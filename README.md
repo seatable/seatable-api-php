@@ -134,4 +134,4 @@ Please don't be confused with the term "email". There are two email addresses in
 
 SeaTable creates for every user an unique identifier in form of an email address like <i>1ef456ab715841cc81b145b2530c2904@auth.local</i>. This unique identifier is used by the api calls to identify a user like in deleteOrgUser().
 
-On the other hand a user registers with an email address for SeaTable. In this example this email is <i>john@gmail.com</i>i>. This is the <i>contact_email</i> and only relevant for the authentification.
+On the other hand a user registers with an email address for SeaTable. In this example this email is <i>john@gmail.com</i>. This is the <i>contact_email</i> and only relevant for the authentification.

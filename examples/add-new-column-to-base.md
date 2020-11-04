@@ -5,8 +5,8 @@
 * you need an SeaTable Account like demo@example.com
 * you need an read/write API-Key for a base like 1d3303315348c6b566c44709d459b33b6bac5ad1
 * you need the name of the table and the columns inside the base like 
-** table-name: Tasks
-** columns of this Table: Name, Description
+  * table-name: Tasks
+  * columns of this Table: Name, Description
 
 ## Example php-code
 
