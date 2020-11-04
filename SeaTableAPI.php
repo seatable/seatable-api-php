@@ -394,18 +394,18 @@ class SeaTableAPI {
 		return $this->get($request);
 	}
 
-	public function updateUser($email, $role){
-		$request = $this->seatable_url.'/api/v2.1/admin/users/'.$email. '/';
-		$form = array(
-			'role' => $role
-		);
-		return $this->put( $request, $form );
-	}
-
-	public function updateUserNew( $email, $changes = array() ){
+	public function updateUser( $email, $changes = array() ){
 		$request = $this->seatable_url.'/api/v2.1/admin/users/'.$email. '/';
 		// erlaubt ist: role, ...
 		return $this->put( $request, $changes );
+	}
+
+	public function activateUser($email){
+		$request = $this->seatable_url.'/api/v2.1/admin/users/'.$email. '/';
+		$form = array(
+			'is_active' => "true"
+		);
+		return $this->put( $request , $form );
 	}
 
 	public function deactivateUser($email){
