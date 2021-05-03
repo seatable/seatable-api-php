@@ -1,0 +1,27 @@
+name: CI/PR
+
+on: [push, pull_request]
+
+jobs:
+  composer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 0
+      - name: Run composer
+        shell: bash
+        run: |
+          core_startGroup() { printf "::group::%s\n" "$1"; }
+          core_endGroup() { printf "::endgroup::\n"; }
+          core_exec() { printf "\e[34m"; printf "%q " "$@"; printf "\e[0m\n"; "$@"; }
+          core_startGroup 'Getting PHP and Composer version info'
+            core_exec "$(command -v php)" --version
+            core_exec "$(command -v composer)" --version
+            composer config --global home
+          core_endGroup
+          (( set -x
+            composer test
+            composer update --no-plugins --no-scripts
+            composer outdated --direct --strict
+          ) > >(sed -u -e 's/^/[out] /') 2> >(sed -u -e 's/^/[err] /' >&2)) 2>&1
