@@ -119,7 +119,7 @@ class SeaTableAPI {
 	*/
 	private function getAuthToken(){
 		$data = $this->post($this->seatable_url.'/api2/auth-token/', array(
-			'username'=> $this->seatable_user, 
+			'username'=> $this->seatable_user,
 			'password'=> $this->seatable_pass
 		));
 		$this->seatable_token = (string)$data->token;
@@ -174,11 +174,11 @@ class SeaTableAPI {
 	
 	/*
 	*	Perform a GET call to server
-	* 
-	*	Additionaly in $response_object and $response_info are the 
-	*	response from server and the response info as it is returned 
+	*
+	*	Additionaly in $response_object and $response_info are the
+	*	response from server and the response info as it is returned
 	*	by curl_exec() and curl_getinfo() respectively.
-	* 
+	*
 	*	@param string $url The url to make the call to.
 	*	@param array $http_options Extra option to pass to curl handle.
 	*	@return string The response from curl if any
@@ -210,11 +210,11 @@ class SeaTableAPI {
 
 	/*
 	*	Perform a POST call to the server
-	* 
-	*	Additionaly in $response_object and $response_info are the 
-	*	response from server and the response info as it is returned 
+	*
+	*	Additionaly in $response_object and $response_info are the
+	*	response from server and the response info as it is returned
 	*	by curl_exec() and curl_getinfo() respectively.
-	* 
+	*
 	*	@param string $url The url to make the call to.
 	*	@param string|array The data to post. Pass an array to make a http form post.
 	*	@param array $http_options Extra option to pass to curl handle.
@@ -253,11 +253,11 @@ class SeaTableAPI {
 
 	/*
 	*	Perform a PUT call to the server
-	* 
-	*	Additionaly in $response_object and $response_info are the 
-	*	response from server and the response info as it is returned 
+	*
+	*	Additionaly in $response_object and $response_info are the
+	*	response from server and the response info as it is returned
 	*	by curl_exec() and curl_getinfo() respectively.
-	* 
+	*
 	*	@param string $url The url to make the call to.
 	*	@param string|array The data to post.
 	*	@param array $http_options Extra option to pass to curl handle.
@@ -284,11 +284,11 @@ class SeaTableAPI {
 
 	/*
 	* Perform a DELETE call to server
-	* 
-	* Additionaly in $response_object and $response_info are the 
-	* response from server and the response info as it is returned 
+	*
+	* Additionaly in $response_object and $response_info are the
+	* response from server and the response info as it is returned
 	* by curl_exec() and curl_getinfo() respectively.
-	* 
+	*
 	* @param string $url The url to make the call to.
 	* @param array $http_options Extra option to pass to curl handle.
 	* @return string The response from curl if any

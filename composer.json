@@ -1,0 +1,28 @@
+{
+  "name": "seatable/seatable-api-php",
+  "type": "library",
+  "description": "Simple php class to use the SeaTable Web API",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Christoph Dyllick-Brenzinger"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "classmap": ["SeaTableAPI.php"]
+  },
+  "scripts": {
+    "test": [
+      "@composer validate --strict",
+      "@composer dump-autoload",
+      "test/autoload.php"
+    ]
+  },
+  "scripts-descriptions": {
+    "test": "run all tests"
+  }
+}

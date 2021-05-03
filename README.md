@@ -23,7 +23,7 @@ require_once '/var/www/seatable.io/lib/SeaTableAPI.php';
 
 // init and obtain auth token
 $seatable = new SeaTableAPI(array(
-    'url'       => 'https://cloud.seatable.io', 
+    'url'       => 'https://cloud.seatable.io',
     'user'      => 'YOUR-EMAIL',
     'password'  => 'YOUR-PASSWORD'
 ));
@@ -35,8 +35,8 @@ echo $seatable->ping();
 
 #### Get Access to a base
 
-SeaTable requires an additional authentification to get access to a specific base. There are two possibilities to get this access. You can either 
-1) create within SeaTable an API-Token for a specific base or 
+SeaTable requires an additional authentification to get access to a specific base. There are two possibilities to get this access. You can either
+1) create within SeaTable an API-Token for a specific base or
 2) you use your credentials but then you have to provide the workspace_id and the name of the base.
 
 ```php
@@ -47,7 +47,7 @@ require_once '/var/www/seatable.io/lib/SeaTableAPI.php';
 
 // init and obtain auth token
 $seatable = new SeaTableAPI(array(
-    'url'       => 'https://cloud.seatable.io', 
+    'url'       => 'https://cloud.seatable.io',
     'user'      => 'YOUR-EMAIL',
     'password'  => 'YOUR-PASSWORD'
 ));
@@ -57,7 +57,7 @@ $seatable->getDTableToken(array(
 	'api_token' => '1d3303315348c6b566c44709d459b33b6bac5ad1',
 ));
 
-// get access with an 
+// get access with an
 $seatable->getDTableToken(array(
 	'workspace_id' => '1323',
 	'table_name' => 'Project tracker'
