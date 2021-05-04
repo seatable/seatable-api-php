@@ -28,6 +28,4 @@ jobs:
           core_endGroup
           (( set -x
             composer test
-            composer update --no-plugins --no-scripts
-            composer outdated --direct --strict
           ) > >(sed -u -e 's/^/[out] /') 2> >(sed -u -e 's/^/[err] /' >&2)) 2>&1

@@ -1,3 +1,7 @@
 # Composer
 /vendor/
 /composer.lock
+
+# php-cs-fixer
+/.php-cs-fixer.cache
+/.php-cs-fixer.php
