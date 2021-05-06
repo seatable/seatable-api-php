@@ -9,6 +9,22 @@ on:
       - main
 
 jobs:
+  php-70:
+    runs-on: "ubuntu-latest"
+    name: "PHP 7.0 Compatibility"
+    steps:
+      - uses: "actions/checkout@v2"
+      - run: 'grep ''"php": ">=7.0"'' composer.json'
+      - uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "7.0"
+          tools: composer:v2
+      - name: "Lock and Install Dependencies"
+        run: |
+          composer update --no-dev --no-plugins --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
+          composer install --no-dev --no-plugins --no-scripts --no-progress --prefer-dist
+      - name: "Lint and Load"
+        run: php -l SeaTableAPI.php && php -r 'require "SeaTableAPI.php";'
   composer:
     runs-on: ubuntu-latest
     steps:
