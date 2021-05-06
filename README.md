@@ -16,7 +16,7 @@ The SeaTable API is installed as part of your project dependencies. It is availa
 composer require seatable/seatable-api-php
 ```
 
-### Upgrading from the `SeaTableAPI.php` single Class/File
+### Upgrading from the `SeaTableAPI.php` Single Class/File
 
 If you previously just copied the `SeaTableAPI.php` file, you can replace it with the `seatable/seatable-api-php` composer package version 0.0.3:
 
@@ -29,7 +29,7 @@ composer require seatable/seatable-api-php:0.0.3
 #### Establish the Connection
 
 ```php
-<?php
+<?php declare(strict_types=1);
 
 // setting up autoloader
 require_once __DIR__ . '/vendor/autoload.php';
@@ -53,7 +53,7 @@ SeaTable requires an additional authentication to get access to a specific base.
 2. use your credentials, but then you have to provide the `workspace_id` and the name of the base.
 
 ```php
-<?php
+<?php declare(strict_types=1);
 
 // setting up autoloader
 require_once __DIR__ . '/vendor/autoload.php';
@@ -95,24 +95,24 @@ $seatable->getDTableToken([
 
 * `listAllWorkspaces()`
 * `listStarredWorkspaces()`
-* `updateDTable($workspace_id, $dtable_name, $changes = array())`
+* `updateDTable($workspace_id, $dtable_name, $changes = [])`
 * `copyDTableExternalLink($link, $dst_workspace_id)`
 
-#### Teammanagement functions (Admin)
+#### Teammanagement Functions (Admin)
 
 > **Note:** On the webpage SeaTable always talks about *teams*. The technical terms that is used within the API documentation and manual is *organization*.
 
 * `listOrganizations($per_page = 25, $page = 1)`
 * `addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)`
 * `deleteOrganization($org_id)`
-* `updateOrganization($org_id, $org_changes = array())`
+* `updateOrganization($org_id, $org_changes = [])`
 * `listOrgUsers($org_id, $is_staff = true, $per_page = 25, $page = 1)`
 * `addOrgUser($org_id, $email, $pass, $name = "")`
 * `deleteOrgUser($org_id, $email)`
 * `listOrgGroups($org_id)`
 * `listOrgBases($org_id, $per_page = 25, $page = 1)`
 
-#### Functions to work with a Base (Table Data)
+#### Functions to Work with a Base (Table Data)
 
 * `listRowsByView($table_name, $view_name = "")`
 * `appendRow($table_name, $row)`
