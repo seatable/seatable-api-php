@@ -33,7 +33,7 @@ class SeaTableAPI
     public $seatable_code;							# curl response code from SeaTable server
     public $seatable_status;						# SeaTable response message
     private $handle;								# Current curl object
-    private $http_options = [];				# Current curl options
+    private $http_options = [];				        # Current curl options
     private $response_object;						# Curl response
     public $response_object_to_array = false;		# Convert response to array instead of object - default false
     public $response_info;							# Curl info
@@ -56,20 +56,17 @@ class SeaTableAPI
         '520'	=>	'OPERATION_FAILED',
     ];
 
-
-    /*
-    *	Instanciate SeaTable class
-    *
-    *	@param string $url
-    *	@param string $user
-    *	@param string $password
-    *	@param int $port
-    *	@throws Exception
-    *
-    */
+    /**
+     * Instantiate SeaTable class
+     *
+     * @param string $url
+     * @param string $user
+     * @param string $password
+     * @param int $port
+     * @throws Exception
+     */
     public function __construct($option = [])
     {
-
         /*
         *	Input validation
         */
@@ -216,7 +213,6 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-
     /*
     *	Perform a POST call to the server
     *
@@ -241,13 +237,6 @@ class SeaTableAPI
         $http_options[CURLOPT_POST] = true;
         $http_options[CURLOPT_POSTFIELDS] = $form_fields;
 
-        /*
-        if(array_key_exists("import", $fields)){
-            $cfile = new CURLFile(realpath($fields['import']));
-            $http_options[CURLOPT_POSTFIELDS] = array('dtable' => $cfile);
-        }
-        */
-
         $this->handle = curl_init($url);
 
         if (! curl_setopt_array($this->handle, $http_options)) {
@@ -260,7 +249,6 @@ class SeaTableAPI
         curl_close($this->handle);
         return $this->decode($this->response_object);
     }
-
 
     /*
     *	Perform a PUT call to the server
@@ -293,7 +281,6 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-
     /*
     * Perform a DELETE call to server
     *
@@ -323,7 +310,6 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-
     /*
     *	(all) Ping SeaTable server
     *
@@ -335,17 +321,17 @@ class SeaTableAPI
         return $this->get($request);
     }
 
-
-    /*
-    *	Return debugged data
-    */
+    /**
+     * Output debug data
+     *
+     * @deprecated since 0.0.4
+     */
     public function debug($data)
     {
         echo "<pre>";
         print_r($data);
         echo "</pre>";
     }
-
 
     /*
     *	(all) Return SeaTable account information
@@ -357,7 +343,6 @@ class SeaTableAPI
         $request = $this->seatable_url.'/api2/account/info/';
         return $this->get($request);
     }
-
 
     /*
     *	(admin only) Return all users on the SeaTable Server
@@ -447,7 +432,6 @@ class SeaTableAPI
         return $this->delete($request, $d);
     }
 
-
     /*
     *	List all workspaces
     * 	@return array
@@ -481,8 +465,7 @@ class SeaTableAPI
         return $this->post($request, $f);
     }
 
-
-    // get getDtableToken
+    // SeaTable: get getDtableToken (via dtable API-Token)
     public function getDtableToken($input)
     {
         if (array_key_exists("api_token", $input)) {
@@ -548,7 +531,6 @@ class SeaTableAPI
         $request = $this->seatable_url.'/api/v2.1/admin/daily-active-users/?date='. $date .'&per_page='. $per_page .'&page='. $page;
         return $this->get($request);
     }
-
 
     // Organisations (admin only)
     // https://docs.seatable.io/published/seatable-api/dtable-web-v2.1-admin/organizations.md
@@ -622,5 +604,32 @@ class SeaTableAPI
     {
         $request = $this->seatable_url.'/api/v2.1/admin/organizations/'. $org_id .'/dtables/?per_page='. $per_page .'&page='. $page;
         return $this->get($request);
+    }
+
+    public function addASystemNotificationToAUser($msg, $username)
+    {
+        $request = $this->seatable_url.'/api/v2.1/admin/sys-user-notifications/';
+        $body = [
+            'msg' => $msg,
+            'username' => $username,
+        ];
+        return $this->post($request, $body);
+    }
+
+    public function listAllSystemNotifications($per_page = 25, $page = 1)
+    {
+        $request = $this->seatable_url.'/api/v2.1/admin/sys-user-notifications/?per_page='. $per_page .'&page='. $page;
+        return $this->get($request);
+    }
+
+    // SeaTable: Import dtable (only for own account)
+    public function importDTable($workspace_id, $dtable_file)
+    {
+        $request = $this->seatable_url.'/api/v2.1/workspace/'. $workspace_id .'/import-dtable/';
+
+        $cfile = new CURLFile(realpath($dtable_file));
+        $form_fields = ['dtable' => $cfile];
+
+        return $this->post($request, $form_fields);
     }
 }
