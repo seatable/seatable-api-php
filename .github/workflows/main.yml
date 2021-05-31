@@ -25,7 +25,7 @@ jobs:
           composer update --no-dev --no-plugins --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
           composer install --no-dev --no-plugins --no-scripts --no-progress --prefer-dist
       - name: "Lint and Load"
-        run: php -l SeaTableAPI.php && php -r 'require "SeaTableAPI.php";'
+        run: composer lint-and-load
   composer:
     runs-on: ubuntu-latest
     steps:
