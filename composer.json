@@ -26,7 +26,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.0.0",
     "kubawerlos/php-cs-fixer-custom-fixers": "^2.5",
-    "phpcompatibility/php-compatibility": "^9.3"
+    "phpcompatibility/php-compatibility": "^9.3",
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "classmap": ["SeaTableAPI.php"]
@@ -38,6 +39,7 @@
       "@lint-and-load",
       "@php-test",
       "@composer --no-plugins update --no-scripts --no-progress",
+      "@phpunit",
       "@php-cs-fixer",
       "@phpcs",
       "@composer --no-plugins outdated --direct --strict"
@@ -55,6 +57,11 @@
     ],
     "phpcs": [
       "@composer --no-plugins exec phpcs -- --standard=.config/phpcs.xml"
+    ],
+    "phpunit": [
+      "@composer -q update --no-scripts --no-plugins --no-progress",
+      "@putenv XDEBUG_MODE=coverage",
+      "@composer --no-plugins exec -- phpunit --configuration .config/phpunit/config.xml"
     ]
   },
   "scripts-descriptions": {
