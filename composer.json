@@ -1,13 +1,20 @@
 {
   "name": "seatable/seatable-api-php",
+  "description": "Simple PHP class to use the SeaTable Web API",
   "type": "library",
-  "description": "Simple php class to use the SeaTable Web API",
+  "keywords": ["SeaTable"],
+  "homepage": "https://github.com/seatable/seatable-api-php",
+  "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
     {
       "name": "Christoph Dyllick-Brenzinger"
     }
   ],
+  "support": {
+    "forum": "https://forum.seatable.io/",
+    "source": "https://github.com/seatable/seatable-api-php"
+  },
   "require": {
     "php": ">=7.0",
     "ext-curl": "*",
