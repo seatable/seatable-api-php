@@ -10,34 +10,17 @@ PHP 7.0+ with the Curl and Json extension (see [`composer.json`](composer.json))
 
 ## Installation
 
-The SeaTable API is installed as part of your project dependencies. It is available from Packagist for Composer:
+The SeaTable API installs as part of your project dependencies. It is available from Packagist for Composer:
 
 ```
 composer require seatable/seatable-api-php
 ```
 
-### Upgrading from below 0.0.8 (0.0.1 - 0.0.7)
+### Upgrading
 
-Version 0.0.8 changed to the cUrl library SSL defaults to improve security (and portability) for `CURLOPT_SSL_VERIFYPEER` and `CURLOPT_SSL_VERIFYHOST`.
+This project is with [Semantic Versioning (2.0.0)](https://semver.org/).
 
-If you rely on non-default values for these two settings, you can pass them explicitly as options when creating the API class:
-
-```php
-$seatable = new SeaTableAPI([
-    'http_options' => [
-        CURLOPT_SSL_VERIFYPEER => true, // always `false` before 0.0.8
-        CURLOPT_SSL_VERIFYHOST => 2,    // always `false` before 0.0.8
-    ]
-]);
-```
-
-### Upgrading from the `SeaTableAPI.php` Single Class/File
-
-If you previously just copied the `SeaTableAPI.php` file, you can replace it with the `seatable/seatable-api-php` composer package version 0.0.3:
-
-```
-composer require seatable/seatable-api-php:0.0.3
-```
+Please see [the notes on upgrading](UPGRADING.md), especially for upgrading from the `SeaTableAPI.php` single class/file and other very early versions (0.x).
 
 ## Usage
 
