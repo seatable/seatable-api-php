@@ -34,13 +34,14 @@ jobs:
       - name: Run composer
         shell: bash
         run: |
+          #${{ github.run_id }}
           core_startGroup() { printf "::group::%s\n" "$1"; }
           core_endGroup() { printf "::endgroup::\n"; }
           core_exec() { printf "\e[34m"; printf "%q " "$@"; printf "\e[0m\n"; "$@"; }
           core_startGroup 'Getting PHP and Composer version info'
             core_exec "$(command -v php)" --version
             core_exec "$(command -v composer)" --version
-            composer config --global home
+            core_exec "$(command -v composer)" config --global home
           core_endGroup
           (( set -x
             composer test
