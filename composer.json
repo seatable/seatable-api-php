@@ -9,6 +9,9 @@
   "authors": [
     {
       "name": "Christoph Dyllick-Brenzinger"
+    },
+    {
+      "name": "Tom Klingenberg"
     }
   ],
   "support": {
@@ -34,8 +37,12 @@
       "@composer --no-plugins dump-autoload",
       "test/autoload.php",
       "@composer --no-plugins update --no-scripts --no-progress",
-      "@composer --no-plugins outdated --direct --strict",
-      "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run} --diff"
+      "@php-cs-fixer",
+      "@composer --no-plugins outdated --direct --strict"
+    ],
+    "php-cs-fixer": [
+      "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run --diff} --config=.config/php-cs-fixer/.php-cs-fixer.php",
+      "git --no-pager diff --check --ws-error-highlight=new"
     ]
   },
   "scripts-descriptions": {
