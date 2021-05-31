@@ -25,7 +25,8 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.0.0",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^2.5"
+    "kubawerlos/php-cs-fixer-custom-fixers": "^2.5",
+    "phpcompatibility/php-compatibility": "^9.3"
   },
   "autoload": {
     "classmap": ["SeaTableAPI.php"]
@@ -38,6 +39,7 @@
       "@php-test",
       "@composer --no-plugins update --no-scripts --no-progress",
       "@php-cs-fixer",
+      "@phpcs",
       "@composer --no-plugins outdated --direct --strict"
     ],
     "lint-and-load": [
@@ -50,6 +52,9 @@
     "php-test": [
       "@composer --no-plugins dump-autoload",
       "test/php/autoload.php"
+    ],
+    "phpcs": [
+      "@composer --no-plugins exec phpcs -- --standard=.config/phpcs.xml"
     ]
   },
   "scripts-descriptions": {
