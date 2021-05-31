@@ -1,5 +1,7 @@
 <?php
 
+namespace SeaTable\SeaTableApi;
+
 /**
  * SeaTable API - PHP class wrapper
  * Perform PUT,GET,POST,DELETE request to your SeaTable server
@@ -16,7 +18,7 @@
  * based on the original work by Alexander Kabanov, Klaus Silveira <https://github.com/shurikk/rest-client-php>
  * and Julien Kirch <https://github.com/rest-client/rest-client> via <https://github.com/archiloque/rest-client>
  */
-class SeaTableAPI
+class SeaTableApi
 {
     private $seatable_user;                         # SeaTable user mail to perform REST
     private $seatable_pass;                         # SeaTable user pass to perform REST

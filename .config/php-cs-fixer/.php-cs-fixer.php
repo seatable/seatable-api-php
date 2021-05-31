@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /* PHP-CS-Fixer has no base-path/directory option, add it */
 $basePath = getenv('PHP_CS_FIXER_CONFIG_BASE_PATH') ?: dirname(__DIR__, 2);
@@ -8,7 +10,7 @@ if (!is_dir($basePath)) {
 }
 
 $finder = PhpCsFixer\Finder::create()
-    ->in($basePath);
+    ->in($basePath . '/src');
 
 return (new PhpCsFixer\Config())
     ->registerCustomFixers(new PhpCsFixerCustomFixers\Fixers())

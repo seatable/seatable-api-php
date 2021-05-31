@@ -18,8 +18,11 @@ You need:
 // setting up autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// use SeaTable api class
+use SeaTable\SeaTableApi\SeaTableApi;
+
 // init and obtain auth token
-$seatable = new SeaTableAPI([
+$seatable = new SeaTableApi([
     'url'       => 'https://cloud.seatable.io',
     'user'      => 'demo@example.com',
     'password'  => 'very-secure-password'

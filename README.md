@@ -32,8 +32,11 @@ Please see [the notes on upgrading](UPGRADING.md), especially for upgrading from
 // setting up autoloader
 require_once __DIR__ . '/vendor/autoload.php';
 
+// use SeaTable api class
+use SeaTable\SeaTableApi\SeaTableApi;
+
 // init and obtain auth token
-$seatable = new SeaTableAPI([
+$seatable = new SeaTableApi([
     'url'       => 'https://cloud.seatable.io',
     'user'      => 'YOUR-EMAIL',
     'password'  => 'YOUR-PASSWORD'
@@ -56,8 +59,11 @@ SeaTable requires an additional authentication to get access to a specific base.
 // setting up autoloader
 require_once __DIR__ . '/vendor/autoload.php';
 
+// use SeaTable api class
+use SeaTable\SeaTableApi\SeaTableApi;
+
 // init and obtain auth token
-$seatable = new SeaTableAPI([
+$seatable = new SeaTableApi([
     'url'       => 'https://cloud.seatable.io',
     'user'      => 'YOUR-EMAIL', # required for variant 2.
     'password'  => 'YOUR-PASSWORD'

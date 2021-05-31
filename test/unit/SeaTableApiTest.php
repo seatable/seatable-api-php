@@ -11,11 +11,18 @@ use SeaTableAPI;
  * Base SeaTableApiTest
  *
  * @covers \SeaTableAPI
+ * @covers \SeaTable\SeaTableApi\SeaTableApi
  * @covers \SeaTable\SeaTableApi\SeaTableApiTest
  */
 class SeaTableApiTest extends TestCase
 {
     public function testCreation()
+    {
+        $this->expectErrorUndefinedArrayKey('url');
+        new \SeaTable\SeaTableApi\SeaTableApi();
+    }
+
+    public function testBackwardsCreation()
     {
         $this->expectErrorUndefinedArrayKey('url');
         new SeaTableAPI();

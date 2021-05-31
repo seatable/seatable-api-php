@@ -6,8 +6,37 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [New Classname (0.1.0)](#new-classname-010)
 * [Curl SSL defaults (0.0.8)](#curl-ssl-defaults-008)
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
+
+### New Classname (0.1.0)
+
+If you previously used `SeaTableAPI` and you upgrade to version 0.1.0 or higher, replace it with `SeaTableApi` (lower-case `pi` at the end) from the new namespace `SeaTable\SeaTableApi`.
+
+The use of the old class-name `SeaTableAPI` in the global namespace is deprecated with 0.1.0 and usages of the old class-name emit a deprecation notice on creation.
+
+Before:
+
+```php
+$seatable = new SeaTableAPI([
+    'url'       => 'https://cloud.seatable.io',
+    'user'      => 'demo@example.com',
+    'password'  => 'very-secure-password'
+]);
+```
+
+After:
+
+```php
+use SeaTable\SeaTableApi\SeaTableApi;
+
+$seatable = new SeaTableApi([
+    'url'       => 'https://cloud.seatable.io',
+    'user'      => 'demo@example.com',
+    'password'  => 'very-secure-password'
+]);
+```
 
 ### Curl SSL defaults (0.0.8)
 

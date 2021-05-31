@@ -32,7 +32,10 @@
     "phpunit/phpunit": "^9.5"
   },
   "autoload": {
-    "classmap": ["SeaTableAPI.php"]
+    "classmap": ["src/Compat/Backward/SeaTableAPI.php"],
+    "psr-4": {
+      "SeaTable\\SeaTableApi\\": "src/"
+    }
   },
   "autoload-dev": {
     "psr-4": {
@@ -52,7 +55,7 @@
       "@composer --no-plugins outdated --direct --strict"
     ],
     "lint-and-load": [
-      "\"$PHP_BINARY\" -l SeaTableAPI.php && \"$PHP_BINARY\" -r 'require \"SeaTableAPI.php\";'"
+      "\"$PHP_BINARY\" -l src/SeaTableApi.php && \"$PHP_BINARY\" -r 'require \"src/SeaTableApi.php\";'"
     ],
     "php-cs-fixer": [
       "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run --diff} --config=.config/php-cs-fixer/.php-cs-fixer.php",

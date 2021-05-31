@@ -11,6 +11,7 @@ use SeaTableAPI;
  * HttpMockTest
  *
  * @covers \SeaTableAPI
+ * @covers \SeaTable\SeaTableApi\SeaTableApi
  * @covers \SeaTable\SeaTableApi\SeaTableHttpApiTest
  * @covers \SeaTable\SeaTableApi\ServerMockTestCase
  */
@@ -43,9 +44,17 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         self::assertArrayNotHasKey(CURLOPT_SSL_VERIFYHOST, $apiHttpOptions);
     }
 
-    private function getInternalHttpOptions(SeaTableAPI $api): array
+    private function getInternalHttpOptions(SeaTableApi $api): array
     {
-        $reflOptions = new \ReflectionProperty($api, 'http_options');
+        $subject = $api;
+
+        $reflClass = new \ReflectionClass($subject);
+        if ($reflClass->getName() === 'SeaTableAPI') {
+            $subject = $reflClass->getParentClass()->getName();
+        }
+        unset($reflClass);
+
+        $reflOptions = new \ReflectionProperty($subject, 'http_options');
         $reflOptions->setAccessible(true);
         return $reflOptions->getValue($api);
     }

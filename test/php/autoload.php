@@ -9,8 +9,12 @@
  *  [1] vendor/autoload.php exists
  *  [2] can include autoload.php
  *  [3] SeaTableAPI class not loaded
- *  [4] SeaTableAPI class can be auto-loaded
+ *  [4] SeaTableApi class not loaded
+ *  [5] SeaTableApi class can be auto-loaded
+ *  [6] SeaTableAPI class can be auto-loaded
  */
+
+use SeaTable\SeaTableApi\SeaTableApi;
 
 # [1] vendor/autoload.php existence
 $path = __DIR__ . '/../../.config/composer/vendor/autoload.php';
@@ -28,13 +32,25 @@ if (false === $result) {
 }
 
 # [3] SeaTableAPI class not loaded
-if (class_exists($class = SeaTableAPI::class, $autoload = false)) {
+if (class_exists($class = \SeaTableAPI::class, $autoload = false)) {
     fwrite(STDERR, "[3] fail: class \"$class\" already loaded.\n");
     exit(1);
 }
 
-# [4] SeaTableAPI class can be auto-loaded
-if (!class_exists($class = SeaTableAPI::class, $autoload = true)) {
-    fwrite(STDERR, "[4] fail: failed to autoload class \"$class\".\n");
+# [4] SeaTableApi class not loaded
+if (class_exists($class = SeaTableApi::class, $autoload = false)) {
+    fwrite(STDERR, "[4] fail: class \"$class\" already loaded.\n");
+    exit(1);
+}
+
+# [5] SeaTableApi class can be auto-loaded
+if (!class_exists($class = SeaTableApi::class, $autoload = true)) {
+    fwrite(STDERR, "[5] fail: failed to autoload class \"$class\".\n");
+    exit(1);
+}
+
+# [6] SeaTableAPI class can be auto-loaded
+if (!class_exists($class = \SeaTableAPI::class, $autoload = true)) {
+    fwrite(STDERR, "[6] fail: failed to autoload class \"$class\".\n");
     exit(1);
 }
