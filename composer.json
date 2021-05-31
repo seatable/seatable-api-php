@@ -34,8 +34,7 @@
     "test": [
       "@composer --no-plugins --version",
       "@composer --no-plugins validate --no-check-lock --strict",
-      "@composer --no-plugins dump-autoload",
-      "test/autoload.php",
+      "@php-test",
       "@composer --no-plugins update --no-scripts --no-progress",
       "@php-cs-fixer",
       "@composer --no-plugins outdated --direct --strict"
@@ -43,6 +42,10 @@
     "php-cs-fixer": [
       "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run --diff} --config=.config/php-cs-fixer/.php-cs-fixer.php",
       "git --no-pager diff --check --ws-error-highlight=new"
+    ],
+    "php-test": [
+      "@composer --no-plugins dump-autoload",
+      "test/php/autoload.php"
     ]
   },
   "scripts-descriptions": {
