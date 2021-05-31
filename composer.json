@@ -29,12 +29,13 @@
   },
   "scripts": {
     "test": [
-      "@composer validate --strict",
-      "@composer dump-autoload",
+      "@composer --no-plugins --version",
+      "@composer --no-plugins validate --no-check-lock --strict",
+      "@composer --no-plugins dump-autoload",
       "test/autoload.php",
-      "@composer update --no-plugins --no-scripts --no-progress",
-      "@composer outdated --direct --strict",
-      "@composer exec -- php-cs-fixer fix ${CI:+--dry-run} --diff"
+      "@composer --no-plugins update --no-scripts --no-progress",
+      "@composer --no-plugins outdated --direct --strict",
+      "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run} --diff"
     ]
   },
   "scripts-descriptions": {
