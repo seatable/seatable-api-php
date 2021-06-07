@@ -105,8 +105,13 @@ class SeaTableAPI
          */
         $this->http_options[CURLOPT_RETURNTRANSFER] = true;
         $this->http_options[CURLOPT_FOLLOWLOCATION] = false;
-        $this->http_options[CURLOPT_SSL_VERIFYPEER] = false;
-        $this->http_options[CURLOPT_SSL_VERIFYHOST] = false;
+
+        if (isset($option['http_options']) && !is_array($option['http_options'])) {
+            throw new Exception("SeaTable http_options must be an array");
+        }
+        foreach ((array) ($option['http_options'] ?? null) as $key => $value) {
+            $this->http_options[$key] = $value;
+        }
 
         /*
          * Return seatable token
