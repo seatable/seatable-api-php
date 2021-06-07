@@ -26,15 +26,28 @@ jobs:
       - name: "Lint and Load"
         run: composer lint-and-load
   composer:
+    name: "Composer (PHP: ${{ matrix.php-version || 'default' }})"
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [ '7.4' ]
+        include: [ {php-version: '', allow-failure: true} ]
+
     steps:
       - uses: "actions/checkout@v2"
         with:
           fetch-depth: 0
+      - uses: "shivammathur/setup-php@v2"
+        if: ${{ matrix.php-version }}
+        with:
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
       - name: Run composer
         shell: bash
         run: |
-          #${{ github.run_id }}
+          #${{ github.run_id }} ${{ matrix.allow-failure && '(allow failures)' }}
           core_startGroup() { printf "::group::%s\n" "$1"; }
           core_endGroup() { printf "::endgroup::\n"; }
           core_exec() { printf "\e[34m"; printf "%q " "$@"; printf "\e[0m\n"; "$@"; }
@@ -44,5 +57,5 @@ jobs:
             core_exec "$(command -v composer)" config --global home
           core_endGroup
           (( set -x
-            composer test
+            composer test ${{ matrix.allow-failure && '|| true' }}
           ) > >(sed -u -e 's/^/[out] /') 2> >(sed -u -e 's/^/[err] /' >&2)) 2>&1
