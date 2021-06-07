@@ -326,7 +326,6 @@ class SeaTableAPI
      * Output debug data
      *
      * @deprecated since 0.0.4
-     * @internal
      */
     public function debug($data)
     {
