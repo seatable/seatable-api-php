@@ -64,9 +64,9 @@
       "@composer --no-plugins exec phpcs -- --standard=.config/phpcs.xml"
     ],
     "phpunit": [
-      "@composer -q update --no-scripts --no-plugins --no-progress",
+      "@composer --no-plugins -q update --no-scripts --no-progress",
       "@putenv XDEBUG_MODE=coverage",
-      "@composer --no-plugins exec -- phpunit --configuration .config/phpunit/config.xml"
+      "\"$PHP_BINARY\" -d zend.assertions=1 -d assert.exception=1 vendor/bin/phpunit --configuration .config/phpunit/config.xml"
     ]
   },
   "scripts-descriptions": {
