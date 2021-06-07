@@ -32,6 +32,11 @@
   "autoload": {
     "classmap": ["SeaTableAPI.php"]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "SeaTable\\SeaTableApi\\": "test/unit/"
+    }
+  },
   "scripts": {
     "test": [
       "@composer --no-plugins --version",
