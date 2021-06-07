@@ -1,22 +1,20 @@
 <?php
 
-/*
+/**
  * SeaTable API - PHP class wrapper
  * Perform PUT,GET,POST,DELETE request to your SeaTable server
- * @author : cdb@seatable.io (thanks for the inspiration by ben@netcap.fr)
- * @copyright : opensource
  *
- * SeaTable - Next-generation online spreadsheet
- * https://seatable.io
+ * @author <cdb@seatable.io> (thanks for the inspiration by <ben@netcap.fr>)
+ * @copyright 2020, 2021 SeaTable GmbH
+ * @license APACHE-2.0
  *
- * SeaTable API
- * https://docs.seatable.io/published/seatable-api/home.md
+ * SeaTable - Next-generation online spreadsheet <https://seatable.io>
  *
- * CURL function from rest_curl_client.php
- * @author : davidmpaz
- * https://github.com/davidmpaz/rest-curlclient-php
+ * SeaTable API <https://api.seatable.io/> (formerly: <https://docs.seatable.io/published/seatable-api/home.md>)
  *
- *
+ * cURL function from David Paz <https://github.com/davidmpaz/rest-curlclient-php>
+ * based on the original work by Alexander Kabanov, Klaus Silveira <https://github.com/shurikk/rest-client-php>
+ * and Julien Kirch <https://github.com/rest-client/rest-client> via <https://github.com/archiloque/rest-client>
  */
 class SeaTableAPI
 {
@@ -116,7 +114,7 @@ class SeaTableAPI
         $this->getAuthToken();
     }
 
-    /*
+    /**
      * Return SeaTable token
      *
      * @return - The SeaTable auth token
@@ -130,12 +128,11 @@ class SeaTableAPI
         $this->seatable_token = (string)$data->token;
     }
 
-    /*
+    /**
      * Decode answer to object format instead of json
      *
      * @param array $data - The json encoded response
      * @param bool $this->response_object_to_array default false - If true return array from json instead of object
-     *
      */
     private function decode($data)
     {
@@ -147,12 +144,11 @@ class SeaTableAPI
     }
 
 
-    /*
+    /**
      * Analyse curl answer
      *
      * @param array $res The curl object
      * @throws Exception
-     *
      */
     private function http_parse_message($res)
     {
@@ -179,7 +175,7 @@ class SeaTableAPI
         }
     }
 
-    /*
+    /**
      * Perform a GET call to server
      *
      * Additionally in $response_object and $response_info are the
@@ -214,7 +210,7 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-    /*
+    /**
      * Perform a POST call to the server
      *
      * Additionally in $response_object and $response_info are the
@@ -222,7 +218,7 @@ class SeaTableAPI
      * by curl_exec() and curl_getinfo() respectively.
      *
      * @param string $url The url to make the call to.
-     * @param string|array The data to post. Pass an array to make a http form post.
+     * @param string|array $form_fields The data to post. Pass an array to make a http form post.
      * @param array $http_options Extra option to pass to curl handle.
      * @return string The response from curl if any
      */
@@ -251,7 +247,7 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-    /*
+    /**
      * Perform a PUT call to the server
      *
      * Additionally in $response_object and $response_info are the
@@ -259,7 +255,7 @@ class SeaTableAPI
      * by curl_exec() and curl_getinfo() respectively.
      *
      * @param string $url The url to make the call to.
-     * @param string|array The data to post.
+     * @param string|array $data The data to post.
      * @param array $http_options Extra option to pass to curl handle.
      * @return string The response from curl if any
      */
@@ -282,7 +278,7 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-    /*
+    /**
      * Perform a DELETE call to server
      *
      * Additionally in $response_object and $response_info are the
@@ -311,7 +307,7 @@ class SeaTableAPI
         return $this->decode($this->response_object);
     }
 
-    /*
+    /**
      * (all) Ping SeaTable server
      *
      * @return string, "pong" if auth token is correct
@@ -334,7 +330,7 @@ class SeaTableAPI
         echo "</pre>";
     }
 
-    /*
+    /**
      * (all) Return SeaTable account information
      *
      * @return object|array the account info
@@ -345,12 +341,12 @@ class SeaTableAPI
         return $this->get($request);
     }
 
-    /*
+    /**
      * (admin only) Return all users on the SeaTable Server
      * https://docs.seatable.io/published/seatable-api/dtable-web-v2.1-admin/users.md
      *
-     * @param int $per_page        Number or users that should be shown (default = 25)
-     * @param int $page            Select Page from which the users are shown (default 1)
+     * @param int $per_page        Number of users that should be shown (default = 25)
+     * @param int $page            Select Page the users shown from (default 1)
      * @return object|array
      */
     public function listUsers($per_page = 25, $page = 1)
@@ -359,7 +355,7 @@ class SeaTableAPI
         return $this->get($request);
     }
 
-    /*
+    /**
      * (admin only)
      * @return int
      */
@@ -369,7 +365,7 @@ class SeaTableAPI
         return $this->get($request)->total_count;
     }
 
-    /*
+    /**
      * (admin only) Add new User to the SeaTable System
      * https://docs.seatable.io/published/seatable-api/dtable-web-v2.1-admin/users.md
      *
@@ -391,7 +387,7 @@ class SeaTableAPI
         return $this->post($request, $form);
     }
 
-    /*
+    /**
      * @return object|array "user_list"
      */
     public function searchUser($query)
@@ -433,7 +429,7 @@ class SeaTableAPI
         return $this->delete($request, $d);
     }
 
-    /*
+    /**
      * List all workspaces
      * @return array
      */
@@ -466,7 +462,9 @@ class SeaTableAPI
         return $this->post($request, $f);
     }
 
-    // SeaTable: get getDtableToken (via dtable API-Token)
+    /**
+     * SeaTable: get getDtableToken (via dtable API-Token)
+     */
     public function getDtableToken($input)
     {
         if (array_key_exists("api_token", $input)) {
@@ -623,7 +621,9 @@ class SeaTableAPI
         return $this->get($request);
     }
 
-    // SeaTable: Import dtable (only for own account)
+    /**
+     * SeaTable: Import dtable (only for own account)
+     */
     public function importDTable($workspace_id, $dtable_file)
     {
         $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspace_id . '/import-dtable/';
