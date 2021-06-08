@@ -67,13 +67,14 @@
     "phpunit": [
       "@composer --no-plugins -q update --no-scripts --no-progress",
       "@putenv XDEBUG_MODE=coverage",
-      "\"$PHP_BINARY\" -d zend.assertions=1 -d assert.exception=1 vendor/bin/phpunit --configuration .config/phpunit/config.xml"
+      "\"$PHP_BINARY\" -d zend.assertions=1 -d assert.exception=1 .config/composer/vendor/bin/phpunit --configuration .config/phpunit/config.xml"
     ]
   },
   "scripts-descriptions": {
     "test": "run all tests"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "vendor-dir": ".config/composer/vendor"
   }
 }

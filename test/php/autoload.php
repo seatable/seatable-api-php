@@ -13,7 +13,7 @@
  */
 
 # [1] vendor/autoload.php existence
-$path = __DIR__ . '/../../vendor/autoload.php';
+$path = __DIR__ . '/../../.config/composer/vendor/autoload.php';
 if (!is_file($path)) {
     fwrite(STDERR, "[1] fail: no autoload file found, install first.\n");
     exit(1);
