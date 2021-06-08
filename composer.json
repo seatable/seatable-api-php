@@ -62,7 +62,7 @@
       "test/php/autoload.php"
     ],
     "phpcs": [
-      "@composer --no-plugins exec phpcs -- --standard=.config/phpcs.xml"
+      "@composer --no-plugins exec phpcs -- --standard=.config/phpcs/config.xml"
     ],
     "phpunit": [
       "@composer --no-plugins -q update --no-scripts --no-progress",
