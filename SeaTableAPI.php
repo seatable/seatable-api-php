@@ -509,6 +509,17 @@ class SeaTableAPI
         return $this->post($request, $row);
     }
 
+    public function updateRow($table_name, $row, $row_id)
+    {
+        $request = $this->seatable_url . '/dtable-server/api/v1/dtables/' . $this->dtable_uuid . '/rows/';
+        $new_row = '{
+            "table_name": "' . $table_name . '",
+            "row": ' . json_encode($row) . ',
+            "row_id": "' . $row_id . '"
+        }';
+        return $this->put($request, $new_row);
+    }
+
     public function getDtableMetadata()
     {
         $request = $this->seatable_url . '/dtable-server/api/v1/dtables/' . $this->dtable_uuid . '/metadata/';
