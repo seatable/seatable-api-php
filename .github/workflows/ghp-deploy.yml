@@ -1,7 +1,11 @@
 name: GHP
 
 on:
-  [pull_request, push]
+  workflow_dispatch:
+    paths: [ '.github/workflows/gh-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
+  pull_request:
+    paths: [ '.github/workflows/gh-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
+    branches: [ 'main' ]
 
 jobs:
   deploy:
@@ -17,3 +21,11 @@ jobs:
           pip install -r requirements.txt
           make docs
           mkdocs gh-deploy --force
+
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: docs-html-ghp
+          retention-days: 1
+          path: |
+            .config/mkdocs/site/**
