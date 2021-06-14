@@ -58,10 +58,7 @@ class SeaTableAPI
     /**
      * Instantiate SeaTable class
      *
-     * @param string $url
-     * @param string $user
-     * @param string $password
-     * @param int $port
+     * @param array{url: string, user: string, password: string, port?: int} $option
      * @throws Exception
      */
     public function __construct($option = [])
