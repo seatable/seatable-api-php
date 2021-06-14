@@ -1,0 +1,53 @@
+site_name: SeaTable PHP API Manual
+site_author: SeaTable
+docs_dir: ./docs
+site_url: https://seatable.github.io/seatable-api-php
+
+repo_name: seatable/seatable-api-php
+repo_url: https://github.com/seatable/seatable-api-php/
+edit_uri: blob/main/manual
+
+copyright: Copyright &copy; 2020, 2021 SeaTable GmbH
+
+theme:
+  name: material
+  # icon:
+  logo: media/SeaTable256-256.png
+  favicon: media/seatable-favicon.ico
+  palette:
+    primary: white
+    accent:
+
+plugins:
+  - search
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/seatable/seatable-api-php
+
+extra_css:
+  - stylesheets/extra.css
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.attr_list
+  - markdown.extensions.codehilite:
+      guess_lang: true
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+      toc_depth: "1-4"
+  - pymdownx.superfences
+
+# Page tree
+nav:
+  - Overview: README.md
+  - Upgrading: UPGRADING.md
+  - Examples:
+    - doc/add-new-column-to-base.md
+    - doc/get-content-from-a-base.md

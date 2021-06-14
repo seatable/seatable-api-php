@@ -1,0 +1,19 @@
+name: GHP
+
+on:
+  [pull_request, push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - working-directory: .config/mkdocs
+        run: |
+          pip install -r requirements.txt
+          make docs
+          mkdocs gh-deploy --force
