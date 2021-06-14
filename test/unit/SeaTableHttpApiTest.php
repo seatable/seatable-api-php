@@ -10,8 +10,9 @@ use SeaTableAPI;
 /**
  * HttpMockTest
  *
- * @covers SeaTableAPI
+ * @covers \SeaTableAPI
  * @covers \SeaTable\SeaTableApi\SeaTableHttpApiTest
+ * @covers \SeaTable\SeaTableApi\ServerMockTestCase
  */
 class SeaTableHttpApiTest extends ServerMockTestCase
 {

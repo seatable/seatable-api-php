@@ -20,7 +20,12 @@
     <coverage cacheDirectory=".phpunit.cache/code-coverage"
               processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">../../src</directory>
+            <directory suffix="SeaTableAPI.php">../..</directory>
+            <directory>../../src</directory>
+            <directory suffix=".php">../../test/unit</directory>
         </include>
+        <report>
+            <html outputDirectory=".phpunit.cache/html-coverage" lowUpperBound="50" highLowerBound="90"/>
+        </report>
     </coverage>
 </phpunit>

@@ -10,7 +10,8 @@ use SeaTableAPI;
 /**
  * Base SeaTableApiTest
  *
- * @covers SeaTableAPI
+ * @covers \SeaTableAPI
+ * @covers \SeaTable\SeaTableApi\SeaTableApiTest
  */
 class SeaTableApiTest extends TestCase
 {

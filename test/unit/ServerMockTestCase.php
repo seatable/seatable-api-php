@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace SeaTable\SeaTableApi;
 
-use InterNations\Component\HttpMock\MockBuilder;
 use PHPUnit\Framework\TestCase;
 
 use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
-use SeaTableAPI;
 
 /**
  * HttpMockTestCase
  *
  * Binding to internations/http-mock for Phpunit tests
+ *
+ * @covers \SeaTable\SeaTableApi\ServerMockTestCase
  */
 abstract class ServerMockTestCase extends TestCase
 {
