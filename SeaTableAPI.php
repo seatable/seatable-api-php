@@ -73,7 +73,7 @@ class SeaTableAPI
             throw new Exception("Curl extension is required");
         }
 
-        if (isset($option['url']) && !empty($option['url']) && !filter_var($option['url'], FILTER_VALIDATE_URL)) {
+        if (isset($option['url']) && !empty($option['url']) && (!filter_var($option['url'], FILTER_VALIDATE_URL) || !in_array(parse_url($option['url'], PHP_URL_SCHEME), ['http', 'https'], true))) {
             throw new Exception("SeaTable URL is missing or bad URL format");
         }
 

@@ -21,6 +21,24 @@ class SeaTableApiTest extends TestCase
         new SeaTableAPI();
     }
 
+    public function provideOptionUrls()
+    {
+        return [
+            ['file:///path/to/some/file', false],
+            ['https://example.org', true],
+        ];
+    }
+
+    /**
+     * @dataProvider provideOptionUrls
+     */
+    public function testUrlOption(string $url, bool $pass)
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage($pass ? "SeaTable user is missing or has a bad format" : "SeaTable URL is missing or bad URL format");
+        new SeaTableAPI(['url' => $url]);
+    }
+
     private function expectErrorUndefinedArrayKey(string $actual)
     {
         $this->expectError();
