@@ -49,5 +49,7 @@ nav:
   - Overview: README.md
   - Upgrading: UPGRADING.md
   - Examples:
-    - doc/add-new-column-to-base.md
-    - doc/get-content-from-a-base.md
+    - Add a new Column to a Base: doc/add-new-column-to-base.md
+    - Get Content from a Base: doc/get-content-from-a-base.md
+  - SeaTable API Docs: 'https://api.seatable.io'
+  - SeaTable Homepage: 'https://seatable.io/'

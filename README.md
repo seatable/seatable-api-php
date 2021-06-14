@@ -10,7 +10,7 @@ PHP 7.0+ with the Curl and Json extension (see [`composer.json`](composer.json))
 
 ## Installation
 
-The SeaTable API installs as part of your project dependencies. It is available from Packagist for Composer:
+The SeaTable API installs as part of your project dependencies. It is [available from Packagist](https://packagist.org/packages/seatable/seatable-api-php) for [Composer](https://getcomposer.org/):
 
 ```
 composer require seatable/seatable-api-php

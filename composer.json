@@ -3,7 +3,7 @@
   "description": "Simple PHP class to use the SeaTable Web API",
   "type": "library",
   "keywords": ["SeaTable"],
-  "homepage": "https://github.com/seatable/seatable-api-php",
+  "homepage": "https://seatable.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
@@ -15,6 +15,7 @@
     }
   ],
   "support": {
+    "docs": "https://seatable.github.io/seatable-api-php/",
     "forum": "https://forum.seatable.io/",
     "source": "https://github.com/seatable/seatable-api-php"
   },
