@@ -109,8 +109,10 @@ class SeaTableAPI
         if (isset($option['http_options']) && !is_array($option['http_options'])) {
             throw new Exception("SeaTable http_options must be an array");
         }
-        foreach ((array) ($option['http_options'] ?? null) as $key => $value) {
-            $this->http_options[$key] = $value;
+        foreach ([CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYHOST] as $httpOption) {
+            isset($option['http_options'][$httpOption])
+                && $this->http_options[$httpOption] = $option['http_options'][$httpOption]
+                ;
         }
 
         /*
