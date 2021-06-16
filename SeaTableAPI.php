@@ -620,6 +620,18 @@ class SeaTableAPI
         return $this->get($request);
     }
 
+    public function getCommonInfo($email)
+    {
+        $request = $this->seatable_url . '/api/v2.1/user-common-info/' . $email . '/';
+        return $this->get($request);
+    }
+
+    public function getOrgInfo($org_id)
+    {
+        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/';
+        return $this->get($request);
+    }
+
     public function addASystemNotificationToAUser($msg, $username)
     {
         $request = $this->seatable_url . '/api/v2.1/admin/sys-user-notifications/';
