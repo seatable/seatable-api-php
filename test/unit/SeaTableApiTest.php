@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SeaTable\SeaTableApi;
 
 use PHPUnit\Framework\TestCase;
-use SeaTableAPI;
+use SeaTableAPI as SeaTableApiDeprecated;
 
 /**
  * Base SeaTableApiTest
@@ -19,13 +19,14 @@ class SeaTableApiTest extends TestCase
     public function testCreation()
     {
         $this->expectErrorUndefinedArrayKey('url');
-        new \SeaTable\SeaTableApi\SeaTableApi();
+        new SeaTableApi();
     }
 
     public function testBackwardsCreation()
     {
-        $this->expectErrorUndefinedArrayKey('url');
-        new SeaTableAPI();
+        $this->expectError();
+        $this->expectErrorMessage('Deprecated use of class SeaTableAPI since 0.1.0 in ');
+        new SeaTableApiDeprecated();
     }
 
     public function provideOptionUrls()

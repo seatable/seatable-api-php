@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace SeaTable\SeaTableApi;
 
 use InterNations\Component\HttpMock\MockBuilder;
-use SeaTableAPI;
 
 /**
  * HttpMockTest
@@ -22,7 +21,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->mockAuthToken();
         $this->http->setUp();
 
-        new SeaTableAPI($this->getOptions());
+        new SeaTableApi($this->getOptions());
 
         self::assertCount(1, $this->http->requests);
         self::assertSame('POST', $this->http->requests->latest()->getMethod());
@@ -37,7 +36,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->mockAuthToken();
         $this->http->setUp();
 
-        $api = new SeaTableAPI($this->getOptions());
+        $api = new SeaTableApi($this->getOptions());
 
         $apiHttpOptions = $this->getInternalHttpOptions($api);
         self::assertArrayNotHasKey(CURLOPT_SSL_VERIFYPEER, $apiHttpOptions);
@@ -69,7 +68,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
 
         /** @noinspection CurlSslServerSpoofingInspection */
-        $api = new SeaTableAPI(
+        $api = new SeaTableApi(
             $this->getOptions(['http_options' => [
                 CURLOPT_SSL_VERIFYPEER => false,
                 CURLOPT_SSL_VERIFYHOST => false,
