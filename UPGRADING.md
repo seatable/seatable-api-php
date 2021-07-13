@@ -14,7 +14,9 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 If you previously used `SeaTableAPI` and you upgrade to version 0.1.0 or higher, replace it with `SeaTableApi` (lower-case `pi` at the end) from the new namespace `SeaTable\SeaTableApi`.
 
-The use of the old class-name `SeaTableAPI` in the global namespace is deprecated with 0.1.0 and usages of the old class-name emit a deprecation notice on creation.
+The use of the old class-name `SeaTableAPI` in the global namespace is deprecated with 0.1.0 and usages of the old class-name emit a deprecation notice ([`E_USER_DEPRECATED`][E_USER_DEPRECATED]) on creation.
+
+[E_USER_DEPRECATED]: https://www.php.net/manual/en/errorfunc.constants.php#errorfunc.constants.errorlevels.e-user-deprecated
 
 Before:
 
