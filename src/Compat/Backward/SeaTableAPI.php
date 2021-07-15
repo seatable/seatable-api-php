@@ -14,6 +14,14 @@ class SeaTableAPI extends \SeaTable\SeaTableApi\SeaTableApi
 {
     public function __construct($option = [])
     {
+        $version = '';
+        $versionClass = \Composer\InstalledVersions::class;
+        $versionMethod = 'getPrettyVersion';
+        if (class_exists($versionClass) && method_exists($versionClass, $versionMethod)) {
+            $versionPkg = 'seatable/seatable-api-php';
+            $version = sprintf(' as %s version %s is already in use', $versionPkg, $versionClass::$versionMethod($versionPkg) ?? '<unknown package>');
+        }
+
         $location = '';
         $callPoint = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1)[0] ?? null;
         if ($callPoint && isset($callPoint['file'], $callPoint['line'])) {
@@ -27,10 +35,11 @@ class SeaTableAPI extends \SeaTable\SeaTableApi\SeaTableApi
          */
         trigger_error(
             sprintf(
-                'Deprecated use of class %s since 0.1.0%s; use class %s instead',
+                'Deprecated use of class %s since 0.1.0%s; use class \\%s instead%s.',
                 __CLASS__,
                 $location,
-                '\\SeaTable\\SeaTableApi\\SeaTableApi'
+                get_parent_class(),
+                $version
             ),
             E_USER_DEPRECATED
         );

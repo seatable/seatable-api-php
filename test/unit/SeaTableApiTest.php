@@ -25,7 +25,7 @@ class SeaTableApiTest extends TestCase
     public function testBackwardsCreation()
     {
         $this->expectError();
-        $this->expectErrorMessage('Deprecated use of class SeaTableAPI since 0.1.0 in ');
+        $this->expectErrorMessageMatches('(Deprecated use of class SeaTableAPI since 0\.1\.0 in .*api-php version dev-main is already in use\.$)');
         new SeaTableApiDeprecated();
     }
 
