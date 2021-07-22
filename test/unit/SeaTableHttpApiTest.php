@@ -29,6 +29,20 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /**
+     * test for default return type and the check account info method
+     */
+    public function testResponseIsObject()
+    {
+        $this->mockAuthToken();
+        $this->mockAccountInfo();
+        $this->http->setUp();
+
+        $actual = (new SeaTableApi($this->getOptions()))->checkAccountInfo();
+
+        self::assertIsObject($actual);
+    }
+
+    /**
      * by default SSL related curl options should be the library default.
      */
     public function testCurlSslDefaultOptions()
@@ -95,6 +109,43 @@ class SeaTableHttpApiTest extends ServerMockTestCase
                 ->pathIs('/api2/auth-token/')
                 ->then()
                 ->body('{"token": null}')
+                ->end() instanceof MockBuilder
+        );
+    }
+
+    /**
+     * stub account info request
+     */
+    private function mockAccountInfo()
+    {
+        self::assertSame('1', ini_get('zend.assertions'));
+        assert(
+            $this->http->mock
+                ->when()
+                ->methodIs('GET')
+                ->pathIs('/api2/account/info/')
+                ->then()
+                ->body('{
+  "org_id": 42,
+  "is_org_staff": 1,
+  "space_usage": "0.0065038%",
+  "total": 1000000000,
+  "usage": 65038,
+  "row_usage_rate": "9.15%",
+  "row_total": 2000,
+  "row_usage": 183,
+  "avatar_url": "https://example.net/image-view/avatars/4/2/39be79e553305e5dcd738fabc9978c/resized/42/306ecbf862d9909f9d87516f32c374fd.png",
+  "email": "cb45042f1901a0aeafeb42e464d6582f@auth.local",
+  "name": "Jane",
+  "login_id": "",
+  "contact_email": "jane.doe@example.net",
+  "institution": "",
+  "is_staff": false,
+  "enable_chargebee": false,
+  "enable_subscription": false,
+  "dtable_updates_email_interval": 0,
+  "dtable_collaborate_email_interval": 0
+}')
                 ->end() instanceof MockBuilder
         );
     }
