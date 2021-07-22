@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace SeaTable\SeaTableApi;
 
 use InterNations\Component\HttpMock\MockBuilder;
+use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
 
 /**
  * HttpMockTest
  *
  * @covers \SeaTableAPI
  * @covers \SeaTable\SeaTableApi\SeaTableApi
+ * @covers \SeaTable\SeaTableApi\Internal\RestCurlClientEx
  * @covers \SeaTable\SeaTableApi\SeaTableHttpApiTest
  * @covers \SeaTable\SeaTableApi\ServerMockTestCase
  */
@@ -43,6 +45,25 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /**
+     * test for $response_object_to_array backwards compat behaviour
+     */
+    public function testResponseAsArray()
+    {
+        $this->mockAuthToken();
+        $this->mockAccountInfo();
+        $this->http->setUp();
+
+        $api = new SeaTableApi($this->getOptions());
+        $api->response_object_to_array = true;
+        try {
+            $actual = $api->checkAccountInfo();
+        } catch (\Throwable $t) {
+            self::assertSame(E_USER_DEPRECATED, $t->getCode());
+            self::assertStringContainsString(' SeaTableApi->response_object_to_array is deprecated ', $t->getMessage());
+        }
+    }
+
+    /**
      * by default SSL related curl options should be the library default.
      */
     public function testCurlSslDefaultOptions()
@@ -61,15 +82,20 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     {
         $subject = $api;
 
-        $reflClass = new \ReflectionClass($subject);
-        if ($reflClass->getName() === 'SeaTableAPI') {
-            $subject = $reflClass->getParentClass()->getName();
+        $reflectionClass = new \ReflectionClass($subject);
+        if ($reflectionClass->getName() === 'SeaTableAPI') {
+            $subject = $reflectionClass->getParentClass()->getName();
         }
-        unset($reflClass);
+        unset($reflectionClass);
 
-        $reflOptions = new \ReflectionProperty($subject, 'http_options');
-        $reflOptions->setAccessible(true);
-        return $reflOptions->getValue($api);
+        $reflectionRecCurlClientEx = new \ReflectionProperty($subject, 'restCurlClientEx');
+        $reflectionRecCurlClientEx->setAccessible(true);
+        /** @var RestCurlClientEx $restCurlClientEx */
+        $restCurlClientEx = $reflectionRecCurlClientEx->getValue($api);
+
+        $reflectionHttpOptions = new \ReflectionProperty($restCurlClientEx, 'http_options');
+        $reflectionHttpOptions->setAccessible(true);
+        return $reflectionHttpOptions->getValue($restCurlClientEx);
     }
 
     /**
@@ -171,9 +197,9 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     private function getOptions(array $defaults = null): array
     {
         return ((array) $defaults) + [
-            'url' => $this->getServerUrl(),
-            'user' => 'u',
-            'password' => 'p',
-        ];
+                'url' => $this->getServerUrl(),
+                'user' => 'u',
+                'password' => 'p',
+            ];
     }
 }
