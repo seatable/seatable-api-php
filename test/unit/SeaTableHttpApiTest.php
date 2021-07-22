@@ -97,6 +97,21 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /**
+     * test debug() gives deprecation notice
+     */
+    public function testDebugDeprecation()
+    {
+        $this->mockAuthToken();
+        $this->http->setUp();
+
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->expectError();
+        $this->expectErrorMessage('Deprecated use of method SeaTable\SeaTableApi\SeaTableApi::debug since 0.0.4;');
+        $api->debug(null);
+    }
+
+    /**
      * stub initial auth request
      */
     private function mockAuthToken()
