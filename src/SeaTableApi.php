@@ -657,7 +657,7 @@ class SeaTableApi
     {
         $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspace_id . '/import-dtable/';
 
-        $curl_file = new CURLFile(realpath($dtable_file));
+        $curl_file = new \CURLFile(realpath($dtable_file));
         $form_fields = ['dtable' => $curl_file];
 
         return $this->post($request, $form_fields);
