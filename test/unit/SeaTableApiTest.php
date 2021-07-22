@@ -44,7 +44,7 @@ class SeaTableApiTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage($pass ? "SeaTable user is missing or has a bad format" : "SeaTable URL is missing or bad URL format");
-        new SeaTableAPI(['url' => $url]);
+        new SeaTableApi(['url' => $url]);
     }
 
     private function expectErrorUndefinedArrayKey(string $actual)
