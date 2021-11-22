@@ -176,7 +176,12 @@ class RestCurlClientEx
      */
     public function put($url, $data = '', $http_options = [])
     {
-        $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json; charset=utf-8; indent=4'];
+        if (strpos($url, "/api/v1/dtables/") !== false) {
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: application/json'];
+        } else {
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json; charset=utf-8; indent=4', 'Content-Type: multipart/form-data'];
+        }
+
         $http_options += $this->http_options;
         $http_options[CURLOPT_CUSTOMREQUEST] = 'PUT';
         $http_options[CURLOPT_POSTFIELDS] = $data;
