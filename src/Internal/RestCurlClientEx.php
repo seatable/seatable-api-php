@@ -14,7 +14,7 @@ use SeaTable\SeaTableApi\SeaTableApi;
 /**
  * RestCurlClientEx
  *
- * Extracted Rest-Curl-Client for the SeaTable API to remove get/pust/put/delete methods
+ * Extracted Rest-Curl-Client for the SeaTable API to remove get/post/put/delete methods
  * on the main SeaTableApi class.
  *
  * Perform PUT,GET,POST,DELETE request to your SeaTable server
@@ -46,17 +46,53 @@ class RestCurlClientEx
      */
     public $access_token;
 
-    private $handle;                                # cUrl handle
-    private $http_options = [];                     # cUrl options
+    /**
+     * @var resource cUrl handle
+     */
+    private $handle;
 
-    private $seatable_code;                         # (ex-public) curl response code from SeaTable server
-    private $seatable_status;                       # (ex-public) SeaTable response message
-    private $response_info;                         # (ex-public) Curl info
-    private $response_object;                       # Curl response
-    private $response_object_to_array = false;      # (ex-public) Convert response to array instead of object - default false
+    /**
+     * cUrl options
+     * @var array<string, int|string>
+     */
+    private $http_options = [];
 
-    # SeaTable static error code
-    private $seatable_status_message = [
+    /**
+     * @var int
+     */
+    private $seatable_code;                 # (ex-public) curl response code from SeaTable server
+
+    /**
+     * @var string
+     */
+    private $seatable_status;               # (ex-public) SeaTable response message
+
+    /**
+     * @var array
+     */
+    private $response_info;                 # (ex-public) Curl info
+
+    /**
+     * cUrl response
+     *
+     * string if {@see curl_exec()} returns transport ({@see CURLOPT_RETURNTRANSFER} enabled in
+     * ctor {@see self::__construct}, default mode of operation)
+     *
+     * @var bool|string
+     */
+    private $response_object;
+
+    /**
+     * @var bool
+     */
+    private $response_object_to_array;      # (ex-public) Convert response to array instead of object - default false
+
+    /**
+     * SeaTable static error code
+     *
+     * @var string[]
+     */
+    private static $seatable_status_message = [
         '200' => 'OK',
         '201' => 'CREATED',
         '202' => 'ACCEPTED',
@@ -99,16 +135,16 @@ class RestCurlClientEx
      *
      * @param string $url The url to make the call to.
      * @param array $http_options Extra option to pass to curl handle.
-     * @return string The response from curl if any
+     * @return object The response from curl if any
      */
-    public function get($url, $http_options = [], $api_token = "")
+    public function get(string $url, array $http_options = [], string $api_token = "")
     {
-        if ($api_token != "") {
-            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $api_token, 'Accept: application/json; charset=utf-8; indent=4'];
+        if ($api_token !== "") {
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $api_token, 'Accept: application/json'];
         } elseif (strpos($url, "/api/v1/dtables/") !== false) {
-            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json; charset=utf-8; indent=4', 'Content-Type: multipart/json'];
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: multipart/json'];
         } else {
-            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json; charset=utf-8; indent=4'];
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json'];
         }
 
         $http_options += $this->http_options;
@@ -133,21 +169,22 @@ class RestCurlClientEx
      * by curl_exec() and curl_getinfo() respectively.
      *
      * @param string $url The url to make the call to.
-     * @param string|array $form_fields The data to post. Pass an array to make a http form post.
+     * @param string|array $data The data to post. Pass an array to make a http form post.
      * @param array $http_options Extra option to pass to curl handle.
-     * @return string The response from curl if any
+     * @return object The json decoded response from curl
      */
-    public function post($url, $form_fields = [], $http_options = [])
+    public function post(string $url, $data = [], array $http_options = [])
     {
         if (strpos($url, "/api/v1/dtables/") !== false) {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: application/json'];
         } else {
-            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json; charset=utf-8; indent=4', 'Content-Type: multipart/form-data'];
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json', 'Content-Type: multipart/form-data'];
         }
 
         $http_options += $this->http_options;
         $http_options[CURLOPT_POST] = true;
-        $http_options[CURLOPT_POSTFIELDS] = $form_fields;
+
+        $http_options[CURLOPT_POSTFIELDS] = $data;
 
         $this->handle = curl_init($url);
 
@@ -172,19 +209,20 @@ class RestCurlClientEx
      * @param string $url The url to make the call to.
      * @param string|array $data The data to post.
      * @param array $http_options Extra option to pass to curl handle.
-     * @return string The response from curl if any
+     * @return object The response from curl if any
      */
-    public function put($url, $data = '', $http_options = [])
+    public function put(string $url, $data = '', array $http_options = [])
     {
         if (strpos($url, "/api/v1/dtables/") !== false) {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: application/json'];
         } else {
-            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json; charset=utf-8; indent=4', 'Content-Type: multipart/form-data'];
+            $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json', 'Content-Type: multipart/form-data'];
         }
-
         $http_options += $this->http_options;
         $http_options[CURLOPT_CUSTOMREQUEST] = 'PUT';
+
         $http_options[CURLOPT_POSTFIELDS] = $data;
+
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
@@ -207,11 +245,11 @@ class RestCurlClientEx
      *
      * @param string $url The url to make the call to.
      * @param array $http_options Extra option to pass to curl handle.
-     * @return string The response from curl if any
+     * @return object The response from curl if any
      */
-    public function delete($url, $http_options = [])
+    public function delete(string $url, array $http_options = [])
     {
-        $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json; charset=utf-8; indent=4'];
+        $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json'];
         $http_options += $this->http_options;
         $http_options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
         $this->handle = curl_init($url);
@@ -230,58 +268,60 @@ class RestCurlClientEx
     /**
      * Decode answer to object format instead of json
      *
-     * @param string $data - The json encoded response
-     * @param bool $this- >response_object_to_array default false - If true return array from json instead of object
+     * @param string $jsonText encoded response
+     * @return object on some endpoints this can differ, e.g. string on /ping
+     * @see $response_object_to_array
+     * @noinspection OverridingDeprecatedMethodInspection
      */
-    private function decode($data)
+    private function decode(string $jsonText)
     {
         if (!$this->response_object_to_array) {
-            return json_decode($data, false);
-        } else {
-            $location = '';
-            $callPoint = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)[2] ?? null;
-            if ($callPoint && isset($callPoint['file'], $callPoint['line'])) {
-                $location = sprintf(' use near %s on line %s', $callPoint['file'], $callPoint['line']);
-            }
-            trigger_error(
-                sprintf(
-                    'the use of SeaTableApi->response_object_to_array is deprecated since 0.1.4%s; there is no replacement.',
-                    $location
-                ),
-                E_USER_DEPRECATED
-            );
-
-            return json_decode($data, true);
+            return json_decode($jsonText, false);
         }
+
+        $location = '';
+        $callPoint = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)[2] ?? null;
+        if ($callPoint && isset($callPoint['file'], $callPoint['line'])) {
+            $location = sprintf(' use near %s on line %s', $callPoint['file'], $callPoint['line']);
+        }
+        trigger_error(
+            sprintf(
+                'the use of SeaTableApi->response_object_to_array is deprecated since 0.1.4%s; there is no replacement.',
+                $location
+            ),
+            E_USER_DEPRECATED
+        );
+
+        return json_decode($jsonText, true);
     }
 
     /**
      * Analyse curl answer
      *
-     * @param array $res The curl object
+     * @param string|bool $res The curl object
      * @throws Exception
      */
     private function http_parse_message($res)
     {
-        if (!$res) {
+        if ($res === '' || $res === false) {
             throw new Exception(curl_error($this->handle), -1);
         }
 
         $this->api->response_info = $this->response_info = curl_getinfo($this->handle);
-        $code = $this->response_info['http_code'];
+        $code = (int) $this->response_info['http_code'];
 
         $this->api->seatable_code = $this->seatable_code = $code;
-        $this->api->seatable_status = $this->seatable_status = $this->seatable_status_message[$code];
+        $this->api->seatable_status = $this->seatable_status = self::$seatable_status_message[$code] ?? 'UNKNOWN';
 
         // weitere fehlermeldungen von https://docs.seatable.io/published/seatable-api/home.md
 
-        if ($code == 404) {
+        if ($code === 404) {
             throw new Exception($this->seatable_code . ' - ' . $this->seatable_status . ' - ' . curl_error($this->handle));
-        } elseif ($code == 403 || $code == 404) {
+        } elseif ($code === 403) {
             throw new Exception("Error " . $this->seatable_code . ': ' . $this->seatable_status . ': ' . $res);
-        } elseif ($code >= 400 && $code <= 600) {
+        } elseif (400 <= $code && $code <= 600) {
             throw new Exception($this->seatable_code . ' - ' . $this->seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
-        } elseif (!in_array($code, range(200, 207))) {
+        } elseif (!(200 <= $code && $code <= 207)) {
             throw new Exception($this->seatable_code . ' - ' . $this->seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
         }
     }

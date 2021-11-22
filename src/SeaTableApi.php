@@ -79,28 +79,28 @@ class SeaTableApi
             throw new Exception("Curl extension is required");
         }
 
-        if (isset($option['url']) && !empty($option['url']) && (!filter_var($option['url'], FILTER_VALIDATE_URL) || !in_array(parse_url($option['url'], PHP_URL_SCHEME), ['http', 'https'], true))) {
+        if (!empty($option['url']) && (!filter_var($option['url'], FILTER_VALIDATE_URL) || !in_array(parse_url($option['url'], PHP_URL_SCHEME), ['http', 'https'], true))) {
             throw new Exception("SeaTable URL is missing or bad URL format");
         }
 
-        if (isset($option['port']) && !empty($option['port']) && !is_int($option['port'])) {
+        if (!empty($option['port']) && !is_int($option['port'])) {
             throw new Exception("SeaTable port must be a number");
         }
 
-        if (isset($option['port']) && !empty($option['port']) && is_int($option['port']) && $option['port'] != 443) {
+        if (!empty($option['port']) && is_int($option['port']) && $option['port'] !== 443) {
             $this->seatable_port = (int) $option['port'];
             $this->seatable_url = $option['url'] . ':' . $this->seatable_port;
         } else {
             $this->seatable_url = $option['url'];
         }
 
-        if (isset($option['user']) && !empty($option['user'])) {
+        if (!empty($option['user'])) {
             $this->seatable_user = strtolower(trim(preg_replace('/\\s+/', '', $option['user'])));
         } else {
             throw new Exception("SeaTable user is missing or has a bad format");
         }
 
-        if (isset($option['password']) && !empty($option['password'])) {
+        if (!empty($option['password'])) {
             $this->seatable_pass = $option['password'];
         } else {
             throw new Exception("SeaTable user password is required");
@@ -179,9 +179,9 @@ class SeaTableApi
     }
 
     /**
-     * Return SeaTable token
+     * Obtain SeaTable Auth Token
      *
-     * @return - The SeaTable auth token
+     * @return void
      */
     private function getAuthToken()
     {
@@ -195,7 +195,7 @@ class SeaTableApi
     /**
      * (all) Ping SeaTable server
      *
-     * @return string, "pong" if auth token is correct
+     * @return string "pong" if auth token is correct
      */
     public function ping()
     {
@@ -421,7 +421,7 @@ class SeaTableApi
 
         $item = null;
         foreach ($metadata->metadata->tables as $struct) {
-            if ($table_name == $struct->name) {
+            if ($table_name === $struct->name) {
                 $item = $struct;
                 break;
             }
@@ -479,7 +479,7 @@ class SeaTableApi
     public function addOrgUser($org_id, $email, $pass, $name = "")
     {
         $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/';
-        if ($name == "") {
+        if ($name === "") {
             $name_arr = explode("@", $email);
             $name = $name[0];
         }
