@@ -57,5 +57,5 @@ jobs:
             core_exec "$(command -v composer)" config --global home
           core_endGroup
           (( set -x
-            composer test ${{ matrix.allow-failure && '|| true' }}
+            composer test ${{ matrix.allow-failure && '|| : allow-failure' }}
           ) 2> >(sed -u -e 's/^/[err] /' >&2)) 2>&1
