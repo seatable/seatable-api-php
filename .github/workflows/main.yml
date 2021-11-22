@@ -58,4 +58,4 @@ jobs:
           core_endGroup
           (( set -x
             composer test ${{ matrix.allow-failure && '|| true' }}
-          ) > >(sed -u -e 's/^/[out] /') 2> >(sed -u -e 's/^/[err] /' >&2)) 2>&1
+          ) 2> >(sed -u -e 's/^/[err] /' >&2)) 2>&1
