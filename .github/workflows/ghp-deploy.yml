@@ -2,10 +2,13 @@ name: GHP
 
 on:
   workflow_dispatch:
-    paths: [ '.github/workflows/gh-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
+    paths: [ '.github/workflows/ghp-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
   pull_request:
-    paths: [ '.github/workflows/gh-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
+    paths: [ '.github/workflows/ghp-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
     branches: [ 'main' ]
+  push:
+    paths: [ '.github/workflows/ghp-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
+    branches: ['main']
 
 jobs:
   deploy:
