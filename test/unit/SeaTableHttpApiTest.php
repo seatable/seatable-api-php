@@ -15,6 +15,7 @@ use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
  * @covers \SeaTable\SeaTableApi\Internal\RestCurlClientEx
  * @covers \SeaTable\SeaTableApi\SeaTableHttpApiTest
  * @covers \SeaTable\SeaTableApi\ServerMockTestCase
+ * @uses \SeaTable\SeaTableApi\Internal\ApiOptions
  */
 class SeaTableHttpApiTest extends ServerMockTestCase
 {

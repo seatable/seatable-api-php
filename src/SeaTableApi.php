@@ -2,6 +2,7 @@
 
 namespace SeaTable\SeaTableApi;
 
+use SeaTable\SeaTableApi\Internal\ApiOptions;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
 
 /**
@@ -76,37 +77,12 @@ class SeaTableApi
             throw new Exception("Curl extension is required");
         }
 
-        if (!empty($option['url']) && (!filter_var($option['url'], FILTER_VALIDATE_URL) || !in_array(parse_url($option['url'], PHP_URL_SCHEME), ['http', 'https'], true))) {
-            throw new Exception("SeaTable URL is missing or bad URL format");
-        }
+        $options = ApiOptions::createFromArray($option);
+        $this->seatable_url = $options->getUrl();
+        $this->seatable_user = $options->getUser();
+        $this->seatable_pass = $options->getPassword();
 
-        if (!empty($option['port']) && !is_int($option['port'])) {
-            throw new Exception("SeaTable port must be a number");
-        }
-
-        if (!empty($option['port']) && is_int($option['port']) && $option['port'] !== 443) {
-            $this->seatable_url = $option['url'] . ':' . (int) $option['port'];
-        } else {
-            $this->seatable_url = $option['url'];
-        }
-
-        if (!empty($option['user'])) {
-            $this->seatable_user = strtolower(trim(preg_replace('/\\s+/', '', $option['user'])));
-        } else {
-            throw new Exception("SeaTable user is missing or has a bad format");
-        }
-
-        if (!empty($option['password'])) {
-            $this->seatable_pass = $option['password'];
-        } else {
-            throw new Exception("SeaTable user password is required");
-        }
-
-        if (isset($option['http_options']) && !is_array($option['http_options'])) {
-            throw new Exception("SeaTable http_options must be an array");
-        }
-
-        $this->restCurlClientEx = new RestCurlClientEx($this, $option['http_options'] ?? []);
+        $this->restCurlClientEx = new RestCurlClientEx($this, $options->getHttpOptions());
 
         /*
          * Return seatable token

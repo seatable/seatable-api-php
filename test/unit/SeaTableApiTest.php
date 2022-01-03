@@ -16,6 +16,9 @@ use SeaTableAPI as SeaTableApiDeprecated;
  */
 class SeaTableApiTest extends TestCase
 {
+    /**
+     * @uses \SeaTable\SeaTableApi\Internal\ApiOptions::createFromArray
+     */
     public function testCreation()
     {
         $this->expectErrorUndefinedArrayKey('url');
@@ -39,6 +42,7 @@ class SeaTableApiTest extends TestCase
 
     /**
      * @dataProvider provideOptionUrls
+     * @uses \SeaTable\SeaTableApi\Internal\ApiOptions::createFromArray
      */
     public function testUrlOption(string $url, bool $pass)
     {
