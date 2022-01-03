@@ -29,11 +29,6 @@ use stdClass;
 final class RestCurlClientEx
 {
     /**
-     * @var stdClass
-     */
-    private $apiStateEx;
-
-    /**
      * Auth Token
      *
      * @var string
@@ -96,7 +91,7 @@ final class RestCurlClientEx
         520 => 'OPERATION_FAILED',
     ];
 
-    public function __construct(stdClass $apiStateEx, array $httpOptions)
+    public function __construct(array $httpOptions)
     {
         /*
          * Default curl config
@@ -108,16 +103,14 @@ final class RestCurlClientEx
             isset($httpOptions[$httpOption])
             && $this->http_options[$httpOption] = $httpOptions[$httpOption];
         }
-
-        $this->apiStateEx = $apiStateEx;
     }
 
     /**
      * Perform a GET call to server
      *
-     * Additionally, in $response_object and $response_info are the
-     * response from server and the response info as it is returned
-     * by curl_exec() and curl_getinfo() respectively.
+     * Additionally, in $response_object is the
+     * response from server as it is returned
+     * by curl_exec().
      *
      * @param string $url The url to make the call to.
      * @param array $http_options Extra option to pass to curl handle.
@@ -150,9 +143,9 @@ final class RestCurlClientEx
     /**
      * Perform a POST call to the server
      *
-     * Additionally, in $response_object and $response_info are the
-     * response from server and the response info as it is returned
-     * by curl_exec() and curl_getinfo() respectively.
+     * Additionally, in $response_object is the
+     * response from server as it is returned
+     * by curl_exec().
      *
      * @param string $url The url to make the call to.
      * @param string|array $data The data to post. Pass an array to make a http form post.
@@ -189,9 +182,9 @@ final class RestCurlClientEx
     /**
      * Perform a PUT call to the server
      *
-     * Additionally, in $response_object and $response_info are the
-     * response from server and the response info as it is returned
-     * by curl_exec() and curl_getinfo() respectively.
+     * Additionally, in $response_object is the
+     * response from server as it is returned
+     * by curl_exec().
      *
      * @param string $url The url to make the call to.
      * @param string|array $data The data to post.
@@ -226,9 +219,9 @@ final class RestCurlClientEx
     /**
      * Perform a DELETE call to server
      *
-     * Additionally, in $response_object and $response_info are the
-     * response from server and the response info as it is returned
-     * by curl_exec() and curl_getinfo() respectively.
+     * Additionally, in $response_object is the
+     * response from server as it is returned
+     * by curl_exec().
      *
      * @param string $url The url to make the call to.
      * @param array $http_options Extra option to pass to curl handle.
@@ -284,19 +277,7 @@ final class RestCurlClientEx
      */
     private function decode(string $jsonText)
     {
-        if (!$this->apiStateEx->response_object_to_array) {
-            return json_decode($jsonText, false);
-        }
-
-        $location = Php::callSite(2);
-        Php::triggerDeprecation(
-            '0.1.4',
-            'SeaTableApi->response_object_to_array = true is deprecated and will be removed in a future version. Near %s on line %s',
-            $location['file'],
-            $location['line']
-        );
-
-        return json_decode($jsonText, true);
+        return json_decode($jsonText, false);
     }
 
     /**
@@ -317,11 +298,10 @@ final class RestCurlClientEx
             throw new Exception($message, -1);
         }
 
-        $this->apiStateEx->response_info = $info = curl_getinfo($this->handle);
+        $info = curl_getinfo($this->handle);
         $code = (int) $info['http_code'];
 
-        $this->apiStateEx->seatable_code = $code;
-        $this->apiStateEx->seatable_status = $message = self::$seatable_status_message[$code] ?? 'UNKNOWN';
+        $message = self::$seatable_status_message[$code] ?? 'UNKNOWN';
 
         // weitere fehlermeldungen von https://docs.seatable.io/published/seatable-api/home.md
 

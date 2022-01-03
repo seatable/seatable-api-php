@@ -19,9 +19,8 @@ class RestCurlClientExTest extends TestCase
 {
     public function testCreation(): RestCurlClientEx
     {
-        $state = new \stdClass();
         $httpOptions = [];
-        $client = new RestCurlClientEx($state, $httpOptions);
+        $client = new RestCurlClientEx($httpOptions);
         $this->addToAssertionCount(1);
 
         return $client;

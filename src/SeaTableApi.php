@@ -5,7 +5,6 @@ namespace SeaTable\SeaTableApi;
 use SeaTable\SeaTableApi\Compat\Deprecation\Php;
 use SeaTable\SeaTableApi\Internal\ApiOptions;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
-use stdClass;
 
 /**
  * SeaTable API - PHP class wrapper
@@ -20,54 +19,9 @@ use stdClass;
  */
 class SeaTableApi
 {
-    /**
-     * @var stdClass
-     */
-    private $apiStateEx;
-
     private $seatable_url;                          # url of the SeaTable server
 
     private $dtable_uuid;
-
-    /**
-     * cUrl response code from SeaTable server
-     *
-     * internal public access via {@see SeaTableApi::__get()} {@see SeaTableApi::__set()} {@see SeaTableApi::__isset()}
-     *
-     * @deprecated since 0.1.4, no replacement
-     */
-    private $seatable_code;
-
-    /**
-     * SeaTable response message
-     *
-     * internal public access via {@see SeaTableApi::__get()} {@see SeaTableApi::__set()} {@see SeaTableApi::__isset()}
-     *
-     * @deprecated since 0.1.4, no replacement
-     * @var string
-     */
-    private $seatable_status;
-
-    /**
-     * Convert response to array instead of object
-     *
-     * Defaults to false
-     *
-     * @deprecated since 0.1.4, no replacement
-     * @see SeaTableApi::__set()
-     * @var bool
-     */
-    private $response_object_to_array = false;
-
-    /**
-     * Curl info
-     *
-     * internal public access via {@see SeaTableApi::__get()} {@see SeaTableApi::__set()} {@see SeaTableApi::__isset()}
-     *
-     * @deprecated since 0.1.4, no replacement
-     * @property $response_info;
-     */
-    private $response_info;
 
     /**
      * @var RestCurlClientEx
@@ -88,131 +42,12 @@ class SeaTableApi
         $options = ApiOptions::createFromArray($option);
         $this->seatable_url = $options->getUrl();
 
-        /*
-         * extracted api state (deprecation and removal)
-         */
-        $this->apiStateEx = new stdClass();
-        $this->apiStateEx->response_object_to_array = false;
-        $this->apiStateEx->seatable_code = null;
-        $this->apiStateEx->seatable_status = null;
-
-        $this->restCurlClientEx = new RestCurlClientEx($this->apiStateEx, $options->getHttpOptions());
+        $this->restCurlClientEx = new RestCurlClientEx($options->getHttpOptions());
 
         /*
          * Return seatable token
          */
         $this->getAuthToken($options->getUser(), $options->getPassword());
-    }
-
-    public function __set($name, $value)
-    {
-        if ($name === 'response_object_to_array') {
-            $value = (bool) $value;
-            if ($value === true) {
-                $location = Php::callSite();
-                Php::triggerDeprecation(
-                    '0.1.4',
-                    'SeaTableApi->response_object_to_array = true is deprecated and will be removed in a future version. In %s on line %s',
-                    $location['file'],
-                    $location['line']
-                );
-            }
-            $this->apiStateEx->$name = $value;
-        }
-
-        if (in_array($name, ['seatable_code', 'seatable_status', 'response_info'])) {
-            $location = Php::callSite();
-            Php::triggerDeprecation(
-                '0.1.4',
-                'Setting of SeaTableApi->%s has no effect on the API, is deprecated and the property for reading will be removed in a future version. In %s on line %s',
-                $name,
-                $location['file'],
-                $location['line']
-            );
-        }
-    }
-
-    public function __get($name)
-    {
-        $location = Php::callSite();
-        if ($name === 'response_object_to_array') {
-            Php::triggerDeprecation(
-                '0.1.4',
-                'Reading of SeaTableApi->response_object_to_array is deprecated and will be removed in a future version. In %s on line %s',
-                $location['file'],
-                $location['line']
-            );
-            return $this->apiStateEx->$name;
-        }
-
-        if (in_array($name, ['seatable_code', 'seatable_status', 'response_info'])) {
-            Php::triggerDeprecation(
-                '0.1.4',
-                'Reading of SeaTableApi->%s is deprecated and will be removed in a future version. In %s on line %s',
-                $name,
-                $location['file'],
-                $location['line']
-            );
-            return $this->apiStateEx->$name;
-        }
-
-        trigger_error(
-            sprintf(
-                'Undefined property: %s::$%s in %s on line %d',
-                __CLASS__,
-                $name,
-                $location['file'],
-                $location['line']
-            ),
-            PHP_VERSION_ID < 80000 ? E_USER_NOTICE : E_USER_WARNING
-        );
-    }
-
-    public function __isset($name)
-    {
-        if ($name === 'response_object_to_array') {
-            return true;
-        }
-
-        if (in_array($name, ['seatable_code', 'seatable_status', 'response_info'])) {
-            return true;
-        }
-    }
-
-    /**
-     * @deprecated since 0.1.4, no replacement
-     */
-    public function get($url, $http_options = [], $api_token = "")
-    {
-        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
-        return $this->restCurlClientEx->get($url, $http_options, $api_token);
-    }
-
-    /**
-     * @deprecated since 0.1.4, no replacement
-     */
-    public function post($url, $form_fields = [], $http_options = [])
-    {
-        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
-        return $this->restCurlClientEx->post($url, $form_fields, $http_options);
-    }
-
-    /**
-     * @deprecated since 0.1.4, no replacement
-     */
-    public function put($url, $data = '', $http_options = [])
-    {
-        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
-        return $this->restCurlClientEx->put($url, $data, $http_options);
-    }
-
-    /**
-     * @deprecated since 0.1.4, no replacement
-     */
-    public function delete($url, $http_options = [])
-    {
-        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
-        return $this->restCurlClientEx->delete($url, $http_options);
     }
 
     /**

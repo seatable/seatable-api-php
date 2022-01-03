@@ -9,12 +9,9 @@ declare(strict_types=1);
 namespace SeaTable\SeaTableApi;
 
 use SeaTable\SeaTableApi\Compat\Deprecation\PhpTest;
-use SeaTableAPI as SeaTableApiDeprecated;
-
 /**
  * Base SeaTableApiTest
  *
- * @covers \SeaTableAPI
  * @covers \SeaTable\SeaTableApi\SeaTableApi
  * @covers \SeaTable\SeaTableApi\SeaTableApiTest
  */
@@ -31,23 +28,6 @@ class SeaTableApiTest extends TestCase
         $this->expectNotice();
         new SeaTableApi();
     } // @codeCoverageIgnore
-
-    /**
-     * @return void
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php
-     */
-    public function testBackwardsCreation()
-    {
-        $this->expectDeprecationMessageMatches(
-            '(^Since seatable/seatable-api-php 0\.1\.0: Class SeaTableAPI is deprecated' .
-            ', use \Q\SeaTable\SeaTableApi\SeaTableApi\E instead as' .
-            ' seatable/seatable-api-php version (?:' . PhpTest::REGEX_PKG_VERSION . ') is already in use\.' .
-            ' In .*/test/unit/SeaTableApiTest\.php on line ' . (__LINE__ + 4) .
-            '$)'
-        );
-        $this->expectDeprecation();
-        new SeaTableApiDeprecated(); // @codeCoverageIgnoreStart
-    } // @codeCoverageIgnoreEnd
 
     /**
      * @codeCoverageIgnore

@@ -11,7 +11,7 @@
  *  [3] SeaTableAPI class not loaded
  *  [4] SeaTableApi class not loaded
  *  [5] SeaTableApi class can autoload
- *  [6] SeaTableAPI class can autoload
+ *  [6] SeaTableAPI class must not autoload (removed)
  */
 
 use SeaTable\SeaTableApi\SeaTableApi;
@@ -48,8 +48,8 @@ if (!class_exists($class = SeaTableApi::class, $autoload = true)) {
     exit(1);
 }
 
-# [6] SeaTableAPI class can autoload
-if (!class_exists($class = \SeaTableAPI::class, $autoload = true)) {
-    fwrite(STDERR, "[6] fail: failed to autoload class \"$class\".\n");
+# [6] SeaTableAPI class must not autoload (removed)
+if (class_exists($class = \SeaTableAPI::class, $autoload = true)) {
+    fwrite(STDERR, "[6] fail: \"$class\" did autoload, but it must not.\n");
     exit(1);
 }

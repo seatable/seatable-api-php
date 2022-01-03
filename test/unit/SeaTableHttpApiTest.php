@@ -15,7 +15,6 @@ use stdClass;
 /**
  * HttpMockTest
  *
- * @covers \SeaTableAPI
  * @covers \SeaTable\SeaTableApi\SeaTableApi
  * @covers \SeaTable\SeaTableApi\Internal\RestCurlClientEx
  * @covers \SeaTable\SeaTableApi\SeaTableHttpApiTest
@@ -56,55 +55,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
      * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
      * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
      */
-    public function testResponseAsArrayIsDeprecated()
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(
-            sprintf(
-                'Since seatable/seatable-api-php 0.1.4: SeaTableApi->response_object_to_array = true is deprecated and will be removed in a future version. In %s on line %s',
-                __FILE__,
-                __LINE__ + 4
-            )
-        );
-        $this->expectDeprecation();
-        $api->response_object_to_array = true;
-    } // @codeCoverageIgnore
-
-    /**
-     * test for $response_object_to_array backwards compat behaviour
-     *
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     */
-    public function testResponseAsArrayIsDeprecatedForReading()
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(
-            sprintf(
-                'Since seatable/seatable-api-php 0.1.4: Reading of SeaTableApi->response_object_to_array is deprecated and will be removed in a future version. In %s on line %s',
-                __FILE__,
-                __LINE__ + 4
-            )
-        );
-        $this->expectDeprecation();
-        $this->assertFalse($api->response_object_to_array);
-    } // @codeCoverageIgnore
-
-    /**
-     * test for $response_object_to_array backwards compat behaviour
-     *
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     */
-    public function testDeprecatedResponseAsArrayCanStillBeSetToTrue()
+    public function testRemovedResponseAsArrayPropertyCanBeDynamicallySetToTrueButHasNoEffect()
     {
         $this->mockAuthToken();
         $this->mockAccountInfo();
@@ -112,25 +63,9 @@ class SeaTableHttpApiTest extends ServerMockTestCase
 
         $api = new SeaTableApi($this->getOptions());
 
-        @$api->response_object_to_array = true;
-        $result = @$api->getAccountInfo();
-        $this->assertIsArray($result);
-    }
-
-    /**
-     * test for $response_object_to_array backwards compat behaviour
-     *
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     */
-    public function testDeprecatedResponseAsArrayCanStillBeRead()
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->assertFalse(@$api->response_object_to_array);
+        $api->response_object_to_array = true;
+        $result = $api->getAccountInfo();
+        $this->assertIsObject($result);
     }
 
     /**
@@ -150,130 +85,70 @@ class SeaTableHttpApiTest extends ServerMockTestCase
 
         $this->expectErrorMessage(
             sprintf(
-                'Undefined property: SeaTable\SeaTableApi\SeaTableApi::$undefinedProperty in %s on line %d',
-                __FILE__,
-                __LINE__ + 4
+                'Undefined property: SeaTable\SeaTableApi\SeaTableApi::$undefinedProperty'
             )
         );
         (PHP_VERSION_ID < 80000) ? $this->expectNotice() : $this->expectWarning();
         $this->assertNull($api->undefinedProperty);
     } // @codeCoverageIgnore
 
-    /**
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     *
-     * @return void
-     */
-    public function testDeprecationOfPropertiesGetDeprecatedDefined()
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->assertTrue(isset($api->response_object_to_array));
-        $this->assertFalse(@$api->response_object_to_array);
-    }
 
     /**
      * @codeCoverageIgnore
      *
      * @return array
      */
-    public function provideDeprecatedPublicPropertyNames(): array
+    public function provideRemovedDeprecatedPublicPropertyNames(): array
     {
         return [
-            'seatable_code' => ['seatable_code', 200],
-            'seatable_status' => ['seatable_status', 'OK'],
-            'response_info' => ['response_info', ['url' => 'http://localhost:8082/api2/auth-token/']],
+            'response_info' => ['response_info'],
+            'response_object_to_array' => ['response_object_to_array'],
+            'seatable_code' => ['seatable_code'],
+            'seatable_status' => ['seatable_status'],
         ];
     }
 
     /**
-     * @dataProvider provideDeprecatedPublicPropertyNames
+     * @dataProvider provideRemovedDeprecatedPublicPropertyNames
+     * @uses         \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
      *
+     * @param string $name
      * @return void
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
      */
-    public function testDeprecationOfPreviousPublicPropertiesGiveNotice(string $name, $default)
+    public function testRemovalOfPreviousDeprecatedPublicProperties(string $name)
     {
         $this->mockAuthToken();
         $this->http->setUp();
 
         $api = new SeaTableApi($this->getOptions());
+        $this->assertObjectNotHasAttribute($name, $api, "property removed: $name");
+        $this->assertFalse(isset($api->$name), "property not isset(): $name");
+        $this->assertNull(@$api->$name, "property undefined notice suppressed is default null: $name");
 
-        if (is_array($default)) {
-            $actual = @$api->$name;
-            $this->assertIsArray($actual, "property: $name; default: " . var_export($default, true));
-            foreach ($default as $key => $expected) {
-                $this->assertArrayHasKey($key, $actual, "property: $name; default: " . var_export($default, true));
-                $this->assertSame($expected, $actual[$key], "property: $name [$key]: $expected");
-            }
-        } else {
-            $this->assertSame($default, @$api->$name, "property: $name; default: $default");
-        }
-
-        $this->expectDeprecationMessage(
+        $this->expectErrorMessageMatches(
             sprintf(
-                'Since seatable/seatable-api-php 0.1.4: Reading of SeaTableApi->%s is deprecated and will be removed in a future version.',
+                '~^\QUndefined property: SeaTable\SeaTableApi\SeaTableApi::$%s\E$~',
                 $name
             )
         );
-        $this->expectDeprecation();
+        (PHP_VERSION_ID < 80000) ? $this->expectNotice() : $this->expectWarning();
         $this->assertNull($api->$name);
     } // @codeCoverageIgnore
 
     /**
-     * @dataProvider provideDeprecatedPublicPropertyNames
+     * @dataProvider provideRemovedDeprecatedPublicPropertyNames
      *
      * @return void
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
      */
-    public function testDeprecationOfPreviousPublicPropertiesAreSet(string $name)
+    public function testRemovedPreviousPublicPropertiesGiveNoWarningOnSet(string $name)
     {
         $this->mockAuthToken();
         $this->http->setUp();
 
         $api = new SeaTableApi($this->getOptions());
 
-        $this->assertTrue(isset($api->$name));
-
-        $this->expectDeprecationMessage(
-            sprintf(
-                'Since seatable/seatable-api-php 0.1.4: Reading of SeaTableApi->%s is deprecated and will be removed in a future version.',
-                $name
-            )
-        );
-        $this->expectDeprecation();
-        $this->assertNull($api->$name);
-    } // @codeCoverageIgnore
-
-    /**
-     * @dataProvider provideDeprecatedPublicPropertyNames
-     *
-     * @return void
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
-     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
-     */
-    public function testDeprecationOfPreviousPublicPropertiesGiveDeprecationWarningOnSet(string $name)
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(
-            sprintf(
-                'Since seatable/seatable-api-php 0.1.4: Setting of SeaTableApi->%s has no effect on the API, is deprecated and the property for reading will be removed in a future version.',
-                $name
-            )
-        );
-        $this->expectDeprecation();
         $this->assertNull($api->$name = null);
-    } // @codeCoverageIgnore
+    }
 
     /**
      * by default SSL related curl options should be the library default.
@@ -338,44 +213,6 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         self::assertFalse(method_exists($api, 'debug'), 'debug() method must not exist any longer');
         self::assertIsNotCallable([$api, 'debug'], 'SeaTableApi::debug() method must not be callable any longer');
     }
-
-    /**
-     * @codeCoverageIgnore
-     * @return array|string[][]
-     */
-    public function provideDeprecatedMethods(): array
-    {
-        return [
-            'get' => ['get'],
-            'post' => ['post'],
-            'put' => ['put'],
-            'delete' => ['delete'],
-        ];
-    }
-
-    /**
-     * @dataProvider provideDeprecatedMethods
-     * @param string $method
-     * @return void
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php
-     */
-    public function testMethodDeprecation(string $method)
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(
-            sprintf(
-                'Since seatable/seatable-api-php 0.1.4: SeaTableApi::%s() is deprecated, there is no replacement in %s on line %d',
-                $method,
-                __FILE__,
-                __LINE__ + 4
-            )
-        );
-        $this->expectDeprecation();
-        !$api->$method('url');
-    } // @codeCoverageIgnore
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
     public function testGetDTableTokenThrows()
