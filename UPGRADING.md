@@ -6,11 +6,16 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [Removal of `SeaTableAPI::debug()` (0.1.7)](#removal-of-seatableapidebug-017)
 * [New Classname (0.1.0)](#new-classname-010)
 * [Curl SSL defaults (0.0.8)](#curl-ssl-defaults-008)
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
 * [Deprecations (0.x.x)](#deprecations-0xx)
 * [Public Interface](#public-interface)
+
+### Removal of `SeaTableAPI::debug()` (0.1.7)
+
+The in 0.0.4 deprecated `SeaTableAPI::debug()` method has been removed in 0.1.7.
 
 ### New Classname (0.1.0)
 

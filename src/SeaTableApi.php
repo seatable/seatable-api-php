@@ -200,26 +200,6 @@ class SeaTableApi
     }
 
     /**
-     * Output debug data
-     *
-     * @deprecated since 0.0.4
-     */
-    public function debug($data)
-    {
-        trigger_error(
-            sprintf(
-                'Deprecated use of method %s since 0.0.4; there is no replacement.',
-                __METHOD__
-            ),
-            E_USER_DEPRECATED
-        );
-
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-    }
-
-    /**
      * (all) Return SeaTable account information
      *
      * @return object|array the account info

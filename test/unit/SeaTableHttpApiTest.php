@@ -123,7 +123,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /**
-     * test debug() gives deprecation notice
+     * test debug() is not a callable any longer (deprecated in 0.0.4)
      */
     public function testDebugDeprecation()
     {
@@ -131,10 +131,8 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
 
         $api = new SeaTableApi($this->getOptions());
-
-        $this->expectError();
-        $this->expectErrorMessage('Deprecated use of method SeaTable\SeaTableApi\SeaTableApi::debug since 0.0.4;');
-        $api->debug(null);
+        self::assertFalse(method_exists($api, 'debug'), 'debug() method must not exist any longer');
+        self::assertIsNotCallable([$api, 'debug'], 'SeaTableApi::debug() method must not be callable any longer');
     }
 
     /**
