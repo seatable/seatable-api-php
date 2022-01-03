@@ -55,7 +55,7 @@
       "@composer --no-plugins outdated --direct"
     ],
     "lint-and-load": [
-      "\"$PHP_BINARY\" -l src/SeaTableApi.php && \"$PHP_BINARY\" -r 'require \"src/SeaTableApi.php\";'"
+      "printf \"%s: \" \"$PHP_BINARY\" && \"$PHP_BINARY\" -l src/SeaTableApi.php && \"$PHP_BINARY\" -r 'require \"src/SeaTableApi.php\";'"
     ],
     "php-cs-fixer": [
       "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run --diff} --config=.config/php-cs-fixer/.php-cs-fixer.php",
