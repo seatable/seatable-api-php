@@ -269,7 +269,7 @@ class RestCurlClientEx
      * Decode answer to object format instead of json
      *
      * @param string $jsonText encoded response
-     * @return object on some endpoints this can differ, e.g. string on /ping
+     * @return object|array|string|null on some endpoints this can differ, e.g. string on /ping
      * @see $response_object_to_array
      * @noinspection OverridingDeprecatedMethodInspection
      */
