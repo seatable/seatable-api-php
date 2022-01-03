@@ -1,0 +1,7 @@
+# Deprecations (0.x.x)
+#
+# see [UPGRADING.md]
+#
+# [UPGRADING.md]: ../UPGRADING.md#deprecations-0xx
+parameters:
+  ignoreErrors:

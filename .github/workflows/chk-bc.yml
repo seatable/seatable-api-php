@@ -9,9 +9,10 @@ on:
       - main
 
 jobs:
-  check-backward-compatibility:
+  roave-bc-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run:  cp .config/$GITHUB_JOB.yaml .
       - name: Roave BC Check
         uses: docker://nyholm/roave-bc-check-ga
