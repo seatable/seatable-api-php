@@ -20,11 +20,8 @@ class SeaTableApi
     private $seatable_user;                         # SeaTable user mail to perform REST
     private $seatable_pass;                         # SeaTable user pass to perform REST
     private $seatable_url;                          # url of the SeaTable server
-    private $seatable_port = 443;                   # SeaTable port
 
     private $dtable_uuid;
-    private $dtable_server;
-    private $dtable_socket;
 
     /**
      * cUrl response code from SeaTable server
@@ -88,8 +85,7 @@ class SeaTableApi
         }
 
         if (!empty($option['port']) && is_int($option['port']) && $option['port'] !== 443) {
-            $this->seatable_port = (int) $option['port'];
-            $this->seatable_url = $option['url'] . ':' . $this->seatable_port;
+            $this->seatable_url = $option['url'] . ':' . (int) $option['port'];
         } else {
             $this->seatable_url = $option['url'];
         }
@@ -365,16 +361,12 @@ class SeaTableApi
             $o = $this->restCurlClientEx->get($request, [], $input['api_token']);
             $this->restCurlClientEx->access_token = $o->access_token;
             $this->dtable_uuid = $o->dtable_uuid;
-            $this->dtable_server = $o->dtable_server;
-            $this->dtable_socket = $o->dtable_socket;
             return $o;
         } elseif (array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input)) {
             $request = $this->seatable_url . '/api/v2.1/workspace/' . $input['workspace_id'] . '/dtable/' . $input['table_name'] . '/access-token/';
             $o = $this->restCurlClientEx->get($request);
             $this->restCurlClientEx->access_token = $o->access_token;
             $this->dtable_uuid = $o->dtable_uuid;
-            $this->dtable_server = $o->dtable_server;
-            $this->dtable_socket = $o->dtable_socket;
             return $o;
         } else {
             throw new Exception("getDtableToken parameters are wrong: use either api_token or workspace_id + table_name");
