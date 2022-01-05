@@ -10,8 +10,8 @@
  *  [2] can include autoload.php
  *  [3] SeaTableAPI class not loaded
  *  [4] SeaTableApi class not loaded
- *  [5] SeaTableApi class can be auto-loaded
- *  [6] SeaTableAPI class can be auto-loaded
+ *  [5] SeaTableApi class can autoload
+ *  [6] SeaTableAPI class can autoload
  */
 
 use SeaTable\SeaTableApi\SeaTableApi;
@@ -42,13 +42,13 @@ if (class_exists($class = SeaTableApi::class, $autoload = false)) {
     exit(1);
 }
 
-# [5] SeaTableApi class can be auto-loaded
+# [5] SeaTableApi class can autoload
 if (!class_exists($class = SeaTableApi::class, $autoload = true)) {
     fwrite(STDERR, "[5] fail: failed to autoload class \"$class\".\n");
     exit(1);
 }
 
-# [6] SeaTableAPI class can be auto-loaded
+# [6] SeaTableAPI class can autoload
 if (!class_exists($class = \SeaTableAPI::class, $autoload = true)) {
     fwrite(STDERR, "[6] fail: failed to autoload class \"$class\".\n");
     exit(1);
