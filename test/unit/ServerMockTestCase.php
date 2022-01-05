@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace SeaTable\SeaTableApi;
 
-use PHPUnit\Framework\TestCase;
-
 use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 
 /**

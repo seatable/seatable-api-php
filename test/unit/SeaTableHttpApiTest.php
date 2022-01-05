@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+/*
+ * seatable-api-php
+ */
+
 namespace SeaTable\SeaTableApi;
 
 use InterNations\Component\HttpMock\MockBuilder;

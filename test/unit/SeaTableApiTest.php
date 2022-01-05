@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * seatable-api-php
+ */
+
 namespace SeaTable\SeaTableApi;
 
-use PHPUnit\Framework\TestCase;
 use SeaTableAPI as SeaTableApiDeprecated;
 
 /**
@@ -28,7 +31,7 @@ class SeaTableApiTest extends TestCase
     public function testBackwardsCreation()
     {
         $this->expectError();
-        $this->expectErrorMessageMatches('(Deprecated use of class SeaTableAPI since 0\.1\.0 in .*api-php version dev-main is already in use\.$)');
+        $this->expectErrorMessageMatches('(Deprecated use of class SeaTableAPI since 0\.1\.0 in .*api-php version (?:dev-main|1\.0\.0\+no-version-set) is already in use\.$)');
         new SeaTableApiDeprecated();
     }
 

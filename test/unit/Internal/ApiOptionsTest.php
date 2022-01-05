@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SeaTable\SeaTableApi\Internal;
 
 use Generator;
-use PHPUnit\Framework\TestCase;
+use SeaTable\SeaTableApi\TestCase;
 
 /**
  * Class ApiOptionsTest
