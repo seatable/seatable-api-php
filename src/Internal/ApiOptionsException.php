@@ -10,6 +10,11 @@ namespace SeaTable\SeaTableApi\Internal;
 
 use SeaTable\SeaTableApi\Exception;
 
+/**
+ * Class ApiOptionsException
+ *
+ * @internal
+ */
 class ApiOptionsException extends Exception
 {
 }
