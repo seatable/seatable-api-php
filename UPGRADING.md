@@ -6,12 +6,17 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [Deprecation of PHP 7.0-7.3 (0.1.8)](#deprecation-of-php-70-73-018)
 * [Removal of `SeaTableAPI::debug()` (0.1.7)](#removal-of-seatableapidebug-017)
 * [New Classname (0.1.0)](#new-classname-010)
 * [Curl SSL defaults (0.0.8)](#curl-ssl-defaults-008)
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
 * [Deprecations (0.x.x)](#deprecations-0xx)
 * [Public Interface](#public-interface)
+
+### Deprecation of PHP 7.0-7.3 (0.1.8)
+
+With 0.1.8 the PHP versions below 7.4 are deprecated.
 
 ### Removal of `SeaTableAPI::debug()` (0.1.7)
 

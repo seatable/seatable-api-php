@@ -33,6 +33,7 @@
   },
   "autoload": {
     "classmap": ["src/Compat/Backward/SeaTableAPI.php"],
+    "files": ["src/Compat/Deprecation/autoload.php"],
     "psr-4": {
       "SeaTable\\SeaTableApi\\": "src/"
     }
