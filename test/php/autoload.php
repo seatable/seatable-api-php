@@ -24,7 +24,6 @@ if (!is_file($path)) {
 }
 
 # [2] require autoload.php
-/** @noinspection PhpIncludeInspection */
 $result = @include $path;
 if (false === $result) {
     fwrite(STDERR, "[2] fail: failure while including autoload.php: \"$path\".\n");
