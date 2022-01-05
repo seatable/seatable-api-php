@@ -5,6 +5,6 @@
 # [UPGRADING.md]: ../UPGRADING.md#deprecations-0xx
 parameters:
   ignoreErrors:
-    # SeaTableApi::debug() deprecated in 0.0.4, removed in v0.1.7
+    # SeaTableApi::debug() deprecated in 0.0.4, removed in 0.1.7
     - '~\Q[BC] REMOVED: Method SeaTableAPI#debug() was removed\E~'
     - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#debug() was removed\E~'
