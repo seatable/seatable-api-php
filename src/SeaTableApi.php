@@ -308,9 +308,14 @@ class SeaTableApi
     }
 
     /**
-     * SeaTable: get getDtableToken (via dtable API-Token)
+     * get dtable token
+     *
+     * either via api-token or authentication on workspace + base
+     *
+     * @param array $input
+     * @return object
      */
-    public function getDtableToken($input)
+    public function getDTableToken($input)
     {
         if (array_key_exists("api_token", $input)) {
             $request = $this->seatable_url . '/api/v2.1/dtable/app-access-token/';
@@ -356,7 +361,7 @@ class SeaTableApi
         return $this->restCurlClientEx->put($request, $new_row);
     }
 
-    public function getDtableMetadata()
+    public function getDTableMetadata()
     {
         $request = $this->seatable_url . '/dtable-server/api/v1/dtables/' . $this->dtable_uuid . '/metadata/';
         return $this->restCurlClientEx->get($request)->metadata;
