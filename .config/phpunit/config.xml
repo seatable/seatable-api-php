@@ -22,7 +22,7 @@
               processUncoveredFiles="true">
         <include>
             <directory suffix="SeaTableAPI.php">../../src</directory>
-            <directory>../../src</directory>
+            <directory suffix=".php">../../src</directory>
             <directory suffix=".php">../../test/unit</directory>
         </include>
         <report>
