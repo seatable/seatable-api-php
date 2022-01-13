@@ -73,10 +73,6 @@ class SeaTableApi
         /*
          * Input validation
          */
-        if (!is_callable('curl_init')) {
-            throw new Exception("Curl extension is required");
-        }
-
         $options = ApiOptions::createFromArray($option);
         $this->seatable_url = $options->getUrl();
         $this->seatable_user = $options->getUser();
