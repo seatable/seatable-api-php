@@ -18,6 +18,11 @@ use SeaTable\SeaTableApi\Exception;
 final class Php
 {
     /**
+     * @var int test-point
+     */
+    private static $PHP_VERSION_ID = PHP_VERSION_ID;
+
+    /**
      * get call site stack frame
      *
      * enriched for deprecations:
@@ -49,9 +54,27 @@ final class Php
     }
 
     /**
-     * @var int test-point
+     * get package version
+     *
+     * conditionally looking into composers meta-data.
+     *
+     * @param string $package e.g. "seatable/seatable-api-php"
+     *
+     * @return ?string package pretty version (e.g. "dev-main", "1.0.0+no-version-set"), null for no version
+     *
+     * @throws \OutOfBoundsException if composer does not find the package
      */
-    private static $PHP_VERSION_ID = PHP_VERSION_ID;
+    public static function pkgVersion(string $package)
+    {
+        $version = '';
+        $versionClass = \Composer\InstalledVersions::class;
+        $versionMethod = 'getPrettyVersion';
+        if (class_exists($versionClass) && method_exists($versionClass, $versionMethod)) {
+            $version = $versionClass::$versionMethod($package);
+        }
+
+        return $version;
+    }
 
     /**
      * check php version and if not within (hard-encoded) configuration trigger a deprecation warning
@@ -78,28 +101,5 @@ final class Php
                 throw new Exception(sprintf('SeaTableApi does not work with this PHP version %s', $versionInUse));
             }
         }
-    }
-
-    /**
-     * get package version
-     *
-     * conditionally looking into composers meta-data.
-     *
-     * @param string $package e.g. "seatable/seatable-api-php"
-     *
-     * @return ?string package pretty version (e.g. "dev-main", "1.0.0+no-version-set"), null for no version
-     *
-     * @throws \OutOfBoundsException if composer does not find the package
-     */
-    public static function pkgVersion(string $package)
-    {
-        $version = '';
-        $versionClass = \Composer\InstalledVersions::class;
-        $versionMethod = 'getPrettyVersion';
-        if (class_exists($versionClass) && method_exists($versionClass, $versionMethod)) {
-            $version = $versionClass::$versionMethod($package);
-        }
-
-        return $version;
     }
 }

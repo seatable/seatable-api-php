@@ -92,6 +92,7 @@ class PhpTest extends TestCase
     /**
      * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::versionCheck()
      * @return void
+     * @throws \Throwable
      */
     public function testVersionCheckTriggers()
     {
@@ -103,6 +104,7 @@ class PhpTest extends TestCase
     /**
      * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::versionCheck()
      * @return void
+     * @throws \Throwable
      */
     public function testVersionCheckThrows()
     {
@@ -112,6 +114,9 @@ class PhpTest extends TestCase
         $this->assertPhpVersionTriggers(70000 - 1);
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function assertPhpVersionTriggers(int $phpVersionId, bool $not = false)
     {
         $this->pointPhpVersionId($phpVersionId);
@@ -140,6 +145,9 @@ class PhpTest extends TestCase
         $this->assertStringContainsString('Use PHP version 7.4.0 or later', $error['message']);
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function assertPhpVersionTriggersNot(int $phpVersionId)
     {
         $this->assertPhpVersionTriggers($phpVersionId, true);
