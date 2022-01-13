@@ -302,11 +302,17 @@ class RestCurlClientEx
 
         if ($code === 404) {
             throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . curl_error($this->handle));
-        } elseif ($code === 403) {
+        }
+
+        if ($code === 403) {
             throw new Exception("Error " . $seatable_code . ': ' . $seatable_status . ': ' . $res);
-        } elseif (400 <= $code && $code <= 600) {
+        }
+
+        if (400 <= $code && $code <= 600) {
             throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
-        } elseif (!(200 <= $code && $code <= 207)) {
+        }
+
+        if (!(200 <= $code && $code <= 207)) {
             throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
         }
     }
