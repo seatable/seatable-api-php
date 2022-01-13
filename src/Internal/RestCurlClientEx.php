@@ -78,20 +78,20 @@ class RestCurlClientEx
      * @var string[]
      */
     private static $seatable_status_message = [
-        '200' => 'OK',
-        '201' => 'CREATED',
-        '202' => 'ACCEPTED',
-        '301' => 'MOVED_PERMANENTLY',
-        '400' => 'BAD_REQUEST',
-        '403' => 'FORBIDDEN',
-        '404' => 'NOT_FOUND',
-        '409' => 'CONFLICT',
-        '429' => 'TOO_MANY_REQUESTS',
-        '440' => 'REPO_PASSWD_REQUIRED',
-        '441' => 'REPO_PASSWD_MAGIC_REQUIRED',
-        '500' => 'INTERNAL_SERVER_ERROR',
-        '502' => 'GATEWAY-TIMEOUT',
-        '520' => 'OPERATION_FAILED',
+        200 => 'OK',
+        201 => 'CREATED',
+        202 => 'ACCEPTED',
+        301 => 'MOVED_PERMANENTLY',
+        400 => 'BAD_REQUEST',
+        403 => 'FORBIDDEN',
+        404 => 'NOT_FOUND',
+        409 => 'CONFLICT',
+        429 => 'TOO_MANY_REQUESTS',
+        440 => 'REPO_PASSWD_REQUIRED',
+        441 => 'REPO_PASSWD_MAGIC_REQUIRED',
+        500 => 'INTERNAL_SERVER_ERROR',
+        502 => 'GATEWAY-TIMEOUT',
+        520 => 'OPERATION_FAILED',
     ];
 
     public function __construct(SeaTableApi $api, array $httpOptions)
