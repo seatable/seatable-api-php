@@ -289,7 +289,13 @@ class RestCurlClientEx
     private function http_parse_message($res)
     {
         if ($res === '' || $res === false) {
-            throw new Exception(curl_error($this->handle), -1);
+            $message = sprintf(
+                'cURL error (%d): "%s"%s',
+                curl_errno($this->handle),
+                curl_error($this->handle),
+                $res === '' ? ' (empty response)' : ''
+            );
+            throw new Exception($message, -1);
         }
 
         $this->api->response_info = $response_info = curl_getinfo($this->handle);
