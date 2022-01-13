@@ -18,7 +18,7 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR12' => true,
         'visibility_required' => ['elements' => ['property', 'method']],
-        '@PHP70Migration' => true,
+        '@PHP71Migration' => true,
         'array_syntax' => ['syntax' => 'short'],
         'no_multiline_whitespace_around_double_arrow' => true,
         'no_trailing_comma_in_singleline_array' => true,

@@ -45,7 +45,7 @@ assert(0 === $status);
 
 assert(copy(__DIR__ . '/consumer.php', $buildDir . '/consumer.php'));
 
-passthru(sprintf('exec %s %s/consumer.php', escapeshellarg('php7.0'), escapeshellarg($buildDir)), $status);
+passthru(sprintf('exec %s %s/consumer.php', escapeshellarg('php7.2'), escapeshellarg($buildDir)), $status);
 assert(0 === $status, (string) $status);
 
 passthru(sprintf('exec %s %s/consumer.php', escapeshellarg('php5.6'), escapeshellarg($buildDir)), $status);

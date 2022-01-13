@@ -23,7 +23,7 @@ use stdClass;
  */
 class SeaTableHttpApiTest extends ServerMockTestCase
 {
-    public function testCreationTriggersAuthTokenRequest()
+    public function testCreationTriggersAuthTokenRequest(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -38,7 +38,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     /**
      * test for default return type and the check account info method
      */
-    public function testResponseIsObject()
+    public function testResponseIsObject(): void
     {
         $this->mockAuthToken();
         $this->mockAccountInfo();
@@ -55,7 +55,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
      * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
      * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
      */
-    public function testRemovedResponseAsArrayPropertyCanBeDynamicallySetToTrueButHasNoEffect()
+    public function testRemovedResponseAsArrayPropertyCanBeDynamicallySetToTrueButHasNoEffect(): void
     {
         $this->mockAuthToken();
         $this->mockAccountInfo();
@@ -73,7 +73,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
      *
      * @return void
      */
-    public function testDeprecationOfPropertiesGetUndefined()
+    public function testDeprecationOfPropertiesGetUndefined(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -115,7 +115,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
      * @param string $name
      * @return void
      */
-    public function testRemovalOfPreviousDeprecatedPublicProperties(string $name)
+    public function testRemovalOfPreviousDeprecatedPublicProperties(string $name): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -153,7 +153,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     /**
      * by default SSL related curl options should be the library default.
      */
-    public function testCurlSslDefaultOptions()
+    public function testCurlSslDefaultOptions(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -181,7 +181,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
      * (at least) SSL related curl options need to be set via ctor parameter
      * as otherwise there is no upgrade path.
      */
-    public function testCurlHttpOptions()
+    public function testCurlHttpOptions(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -204,7 +204,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     /**
      * test debug() is not a callable any longer (deprecated in 0.0.4)
      */
-    public function testDebugDeprecation()
+    public function testDebugDeprecation(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -215,7 +215,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenThrows()
+    public function testGetDTableTokenThrows(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -227,7 +227,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     } // @codeCoverageIgnore
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenIsDeprecated()
+    public function testGetDTableTokenIsDeprecated(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -239,7 +239,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     } // @codeCoverageIgnore
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithApiTokenIsDeprecated()
+    public function testGetDTableTokenWithApiTokenIsDeprecated(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -251,7 +251,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     } // @codeCoverageIgnore
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithApiTokenDeprecated()
+    public function testGetDTableTokenWithApiTokenDeprecated(): void
     {
         $this->mockAuthToken();
         $this->mockDTableAuthWithApiToken();
@@ -262,7 +262,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithWorkspaceIdAndTableNameIsDeprecated()
+    public function testGetDTableTokenWithWorkspaceIdAndTableNameIsDeprecated(): void
     {
         $this->mockAuthToken();
         $this->http->setUp();
@@ -274,7 +274,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     } // @codeCoverageIgnore
 
     /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithWorkspaceIdAndTableNameDeprecated()
+    public function testGetDTableTokenWithWorkspaceIdAndTableNameDeprecated(): void
     {
         $this->mockAuthToken();
         $this->mockDTableAuthWithWorkspaceIdAndTableName();
@@ -284,7 +284,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->assertInstanceOf(stdClass::class, @$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']));
     }
 
-    public function testGetBaseAppAccessToken()
+    public function testGetBaseAppAccessToken(): void
     {
         $this->mockAuthToken();
         $this->mockDTableAuthWithApiToken();
@@ -294,7 +294,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->assertInstanceOf(stdClass::class, $api->getBaseAppAccessToken('452fd5ab30de6a561460c9347f2c88036e10ad65'));
     }
 
-    public function testGetBaseAccessToken()
+    public function testGetBaseAccessToken(): void
     {
         $this->mockAuthToken();
         $this->mockDTableAuthWithWorkspaceIdAndTableName();
@@ -336,7 +336,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     /**
      * stub initial auth request
      */
-    private function mockAuthToken()
+    private function mockAuthToken(): void
     {
         self::assertSame('1', ini_get('zend.assertions'));
         assert(
@@ -353,7 +353,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     /**
      * stub account info request
      */
-    private function mockAccountInfo()
+    private function mockAccountInfo(): void
     {
         self::assertSame('1', ini_get('zend.assertions'));
         assert(
@@ -387,7 +387,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         );
     }
 
-    private function mockDTableAuthWithApiToken()
+    private function mockDTableAuthWithApiToken(): void
     {
         self::assertSame('1', ini_get('zend.assertions'));
         assert(
@@ -401,7 +401,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         );
     }
 
-    private function mockDTableAuthWithWorkspaceIdAndTableName()
+    private function mockDTableAuthWithWorkspaceIdAndTableName(): void
     {
         self::assertSame('1', ini_get('zend.assertions'));
         assert(

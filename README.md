@@ -6,7 +6,7 @@ PHP-bindings of the SeaTable API ([api.seatable.io]).
 
 ## Requirements
 
-PHP 7.0+ (deprecated, 7.4+ recommended) with the Curl and Json extension (see [`composer.json`](composer.json)).
+PHP 7.2.5+ (deprecated, 7.4+ recommended) with the Curl and Json extension (see [`composer.json`](composer.json)).
 
 ## Installation
 

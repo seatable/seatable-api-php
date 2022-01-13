@@ -6,6 +6,10 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [End of PHP 7.0 and PHP 7.1 support (0.2.0)](#end-of-php-70-and-php-71-support-020)
+
+---
+
 * [Break of `SeaTableApi::listOrgUsers()` (0.1.20)](#break-of-seatableapilistorgusers-0120)
 * [Deprecation of `SeaTableApi::getDTableToken()` (0.1.11)](#deprecation-of-seatableapigetdtabletoken-0111)
 * [Deprecation of PHP 7.0-7.3 (0.1.8)](#deprecation-of-php-70-73-018)
@@ -18,6 +22,12 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
 * [Deprecations (0.x.x)](#deprecations-0xx)
 * [Public Interface](#public-interface)
+
+### End of PHP 7.0 and PHP 7.1 support (0.2.0)
+
+As of version 0.1.8 PHP versions below PHP 7.4 were deprecated. With the release of version 0.2.0 the minimum PHP requirement is PHP 7.2.5.
+
+---
 
 ### Break of `SeaTableApi::listOrgUsers()` (0.1.20)
 

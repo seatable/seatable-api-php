@@ -18,7 +18,7 @@ use SeaTable\SeaTableApi\TestCase;
  */
 class ReadmeTest extends TestCase
 {
-    public function testFunctions()
+    public function testFunctions(): void
     {
         $changes = [];
 
@@ -38,14 +38,8 @@ class ReadmeTest extends TestCase
             $buffer = '* `' . $reflectionMethod->getName() . '(';
             foreach ($reflectionMethod->getParameters() as $index => $reflectionParameter) {
                 $index && $buffer .= ', ';
-                $reflectionType = $reflectionParameter->getType();
-                if (null !== $reflectionType) {
-                    if (!method_exists($reflectionType, 'getName')) {
-                        $this->fail('code is incompatible with the target PHP version');
-                    }
-                    /** @noinspection PhpElementIsNotAvailableInCurrentPhpVersionInspection */
-                    $buffer .= $reflectionType->getName() . ' ';
-                }
+                $reflectionNamedType = $reflectionParameter->getType();
+                null !== $reflectionNamedType && $buffer .= $reflectionNamedType->getName() . ' ';
                 $buffer .= '$' . $reflectionParameter->getName();
                 if ($reflectionParameter->isOptional()) {
                     $this->assertTrue($reflectionParameter->isDefaultValueAvailable());

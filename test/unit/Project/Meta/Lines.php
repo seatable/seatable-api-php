@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  * seatable-api-php
@@ -6,6 +8,9 @@
 
 namespace SeaTable\SeaTableApi\Project\Meta;
 
+/**
+ * Class Lines
+ */
 class Lines implements \Countable, \IteratorAggregate
 {
     /**

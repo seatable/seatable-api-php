@@ -1,17 +1,18 @@
-<?php declare(strict_types=1);
+<?php
 
+declare(strict_types=1);
 
 /*
  * seatable-api-php
- *
- * Date: 05.05.22 16:46
  */
 
 namespace SeaTable\SeaTableApi\Project\Meta;
 
-
 use SeaTable\SeaTableApi\Exception;
 
+/**
+ * Class PregException
+ */
 class PregException extends Exception
 {
     public static function inherit(string $message = ''): self

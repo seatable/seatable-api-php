@@ -122,7 +122,7 @@ final class Php
                 $versionSuggest
             );
 
-            if (self::$PHP_VERSION_ID < 70000) {
+            if (self::$PHP_VERSION_ID < 70205) {
                 throw new Exception(sprintf('SeaTableApi does not work with this PHP version %s', $versionInUse));
             }
         }

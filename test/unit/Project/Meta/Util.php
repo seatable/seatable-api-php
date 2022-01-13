@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 /*
  * seatable-api-php
  */
@@ -11,6 +10,9 @@ namespace SeaTable\SeaTableApi\Project\Meta;
 
 use SeaTable\SeaTableApi\SeaTableApi;
 
+/**
+ * Class Util
+ */
 final class Util
 {
     private function __construct()
@@ -21,7 +23,7 @@ final class Util
      * @param string|\ReflectionMethod $method
      * @return \ReflectionMethod|null
      */
-    public static function apiMethodGetDeprecatedByMethod($method)
+    public static function apiMethodGetDeprecatedByMethod($method): ?\ReflectionMethod
     {
         $docComment = self::apiMethodReflection($method)->getDocComment();
         if (!is_string($docComment)) {
@@ -103,7 +105,7 @@ final class Util
             if (!is_string($subject)) {
                 $subject = (string) $subject;
             }
-            $matches = ($result = preg_match($pattern, (string) $subject, $matches)) ? $matches : null;
+            $matches = ($result = preg_match($pattern, $subject, $matches)) ? $matches : null;
             false === $result && PregException::throwInherit('Preg match w/ pattern: ' . $pattern . ' ::');
             if ($result === 0) {
                 if (!$includeNonMatching) {

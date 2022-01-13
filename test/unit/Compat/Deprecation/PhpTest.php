@@ -176,10 +176,10 @@ class PhpTest extends TestCase
      */
     public function testVersionCheckThrows()
     {
-        $this->assertPhpVersionTriggers(70000 + 1);
-        $this->assertPhpVersionTriggers(70000);
+        $this->assertPhpVersionTriggers(70205 + 1);
+        $this->assertPhpVersionTriggers(70205);
         $this->expectException(Exception::class);
-        $this->assertPhpVersionTriggers(70000 - 1);
+        $this->assertPhpVersionTriggers(70205 - 1);
     } // @codeCoverageIgnore
 
     /**

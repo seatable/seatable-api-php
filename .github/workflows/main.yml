@@ -7,15 +7,15 @@ on:
     branches: [ 'main', 'next' ]
 
 jobs:
-  php-70:
+  php-72:
     runs-on: "ubuntu-latest"
-    name: "PHP 7.0 Compatibility"
+    name: "PHP 7.2 Compatibility"
     steps:
       - uses: "actions/checkout@v2"
-      - run: 'grep ''"php": ">=7.0"'' composer.json'
+      - run: 'grep ''"php": ">=7.2.5"'' composer.json'
       - uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "7.0"
+          php-version: "7.2"
           tools: composer:v2
       - name: "Lock and Install Dependencies"
         run: |
