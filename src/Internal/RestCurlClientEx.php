@@ -58,21 +58,6 @@ class RestCurlClientEx
     private $http_options = [];
 
     /**
-     * @var int
-     */
-    private $seatable_code;                 # (ex-public) curl response code from SeaTable server
-
-    /**
-     * @var string
-     */
-    private $seatable_status;               # (ex-public) SeaTable response message
-
-    /**
-     * @var array
-     */
-    private $response_info;                 # (ex-public) Curl info
-
-    /**
      * cUrl response
      *
      * string if {@see curl_exec()} returns transport ({@see CURLOPT_RETURNTRANSFER} enabled in
@@ -307,22 +292,22 @@ class RestCurlClientEx
             throw new Exception(curl_error($this->handle), -1);
         }
 
-        $this->api->response_info = $this->response_info = curl_getinfo($this->handle);
-        $code = (int) $this->response_info['http_code'];
+        $this->api->response_info = $response_info = curl_getinfo($this->handle);
+        $code = (int) $response_info['http_code'];
 
-        $this->api->seatable_code = $this->seatable_code = $code;
-        $this->api->seatable_status = $this->seatable_status = self::$seatable_status_message[$code] ?? 'UNKNOWN';
+        $this->api->seatable_code = $seatable_code = $code;
+        $this->api->seatable_status = $seatable_status = self::$seatable_status_message[$code] ?? 'UNKNOWN';
 
         // weitere fehlermeldungen von https://docs.seatable.io/published/seatable-api/home.md
 
         if ($code === 404) {
-            throw new Exception($this->seatable_code . ' - ' . $this->seatable_status . ' - ' . curl_error($this->handle));
+            throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . curl_error($this->handle));
         } elseif ($code === 403) {
-            throw new Exception("Error " . $this->seatable_code . ': ' . $this->seatable_status . ': ' . $res);
+            throw new Exception("Error " . $seatable_code . ': ' . $seatable_status . ': ' . $res);
         } elseif (400 <= $code && $code <= 600) {
-            throw new Exception($this->seatable_code . ' - ' . $this->seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
+            throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
         } elseif (!(200 <= $code && $code <= 207)) {
-            throw new Exception($this->seatable_code . ' - ' . $this->seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
+            throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . 'Server response status was: ' . $code . ' with response: [' . $res . ']', $code);
         }
     }
 }
