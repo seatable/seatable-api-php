@@ -169,6 +169,7 @@ class RestCurlClientEx
         $http_options += $this->http_options;
         $http_options[CURLOPT_POST] = true;
 
+        unset($http_options[CURLOPT_POSTFIELDS]);
         $http_options[CURLOPT_POSTFIELDS] = $data;
 
         $this->handle = curl_init($url);
