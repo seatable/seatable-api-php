@@ -19,7 +19,7 @@ use SeaTable\SeaTableApi\SeaTableApi;
  *
  * Perform PUT,GET,POST,DELETE request to your SeaTable server
  *
- * cURL function from David Paz <https://github.com/davidmpaz/rest-curlclient-php>
+ * curl function originally from David Paz <https://github.com/davidmpaz/rest-curlclient-php>
  * based on the original work by Alexander Kabanov, Klaus Silveira <https://github.com/shurikk/rest-client-php>
  * and Julien Kirch <https://github.com/rest-client/rest-client> via <https://github.com/archiloque/rest-client>
  *
@@ -136,7 +136,7 @@ class RestCurlClientEx
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
-            throw new Exception("Error setting cURL request options");
+            throw new Exception("Error setting curl request options");
         }
 
         $this->response_object = curl_exec($this->handle);
@@ -174,7 +174,7 @@ class RestCurlClientEx
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
-            throw new Exception("Error setting cURL request options.");
+            throw new Exception("Error setting curl request options.");
         }
 
         $this->response_object = curl_exec($this->handle);
@@ -211,7 +211,7 @@ class RestCurlClientEx
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
-            throw new Exception("Error setting cURL request options.");
+            throw new Exception("Error setting curl request options.");
         }
 
         $this->response_object = curl_exec($this->handle);
@@ -240,7 +240,7 @@ class RestCurlClientEx
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
-            throw new Exception("Error setting cURL request options.");
+            throw new Exception("Error setting curl request options.");
         }
 
         $this->response_object = curl_exec($this->handle);
@@ -290,7 +290,7 @@ class RestCurlClientEx
     {
         if ($res === '' || $res === false) {
             $message = sprintf(
-                'cURL error (%d): "%s"%s',
+                'curl error (%d): "%s"%s',
                 curl_errno($this->handle),
                 curl_error($this->handle),
                 $res === '' ? ' (empty response)' : ''
