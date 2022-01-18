@@ -11,6 +11,6 @@ namespace SeaTable\SeaTableApi;
  *
  * @covers \SeaTable\SeaTableApi\TestCase
  */
-class TestCase extends \PHPUnit\Framework\TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
 }
