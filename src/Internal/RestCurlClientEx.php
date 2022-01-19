@@ -307,11 +307,11 @@ class RestCurlClientEx
         // weitere fehlermeldungen von https://docs.seatable.io/published/seatable-api/home.md
 
         if ($code === 404) {
-            throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . curl_error($this->handle));
+            throw new Exception($seatable_code . ' - ' . $seatable_status . ' - ' . curl_error($this->handle), $code);
         }
 
         if ($code === 403) {
-            throw new Exception("Error " . $seatable_code . ': ' . $seatable_status . ': ' . $res);
+            throw new Exception("Error " . $seatable_code . ': ' . $seatable_status . ': ' . $res, $code);
         }
 
         if (400 <= $code && $code <= 600) {
