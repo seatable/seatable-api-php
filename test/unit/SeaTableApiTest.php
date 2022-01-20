@@ -26,7 +26,7 @@ class SeaTableApiTest extends TestCase
     {
         $this->expectErrorUndefinedArrayKey('url');
         new SeaTableApi();
-    }
+    } // @codeCoverageIgnore
 
     /**
      * @return void
@@ -40,10 +40,14 @@ class SeaTableApiTest extends TestCase
             'in .*/test/unit/SeaTableApiTest\.php on line ' . (__LINE__ + 3) . ';' .
             '.* seatable/seatable-api-php version (?:' . PhpTest::REGEX_PKG_VERSION . ') is already in use\.$)'
         );
-        new SeaTableApiDeprecated();
-    }
+        new SeaTableApiDeprecated(); // @codeCoverageIgnoreStart
+    } // @codeCoverageIgnoreEnd
 
-    public function provideOptionUrls()
+    /**
+     * @codeCoverageIgnore
+     * @return array[]
+     */
+    public function provideOptionUrls(): array
     {
         return [
             ['file:///path/to/some/file', false],
@@ -60,7 +64,7 @@ class SeaTableApiTest extends TestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage($pass ? "SeaTable user is missing or has a bad format" : "SeaTable URL is missing or bad URL format");
         new SeaTableApi(['url' => $url]);
-    }
+    } // @codeCoverageIgnore
 
     private function expectErrorUndefinedArrayKey(string $actual)
     {

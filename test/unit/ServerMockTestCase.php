@@ -28,11 +28,19 @@ abstract class ServerMockTestCase extends TestCase
         return sprintf('http://%s:%s', self::$httpHost, self::$httpPort);
     }
 
+    /**
+     * @codeCoverageIgnore
+     * @return void
+     */
     public static function setUpBeforeClass(): void
     {
         static::setUpHttpMockBeforeClass(self::$httpPort, self::$httpHost);
     }
 
+    /**
+     * @codeCoverageIgnore
+     * @return void
+     */
     public static function tearDownAfterClass(): void
     {
         static::tearDownHttpMockAfterClass();

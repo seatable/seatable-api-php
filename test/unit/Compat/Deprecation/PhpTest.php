@@ -112,7 +112,7 @@ class PhpTest extends TestCase
         $this->assertPhpVersionTriggers(70000);
         $this->expectException(Exception::class);
         $this->assertPhpVersionTriggers(70000 - 1);
-    }
+    } // @codeCoverageIgnore
 
     /**
      * @throws \Throwable

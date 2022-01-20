@@ -31,8 +31,12 @@ class ApiOptionsTest extends TestCase
             sprintf('~^\QUndefined index: %s\E|\QUndefined array key "%s"\E$~', $key = 'url', $key)
         );
         ApiOptions::createFromArray([]);
-    }
+    } // @codeCoverageIgnore
 
+    /**
+     * @return Generator
+     * @codeCoverageIgnore
+     */
     public function provideOptionArrayFailure(): Generator
     {
         yield 'url empty' => [['url' => '']];
@@ -67,8 +71,12 @@ class ApiOptionsTest extends TestCase
     {
         $this->expectException(ApiOptionsException::class);
         ApiOptions::createFromArray($options);
-    }
+    } // @codeCoverageIgnore
 
+    /**
+     * @return Generator
+     * @codeCoverageIgnore
+     */
     public function provideOptionArrayHappy(): Generator
     {
         yield 'minimal' => [$minimal = [

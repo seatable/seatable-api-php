@@ -85,15 +85,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
 
     private function getInternalHttpOptions(SeaTableApi $api): array
     {
-        $subject = $api;
-
-        $reflectionClass = new \ReflectionClass($subject);
-        if ($reflectionClass->getName() === 'SeaTableAPI') {
-            $subject = $reflectionClass->getParentClass()->getName();
-        }
-        unset($reflectionClass);
-
-        $reflectionRecCurlClientEx = new \ReflectionProperty($subject, 'restCurlClientEx');
+        $reflectionRecCurlClientEx = new \ReflectionProperty($api, 'restCurlClientEx');
         $reflectionRecCurlClientEx->setAccessible(true);
         /** @var RestCurlClientEx $restCurlClientEx */
         $restCurlClientEx = $reflectionRecCurlClientEx->getValue($api);
