@@ -25,6 +25,7 @@ jobs:
           composer install --no-dev --no-plugins --no-scripts --no-progress --prefer-dist
       - name: "Lint and Load"
         run: composer lint-and-load
+
   composer:
     name: "Composer (PHP: ${{ matrix.php-version || 'default' }})"
     runs-on: ubuntu-latest
