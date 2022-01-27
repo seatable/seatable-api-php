@@ -2,7 +2,6 @@
 
 namespace SeaTable\SeaTableApi;
 
-use SeaTable\SeaTableApi\Compat\Deprecation\Php;
 use SeaTable\SeaTableApi\Internal\ApiOptions;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
 
@@ -94,22 +93,6 @@ class SeaTableApi
     }
 
     /**
-     * Get Account Info
-     *
-     * @group User / Account
-     * @link https://api.seatable.io/#66ce3ca0-edc5-486b-8877-91157bb71d7d
-     *
-     * @deprecated since 0.1.18, use `SeaTableApi::getAccountInfo()`; {@see SeaTableApi::getAccountInfo}
-     *
-     * @return object the account info
-     */
-    public function checkAccountInfo(): object
-    {
-        Php::triggerMethodDeprecation('0.1.18', 'use SeaTableApi::getAccountInfo() instead');
-        return $this->getAccountInfo();
-    }
-
-    /**
      * List All Users
      *
      * @group System Admin / Users
@@ -123,31 +106,6 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/api/v2.1/admin/users/?per_page=$perPage&page=$page";
         return $this->restCurlClientEx->get($request);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListUsers()`; {@see SeaTableApi::sysAdminListUsers}
-     */
-    public function listUsers(int $page = 1, int $perPage = 25): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListUsers() instead");
-        return $this->sysAdminListUsers($page, $perPage);
-    }
-
-    /**
-     * {@unfit}
-     *
-     * @group System Admin / Users
-     * @link https://api.seatable.io/#883d8faf-1f2a-4033-8904-0171fece890c
-     *
-     * @deprecated since 0.1.15, use `SeaTableApi::sysAdminListUsers(1, 1)->total_count`; {@see SeaTableApi::sysAdminListUsers}
-     *
-     * @return int
-     */
-    public function getTotalUsers(): int
-    {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::sysAdminListUsers(1, 1)->total_count instead");
-        return $this->sysAdminListUsers(1, 1)->total_count;
     }
 
     /**
@@ -175,15 +133,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddUser()`; {@see SeaTableApi::sysAdminAddUser}
-     */
-    public function addUser(string $email, string $name, string $password, string $role = 'default'): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddUser() instead");
-        return $this->sysAdminAddUser($email, $name, $password, $role);
-    }
-
-    /**
      * Search a User
      *
      * @group System Admin / Users
@@ -197,16 +146,6 @@ class SeaTableApi
         $request = "$this->seatable_url/api/v2.1/admin/search-user/?query=" . urlencode($query);
         return $this->restCurlClientEx->get($request);
     }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminSearchUser()`; {@see SeaTableApi::sysAdminSearchUser}
-     */
-    public function searchUser(string $query): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminSearchUser() instead");
-        return $this->sysAdminSearchUser(urldecode($query));
-    }
-
 
     /**
      * Update User
@@ -226,43 +165,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminUpdateUser()`; {@see SeaTableApi::sysAdminUpdateUser}
-     */
-    public function updateUser(string $email, array $changes = []): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminUpdateUser() instead");
-        return $this->sysAdminUpdateUser($email, $changes);
-    }
-
-    /**
-     * Activate User {@unfit}
-     *
-     * @deprecated since 0.1.13, use `SeaTableApi::sysAdminUpdateUser($email, ['is_active' => 'true'])`; {@see SeaTableApi::sysAdminUpdateUser}
-     *
-     * @param string $email
-     * @return object
-     */
-    public function activateUser(string $email): object
-    {
-        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::sysAdminUpdateUser(\$email, ['is_active' => 'true']) instead");
-        return $this->sysAdminUpdateUser($email, ['is_active' => 'true']);
-    }
-
-    /**
-     * Deactivate User {@unfit}
-     *
-     * @deprecated since 0.1.13, use `SeaTableApi::sysAdminUpdateUser($email, ['is_active' => 'false'])`; {@see SeaTableApi::sysAdminUpdateUser}
-     *
-     * @param string $email
-     * @return object
-     */
-    public function deactivateUser(string $email): object
-    {
-        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::sysAdminUpdateUser(\$email, ['is_active' => 'false']) instead");
-        return $this->sysAdminUpdateUser($email, ['is_active' => 'false']);
-    }
-
-    /**
      * Delete User
      *
      * @group System Admin / Users
@@ -278,15 +180,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminDeleteUser()`; {@see SeaTableApi::sysAdminDeleteUser}
-     */
-    public function deleteUser(string $email): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminDeleteUser() instead");
-        return $this->sysAdminDeleteUser($email);
-    }
-
-    /**
      * List Workspaces
      *
      * @group User / Workspaces
@@ -298,36 +191,6 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/api/v2.1/workspaces/";
         return $this->restCurlClientEx->get($request);
-    }
-
-    /**
-     * List Workspaces {@unfit}
-     *
-     * @group User / Workspaces
-     * @link https://api.seatable.io/#bb823388-ccfb-4dc2-bb01-5eb81acb6683
-     *
-     * @return array|object[]
-     * @deprecated since 0.1.15, use `SeaTableApi::listWorkspaces()->workspace_list` {@see SeaTableApi::listWorkspaces}
-     */
-    public function listAllWorkspaces(): array
-    {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::listWorkspaces()->workspace_list instead");
-        return $this->listWorkspaces()->workspace_list;
-    }
-
-    /**
-     * List Workspaces {@unfit}
-     *
-     * @group User / Workspaces
-     * @link https://api.seatable.io/#bb823388-ccfb-4dc2-bb01-5eb81acb6683
-     *
-     * @return array|object[]
-     * @deprecated since 0.1.15, use `SeaTableApi::listWorkspaces()->starred_dtable_list` {@see SeaTableApi::listWorkspaces}
-     */
-    public function listStarredWorkspaces(): array
-    {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::listWorkspaces()->starred_dtable_list instead");
-        return $this->listWorkspaces()->starred_dtable_list;
     }
 
     /**
@@ -351,15 +214,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.18, use `SeaTableApi::updateBase()`; {@see SeaTableApi::updateBase}
-     */
-    public function updateDTable(int $workspaceId, string $dtableName, array $changes = []): object
-    {
-        Php::triggerMethodDeprecation('0.1.18', 'use SeaTableApi::updateBase() instead');
-        return $this->updateBase($workspaceId, $dtableName, $changes);
-    }
-
-    /**
      * Copy a Base from an External Link
      *
      * @group User / Bases / Base Management
@@ -380,70 +234,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.20, use `SeaTableApi::copyBaseExternalLink()`; {@see SeaTableApi::copyBaseExternalLink}
-     */
-    public function copyDTableExternalLink(string $link, int $destinationWorkspaceId): object
-    {
-        Php::triggerMethodDeprecation('0.1.20', 'use SeaTableApi::copyBaseExternalLink() instead');
-        return $this->copyBaseExternalLink($link, $destinationWorkspaceId);
-    }
-
-    /**
-     * get dtable token {@unfit}
-     *
-     * either via api-token or authentication on workspace + base
-     *
-     * @param array $input
-     * @return object
-     * @deprecated since 0.1.11, use `SeaTableApi::getBaseAppAccessToken()` or `SeaTableApi::getBaseAccessToken()`; {@see SeaTableApi::getBaseAppAccessToken} or {@see SeaTableApi::getBaseAccessToken}
-     */
-    public function getDTableToken(array $input): object
-    {
-        $isAppAccessToken = array_key_exists("api_token", $input);
-        $isBaseAccessToken = array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input);
-
-        $instead = [];
-        $isBaseAccessToken || $instead[] = 'getBaseAppAccessToken';
-        $isAppAccessToken || $instead[] = 'getBaseAccessToken';
-
-        Php::triggerMethodDeprecation(
-            '0.1.11',
-            sprintf(
-                'use SeaTableApi::%s() instead%s',
-                implode('() or ::', $instead),
-                count($instead) === 1 ? ' in this case' : ''
-            )
-        );
-        unset($instead);
-
-        if ($isAppAccessToken) {
-            return $this->getBaseAppAccessToken($input['api_token']);
-        }
-
-        if ($isBaseAccessToken) {
-            return $this->getBaseAccessToken($input['workspace_id'], $input['table_name']);
-        }
-
-        throw new Exception("getDtableToken parameters are wrong: use either api_token or workspace_id + table_name");
-    }
-
-    /**
-     * Get Base Access Token via API Token
-     *
-     * @link https://api.seatable.io/#3b782fd2-6091-4871-acc7-2725bfc7e067
-     *
-     * @param string $apiToken API Token
-     * @return object
-     *
-     * @deprecated since 0.1.16, use `SeaTableApi::getBaseAppAccessToken()`; {@see SeaTableApi::getBaseAppAccessToken}
-     */
-    public function getDTableAccessToken(string $apiToken): object
-    {
-        Php::triggerMethodDeprecation('0.1.16', 'use SeaTableApi::getBaseAppAccessToken() instead');
-        return $this->getBaseAppAccessToken($apiToken);
-    }
-
-    /**
      * Get Base Access Token via API Token
      *
      * @group Authentication / Base Access Token
@@ -459,24 +249,6 @@ class SeaTableApi
         $this->restCurlClientEx->access_token = $appAccessToken->access_token;
         $this->dtable_uuid = $appAccessToken->dtable_uuid;
         return $appAccessToken;
-    }
-
-    /**
-     * Get Base Access Token via Auth Token
-     *
-     * @group Authentication / Base Access Token
-     * @link https://api.seatable.io/#7b251436-a4f1-4793-bd03-678caa32c29d
-     *
-     * @param int $workspaceId Workspace ID
-     * @param string $name Base Name
-     * @return object
-     *
-     * @deprecated since 0.1.16, use `SeaTableApi::getBaseAccessToken()`; {@see SeaTableApi::getBaseAccessToken}
-     */
-    public function getTableAccessToken(int $workspaceId, string $name): object
-    {
-        Php::triggerMethodDeprecation('0.1.16', 'use SeaTableApi::getBaseAccessToken() instead');
-        return $this->getBaseAccessToken($workspaceId, $name);
     }
 
     /**
@@ -527,24 +299,6 @@ class SeaTableApi
         ]);
 
         return $this->restCurlClientEx->get($request);
-    }
-
-    /**
-     * List Rows {@unfit}
-     *
-     * @group Base Operations / Rows
-     * @link https://api.seatable.io/#c7caa77d-6214-4ca1-bb91-5c1d3d19c52d
-     *
-     * @param string $tableName
-     * @param string|null $viewName (optional)
-     * @return array
-     *
-     * @deprecated since 0.1.17, use `SeaTableApi::listRows()->rows`; {@see SeaTableApi::listRows}
-     */
-    public function listRowsByView(string $tableName, string $viewName = null): array
-    {
-        Php::triggerMethodDeprecation('0.1.17', 'use SeaTableApi::listRows()->rows instead');
-        return $this->listRows($tableName, $viewName)->rows;
     }
 
     /**
@@ -613,31 +367,6 @@ class SeaTableApi
     }
 
     /**
-     * Get Metadata from active Base {@unfit}
-     *
-     * @deprecated since 0.1.14, use `SeaTableApi::getBaseMetadata()->metadata`; {@see SeaTableApi::getBaseMetadata}
-     * @return object
-     */
-    public function getDTableMetadata(): object
-    {
-        Php::triggerMethodDeprecation('0.1.14', 'use SeaTableApi::getBaseMetadata()->metadata instead');
-
-        return $this->getBaseMetadata()->metadata;
-    }
-
-    /**
-     * @deprecated since 0.1.14, use `array_column(SeaTableApi::getBaseMetadata()->metadata->tables, null, 'name')[$table_name] ?? null`; {@see SeaTableApi::getBaseMetadata}
-     * @param string $tableName
-     * @return object|null
-     */
-    public function getColumnsFromTable(string $tableName): ?object
-    {
-        Php::triggerMethodDeprecation('0.1.14', "use array_column(SeaTableApi::getBaseMetadata()->metadata->tables, null, 'name')[\$tableName] ?? null instead");
-
-        return array_column($this->getBaseMetadata()->metadata->tables, null, 'name')[$tableName] ?? null;
-    }
-
-    /**
      * List of Daily Active Users
      *
      * @group System Admin / Statistics
@@ -655,15 +384,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListDailyActiveUsers()`; {@see SeaTableApi::sysAdminListDailyActiveUsers}
-     */
-    public function listDailyActiveUsers($date = '2020-08-12+00:00:00', $per_page = 5000, $page = 1)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListDailyActiveUsers() instead");
-        return $this->sysAdminListDailyActiveUsers(urldecode($date), $page, $per_page);
-    }
-
-    /**
      * List Teams (Organizations)
      *
      * @group System Admin / Teams (organizations)
@@ -677,15 +397,6 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/api/v2.1/admin/organizations/?per_page=$perPage&page=$page";
         return $this->restCurlClientEx->get($request);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeams()`; {@see SeaTableApi::sysAdminListTeams}
-     */
-    public function listOrganizations($per_page = 25, $page = 1)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeams() instead");
-        return $this->sysAdminListTeams($page, $per_page);
     }
 
     /**
@@ -715,15 +426,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddTeam()`; {@see SeaTableApi::sysAdminAddTeam}
-     */
-    public function addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddTeam() instead");
-        return $this->sysAdminAddTeam($org_name, $admin_email, $admin_name, $password, $max_user_number);
-    }
-
-    /**
      * Delete Team (Organization)
      *
      * @group System Admin / Teams (organizations)
@@ -736,15 +438,6 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/";
         return $this->restCurlClientEx->delete($request);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminDeleteTeam()`; {@see SeaTableApi::sysAdminDeleteTeam}
-     */
-    public function deleteOrganization($org_id)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminDeleteTeam() instead");
-        return $this->sysAdminDeleteTeam($org_id);
     }
 
     /**
@@ -764,15 +457,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminUpdateTeam()`; {@see SeaTableApi::sysAdminUpdateTeam}
-     */
-    public function updateOrganization($org_id, $org_changes = [])
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminUpdateTeam() instead");
-        return $this->sysAdminUpdateTeam($org_id, $org_changes);
-    }
-
-    /**
      * List Team Members
      *
      * @group System Admin / Teams (organizations)
@@ -789,15 +473,6 @@ class SeaTableApi
         $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/users/?per_page=$perPage&page=$page&is_staff=" . ($isStaff ? 'true' : 'false');
 
         return $this->restCurlClientEx->get($request);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeamUsers()`; {@see SeaTableApi::sysAdminListTeamUsers}
-     */
-    public function listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeamUsers() instead");
-        return $this->sysAdminListTeamUsers($org_id, $page, $per_page, $is_staff);
     }
 
     /**
@@ -825,15 +500,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddTeamUser()`; {@see SeaTableApi::sysAdminAddTeamUser}
-     */
-    public function addOrgUser($org_id, $email, $pass, $name = "")
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddTeamUser() instead");
-        return $this->sysAdminAddTeamUser($org_id, $email, $pass, $name);
-    }
-
-    /**
      * Delete a Team User
      *
      * @group System Admin / Teams (organizations)
@@ -847,15 +513,6 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/users/" . rawurlencode($email) . '/';
         return $this->restCurlClientEx->delete($request);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminDeleteTeamUser()`; {@see SeaTableApi::sysAdminDeleteTeamUser}
-     */
-    public function deleteOrgUser($org_id, $email)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminDeleteTeamUser() instead");
-        return $this->sysAdminDeleteTeamUser($org_id, $email);
     }
 
     /**
@@ -874,15 +531,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeamGroups()`; {@see SeaTableApi::sysAdminListTeamGroups}
-     */
-    public function listOrgGroups($org_id)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeamGroups() instead");
-        return $this->sysAdminListTeamGroups($org_id);
-    }
-
-    /**
      * List Team Bases
      *
      * @group System Admin / Teams (organizations)
@@ -897,15 +545,6 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/dtables/?per_page=$perPage&page=$page";
         return $this->restCurlClientEx->get($request);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeamBases()`; {@see SeaTableApi::sysAdminListTeamBases}
-     */
-    public function listOrgBases($org_id, $per_page = 25, $page = 1)
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeamBases() instead");
-        return $this->sysAdminListTeamBases($org_id, $page, $per_page);
     }
 
     /**
@@ -939,22 +578,6 @@ class SeaTableApi
     }
 
     /**
-     * Get Team Information / Get a Team {@unfit}
-     *
-     * @group System Admin / Teams (organizations)
-     * @link https://api.seatable.io/#bf22f375-4eba-4fe4-ba09-fe8082dc5fd6
-     *
-     * @param int $orgId
-     * @return object
-     * @deprecated since 0.1.15, use `SeaTableApi::sysAdminGetTeam()` {@see SeaTableApi::sysAdminGetTeam}
-     */
-    public function getOrgInfo(int $orgId): object
-    {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::sysAdminGetTeam() instead");
-        return $this->sysAdminGetTeam($orgId);
-    }
-
-    /**
      * Add System Notification to User
      *
      * @group System Admin / System Notifications
@@ -972,24 +595,6 @@ class SeaTableApi
             'username' => $username,
         ];
         return $this->restCurlClientEx->post($request, $body);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddSystemNotificationToUser()`; {@see SeaTableApi::sysAdminAddSystemNotificationToUser}
-     */
-    public function addSystemNotificationToUser(string $msg, string $username): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddSystemNotificationToUser() instead");
-        return $this->sysAdminAddSystemNotificationToUser($msg, $username);
-    }
-
-    /**
-     * @deprecated since 0.1.15, use `SeaTableApi::sysAdminAddSystemNotificationToUser()`; {@see SeaTableApi::sysAdminAddSystemNotificationToUser}
-     */
-    public function addASystemNotificationToAUser(string $msg, string $username): object
-    {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::sysAdminAddSystemNotificationToUser() instead");
-        return $this->sysAdminAddSystemNotificationToUser($msg, $username);
     }
 
     /**
@@ -1021,20 +626,6 @@ class SeaTableApi
         $form = ['dtable' => $this->restCurlClientEx->curlFile($path)];
 
         return $this->restCurlClientEx->post($request, $form);
-    }
-
-    /**
-     * Import Base from *.dtable or *.csv File
-     *
-     * @group User / Bases
-     * @link https://api.seatable.io/#3a888a1e-833f-407d-8586-0a5e1cdfa851
-     *
-     * @deprecated since 0.1.18, use `SeaTableApi::importBaseFromFile()`; {@see SeaTableApi::importBaseFromFile}
-     */
-    public function importDTable(int $workspaceId, string $path): object
-    {
-        Php::triggerMethodDeprecation('0.1.18', 'use SeaTableApi::importBaseFromFile() instead');
-        return $this->importBaseFromFile($workspaceId, $path);
     }
 
     /**
@@ -1090,15 +681,6 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.21, use `SeaTableApi::teamAdminAddGroup()`; {@see SeaTableApi::teamAdminAddGroup}
-     */
-    public function addGroup(int $orgId, string $groupName, string $groupOwner): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', 'use SeaTableApi::teamAdminAddGroup() instead');
-        return $this->teamAdminAddGroup($orgId, $groupName, $groupOwner);
-    }
-
-    /**
      * Batch Add Members to Group
      *
      * @group Team Admin / Group Members
@@ -1125,15 +707,6 @@ class SeaTableApi
         $httpOptions = [CURLOPT_HTTPHEADER => ['Authorization: Token ' . $this->restCurlClientEx->seatable_token, 'Content-Type: application/x-www-form-urlencoded']];
 
         return $this->restCurlClientEx->post($request, $buffer, $httpOptions);
-    }
-
-    /**
-     * @deprecated since 0.1.21, use `SeaTableApi::teamAdminAddGroupMember()`; {@see SeaTableApi::teamAdminAddGroupMember}
-     */
-    public function addGroupMember(int $orgId, int $groupId, string $email, string ...$emails): object
-    {
-        Php::triggerMethodDeprecation('0.1.21', 'use SeaTableApi::teamAdminAddGroupMember() instead');
-        return $this->teamAdminAddGroupMember($orgId, $groupId, $email, ...$emails);
     }
 
     /**

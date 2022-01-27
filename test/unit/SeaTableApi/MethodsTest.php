@@ -111,9 +111,8 @@ class MethodsTest extends TestCase
         $verbs = $this->testMethodNamingConvention()['verbs'];
 
         $expected = [
-            'activate', 'add', 'append',
-            'check', 'copy', 'create',
-            'deactivate',
+            'add', 'append',
+            'copy', 'create',
             'delete', 'get', 'import',
             'list', 'ping', 'search',
             'update',

@@ -237,3 +237,45 @@ parameters:
     - '~\Q[BC] CHANGED: The return type of SeaTable\SeaTableApi\SeaTableApi#importDTable() changed from no type to object\E~'
     - '~\Q[BC] CHANGED: The parameter $dtable_file of SeaTable\SeaTableApi\SeaTableApi#importDTable() changed from no type to a non-contravariant string\E~'
     - '~\Q[BC] CHANGED: The parameter $dtable_file of SeaTable\SeaTableApi\SeaTableApi#importDTable() changed from no type to string\E~'
+
+    # Deprecated in 0.1.11, removed in 0.2.x
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#getDtableToken() was removed\E~'
+
+    # Deprecated in 0.1.13, removed in 0.2.x
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#activateUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#deactivateUser() was removed\E~'
+
+    # Deprecated in 0.1.14, removed in 0.2.x
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#getDtableMetadata() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#getColumnsFromTable() was removed\E~'
+
+    # Deprecated in 0.1.15, removed in 0.2.x
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#getTotalUsers() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listAllWorkspaces() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listStarredWorkspaces() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#getOrgInfo() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#addASystemNotificationToAUser() was removed\E~'
+
+    # Deprecated in 0.1.17..20, removed in 0.2.x
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#checkAccountInfo() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#updateDTable() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#copyDTableExternalLink() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listRowsByView() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#importDTable() was removed\E~'
+
+    # Deprecated in 0.1.21, removed in 0.2.x
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listUsers() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#addUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#searchUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#updateUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#deleteUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listDailyActiveUsers() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listOrganizations() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#addOrganization() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#deleteOrganization() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#updateOrganization() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listOrgUsers() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#addOrgUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#deleteOrgUser() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listOrgGroups() was removed\E~'
+    - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#listOrgBases() was removed\E~'

@@ -89,18 +89,13 @@ $seatable->getBaseAccessToken(
 #### Admin Functions (User)
 
 * `sysAdminListUsers(int $page = 1, int $perPage = 25)`
-* `getTotalUsers()`
 * `sysAdminAddUser(string $email, string $name, string $password, string $role = 'default')`
 * `sysAdminSearchUser(string $query)`
 * `sysAdminUpdateUser(string $email, array $changes = [])`
-* `activateUser(string $email)`
-* `deactivateUser(string $email)`
 * `sysAdminDeleteUser(string $email)`
 
 #### Workspace Functions (Admin)
 
-* `listAllWorkspaces()`
-* `listStarredWorkspaces()`
 * `updateBase(int $workspaceId, string $baseName, array $changes = [])`
 * `copyBaseExternalLink(string $link, int $destinationWorkspaceId)`
 
@@ -120,7 +115,7 @@ $seatable->getBaseAccessToken(
 
 #### Functions to Work with a Base (Table Data)
 
-* `listRowsByView(string $tableName, string $viewName = null)`
+* `listRows(string $tableName, string $viewName = null, bool $convertLinkId = false, string $orderBy = null, bool $direction = false, int $start = 0, int $limit = 1000)`
 * `appendRow(string $tableName, array $row)`
 * `getBaseMetadata()`
 

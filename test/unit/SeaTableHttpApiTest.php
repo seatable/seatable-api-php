@@ -214,76 +214,6 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         self::assertIsNotCallable([$api, 'debug'], 'SeaTableApi::debug() method must not be callable any longer');
     }
 
-    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenThrows(): void
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectExceptionMessage('getDtableToken parameters are wrong: use either api_token or workspace_id + table_name');
-        $this->expectException(Exception::class);
-        !@$api->getDTableToken([]);
-    } // @codeCoverageIgnore
-
-    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenIsDeprecated(): void
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getBaseAppAccessToken() or ::getBaseAccessToken() instead in %s on line %d', __FILE__, __LINE__ + 2));
-        $this->expectDeprecation();
-        !$api->getDTableToken([]);
-    } // @codeCoverageIgnore
-
-    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithApiTokenIsDeprecated(): void
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getBaseAppAccessToken() instead in this case in %s on line %d', __FILE__, __LINE__ + 2));
-        $this->expectDeprecation();
-        !$api->getDTableToken(['api_token' => '452fd5ab30de6a561460c9347f2c88036e10ad65']);
-    } // @codeCoverageIgnore
-
-    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithApiTokenDeprecated(): void
-    {
-        $this->mockAuthToken();
-        $this->mockDTableAuthWithApiToken();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->assertInstanceOf(stdClass::class, @$api->getDTableToken(['api_token' => '452fd5ab30de6a561460c9347f2c88036e10ad65']));
-    }
-
-    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithWorkspaceIdAndTableNameIsDeprecated(): void
-    {
-        $this->mockAuthToken();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getBaseAccessToken() instead in this case in %s on line %d', __FILE__, __LINE__ + 2));
-        $this->expectDeprecation();
-        !$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']);
-    } // @codeCoverageIgnore
-
-    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
-    public function testGetDTableTokenWithWorkspaceIdAndTableNameDeprecated(): void
-    {
-        $this->mockAuthToken();
-        $this->mockDTableAuthWithWorkspaceIdAndTableName();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-
-        $this->assertInstanceOf(stdClass::class, @$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']));
-    }
-
     public function testGetBaseAppAccessToken(): void
     {
         $this->mockAuthToken();
@@ -313,25 +243,6 @@ class SeaTableHttpApiTest extends ServerMockTestCase
 
         $this->assertIsObject($api->sysAdminUpdateUser('123456786569491ba42905bf1647fd3f@auth.local'));
     }
-
-    /**
-     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php
-     * @return void
-     */
-    public function testActivateDeactivateUserDeprecation()
-    {
-        $this->mockAuthToken();
-        $this->mockUpdateUser();
-        $this->http->setUp();
-        $api = new SeaTableApi($this->getOptions());
-        $this->assertIsObject(@$api->updateUser('123456786569491ba42905bf1647fd3f@auth.local', ['is_active' => 'true']));
-        $this->assertIsObject(@$api->updateUser('123456786569491ba42905bf1647fd3f@auth.local', ['is_active' => 'false']));
-
-        $this->expectDeprecationMessage('Since seatable/seatable-api-php 0.1.13: SeaTableApi::activateUser() is deprecated, use SeaTableApi::sysAdminUpdateUser($email, [\'is_active\' => \'true\']) instead');
-        $this->expectDeprecation();
-
-        $this->assertIsObject($api->activateUser('123456786569491ba42905bf1647fd3f@auth.local'));
-    } // @codeCoverageIgnore
 
     /**
      * stub initial auth request
