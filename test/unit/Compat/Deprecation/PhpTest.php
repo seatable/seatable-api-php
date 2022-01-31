@@ -32,9 +32,6 @@ class PhpTest extends TestCase
         $this->assertSame(__FILE__, $call['file']);
         $this->assertSame($line, $call['line']);
 
-        $expected = sprintf(' in %s on line %s', __FILE__, $line);
-        $this->assertSame($expected, $call['location']);
-
         $notMe = Php::callSite();
         $this->assertNotEquals(__FILE__, $notMe['file'], 'one below is not the same file');
     }
@@ -103,7 +100,64 @@ class PhpTest extends TestCase
     }
 
     /**
-     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::versionCheck()
+     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
+     * @return void
+     */
+    public function testTriggerDeprecation()
+    {
+        @Php::triggerDeprecation('0.0.42', 'Silenced. Foo %s.', 'bar');
+
+        $this->expectDeprecationMessage('Since seatable/seatable-api-php 0.0.42: Foo bar.');
+        $this->expectDeprecation();
+        Php::triggerDeprecation('0.0.42', 'Foo %s.', 'bar');
+    } // @codeCoverageIgnore
+
+    /**
+     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerMethodDeprecation
+     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
+     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
+     *
+     * @return void
+     */
+    public function testTriggerMethodDeprecation()
+    {
+        @Php::triggerMethodDeprecation('0.0.42', 'silenced');
+
+        $this->expectDeprecationMessage(
+            'Since seatable/seatable-api-php 0.0.42: Compat\Deprecation\PhpTest::testTriggerMethodDeprecation() is deprecated in'
+        );
+        $this->expectDeprecation();
+        Php::triggerMethodDeprecation('0.0.42');
+    } // @codeCoverageIgnore
+
+    /**
+     * @covers  \SeaTable\SeaTableApi\Compat\Deprecation\Php
+     * @depends testTriggerMethodDeprecation
+     *
+     * @return void
+     */
+    public function testTriggerMethodDeprecationCallSite()
+    {
+        @Php::triggerMethodDeprecation('0.0.42', 'silenced');
+
+        $trigger = static function () {
+            Php::triggerMethodDeprecation('0.0.42');
+        };
+
+        $this->expectDeprecationMessage(
+            sprintf(
+                'Since seatable/seatable-api-php 0.0.42: Compat\Deprecation\PhpTest::Compat\Deprecation\{closure}() is deprecated in %s on line %d',
+                __FILE__,
+                __LINE__ + 4
+            )
+        );
+        $this->expectDeprecation();
+        $trigger();
+    } // @codeCoverageIgnore
+
+    /**
+     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::versionCheck
+     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
      * @return void
      * @throws \Throwable
      */
@@ -115,7 +169,8 @@ class PhpTest extends TestCase
     }
 
     /**
-     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::versionCheck()
+     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::versionCheck
+     * @uses   \SeaTable\SeaTableApi\Compat\Deprecation\Php::triggerDeprecation
      * @return void
      * @throws \Throwable
      */
@@ -151,10 +206,9 @@ class PhpTest extends TestCase
 
         $this->assertSame(E_USER_DEPRECATED, $error['type']);
         $this->assertStringContainsString(
-            vsprintf('this PHP version %d.%d.%d is deprecated', sscanf(PHP_VERSION, '%d.%d.%d')),
+            vsprintf('Since seatable/seatable-api-php 0.1.8: This PHP version %d.%d.%d is deprecated', sscanf(PHP_VERSION, '%d.%d.%d')),
             $error['message']
         );
-        $this->assertStringContainsString('is deprecated since 0.1.8', $error['message']);
         $this->assertStringContainsString('Use PHP version 7.4.0 or later', $error['message']);
     }
 

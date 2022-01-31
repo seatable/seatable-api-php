@@ -39,9 +39,11 @@ class SeaTableApiTest extends TestCase
     public function testBackwardsCreation()
     {
         $this->expectDeprecationMessageMatches(
-            '(Deprecated use of class SeaTableAPI since 0\.1\.0 ' .
-            'in .*/test/unit/SeaTableApiTest\.php on line ' . (__LINE__ + 4) . ';' .
-            '.* seatable/seatable-api-php version (?:' . PhpTest::REGEX_PKG_VERSION . ') is already in use\.$)'
+            '(^Since seatable/seatable-api-php 0\.1\.0: Class SeaTableAPI is deprecated' .
+            ', use \Q\SeaTable\SeaTableApi\SeaTableApi\E instead as' .
+            ' seatable/seatable-api-php version (?:' . PhpTest::REGEX_PKG_VERSION . ') is already in use\.' .
+            ' In .*/test/unit/SeaTableApiTest\.php on line ' . (__LINE__ + 4) .
+            '$)'
         );
         $this->expectDeprecation();
         new SeaTableApiDeprecated(); // @codeCoverageIgnoreStart

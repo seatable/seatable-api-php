@@ -2,6 +2,7 @@
 
 namespace SeaTable\SeaTableApi;
 
+use SeaTable\SeaTableApi\Compat\Deprecation\Php;
 use SeaTable\SeaTableApi\Internal\ApiOptions;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
 
@@ -87,13 +88,7 @@ class SeaTableApi
      */
     public function get($url, $http_options = [], $api_token = "")
     {
-        trigger_error(
-            sprintf(
-                'Deprecated use of method %s since 0.1.4; there is no replacement.',
-                __METHOD__
-            ),
-            E_USER_DEPRECATED
-        );
+        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
         return $this->restCurlClientEx->get($url, $http_options, $api_token);
     }
 
@@ -102,13 +97,7 @@ class SeaTableApi
      */
     public function post($url, $form_fields = [], $http_options = [])
     {
-        trigger_error(
-            sprintf(
-                'Deprecated use of method %s since 0.1.4; there is no replacement.',
-                __METHOD__
-            ),
-            E_USER_DEPRECATED
-        );
+        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
         return $this->restCurlClientEx->post($url, $form_fields, $http_options);
     }
 
@@ -117,13 +106,7 @@ class SeaTableApi
      */
     public function put($url, $data = '', $http_options = [])
     {
-        trigger_error(
-            sprintf(
-                'Deprecated use of method %s since 0.1.4; there is no replacement.',
-                __METHOD__
-            ),
-            E_USER_DEPRECATED
-        );
+        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
         return $this->restCurlClientEx->put($url, $data, $http_options);
     }
 
@@ -132,13 +115,7 @@ class SeaTableApi
      */
     public function delete($url, $http_options = [])
     {
-        trigger_error(
-            sprintf(
-                'Deprecated use of method %s since 0.1.4; there is no replacement.',
-                __METHOD__
-            ),
-            E_USER_DEPRECATED
-        );
+        Php::triggerMethodDeprecation('0.1.4', 'there is no replacement');
         return $this->restCurlClientEx->delete($url, $http_options);
     }
 

@@ -131,6 +131,44 @@ class SeaTableHttpApiTest extends ServerMockTestCase
     }
 
     /**
+     * @codeCoverageIgnore
+     * @return array|string[][]
+     */
+    public function provideDeprecatedMethods(): array
+    {
+        return [
+            'get' => ['get'],
+            'post' => ['post'],
+            'put' => ['put'],
+            'delete' => ['delete'],
+        ];
+    }
+
+    /**
+     * @dataProvider provideDeprecatedMethods
+     * @param string $method
+     * @return void
+     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php
+     */
+    public function testMethodDeprecation(string $method)
+    {
+        $this->mockAuthToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->expectDeprecationMessage(
+            sprintf(
+                'Since seatable/seatable-api-php 0.1.4: SeaTableApi::%s() is deprecated, there is no replacement. In %s on line %d',
+                $method,
+                __FILE__,
+                __LINE__ + 4
+            )
+        );
+        $this->expectDeprecation();
+        !$api->$method('url');
+    } // @codeCoverageIgnore
+
+    /**
      * stub initial auth request
      */
     private function mockAuthToken()

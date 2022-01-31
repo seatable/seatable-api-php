@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace SeaTable\SeaTableApi\Compat\Deprecation;
 
 use SeaTable\SeaTableApi\Exception;
+use SeaTable\SeaTableApi\SeaTableApi;
 
 /**
  * PHP Deprecation Utility
@@ -47,7 +48,6 @@ final class Php
             throw new \UnexpectedValueException('internal stack frame error on file, line'); // @codeCoverageIgnore
         }
 
-        $stackFrame['location'] = sprintf(' in %s on line %s', $stackFrame['file'], $stackFrame['line']);
         $stackFrame['parent'] = $stack[$at + 2] ?? null;
 
         return $stackFrame;
@@ -76,6 +76,31 @@ final class Php
         return $version;
     }
 
+    public static function triggerDeprecation(string $since, string $message, ...$args)
+    {
+        $buffer = ($since ? "Since seatable/seatable-api-php $since: " : '') . vsprintf($message, $args);
+        trigger_error($buffer, \E_USER_DEPRECATED);
+    }
+
+    public static function triggerMethodDeprecation(string $since, string $reason = '')
+    {
+        $callSite = Php::callSite(1);
+        $method = $callSite['class'] . '::' . $callSite['function'];
+
+        if (0 === strpos($method, 'SeaTable\SeaTableApi\\')) {
+            $method = str_replace('SeaTable\SeaTableApi\\', '', $method);
+        }
+
+        self::triggerDeprecation(
+            $since,
+            '%s() is deprecated%s %s on line %d',
+            $method,
+            $reason ? ", $reason. In" : ' in',
+            $callSite['file'],
+            $callSite['line']
+        );
+    }
+
     /**
      * check php version and if not within (hard-encoded) configuration trigger a deprecation warning
      *
@@ -88,13 +113,11 @@ final class Php
         if (self::$PHP_VERSION_ID < 70400) {
             $versionSuggest = '7.4.0';
             $versionInUse = sprintf('%d.%d.%d', PHP_MAJOR_VERSION, PHP_MINOR_VERSION, PHP_RELEASE_VERSION);
-            trigger_error(
-                sprintf(
-                    'Using the SeaTableApi with this PHP version %s is deprecated since 0.1.8 and it will stop working in the future. Use PHP version %s or later instead.',
-                    $versionInUse,
-                    $versionSuggest
-                ),
-                E_USER_DEPRECATED
+            self::triggerDeprecation(
+                '0.1.8',
+                'This PHP version %s is deprecated and it will stop working in the future. Use PHP version %s or later instead.',
+                $versionInUse,
+                $versionSuggest
             );
 
             if (self::$PHP_VERSION_ID < 70000) {
