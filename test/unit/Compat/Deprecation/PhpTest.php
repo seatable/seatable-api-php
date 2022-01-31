@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace SeaTable\SeaTableApi\Compat\Deprecation;
 
-use PHPUnit\Framework\TestCase;
+use OutOfBoundsException;
 use SeaTable\SeaTableApi\Exception;
+use SeaTable\SeaTableApi\TestCase;
 
 /**
  * Class PhpTest
@@ -18,10 +19,10 @@ use SeaTable\SeaTableApi\Exception;
  */
 class PhpTest extends TestCase
 {
-    const REGEX_PKG_VERSION = '(?:dev-[a-z]{4,}|\Q1.0.0+no-version-set\E)';
+    const REGEX_PKG_VERSION = '(?:dev-[a-z]{4,}|v\d+\.\d+.\d+|\Q1.0.0+no-version-set\E)';
 
     /**
-     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite()
+     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
      * @return void
      */
     public function testCallSite()
@@ -77,6 +78,18 @@ class PhpTest extends TestCase
         $this->assertSame($parent['file'], $parentAgain['file'], 'parent again file');
         $this->assertSame($parent['line'], $parentAgain['line'], 'parent again line');
     }
+
+    /**
+     * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::callSite
+     * @return void
+     */
+    public function testCallSiteOutOfBounds()
+    {
+        $this->expectExceptionMessage('no call site at 999');
+        $this->expectExceptionCode(0);
+        $this->expectException(OutOfBoundsException::class);
+        !Php::callSite(999);
+    } // @codeCoverageIgnore
 
     /**
      * @covers \SeaTable\SeaTableApi\Compat\Deprecation\Php::pkgVersion

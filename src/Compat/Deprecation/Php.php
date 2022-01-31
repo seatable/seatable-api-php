@@ -44,7 +44,7 @@ final class Php
 
         $stackFrame = $stack[$at + 1];
         if (!isset($stackFrame['file'], $stackFrame['line'])) {
-            throw new \UnexpectedValueException('internal stack frame error on file, line');
+            throw new \UnexpectedValueException('internal stack frame error on file, line'); // @codeCoverageIgnore
         }
 
         $stackFrame['location'] = sprintf(' in %s on line %s', $stackFrame['file'], $stackFrame['line']);
