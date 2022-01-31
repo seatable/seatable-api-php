@@ -29,9 +29,9 @@ $seatable = new SeaTableApi([
 ]);
 
 // get access with an api-token for a base
-$seatable->getDTableToken([
-	'api_token' => '1d3303315348c6b566c44709d459b33b6bac5ad1',
-]);
+$seatable->getDTableAccessToken(
+    '1d3303315348c6b566c44709d459b33b6bac5ad1'
+);
 
 // Append a row
 $row = [

@@ -32,9 +32,9 @@ $seatable = new SeaTableApi([
 ]);
 
 // get access with an api-token for a base
-$seatable->getDTableToken([
-	'api_token' => '1d3303315348c6b577c44709d459b33b6bac5ad1',
-]);
+$seatable->getDTableAccessToken(
+	$token = '1d3303315348c6b577c44709d459b33b6bac5ad1'
+);
 
 // get all rows from the table Articles
 $rows = $seatable->listRowsByView('Articles');

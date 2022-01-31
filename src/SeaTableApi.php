@@ -379,24 +379,67 @@ class SeaTableApi
      *
      * @param array $input
      * @return object
+     * @deprecated use {@see SeaTableApi::getDTableAccessToken()} or {@see SeaTableApi::getTableAccessToken()}
      */
     public function getDTableToken($input)
     {
-        if (array_key_exists("api_token", $input)) {
-            $request = $this->seatable_url . '/api/v2.1/dtable/app-access-token/';
-            $o = $this->restCurlClientEx->get($request, [], $input['api_token']);
-            $this->restCurlClientEx->access_token = $o->access_token;
-            $this->dtable_uuid = $o->dtable_uuid;
-            return $o;
-        } elseif (array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input)) {
-            $request = $this->seatable_url . '/api/v2.1/workspace/' . $input['workspace_id'] . '/dtable/' . $input['table_name'] . '/access-token/';
-            $o = $this->restCurlClientEx->get($request);
-            $this->restCurlClientEx->access_token = $o->access_token;
-            $this->dtable_uuid = $o->dtable_uuid;
-            return $o;
-        } else {
-            throw new Exception("getDtableToken parameters are wrong: use either api_token or workspace_id + table_name");
+        $isAppAccessToken = array_key_exists("api_token", $input);
+        $isTableAccessToken = array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input);
+
+        $instead = [];
+        $isTableAccessToken || $instead[] = 'getDTableAccessToken';
+        $isAppAccessToken || $instead[] = 'getTableAccessToken';
+
+        Php::triggerMethodDeprecation(
+            '0.1.11',
+            sprintf(
+                'use SeaTableApi::%s() instead%s',
+                implode('() or ::', $instead),
+                count($instead) === 1 ? ' in this case' : ''
+            )
+        );
+        unset($instead);
+
+        if ($isAppAccessToken) {
+            return $this->getDTableAccessToken($input['api_token']);
         }
+
+        if ($isTableAccessToken) {
+            return $this->getTableAccessToken($input['workspace_id'], $input['table_name']);
+        }
+
+        throw new Exception("getDtableToken parameters are wrong: use either api_token or workspace_id + table_name");
+    }
+
+    /**
+     * Get Base Access Token via API Token
+     *
+     * @param string $apiToken API Token
+     * @return object
+     */
+    public function getDTableAccessToken(string $apiToken)
+    {
+        $request = $this->seatable_url . '/api/v2.1/dtable/app-access-token/';
+        $o = $this->restCurlClientEx->get($request, [], $apiToken);
+        $this->restCurlClientEx->access_token = $o->access_token;
+        $this->dtable_uuid = $o->dtable_uuid;
+        return $o;
+    }
+
+    /**
+     * Get Base Access Token via Auth Token
+     *
+     * @param int $workspaceID Workspace ID
+     * @param string $name Table Name
+     * @return object
+     */
+    public function getTableAccessToken(int $workspaceID, string $name)
+    {
+        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceID . '/dtable/' . rawurlencode($name) . '/access-token/';
+        $o = $this->restCurlClientEx->get($request);
+        $this->restCurlClientEx->access_token = $o->access_token;
+        $this->dtable_uuid = $o->dtable_uuid;
+        return $o;
     }
 
     public function listRowsByView($table_name, $view_name = "")

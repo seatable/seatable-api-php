@@ -6,6 +6,7 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [Deprecation of `SeaTableApi::getDTableToken()` (0.1.11)](#deprecation-of-seatableapigetdtabletoken-0111)
 * [Deprecation of PHP 7.0-7.3 (0.1.8)](#deprecation-of-php-70-73-018)
 * [Removal of `SeaTableAPI::debug()` (0.1.7)](#removal-of-seatableapidebug-017)
 * [New Classname (0.1.0)](#new-classname-010)
@@ -16,6 +17,13 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
 * [Deprecations (0.x.x)](#deprecations-0xx)
 * [Public Interface](#public-interface)
+
+### Deprecation of `SeaTableApi::getDTableToken()` (0.1.11)
+
+The method `getDTableToken()` is deprecated. There are two new replacement methods to obtain a DTable Token:
+
+1. `SeaTableApi::getDTableAccessToken()` by the API Token
+2. `SeaTableApi::getTableAccessToken()` by Workspace ID and DTable Name
 
 ### Deprecation of PHP 7.0-7.3 (0.1.8)
 

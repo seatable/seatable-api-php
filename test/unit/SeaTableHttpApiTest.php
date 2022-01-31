@@ -10,6 +10,7 @@ namespace SeaTable\SeaTableApi;
 
 use InterNations\Component\HttpMock\MockBuilder;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
+use stdClass;
 
 /**
  * HttpMockTest
@@ -376,6 +377,96 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         !$api->$method('url');
     } // @codeCoverageIgnore
 
+    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
+    public function testGetDTableTokenThrows()
+    {
+        $this->mockAuthToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->expectExceptionMessage('getDtableToken parameters are wrong: use either api_token or workspace_id + table_name');
+        $this->expectException(Exception::class);
+        !@$api->getDTableToken([]);
+    } // @codeCoverageIgnore
+
+    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
+    public function testGetDTableTokenIsDeprecated()
+    {
+        $this->mockAuthToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getDTableAccessToken() or ::getTableAccessToken() instead. In %s on line %d', __FILE__, __LINE__ + 2));
+        $this->expectDeprecation();
+        !$api->getDTableToken([]);
+    } // @codeCoverageIgnore
+
+    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
+    public function testGetDTableTokenWithApiTokenIsDeprecated()
+    {
+        $this->mockAuthToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getDTableAccessToken() instead in this case. In %s on line %d', __FILE__, __LINE__ + 2));
+        $this->expectDeprecation();
+        !$api->getDTableToken(['api_token' => '452fd5ab30de6a561460c9347f2c88036e10ad65']);
+    } // @codeCoverageIgnore
+
+    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
+    public function testGetDTableTokenWithApiTokenDeprecated()
+    {
+        $this->mockAuthToken();
+        $this->mockDTableAuthWithApiToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->assertInstanceOf(stdClass::class, @$api->getDTableToken(['api_token' => '452fd5ab30de6a561460c9347f2c88036e10ad65']));
+    }
+
+    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
+    public function testGetDTableTokenWithWorkspaceIdAndTableNameIsDeprecated()
+    {
+        $this->mockAuthToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getTableAccessToken() instead in this case. In %s on line %d', __FILE__, __LINE__ + 2));
+        $this->expectDeprecation();
+        !$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']);
+    } // @codeCoverageIgnore
+
+    /** @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php */
+    public function testGetDTableTokenWithWorkspaceIdAndTableNameDeprecated()
+    {
+        $this->mockAuthToken();
+        $this->mockDTableAuthWithWorkspaceIdAndTableName();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->assertInstanceOf(stdClass::class, @$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']));
+    }
+
+    public function testGetDTableAccessToken()
+    {
+        $this->mockAuthToken();
+        $this->mockDTableAuthWithApiToken();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->assertInstanceOf(stdClass::class, $api->getDTableAccessToken('452fd5ab30de6a561460c9347f2c88036e10ad65'));
+    }
+
+    public function testGetTableAccessToken()
+    {
+        $this->mockAuthToken();
+        $this->mockDTableAuthWithWorkspaceIdAndTableName();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->assertInstanceOf(stdClass::class, $api->getTableAccessToken(1, 'Test-Base'));
+    }
+
     /**
      * stub initial auth request
      */
@@ -426,6 +517,34 @@ class SeaTableHttpApiTest extends ServerMockTestCase
   "dtable_updates_email_interval": 0,
   "dtable_collaborate_email_interval": 0
 }')
+                ->end() instanceof MockBuilder
+        );
+    }
+
+    private function mockDTableAuthWithApiToken()
+    {
+        self::assertSame('1', ini_get('zend.assertions'));
+        assert(
+            $this->http->mock
+                ->when()
+                ->methodIs('GET')
+                ->pathIs('/api/v2.1/dtable/app-access-token/')
+                ->then()
+                ->body('{"app_name":"test","access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDM1MzM3MDQsImR0YWJsZV91dWlkIjoiMjg0Nzg5NTctNGExNy00ZTI1LTk0OGQtZTVhNTliOGE4NmM1IiwidXNlcm5hbWUiOiIiLCJwZXJtaXNzaW9uIjoicnciLCJhcHBfbmFtZSI6InRlc3QifQ.g3q4V_VV0cxYkMWdFR48IUhajZ6Ibl-5R9iBz-WwsGQ","dtable_uuid":"28478957-4a17-4e25-948d-e5a59b8a86c5","dtable_server":"http://localhost/dtable-server/","dtable_socket":"http://localhost/","dtable_db":"http://localhost/dtable-db/","workspace_id":1,"dtable_name":"Test-Base"}')
+                ->end() instanceof MockBuilder
+        );
+    }
+
+    private function mockDTableAuthWithWorkspaceIdAndTableName()
+    {
+        self::assertSame('1', ini_get('zend.assertions'));
+        assert(
+            $this->http->mock
+                ->when()
+                ->methodIs('GET')
+                ->pathIs('/api/v2.1/workspace/1/dtable/Test-Base/access-token/')
+                ->then()
+                ->body('{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDM1MzQ1MTgsImR0YWJsZV91dWlkIjoiMjg0Nzg5NTctNGExNy00ZTI1LTk0OGQtZTVhNTliOGE4NmM1IiwidXNlcm5hbWUiOiI4OTFlNDIyMmI3YmI0MzhlYWYzZmRmNTlkMDM0OGUyZUBhdXRoLmxvY2FsIiwiaWRfaW5fb3JnIjoiIiwicGVybWlzc2lvbiI6InJ3In0.lYk7OZWuw9Wxa8aoAealjQE4rLFKdCwpfORnDKBJEcs","dtable_uuid":"28478957-4a17-4e25-948d-e5a59b8a86c5","dtable_server":"http://localhost/dtable-server/","dtable_socket":"http://localhost/"}')
                 ->end() instanceof MockBuilder
         );
     }
