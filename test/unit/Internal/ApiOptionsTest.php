@@ -26,10 +26,10 @@ class ApiOptionsTest extends TestCase
 
     public function testCreateFromArrayError()
     {
-        $this->expectError();
-        $this->expectErrorMessageMatches(
-            sprintf('~^\QUndefined index: %s\E|\QUndefined array key "%s"\E$~', $key = 'url', $key)
+        $this->expectNoticeMessageMatches(
+            sprintf('~^\QUndefined index: %1$s\E|\QUndefined array key "%1$s"\E$~', 'url')
         );
+        $this->expectNotice();
         ApiOptions::createFromArray([]);
     } // @codeCoverageIgnore
 

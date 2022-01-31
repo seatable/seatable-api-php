@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace SeaTable\SeaTableApi;
 
+use SeaTable\SeaTableApi\Compat\Deprecation\PhpTest;
 use SeaTableAPI as SeaTableApiDeprecated;
 
 /**
@@ -24,7 +25,10 @@ class SeaTableApiTest extends TestCase
      */
     public function testCreation()
     {
-        $this->expectErrorUndefinedArrayKey('url');
+        $this->expectNoticeMessageMatches(
+            sprintf('~^\QUndefined index: %1$s\E|\QUndefined array key "%1$s"\E$~', 'url')
+        );
+        $this->expectNotice();
         new SeaTableApi();
     } // @codeCoverageIgnore
 
@@ -34,12 +38,12 @@ class SeaTableApiTest extends TestCase
      */
     public function testBackwardsCreation()
     {
-        $this->expectError();
-        $this->expectErrorMessageMatches(
+        $this->expectDeprecationMessageMatches(
             '(Deprecated use of class SeaTableAPI since 0\.1\.0 ' .
-            'in .*/test/unit/SeaTableApiTest\.php on line ' . (__LINE__ + 3) . ';' .
+            'in .*/test/unit/SeaTableApiTest\.php on line ' . (__LINE__ + 4) . ';' .
             '.* seatable/seatable-api-php version (?:' . PhpTest::REGEX_PKG_VERSION . ') is already in use\.$)'
         );
+        $this->expectDeprecation();
         new SeaTableApiDeprecated(); // @codeCoverageIgnoreStart
     } // @codeCoverageIgnoreEnd
 
@@ -65,12 +69,4 @@ class SeaTableApiTest extends TestCase
         $this->expectExceptionMessage($pass ? "SeaTable user is missing or has a bad format" : "SeaTable URL is missing or bad URL format");
         new SeaTableApi(['url' => $url]);
     } // @codeCoverageIgnore
-
-    private function expectErrorUndefinedArrayKey(string $actual)
-    {
-        $this->expectError();
-        $this->expectErrorMessageMatches(
-            sprintf('~^\QUndefined index: %s\E|\QUndefined array key "%s"\E$~', $actual, $actual)
-        );
-    }
 }

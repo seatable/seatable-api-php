@@ -60,13 +60,11 @@ class SeaTableHttpApiTest extends ServerMockTestCase
 
         $api = new SeaTableApi($this->getOptions());
         $api->response_object_to_array = true;
-        try {
-            $actual = $api->checkAccountInfo();
-        } catch (\Throwable $t) {
-            self::assertSame(E_USER_DEPRECATED, $t->getCode());
-            self::assertStringContainsString(' SeaTableApi->response_object_to_array is deprecated ', $t->getMessage());
-        }
-    }
+
+        $this->expectDeprecationMessage(' SeaTableApi->response_object_to_array is deprecated since 0.1.4 use near ' . __FILE__);
+        $this->expectDeprecation();
+        !$api->checkAccountInfo();
+    } // @codeCoverageIgnore
 
     /**
      * by default SSL related curl options should be the library default.
