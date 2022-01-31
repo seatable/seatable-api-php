@@ -18,8 +18,6 @@ use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
  */
 class SeaTableApi
 {
-    private $seatable_user;                         # SeaTable user mail to perform REST
-    private $seatable_pass;                         # SeaTable user pass to perform REST
     private $seatable_url;                          # url of the SeaTable server
 
     private $dtable_uuid;
@@ -75,15 +73,13 @@ class SeaTableApi
          */
         $options = ApiOptions::createFromArray($option);
         $this->seatable_url = $options->getUrl();
-        $this->seatable_user = $options->getUser();
-        $this->seatable_pass = $options->getPassword();
 
         $this->restCurlClientEx = new RestCurlClientEx($this, $options->getHttpOptions());
 
         /*
          * Return seatable token
          */
-        $this->getAuthToken();
+        $this->getAuthToken($options->getUser(), $options->getPassword());
     }
 
     /**
@@ -151,11 +147,11 @@ class SeaTableApi
      *
      * @return void
      */
-    private function getAuthToken()
+    private function getAuthToken(string $username, string $password)
     {
         $data = $this->restCurlClientEx->post($this->seatable_url . '/api2/auth-token/', [
-            'username' => $this->seatable_user,
-            'password' => $this->seatable_pass,
+            'username' => $username,
+            'password' => $password,
         ]);
         $this->restCurlClientEx->seatable_token = (string) $data->token;
     }
