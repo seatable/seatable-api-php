@@ -8,3 +8,16 @@ parameters:
     # SeaTableApi::debug() deprecated in 0.0.4, removed in 0.1.7
     - '~\Q[BC] REMOVED: Method SeaTableAPI#debug() was removed\E~'
     - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#debug() was removed\E~'
+   # Deprecated in 0.1.4, improved by private/magic-set-get-isset in 0.1.11
+    - '~\Q[BC] REMOVED: Property SeaTableAPI#$seatable_code was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTableAPI#$seatable_status was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTableAPI#$response_object_to_array was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTableAPI#$response_info was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTable\SeaTableApi\SeaTableApi#$seatable_code was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTable\SeaTableApi\SeaTableApi#$seatable_status was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTable\SeaTableApi\SeaTableApi#$response_object_to_array was removed\E~'
+    - '~\Q[BC] REMOVED: Property SeaTable\SeaTableApi\SeaTableApi#$response_info was removed\E~'
+    - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$seatable_code visibility reduced from public to private\E~'
+    - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$seatable_status visibility reduced from public to private\E~'
+    - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$response_object_to_array visibility reduced from public to private\E~'
+    - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$response_info visibility reduced from public to private\E~'

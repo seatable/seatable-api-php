@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace SeaTable\SeaTableApi\Internal;
 
+use SeaTable\SeaTableApi\Compat\Deprecation\Php;
 use SeaTable\SeaTableApi\Exception;
-use SeaTable\SeaTableApi\SeaTableApi;
+use stdClass;
 
 /**
  * RestCurlClientEx
@@ -28,9 +29,9 @@ use SeaTable\SeaTableApi\SeaTableApi;
 class RestCurlClientEx
 {
     /**
-     * @var SeaTableApi
+     * @var stdClass
      */
-    private $api;
+    private $apiStateEx;
 
     /**
      * @var string
@@ -68,11 +69,6 @@ class RestCurlClientEx
     private $response_object;
 
     /**
-     * @var bool
-     */
-    private $response_object_to_array;      # (ex-public) Convert response to array instead of object - default false
-
-    /**
      * SeaTable static error code
      *
      * @var string[]
@@ -94,7 +90,7 @@ class RestCurlClientEx
         520 => 'OPERATION_FAILED',
     ];
 
-    public function __construct(SeaTableApi $api, array $httpOptions)
+    public function __construct(stdClass $apiStateEx, array $httpOptions)
     {
         /*
          * Default curl config
@@ -107,8 +103,7 @@ class RestCurlClientEx
             && $this->http_options[$httpOption] = $httpOptions[$httpOption];
         }
 
-        $this->api = $api;
-        $this->response_object_to_array = &$api->response_object_to_array;
+        $this->apiStateEx = $apiStateEx;
     }
 
     /**
@@ -256,26 +251,19 @@ class RestCurlClientEx
      *
      * @param string $jsonText encoded response
      * @return object|array|string|null on some endpoints this can differ, e.g. string on /ping
-     * @see $response_object_to_array
-     * @noinspection OverridingDeprecatedMethodInspection
      */
     private function decode(string $jsonText)
     {
-        if (!$this->response_object_to_array) {
+        if (!$this->apiStateEx->response_object_to_array) {
             return json_decode($jsonText, false);
         }
 
-        $location = '';
-        $callPoint = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)[2] ?? null;
-        if ($callPoint && isset($callPoint['file'], $callPoint['line'])) {
-            $location = sprintf(' use near %s on line %s', $callPoint['file'], $callPoint['line']);
-        }
-        trigger_error(
-            sprintf(
-                'the use of SeaTableApi->response_object_to_array is deprecated since 0.1.4%s; there is no replacement.',
-                $location
-            ),
-            E_USER_DEPRECATED
+        $location = Php::callSite(2);
+        Php::triggerDeprecation(
+            '0.1.4',
+            'SeaTableApi->response_object_to_array = true is deprecated and will be removed in a future version. Near %s on line %s',
+            $location['file'],
+            $location['line']
         );
 
         return json_decode($jsonText, true);
@@ -299,11 +287,11 @@ class RestCurlClientEx
             throw new Exception($message, -1);
         }
 
-        $this->api->response_info = $response_info = curl_getinfo($this->handle);
+        $this->apiStateEx->response_info = $response_info = curl_getinfo($this->handle);
         $code = (int) $response_info['http_code'];
 
-        $this->api->seatable_code = $seatable_code = $code;
-        $this->api->seatable_status = $seatable_status = self::$seatable_status_message[$code] ?? 'UNKNOWN';
+        $this->apiStateEx->seatable_code = $seatable_code = $code;
+        $this->apiStateEx->seatable_status = $seatable_status = self::$seatable_status_message[$code] ?? 'UNKNOWN';
 
         // weitere fehlermeldungen von https://docs.seatable.io/published/seatable-api/home.md
 
