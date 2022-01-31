@@ -23,7 +23,7 @@ $config = [
         ],
     ],
     "require" => [
-        $package => "dev-" . rtrim(`git rev-parse --abbrev-ref HEAD`) . "#" . rtrim(`git show-ref --hash --verify HEAD`),
+        $package => "dev-" . rtrim(`if [ "\${b=$(git rev-parse --abbrev-ref HEAD)}" = HEAD ]; then echo 'main'; else echo "\$b"; fi`) . "#" . rtrim(`git show-ref --hash --verify HEAD`),
     ],
     "config" => [
         "platform" => [
@@ -46,9 +46,9 @@ assert(0 === $status);
 assert(copy(__DIR__ . '/consumer.php', $buildDir . '/consumer.php'));
 
 passthru(sprintf('exec %s %s/consumer.php', escapeshellarg('php7.0'), escapeshellarg($buildDir)), $status);
-assert(0 === $status, "$status");
+assert(0 === $status, (string) $status);
 
 passthru(sprintf('exec %s %s/consumer.php', escapeshellarg('php5.6'), escapeshellarg($buildDir)), $status);
-assert(255 === $status, "$status");
+assert(255 === $status, (string) $status);
 
 echo "OK. all tests have successfully passed.\n";

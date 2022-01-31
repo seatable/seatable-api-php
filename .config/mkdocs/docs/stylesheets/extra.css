@@ -53,3 +53,16 @@
 .md-nav__item {
   padding-left: 16px;
 }
+
+article.md-typeset ul + hr {
+  margin: 0;
+}
+
+article.md-typeset ul + hr + ul {
+  margin-top: 0;
+}
+
+article.md-typeset ul:not(:last-of-type) + hr {
+  position: relative;
+  top: -0.5em;
+}
