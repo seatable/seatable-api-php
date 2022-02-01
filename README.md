@@ -93,8 +93,8 @@ $seatable->getBaseAccessToken(
 * `sysAdminAddUser(string $email, string $name, string $password, string $role = 'default')`
 * `sysAdminSearchUser(string $query)`
 * `sysAdminUpdateUser(string $email, array $changes = [])`
-* `activateUser($email)`
-* `deactivateUser($email)`
+* `activateUser(string $email)`
+* `deactivateUser(string $email)`
 * `sysAdminDeleteUser(string $email)`
 
 #### Workspace Functions (Admin)
@@ -120,8 +120,8 @@ $seatable->getBaseAccessToken(
 
 #### Functions to Work with a Base (Table Data)
 
-* `listRowsByView($table_name, $view_name = '')`
-* `appendRow($table_name, $row)`
+* `listRowsByView(string $tableName, string $viewName = null)`
+* `appendRow(string $tableName, array $row)`
 * `getBaseMetadata()`
 
 More functions will be added in the future. If you want to get a feeling about the usage of the functions, please have a look at the examples in the `doc` folder.

@@ -6,6 +6,7 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [Change of Pagination Parameter Order (0.2.0)](#change-of-pagination-parameter-order-020)
 * [End of PHP 7.0 and PHP 7.1 support (0.2.0)](#end-of-php-70-and-php-71-support-020)
 
 ---
@@ -22,6 +23,23 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
 * [Deprecations (0.x.x)](#deprecations-0xx)
 * [Public Interface](#public-interface)
+
+### Change of Pagination Parameter Order (0.2.0)
+
+Version 0.2.0 corrects the non-intuitive order of the two pagination parameters (page and page size). Now first is the page number (`int $page`) and then size per page (`int $perPage`).
+
+These parameters always were with default values and the default values have not been changed.
+
+Otherwise, this is a backwards incompatible change, and it is without any additional deprecation or warning message.
+
+Affected methods are:
+
+1. `\SeaTable\SeaTableApi\SeaTableApi::listUsers`
+2. `\SeaTable\SeaTableApi\SeaTableApi::listDailyActiveUsers`
+3. `\SeaTable\SeaTableApi\SeaTableApi::listOrganizations`
+4. `\SeaTable\SeaTableApi\SeaTableApi::listOrgUsers`
+5. `\SeaTable\SeaTableApi\SeaTableApi::listOrgBases`
+6. `\SeaTable\SeaTableApi\SeaTableApi::listAllSystemNotifications`
 
 ### End of PHP 7.0 and PHP 7.1 support (0.2.0)
 
