@@ -429,13 +429,13 @@ class SeaTableApi
     /**
      * Get Base Access Token via Auth Token
      *
-     * @param int $workspaceID Workspace ID
+     * @param int $workspaceId Workspace ID
      * @param string $name Table Name
      * @return object
      */
-    public function getTableAccessToken(int $workspaceID, string $name)
+    public function getTableAccessToken(int $workspaceId, string $name)
     {
-        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceID . '/dtable/' . rawurlencode($name) . '/access-token/';
+        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceId . '/dtable/' . rawurlencode($name) . '/access-token/';
         $o = $this->restCurlClientEx->get($request);
         $this->restCurlClientEx->access_token = $o->access_token;
         $this->dtable_uuid = $o->dtable_uuid;
