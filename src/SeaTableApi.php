@@ -603,11 +603,107 @@ class SeaTableApi
      */
     public function importDTable($workspace_id, $dtable_file)
     {
-        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspace_id . '/import-dtable/';
+        $request = $this->seatable_url . '/api/v2.1/workspace/' . ((int) $workspace_id) . '/import-dtable/';
 
-        $curl_file = new \CURLFile(realpath($dtable_file));
-        $form_fields = ['dtable' => $curl_file];
+        $form_fields = ['dtable' => $this->restCurlClientEx->curlFile($dtable_file)];
 
         return $this->restCurlClientEx->post($request, $form_fields);
+    }
+
+    /**
+     * Upload/Update User Avatar
+     * @link https://api.seatable.io/#137dc28b-0f0d-4f18-8e33-993946811ec6
+     * @param string $path to image file
+     * @return object
+     */
+    public function updateAvatar(string $path)
+    {
+        $request = $this->seatable_url . '/api/v2.1/user-avatar/';
+
+        $curlFile = $this->restCurlClientEx->curlFile($path);
+
+        return $this->restCurlClientEx->post($request, ['avatar' => $curlFile]);
+    }
+
+    /**
+     * Add A Group
+     * @link https://api.seatable.io/#4fd4ab0b-1ea8-413a-bb50-bd8a982f1f54
+     * @param int $orgId
+     * @param string $groupName
+     * @param string $groupOwner
+     * @return object
+     */
+    public function addGroup(int $orgId, string $groupName, string $groupOwner)
+    {
+        $request = $this->seatable_url . '/api/v2.1/org/' . $orgId . '/admin/groups/';
+
+        return $this->restCurlClientEx->post($request, [
+            'group_name' => $groupName,
+            'group_owner' => $groupOwner,
+        ]);
+    }
+
+    /**
+     * Add a Member to a Group (Batch Add Members to A Group)
+     * @link https://api.seatable.io/#277fa732-b785-4933-859b-1f36487ade96
+     * @param int $orgId
+     * @param int $groupId
+     * @param string $email
+     * @return object
+     */
+    public function addGroupMember(int $orgId, int $groupId, string $email)
+    {
+        $request = $this->seatable_url . '/api/v2.1/org/' . $orgId . '/admin/groups/' . $groupId . '/members/';
+
+        return $this->restCurlClientEx->post($request, [
+            'email' => $email,
+        ]);
+    }
+
+    /**
+     * Create A Base API Token
+     * @link https://api.seatable.io/#1866e49a-1eb4-4865-9fef-fc28b111c787
+     * @param int $workspaceId
+     * @param string $baseName
+     * @param string $appName
+     * @param string $permission
+     * @return object
+     */
+    public function createBaseApiToken(int $workspaceId, string $baseName, string $appName, string $permission = "r")
+    {
+        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceId . '/dtable/' . rawurlencode($baseName) . '/api-tokens/';
+        return $this->restCurlClientEx->post($request, [
+            'app_name' => $appName,
+            'permission' => $permission,
+        ]);
+    }
+
+    /**
+     * Add A Plugin
+     * @link https://api.seatable.io/#e4fb06bd-17af-4dc4-9098-221c293cf9e0
+     * @param string $path
+     * @return object
+     */
+    public function addPlugin(string $path)
+    {
+        $request = $this->seatable_url . '/api/v2.1/admin/dtable-system-plugins/';
+
+        $curlFile = new \CURLFile(realpath($path));
+
+        return $this->restCurlClientEx->post($request, [
+            'plugin' => $curlFile,
+        ]);
+    }
+
+    /**
+     * Delete All Notifications
+     * @link https://api.seatable.io/#e7803745-e90d-49c7-b41e-790a317b9860
+     * @return object
+     */
+    public function deleteAllNotifications()
+    {
+        $request = $this->seatable_url . '/api/v2.1/notifications/';
+
+        return $this->restCurlClientEx->delete($request);
     }
 }

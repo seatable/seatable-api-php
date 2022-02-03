@@ -247,6 +247,30 @@ class RestCurlClientEx
     }
 
     /**
+     * create a \CURLFile from a path
+     *
+     * @param string $path
+     * @return \CURLFile
+     */
+    public function curlFile(string $path): \CURLFile
+    {
+        $realPath = realpath($path);
+        if (false === $realPath) {
+            throw new \InvalidArgumentException(
+                sprintf('failed to resolve file path: "%s"', $path)
+            );
+        }
+
+        if (!is_file($realPath) || !is_readable($realPath)) {
+            throw new \InvalidArgumentException(
+                sprintf('not a readable file: "%s"', $path)
+            );
+        }
+
+        return new \CURLFile($realPath);
+    }
+
+    /**
      * Decode answer to object format instead of json
      *
      * @param string $jsonText encoded response
