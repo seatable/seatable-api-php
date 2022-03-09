@@ -540,10 +540,7 @@ class SeaTableApi
     public function addOrgUser($org_id, $email, $pass, $name = "")
     {
         $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/';
-        if ($name === "") {
-            $name_arr = explode("@", $email);
-            $name = $name[0];
-        }
+        '' === $name && $name = (string)strtok($email, '@');
         $user = [
             'email' => $email,
             'name' => $name,
