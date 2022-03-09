@@ -24,7 +24,7 @@ Please see [the notes on upgrading](UPGRADING.md), especially for upgrading from
 
 ## Usage
 
-#### Establish the Connection
+### Establish the Connection
 
 ```php
 <?php declare(strict_types=1);
@@ -46,7 +46,7 @@ $seatable = new SeaTableApi([
 echo $seatable->ping();
 ```
 
-#### Get Access to a Base
+### Get Access to a Base
 
 SeaTable requires an additional authentication to get access to a specific base. There are two variants to obtain access. You can either:
 
@@ -84,13 +84,15 @@ $seatable->getDTableAccessToken(
 // ...
 ```
 
+### Functions
+
 #### Admin Functions (User)
 
 * `listUsers($per_page = 25, $page = 1)`
 * `getTotalUsers()`
 * `addUser($email, $name, $password, $role = 'default')`
 * `searchUser($query)`
-* `updateUser($email, $changes)`
+* `updateUser($email, $changes = [])`
 * `activateUser($email)`
 * `deactivateUser($email)`
 * `deleteUser($email)`
@@ -104,32 +106,33 @@ $seatable->getDTableAccessToken(
 
 #### Teammanagement Functions (Admin)
 
-> **Note:** On the webpage SeaTable always talks about *teams*. The technical terms that is used within the API documentation and manual is *organization*.
+> **Note:** On the webpage SeaTable always talks about *teams*. The technical term that is used within the API documentation and manual is *organization*.
 
 * `listOrganizations($per_page = 25, $page = 1)`
 * `addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)`
 * `deleteOrganization($org_id)`
 * `updateOrganization($org_id, $org_changes = [])`
 * `listOrgUsers($org_id, $is_staff = true, $per_page = 25, $page = 1)`
-* `addOrgUser($org_id, $email, $pass, $name = "")`
+* `addOrgUser($org_id, $email, $pass, $name = '')`
 * `deleteOrgUser($org_id, $email)`
 * `listOrgGroups($org_id)`
 * `listOrgBases($org_id, $per_page = 25, $page = 1)`
 
 #### Functions to Work with a Base (Table Data)
 
-* `listRowsByView($table_name, $view_name = "")`
+* `listRowsByView($table_name, $view_name = '')`
 * `appendRow($table_name, $row)`
-* `getDtableMetadata()`
+* `getDTableMetadata()`
 * `getColumnsFromTable($table_name)`
 
 More functions will be added in the future. If you want to get a feeling about the usage of the functions, please have a look at the examples in the `doc` folder.
 
 ## Common Mistakes
 
-#### There are two kind of Email-Addresses in SeaTable
+### There are two kind of Email-Addresses in SeaTable
 
 There are two kind of email-addresses in SeaTable. Please don't be confused with the property `email`. There are two email addresses in SeaTable. Let's have a look at the user object in SeaTable:
+
 ```
 {
     "data": [
@@ -144,6 +147,6 @@ There are two kind of email-addresses in SeaTable. Please don't be confused with
 }
 ```
 
-SeaTable creates for every user an unique identifier in form of an email address in the form of `1ef456ab715841cc81b145b2530c2904@auth.local`. This unique identifier is used by the api calls to identify a user like in `deleteOrgUser()`.
+SeaTable creates for every user a unique identifier in form of an email address in the form of `1ef456ab715841cc81b145b2530c2904@auth.local`. This unique identifier is used by the API calls to identify a user like in `deleteOrgUser()`.
 
 On the other hand a user registers with an email address for SeaTable. In this example this email is `jane@example.com`. This is the *`contact_email`* and only relevant for the authentication.
