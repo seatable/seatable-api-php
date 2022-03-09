@@ -313,22 +313,32 @@ class SeaTableApi
         return $this->restCurlClientEx->put($request, $changes);
     }
 
+    /**
+     * Activate User {@unfit}
+     *
+     * @deprecated since 0.1.13, use `SeaTableApi::updateUser($email, ['is_active' => 'true'])`; {@see SeaTableApi::updateUser}
+     *
+     * @param string $email
+     * @return object
+     */
     public function activateUser($email)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/' . $email . '/';
-        $form = [
-            'is_active' => "true",
-        ];
-        return $this->restCurlClientEx->put($request, $form);
+        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::updateUser(\$email, ['is_active' => 'true']) instead");
+        return $this->updateUser($email, ['is_active' => 'true']);
     }
 
+    /**
+     * Deactivate User {@unfit}
+     *
+     * @deprecated since 0.1.13, use `SeaTableApi::updateUser($email, ['is_active' => 'false'])`; {@see SeaTableApi::updateUser}
+     *
+     * @param string $email
+     * @return object
+     */
     public function deactivateUser($email)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/' . $email . '/';
-        $form = [
-            'is_active' => "false",
-        ];
-        return $this->restCurlClientEx->put($request, $form);
+        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::updateUser(\$email, ['is_active' => 'false']) instead");
+        return $this->updateUser($email, ['is_active' => 'false']);
     }
 
     // (admin only)

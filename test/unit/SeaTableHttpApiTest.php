@@ -467,6 +467,36 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->assertInstanceOf(stdClass::class, $api->getTableAccessToken(1, 'Test-Base'));
     }
 
+    public function testUpdateUser()
+    {
+        $this->mockAuthToken();
+        $this->mockUpdateUser();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->assertIsObject($api->updateUser('123456786569491ba42905bf1647fd3f@auth.local'));
+    }
+
+    /**
+     * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php
+     * @return void
+     */
+    public function testActivateDeactivateUserDeprecation()
+    {
+        $this->mockAuthToken();
+        $this->mockUpdateUser();
+        $this->http->setUp();
+        $api = new SeaTableApi($this->getOptions());
+
+        $this->assertIsObject(@$api->activateUser('123456786569491ba42905bf1647fd3f@auth.local'));
+        $this->assertIsObject(@$api->deactivateUser('123456786569491ba42905bf1647fd3f@auth.local'));
+
+        $this->expectDeprecationMessage('Since seatable/seatable-api-php 0.1.13: SeaTableApi::activateUser() is deprecated, use SeaTableApi::updateUser($email, [\'is_active\' => \'true\']) instead.');
+        $this->expectDeprecation();
+
+        $this->assertIsObject($api->activateUser('123456786569491ba42905bf1647fd3f@auth.local'));
+    } // @codeCoverageIgnore
+
     /**
      * stub initial auth request
      */
@@ -545,6 +575,36 @@ class SeaTableHttpApiTest extends ServerMockTestCase
                 ->pathIs('/api/v2.1/workspace/1/dtable/Test-Base/access-token/')
                 ->then()
                 ->body('{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDM1MzQ1MTgsImR0YWJsZV91dWlkIjoiMjg0Nzg5NTctNGExNy00ZTI1LTk0OGQtZTVhNTliOGE4NmM1IiwidXNlcm5hbWUiOiI4OTFlNDIyMmI3YmI0MzhlYWYzZmRmNTlkMDM0OGUyZUBhdXRoLmxvY2FsIiwiaWRfaW5fb3JnIjoiIiwicGVybWlzc2lvbiI6InJ3In0.lYk7OZWuw9Wxa8aoAealjQE4rLFKdCwpfORnDKBJEcs","dtable_uuid":"28478957-4a17-4e25-948d-e5a59b8a86c5","dtable_server":"http://localhost/dtable-server/","dtable_socket":"http://localhost/"}')
+                ->end() instanceof MockBuilder
+        );
+    }
+
+    /**
+     * stub update user request for activation
+     */
+    private function mockUpdateUser()
+    {
+        self::assertSame('1', ini_get('zend.assertions'));
+        assert(
+            $this->http->mock
+                ->when()
+                ->methodIs('PUT')
+                ->pathIs('/api/v2.1/admin/users/123456786569491ba42905bf1647fd3f@auth.local/')
+                ->then()
+                ->body('{
+  "email": "123456786569491ba42905bf1647fd3f@auth.local",
+  "name": "Jasmin Tee",
+  "contact_email": "jasmin@example.com",
+  "login_id": "",
+  "id_in_org": "013",
+  "is_staff": false,
+  "is_active": true,
+  "org_id": 1,
+  "org_name": "Team SeaTable",
+  "create_time": "2020-11-18T12:30:31+00:00",
+  "role": "default",
+  "update_status_tip": ""
+}')
                 ->end() instanceof MockBuilder
         );
     }
