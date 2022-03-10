@@ -122,8 +122,7 @@ $seatable->getDTableAccessToken(
 
 * `listRowsByView($table_name, $view_name = '')`
 * `appendRow($table_name, $row)`
-* `getDTableMetadata()`
-* `getColumnsFromTable($table_name)`
+* `getBaseMetadata()`
 
 More functions will be added in the future. If you want to get a feeling about the usage of the functions, please have a look at the examples in the `doc` folder.
 

@@ -479,25 +479,39 @@ class SeaTableApi
         return $this->restCurlClientEx->put($request, $new_row);
     }
 
-    public function getDTableMetadata()
+    /**
+     * Get Base Metadata
+     *
+     * @group Base Operations / Bases Infos
+     * @link https://api.seatable.io/#0ba333a2-7450-4b03-8efb-6c49d6b47a0e
+     *
+     * @return object
+     */
+    public function getBaseMetadata()
     {
         $request = $this->seatable_url . '/dtable-server/api/v1/dtables/' . $this->dtable_uuid . '/metadata/';
-        return $this->restCurlClientEx->get($request)->metadata;
+        return $this->restCurlClientEx->get($request);
     }
 
+    /**
+     * @deprecated since 0.1.14, use `SeaTableApi::getBaseMetadata()->metadata`; {@see SeaTableApi::getBaseMetadata}
+     * @return object
+     */
+    public function getDTableMetadata()
+    {
+        Php::triggerMethodDeprecation('0.1.14', 'use SeaTableApi::getBaseMetadata()->metadata instead');
+        return $this->getBaseMetadata()->metadata;
+    }
+
+    /**
+     * @deprecated since 0.1.14, use `array_column(SeaTableApi::getBaseMetadata()->metadata->tables, null, 'name')[$table_name] ?? null`; {@see SeaTableApi::getBaseMetadata}
+     * @param string $table_name
+     * @return object
+     */
     public function getColumnsFromTable($table_name)
     {
-        $request = $this->seatable_url . '/dtable-server/api/v1/dtables/' . $this->dtable_uuid . '/metadata/';
-        $metadata = $this->restCurlClientEx->get($request);
-
-        $item = null;
-        foreach ($metadata->metadata->tables as $struct) {
-            if ($table_name === $struct->name) {
-                $item = $struct;
-                break;
-            }
-        }
-        return $item;
+        Php::triggerMethodDeprecation('0.1.14', "use array_column(SeaTableApi::getBaseMetadata()->metadata->tables, null, 'name')[\$table_name] ?? null instead");
+        return array_column($this->getBaseMetadata()->metadata->tables, null, 'name')[$table_name] ?? null;
     }
 
     public function listDailyActiveUsers($date = '2020-08-12+00:00:00', $per_page = 5000, $page = 1)
