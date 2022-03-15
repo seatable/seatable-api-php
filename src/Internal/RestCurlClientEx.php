@@ -26,7 +26,7 @@ use stdClass;
  *
  * @internal
  */
-class RestCurlClientEx
+final class RestCurlClientEx
 {
     /**
      * @var stdClass
@@ -35,14 +35,14 @@ class RestCurlClientEx
 
     /**
      * @var string
-     * @see \SeaTable\SeaTableApi\SeaTableApi::getAuthToken
+     * @see \SeaTable\SeaTableApi\SeaTableApi::getAuthToken()
      * @internal
      */
     public $seatable_token;
 
     /**
      * @var string
-     * @see \SeaTable\SeaTableApi\SeaTableApi::getDtableToken
+     * @see \SeaTable\SeaTableApi\SeaTableApi::getDTableAccessToken()
      * @internal
      */
     public $access_token;
@@ -62,7 +62,7 @@ class RestCurlClientEx
      * cUrl response
      *
      * string if {@see curl_exec()} returns transport ({@see CURLOPT_RETURNTRANSFER} enabled in
-     * ctor {@see self::__construct}, default mode of operation)
+     * ctor {@see RestCurlClientEx::__construct()}, default mode of operation)
      *
      * @var bool|string
      */
