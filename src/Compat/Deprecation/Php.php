@@ -93,9 +93,11 @@ final class Php
 
         self::triggerDeprecation(
             $since,
-            '%s() is deprecated%s %s on line %d',
+            "%s() is deprecated%s %s on line %d\nPHP Deprecated:  At %s on line %d and triggered",
             $method,
-            $reason ? ", $reason. In" : ' in',
+            $reason ? ", $reason in" : ' in',
+            $callSite['file'],
+            $callSite['line'],
             $callSite['file'],
             $callSite['line']
         );
