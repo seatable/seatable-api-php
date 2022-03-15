@@ -267,12 +267,15 @@ class SeaTableApi
 
     /**
      * (admin only)
+     *
+     * @deprecated since 0.1.15, use `SeaTableApi::listUsers(1, 1)->total_count`; {@see SeaTableApi::listUsers}
+     *
      * @return int
      */
     public function getTotalUsers()
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/?per_page=1&page=1';
-        return $this->restCurlClientEx->get($request)->total_count;
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::listUsers(1, 1)->total_count instead");
+        return $this->listUsers(1, 1)->total_count;
     }
 
     /**
@@ -350,19 +353,37 @@ class SeaTableApi
     }
 
     /**
+     * List Workspaces
+     *
+     * @group User / Workspaces
+     * @link https://api.seatable.io/#bb823388-ccfb-4dc2-bb01-5eb81acb6683
+     *
+     * @return object
+     */
+    public function listWorkspaces()
+    {
+        $request = "$this->seatable_url/api/v2.1/workspaces/";
+        return $this->restCurlClientEx->get($request);
+    }
+
+    /**
      * List all workspaces
      * @return array
+     * @deprecated since 0.1.15, use `SeaTableApi::listWorkspaces()->workspace_list` {@see SeaTableApi::listWorkspaces}
      */
     public function listAllWorkspaces()
     {
-        $request = $this->seatable_url . '/api/v2.1/workspaces/';
-        return $this->restCurlClientEx->get($request)->workspace_list;
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::listWorkspaces()->workspace_list instead");
+        return $this->listWorkspaces()->workspace_list;
     }
 
+    /**
+     * @deprecated since 0.1.15, use `SeaTableApi::listWorkspaces()->starred_dtable_list` {@see SeaTableApi::listWorkspaces}
+     */
     public function listStarredWorkspaces()
     {
-        $request = $this->seatable_url . '/api/v2.1/workspaces/';
-        return $this->restCurlClientEx->get($request)->starred_dtable_list;
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::listWorkspaces()->starred_dtable_list instead");
+        return $this->listWorkspaces()->starred_dtable_list;
     }
 
     public function updateDTable($workspace_id, $dtable_name, $changes = [])
@@ -597,13 +618,42 @@ class SeaTableApi
         return $this->restCurlClientEx->get($request);
     }
 
-    public function getOrgInfo($org_id)
+    /**
+     * Get a Team
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#bf22f375-4eba-4fe4-ba09-fe8082dc5fd6
+     *
+     * @param int $id
+     * @return object
+     */
+    public function sysAdminGetTeam(int $id)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/';
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/";
         return $this->restCurlClientEx->get($request);
     }
 
-    public function addASystemNotificationToAUser($msg, $username)
+    /**
+     * @deprecated since 0.1.15, use `SeaTableApi::sysAdminGetTeam()` {@see SeaTableApi::sysAdminGetTeam}
+     */
+    public function getOrgInfo($org_id)
+    {
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::sysAdminGetTeam() instead");
+        return $this->sysAdminGetTeam($org_id);
+    }
+
+    /**
+     * Add System Notification to User
+     *
+     * @group System admin / System Notifications
+     * @link https://api.seatable.io/#65927c78-d524-456e-aaa8-674019b5bd98
+     *
+     * @param string $msg
+     * @param string $username
+     *
+     * @return object
+     */
+    public function addSystemNotificationToUser(string $msg, string $username)
     {
         $request = $this->seatable_url . '/api/v2.1/admin/sys-user-notifications/';
         $body = [
@@ -611,6 +661,15 @@ class SeaTableApi
             'username' => $username,
         ];
         return $this->restCurlClientEx->post($request, $body);
+    }
+
+    /**
+     * @deprecated since 0.1.15, use `SeaTableApi::addSystemNotificationToUser()`; {@see SeaTableApi::addSystemNotificationToUser}
+     */
+    public function addASystemNotificationToAUser($msg, $username)
+    {
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::addSystemNotificationToUser() instead");
+        return $this->addSystemNotificationToUser($msg, $username);
     }
 
     public function listAllSystemNotifications($per_page = 25, $page = 1)
