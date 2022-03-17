@@ -18,67 +18,79 @@ use SeaTable\SeaTableApi\Internal\ApiOptionsException as Exception;
 final class ApiOptions
 {
     /**
-     * @var string
+     * @var ConnectOptions
      */
-    private $url;
+    private $connectOptions;
 
     /**
-     * @var string
+     * @param array{url: string, user: string, password: string, port?: int, base_api_token?: string, base_app_name?: string, api_token?: string} $options
+     * @return ApiOptions
      */
-    private $user;
-
-    /**
-     * @var string
-     */
-    private $pass;
-
-    /**
-     * @var array
-     */
-    private $curlHttpOptions;
-
     public static function createFromArray(array $options): ApiOptions
     {
-        if (!empty($options['url']) && (!filter_var($options['url'], FILTER_VALIDATE_URL) || !in_array(parse_url($options['url'], PHP_URL_SCHEME), ['http', 'https'], true))) {
-            throw new Exception("SeaTable URL is missing or bad URL format");
+        if (empty($options['url']) || (!filter_var($options['url'], FILTER_VALIDATE_URL) || !in_array(parse_url($options['url'], PHP_URL_SCHEME), ['http', 'https'], true))) {
+            throw new Exception("SeaTable URL is missing or bad URL format.");
+        }
+        if (isset($options['port'])) {
+            throw new Exception(sprintf('SeaTable old option "port" found: %d (url is: %s), use port in "url" if you need it.', $options['port'], $options['url']));
+        }
+        $connectOptions = new ConnectOptions();
+        $connectOptions->url = $options['url'];
+
+
+        // (A) email + passwort
+        if (
+            (empty($options['user']) && !empty($options['password']))
+            || !is_string($options['user'] ?? '')
+        ) {
+            throw new Exception("SeaTable user is missing or has a bad format.");
+        }
+        if (
+            (!empty($options['user']) && empty($options['password']))
+            || !is_string($options['password'] ?? '')
+        ) {
+            throw new Exception("SeaTable password is missing or has bad format.");
+        }
+        $connectOptions->user = $options['user'] ?? null;
+        $connectOptions->password = $options['password'] ?? null;
+
+        // (B) base-api-token
+        if (!is_string($options['base_api_token'] ?? '')) {
+            throw new Exception("SeaTable base api-token has bad format.");
+        }
+        if (!is_string($options['base_app_name'] ?? '')) {
+            throw new Exception("SeaTable base api-token has bad format.");
+        }
+        $connectOptions->baseApiToken = $options['base_api_token'] ?? null;
+        $connectOptions->baseAppName = $options['base_app_name'] ?? null;
+
+        // (C) authentication-api-token
+        if (!is_string($options['auth_token'] ?? $options['api_token'] ?? '')) {
+            throw new Exception("SeaTable api authentication token has bad format.");
+        }
+        $connectOptions->authToken = $options['auth_token'] ?? $options['api_token'] ?? null;
+
+
+        $authTypes = new \stdClass();
+        $authTypes->user = isset($connectOptions->user, $connectOptions->password);
+        $authTypes->apiToken = isset($connectOptions->baseApiToken);
+        $authTypes->authToken = isset($connectOptions->authToken);
+        if (!($authTypes->user || $authTypes->apiToken || $authTypes->authToken)) {
+            throw new Exception("SeaTable user is missing or has a bad format.");
         }
 
-        if (!empty($options['port']) && !is_int($options['port'])) {
-            throw new Exception("SeaTable port must be a number");
-        }
-
-        if (!empty($options['port']) && is_int($options['port']) && $options['port'] !== 443) {
-            $url = $options['url'] . ':' . (int) $options['port'];
-        } else {
-            $url = $options['url'];
-        }
-
-        if (!empty($options['user'])) {
-            $user = strtolower(trim(preg_replace('/\\s+/', '', $options['user'])));
-        } else {
-            throw new Exception("SeaTable user is missing or has a bad format");
-        }
-
-        if (!empty($options['password'])) {
-            $password = $options['password'];
-        } else {
-            throw new Exception("SeaTable user password is required");
-        }
 
         if (isset($options['http_options']) && !is_array($options['http_options'])) {
-            throw new Exception("SeaTable http_options must be an array");
+            throw new Exception("SeaTable http_options must be an array.");
         }
-        $http_options = $options['http_options'] ?? null;
+        $connectOptions->curlHttpOptions = $options['http_options'] ?? null;
 
-        return new self($url, $user, $password, $http_options);
+        return new self($connectOptions);
     }
 
-    public function __construct(string $url, string $user, string $password, array $curlHttpOptions = null)
+    public function __construct(ConnectOptions $connectOptions)
     {
-        $this->url = $url;
-        $this->user = $user;
-        $this->pass = $password;
-        $this->curlHttpOptions = $curlHttpOptions ?? [];
+        $this->connectOptions = $connectOptions;
     }
 
     /**
@@ -86,7 +98,7 @@ final class ApiOptions
      */
     public function getUrl(): string
     {
-        return $this->url;
+        return $this->connectOptions->url;
     }
 
     /**
@@ -94,7 +106,7 @@ final class ApiOptions
      */
     public function getUser(): string
     {
-        return $this->user;
+        return $this->connectOptions->user;
     }
 
     /**
@@ -102,7 +114,7 @@ final class ApiOptions
      */
     public function getPassword(): string
     {
-        return $this->pass;
+        return $this->connectOptions->password;
     }
 
     /**
@@ -110,6 +122,36 @@ final class ApiOptions
      */
     public function getHttpOptions(): array
     {
-        return $this->curlHttpOptions;
+        return $this->connectOptions->curlHttpOptions ?? [];
+    }
+
+    public function authIsUser(): bool
+    {
+        return isset($this->connectOptions->user, $this->connectOptions->password);
+    }
+
+    public function authIsApi(): bool
+    {
+        return isset($this->connectOptions->baseApiToken);
+    }
+
+    public function authIsToken(): bool
+    {
+        return isset($this->connectOptions->authToken);
+    }
+
+    public function getBaseApiToken(): ?string
+    {
+        return $this->connectOptions->baseApiToken;
+    }
+
+    public function getBaseAppName(): ?string
+    {
+        return $this->connectOptions->baseAppName;
+    }
+
+    public function getAuthToken(): ?string
+    {
+        return $this->connectOptions->authToken;
     }
 }

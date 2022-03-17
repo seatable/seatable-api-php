@@ -24,27 +24,9 @@ Please see [the notes on upgrading](UPGRADING.md), especially for upgrading from
 
 ## Usage
 
-### Establish the Connection
+!!! tldr "More connection options"
 
-```php
-<?php declare(strict_types=1);
-
-// setting up autoloader
-require_once __DIR__ . '/vendor/autoload.php';
-
-// use SeaTable api class
-use SeaTable\SeaTableApi\SeaTableApi;
-
-// init and obtain auth token
-$seatable = new SeaTableApi([
-    'url'       => 'https://cloud.seatable.io',
-    'user'      => 'YOUR-EMAIL',
-    'password'  => 'YOUR-PASSWORD'
-]);
-
-// start using the available api calls
-echo $seatable->ping();
-```
+    Please see [_Establish the Connection_](doc/establish-the-connection.md) for an overview of all connection options, the following example is for getting started.
 
 ### Get Access to a Base
 

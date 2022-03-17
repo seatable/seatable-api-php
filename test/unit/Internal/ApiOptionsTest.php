@@ -17,21 +17,17 @@ class ApiOptionsTest extends TestCase
 {
     public function testCreation()
     {
-        $options = new ApiOptions('url', 'user', 'password');
+        $connectOptions = new ConnectOptions();
+        $connectOptions->url = 'url';
+        $connectOptions->user = 'user';
+        $connectOptions->password = 'password';
+        $options = new ApiOptions($connectOptions);
         self::assertInstanceOf(ApiOptions::class, $options);
 
-        $options = new ApiOptions('url', 'user', 'password', ['foo' => 'bar']);
+        $connectOptions->curlHttpOptions =  ['foo' => 'bar'];
+        $options = new ApiOptions($connectOptions);
         self::assertInstanceOf(ApiOptions::class, $options);
     }
-
-    public function testCreateFromArrayError()
-    {
-        $this->expectNoticeMessageMatches(
-            sprintf('~^\QUndefined index: %1$s\E|\QUndefined array key "%1$s"\E$~', 'url')
-        );
-        $this->expectNotice();
-        ApiOptions::createFromArray([]);
-    } // @codeCoverageIgnore
 
     /**
      * @return Generator
@@ -50,7 +46,7 @@ class ApiOptionsTest extends TestCase
         $minimal_ok = ['url' => 'https://api.example.net'] + $minimal;
 
         yield 'optional port' => [$minimal_ok + [
-                'port' => '8080',
+                'port' => 8080,
         ]];
 
         yield 'optional http_options' => [$minimal_ok + [
@@ -85,8 +81,8 @@ class ApiOptionsTest extends TestCase
             'password' => 'password',
         ]];
 
-        yield 'optional port' => [$minimal + [
-            'port' => 8080,
+        yield 'optional user (new)' => [$minimal + [
+            'user' => null,
         ]];
 
         yield 'optional http_options' => [$minimal + [

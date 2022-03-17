@@ -47,6 +47,7 @@ markdown_extensions:
       permalink: true
       toc_depth: "1-4"
   - pymdownx.superfences
+  - pymdownx.details
 
 # Page tree
 nav:
@@ -55,5 +56,7 @@ nav:
   - Examples:
     - Add a new Column to a Base: doc/add-new-column-to-base.md
     - Get Content from a Base: doc/get-content-from-a-base.md
+  - Topics:
+    - doc/establish-the-connection.md
   - SeaTable API Docs: 'https://api.seatable.io'
   - SeaTable Homepage: 'https://seatable.io/'

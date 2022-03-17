@@ -30,7 +30,7 @@ class SeaTableApi
     /**
      * Instantiate SeaTable class
      *
-     * @param array{url: string, user: string, password: string, port?: int} $options
+     * @param array{url: string, user: string, password: string, port?: int, base_api_token?: string, base_app_name?: string, api_token?: string} $options
      * @throws Exception
      */
     public function __construct(array $options = [])
@@ -43,10 +43,43 @@ class SeaTableApi
 
         $this->restCurlClientEx = new RestCurlClientEx($apiOptions->getHttpOptions());
 
-        /*
-         * Return seatable token
-         */
-        $this->getAuthToken($apiOptions->getUser(), $apiOptions->getPassword());
+        $this->authenticate($apiOptions);
+    }
+
+    /**
+     * authenticate based on options
+     *
+     * @param ApiOptions $options
+     * @return void
+     */
+    private function authenticate(ApiOptions $options): void
+    {
+        if ($options->authIsUser()) {
+            // $this->restCurlClientEx->seatable_token
+            // 2.1 'Authorization: Token ' . $this->seatable_token
+            $this->getAuthToken($options->getUser(), $options->getPassword());
+            return;
+        }
+
+        if ($options->authIsApi()) {
+            // $this->restCurlClientEx->access_token = $o->access_token;
+            // api/v1/dtables 'Authorization: Token ' . $this->access_token
+            $accessToken = $this->getBaseAppAccessToken($options->getBaseApiToken());
+            if (
+                (null !== $expectedAppName = $options->getBaseAppName())
+                && $accessToken->app_name !== $expectedAppName
+            ) {
+                throw new Exception(sprintf('SeaTable invalid application name: "%s"', $expectedAppName));
+            }
+            return;
+        }
+
+        if ($options->authIsToken()) {
+            $this->restCurlClientEx->seatable_token = $options->getAuthToken();
+            return;
+        }
+
+        throw new Exception('SeaTable found no authentication option.');
     }
 
     /**

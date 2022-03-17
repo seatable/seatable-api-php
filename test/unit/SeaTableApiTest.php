@@ -18,18 +18,6 @@ use SeaTable\SeaTableApi\Compat\Deprecation\PhpTest;
 class SeaTableApiTest extends TestCase
 {
     /**
-     * @uses \SeaTable\SeaTableApi\Internal\ApiOptions::createFromArray
-     */
-    public function testCreation()
-    {
-        $this->expectNoticeMessageMatches(
-            sprintf('~^\QUndefined index: %1$s\E|\QUndefined array key "%1$s"\E$~', 'url')
-        );
-        $this->expectNotice();
-        new SeaTableApi();
-    } // @codeCoverageIgnore
-
-    /**
      * @codeCoverageIgnore
      * @return array[]
      */
