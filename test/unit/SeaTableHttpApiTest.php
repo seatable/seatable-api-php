@@ -396,7 +396,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
         $api = new SeaTableApi($this->getOptions());
 
-        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getDTableAccessToken() or ::getTableAccessToken() instead in %s on line %d', __FILE__, __LINE__ + 2));
+        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getBaseAccessToken() or ::getBaseAppAccessToken() instead in %s on line %d', __FILE__, __LINE__ + 2));
         $this->expectDeprecation();
         !$api->getDTableToken([]);
     } // @codeCoverageIgnore
@@ -408,7 +408,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
         $api = new SeaTableApi($this->getOptions());
 
-        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getDTableAccessToken() instead in this case in %s on line %d', __FILE__, __LINE__ + 2));
+        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getBaseAccessToken() instead in this case in %s on line %d', __FILE__, __LINE__ + 2));
         $this->expectDeprecation();
         !$api->getDTableToken(['api_token' => '452fd5ab30de6a561460c9347f2c88036e10ad65']);
     } // @codeCoverageIgnore
@@ -431,7 +431,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
         $api = new SeaTableApi($this->getOptions());
 
-        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getTableAccessToken() instead in this case in %s on line %d', __FILE__, __LINE__ + 2));
+        $this->expectDeprecationMessage(sprintf('Since seatable/seatable-api-php 0.1.11: SeaTableApi::getDTableToken() is deprecated, use SeaTableApi::getBaseAppAccessToken() instead in this case in %s on line %d', __FILE__, __LINE__ + 2));
         $this->expectDeprecation();
         !$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']);
     } // @codeCoverageIgnore
@@ -454,7 +454,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
         $api = new SeaTableApi($this->getOptions());
 
-        $this->assertInstanceOf(stdClass::class, $api->getDTableAccessToken('452fd5ab30de6a561460c9347f2c88036e10ad65'));
+        $this->assertInstanceOf(stdClass::class, $api->getBaseAppAccessToken('452fd5ab30de6a561460c9347f2c88036e10ad65'));
     }
 
     public function testGetTableAccessToken()
@@ -464,7 +464,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
         $api = new SeaTableApi($this->getOptions());
 
-        $this->assertInstanceOf(stdClass::class, $api->getTableAccessToken(1, 'Test-Base'));
+        $this->assertInstanceOf(stdClass::class, $api->getBaseAccessToken(1, 'Test-Base'));
     }
 
     public function testUpdateUser()

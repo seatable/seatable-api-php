@@ -32,7 +32,7 @@ $seatable = new SeaTableApi([
 ]);
 
 // get access with an api-token for a base
-$seatable->getDTableAccessToken(
+$seatable->getBaseAppAccessToken(
 	$token = '1d3303315348c6b577c44709d459b33b6bac5ad1'
 );
 

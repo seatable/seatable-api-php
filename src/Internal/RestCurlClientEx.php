@@ -34,6 +34,8 @@ final class RestCurlClientEx
     private $apiStateEx;
 
     /**
+     * Auth Token
+     *
      * @var string
      * @see \SeaTable\SeaTableApi\SeaTableApi::getAuthToken()
      * @internal
@@ -41,8 +43,11 @@ final class RestCurlClientEx
     public $seatable_token;
 
     /**
+     * Base Access Token
+     *
      * @var string
-     * @see \SeaTable\SeaTableApi\SeaTableApi::getDTableAccessToken()
+     * @see \SeaTable\SeaTableApi\SeaTableApi::getBaseAppAccessToken()
+     * @see \SeaTable\SeaTableApi\SeaTableApi::getBaseAccessToken()
      * @internal
      */
     public $access_token;

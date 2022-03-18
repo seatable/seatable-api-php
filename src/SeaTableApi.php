@@ -410,16 +410,16 @@ class SeaTableApi
      *
      * @param array $input
      * @return object
-     * @deprecated use {@see SeaTableApi::getDTableAccessToken()} or {@see SeaTableApi::getTableAccessToken()}
+     * @deprecated since 0.1.11, use `SeaTableApi::getBaseAppAccessToken()` or `SeaTableApi::getBaseAccessToken()`; {@see SeaTableApi::getBaseAppAccessToken} or {@see SeaTableApi::getBaseAccessToken}
      */
     public function getDTableToken($input)
     {
         $isAppAccessToken = array_key_exists("api_token", $input);
-        $isTableAccessToken = array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input);
+        $isBaseAccessToken = array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input);
 
         $instead = [];
-        $isTableAccessToken || $instead[] = 'getDTableAccessToken';
-        $isAppAccessToken || $instead[] = 'getTableAccessToken';
+        $isBaseAccessToken || $instead[] = 'getBaseAccessToken';
+        $isAppAccessToken || $instead[] = 'getBaseAppAccessToken';
 
         Php::triggerMethodDeprecation(
             '0.1.11',
@@ -432,11 +432,11 @@ class SeaTableApi
         unset($instead);
 
         if ($isAppAccessToken) {
-            return $this->getDTableAccessToken($input['api_token']);
+            return $this->getBaseAppAccessToken($input['api_token']);
         }
 
-        if ($isTableAccessToken) {
-            return $this->getTableAccessToken($input['workspace_id'], $input['table_name']);
+        if ($isBaseAccessToken) {
+            return $this->getBaseAccessToken($input['workspace_id'], $input['table_name']);
         }
 
         throw new Exception("getDtableToken parameters are wrong: use either api_token or workspace_id + table_name");
@@ -447,30 +447,65 @@ class SeaTableApi
      *
      * @param string $apiToken API Token
      * @return object
+     *
+     * @deprecated since 0.1.16, use `SeaTableApi::getBaseAppAccessToken()`; {@see SeaTableApi::getBaseAppAccessToken}
      */
     public function getDTableAccessToken(string $apiToken)
     {
+        Php::triggerMethodDeprecation('0.1.16', 'use SeaTableApi::getBaseAppAccessToken() instead');
+        return $this->getBaseAppAccessToken($apiToken);
+    }
+
+    /**
+     * Get Base Access Token via API Token
+     *
+     * @group Authentication / Base Access Token
+     * @link https://api.seatable.io/#3b782fd2-6091-4871-acc7-2725bfc7e067
+     *
+     * @param string $apiToken
+     * @return object
+     */
+    public function getBaseAppAccessToken(string $apiToken)
+    {
         $request = $this->seatable_url . '/api/v2.1/dtable/app-access-token/';
-        $o = $this->restCurlClientEx->get($request, [], $apiToken);
-        $this->restCurlClientEx->access_token = $o->access_token;
-        $this->dtable_uuid = $o->dtable_uuid;
-        return $o;
+        $appAccessToken = $this->restCurlClientEx->get($request, [], $apiToken);
+        $this->restCurlClientEx->access_token = $appAccessToken->access_token;
+        $this->dtable_uuid = $appAccessToken->dtable_uuid;
+        return $appAccessToken;
     }
 
     /**
      * Get Base Access Token via Auth Token
      *
      * @param int $workspaceId Workspace ID
-     * @param string $name Table Name
+     * @param string $name Base Name
      * @return object
+     *
+     * @deprecated since 0.1.16, use `SeaTableApi::getBaseAccessToken()`; {@see SeaTableApi::getBaseAccessToken}
      */
     public function getTableAccessToken(int $workspaceId, string $name)
     {
-        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceId . '/dtable/' . rawurlencode($name) . '/access-token/';
-        $o = $this->restCurlClientEx->get($request);
-        $this->restCurlClientEx->access_token = $o->access_token;
-        $this->dtable_uuid = $o->dtable_uuid;
-        return $o;
+        Php::triggerMethodDeprecation('0.1.16', 'use SeaTableApi::getBaseAccessToken() instead');
+        return $this->getBaseAccessToken($workspaceId, $name);
+    }
+
+    /**
+     * Get Base Access Token via Auth Token
+     *
+     * @group Authentication / Base Access Token
+     * @link https://api.seatable.io/#7b251436-a4f1-4793-bd03-678caa32c29d
+     *
+     * @param int $workspaceId
+     * @param string $baseName
+     * @return object
+     */
+    public function getBaseAccessToken(int $workspaceId, string $baseName)
+    {
+        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceId . '/dtable/' . rawurlencode($baseName) . '/access-token/';
+        $accessToken = $this->restCurlClientEx->get($request);
+        $this->restCurlClientEx->access_token = $accessToken->access_token;
+        $this->dtable_uuid = $accessToken->dtable_uuid;
+        return $accessToken;
     }
 
     public function listRowsByView($table_name, $view_name = "")

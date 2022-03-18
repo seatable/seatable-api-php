@@ -70,12 +70,12 @@ $seatable = new SeaTableApi([
 ]);
 
 // get access with an api-token for a base
-$seatable->getTableAccessToken(
+$seatable->getBaseAccessToken(
     $token = '1d3303315348c6b566c44709d459b33b6bac5ad1'
 ]);
 
 // get access with your credentials (by workspace-id and table-name)
-$seatable->getDTableAccessToken(
+$seatable->getBaseAppAccessToken(
 	$workspaceID = 1323,
 	$name = 'Project tracker'
 ]);
