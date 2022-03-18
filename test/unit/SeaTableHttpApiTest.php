@@ -359,7 +359,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
      * @return void
      * @uses \SeaTable\SeaTableApi\Compat\Deprecation\Php
      */
-    public function stestMethodDeprecation(string $method)
+    public function testMethodDeprecation(string $method)
     {
         $this->mockAuthToken();
         $this->http->setUp();
