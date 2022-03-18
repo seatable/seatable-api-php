@@ -447,7 +447,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->assertInstanceOf(stdClass::class, @$api->getDTableToken(['workspace_id' => 1, 'table_name' => 'Test-Base']));
     }
 
-    public function testGetDTableAccessToken()
+    public function testGetBaseAppAccessToken()
     {
         $this->mockAuthToken();
         $this->mockDTableAuthWithApiToken();
@@ -457,7 +457,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->assertInstanceOf(stdClass::class, $api->getBaseAppAccessToken('452fd5ab30de6a561460c9347f2c88036e10ad65'));
     }
 
-    public function testGetTableAccessToken()
+    public function testGetBaseAccessToken()
     {
         $this->mockAuthToken();
         $this->mockDTableAuthWithWorkspaceIdAndTableName();

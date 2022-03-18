@@ -22,8 +22,8 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 The method `getDTableToken()` is deprecated. There are two new replacement methods to obtain a DTable Token:
 
-1. `SeaTableApi::getDTableAccessToken()` by the API Token
-2. `SeaTableApi::getTableAccessToken()` by Workspace ID and DTable Name
+1. `SeaTableApi::getBaseAppAccessToken()` by the API Token
+2. `SeaTableApi::getBaseAccessToken()` by Workspace ID and DTable Name
 
 ### Deprecation of PHP 7.0-7.3 (0.1.8)
 
