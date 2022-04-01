@@ -79,6 +79,10 @@ class ReadmeTest extends TestCase
             return json_encode($mixed);
         }
 
+        if (null === $mixed) {
+            return 'null';
+        }
+
         return var_export($mixed, true);
     }
 }

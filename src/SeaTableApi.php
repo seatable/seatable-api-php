@@ -508,10 +508,53 @@ class SeaTableApi
         return $accessToken;
     }
 
-    public function listRowsByView($table_name, $view_name = "")
+    /**
+     * List Rows
+     *
+     * @group Base Operations / Rows
+     * @link https://api.seatable.io/#c7caa77d-6214-4ca1-bb91-5c1d3d19c52d
+     *
+     * @param string $tableName
+     * @param string|null $viewName
+     * @param bool $convertLinkId
+     * @param string|null $orderBy
+     * @param bool $direction false: ascending, true: descending
+     * @param int $start
+     * @param int $limit
+     * @return object
+     */
+    public function listRows(string $tableName, string $viewName = null, bool $convertLinkId = false, string $orderBy = null, bool $direction = false, int $start = 0, int $limit = 1000)
     {
-        $request = $this->seatable_url . '/dtable-server/api/v1/dtables/' . $this->dtable_uuid . '/rows/?table_name=' . urlencode($table_name);
-        return $this->restCurlClientEx->get($request)->rows;
+        $request = "$this->seatable_url/dtable-server/api/v1/dtables/$this->dtable_uuid/rows/";
+        $request .= '?' . http_build_query([
+            'table_name' => $tableName,
+            'view_name' => $viewName,
+            'convert_link_id' => $convertLinkId ? 'true' : 'false',
+            'order_by' => $orderBy,
+            'direction' => $direction ? 'desc' : 'asc',
+            'start' => $start,
+            'limit' => $limit,
+        ]);
+
+        return $this->restCurlClientEx->get($request);
+    }
+
+    /**
+     * List Rows {@unfit}
+     *
+     * @group Base Operations / Rows
+     * @link https://api.seatable.io/#c7caa77d-6214-4ca1-bb91-5c1d3d19c52d
+     *
+     * @param string $table_name
+     * @param string $view_name (optional)
+     * @return array
+     *
+     * @deprecated since 0.1.17, use `SeaTableApi::listRows()->rows`; {@see SeaTableApi::listRows}
+     */
+    public function listRowsByView($table_name, $view_name = '')
+    {
+        Php::triggerMethodDeprecation('0.1.17', 'use SeaTableApi::listRows()->rows instead');
+        return $this->listRows($table_name, '' === $view_name ? null : $view_name)->rows;
     }
 
     public function appendRow($table_name, $row)
