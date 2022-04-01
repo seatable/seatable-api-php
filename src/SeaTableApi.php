@@ -802,20 +802,32 @@ class SeaTableApi
     }
 
     /**
-     * Add a Member to a Group (Batch Add Members to A Group)
+     * Batch Add Members to Group
+     *
+     * @group Team admin / Groups
      * @link https://api.seatable.io/#277fa732-b785-4933-859b-1f36487ade96
+     *
      * @param int $orgId
      * @param int $groupId
-     * @param string $email
+     * @param string|string[] $email
+     * @param string ...$emails
      * @return object
      */
-    public function addGroupMember(int $orgId, int $groupId, string $email)
+    public function addGroupMember(int $orgId, int $groupId, string $email, string ...$emails)
     {
-        $request = $this->seatable_url . '/api/v2.1/org/' . $orgId . '/admin/groups/' . $groupId . '/members/';
+        $request = "$this->seatable_url/api/v2.1/org/$orgId/admin/groups/$groupId/members/";
 
-        return $this->restCurlClientEx->post($request, [
-            'email' => $email,
-        ]);
+        array_unshift($emails, $email);
+        $buffer = array_reduce($emails, static function ($carry, $item) {
+            if (is_string($item) && strlen($item) > 3) {
+                '' === $carry || $carry .= '&';
+                $carry .= 'email=' . urlencode($item);
+            }
+            return $carry;
+        }, '');
+        $httpOptions = [CURLOPT_HTTPHEADER => ['Authorization: Token ' . $this->restCurlClientEx->seatable_token, 'Content-Type: application/x-www-form-urlencoded']];
+
+        return $this->restCurlClientEx->post($request, $buffer, $httpOptions);
     }
 
     /**
