@@ -241,14 +241,31 @@ class SeaTableApi
     }
 
     /**
+     * Get Account Info
+     *
+     * @group User/Account
+     * @link https://api.seatable.io/#66ce3ca0-edc5-486b-8877-91157bb71d7d
+     *
+     * @return object
+     */
+    public function getAccountInfo()
+    {
+        $request = "$this->seatable_url/api2/account/info/";
+        return $this->restCurlClientEx->get($request);
+    }
+
+    /**
      * (all) Return SeaTable account information
      *
-     * @return object|array the account info
+     *
+     * @deprecated since 0.1.18, use `SeaTableApi::getAccountInfo()`; {@see SeaTableApi::getAccountInfo}
+     *
+     * @return object the account info
      */
     public function checkAccountInfo()
     {
-        $request = $this->seatable_url . '/api2/account/info/';
-        return $this->restCurlClientEx->get($request);
+        Php::triggerMethodDeprecation('0.1.18', 'use SeaTableApi::getAccountInfo() instead');
+        return $this->getAccountInfo();
     }
 
     /**
@@ -386,11 +403,26 @@ class SeaTableApi
         return $this->listWorkspaces()->starred_dtable_list;
     }
 
+    /**
+     * @param int $workspaceId
+     * @param string $baseName
+     * @param array $changes
+     * @return object
+     */
+    public function updateBase(int $workspaceId, string $baseName, array $changes = [])
+    {
+        $changes['name'] = $baseName;
+        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspaceId . '/dtable/';
+        return $this->restCurlClientEx->put($request, $changes);
+    }
+
+    /**
+     * @deprecated since 0.1.18, use `SeaTableApi::updateBase()`; {@see SeaTableApi::updateBase}
+     */
     public function updateDTable($workspace_id, $dtable_name, $changes = [])
     {
-        $changes['name'] = $dtable_name;
-        $request = $this->seatable_url . '/api/v2.1/workspace/' . $workspace_id . '/dtable/';
-        return $this->restCurlClientEx->put($request, $changes);
+        Php::triggerMethodDeprecation('0.1.18', 'use SeaTableApi::updateBase() instead');
+        return $this->updateBase($workspace_id, $dtable_name, $changes);
     }
 
     public function copyDTableExternalLink($link, $dst_workspace_id)
@@ -757,15 +789,31 @@ class SeaTableApi
     }
 
     /**
+     * Import Base from *.dtable or *.csv File
+     *
+     * @group User / Bases
+     * @link https://api.seatable.io/#3a888a1e-833f-407d-8586-0a5e1cdfa851
+     *
+     * @return object
+     */
+    public function importBaseFromFile(int $workspaceId, string $path)
+    {
+        $request = "$this->seatable_url/api/v2.1/workspace/$workspaceId/import-dtable/";
+
+        $form = ['dtable' => $this->restCurlClientEx->curlFile($path)];
+
+        return $this->restCurlClientEx->post($request, $form);
+    }
+
+    /**
      * SeaTable: Import dtable (only for own account)
+     *
+     * @deprecated since 0.1.18, use `SeaTableApi::importBaseFromFile()`; {@see SeaTableApi::importBaseFromFile}
      */
     public function importDTable($workspace_id, $dtable_file)
     {
-        $request = $this->seatable_url . '/api/v2.1/workspace/' . ((int) $workspace_id) . '/import-dtable/';
-
-        $form_fields = ['dtable' => $this->restCurlClientEx->curlFile($dtable_file)];
-
-        return $this->restCurlClientEx->post($request, $form_fields);
+        Php::triggerMethodDeprecation('0.1.18', 'use SeaTableApi::importBaseFromFile() instead');
+        return $this->importBaseFromFile($workspace_id, $dtable_file);
     }
 
     /**

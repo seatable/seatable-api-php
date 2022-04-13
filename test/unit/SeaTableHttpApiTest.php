@@ -45,7 +45,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->mockAccountInfo();
         $this->http->setUp();
 
-        $actual = (new SeaTableApi($this->getOptions()))->checkAccountInfo();
+        $actual = (new SeaTableApi($this->getOptions()))->getAccountInfo();
 
         self::assertIsObject($actual);
     }
@@ -113,7 +113,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $api = new SeaTableApi($this->getOptions());
 
         @$api->response_object_to_array = true;
-        $result = @$api->checkAccountInfo();
+        $result = @$api->getAccountInfo();
         $this->assertIsArray($result);
     }
 

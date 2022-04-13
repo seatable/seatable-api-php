@@ -101,7 +101,7 @@ $seatable->getBaseAppAccessToken(
 
 * `listAllWorkspaces()`
 * `listStarredWorkspaces()`
-* `updateDTable($workspace_id, $dtable_name, $changes = [])`
+* `updateBase(int $workspaceId, string $baseName, array $changes = [])`
 * `copyDTableExternalLink($link, $dst_workspace_id)`
 
 #### Teammanagement Functions (Admin)
