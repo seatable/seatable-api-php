@@ -136,7 +136,7 @@ final class RestCurlClientEx
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
-            throw new Exception("Error setting curl request options");
+            throw new Exception("Error setting curl request options.");
         }
 
         $this->response_object = curl_exec($this->handle);
