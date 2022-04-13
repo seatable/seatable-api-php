@@ -91,7 +91,8 @@ final class RestCurlClientEx
         440 => 'REPO_PASSWD_REQUIRED',
         441 => 'REPO_PASSWD_MAGIC_REQUIRED',
         500 => 'INTERNAL_SERVER_ERROR',
-        502 => 'GATEWAY-TIMEOUT',
+        502 => 'BAD_GATEWAY',
+        504 => 'GATEWAY_TIMEOUT',
         520 => 'OPERATION_FAILED',
     ];
 
