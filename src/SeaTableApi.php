@@ -450,8 +450,8 @@ class SeaTableApi
         $isBaseAccessToken = array_key_exists("table_name", $input) && array_key_exists("workspace_id", $input);
 
         $instead = [];
-        $isBaseAccessToken || $instead[] = 'getBaseAccessToken';
-        $isAppAccessToken || $instead[] = 'getBaseAppAccessToken';
+        $isBaseAccessToken || $instead[] = 'getBaseAppAccessToken';
+        $isAppAccessToken || $instead[] = 'getBaseAccessToken';
 
         Php::triggerMethodDeprecation(
             '0.1.11',
