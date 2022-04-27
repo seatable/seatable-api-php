@@ -23,7 +23,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           make docs
-          mkdocs gh-deploy --force
+          mike deploy 0.1 stable --push --force
 
       - uses: actions/upload-artifact@v2
         if: always()
