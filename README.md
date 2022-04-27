@@ -112,7 +112,7 @@ $seatable->getBaseAppAccessToken(
 * `addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)`
 * `deleteOrganization($org_id)`
 * `updateOrganization($org_id, $org_changes = [])`
-* `listOrgUsers($org_id, $is_staff = true, $per_page = 25, $page = 1)`
+* `listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)`
 * `addOrgUser($org_id, $email, $pass, $name = '')`
 * `deleteOrgUser($org_id, $email)`
 * `listOrgGroups($org_id)`

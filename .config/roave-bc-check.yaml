@@ -21,3 +21,6 @@ parameters:
     - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$seatable_status visibility reduced from public to private\E~'
     - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$response_object_to_array visibility reduced from public to private\E~'
     - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$response_info visibility reduced from public to private\E~'
+   # BC breaking fix in 0.1.20
+    - '~\Q[BC] CHANGED: Default parameter value for parameter $is_staff of SeaTableAPI#listOrgUsers() changed from true to false\E~'
+    - '~\Q[BC] CHANGED: Default parameter value for parameter $is_staff of SeaTable\SeaTableApi\SeaTableApi#listOrgUsers() changed from true to false\E~'

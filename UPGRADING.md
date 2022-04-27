@@ -6,6 +6,7 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 
 ## From very early Versions
 
+* [Break of `SeaTableApi::listOrgUsers()` (0.1.20)](#break-of-seatableapilistorgusers-0120)
 * [Deprecation of `SeaTableApi::getDTableToken()` (0.1.11)](#deprecation-of-seatableapigetdtabletoken-0111)
 * [Deprecation of PHP 7.0-7.3 (0.1.8)](#deprecation-of-php-70-73-018)
 * [Removal of `SeaTableAPI::debug()` (0.1.7)](#removal-of-seatableapidebug-017)
@@ -17,6 +18,28 @@ Therefore, to ease use already for early versions, upgrade instructions for any 
 * [Upgrading from the `SeaTableAPI.php` Single Class/File (no version)](#upgrading-from-the-seatableapiphp-single-classfile-no-version)
 * [Deprecations (0.x.x)](#deprecations-0xx)
 * [Public Interface](#public-interface)
+
+### Break of `SeaTableApi::listOrgUsers()` (0.1.20)
+
+The `$is_staff` parameter of `listOrgUsers()` was broken and fixed in version 0.1.20.
+
+Unfortunately it could not be fixed without breaking backwards compatibility when using the `$is_staff` parameter.
+
+Previously when the `$is_staff` parameter was with the `true` default value, it was ineffective.
+
+Now the `is_staff` parameter is effective but the default value has changed to `false`. This ensures the behaviour is the same to previous but breaks in case the value `true` has been passed to obtain all users (admin and normal users) - `true` will now only return admin users.
+
+If `true` was in use to obtain all users, migrating to 0.1.20 requires to change `$is_staff` to `false`. Failing to do this will **list admin users only**.
+
+!!! danger "Upcoming Incompatible Changes in 0.2.x"
+
+    In 0.2.x the signature of the method will change with the `$is_staff` moved after the pagination parameters which will be swapped, too:
+
+    0.2.x: `listOrgUsers(int $orgId, int $page = 1, int $perPage = 25, bool $isStaff = false): object`
+
+    0.1.20: `listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)`
+
+    0.1.19: `listOrgUsers($org_id, $is_staff = true, $per_page = 25, $page = 1)`
 
 ### Deprecation of `SeaTableApi::getDTableToken()` (0.1.11)
 
@@ -77,6 +100,8 @@ $seatable = new SeaTableAPI([
     ]
 ]);
 ```
+
+---
 
 ### Upgrading from the `SeaTableAPI.php` Single Class/File (no version)
 

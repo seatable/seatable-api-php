@@ -695,9 +695,9 @@ class SeaTableApi
         return $this->restCurlClientEx->put($request, $org_changes);
     }
 
-    public function listOrgUsers($org_id, $is_staff = true, $per_page = 25, $page = 1)
+    public function listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/?per_page=' . $per_page . '&page=' . $page;
+        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/?per_page=' . $per_page . '&page=' . $page . '&is_staff=' . ($is_staff ? 'true' : 'false');
         return $this->restCurlClientEx->get($request);
     }
 
