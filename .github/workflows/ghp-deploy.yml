@@ -14,16 +14,25 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
       - working-directory: .config/mkdocs
+        env:
+          MIKE_VERSION: 0.1
+          MIKE_TITLE: main
+          SOURCE_DATE_EPOCH: 0
         run: |
+          set -x
           pip install -r requirements.txt
+          export -p | grep SOURCE_DATE_EPOCH
           make docs
-          mike deploy 0.1 stable --push --force
+          git config user.name ci-bot
+          git config user.email ci-bot@example.com
+          git fetch origin gh-pages:gh-pages
+          mike deploy --title "$MIKE_VERSION ($MIKE_TITLE)" --push "$MIKE_VERSION"
 
       - uses: actions/upload-artifact@v2
         if: always()

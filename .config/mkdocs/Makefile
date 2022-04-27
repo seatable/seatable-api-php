@@ -24,6 +24,14 @@ docs  : $(TRGS) ; mkdocs build --strict
 serve : $(TRGS) ; mkdocs serve
 clean :         ; $(VCS) clean -fx $(DOCS) && make -s $(DOCS)$(IGNORE)
 
+.PHONY: deploy # with mike, local gh-pages branch
+deploy: export MIKE_VERSION ?= 0.1
+deploy: export MIKE_TITLE ?= main
+deploy: export SOURCE_DATE_EPOCH ?= 0
+deploy:
+	set -x; mike deploy --title "$$MIKE_VERSION ($$MIKE_TITLE)" --ignore "$$MIKE_VERSION"
+	git -P show --shortstat gh-pages
+
 .PHONY: version
 version:
 	@mkdocs --version
