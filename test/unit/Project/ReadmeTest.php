@@ -35,7 +35,15 @@ class ReadmeTest extends TestCase
             $matches = preg_match('~^[*] `([a-z]+)[(]([^)]*)[)]`$~Di', $line, $matches) ? $matches : null;
             $this->assertNotNull($matches, $start + $offset . ': ' . $line);
             $reflectionMethod = new \ReflectionMethod(SeaTableApi::class, $matches[1]);
-            $buffer = '* `' . $reflectionMethod->getName() . '(';
+            $methodName = $reflectionMethod->getName();
+            $docComment = $reflectionMethod->getDocComment();
+            if (false !== $docComment) {
+                $probe = preg_match('~\s+\* @deprecated since [0-9.]+, use `SeaTableApi::([a-z]+)\(\)`~i', $docComment, $matches);
+                if ($probe !== 0 && false !== strpos($docComment, '@deprecated')) {
+                    $methodName = $matches[1];
+                }
+            }
+            $buffer = '* `' . $methodName . '(';
             foreach ($reflectionMethod->getParameters() as $index => $reflectionParameter) {
                 $index && $buffer .= ', ';
                 $reflectionType = $reflectionParameter->getType();

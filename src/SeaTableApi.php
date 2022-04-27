@@ -425,14 +425,23 @@ class SeaTableApi
         return $this->updateBase($workspace_id, $dtable_name, $changes);
     }
 
-    public function copyDTableExternalLink($link, $dst_workspace_id)
+    public function copyBaseExternalLink(string $link, int $destinationWorkspaceId)
     {
-        $request = $this->seatable_url . '/api/v2.1/dtable-external-link/dtable-copy/';
+        $request = "$this->seatable_url/api/v2.1/dtable-external-link/dtable-copy/";
         $f = [
             'link' => $link,
-            'dst_workspace_id' => $dst_workspace_id,
+            'dst_workspace_id' => $destinationWorkspaceId,
         ];
         return $this->restCurlClientEx->post($request, $f);
+    }
+
+    /**
+     * @deprecated since 0.1.20, use `SeaTableApi::copyBaseExternalLink()`; {@see SeaTableApi::copyBaseExternalLink}
+     */
+    public function copyDTableExternalLink($link, $dst_workspace_id)
+    {
+        Php::triggerMethodDeprecation('0.1.20', 'use SeaTableApi::updateBase() instead');
+        return $this->copyBaseExternalLink($link, $dst_workspace_id);
     }
 
     /**
