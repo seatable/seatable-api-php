@@ -88,14 +88,14 @@ $seatable->getBaseAppAccessToken(
 
 #### Admin Functions (User)
 
-* `listUsers($per_page = 25, $page = 1)`
+* `sysAdminListUsers(int $page = 1, int $perPage = 25)`
 * `getTotalUsers()`
-* `addUser($email, $name, $password, $role = 'default')`
-* `searchUser($query)`
-* `updateUser($email, $changes = [])`
+* `sysAdminAddUser(string $email, string $name, string $password, string $role = 'default')`
+* `sysAdminSearchUser(string $query)`
+* `sysAdminUpdateUser(string $email, array $changes = [])`
 * `activateUser($email)`
 * `deactivateUser($email)`
-* `deleteUser($email)`
+* `sysAdminDeleteUser(string $email)`
 
 #### Workspace Functions (Admin)
 
@@ -108,15 +108,15 @@ $seatable->getBaseAppAccessToken(
 
 > **Note:** On the webpage SeaTable always talks about *teams*. The technical term that is used within the API documentation and manual is *organization*.
 
-* `listOrganizations($per_page = 25, $page = 1)`
-* `addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)`
-* `deleteOrganization($org_id)`
-* `updateOrganization($org_id, $org_changes = [])`
-* `listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)`
-* `addOrgUser($org_id, $email, $pass, $name = '')`
-* `deleteOrgUser($org_id, $email)`
-* `listOrgGroups($org_id)`
-* `listOrgBases($org_id, $per_page = 25, $page = 1)`
+* `sysAdminListTeams(int $page = 1, int $perPage = 25)`
+* `sysAdminAddTeam(string $name, string $adminEmail, string $adminName, string $password, int $maxUser)`
+* `sysAdminDeleteTeam(int $id)`
+* `sysAdminUpdateTeam(int $id, array $changes = [])`
+* `sysAdminListTeamUsers(int $id, int $page = 1, int $perPage = 25, bool $isStaff = false)`
+* `sysAdminAddTeamUser(int $id, string $email, string $pass, string $name = null)`
+* `sysAdminDeleteTeamUser(int $id, string $email)`
+* `sysAdminListTeamGroups(int $id)`
+* `sysAdminListTeamBases(int $id, int $page = 1, int $perPage = 25)`
 
 #### Functions to Work with a Base (Table Data)
 

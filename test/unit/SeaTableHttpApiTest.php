@@ -474,7 +474,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->http->setUp();
         $api = new SeaTableApi($this->getOptions());
 
-        $this->assertIsObject($api->updateUser('123456786569491ba42905bf1647fd3f@auth.local'));
+        $this->assertIsObject($api->sysAdminUpdateUser('123456786569491ba42905bf1647fd3f@auth.local'));
     }
 
     /**
@@ -490,7 +490,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
         $this->assertIsObject(@$api->updateUser('123456786569491ba42905bf1647fd3f@auth.local', ['is_active' => 'true']));
         $this->assertIsObject(@$api->updateUser('123456786569491ba42905bf1647fd3f@auth.local', ['is_active' => 'false']));
 
-        $this->expectDeprecationMessage('Since seatable/seatable-api-php 0.1.13: SeaTableApi::activateUser() is deprecated, use SeaTableApi::updateUser($email, [\'is_active\' => \'true\']) instead');
+        $this->expectDeprecationMessage('Since seatable/seatable-api-php 0.1.13: SeaTableApi::activateUser() is deprecated, use SeaTableApi::sysAdminUpdateUser($email, [\'is_active\' => \'true\']) instead');
         $this->expectDeprecation();
 
         $this->assertIsObject($api->activateUser('123456786569491ba42905bf1647fd3f@auth.local'));
@@ -588,7 +588,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
             $this->http->mock
                 ->when()
                 ->methodIs('PUT')
-                ->pathIs('/api/v2.1/admin/users/123456786569491ba42905bf1647fd3f@auth.local/')
+                ->pathIs('/api/v2.1/admin/users/123456786569491ba42905bf1647fd3f%40auth.local/')
                 ->then()
                 ->body('{
   "email": "123456786569491ba42905bf1647fd3f@auth.local",

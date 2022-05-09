@@ -269,45 +269,58 @@ class SeaTableApi
     }
 
     /**
-     * (admin only) Return all users on the SeaTable Server
-     * https://docs.seatable.io/published/seatable-api/dtable-web-v2.1-admin/users.md
+     * List All Users
      *
-     * @param int $per_page Number of users that should be shown (default = 25)
+     * @group System admin / Users
+     * @link https://api.seatable.io/#883d8faf-1f2a-4033-8904-0171fece890c
+     *
      * @param int $page Select Page the users shown from (default 1)
-     * @return object|array
+     * @param int $perPage Number of users that should be shown (default = 25)
+     * @return object
+     */
+    public function sysAdminListUsers(int $page = 1, int $perPage = 25)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/users/?per_page=$perPage&page=$page";
+        return $this->restCurlClientEx->get($request);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListUsers()`; {@see SeaTableApi::sysAdminListUsers}
      */
     public function listUsers($per_page = 25, $page = 1)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/?per_page=' . $per_page . '&page=' . $page;
-        return $this->restCurlClientEx->get($request);
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListUsers() instead");
+        return $this->sysAdminListUsers($page, $per_page);
     }
 
     /**
      * (admin only)
      *
-     * @deprecated since 0.1.15, use `SeaTableApi::listUsers(1, 1)->total_count`; {@see SeaTableApi::listUsers}
+     * @deprecated since 0.1.15, use `SeaTableApi::sysAdminListUsers(1, 1)->total_count`; {@see SeaTableApi::sysAdminListUsers}
      *
      * @return int
      */
     public function getTotalUsers()
     {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::listUsers(1, 1)->total_count instead");
-        return $this->listUsers(1, 1)->total_count;
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::sysAdminListUsers(1, 1)->total_count instead");
+        return $this->sysAdminListUsers(1, 1)->total_count;
     }
 
     /**
-     * (admin only) Add new User to the SeaTable System
-     * https://docs.seatable.io/published/seatable-api/dtable-web-v2.1-admin/users.md
+     * Add New User
+     *
+     * @group System admin / Users
+     * @link https://api.seatable.io/#922eb788-ebad-47b1-af34-e1aec536182e
      *
      * @param string $email
      * @param string $name
      * @param string $password
      * @param string $role
-     * @return object|array with user account details
+     * @return object
      */
-    public function addUser($email, $name, $password, $role = 'default')
+    public function sysAdminAddUser(string $email, string $name, string $password, string $role = 'default')
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/';
+        $request = "$this->seatable_url/api/v2.1/admin/users/";
         $form = [
             'email' => $email,
             'name' => $name,
@@ -318,55 +331,114 @@ class SeaTableApi
     }
 
     /**
-     * @return object|array "user_list"
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddUser()`; {@see SeaTableApi::sysAdminAddUser}
      */
-    public function searchUser($query)
+    public function addUser($email, $name, $password, $role = 'default')
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/search-user/?query=' . $query;
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddUser() instead");
+        return $this->sysAdminAddUser($email, $name, $password, $role);
+    }
+
+    /**
+     * Search a User
+     *
+     * @group System admin / Users
+     * @link https://api.seatable.io/#95fcb3f1-5496-4113-a078-22972c19e583
+     *
+     * @return object
+     */
+    public function sysAdminSearchUser(string $query)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/search-user/?query=" . urlencode($query);
         return $this->restCurlClientEx->get($request);
     }
 
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminSearchUser()`; {@see SeaTableApi::sysAdminSearchUser}
+     */
+    public function searchUser($query)
+    {
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminSearchUser() instead");
+        return $this->sysAdminSearchUser(urldecode($query));
+    }
+
+
+    /**
+     * Update a User
+     *
+     * @group System admin / Users
+     * @link https://api.seatable.io/#9d4ffcd3-a798-4ebe-9a9c-9f639f95045d
+     *
+     * @param string $email
+     * @param array $changes role, ...
+     * @return object
+     */
+    public function sysAdminUpdateUser(string $email, array $changes = [])
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/users/" . rawurlencode($email) . '/';
+
+        return $this->restCurlClientEx->put($request, $changes);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminUpdateUser()`; {@see SeaTableApi::sysAdminUpdateUser}
+     */
     public function updateUser($email, $changes = [])
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/' . $email . '/';
-        // erlaubt ist: role, ...
-        return $this->restCurlClientEx->put($request, $changes);
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminUpdateUser() instead");
+        return $this->sysAdminUpdateUser($email, $changes);
     }
 
     /**
      * Activate User {@unfit}
      *
-     * @deprecated since 0.1.13, use `SeaTableApi::updateUser($email, ['is_active' => 'true'])`; {@see SeaTableApi::updateUser}
+     * @deprecated since 0.1.13, use `SeaTableApi::sysAdminUpdateUser($email, ['is_active' => 'true'])`; {@see SeaTableApi::sysAdminUpdateUser}
      *
      * @param string $email
      * @return object
      */
     public function activateUser($email)
     {
-        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::updateUser(\$email, ['is_active' => 'true']) instead");
-        return $this->updateUser($email, ['is_active' => 'true']);
+        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::sysAdminUpdateUser(\$email, ['is_active' => 'true']) instead");
+        return $this->sysAdminUpdateUser($email, ['is_active' => 'true']);
     }
 
     /**
      * Deactivate User {@unfit}
      *
-     * @deprecated since 0.1.13, use `SeaTableApi::updateUser($email, ['is_active' => 'false'])`; {@see SeaTableApi::updateUser}
+     * @deprecated since 0.1.13, use `SeaTableApi::sysAdminUpdateUser($email, ['is_active' => 'false'])`; {@see SeaTableApi::sysAdminUpdateUser}
      *
      * @param string $email
      * @return object
      */
     public function deactivateUser($email)
     {
-        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::updateUser(\$email, ['is_active' => 'false']) instead");
-        return $this->updateUser($email, ['is_active' => 'false']);
+        Php::triggerMethodDeprecation('0.1.13', "use SeaTableApi::sysAdminUpdateUser(\$email, ['is_active' => 'false']) instead");
+        return $this->sysAdminUpdateUser($email, ['is_active' => 'false']);
     }
 
-    // (admin only)
+    /**
+     * Delete User
+     *
+     * @group System admin / Users
+     * @link https://api.seatable.io/#17bdf15e-fbb8-4fa9-b8ef-43841fc6c40d
+     *
+     * @param string $email
+     * @return array|object|string|null
+     */
+    public function sysAdminDeleteUser(string $email)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/users/" . rawurlencode($email) . '/';
+        return $this->restCurlClientEx->delete($request);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminDeleteUser()`; {@see SeaTableApi::sysAdminDeleteUser}
+     */
     public function deleteUser($email)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/users/' . $email . '/';
-        $d = [];
-        return $this->restCurlClientEx->delete($request, $d);
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminDeleteUser() instead");
+        return $this->sysAdminDeleteUser($email);
     }
 
     /**
@@ -654,57 +726,182 @@ class SeaTableApi
         return array_column($this->getBaseMetadata()->metadata->tables, null, 'name')[$table_name] ?? null;
     }
 
+    /**
+     * List Daily Active Users
+     *
+     * @group System admin / Statistics
+     * @link https://api.seatable.io/#a3590cbf-1ec4-4148-8aa4-308d10a8437e
+     *
+     * @param string $date
+     * @param int $page
+     * @param int $perPage
+     * @return object
+     */
+    public function sysAdminListDailyActiveUsers(string $date = '2020-08-12+00:00:00', int $page = 1, int $perPage = 25)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/daily-active-users/?date=" . urlencode($date) . "&per_page=$perPage&page=$page";
+        return $this->restCurlClientEx->get($request);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListDailyActiveUsers()`; {@see SeaTableApi::sysAdminListDailyActiveUsers}
+     */
     public function listDailyActiveUsers($date = '2020-08-12+00:00:00', $per_page = 5000, $page = 1)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/daily-active-users/?date=' . $date . '&per_page=' . $per_page . '&page=' . $page;
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListDailyActiveUsers() instead");
+        return $this->sysAdminListDailyActiveUsers($date, $page, $per_page);
+    }
+
+    /**
+     * List Teams (Organizations)
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#3eec0a21-4322-46b8-936d-d003ef540852
+     *
+     * @param int $page
+     * @param int $perPage
+     * @return object
+     */
+    public function sysAdminListTeams(int $page = 1, int $perPage = 25)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/?per_page=$perPage&page=$page";
         return $this->restCurlClientEx->get($request);
     }
 
-    // Organisations (admin only)
-    // https://docs.seatable.io/published/seatable-api/dtable-web-v2.1-admin/organizations.md
-
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeams()`; {@see SeaTableApi::sysAdminListTeams}
+     */
     public function listOrganizations($per_page = 25, $page = 1)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/?per_page=' . $per_page . '&page=' . $page;
-        return $this->restCurlClientEx->get($request);
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeams() instead");
+        return $this->sysAdminListTeams($page, $per_page);
     }
 
-    public function addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)
+    /**
+     * Add Team (Organization)
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#4dc845bd-9eb2-4ab5-a57f-8d1bdebd62bf
+     *
+     * @param string $name of team (organization)
+     * @param string $adminEmail
+     * @param string $adminName
+     * @param string $password
+     * @param int $maxUser
+     * @return object
+     */
+    public function sysAdminAddTeam(string $name, string $adminEmail, string $adminName, string $password, int $maxUser)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/';
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/";
         $org = [
-            'org_name' => $org_name,
-            'admin_email' => $admin_email,
-            'admin_name' => $admin_name,
+            'org_name' => $name,
+            'admin_email' => $adminEmail,
+            'admin_name' => $adminName,
             'password' => $password,
-            'max_user_number' => $max_user_number,
+            'max_user_number' => $maxUser,
         ];
         return $this->restCurlClientEx->post($request, $org);
     }
 
-    public function deleteOrganization($org_id)
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddTeam()`; {@see SeaTableApi::sysAdminAddTeam}
+     */
+    public function addOrganization($org_name, $admin_email, $admin_name, $password, $max_user_number)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/';
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddTeam() instead");
+        return $this->sysAdminAddTeam($org_name, $admin_email, $admin_name, $password, $max_user_number);
+    }
+
+    /**
+     * Delete Team
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#424afa58-ad74-444d-8007-8bfeee79ff87
+     *
+     * @param int $id
+     * @return object
+     */
+    public function sysAdminDeleteTeam(int $id)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/";
         return $this->restCurlClientEx->delete($request);
     }
 
-    public function updateOrganization($org_id, $org_changes = [])
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminDeleteTeam()`; {@see SeaTableApi::sysAdminDeleteTeam}
+     */
+    public function deleteOrganization($org_id)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/';
-        // possible changes are: role, max_user_number, org_name, row_limit, asset_quota
-        return $this->restCurlClientEx->put($request, $org_changes);
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminDeleteTeam() instead");
+        return $this->sysAdminDeleteTeam($org_id);
     }
 
-    public function listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)
+    /**
+     * Update Team (Organization)
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#e9f4b4cd-e234-42c2-9159-b05ff33c23ca
+     *
+     * @param int $id
+     * @param array $changes possible changes are: role, max_user_number, org_name, row_limit, asset_quota
+     * @return object
+     */
+    public function sysAdminUpdateTeam(int $id, array $changes = [])
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/?per_page=' . $per_page . '&page=' . $page . '&is_staff=' . ($is_staff ? 'true' : 'false');
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/";
+        return $this->restCurlClientEx->put($request, $changes);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminUpdateTeam()`; {@see SeaTableApi::sysAdminUpdateTeam}
+     */
+    public function updateOrganization($org_id, $org_changes = [])
+    {
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminUpdateTeam() instead");
+        return $this->sysAdminUpdateTeam($org_id, $org_changes);
+    }
+
+    /**
+     * List Team Members
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#f5dad123-02a7-4b50-a9a0-464cebd7c922
+     *
+     * @param int $id
+     * @param int $page
+     * @param int $perPage
+     * @param bool $isStaff defaults to false which includes all users (incl. team admins)
+     * @return object
+     */
+    public function sysAdminListTeamUsers(int $id, int $page = 1, int $perPage = 25, bool $isStaff = false)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/users/?per_page=$perPage&page=$page&is_staff=" . ($isStaff ? 'true' : 'false');
+
         return $this->restCurlClientEx->get($request);
     }
 
-    public function addOrgUser($org_id, $email, $pass, $name = "")
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeamUsers()`; {@see SeaTableApi::sysAdminListTeamUsers}
+     */
+    public function listOrgUsers($org_id, $is_staff = false, $per_page = 25, $page = 1)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/';
-        '' === $name && $name = (string)strtok($email, '@');
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeamUsers() instead");
+        return $this->sysAdminListTeamUsers($org_id, $page, $per_page, $is_staff);
+    }
+
+    /**
+     * @link {@pending /api/v2.1/admin/organizations/:org_id/users/}
+     *
+     * @param int $id
+     * @param string $email
+     * @param string $pass
+     * @param string|null $name
+     * @return object
+     */
+    public function sysAdminAddTeamUser(int $id, string $email, string $pass, string $name = null)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/users/";
+        null === $name && $name = (string)strtok($email, '@');
         $user = [
             'email' => $email,
             'name' => $name,
@@ -713,22 +910,86 @@ class SeaTableApi
         return $this->restCurlClientEx->post($request, $user);
     }
 
-    public function deleteOrgUser($org_id, $email)
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddTeamUser()`; {@see SeaTableApi::sysAdminAddTeamUser}
+     */
+    public function addOrgUser($org_id, $email, $pass, $name = "")
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/users/' . $email . '/';
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddTeamUser() instead");
+        return $this->sysAdminAddTeamUser($org_id, $email, $pass, $name);
+    }
+
+    /**
+     * @group System admin / Teams (organizations)
+     * @link {@pending /api/v2.1/admin/organizations/:org_id/users/...}
+     *
+     * @param int $id Team
+     * @param string $email User
+     * @return object
+     */
+    public function sysAdminDeleteTeamUser(int $id, string $email)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/users/" . rawurlencode($email) . '/';
         return $this->restCurlClientEx->delete($request);
     }
 
-    public function listOrgGroups($org_id)
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminDeleteTeamUser()`; {@see SeaTableApi::sysAdminDeleteTeamUser}
+     */
+    public function deleteOrgUser($org_id, $email)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/groups/';
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminDeleteTeamUser() instead");
+        return $this->sysAdminDeleteTeamUser($org_id, $email);
+    }
+
+    /**
+     * List Team Groups
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#42e907af-577c-49c0-8cbf-28d03c65c01c
+     *
+     * @param int $id
+     * @return object
+     */
+    public function sysAdminListTeamGroups(int $id)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/groups/";
         return $this->restCurlClientEx->get($request);
     }
 
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeamGroups()`; {@see SeaTableApi::sysAdminListTeamGroups}
+     */
+    public function listOrgGroups($org_id)
+    {
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeamGroups() instead");
+        return $this->sysAdminListTeamGroups($org_id);
+    }
+
+    /**
+     * List Team Bases
+     *
+     * @group System admin / Teams (organizations)
+     * @link https://api.seatable.io/#b1fe997d-f5e5-48fc-ab1b-0b5b4e9df6ab
+     *
+     * @param int $id
+     * @param int $page
+     * @param int $perPage
+     * @return object
+     */
+    public function sysAdminListTeamBases(int $id, int $page = 1, int $perPage = 25)
+    {
+        $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/dtables/?per_page=$perPage&page=$page";
+        return $this->restCurlClientEx->get($request);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminListTeamBases()`; {@see SeaTableApi::sysAdminListTeamBases}
+     */
     public function listOrgBases($org_id, $per_page = 25, $page = 1)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/organizations/' . $org_id . '/dtables/?per_page=' . $per_page . '&page=' . $page;
-        return $this->restCurlClientEx->get($request);
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListTeamBases() instead");
+        return $this->sysAdminListTeamBases($org_id, $page, $per_page);
     }
 
     public function getCommonInfo($email)
@@ -772,9 +1033,9 @@ class SeaTableApi
      *
      * @return object
      */
-    public function addSystemNotificationToUser(string $msg, string $username)
+    public function sysAdminAddSystemNotificationToUser(string $msg, string $username)
     {
-        $request = $this->seatable_url . '/api/v2.1/admin/sys-user-notifications/';
+        $request = "$this->seatable_url/api/v2.1/admin/sys-user-notifications/";
         $body = [
             'msg' => $msg,
             'username' => $username,
@@ -783,12 +1044,21 @@ class SeaTableApi
     }
 
     /**
-     * @deprecated since 0.1.15, use `SeaTableApi::addSystemNotificationToUser()`; {@see SeaTableApi::addSystemNotificationToUser}
+     * @deprecated since 0.1.21, use `SeaTableApi::sysAdminAddSystemNotificationToUser()`; {@see SeaTableApi::sysAdminAddSystemNotificationToUser}
+     */
+    public function addSystemNotificationToUser(string $msg, string $username)
+    {
+        Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminAddSystemNotificationToUser() instead");
+        return $this->sysAdminAddSystemNotificationToUser($msg, $username);
+    }
+
+    /**
+     * @deprecated since 0.1.15, use `SeaTableApi::sysAdminAddSystemNotificationToUser()`; {@see SeaTableApi::sysAdminAddSystemNotificationToUser}
      */
     public function addASystemNotificationToAUser($msg, $username)
     {
-        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::addSystemNotificationToUser() instead");
-        return $this->addSystemNotificationToUser($msg, $username);
+        Php::triggerMethodDeprecation('0.1.15', "use SeaTableApi::sysAdminAddSystemNotificationToUser() instead");
+        return $this->sysAdminAddSystemNotificationToUser($msg, $username);
     }
 
     public function listAllSystemNotifications($per_page = 25, $page = 1)
@@ -841,16 +1111,19 @@ class SeaTableApi
     }
 
     /**
-     * Add A Group
+     * Add Group
+     *
+     * @group Team admin / Groups
      * @link https://api.seatable.io/#4fd4ab0b-1ea8-413a-bb50-bd8a982f1f54
-     * @param int $orgId
+     *
+     * @param int $id
      * @param string $groupName
      * @param string $groupOwner
      * @return object
      */
-    public function addGroup(int $orgId, string $groupName, string $groupOwner)
+    public function teamAdminAddGroup(int $id, string $groupName, string $groupOwner)
     {
-        $request = $this->seatable_url . '/api/v2.1/org/' . $orgId . '/admin/groups/';
+        $request =  "$this->seatable_url/api/v2.1/org/$id/admin/groups/";
 
         return $this->restCurlClientEx->post($request, [
             'group_name' => $groupName,
@@ -859,20 +1132,29 @@ class SeaTableApi
     }
 
     /**
+     * @deprecated since 0.1.21, use `SeaTableApi::teamAdminAddGroup()`; {@see SeaTableApi::teamAdminAddGroup}
+     */
+    public function addGroup(int $orgId, string $groupName, string $groupOwner)
+    {
+        Php::triggerMethodDeprecation('0.1.21', 'use SeaTableApi::teamAdminAddGroup() instead');
+        return $this->teamAdminAddGroup($orgId, $groupName, $groupOwner);
+    }
+
+    /**
      * Batch Add Members to Group
      *
      * @group Team admin / Groups
      * @link https://api.seatable.io/#277fa732-b785-4933-859b-1f36487ade96
      *
-     * @param int $orgId
+     * @param int $id
      * @param int $groupId
      * @param string|string[] $email
      * @param string ...$emails
      * @return object
      */
-    public function addGroupMember(int $orgId, int $groupId, string $email, string ...$emails)
+    public function teamAdminAddGroupMember(int $id, int $groupId, string $email, string ...$emails)
     {
-        $request = "$this->seatable_url/api/v2.1/org/$orgId/admin/groups/$groupId/members/";
+        $request = "$this->seatable_url/api/v2.1/org/$id/admin/groups/$groupId/members/";
 
         array_unshift($emails, $email);
         $buffer = array_reduce($emails, static function ($carry, $item) {
@@ -885,6 +1167,15 @@ class SeaTableApi
         $httpOptions = [CURLOPT_HTTPHEADER => ['Authorization: Token ' . $this->restCurlClientEx->seatable_token, 'Content-Type: application/x-www-form-urlencoded']];
 
         return $this->restCurlClientEx->post($request, $buffer, $httpOptions);
+    }
+
+    /**
+     * @deprecated since 0.1.21, use `SeaTableApi::teamAdminAddGroupMember()`; {@see SeaTableApi::teamAdminAddGroupMember}
+     */
+    public function addGroupMember(int $orgId, int $groupId, string $email, string ...$emails)
+    {
+        Php::triggerMethodDeprecation('0.1.21', 'use SeaTableApi::teamAdminAddGroupMember() instead');
+        return $this->teamAdminAddGroupMember($orgId, $groupId, $email, ...$emails);
     }
 
     /**
