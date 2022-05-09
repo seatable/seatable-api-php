@@ -8,7 +8,7 @@ parameters:
     # SeaTableApi::debug() deprecated in 0.0.4, removed in 0.1.7
     - '~\Q[BC] REMOVED: Method SeaTableAPI#debug() was removed\E~'
     - '~\Q[BC] REMOVED: Method SeaTable\SeaTableApi\SeaTableApi#debug() was removed\E~'
-   # Deprecated in 0.1.4, improved by private/magic-set-get-isset in 0.1.11
+    # Deprecated in 0.1.4, improved by private/magic-set-get-isset in 0.1.11
     - '~\Q[BC] REMOVED: Property SeaTableAPI#$seatable_code was removed\E~'
     - '~\Q[BC] REMOVED: Property SeaTableAPI#$seatable_status was removed\E~'
     - '~\Q[BC] REMOVED: Property SeaTableAPI#$response_object_to_array was removed\E~'
@@ -21,6 +21,6 @@ parameters:
     - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$seatable_status visibility reduced from public to private\E~'
     - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$response_object_to_array visibility reduced from public to private\E~'
     - '~\Q[BC] CHANGED: Property SeaTable\SeaTableApi\SeaTableApi#$response_info visibility reduced from public to private\E~'
-   # BC breaking fix in 0.1.20
+    # BC breaking fix in 0.1.20
     - '~\Q[BC] CHANGED: Default parameter value for parameter $is_staff of SeaTableAPI#listOrgUsers() changed from true to false\E~'
     - '~\Q[BC] CHANGED: Default parameter value for parameter $is_staff of SeaTable\SeaTableApi\SeaTableApi#listOrgUsers() changed from true to false\E~'
