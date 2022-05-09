@@ -440,7 +440,7 @@ class SeaTableApi
      */
     public function copyDTableExternalLink($link, $dst_workspace_id)
     {
-        Php::triggerMethodDeprecation('0.1.20', 'use SeaTableApi::updateBase() instead');
+        Php::triggerMethodDeprecation('0.1.20', 'use SeaTableApi::copyBaseExternalLink() instead');
         return $this->copyBaseExternalLink($link, $dst_workspace_id);
     }
 
