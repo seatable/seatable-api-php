@@ -5,7 +5,7 @@ site_url: https://seatable.github.io/seatable-api-php
 
 repo_name: seatable/seatable-api-php
 repo_url: https://github.com/seatable/seatable-api-php/
-edit_uri: blob/main/manual
+edit_uri: blob/main
 
 copyright: Copyright &copy; 2020, 2021 SeaTable GmbH
 
