@@ -127,7 +127,7 @@ final class RestCurlClientEx
     {
         if ($api_token !== "") {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $api_token, 'Accept: application/json'];
-        } elseif (strpos($url, "/api/v1/dtables/") !== false) {
+        } elseif (strpos($url, "/api/v1/") !== false) {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: multipart/json'];
         } else {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json'];
@@ -161,7 +161,7 @@ final class RestCurlClientEx
      */
     public function post(string $url, $data = [], array $http_options = [])
     {
-        if (strpos($url, "/api/v1/dtables/") !== false) {
+        if (strpos($url, "/api/v1/") !== false) {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: application/json'];
         } else {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json', 'Content-Type: multipart/form-data'];
@@ -200,7 +200,7 @@ final class RestCurlClientEx
      */
     public function put(string $url, $data = '', array $http_options = [])
     {
-        if (strpos($url, "/api/v1/dtables/") !== false) {
+        if (strpos($url, "/api/v1/") !== false) {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->access_token, 'Accept: application/json', 'Content-Type: application/json'];
         } else {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json', 'Content-Type: multipart/form-data'];
