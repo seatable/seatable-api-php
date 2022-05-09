@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /*
  * seatable-api-php
@@ -6,7 +8,7 @@
 
 namespace SeaTable\SeaTableApi\Project;
 
-use SeaTable\SeaTableApi\SeaTableApi;
+use SeaTable\SeaTableApi\Project\Meta\Lines;
 use SeaTable\SeaTableApi\TestCase;
 
 /**
@@ -18,32 +20,22 @@ class ReadmeTest extends TestCase
 {
     public function testFunctions()
     {
-        $changes = 0;
-        $path = __DIR__ . '/../../../README.md';
+        $changes = [];
 
-        $lines = file($path, FILE_IGNORE_NEW_LINES);
-        $start = array_search('### Functions', $lines, true);
-        $this->assertIsInt($start);
-        $segment = array_slice($lines, $start);
-        $end = array_search('## Common Mistakes', $segment, true);
-        $this->assertIsInt($end);
-        $segment = array_slice($segment, 0, $end, false);
-        foreach ($segment as $offset => $line) {
-            if ('' === $line || '*' !== $line[0]) {
-                continue;
+        $path = __DIR__ . '/../../../README.md';
+        $segment = (new Lines(file($path)))
+            ->segment("### Functions\n", "## Common Mistakes\n", true, false);
+
+        foreach ($segment->match('~^[*] `([a-z]+)[(]([^)]*)[)]`\n$~Di') as $offset => $matches) {
+            $line = (string)$matches;
+
+            $reflectionMethod = Meta\Util::apiMethodReflection($matches[1]);
+            $deprecatedBy = Meta\Util::apiMethodGetDeprecatedByMethod($reflectionMethod);
+            if ($deprecatedBy) {
+                $reflectionMethod = $deprecatedBy;
             }
-            $matches = preg_match('~^[*] `([a-z]+)[(]([^)]*)[)]`$~Di', $line, $matches) ? $matches : null;
-            $this->assertNotNull($matches, $start + $offset . ': ' . $line);
-            $reflectionMethod = new \ReflectionMethod(SeaTableApi::class, $matches[1]);
-            $methodName = $reflectionMethod->getName();
-            $docComment = $reflectionMethod->getDocComment();
-            if (false !== $docComment) {
-                $probe = preg_match('~\s+\* @deprecated since [0-9.]+, use `SeaTableApi::([a-z]+)\(\)`~i', $docComment, $matches);
-                if ($probe !== 0 && false !== strpos($docComment, '@deprecated')) {
-                    $methodName = $matches[1];
-                }
-            }
-            $buffer = '* `' . $methodName . '(';
+
+            $buffer = '* `' . $reflectionMethod->getName() . '(';
             foreach ($reflectionMethod->getParameters() as $index => $reflectionParameter) {
                 $index && $buffer .= ', ';
                 $reflectionType = $reflectionParameter->getType();
@@ -59,38 +51,21 @@ class ReadmeTest extends TestCase
                     $this->assertTrue($reflectionParameter->isDefaultValueAvailable());
                     $this->assertFalse($reflectionParameter->isDefaultValueConstant());
                     $defaultValue = $reflectionParameter->getDefaultValue();
-                    $buffer .= ' = ' . $this->varExport($defaultValue);
+                    $buffer .= ' = ' . Meta\Util::varExport($defaultValue);
                 }
             }
-            $buffer .= ')`';
+            $buffer .= ')`' . "\n";
             if ($buffer !== $line) {
-                $fileBuffer = file_get_contents($path);
-                $this->assertIsString($fileBuffer);
-                $fileBuffer = str_replace($line, $buffer, $fileBuffer, $count);
-                $this->assertSame(1, $count);
-                $result = file_put_contents($path, $fileBuffer);
-                $this->assertNotFalse($result);
-                $this->assertSame(strlen($fileBuffer), $result);
-                $changes++;
+                $changes[$offset] = $buffer;
             }
         }
-        $this->assertSame(0, $changes, 'test fails on changes');
-    }
 
-    private function varExport($mixed): string
-    {
-        if (is_object($mixed)) {
-            $this->fail('object encountered');
+        if (!empty($changes)) {
+            $lines = array_replace(file($path), $changes);
+            $result = file_put_contents($path, $lines);
+            $this->assertNotFalse($result, 'failed writing file: ' . $path);
         }
 
-        if (is_array($mixed)) {
-            return json_encode($mixed);
-        }
-
-        if (null === $mixed) {
-            return 'null';
-        }
-
-        return var_export($mixed, true);
+        $this->assertCount(0, $changes, 'test fails on changes');
     }
 }
