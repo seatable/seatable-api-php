@@ -642,7 +642,7 @@
 <h1 id="seatable-api-php">seatable-api-php<a class="headerlink" href="#seatable-api-php" title="Permanent link">&para;</a></h1>
 <p>PHP-bindings of the SeaTable API (<a href="https://api.seatable.io/">api.seatable.io</a>).</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p>PHP 7.0+ (deprecated, 7.4+ recommended) with the Curl and Json extension (see <a href="composer.json"><code>composer.json</code></a>).</p>
+<p>PHP 7.2.5+ (deprecated, 7.4+ recommended) with the Curl and Json extension (see <a href="composer.json"><code>composer.json</code></a>).</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>The SeaTable API installs as part of your project dependencies. It is <a href="https://packagist.org/packages/seatable/seatable-api-php">available from Packagist</a> for <a href="https://getcomposer.org/">Composer</a>:</p>
 <div class="highlight"><pre><span></span><code>composer require seatable/seatable-api-php
@@ -713,8 +713,8 @@
 <li><code>sysAdminAddUser(string $email, string $name, string $password, string $role = 'default')</code></li>
 <li><code>sysAdminSearchUser(string $query)</code></li>
 <li><code>sysAdminUpdateUser(string $email, array $changes = [])</code></li>
-<li><code>activateUser($email)</code></li>
-<li><code>deactivateUser($email)</code></li>
+<li><code>activateUser(string $email)</code></li>
+<li><code>deactivateUser(string $email)</code></li>
 <li><code>sysAdminDeleteUser(string $email)</code></li>
 </ul>
 <h4 id="workspace-functions-admin">Workspace Functions (Admin)<a class="headerlink" href="#workspace-functions-admin" title="Permanent link">&para;</a></h4>
@@ -741,8 +741,8 @@
 </ul>
 <h4 id="functions-to-work-with-a-base-table-data">Functions to Work with a Base (Table Data)<a class="headerlink" href="#functions-to-work-with-a-base-table-data" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>listRowsByView($table_name, $view_name = '')</code></li>
-<li><code>appendRow($table_name, $row)</code></li>
+<li><code>listRowsByView(string $tableName, string $viewName = null)</code></li>
+<li><code>appendRow(string $tableName, array $row)</code></li>
 <li><code>getBaseMetadata()</code></li>
 </ul>
 <p>More functions will be added in the future. If you want to get a feeling about the usage of the functions, please have a look at the examples in the <code>doc</code> folder.</p>

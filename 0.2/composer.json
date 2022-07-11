@@ -20,7 +20,7 @@
     "source": "https://github.com/seatable/seatable-api-php"
   },
   "require": {
-    "php": ">=7.0",
+    "php": ">=7.2.5",
     "ext-curl": "*",
     "ext-json": "*"
   },
@@ -32,7 +32,6 @@
     "phpunit/phpunit": "^9.5"
   },
   "autoload": {
-    "classmap": ["src/Compat/Backward/SeaTableAPI.php"],
     "files": ["src/Compat/Deprecation/autoload.php"],
     "psr-4": {
       "SeaTable\\SeaTableApi\\": "src/"
@@ -49,7 +48,8 @@
       "@composer --no-plugins validate --no-check-lock --strict",
       "@lint-and-load",
       "@php-test",
-      "@composer --no-plugins update --no-scripts --no-progress",
+      "@php .config/composer/vcache.php",
+      "@composer --no-plugins -q install --no-scripts --no-progress",
       "@phpunit",
       "@php-cs-fixer",
       "@phpcs",
@@ -70,7 +70,8 @@
       "@composer --no-plugins exec phpcs -- --standard=.config/phpcs/config.xml"
     ],
     "phpunit": [
-      "@composer --no-plugins -q update --no-scripts --no-progress",
+      "@php .config/composer/vcache.php",
+      "@composer --no-plugins -q install --no-scripts --no-progress",
       "@putenv XDEBUG_MODE=coverage",
       "\"$PHP_BINARY\" -d zend.assertions=1 -d assert.exception=1 .config/composer/vendor/bin/phpunit --configuration .config/phpunit"
     ]
