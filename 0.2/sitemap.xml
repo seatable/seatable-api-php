@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
+     <loc>https://seatable.github.io/seatable-api-php/0.2/</loc>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://seatable.github.io/seatable-api-php/0.2/UPGRADING/</loc>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://seatable.github.io/seatable-api-php/0.2/doc/add-new-column-to-base/</loc>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://seatable.github.io/seatable-api-php/0.2/doc/get-content-from-a-base/</loc>
+     <changefreq>daily</changefreq>
+    </url>
+</urlset>
