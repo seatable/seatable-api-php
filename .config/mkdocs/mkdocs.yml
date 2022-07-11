@@ -29,6 +29,7 @@ extra:
       link: https://github.com/seatable/seatable-api-php
   version:
     provider: mike
+    default: main
 
 extra_css:
   - stylesheets/extra.css
