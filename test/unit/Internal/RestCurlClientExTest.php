@@ -14,6 +14,7 @@ use SeaTable\SeaTableApi\TestCase;
 /**
  * @covers \SeaTable\SeaTableApi\Internal\RestCurlClientEx
  * @covers \SeaTable\SeaTableApi\Internal\RestCurlClientExTest
+ * @uses \SeaTable\SeaTableApi\Internal\CurlHttpOptions
  */
 class RestCurlClientExTest extends TestCase
 {

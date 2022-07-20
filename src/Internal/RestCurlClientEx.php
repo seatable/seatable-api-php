@@ -54,9 +54,9 @@ final class RestCurlClientEx
 
     /**
      * cUrl options
-     * @var array<string, int|string>
+     * @var CurlHttpOptions
      */
-    private $http_options = [];
+    private $http_options;
 
     /**
      * cUrl response
@@ -93,16 +93,7 @@ final class RestCurlClientEx
 
     public function __construct(array $httpOptions)
     {
-        /*
-         * Default curl config
-         */
-        $this->http_options[CURLOPT_RETURNTRANSFER] = true;
-        $this->http_options[CURLOPT_FOLLOWLOCATION] = false;
-
-        foreach ([CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYHOST] as $httpOption) {
-            isset($httpOptions[$httpOption])
-            && $this->http_options[$httpOption] = $httpOptions[$httpOption];
-        }
+        $this->http_options = new CurlHttpOptions($httpOptions);
     }
 
     /**
@@ -126,7 +117,7 @@ final class RestCurlClientEx
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json'];
         }
 
-        $http_options += $this->http_options;
+        $http_options += $this->http_options->getArrayCopy();
         $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $http_options)) {
@@ -160,7 +151,7 @@ final class RestCurlClientEx
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json', 'Content-Type: multipart/form-data'];
         }
 
-        $http_options += $this->http_options;
+        $http_options += $this->http_options->getArrayCopy();
         $http_options[CURLOPT_POST] = true;
 
         unset($http_options[CURLOPT_POSTFIELDS]);
@@ -198,7 +189,7 @@ final class RestCurlClientEx
         } else {
             $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json', 'Content-Type: multipart/form-data'];
         }
-        $http_options += $this->http_options;
+        $http_options += $this->http_options->getArrayCopy();
         $http_options[CURLOPT_CUSTOMREQUEST] = 'PUT';
 
         $http_options[CURLOPT_POSTFIELDS] = $data;
@@ -230,7 +221,7 @@ final class RestCurlClientEx
     public function delete(string $url, array $http_options = [])
     {
         $this->http_options[CURLOPT_HTTPHEADER] = ['Authorization: Token ' . $this->seatable_token, 'Accept: application/json'];
-        $http_options += $this->http_options;
+        $http_options += $this->http_options->getArrayCopy();
         $http_options[CURLOPT_CUSTOMREQUEST] = 'DELETE';
         $this->handle = curl_init($url);
 

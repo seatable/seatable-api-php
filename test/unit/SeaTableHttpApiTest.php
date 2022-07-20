@@ -20,6 +20,7 @@ use stdClass;
  * @covers \SeaTable\SeaTableApi\SeaTableHttpApiTest
  * @covers \SeaTable\SeaTableApi\ServerMockTestCase
  * @uses \SeaTable\SeaTableApi\Internal\ApiOptions
+ * @uses \SeaTable\SeaTableApi\Internal\CurlHttpOptions
  */
 class SeaTableHttpApiTest extends ServerMockTestCase
 {
@@ -174,7 +175,7 @@ class SeaTableHttpApiTest extends ServerMockTestCase
 
         $reflectionHttpOptions = new \ReflectionProperty($restCurlClientEx, 'http_options');
         $reflectionHttpOptions->setAccessible(true);
-        return $reflectionHttpOptions->getValue($restCurlClientEx);
+        return $reflectionHttpOptions->getValue($restCurlClientEx)->getArrayCopy();
     }
 
     /**
