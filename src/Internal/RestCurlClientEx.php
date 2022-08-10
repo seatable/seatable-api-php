@@ -8,9 +8,7 @@ declare(strict_types=1);
 
 namespace SeaTable\SeaTableApi\Internal;
 
-use SeaTable\SeaTableApi\Compat\Deprecation\Php;
 use SeaTable\SeaTableApi\Exception;
-use stdClass;
 
 /**
  * RestCurlClientEx
@@ -286,7 +284,7 @@ final class RestCurlClientEx
                 curl_error($this->handle),
                 $result === '' ? ' (empty response)' : ''
             );
-            throw new Exception($message, -1);
+            throw new RestCurlClientExErrorException($message, -1);
         }
 
         $info = curl_getinfo($this->handle);
@@ -301,11 +299,11 @@ final class RestCurlClientEx
         }
 
         if ($code === 404) {
-            throw new Exception($code . ' - ' . $message . ' - ' . curl_error($this->handle), $code);
+            throw new RestCurlClientExResponseException($result, $code . ' - ' . $message . ' - ' . curl_error($this->handle), $code);
         }
 
         if ($code === 403) {
-            throw new Exception("Error " . $code . ': ' . $message . ': ' . $result, $code);
+            throw new RestCurlClientExResponseException($result, "Error " . $code . ': ' . $message . ': ' . $result, $code);
         }
 
         $message = sprintf(
@@ -314,6 +312,6 @@ final class RestCurlClientEx
             $message,
             addcslashes($result, "\0..\37\\\"\177..\377")
         );
-        throw new Exception($message, $code);
+        throw new RestCurlClientExResponseException($result, $message, $code);
     }
 }
