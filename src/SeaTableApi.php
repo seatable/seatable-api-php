@@ -737,7 +737,7 @@ class SeaTableApi
      * @param int $perPage
      * @return object
      */
-    public function sysAdminListDailyActiveUsers(string $date = '2020-08-12+00:00:00', int $page = 1, int $perPage = 25)
+    public function sysAdminListDailyActiveUsers(string $date = '2020-08-12 00:00:00', int $page = 1, int $perPage = 25)
     {
         $request = "$this->seatable_url/api/v2.1/admin/daily-active-users/?date=" . urlencode($date) . "&per_page=$perPage&page=$page";
         return $this->restCurlClientEx->get($request);
@@ -749,7 +749,7 @@ class SeaTableApi
     public function listDailyActiveUsers($date = '2020-08-12+00:00:00', $per_page = 5000, $page = 1)
     {
         Php::triggerMethodDeprecation('0.1.21', "use SeaTableApi::sysAdminListDailyActiveUsers() instead");
-        return $this->sysAdminListDailyActiveUsers($date, $page, $per_page);
+        return $this->sysAdminListDailyActiveUsers(urldecode($date), $page, $per_page);
     }
 
     /**
