@@ -1,6 +1,6 @@
 {
   "name": "seatable/seatable-api-php",
-  "description": "Simple PHP class to use the SeaTable Web API",
+  "description": "PHP bindings for the SeaTable Web API",
   "type": "library",
   "keywords": ["SeaTable"],
   "homepage": "https://seatable.io/",

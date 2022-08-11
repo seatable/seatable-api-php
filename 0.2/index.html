@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/">
       
       <link rel="icon" href="media/seatable-favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
@@ -692,15 +692,15 @@
 <span class="p">]);</span>
 
 <span class="c1">// get access with an api-token for a base</span>
-<span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">getBaseAccessToken</span><span class="p">(</span>
+<span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">getBaseAppAccessToken</span><span class="p">(</span>
     <span class="nv">$token</span> <span class="o">=</span> <span class="s1">&#39;1d3303315348c6b566c44709d459b33b6bac5ad1&#39;</span>
-<span class="p">]);</span>
+<span class="p">);</span>
 
 <span class="c1">// get access with your credentials (by workspace-id and table-name)</span>
-<span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">getBaseAppAccessToken</span><span class="p">(</span>
+<span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">getBaseAccessToken</span><span class="p">(</span>
     <span class="nv">$workspaceID</span> <span class="o">=</span> <span class="mi">1323</span><span class="p">,</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="s1">&#39;Project tracker&#39;</span>
-<span class="p">]);</span>
+<span class="p">);</span>
 
 <span class="c1">// start using the available api calls to edit the data inside a base</span>
 <span class="c1">// ...</span>
