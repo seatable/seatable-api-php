@@ -289,14 +289,14 @@ class SeaTableApi
     {
         $request = "$this->seatable_url/dtable-server/api/v1/dtables/$this->dtable_uuid/rows/";
         $request .= '?' . http_build_query([
-            'table_name' => $tableName,
-            'view_name' => $viewName,
-            'convert_link_id' => $convertLinkId ? 'true' : 'false',
-            'order_by' => $orderBy,
-            'direction' => $direction ? 'desc' : 'asc',
-            'start' => $start,
-            'limit' => $limit,
-        ]);
+                'table_name' => $tableName,
+                'view_name' => $viewName,
+                'convert_link_id' => $convertLinkId ? 'true' : 'false',
+                'order_by' => $orderBy,
+                'direction' => $direction ? 'desc' : 'asc',
+                'start' => $start,
+                'limit' => $limit,
+            ]);
 
         return $this->restCurlClientEx->get($request);
     }
@@ -490,7 +490,7 @@ class SeaTableApi
     public function sysAdminAddTeamUser(int $id, string $email, string $pass, string $name = null): object
     {
         $request = "$this->seatable_url/api/v2.1/admin/organizations/$id/users/";
-        null === $name && $name = (string)strtok($email, '@');
+        null === $name && $name = (string) strtok($email, '@');
         $user = [
             'email' => $email,
             'name' => $name,
@@ -672,7 +672,7 @@ class SeaTableApi
      */
     public function teamAdminAddGroup(int $id, string $groupName, string $groupOwner): object
     {
-        $request =  "$this->seatable_url/api/v2.1/org/$id/admin/groups/";
+        $request = "$this->seatable_url/api/v2.1/org/$id/admin/groups/";
 
         return $this->restCurlClientEx->post($request, [
             'group_name' => $groupName,
