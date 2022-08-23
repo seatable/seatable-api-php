@@ -114,7 +114,10 @@ class MethodsTest extends TestCase
             'add', 'append',
             'copy', 'create',
             'delete', 'get', 'import',
-            'list', 'ping', 'search',
+            'link',
+            'list', 'ping',
+            'query',
+            'search',
             'update',
         ];
         $actual = array_keys($verbs);
@@ -428,7 +431,7 @@ class MethodsTest extends TestCase
     public function testMethodDocblockHasLink(ReflectionMethod $method): void
     {
         $docComment = DocCommentSpy::from($method);
-        $linkPattern = '(^(?:@link (https://api\.seatable\.io/#)([a-z0-9-]+)$|@link {@pending /api/))D';
+        $linkPattern = '(^(?:@link (https://(?:api\.seatable\.io/#([a-z0-9-]+)$|seatable\.github\.io/))|@link {@pending /api/))D';
         $hasLink = $docComment->matches($linkPattern);
 
         $hasLinkOrIsDeprecated = $hasLink || $docComment->matches('(^@deprecated since )');

@@ -4,6 +4,7 @@ namespace SeaTable\SeaTableApi;
 
 use SeaTable\SeaTableApi\Internal\ApiOptions;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
+use SeaTable\SeaTableApi\Internal\Util;
 
 /**
  * SeaTable API - PHP class wrapper
@@ -285,6 +286,38 @@ class SeaTableApi
     }
 
     /**
+     * Get Base File Download Link via API Token
+     *
+     * @group Authentication / Base API Token
+     * @link https://api.seatable.io/#f1bf0c82-a948-483c-8007-7e4b50d06bbf
+     *
+     * @param string $path
+     * @param string $apiToken
+     * @return object{download_link: string}
+     */
+    public function getBaseAppFileDownloadLink(string $path, string $apiToken): object
+    {
+        $path = Util::urlToPath($this->seatable_url, $path) ?? $path;
+        $request = $this->seatable_url . '/api/v2.1/dtable/app-download-link/?path=' . urlencode($path);
+        return $this->restCurlClientEx->get($request, [], $apiToken);
+    }
+
+    /**
+     * Get Base File Upload Link via API Token
+     *
+     * @group Base Operations / Files/Images
+     * @link https://api.seatable.io/#5e86ebc8-1df6-4cef-acb7-eaa6ccd173c6
+     *
+     * @param string $apiToken
+     * @return object
+     */
+    public function getBaseAppFileUploadLink(string $apiToken): object
+    {
+        $request = $this->seatable_url . '/api/v2.1/dtable/app-upload-link/';
+        return $this->restCurlClientEx->get($request, [], $apiToken);
+    }
+
+    /**
      * Get Base Access Token via Auth Token
      *
      * @group Authentication / Base Access Token
@@ -301,6 +334,45 @@ class SeaTableApi
         $this->restCurlClientEx->access_token = $accessToken->access_token;
         $this->dtable_uuid = $accessToken->dtable_uuid;
         return $accessToken;
+    }
+
+    /**
+     * Query with SQL
+     *
+     * @group Base Operations / Archives / Base Query
+     * @link https://api.seatable.io/#440e7112-8076-463b-b3f2-cf654ab8e7d1
+     *
+     * @param string $sql
+     * @param bool $convertKeys
+     * @return object
+     */
+    public function querySql(string $sql, bool $convertKeys = false): object
+    {
+        $request = "$this->seatable_url/dtable-db/api/v1/query/$this->dtable_uuid/";
+        $definition = [
+            'sql' => $sql,
+            'convert_keys' => $convertKeys,
+        ];
+        $buffer = json_encode($definition);
+        if (!is_string($buffer)) {
+            throw new \UnexpectedValueException('Definition failed to encode (JSON)');
+        }
+        return $this->restCurlClientEx->post($request, $buffer);
+    }
+
+    /**
+     * Backquote SQL table name
+     *
+     * @group Base Operations / Archives / Base Query
+     *
+     * @link https://seatable.github.io/seatable-scripts/python/sql/#use-formulas-in-sql-query
+     *
+     * @param string $tableName
+     * @return string
+     */
+    public function querySqlQuoteTableName(string $tableName): string
+    {
+        return Util::quoteSqlTableName($tableName);
     }
 
     /**
@@ -382,6 +454,38 @@ class SeaTableApi
             throw new \UnexpectedValueException('Definition failed to encode (JSON)');
         }
         return $this->restCurlClientEx->put($request, $buffer);
+    }
+
+    /**
+     * Link Row
+     *
+     * @group Base Operations / Links
+     * @link https://api.seatable.io/#ff463ec1-140a-4190-b73f-dc41af561b48
+     *
+     * @param string $tableName
+     * @param string $otherTableName
+     * @param string $linkId
+     * @param string $tableRowId
+     * @param string $otherTableRowId
+     * @return object
+     */
+    public function linkRow(string $tableName, string $otherTableName, string $linkId, string $tableRowId, string $otherTableRowId): object
+    {
+        $request = "$this->seatable_url/dtable-server/api/v1/dtables/$this->dtable_uuid/links/";
+
+        $definition = [
+            'table_name' => $tableName,
+            'other_table_name' => $otherTableName,
+            'link_id' => $linkId,
+            'table_row_id' => $tableRowId,
+            'other_table_row_id' => $otherTableRowId,
+        ];
+        $buffer = json_encode($definition);
+        if (!is_string($buffer)) {
+            throw new \UnexpectedValueException('Definition failed to encode (JSON)');
+        }
+
+        return $this->restCurlClientEx->post($request, $buffer);
     }
 
     /**
