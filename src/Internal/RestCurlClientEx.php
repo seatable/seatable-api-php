@@ -337,6 +337,12 @@ final class RestCurlClientEx
             throw new Exception("Error " . $code . ': ' . $message . ': ' . $result, $code);
         }
 
-        throw new Exception($code . ' - ' . $message . ' - ' . 'Response: [' . $result . ']', $code);
+        $message = sprintf(
+            '%d - %s - Response: "%s"',
+            $code,
+            $message,
+            addcslashes($result, "\0..\37\\\"\177..\377")
+        );
+        throw new Exception($message, $code);
     }
 }
