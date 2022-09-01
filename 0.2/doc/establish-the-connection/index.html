@@ -10,14 +10,14 @@
         <meta name="author" content="SeaTable">
       
       
-        <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/doc/get-content-from-a-base/">
+        <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/doc/establish-the-connection/">
       
       <link rel="icon" href="../../media/seatable-favicon.ico">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.2">
     
     
       
-        <title>Get Content from a Base - SeaTable PHP API Manual</title>
+        <title>Establish the Connection - SeaTable PHP API Manual</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#example-get-content-from-a-base" class="md-skip">
+        <a href="#establish-the-connection" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Get Content from a Base
+              Establish the Connection
             
           </span>
         </div>
@@ -243,14 +243,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -285,59 +283,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Get Content from a Base
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../get-content-from-a-base/" class="md-nav__link">
         Get Content from a Base
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-php-code" class="md-nav__link">
-    Example PHP-code
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -406,16 +356,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
+  <a href="#options" class="md-nav__link">
+    Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usernamepassword-authentication" class="md-nav__link">
+    Username+Password Authentication
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#example-php-code" class="md-nav__link">
-    Example PHP-code
+        
+          <li class="md-nav__item">
+  <a href="#base-api-token-authentication" class="md-nav__link">
+    Base API-Token Authentication
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-authentication" class="md-nav__link">
+    Token Authentication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -431,30 +401,18 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/seatable/seatable-api-php/blob/main/doc/get-content-from-a-base.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/seatable/seatable-api-php/blob/main/doc/establish-the-connection.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="example-get-content-from-a-base">Example: Get Content from a Base<a class="headerlink" href="#example-get-content-from-a-base" title="Permanent link">&para;</a></h1>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>You need:</p>
-<ul>
-<li>a SeaTable account like <code>demo@example.com</code></li>
-<li>an API-key for a base like <code>1d3303315348c6b566c44709d459b33b6bac5ad1</code> (read-only is enough)</li>
-<li>the name of the table like <code>Articles</code></li>
-<li>the columns of this table:</li>
-<li><code>Status</code> (single select)</li>
-<li><code>Description</code></li>
-<li><code>Title</code></li>
-<li><code>URL</code></li>
-</ul>
-<h2 id="example-php-code">Example PHP-code<a class="headerlink" href="#example-php-code" title="Permanent link">&para;</a></h2>
+<h1 id="establish-the-connection">Establish the Connection<a class="headerlink" href="#establish-the-connection" title="Permanent link">&para;</a></h1>
+<p>The SeaTable PHP Api authenticates on creation by passing the authentication options as an associative array with the keys as option names and the values as the option values.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// setting up autoloader</span>
-<span class="k">require_once</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/vendor/autoload.php&#39;</span><span class="p">;</span>
 
 <span class="c1">// use SeaTable api class</span>
 <span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\SeaTableApi</span><span class="p">;</span>
@@ -462,37 +420,34 @@
 <span class="c1">// init and obtain auth token</span>
 <span class="nv">$seatable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SeaTableApi</span><span class="p">([</span>
     <span class="s1">&#39;url&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;https://cloud.seatable.io&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;user&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;demo@example.com&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;very-secure-password&#39;</span>
+    <span class="s1">&#39;user&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;YOUR-EMAIL&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;YOUR-PASSWORD&#39;</span>
 <span class="p">]);</span>
 
-<span class="c1">// get access with an api-token for a base</span>
-<span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">getBaseAppAccessToken</span><span class="p">(</span>
-    <span class="nv">$token</span> <span class="o">=</span> <span class="s1">&#39;1d3303315348c6b577c44709d459b33b6bac5ad1&#39;</span>
-<span class="p">);</span>
-
-<span class="c1">// get all rows from the table Articles</span>
-<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">listRowsByView</span><span class="p">(</span><span class="s1">&#39;Articles&#39;</span><span class="p">);</span>
-
-
-<span class="nv">$reportsHtml</span> <span class="o">=</span> <span class="s1">&#39;</span>
-<span class="s1">&lt;ul class=&quot;my-reports&quot;&gt;&#39;</span><span class="p">;</span>
-    <span class="k">foreach</span><span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">){</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Status</span> <span class="o">===</span> <span class="s1">&#39;published&#39;</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="nv">$reportsHtml</span> <span class="o">.=</span> <span class="s1">&#39;</span>
-<span class="s1">    &lt;li&gt;</span>
-<span class="s1">        &lt;h2&gt;&lt;a href=&quot;&#39;</span><span class="o">.</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">URL</span> <span class="o">.</span><span class="s1">&#39;&quot; target=&quot;_blank&quot;&gt;&#39;</span><span class="o">.</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Title</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span> <span class="o">|</span> <span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;&lt;/a&gt;&lt;/h2&gt;</span>
-<span class="s1">        &lt;div class=&quot;desc&gt;</span>
-<span class="s1">            &lt;p&gt;&#39;</span><span class="o">.</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Description</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span> <span class="o">|</span> <span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;&lt;/p&gt;</span>
-<span class="s1">        &lt;/div&gt;</span>
-<span class="s1">    &lt;/li&gt;&#39;</span><span class="p">;</span>
-    <span class="p">}}</span>
-    <span class="nv">$reportsHtml</span> <span class="o">.=</span> <span class="s1">&#39;</span>
-<span class="s1">&lt;/ul&gt;&#39;</span><span class="p">;</span>
-
-<span class="k">echo</span> <span class="nv">$reportsHtml</span><span class="p">;</span>
+<span class="c1">// start using the available api calls</span>
+<span class="k">echo</span> <span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">ping</span><span class="p">();</span>
 </code></pre></div>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>url</code> URL of the SeaTable server instance. Without a trailing slash.</li>
+</ul>
+<p>Depending on which authentication variant, the other options differ:</p>
+<h3 id="usernamepassword-authentication">Username+Password Authentication<a class="headerlink" href="#usernamepassword-authentication" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>user</code> Username as used in the frontend to login (email).</li>
+<li><code>password</code> Password.</li>
+</ul>
+<h3 id="base-api-token-authentication">Base API-Token Authentication<a class="headerlink" href="#base-api-token-authentication" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>base_api_token</code> API token for the base to authenticate against.</li>
+<li><code>base_app_name</code> (optional) Name of the base app (can be given when creating the API token). Is verified when given.</li>
+</ul>
+<p>Compare <em>b) Base authentication (base access token)</em> in <a href="https://api.seatable.io/#da9d1462-3945-41df-96c6-22cd63c97540">Authentication (api.seatable.io)</a>.</p>
+<h3 id="token-authentication">Token Authentication<a class="headerlink" href="#token-authentication" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>auth_token</code> The authentication token.</li>
+</ul>
+<p>Compare <em>a) User authentication (auth token)</em> in <a href="https://api.seatable.io/#da9d1462-3945-41df-96c6-22cd63c97540">Authentication (api.seatable.io)</a>.</p>
 
 
 
@@ -506,27 +461,6 @@
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../add-new-column-to-base/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Add a new Column to a Base" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Add a new Column to a Base
-            </div>
-          </div>
-        </a>
-      
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
