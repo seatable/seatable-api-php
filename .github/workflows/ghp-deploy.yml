@@ -5,10 +5,10 @@ on:
     paths: [ '.github/workflows/ghp-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
   pull_request:
     paths: [ '.github/workflows/ghp-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
-    branches: [ 'next' ]
+    branches: [ 'main', 'next' ]
   push:
     paths: [ '.github/workflows/ghp-deploy.yml', '.config/mkdocs/**', 'doc/*.md', '*.md' ]
-    branches: [ 'next' ]
+    branches: [ 'main', 'next' ]
 
 jobs:
   deploy:
@@ -22,7 +22,7 @@ jobs:
       - working-directory: .config/mkdocs
         env:
           MIKE_VERSION: 0.2
-          MIKE_TITLE: next
+          MIKE_TITLE: main
           SOURCE_DATE_EPOCH: 0
         run: |
           set -x
