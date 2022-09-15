@@ -11,5 +11,8 @@
     </url><url>
      <loc>https://seatable.github.io/seatable-api-php/0.2/doc/get-content-from-a-base/</loc>
      <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://seatable.github.io/seatable-api-php/0.2/doc/establish-the-connection/</loc>
+     <changefreq>daily</changefreq>
     </url>
 </urlset>
