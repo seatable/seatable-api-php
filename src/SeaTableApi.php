@@ -4,6 +4,7 @@ namespace SeaTable\SeaTableApi;
 
 use SeaTable\SeaTableApi\Internal\ApiOptions;
 use SeaTable\SeaTableApi\Internal\RestCurlClientEx;
+use SeaTable\SeaTableApi\Internal\RestCurlClientExInterface;
 use SeaTable\SeaTableApi\Internal\Util;
 
 /**
@@ -24,7 +25,7 @@ class SeaTableApi
     private $dtable_uuid;
 
     /**
-     * @var RestCurlClientEx
+     * @var RestCurlClientExInterface
      */
     private $restCurlClientEx;
 

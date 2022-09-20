@@ -24,7 +24,7 @@ use SeaTable\SeaTableApi\Exception;
  *
  * @internal
  */
-final class RestCurlClientEx
+final class RestCurlClientEx implements RestCurlClientExInterface
 {
     /**
      * Auth Token
@@ -103,7 +103,7 @@ final class RestCurlClientEx
      *
      * @param string $url The url to make the call to.
      * @param array $http_options Extra option to pass to curl handle.
-     * @return object The response from curl if any
+     * @return object|array|string|null The (decoded) response body from curl if any
      */
     public function get(string $url, array $http_options = [], string $api_token = "")
     {
@@ -275,7 +275,7 @@ final class RestCurlClientEx
      * @param string|bool $result The curl object
      * @throws Exception
      */
-    private function http_parse_message($result)
+    private function http_parse_message($result): void
     {
         if ($result === '' || $result === false) {
             $message = sprintf(
