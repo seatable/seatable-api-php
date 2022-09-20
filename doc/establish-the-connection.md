@@ -27,7 +27,7 @@ echo $seatable->ping();
 
 Depending on which authentication is preferred, other options are different.
 
-!!! info "SeaTable Cloud Team-Admin"
+!!! tip "SeaTable Cloud Team-Admin"
 
     Find your API Token and Base Tokens under [**API & Integrations** (account.seatable.io)](https://account.seatable.io/api).
 
@@ -50,10 +50,26 @@ Depending on which authentication is preferred, other options are different.
 
     Compare _a) User authentication (auth token)_ in [**Authentication** (api.seatable.io)](https://api.seatable.io/#da9d1462-3945-41df-96c6-22cd63c97540).
 
-### Base API-Token Authentication
+### Base-App-API-Token Authentication
 
-* `base_api_token` API token for the base to authenticate against.
+* `base_app_api_token` API token for the base app to authenticate against.
 * `base_app_name` (optional) Name of the base app (can be given when creating the API token). Is verified when given.
+
+??? info "In the SeaTable API Docs"
+
+    !!! quote "Base API Token"
+
+        Base API Tokens are extremely useful if you would like a third-party integration to manipulate your base automatically for you.
+
+        For each third-party App, you can create a unique App API Token for them and define read/write permissions. This token is then valid until you delete them.
+
+    Compare _Base API Token_ in [**Authentication** (api.seatable.io)](https://api.seatable.io/#6204fb15-8a49-4c98-8afd-71fd95ff033a).
+
+---
+
+## The Base-Access-Token
+
+This form of authentication is used in the API and the SeaTable API PHP binding handles it during connection.  It is not available with one of the authentication options above directly, instead it is acquired by the `getBaseAccessToken()` method to enable base access with [_Username+Password Authentication_](#usernamepassword-authentication) for a specific workspace and base.
 
 ??? info "In the SeaTable API Docs"
 
@@ -68,3 +84,7 @@ Depending on which authentication is preferred, other options are different.
         3. create a base access token via invite link token
 
     Compare _b) Base authentication (base access token)_ in [**Authentication** (api.seatable.io)](https://api.seatable.io/#da9d1462-3945-41df-96c6-22cd63c97540).
+
+??? done "Legacy Information"
+
+    The pairing method `getBaseAppAccessToken()` is still available to obtain an base-access-token with the [_Base-App-API-Token Authentication_](#base-app-api-token-authentication) token, but it is recommended to use the now existing option instead: `base_app_api_token`.

@@ -54,17 +54,17 @@ final class ApiOptions
         $connectOptions->user = $options['user'] ?? null;
         $connectOptions->password = $options['password'] ?? null;
 
-        // (B) base-api-token
-        if (!is_string($options['base_api_token'] ?? '')) {
+        // (B) base-app-api-token
+        if (!is_string($options['base_app_api_token'] ?? $options['base_api_token'] ?? '')) {
             throw new Exception("SeaTable base api-token has bad format.");
         }
         if (!is_string($options['base_app_name'] ?? '')) {
             throw new Exception("SeaTable base api-token has bad format.");
         }
-        $connectOptions->baseApiToken = $options['base_api_token'] ?? null;
+        $connectOptions->baseAppApiToken = $options['base_app_api_token'] ?? $options['base_api_token'] ?? null;
         $connectOptions->baseAppName = $options['base_app_name'] ?? null;
 
-        // (C) authentication-api-token
+        // (C) auth-token
         if (!is_string($options['auth_token'] ?? $options['api_token'] ?? '')) {
             throw new Exception("SeaTable api authentication token has bad format.");
         }
@@ -73,9 +73,9 @@ final class ApiOptions
 
         $authTypes = new \stdClass();
         $authTypes->user = isset($connectOptions->user, $connectOptions->password);
-        $authTypes->apiToken = isset($connectOptions->baseApiToken);
+        $authTypes->baseAppApiToken = isset($connectOptions->baseAppApiToken);
         $authTypes->authToken = isset($connectOptions->authToken);
-        if (!($authTypes->user || $authTypes->apiToken || $authTypes->authToken)) {
+        if (!($authTypes->user || $authTypes->baseAppApiToken || $authTypes->authToken)) {
             throw new Exception("SeaTable user is missing or has a bad format.");
         }
 
@@ -132,7 +132,7 @@ final class ApiOptions
 
     public function authIsApi(): bool
     {
-        return isset($this->connectOptions->baseApiToken);
+        return isset($this->connectOptions->baseAppApiToken);
     }
 
     public function authIsToken(): bool
@@ -142,7 +142,7 @@ final class ApiOptions
 
     public function getBaseApiToken(): ?string
     {
-        return $this->connectOptions->baseApiToken;
+        return $this->connectOptions->baseAppApiToken;
     }
 
     public function getBaseAppName(): ?string
