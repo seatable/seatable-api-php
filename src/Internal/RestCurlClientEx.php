@@ -52,6 +52,7 @@ final class RestCurlClientEx implements RestCurlClientExInterface
 
     /**
      * cUrl options
+     *
      * @var CurlHttpOptions
      */
     private $http_options;
@@ -306,11 +307,16 @@ final class RestCurlClientEx implements RestCurlClientExInterface
             throw new RestCurlClientExResponseException($result, "Error " . $code . ': ' . $message . ': ' . $result, $code);
         }
 
+        $maxLen = 256;
+        $len = strlen($result);
+        $overlong = $len > $maxLen;
         $message = sprintf(
-            '%d - %s - Response: "%s"',
+            '%d - %s - Response: (%d)"%s%s',
             $code,
             $message,
-            addcslashes($result, "\0..\37\\\"\177..\377")
+            $len,
+            $overlong ? sprintf('... (%d more)', $len - $maxLen) : '"',
+            addcslashes($overlong ? substr($result, 0, $maxLen) : $result, "\0..\37\\\"\177..\377")
         );
         throw new RestCurlClientExResponseException($result, $message, $code);
     }
