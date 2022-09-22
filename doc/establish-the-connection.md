@@ -87,4 +87,4 @@ This form of authentication is used in the API and the SeaTable API PHP binding 
 
 ??? done "Legacy Information"
 
-    The pairing method `getBaseAppAccessToken()` is still available to obtain an base-access-token with the [_Base-App-API-Token Authentication_](#base-app-api-token-authentication) token, but it is recommended to use the now existing option instead: `base_app_api_token`.
+    The pairing method `getBaseAppAccessToken()` is still available to obtain a base-access-token with the [_Base-App-API-Token Authentication_](#base-app-api-token-authentication) token, but it is recommended to use the now existing option instead: `base_app_api_token`.
