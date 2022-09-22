@@ -1,0 +1,1417 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="SeaTable">
+      
+      
+        <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/doc/seatableapi-php/">
+      
+      <link rel="icon" href="../../media/seatable-favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+    
+    
+      
+        <title>SeaTableApi (PHP) - SeaTable PHP API Manual</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a952b86.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#seatableapi-php" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SeaTable PHP API Manual" class="md-header__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
+      
+  <img src="../../media/SeaTable256-256.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeaTable PHP API Manual
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SeaTableApi (PHP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/seatable/seatable-api-php/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    seatable/seatable-api-php
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SeaTable PHP API Manual" class="md-nav__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
+      
+  <img src="../../media/SeaTable256-256.png" alt="logo">
+
+    </a>
+    SeaTable PHP API Manual
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/seatable/seatable-api-php/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    seatable/seatable-api-php
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UPGRADING/" class="md-nav__link">
+        Upgrading
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Examples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-new-column-to-base/" class="md-nav__link">
+        Add a new Column to a Base
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get-content-from-a-base/" class="md-nav__link">
+        Get Content from a Base
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Topics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Topics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Topics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../establish-the-connection/" class="md-nav__link">
+        Establish the Connection
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://api.seatable.io" class="md-nav__link">
+        SeaTable API Docs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://seatable.io/" class="md-nav__link">
+        SeaTable Homepage
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/seatable/seatable-api-php/blob/main/doc/seatableapi-php.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="seatableapi-php">SeaTableApi (PHP)<a class="headerlink" href="#seatableapi-php" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">SeaTable\SeaTableApi</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\Internal\ApiOptions</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\Internal\RestCurlClientEx</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\Internal\RestCurlClientExInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\Internal\Util</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * SeaTable API - PHP class wrapper</span>
+<span class="sd"> *</span>
+<span class="sd"> * @author &lt;cdb@seatable.io&gt; (thanks for the inspiration by &lt;ben@netcap.fr&gt;)</span>
+<span class="sd"> * @copyright 2020, 2021 SeaTable GmbH</span>
+<span class="sd"> * @license APACHE-2.0</span>
+<span class="sd"> *</span>
+<span class="sd"> * SeaTable - Next-generation online spreadsheet &lt;https://seatable.io&gt;</span>
+<span class="sd"> *</span>
+<span class="sd"> * SeaTable API &lt;https://api.seatable.io/&gt; (formerly: &lt;https://docs.seatable.io/published/seatable-api/home.md&gt;)</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">SeaTableApi</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$seatable_url</span><span class="p">;</span>                          <span class="c1"># url of the SeaTable server</span>
+
+    <span class="k">private</span> <span class="nv">$dtable_uuid</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @var RestCurlClientExInterface</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="nv">$restCurlClientEx</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Instantiate SeaTable class</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array{url: string, user: string, password: string, port?: int, base_api_token?: string, base_app_name?: string, api_token?: string} $options</span>
+<span class="sd">     * @throws Exception</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+    <span class="p">{</span>
+        <span class="cm">/*</span>
+<span class="cm">         * Input validation</span>
+<span class="cm">         */</span>
+        <span class="nv">$apiOptions</span> <span class="o">=</span> <span class="nx">ApiOptions</span><span class="o">::</span><span class="na">createFromArray</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">=</span> <span class="nv">$apiOptions</span><span class="o">-&gt;</span><span class="na">getUrl</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RestCurlClientEx</span><span class="p">(</span><span class="nv">$apiOptions</span><span class="o">-&gt;</span><span class="na">getHttpOptions</span><span class="p">());</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authenticate</span><span class="p">(</span><span class="nv">$apiOptions</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * authenticate based on options</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param ApiOptions $options</span>
+<span class="sd">     * @return void</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">authenticate</span><span class="p">(</span><span class="nx">ApiOptions</span> <span class="nv">$options</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="o">-&gt;</span><span class="na">authIsUser</span><span class="p">())</span> <span class="p">{</span>
+            <span class="c1">// $this-&gt;restCurlClientEx-&gt;seatable_token</span>
+            <span class="c1">// 2.1 &#39;Authorization: Token &#39; . $this-&gt;seatable_token</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getAuthToken</span><span class="p">(</span><span class="nv">$options</span><span class="o">-&gt;</span><span class="na">getUser</span><span class="p">(),</span> <span class="nv">$options</span><span class="o">-&gt;</span><span class="na">getPassword</span><span class="p">());</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="o">-&gt;</span><span class="na">authIsApi</span><span class="p">())</span> <span class="p">{</span>
+            <span class="c1">// $this-&gt;restCurlClientEx-&gt;access_token = $o-&gt;access_token;</span>
+            <span class="c1">// api/v1/dtables &#39;Authorization: Token &#39; . $this-&gt;access_token</span>
+            <span class="nv">$accessToken</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getBaseAppAccessToken</span><span class="p">(</span><span class="nv">$options</span><span class="o">-&gt;</span><span class="na">getBaseApiToken</span><span class="p">());</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$expectedAppName</span> <span class="o">=</span> <span class="nv">$options</span><span class="o">-&gt;</span><span class="na">getBaseAppName</span><span class="p">())</span>
+                <span class="o">&amp;&amp;</span> <span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">app_name</span> <span class="o">!==</span> <span class="nv">$expectedAppName</span>
+            <span class="p">)</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;SeaTable invalid application name: &quot;%s&quot;&#39;</span><span class="p">,</span> <span class="nv">$expectedAppName</span><span class="p">));</span>
+            <span class="p">}</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$options</span><span class="o">-&gt;</span><span class="na">authIsToken</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">seatable_token</span> <span class="o">=</span> <span class="nv">$options</span><span class="o">-&gt;</span><span class="na">getAuthToken</span><span class="p">();</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s1">&#39;SeaTable found no authentication option.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Obtain SeaTable Auth Token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $username</span>
+<span class="sd">     * @param string $password</span>
+<span class="sd">     * @return void</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">getAuthToken</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$username</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api2/auth-token/&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$username</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$password</span><span class="p">,</span>
+        <span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">seatable_token</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$data</span><span class="o">-&gt;</span><span class="na">token</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Ping Server (with authentication)</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Authentication / Ping Server</span>
+<span class="sd">     * @link https://api.seatable.io/#5a2261c2-4e87-44fa-8b28-0145759de970</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return string &quot;pong&quot; if auth token is correct</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">ping</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api2/auth/ping/&#39;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get Account Info</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Account</span>
+<span class="sd">     * @link https://api.seatable.io/#66ce3ca0-edc5-486b-8877-91157bb71d7d</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAccountInfo</span><span class="p">()</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api2/account/info/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List All Users</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Users</span>
+<span class="sd">     * @link https://api.seatable.io/#883d8faf-1f2a-4033-8904-0171fece890c</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $page Select Page the users shown from (default 1)</span>
+<span class="sd">     * @param int $perPage Number of users that should be shown (default = 25)</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminListUsers</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/users/?per_page=</span><span class="si">$perPage</span><span class="s2">&amp;page=</span><span class="si">$page</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Add New User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Users</span>
+<span class="sd">     * @link https://api.seatable.io/#922eb788-ebad-47b1-af34-e1aec536182e</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $email</span>
+<span class="sd">     * @param string $name</span>
+<span class="sd">     * @param string $password</span>
+<span class="sd">     * @param string $role</span>
+<span class="sd">     * @return object with user account details</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminAddUser</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$name</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$role</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/users/&quot;</span><span class="p">;</span>
+        <span class="nv">$form</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$email</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$password</span><span class="p">,</span>
+            <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="nv">$role</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$form</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Search a User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Users</span>
+<span class="sd">     * @link https://api.seatable.io/#95fcb3f1-5496-4113-a078-22972c19e583</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $query</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminSearchUser</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$query</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/search-user/?query=&quot;</span> <span class="o">.</span> <span class="nb">urlencode</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Update User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Users</span>
+<span class="sd">     * @link https://api.seatable.io/#8fcb4411-4007-495a-b3f3-c3014c4f7ace</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $email</span>
+<span class="sd">     * @param array $changes role, ...</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminUpdateUser</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$changes</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/users/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$changes</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Delete User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Users</span>
+<span class="sd">     * @link https://api.seatable.io/#17bdf15e-fbb8-4fa9-b8ef-43841fc6c40d</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $email</span>
+<span class="sd">     * @return array|object|string|null</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminDeleteUser</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$email</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/users/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Workspaces</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Workspaces</span>
+<span class="sd">     * @link https://api.seatable.io/#bb823388-ccfb-4dc2-bb01-5eb81acb6683</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">listWorkspaces</span><span class="p">()</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/workspaces/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Update a Base</span>
+<span class="sd">     *</span>
+<span class="sd">     * Update a base&#39;s name, icon and icon color.</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Bases / Base Management</span>
+<span class="sd">     * @link https://api.seatable.io/#55d6c818-3247-4b89-b169-9de2872a023f</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $workspaceId</span>
+<span class="sd">     * @param string $baseName</span>
+<span class="sd">     * @param array $changes</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">updateBase</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$workspaceId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$baseName</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$changes</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$changes</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$baseName</span><span class="p">;</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/workspace/</span><span class="si">$workspaceId</span><span class="s2">/dtable/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$changes</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Copy a Base from an External Link</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Bases / Base Management</span>
+<span class="sd">     * @link https://api.seatable.io/#21b89497-80a0-4b35-9543-5d584e92fa80</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $link</span>
+<span class="sd">     * @param int $destinationWorkspaceId</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">copyBaseExternalLink</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$link</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$destinationWorkspaceId</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/dtable-external-link/dtable-copy/&quot;</span><span class="p">;</span>
+        <span class="nv">$f</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;link&#39;</span> <span class="o">=&gt;</span> <span class="nv">$link</span><span class="p">,</span>
+            <span class="s1">&#39;dst_workspace_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$destinationWorkspaceId</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$f</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get Base Access Token via API Token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Authentication / Base Access Token</span>
+<span class="sd">     * @link https://api.seatable.io/#3b782fd2-6091-4871-acc7-2725bfc7e067</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $apiToken</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBaseAppAccessToken</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$apiToken</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/dtable/app-access-token/&#39;</span><span class="p">;</span>
+        <span class="nv">$appAccessToken</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[],</span> <span class="nv">$apiToken</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">access_token</span> <span class="o">=</span> <span class="nv">$appAccessToken</span><span class="o">-&gt;</span><span class="na">access_token</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dtable_uuid</span> <span class="o">=</span> <span class="nv">$appAccessToken</span><span class="o">-&gt;</span><span class="na">dtable_uuid</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$appAccessToken</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get Base File Download Link via API Token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Authentication / Base API Token</span>
+<span class="sd">     * @link https://api.seatable.io/#f1bf0c82-a948-483c-8007-7e4b50d06bbf</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $path</span>
+<span class="sd">     * @param string $apiToken</span>
+<span class="sd">     * @return object{download_link: string}</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBaseAppFileDownloadLink</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$path</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$apiToken</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$path</span> <span class="o">=</span> <span class="nx">Util</span><span class="o">::</span><span class="na">urlToPath</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span><span class="p">,</span> <span class="nv">$path</span><span class="p">)</span> <span class="o">??</span> <span class="nv">$path</span><span class="p">;</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/dtable/app-download-link/?path=&#39;</span> <span class="o">.</span> <span class="nb">urlencode</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[],</span> <span class="nv">$apiToken</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get Base File Upload Link via API Token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Files/Images</span>
+<span class="sd">     * @link https://api.seatable.io/#5e86ebc8-1df6-4cef-acb7-eaa6ccd173c6</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $apiToken</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBaseAppFileUploadLink</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$apiToken</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/dtable/app-upload-link/&#39;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[],</span> <span class="nv">$apiToken</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get Base Access Token via Auth Token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Authentication / Base Access Token</span>
+<span class="sd">     * @link https://api.seatable.io/#7b251436-a4f1-4793-bd03-678caa32c29d</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $workspaceId</span>
+<span class="sd">     * @param string $baseName</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBaseAccessToken</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$workspaceId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$baseName</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/workspace/</span><span class="si">$workspaceId</span><span class="s2">/dtable/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$baseName</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/access-token/&#39;</span><span class="p">;</span>
+        <span class="nv">$accessToken</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">access_token</span> <span class="o">=</span> <span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">access_token</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dtable_uuid</span> <span class="o">=</span> <span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">dtable_uuid</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$accessToken</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Query with SQL</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Archives / Base Query</span>
+<span class="sd">     * @link https://api.seatable.io/#440e7112-8076-463b-b3f2-cf654ab8e7d1</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $sql</span>
+<span class="sd">     * @param bool $convertKeys</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">querySql</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$sql</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$convertKeys</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/dtable-db/api/v1/query/</span><span class="si">$this-&gt;dtable_uuid</span><span class="s2">/&quot;</span><span class="p">;</span>
+        <span class="nv">$definition</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;sql&#39;</span> <span class="o">=&gt;</span> <span class="nv">$sql</span><span class="p">,</span>
+            <span class="s1">&#39;convert_keys&#39;</span> <span class="o">=&gt;</span> <span class="nv">$convertKeys</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="nv">$buffer</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">is_string</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\UnexpectedValueException</span><span class="p">(</span><span class="s1">&#39;Definition failed to encode (JSON)&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Backquote SQL table name</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Archives / Base Query</span>
+<span class="sd">     *</span>
+<span class="sd">     * @link https://seatable.github.io/seatable-scripts/python/sql/#use-formulas-in-sql-query</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $tableName</span>
+<span class="sd">     * @return string</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">querySqlQuoteTableName</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$tableName</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Util</span><span class="o">::</span><span class="na">quoteSqlTableName</span><span class="p">(</span><span class="nv">$tableName</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Rows</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Rows</span>
+<span class="sd">     * @link https://api.seatable.io/#c7caa77d-6214-4ca1-bb91-5c1d3d19c52d</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $tableName</span>
+<span class="sd">     * @param string|null $viewName</span>
+<span class="sd">     * @param bool $convertLinkId</span>
+<span class="sd">     * @param string|null $orderBy</span>
+<span class="sd">     * @param bool $direction false: ascending, true: descending</span>
+<span class="sd">     * @param int $start</span>
+<span class="sd">     * @param int $limit</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">listRows</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$tableName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$viewName</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$convertLinkId</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$orderBy</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$direction</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$limit</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/dtable-server/api/v1/dtables/</span><span class="si">$this-&gt;dtable_uuid</span><span class="s2">/rows/&quot;</span><span class="p">;</span>
+        <span class="nv">$request</span> <span class="o">.=</span> <span class="s1">&#39;?&#39;</span> <span class="o">.</span> <span class="nb">http_build_query</span><span class="p">([</span>
+                <span class="s1">&#39;table_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$tableName</span><span class="p">,</span>
+                <span class="s1">&#39;view_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$viewName</span><span class="p">,</span>
+                <span class="s1">&#39;convert_link_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$convertLinkId</span> <span class="o">?</span> <span class="s1">&#39;true&#39;</span> <span class="o">:</span> <span class="s1">&#39;false&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;order_by&#39;</span> <span class="o">=&gt;</span> <span class="nv">$orderBy</span><span class="p">,</span>
+                <span class="s1">&#39;direction&#39;</span> <span class="o">=&gt;</span> <span class="nv">$direction</span> <span class="o">?</span> <span class="s1">&#39;desc&#39;</span> <span class="o">:</span> <span class="s1">&#39;asc&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;start&#39;</span> <span class="o">=&gt;</span> <span class="nv">$start</span><span class="p">,</span>
+                <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="nv">$limit</span><span class="p">,</span>
+            <span class="p">]);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Append Row</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Rows</span>
+<span class="sd">     * @link https://api.seatable.io/#28fa1ae4-3b6d-43c7-99ea-79a458cee213</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $tableName</span>
+<span class="sd">     * @param array $row</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">appendRow</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$tableName</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$row</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/dtable-server/api/v1/dtables/</span><span class="si">$this-&gt;dtable_uuid</span><span class="s2">/rows/&quot;</span><span class="p">;</span>
+        <span class="nv">$definition</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;table_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$tableName</span><span class="p">,</span>
+            <span class="s1">&#39;row&#39;</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="nv">$buffer</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">is_string</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\UnexpectedValueException</span><span class="p">(</span><span class="s1">&#39;Definition failed to encode (JSON)&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Update Row</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Rows</span>
+<span class="sd">     * @link https://api.seatable.io/#8397f141-4df6-438e-858a-1ccc112cda75</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $tableName</span>
+<span class="sd">     * @param array $row</span>
+<span class="sd">     * @param string $rowId</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">updateRow</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$tableName</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$row</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$rowId</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/dtable-server/api/v1/dtables/</span><span class="si">$this-&gt;dtable_uuid</span><span class="s2">/rows/&quot;</span><span class="p">;</span>
+        <span class="nv">$definition</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;table_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$tableName</span><span class="p">,</span>
+            <span class="s1">&#39;row&#39;</span> <span class="o">=&gt;</span> <span class="nv">$row</span><span class="p">,</span>
+            <span class="s1">&#39;row_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$rowId</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="nv">$buffer</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">is_string</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\UnexpectedValueException</span><span class="p">(</span><span class="s1">&#39;Definition failed to encode (JSON)&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Link Row</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Links</span>
+<span class="sd">     * @link https://api.seatable.io/#ff463ec1-140a-4190-b73f-dc41af561b48</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $tableName</span>
+<span class="sd">     * @param string $otherTableName</span>
+<span class="sd">     * @param string $linkId</span>
+<span class="sd">     * @param string $tableRowId</span>
+<span class="sd">     * @param string $otherTableRowId</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">linkRow</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$tableName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$otherTableName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$linkId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$tableRowId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$otherTableRowId</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/dtable-server/api/v1/dtables/</span><span class="si">$this-&gt;dtable_uuid</span><span class="s2">/links/&quot;</span><span class="p">;</span>
+
+        <span class="nv">$definition</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;table_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$tableName</span><span class="p">,</span>
+            <span class="s1">&#39;other_table_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$otherTableName</span><span class="p">,</span>
+            <span class="s1">&#39;link_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$linkId</span><span class="p">,</span>
+            <span class="s1">&#39;table_row_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$tableRowId</span><span class="p">,</span>
+            <span class="s1">&#39;other_table_row_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$otherTableRowId</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="nv">$buffer</span> <span class="o">=</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$definition</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">is_string</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\UnexpectedValueException</span><span class="p">(</span><span class="s1">&#39;Definition failed to encode (JSON)&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get Base Metadata</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Base Operations / Bases Infos</span>
+<span class="sd">     * @link https://api.seatable.io/#0ba333a2-7450-4b03-8efb-6c49d6b47a0e</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getBaseMetadata</span><span class="p">()</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/dtable-server/api/v1/dtables/&#39;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dtable_uuid</span> <span class="o">.</span> <span class="s1">&#39;/metadata/&#39;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List of Daily Active Users</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Statistics</span>
+<span class="sd">     * @link https://api.seatable.io/#a3590cbf-1ec4-4148-8aa4-308d10a8437e</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $date</span>
+<span class="sd">     * @param int $page</span>
+<span class="sd">     * @param int $perPage</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminListDailyActiveUsers</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$date</span> <span class="o">=</span> <span class="s1">&#39;2020-08-12 00:00:00&#39;</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/daily-active-users/?date=&quot;</span> <span class="o">.</span> <span class="nb">urlencode</span><span class="p">(</span><span class="nv">$date</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot;&amp;per_page=</span><span class="si">$perPage</span><span class="s2">&amp;page=</span><span class="si">$page</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Teams (Organizations)</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#3eec0a21-4322-46b8-936d-d003ef540852</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $page</span>
+<span class="sd">     * @param int $perPage</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminListTeams</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/?per_page=</span><span class="si">$perPage</span><span class="s2">&amp;page=</span><span class="si">$page</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Add Team (Organization)</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#4dc845bd-9eb2-4ab5-a57f-8d1bdebd62bf</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $name of team (organization)</span>
+<span class="sd">     * @param string $adminEmail</span>
+<span class="sd">     * @param string $adminName</span>
+<span class="sd">     * @param string $password</span>
+<span class="sd">     * @param int $maxUser</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminAddTeam</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$name</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$adminEmail</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$adminName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$password</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$maxUser</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/&quot;</span><span class="p">;</span>
+        <span class="nv">$org</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;org_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
+            <span class="s1">&#39;admin_email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$adminEmail</span><span class="p">,</span>
+            <span class="s1">&#39;admin_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$adminName</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$password</span><span class="p">,</span>
+            <span class="s1">&#39;max_user_number&#39;</span> <span class="o">=&gt;</span> <span class="nv">$maxUser</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$org</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Delete Team (Organization)</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#424afa58-ad74-444d-8007-8bfeee79ff87</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminDeleteTeam</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Update Team (Organization)</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#e9f4b4cd-e234-42c2-9159-b05ff33c23ca</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @param array $changes possible changes are: role, max_user_number, org_name, row_limit, asset_quota</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminUpdateTeam</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$changes</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$changes</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Team Members</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#f5dad123-02a7-4b50-a9a0-464cebd7c922</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @param int $page</span>
+<span class="sd">     * @param int $perPage</span>
+<span class="sd">     * @param bool $isStaff defaults to false which includes all users (incl. team admins)</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminListTeamUsers</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$isStaff</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/users/?per_page=</span><span class="si">$perPage</span><span class="s2">&amp;page=</span><span class="si">$page</span><span class="s2">&amp;is_staff=&quot;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$isStaff</span> <span class="o">?</span> <span class="s1">&#39;true&#39;</span> <span class="o">:</span> <span class="s1">&#39;false&#39;</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Add a Team User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#ee0150d3-d5a4-43e4-9d5f-0cb5f207f168</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @param string $email</span>
+<span class="sd">     * @param string $pass</span>
+<span class="sd">     * @param string|null $name</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminAddTeamUser</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$pass</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$name</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/users/&quot;</span><span class="p">;</span>
+        <span class="k">null</span> <span class="o">===</span> <span class="nv">$name</span> <span class="o">&amp;&amp;</span> <span class="nv">$name</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nb">strtok</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span><span class="p">);</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$email</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nv">$pass</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Delete a Team User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#e7bd43e5-ef48-4dd1-85b1-be5118ca4dc4</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id Team</span>
+<span class="sd">     * @param string $email User</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminDeleteTeamUser</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$email</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/users/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Team Groups</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#42e907af-577c-49c0-8cbf-28d03c65c01c</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminListTeamGroups</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/groups/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Team Bases</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#b1fe997d-f5e5-48fc-ab1b-0b5b4e9df6ab</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @param int $page</span>
+<span class="sd">     * @param int $perPage</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminListTeamBases</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/dtables/?per_page=</span><span class="si">$perPage</span><span class="s2">&amp;page=</span><span class="si">$page</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get User&#39;s Common Info</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Account</span>
+<span class="sd">     * @link https://api.seatable.io/#c78b6b44-b238-46a6-a9c5-c70aec1faa71</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $email</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getCommonInfo</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$email</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/user-common-info/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get a Team</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Teams (organizations)</span>
+<span class="sd">     * @link https://api.seatable.io/#bf22f375-4eba-4fe4-ba09-fe8082dc5fd6</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminGetTeam</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/organizations/</span><span class="si">$id</span><span class="s2">/&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Add System Notification to User</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / System Notifications</span>
+<span class="sd">     * @link https://api.seatable.io/#65927c78-d524-456e-aaa8-674019b5bd98</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $msg</span>
+<span class="sd">     * @param string $username</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sysAdminAddSystemNotificationToUser</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$msg</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$username</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/sys-user-notifications/&quot;</span><span class="p">;</span>
+        <span class="nv">$body</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;msg&#39;</span> <span class="o">=&gt;</span> <span class="nv">$msg</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$username</span><span class="p">,</span>
+        <span class="p">];</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$body</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List System Notifications</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / System Notifications</span>
+<span class="sd">     * @link https://api.seatable.io/#dc65d982-2c19-4be7-85e2-3c1a4f94a8a3</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $page</span>
+<span class="sd">     * @param int $perPage</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">listAllSystemNotifications</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/admin/sys-user-notifications/?per_page=</span><span class="si">$perPage</span><span class="s2">&amp;page=</span><span class="si">$page</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Import Base from *.dtable or *.csv File</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Bases / Base Management</span>
+<span class="sd">     * @link https://api.seatable.io/#3a888a1e-833f-407d-8586-0a5e1cdfa851</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">importBaseFromFile</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$workspaceId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$path</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/workspace/</span><span class="si">$workspaceId</span><span class="s2">/import-dtable/&quot;</span><span class="p">;</span>
+
+        <span class="nv">$form</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dtable&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">curlFile</span><span class="p">(</span><span class="nv">$path</span><span class="p">)];</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$form</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Upload/Update User Avatar</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Account</span>
+<span class="sd">     * @link https://api.seatable.io/#137dc28b-0f0d-4f18-8e33-993946811ec6</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $path to image file</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">updateAvatar</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$path</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/user-avatar/&#39;</span><span class="p">;</span>
+
+        <span class="nv">$curlFile</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">curlFile</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;avatar&#39;</span> <span class="o">=&gt;</span> <span class="nv">$curlFile</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * List Groups (in your Team)</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Team Admin / Groups</span>
+<span class="sd">     * @link https://api.seatable.io/#2f842f81-4723-4a6d-b96c-38f31cbbc546</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">listGroups</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$orgId</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/org/</span><span class="si">$orgId</span><span class="s2">/admin/groups/?page=</span><span class="si">$page</span><span class="s2">&amp;per_page=</span><span class="si">$perPage</span><span class="s2">&quot;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Add Group</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Team Admin / Groups</span>
+<span class="sd">     * @link https://api.seatable.io/#4fd4ab0b-1ea8-413a-bb50-bd8a982f1f54</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @param string $groupName</span>
+<span class="sd">     * @param string $groupOwner</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">teamAdminAddGroup</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$groupName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$groupOwner</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/org/</span><span class="si">$id</span><span class="s2">/admin/groups/&quot;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;group_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$groupName</span><span class="p">,</span>
+            <span class="s1">&#39;group_owner&#39;</span> <span class="o">=&gt;</span> <span class="nv">$groupOwner</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Batch Add Members to Group</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Team Admin / Group Members</span>
+<span class="sd">     * @link https://api.seatable.io/#277fa732-b785-4933-859b-1f36487ade96</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $id</span>
+<span class="sd">     * @param int $groupId</span>
+<span class="sd">     * @param string|string[] $email</span>
+<span class="sd">     * @param string ...$emails</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">teamAdminAddGroupMember</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$id</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$groupId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="nx">string</span> <span class="o">...</span><span class="nv">$emails</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/org/</span><span class="si">$id</span><span class="s2">/admin/groups/</span><span class="si">$groupId</span><span class="s2">/members/&quot;</span><span class="p">;</span>
+
+        <span class="nb">array_unshift</span><span class="p">(</span><span class="nv">$emails</span><span class="p">,</span> <span class="nv">$email</span><span class="p">);</span>
+        <span class="nv">$buffer</span> <span class="o">=</span> <span class="nb">array_reduce</span><span class="p">(</span><span class="nv">$emails</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$carry</span><span class="p">,</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">is_string</span><span class="p">(</span><span class="nv">$item</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$item</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+                <span class="s1">&#39;&#39;</span> <span class="o">===</span> <span class="nv">$carry</span> <span class="o">||</span> <span class="nv">$carry</span> <span class="o">.=</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">;</span>
+                <span class="nv">$carry</span> <span class="o">.=</span> <span class="s1">&#39;email=&#39;</span> <span class="o">.</span> <span class="nb">urlencode</span><span class="p">(</span><span class="nv">$item</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nv">$carry</span><span class="p">;</span>
+        <span class="p">},</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+        <span class="nv">$httpOptions</span> <span class="o">=</span> <span class="p">[</span><span class="nx">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;Authorization: Token &#39;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">seatable_token</span><span class="p">,</span> <span class="s1">&#39;Content-Type: application/x-www-form-urlencoded&#39;</span><span class="p">]];</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$buffer</span><span class="p">,</span> <span class="nv">$httpOptions</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Change a Group Members&#39; Role</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Team Admin / Group Members</span>
+<span class="sd">     * @link https://api.seatable.io/#6de52f15-e574-4b92-b5f9-255a5efa4ef8</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">teamAdminUpdateGroupMember</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$orgId</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$groupId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$isAdmin</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/org/</span><span class="si">$orgId</span><span class="s2">/admin/groups/</span><span class="si">$groupId</span><span class="s2">/members/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;is_admin&#39;</span> <span class="o">=&gt;</span> <span class="nb">json_encode</span><span class="p">(</span><span class="nv">$isAdmin</span><span class="p">),</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Remove A Member from A Group</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Team Admin / Group Members</span>
+<span class="sd">     * @link https://api.seatable.io/#95df40eb-4670-453d-a6a3-030c4a8549d5</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">deleteGroupMember</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$orgId</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$groupId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$email</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">$this-&gt;seatable_url</span><span class="s2">/api/v2.1/org/</span><span class="si">$orgId</span><span class="s2">/admin/groups/</span><span class="si">$groupId</span><span class="s2">/members/&quot;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Create A Base API Token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group Authentication / Base API Token</span>
+<span class="sd">     * @ref [dTable api] dtable-web-api.js:438 addTableAPIToken</span>
+<span class="sd">     * @link https://api.seatable.io/#1866e49a-1eb4-4865-9fef-fc28b111c787</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param int $workspaceId</span>
+<span class="sd">     * @param string $baseName</span>
+<span class="sd">     * @param string $appName</span>
+<span class="sd">     * @param string $permission</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createBaseApiToken</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$workspaceId</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$baseName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$appName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$permission</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/workspace/&#39;</span> <span class="o">.</span> <span class="nv">$workspaceId</span> <span class="o">.</span> <span class="s1">&#39;/dtable/&#39;</span> <span class="o">.</span> <span class="nb">rawurlencode</span><span class="p">(</span><span class="nv">$baseName</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/api-tokens/&#39;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;app_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$appName</span><span class="p">,</span>
+            <span class="s1">&#39;permission&#39;</span> <span class="o">=&gt;</span> <span class="nv">$permission</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Add A Plugin</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group System Admin / Plugins</span>
+<span class="sd">     * @link https://api.seatable.io/#e4fb06bd-17af-4dc4-9098-221c293cf9e0</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $path</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">addPlugin</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$path</span><span class="p">)</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/admin/dtable-system-plugins/&#39;</span><span class="p">;</span>
+
+        <span class="nv">$curlFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\CURLFile</span><span class="p">(</span><span class="nb">realpath</span><span class="p">(</span><span class="nv">$path</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="nv">$curlFile</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Delete All Notifications</span>
+<span class="sd">     *</span>
+<span class="sd">     * @group User / Notification</span>
+<span class="sd">     * @link https://api.seatable.io/#e7803745-e90d-49c7-b41e-790a317b9860</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return object</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">deleteAllNotifications</span><span class="p">()</span><span class="o">:</span> <span class="nx">object</span>
+    <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seatable_url</span> <span class="o">.</span> <span class="s1">&#39;/api/v2.1/notifications/&#39;</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">restCurlClientEx</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020, 2021 SeaTable GmbH
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/seatable/seatable-api-php" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"default": "main", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.37e9125f.min.js"></script>
+      
+    
+  </body>
+</html>
