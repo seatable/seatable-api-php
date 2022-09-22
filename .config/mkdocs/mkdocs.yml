@@ -13,8 +13,8 @@ theme:
   name: material
   custom_dir: theme
   # icon:
-  logo: media/SeaTable256-256.png
-  favicon: media/seatable-favicon.ico
+  logo: media/SeaTableElephant256-256.png
+  favicon: media/seatable-elephant-favicon.ico
   palette:
     primary: white
     accent:
@@ -46,7 +46,13 @@ markdown_extensions:
   - markdown.extensions.toc:
       permalink: true
       toc_depth: "1-4"
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.details
 
 # Page tree

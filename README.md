@@ -4,67 +4,90 @@ PHP-bindings of the SeaTable API ([api.seatable.io]).
 
 [api.seatable.io]: https://api.seatable.io/
 
-## Requirements
+=== "Requirements"
 
-PHP 7.2.5+ (deprecated, 7.4+ recommended) with the Curl and Json extension (see [`composer.json`](composer.json)).
+    PHP 7.2.5+ (deprecated, 7.4+ recommended) with the Curl and Json extension (see [`composer.json`](doc/composer-json.md)).
 
-## Installation
+===  "Installation"
 
-The SeaTable API installs as part of your project dependencies. It is [available from Packagist](https://packagist.org/packages/seatable/seatable-api-php) for [Composer](https://getcomposer.org/):
+    The SeaTable API installs as part of your project dependencies. It is [available from Packagist](https://packagist.org/packages/seatable/seatable-api-php) for [Composer](https://getcomposer.org/):
 
-```
-composer require seatable/seatable-api-php
-```
+    ```
+    composer require seatable/seatable-api-php
+    ```
 
-### Upgrading
+===  "Upgrading"
 
-This project is with [Semantic Versioning (2.0.0)](https://semver.org/).
+    This project is with [Semantic Versioning (2.0.0)](https://semver.org/).
 
-Please see [the notes on upgrading](UPGRADING.md), especially for upgrading from the `SeaTableAPI.php` single class/file and other very early versions (0.x).
+    Please see [the notes on upgrading](UPGRADING.md), especially for upgrading from the `SeaTableAPI.php` single class/file and other very early versions (0.x).
 
 ## Usage
 
-!!! tldr "More connection options"
-
-    Please see [_Establish the Connection_](doc/establish-the-connection.md) for an overview of all connection options, the following example is for getting started.
-
 ### Get Access to a Base
 
-SeaTable requires an additional authentication to get access to a specific base. There are two variants to obtain access. You can either:
+SeaTable has additional authentication to access a specific base. The `README.md` presents two variants to obtain access. You normally *either*:
 
-1. create within SeaTable an API-Token for a specific base _- or -_
-2. use your credentials, but then you have to provide the `workspace_id` and the name of the base.
+1. Create a SeaTable API-Token for a specific base, the _Base App API Token_. :material-star-shooting:{ title="Improved in 0.2.0" }
+2. Use your credentials, and later on provide the `workspace_id` and the name of the base to obtain an (_internal_) _Base Access Token_.
 
-```php
-<?php declare(strict_types=1);
+=== "Base App API Token :material-star-shooting:{ title="Improved in 0.2.0" }"
 
-// setting up autoloader
-require_once __DIR__ . '/vendor/autoload.php';
+    ```php
+    <?php declare(strict_types=1);
 
-// use SeaTable api class
-use SeaTable\SeaTableApi\SeaTableApi;
+    // setting up autoloader
+    require_once __DIR__ . '/vendor/autoload.php';
 
-// init and obtain auth token
-$seatable = new SeaTableApi([
-    'url'       => 'https://cloud.seatable.io',
-    'user'      => 'YOUR-EMAIL', # required for variant 2.
-    'password'  => 'YOUR-PASSWORD'
-]);
+    // use SeaTable api class
+    use SeaTable\SeaTableApi\SeaTableApi;
 
-// get access with an api-token for a base
-$seatable->getBaseAppAccessToken(
-    $token = '1d3303315348c6b566c44709d459b33b6bac5ad1'
-);
+    // init and obtain base access token
+    $seatable = new SeaTableApi([
+        'url'                => 'https://cloud.seatable.io',
+        'base_app_api_token' => '1d3303315348c6b566c44709d459b33b6bac5ad1',
+        'base_app_name'      => '(optional)',
+    ]);
 
-// get access with your credentials (by workspace-id and table-name)
-$seatable->getBaseAccessToken(
-	$workspaceID = 1323,
-	$name = 'Project tracker'
-);
+    // start using the available api calls to edit the data inside a base
+    // ...
+    ```
 
-// start using the available api calls to edit the data inside a base
-// ...
-```
+=== "Email+Password & Base Access Token"
+
+    ```php
+    <?php declare(strict_types=1);
+
+    // setting up autoloader
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    // use SeaTable api class
+    use SeaTable\SeaTableApi\SeaTableApi;
+
+    // init and obtain auth token
+    $seatable = new SeaTableApi([
+        'url'       => 'https://cloud.seatable.io',
+        'user'      => 'YOUR-EMAIL', # required for variant 2.
+        'password'  => 'YOUR-PASSWORD'
+    ]);
+
+    // get access with your credentials (by workspace-id and table-name)
+    $seatable->getBaseAccessToken(
+        $workspaceID = 1323,
+        $name = 'Project tracker'
+    );
+
+    // start using the available api calls to edit the data inside a base
+    // ...
+    ```
+!!! tldr "More connection options"
+
+    Please see [_Establish the Connection_](doc/establish-the-connection.md) for an overview of all connection options, the previous examples are for getting started.
+
+If you want to get a feeling about the usage, please see the _Examples_ section:
+
+* [Add a new Column to a Base](doc/add-new-column-to-base.md)
+* [Get Content from a Base](doc/get-content-from-a-base.md)
 
 ### Functions
 
@@ -83,7 +106,9 @@ $seatable->getBaseAccessToken(
 
 #### Teammanagement Functions (Admin)
 
-> **Note:** On the webpage SeaTable always talks about *teams*. The technical term that is used within the API documentation and manual is *organization*.
+!!! note "Note"
+
+    On the webpage SeaTable always talks about *teams*. The technical term that is used within the API documentation and manual is *organization* (or `org` in short).
 
 * `sysAdminListTeams(int $page = 1, int $perPage = 25)`
 * `sysAdminAddTeam(string $name, string $adminEmail, string $adminName, string $password, int $maxUser)`
@@ -101,7 +126,11 @@ $seatable->getBaseAccessToken(
 * `appendRow(string $tableName, array $row)`
 * `getBaseMetadata()`
 
-More functions will be added in the future. If you want to get a feeling about the usage of the functions, please have a look at the examples in the `doc` folder.
+!!! tldr "All Methods"
+
+     For the full list of functions, please see all public methods of the class [`\SeaTable\SeaTableApi\SeaTableApi`](doc/seatableapi-php.md).
+
+     More functions will be added in the future and the documentation improved.
 
 ## Common Mistakes
 
@@ -109,7 +138,7 @@ More functions will be added in the future. If you want to get a feeling about t
 
 There are two kind of email-addresses in SeaTable. Please don't be confused with the property `email`. There are two email addresses in SeaTable. Let's have a look at the user object in SeaTable:
 
-```
+```json
 {
     "data": [
         {

@@ -7,8 +7,8 @@ You need:
 * a SeaTable account like `demo@example.com`
 * an API-key for a base like `1d3303315348c6b566c44709d459b33b6bac5ad1` (read and write)
 * the name of the table and the columns inside the base like
-  * table-name: `Tasks`
-  * columns of this table: `Name`, `Description`
+    * table-name: `Tasks`
+    * columns of this table: `Name`, `Description`
 
 ## Example PHP-code
 
@@ -21,17 +21,11 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // use SeaTable api class
 use SeaTable\SeaTableApi\SeaTableApi;
 
-// init and obtain auth token
+// init and get access with an api-token for a base
 $seatable = new SeaTableApi([
-    'url'       => 'https://cloud.seatable.io',
-    'user'      => 'demo@example.com',
-    'password'  => 'very-secure-password'
+    'url'                => 'https://cloud.seatable.io',
+    'base_app_api_token' => '1d3303315348c6b566c44709d459b33b6bac5ad1',
 ]);
-
-// get access with an api-token for a base
-$seatable->getBaseAppAccessToken(
-    '1d3303315348c6b566c44709d459b33b6bac5ad1'
-);
 
 // Append a row
 $row = [

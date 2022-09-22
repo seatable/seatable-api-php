@@ -2,36 +2,45 @@
 
 The SeaTable PHP Api authenticates on creation by passing the authentication options as an associative array with the keys as option names and the values as the option values.
 
-```php
-<?php declare(strict_types=1);
+??? abstract "PHP Connection Example"
 
-// setting up autoloader
-require_once __DIR__ . '/vendor/autoload.php';
+    ```php
+    <?php declare(strict_types=1);
 
-// use SeaTable api class
-use SeaTable\SeaTableApi\SeaTableApi;
+    // setting up autoloader
+    require_once __DIR__ . '/vendor/autoload.php';
 
-// init and obtain auth token
-$seatable = new SeaTableApi([
-    'url'       => 'https://cloud.seatable.io',
-    'user'      => 'YOUR-EMAIL',
-    'password'  => 'YOUR-PASSWORD'
-]);
+    // use SeaTable api class
+    use SeaTable\SeaTableApi\SeaTableApi;
 
-// start using the available api calls
-echo $seatable->ping();
-```
+    // init and obtain auth token
+    $seatable = new SeaTableApi([
+        'url'       => 'https://cloud.seatable.io',
+        'user'      => 'your email...',
+        'password'  => 'you password...'
+    ]);
+
+    // start using the available api calls
+    echo $seatable->ping();
+    ```
+
 ## Options
 
 * `url` URL of the SeaTable server instance. Without a trailing slash.
 
-Depending on which authentication is preferred, other options are different.
+## Authentication Options
+
+Depending on which authentication is preferred, authentication options are different for the different ways to authenticate.
+
+Via the constructor option the class supports three different ways to authentication, of which one will be in effect:
+
+1. [Username+Password](#usernamepassword-authentication)
+2. [Auth-Token](#auth-token-authentication)
+3. [Base-App-API-Token :material-star-shooting:](#base-app-api-token-authentication)
 
 !!! tip "SeaTable Cloud Team-Admin"
 
     Find your API Token and Base Tokens under [**API & Integrations** (account.seatable.io)](https://account.seatable.io/api).
-
-## Authentication Options
 
 ### Username+Password Authentication
 
@@ -55,6 +64,12 @@ Depending on which authentication is preferred, other options are different.
 * `base_app_api_token` API token for the base app to authenticate against.
 * `base_app_name` (optional) Name of the base app (can be given when creating the API token). Is verified when given.
 
+!!! note "Best for Getting Started"
+
+    :material-star-shooting: New in 0.2.0
+
+    The `base_app_api_token` is the archetype of the SeaTable _API token_ when it comes to creating and interacting with your own apps and open-up to third-party integrations. It is also one of - if not _the_ - easiest to use, administer and manage over time. That's why we at SeaTable think this is the best option to get started and get the most out of a SeaTable Base (App).
+
 ??? info "In the SeaTable API Docs"
 
     !!! quote "Base API Token"
@@ -65,11 +80,11 @@ Depending on which authentication is preferred, other options are different.
 
     Compare _Base API Token_ in [**Authentication** (api.seatable.io)](https://api.seatable.io/#6204fb15-8a49-4c98-8afd-71fd95ff033a).
 
----
-
 ## The Base-Access-Token
 
-This form of authentication is used in the API and the SeaTable API PHP binding handles it during connection.  It is not available with one of the authentication options above directly, instead it is acquired by the `getBaseAccessToken()` method to enable base access with [_Username+Password Authentication_](#usernamepassword-authentication) for a specific workspace and base.
+This form of authentication is used in the API and the SeaTable API PHP binding handles it during connection.  It is internal with the authentication options above.
+
+It still can be acquired by the `getBaseAccessToken()` method to enable base access with [_Username+Password Authentication_](#usernamepassword-authentication) for a specific workspace and base, which stems from earlier versions.
 
 ??? info "In the SeaTable API Docs"
 
@@ -88,3 +103,13 @@ This form of authentication is used in the API and the SeaTable API PHP binding 
 ??? done "Legacy Information"
 
     The pairing method `getBaseAppAccessToken()` is still available to obtain a base-access-token with the [_Base-App-API-Token Authentication_](#base-app-api-token-authentication) token, but it is recommended to use the now existing option instead: `base_app_api_token`.
+
+## Options and API Doc Variables
+
+Depending on area the names of options to variables varies a little, an overview across contexts.  Wording in parentheses.
+
+| API PHP Option              | API Doc Variables                                                   | Team Admin           |
+|-----------------------------|---------------------------------------------------------------------|----------------------|
+| `auth_token`                | `admin_token`, `org_admin_token`, `user_token` (_auth token_)       | (_Your API Token_)   |
+| `base_app_api_token`        | `base_api_token` (_API Token_ / _Base API Token_ / _App API Token_) | (_Your Base Tokens_) |
+| _n/a_ (_Base-Access-Token_) | `access_token`                                                      | (_-/-_)              |
