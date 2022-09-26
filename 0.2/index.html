@@ -12,7 +12,7 @@
       
         <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/">
       
-      <link rel="icon" href="media/seatable-favicon.ico">
+      <link rel="icon" href="media/seatable-elephant-favicon.ico">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
     
     
@@ -92,7 +92,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="SeaTable PHP API Manual" class="md-header__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
       
-  <img src="media/SeaTable256-256.png" alt="logo">
+  <img src="media/SeaTableElephant256-256.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -189,7 +189,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="SeaTable PHP API Manual" class="md-nav__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
       
-  <img src="media/SeaTable256-256.png" alt="logo">
+  <img src="media/SeaTableElephant256-256.png" alt="logo">
 
     </a>
     SeaTable PHP API Manual
@@ -641,10 +641,10 @@
 </div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="get-access-to-a-base">Get Access to a Base<a class="headerlink" href="#get-access-to-a-base" title="Permanent link">&para;</a></h3>
-<p>SeaTable requires an additional authentication to get access to a specific base. The <code>README.md</code> presents two variants to obtain access. You can either:</p>
+<p>SeaTable has additional authentication to access a specific base. The <code>README.md</code> presents two variants to obtain access. You normally either:</p>
 <ol>
-<li>Create a SeaTable an API-Token for a specific base, the so called <em>Base App API Token</em>.</li>
-<li>Use your credentials, and later on provide the <code>workspace_id</code> and the name of the base to obtain the (<em>internal</em>) <em>Base Access Token</em>.</li>
+<li>Create a SeaTable API-Token for a specific base, the <em>Base App API Token</em>.</li>
+<li>Use your credentials, and later on provide the <code>workspace_id</code> and the name of the base to obtain an (<em>internal</em>) <em>Base Access Token</em>.</li>
 </ol>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Base App API Token</label><label for="__tabbed_2_2">Email+Password &amp; Base Access Token</label></div>
 <div class="tabbed-content">
@@ -659,9 +659,9 @@
 
 <span class="c1">// init and obtain base access token</span>
 <span class="nv">$seatable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SeaTableApi</span><span class="p">([</span>
-    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://cloud.seatable.io&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;url&#39;</span>                <span class="o">=&gt;</span> <span class="s1">&#39;https://cloud.seatable.io&#39;</span><span class="p">,</span>
     <span class="s1">&#39;base_app_api_token&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1d3303315348c6b566c44709d459b33b6bac5ad1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;base_app_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;(optional)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;base_app_name&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;(optional)&#39;</span><span class="p">,</span>
 <span class="p">]);</span>
 
 <span class="c1">// start using the available api calls to edit the data inside a base</span>
@@ -722,7 +722,7 @@
 <h4 id="teammanagement-functions-admin">Teammanagement Functions (Admin)<a class="headerlink" href="#teammanagement-functions-admin" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On the webpage SeaTable always talks about <em>teams</em>. The technical term that is used within the API documentation and manual is <em>organization</em>.</p>
+<p>On the webpage SeaTable always talks about <em>teams</em>. The technical term that is used within the API documentation and manual is <em>organization</em> (or <code>org</code> in short).</p>
 </div>
 <ul>
 <li><code>sysAdminListTeams(int $page = 1, int $perPage = 25)</code></li>

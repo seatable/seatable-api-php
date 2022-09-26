@@ -12,7 +12,7 @@
       
         <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/doc/establish-the-connection/">
       
-      <link rel="icon" href="../../media/seatable-favicon.ico">
+      <link rel="icon" href="../../media/seatable-elephant-favicon.ico">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
     
     
@@ -92,7 +92,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="SeaTable PHP API Manual" class="md-header__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
       
-  <img src="../../media/SeaTable256-256.png" alt="logo">
+  <img src="../../media/SeaTableElephant256-256.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -189,7 +189,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="SeaTable PHP API Manual" class="md-nav__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
       
-  <img src="../../media/SeaTable256-256.png" alt="logo">
+  <img src="../../media/SeaTableElephant256-256.png" alt="logo">
 
     </a>
     SeaTable PHP API Manual
@@ -598,12 +598,18 @@
 <ul>
 <li><code>url</code> URL of the SeaTable server instance. Without a trailing slash.</li>
 </ul>
-<p>Depending on which authentication is preferred, other options are different.</p>
+<h2 id="authentication-options">Authentication Options<a class="headerlink" href="#authentication-options" title="Permanent link">&para;</a></h2>
+<p>Depending on which authentication is preferred, authentication options are different for the different ways to authenticate.</p>
+<p>Via the constructor option the class supports three different ways to authentication, of which one will be in effect:</p>
+<ol>
+<li><a href="#usernamepassword-authentication">Username+Password</a></li>
+<li><a href="#auth-token-authentication">Auth-Token</a></li>
+<li><a href="#base-app-api-token-authentication">Base-App-API-Token <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18.09 11.77 1.47 6.33L14 14.74 8.44 18.1l1.46-6.33L5 7.5l6.47-.54L14 1l2.53 5.96L23 7.5l-4.91 4.27M2 12.43c.19 0 .38-.06.55-.17l3.2-2.11-1.57-1.36-2.73 1.8c-.461.3-.589.91-.29 1.41.2.27.52.43.84.43m-.84 9.12c.2.29.52.45.84.45.19 0 .38-.05.55-.16l4.11-2.71.34-1.37.31-1.45-5.86 3.85c-.461.31-.589.93-.29 1.39m.29-6.17a1 1 0 0 0-.29 1.38c.2.3.52.45.84.45.19 0 .38-.05.55-.16l5.42-3.55.27-1.19-.92-.81-5.87 3.88Z"/></svg></span></a></li>
+</ol>
 <div class="admonition tip">
 <p class="admonition-title">SeaTable Cloud Team-Admin</p>
 <p>Find your API Token and Base Tokens under <a href="https://account.seatable.io/api"><strong>API &amp; Integrations</strong> (account.seatable.io)</a>.</p>
 </div>
-<h2 id="authentication-options">Authentication Options<a class="headerlink" href="#authentication-options" title="Permanent link">&para;</a></h2>
 <h3 id="usernamepassword-authentication">Username+Password Authentication<a class="headerlink" href="#usernamepassword-authentication" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>user</code> Username as used in the frontend to login (email).</li>
@@ -626,6 +632,11 @@
 <li><code>base_app_api_token</code> API token for the base app to authenticate against.</li>
 <li><code>base_app_name</code> (optional) Name of the base app (can be given when creating the API token). Is verified when given.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Best for Getting Started</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18.09 11.77 1.47 6.33L14 14.74 8.44 18.1l1.46-6.33L5 7.5l6.47-.54L14 1l2.53 5.96L23 7.5l-4.91 4.27M2 12.43c.19 0 .38-.06.55-.17l3.2-2.11-1.57-1.36-2.73 1.8c-.461.3-.589.91-.29 1.41.2.27.52.43.84.43m-.84 9.12c.2.29.52.45.84.45.19 0 .38-.05.55-.16l4.11-2.71.34-1.37.31-1.45-5.86 3.85c-.461.31-.589.93-.29 1.39m.29-6.17a1 1 0 0 0-.29 1.38c.2.3.52.45.84.45.19 0 .38-.05.55-.16l5.42-3.55.27-1.19-.92-.81-5.87 3.88Z"/></svg></span> New in 0.2.0</p>
+<p>The <code>base_app_api_token</code> is the archetype of the SeaTable <em>API token</em> when it comes to creating and interacting with your own apps and open-up to third-party integrations. It is also one of - if not <em>the</em> - easiest to use, administer and manage over time. That's why we at SeaTable think this is the best option to get started and get the most out of a SeaTable Base (App).</p>
+</div>
 <details class="info">
 <summary>In the SeaTable API Docs</summary>
 <div class="admonition quote">
@@ -657,7 +668,7 @@
 <p>The pairing method <code>getBaseAppAccessToken()</code> is still available to obtain a base-access-token with the <a href="#base-app-api-token-authentication"><em>Base-App-API-Token Authentication</em></a> token, but it is recommended to use the now existing option instead: <code>base_app_api_token</code>.</p>
 </details>
 <h2 id="options-and-api-doc-variables">Options and API Doc Variables<a class="headerlink" href="#options-and-api-doc-variables" title="Permanent link">&para;</a></h2>
-<p>Depending on area the wording of options/variables varies a little, an overview across contexts.  Wording in parentheses.</p>
+<p>Depending on area the names of options to variables varies a little, an overview across contexts.  Wording in parentheses.</p>
 <table>
 <thead>
 <tr>

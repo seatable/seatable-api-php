@@ -12,7 +12,7 @@
       
         <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/doc/get-content-from-a-base/">
       
-      <link rel="icon" href="../../media/seatable-favicon.ico">
+      <link rel="icon" href="../../media/seatable-elephant-favicon.ico">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
     
     
@@ -92,7 +92,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="SeaTable PHP API Manual" class="md-header__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
       
-  <img src="../../media/SeaTable256-256.png" alt="logo">
+  <img src="../../media/SeaTableElephant256-256.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -189,7 +189,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="SeaTable PHP API Manual" class="md-nav__button md-logo" aria-label="SeaTable PHP API Manual" data-md-component="logo">
       
-  <img src="../../media/SeaTable256-256.png" alt="logo">
+  <img src="../../media/SeaTableElephant256-256.png" alt="logo">
 
     </a>
     SeaTable PHP API Manual
@@ -493,14 +493,15 @@
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>You need:</p>
 <ul>
-<li>a SeaTable account like <code>demo@example.com</code></li>
-<li>an API-key for a base like <code>1d3303315348c6b566c44709d459b33b6bac5ad1</code> (read-only is enough)</li>
-<li>the name of the table like <code>Articles</code></li>
-<li>the columns of this table:</li>
+<li>A SeaTable Base and for it an API-key like <code>1d3303315348c6b566c44709d459b33b6bac5ad1</code> (read-only is fine)</li>
+<li>A table name like <code>Articles</code></li>
+<li>The columns in that table:<ul>
 <li><code>Status</code> (single select)</li>
 <li><code>Description</code></li>
 <li><code>Title</code></li>
 <li><code>URL</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="example-php-code">Example PHP-code<a class="headerlink" href="#example-php-code" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
@@ -511,39 +512,29 @@
 <span class="c1">// use SeaTable api class</span>
 <span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\SeaTableApi</span><span class="p">;</span>
 
-<span class="c1">// init and obtain auth token</span>
+<span class="c1">// init and get access with an api-token for a base</span>
 <span class="nv">$seatable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SeaTableApi</span><span class="p">([</span>
-    <span class="s1">&#39;url&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;https://cloud.seatable.io&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;user&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;demo@example.com&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;very-secure-password&#39;</span>
+    <span class="s1">&#39;url&#39;</span>                <span class="o">=&gt;</span> <span class="s1">&#39;https://cloud.seatable.io&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;base_app_api_token&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1d3303315348c6b577c44709d459b33b6bac5ad1&#39;</span><span class="p">,</span>
 <span class="p">]);</span>
-
-<span class="c1">// get access with an api-token for a base</span>
-<span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">getBaseAppAccessToken</span><span class="p">(</span>
-    <span class="nv">$token</span> <span class="o">=</span> <span class="s1">&#39;1d3303315348c6b577c44709d459b33b6bac5ad1&#39;</span>
-<span class="p">);</span>
 
 <span class="c1">// get all rows from the table Articles</span>
 <span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">listRowsByView</span><span class="p">(</span><span class="s1">&#39;Articles&#39;</span><span class="p">);</span>
 
-
-<span class="nv">$reportsHtml</span> <span class="o">=</span> <span class="s1">&#39;</span>
-<span class="s1">&lt;ul class=&quot;my-reports&quot;&gt;&#39;</span><span class="p">;</span>
-    <span class="k">foreach</span><span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">){</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Status</span> <span class="o">===</span> <span class="s1">&#39;published&#39;</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="nv">$reportsHtml</span> <span class="o">.=</span> <span class="s1">&#39;</span>
-<span class="s1">    &lt;li&gt;</span>
-<span class="s1">        &lt;h2&gt;&lt;a href=&quot;&#39;</span><span class="o">.</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">URL</span> <span class="o">.</span><span class="s1">&#39;&quot; target=&quot;_blank&quot;&gt;&#39;</span><span class="o">.</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Title</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span> <span class="o">|</span> <span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;&lt;/a&gt;&lt;/h2&gt;</span>
-<span class="s1">        &lt;div class=&quot;desc&gt;</span>
-<span class="s1">            &lt;p&gt;&#39;</span><span class="o">.</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Description</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span> <span class="o">|</span> <span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;&lt;/p&gt;</span>
-<span class="s1">        &lt;/div&gt;</span>
-<span class="s1">    &lt;/li&gt;&#39;</span><span class="p">;</span>
-    <span class="p">}}</span>
-    <span class="nv">$reportsHtml</span> <span class="o">.=</span> <span class="s1">&#39;</span>
-<span class="s1">&lt;/ul&gt;&#39;</span><span class="p">;</span>
-
-<span class="k">echo</span> <span class="nv">$reportsHtml</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;ul class=&quot;my-reports&quot;&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Status</span> <span class="o">===</span> <span class="s1">&#39;published&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;li&gt;</span>
+<span class="x">        &lt;h2&gt;&lt;a href=&quot;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">URL</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&quot;</span>
+<span class="x">               target=&quot;_blank&quot;&gt;</span><span class="cp">&lt;?</span><span class="o">=</span>
+                <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Title</span><span class="p">,</span> <span class="nx">ENT_HTML5</span><span class="p">)</span>
+            <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h2&gt;</span>
+<span class="x">        &lt;div class=&quot;desc&quot;&gt;</span>
+<span class="x">            &lt;p&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Description</span><span class="p">,</span> <span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">        &lt;/div&gt;</span>
+<span class="x">    &lt;/li&gt;</span>
+<span class="cp">&lt;?php</span> <span class="p">}</span> <span class="cm">/* foreach $rows if $row-&gt;Status published */</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/ul&gt;</span>
 </code></pre></div>
 
 
