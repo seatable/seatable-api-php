@@ -13,6 +13,7 @@ LC_ALL=C
 DOCS=docs/
 SRC=../../
 VCS=git
+VIRTUAL_ENV := if [ -z $${VIRTUAL_ENV+x} ]; then . venv/bin/activate; fi;
 IGNORE=.$(VCS)ignore
 
 PMD=README.md UPGRADING.md composer.json doc
@@ -20,8 +21,8 @@ SRCS=$(patsubst %,$(SRC)%,$(PMD))
 TRGS=$(patsubst %,$(DOCS)%,$(PMD))
 
 .PHONY: docs clean serve
-docs  : $(TRGS) ; mkdocs build --strict
-serve : $(TRGS) ; mkdocs serve
+docs  : $(TRGS) ; $(VIRTUAL_ENV) mkdocs build --strict
+serve : $(TRGS) ; $(VIRTUAL_ENV) mkdocs serve
 clean :         ; $(VCS) clean -fx $(DOCS) && make -s $(DOCS)$(IGNORE)
 
 .PHONY: deploy # with mike, local gh-pages branch
@@ -34,9 +35,9 @@ deploy:
 
 .PHONY: version
 version:
-	@mkdocs --version
-	@mike --version
-	@pip freeze | grep mkdocs-material | tr '\n' ' '; printf '\n'
+	@$(VIRTUAL_ENV) mkdocs --version
+	@$(VIRTUAL_ENV) mike --version
+	@$(VIRTUAL_ENV) pip freeze | grep mkdocs-material | tr '\n' ' '; printf '\n'
 
 
 vcs_ignore=((test -f $(DOCS)$(IGNORE) && grep -qxF '/$1' $(DOCS)$(IGNORE)) || printf '/$1\n' >> $(DOCS)$(IGNORE)) && LC_ALL=C sort -s -o $(DOCS)$(IGNORE) $(DOCS)$(IGNORE)
