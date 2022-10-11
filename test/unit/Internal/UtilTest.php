@@ -66,6 +66,38 @@ class UtilTest extends TestCase
         ));
     }
 
+    /**
+     * @return void
+     */
+    public function testTryBaseAuth(): void
+    {
+        $this->assertNull(Util::tryBaseAuth(
+            (new \ReflectionClass(SeaTableApi::class))
+                ->newInstanceWithoutConstructor()
+        ));
+    }
+
+    /**
+     * @uses \SeaTable\SeaTableApi\Internal\CurlHttpOptions::__construct
+     * @uses \SeaTable\SeaTableApi\Internal\RestCurlClientEx::__construct
+     *
+     * @return void
+     */
+    public function testTryBaseAuthProvides(): void
+    {
+        $api = (new \ReflectionClass(SeaTableApi::class))
+            ->newInstanceWithoutConstructor();
+
+        $restCurlClientEx = new RestCurlClientEx([]);
+        Util::setReflectionProperty($api, 'restCurlClientEx', $restCurlClientEx);
+
+        $expected = (object) ['dtable_name' => 'foo'];
+        Util::setReflectionProperty($restCurlClientEx, 'response_object', json_encode($expected));
+
+        $this->assertEquals($expected, Util::tryBaseAuth($api));
+    }
+
+
     public function provideQuoteSqlTableNames(): array
     {
         return [

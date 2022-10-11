@@ -50,19 +50,29 @@ class Util
      * @return string|null
      * @internal spares a second API request by accessing an internal property
      *           which is prone to race conditions and requires version pinning.
-     *
      */
     public static function tryBaseAuthDtableName(SeaTableApi $api): ?string
+    {
+        $try = self::tryBaseAuth($api);
+        return $try ? $try->dtable_name ?? null : null;
+    }
+
+    /**
+     * Get Base-Auth blob directly after base authentication
+     *
+     * @param SeaTableApi $api
+     * @return object|null
+     * @internal spares a second API request by accessing an internal property
+     *           which is prone to race conditions and requires version pinning.
+     */
+    public static function tryBaseAuth(SeaTableApi $api): ?object
     {
         $fProp = static function (?object $o, string $n) {
             if (null === $o) {
                 return null;
             }
             try {
-                $rfl = new ReflectionObject($o);
-                $rfl = $rfl->getProperty($n);
-                $rfl->setAccessible(true);
-                return $rfl->getValue($o);
+                return self::getReflectionProperty($o, $n)->getValue($o);
             } catch (ReflectionException $ex) {
                 return null;
             }
@@ -76,7 +86,26 @@ class Util
         } catch (ReflectionException $ex) {
             return null;
         }
-        return @json_decode($jt, false)->dtable_name ?? null;
+        return @json_decode($jt, false) ?? null;
+    }
+
+    /**
+     * @internal
+     *
+     * @param object $object
+     * @param string $name
+     * @return \ReflectionProperty
+     */
+    public static function getReflectionProperty(object $object, string $name): \ReflectionProperty
+    {
+        $reflectionProperty = (new ReflectionObject($object))->getProperty($name);
+        $reflectionProperty->setAccessible(true);
+        return $reflectionProperty;
+    }
+
+    public static function setReflectionProperty(object $object, string $name, $value): void
+    {
+        self::getReflectionProperty($object, $name)->setValue($object, $value);
     }
 
     /**
