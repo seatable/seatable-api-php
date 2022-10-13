@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://seatable.github.io/seatable-api-php/0.2/doc/get-content-from-a-base/">
       
       <link rel="icon" href="../../media/seatable-elephant-favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.3">
     
     
       
@@ -504,6 +504,45 @@
 </li>
 </ul>
 <h2 id="example-php-code">Example PHP-code<a class="headerlink" href="#example-php-code" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">querySql <span class="twemoji" title="Improved in 0.2.0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18.09 11.77 1.47 6.33L14 14.74 8.44 18.1l1.46-6.33L5 7.5l6.47-.54L14 1l2.53 5.96L23 7.5l-4.91 4.27M2 12.43c.19 0 .38-.06.55-.17l3.2-2.11-1.57-1.36-2.73 1.8c-.461.3-.589.91-.29 1.41.2.27.52.43.84.43m-.84 9.12c.2.29.52.45.84.45.19 0 .38-.05.55-.16l4.11-2.71.34-1.37.31-1.45-5.86 3.85c-.461.31-.589.93-.29 1.39m.29-6.17a1 1 0 0 0-.29 1.38c.2.3.52.45.84.45.19 0 .38-.05.55-.16l5.42-3.55.27-1.19-.92-.81-5.87 3.88Z"/></svg></span></label><label for="__tabbed_1_2">listRows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// setting up autoloader</span>
+<span class="k">require_once</span> <span class="no">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="c1">// use SeaTable api class</span>
+<span class="k">use</span> <span class="nx">SeaTable\SeaTableApi\SeaTableApi</span><span class="p">;</span>
+
+<span class="c1">// init and get access with an api-token for a base</span>
+<span class="nv">$seatable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SeaTableApi</span><span class="p">([</span>
+    <span class="s1">&#39;url&#39;</span>                <span class="o">=&gt;</span> <span class="s1">&#39;https://cloud.seatable.io&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;base_app_api_token&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1d3303315348c6b577c44709d459b33b6bac5ad1&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="c1">// get published rows from the table Articles</span>
+<span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM `Articles` WHERE `Status` = &#39;published&#39;&quot;</span><span class="p">;</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">querySql</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">results</span><span class="p">;</span>
+
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;ul class=&quot;my-reports&quot;&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;li&gt;</span>
+<span class="x">        &lt;h2&gt;&lt;a href=&quot;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">URL</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&quot;</span>
+<span class="x">               target=&quot;_blank&quot;&gt;</span><span class="cp">&lt;?</span><span class="o">=</span>
+                <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Title</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span>
+            <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h2&gt;</span>
+<span class="x">        &lt;div class=&quot;desc&quot;&gt;</span>
+<span class="x">            &lt;p&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Description</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">        &lt;/div&gt;</span>
+<span class="x">    &lt;/li&gt;</span>
+<span class="cp">&lt;?php</span> <span class="p">}</span> <span class="cm">/* foreach $rows */</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/ul&gt;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span> <span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="c1">// setting up autoloader</span>
@@ -519,7 +558,8 @@
 <span class="p">]);</span>
 
 <span class="c1">// get all rows from the table Articles</span>
-<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">listRowsByView</span><span class="p">(</span><span class="s1">&#39;Articles&#39;</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$seatable</span><span class="o">-&gt;</span><span class="na">listRows</span><span class="p">(</span><span class="s1">&#39;Articles&#39;</span><span class="p">);</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">rows</span><span class="p">;</span>
 
 <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">&lt;ul class=&quot;my-reports&quot;&gt;</span>
@@ -527,15 +567,18 @@
 <span class="x">    &lt;li&gt;</span>
 <span class="x">        &lt;h2&gt;&lt;a href=&quot;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">URL</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&quot;</span>
 <span class="x">               target=&quot;_blank&quot;&gt;</span><span class="cp">&lt;?</span><span class="o">=</span>
-                <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Title</span><span class="p">,</span> <span class="nx">ENT_HTML5</span><span class="p">)</span>
+                <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Title</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span>
             <span class="cp">?&gt;</span><span class="x">&lt;/a&gt;&lt;/h2&gt;</span>
 <span class="x">        &lt;div class=&quot;desc&quot;&gt;</span>
-<span class="x">            &lt;p&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Description</span><span class="p">,</span> <span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">htmlspecialchars</span><span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">Description</span><span class="p">,</span> <span class="nx">ENT_QUOTES</span><span class="o">|</span><span class="nx">ENT_HTML5</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
 <span class="x">        &lt;/div&gt;</span>
 <span class="x">    &lt;/li&gt;</span>
 <span class="cp">&lt;?php</span> <span class="p">}</span> <span class="cm">/* foreach $rows if $row-&gt;Status published */</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">&lt;/ul&gt;</span>
 </code></pre></div>
+</div>
+</div>
+</div>
 
 
 
