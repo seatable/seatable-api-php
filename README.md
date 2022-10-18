@@ -66,9 +66,9 @@ SeaTable has additional authentication to access a specific base. The `README.md
 
     // init and obtain auth token
     $seatable = new SeaTableApi([
-        'url'       => 'https://cloud.seatable.io',
-        'user'      => 'YOUR-EMAIL', # required for variant 2.
-        'password'  => 'YOUR-PASSWORD'
+        'url'      => 'https://cloud.seatable.io',
+        'user'     => 'YOUR-EMAIL', # required for variant 2.
+        'password' => 'YOUR-PASSWORD'
     ]);
 
     // get access with your credentials (by workspace-id and table-name)
@@ -144,7 +144,7 @@ There are two kind of email-addresses in SeaTable. Please don't be confused with
         {
             "email": "1ef456ab715841cc81b145b2530c2904@auth.local",
             "name": "Jane Doe",
-            "contact_email": "jane@example.com,
+            "contact_email": "jane@example.com",
             ...
         }
     ],

@@ -7,7 +7,7 @@ repo_name: seatable/seatable-api-php
 repo_url: https://github.com/seatable/seatable-api-php/
 edit_uri: blob/main
 
-copyright: Copyright &copy; 2020, 2021 SeaTable GmbH
+copyright: Copyright &copy; 2020, 2022 SeaTable GmbH
 
 theme:
   name: material
@@ -25,8 +25,25 @@ plugins:
 # Customization
 extra:
   social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/seatable/seatable-api-php
+    - icon: 'seatable'
+      name: 'SeaTable homepage'
+      link: 'https://seatable.io/'
+    - icon: 'simple/postman'
+      name: 'SeaTable API Docs'
+      link: 'https://api.seatable.io'
+    - icon: 'fontawesome/solid/code'
+      name: 'SeaTable Programming Manual'
+      link: 'https://seatable.github.io/seatable-scripts/'
+    - icon: 'material/progress-wrench'
+      name: 'SeaTable Admin Manual'
+      link: 'https://manual.seatable.io/'
+    - icon: 'fontawesome/brands/docker'
+      name: 'SeaTable on Docker Hub'
+      link: 'https://hub.docker.com/u/seatable'
+      separate: true
+    - icon: 'logo'
+      name: 'Made with Material for MkDocs + Mkdocs + Mike + GNU Make + <3'
+      link: 'https://squidfunk.github.io/mkdocs-material/'
   version:
     provider: mike
     default: main
