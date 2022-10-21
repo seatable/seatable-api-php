@@ -1,2 +1,6 @@
+*.cache*
+*.env*
+!*.env*.dist
+
 # Composer
 /composer.lock

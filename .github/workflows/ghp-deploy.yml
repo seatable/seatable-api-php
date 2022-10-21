@@ -1,4 +1,4 @@
-name: GHP
+name: 'GHP'
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
@@ -23,7 +23,7 @@ jobs:
         env:
           VIRTUAL_ENV: false
           MIKE_VERSION: 0.2
-          MIKE_TITLE: main
+          MIKE_TITLE: 'main'
           SOURCE_DATE_EPOCH: 0
         run: |
           set -x
@@ -35,10 +35,10 @@ jobs:
           git fetch origin gh-pages:gh-pages
           mike deploy --title "$MIKE_VERSION ($MIKE_TITLE)" --push "$MIKE_VERSION"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: docs-html-ghp
+          name: 'docs-html-ghp'
           retention-days: 1
           path: |
             .config/mkdocs/site/**

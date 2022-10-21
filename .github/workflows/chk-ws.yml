@@ -1,4 +1,4 @@
-name: check-whitespace
+name: 'check-whitespace'
 
 # https://github.com/git/git/blob/master/.github/workflows/check-whitespace.yml
 # see ./COPYING
@@ -15,17 +15,17 @@ jobs:
   check-whitespace:
     runs-on: ubuntu-latest
     steps:
-      - name: Set commit count
+      - name: 'Set commit count'
         shell: bash
         run: echo "COMMIT_DEPTH=$((1+$COMMITS))" >>$GITHUB_ENV
         env:
           COMMITS: ${{ github.event.pull_request.commits }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: ${{ env.COMMIT_DEPTH }}
 
-      - name: git log --check
+      - name: 'git log --check'
         id: check_out
         run: |
           log=
@@ -53,10 +53,10 @@ jobs:
           done <<< $(git log --check --pretty=format:"---% h% s" -${{github.event.pull_request.commits}})
           if test -n "${log}"
           then
-            echo "::set-output name=checkout::"${log}""
+            echo "{checkout}=${log}" >> $GITHUB_OUTPUT
             exit 2
           fi
-      - name: Add Check Output as Comment
+      - name: 'Add Check Output as Comment'
         uses: actions/github-script@v3
         id: add-comment
         env:

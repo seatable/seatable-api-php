@@ -1,4 +1,4 @@
-name: CI/PR
+name: 'CI/PR'
 
 on:
   push:
@@ -8,16 +8,16 @@ on:
 
 jobs:
   php-72:
-    runs-on: "ubuntu-latest"
-    name: "PHP 7.2 Compatibility"
+    name: 'PHP 7.2 Compatibility'
+    runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v2"
+      - uses: actions/checkout@v3
       - run: 'grep ''"php": ">=7.2.5"'' composer.json'
-      - uses: "shivammathur/setup-php@v2"
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: "7.2"
+          php-version: 7.2
           tools: composer:v2
-      - name: "Lock and Install Dependencies"
+      - name: 'Lock and Install Dependencies'
         run: |
           composer update --no-dev --no-plugins --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
           composer install --no-dev --no-plugins --no-scripts --no-progress --prefer-dist
@@ -25,7 +25,7 @@ jobs:
         run: composer lint-and-load
 
   composer:
-    name: "Composer (PHP: ${{ matrix.php-version || 'default' }})"
+    name: 'Composer (PHP: ${{ matrix.php-version || ''default'' }})'
     runs-on: ubuntu-latest
 
     strategy:
@@ -35,15 +35,15 @@ jobs:
         include: [ {php-version: '', allow-failure: true} ]
 
     steps:
-      - uses: "actions/checkout@v2"
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: "shivammathur/setup-php@v2"
+      - uses: shivammathur/setup-php@v2
         if: ${{ matrix.php-version }}
         with:
-          php-version: "${{ matrix.php-version }}"
+          php-version: ${{ matrix.php-version }}
           tools: composer:v2
-      - name: Run composer
+      - name: 'Run composer'
         shell: bash
         run: |
           #${{ github.run_id }} ${{ matrix.allow-failure && '(allow failures)' }}
