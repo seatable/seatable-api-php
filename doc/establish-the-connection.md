@@ -40,7 +40,7 @@ Via the constructor option the class supports three different ways to authentica
 
 !!! tip "SeaTable Cloud Team-Admin"
 
-    Find your API Token and Base Tokens under [**API & Integrations** (account.seatable.io)](https://account.seatable.io/api).
+    Manage your Base-App-API-Tokens and get the Auth-Token under [**API & Integrations** (account.seatable.io)](https://account.seatable.io/api).
 
 ### Username+Password Authentication
 
