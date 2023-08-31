@@ -1,5 +1,9 @@
 # seatable-api-php
 
+!!! danger "This manual is deprecated."
+
+    Please use the new [SeaTable Developer Manual](https://developer.seatable.io) instead.
+
 PHP-bindings of the SeaTable API ([api.seatable.io]).
 
 [api.seatable.io]: https://api.seatable.io/
