@@ -338,6 +338,28 @@ class SeaTableApi
     }
 
     /**
+     * List Columns
+     *
+     * @group Base Operations / Columns
+     * @link https://api.seatable.io/reference/list-columns
+     *
+     * @param string $tableName
+     * @param string|null $viewName
+     * @return object
+     */
+    public function listColumns(string $tableName, string $viewName = null): object
+    {
+        $request = "$this->seatable_url/dtable-server/api/v1/dtables/$this->dtable_uuid/columns/";
+        $request .= '?' . http_build_query([
+                'table_name' => $tableName,
+                'view_name' => $viewName
+            ]);
+
+        return $this->restCurlClientEx->get($request);
+    }
+
+
+    /**
      * Query with SQL
      *
      * @group Base Operations / Archives / Base Query
