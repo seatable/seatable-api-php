@@ -152,7 +152,7 @@ class ColumnsApi
      * Add Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddSingleMultipleSelectOptions $add_single_multiple_select_options add_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\AddSingleMultipleSelectOptions $add_single_multiple_select_options add_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addSelectOption'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -171,7 +171,7 @@ class ColumnsApi
      * Add Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addSelectOption'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -296,7 +296,7 @@ class ColumnsApi
      * Add Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -318,7 +318,7 @@ class ColumnsApi
      * Add Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -369,7 +369,7 @@ class ColumnsApi
      * Create request for operation 'addSelectOption'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\AddSingleMultipleSelectOptions $add_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -479,7 +479,7 @@ class ColumnsApi
      * Append Columns
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendColumnsRequest $append_columns_request append_columns_request (optional)
+     * @param  \SeaTable\Client\Base\AppendColumnsRequest $append_columns_request append_columns_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendColumns'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -498,7 +498,7 @@ class ColumnsApi
      * Append Columns
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendColumnsRequest $append_columns_request (optional)
+     * @param  \SeaTable\Client\Base\AppendColumnsRequest $append_columns_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendColumns'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -623,7 +623,7 @@ class ColumnsApi
      * Append Columns
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendColumnsRequest $append_columns_request (optional)
+     * @param  \SeaTable\Client\Base\AppendColumnsRequest $append_columns_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendColumns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -645,7 +645,7 @@ class ColumnsApi
      * Append Columns
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendColumnsRequest $append_columns_request (optional)
+     * @param  \SeaTable\Client\Base\AppendColumnsRequest $append_columns_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendColumns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -696,7 +696,7 @@ class ColumnsApi
      * Create request for operation 'appendColumns'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendColumnsRequest $append_columns_request (optional)
+     * @param  \SeaTable\Client\Base\AppendColumnsRequest $append_columns_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendColumns'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -806,7 +806,7 @@ class ColumnsApi
      * Delete Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteColumn $delete_column delete_column (optional)
+     * @param  \SeaTable\Client\Base\DeleteColumn $delete_column delete_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteColumn'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -825,7 +825,7 @@ class ColumnsApi
      * Delete Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteColumn $delete_column (optional)
+     * @param  \SeaTable\Client\Base\DeleteColumn $delete_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteColumn'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -950,7 +950,7 @@ class ColumnsApi
      * Delete Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteColumn $delete_column (optional)
+     * @param  \SeaTable\Client\Base\DeleteColumn $delete_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -972,7 +972,7 @@ class ColumnsApi
      * Delete Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteColumn $delete_column (optional)
+     * @param  \SeaTable\Client\Base\DeleteColumn $delete_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1023,7 +1023,7 @@ class ColumnsApi
      * Create request for operation 'deleteColumn'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteColumn $delete_column (optional)
+     * @param  \SeaTable\Client\Base\DeleteColumn $delete_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1133,7 +1133,7 @@ class ColumnsApi
      * Delete Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteSelectOptions $delete_select_options delete_select_options (optional)
+     * @param  \SeaTable\Client\Base\DeleteSelectOptions $delete_select_options delete_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSelectOption'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1152,7 +1152,7 @@ class ColumnsApi
      * Delete Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteSelectOptions $delete_select_options (optional)
+     * @param  \SeaTable\Client\Base\DeleteSelectOptions $delete_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSelectOption'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1277,7 +1277,7 @@ class ColumnsApi
      * Delete Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteSelectOptions $delete_select_options (optional)
+     * @param  \SeaTable\Client\Base\DeleteSelectOptions $delete_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1299,7 +1299,7 @@ class ColumnsApi
      * Delete Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteSelectOptions $delete_select_options (optional)
+     * @param  \SeaTable\Client\Base\DeleteSelectOptions $delete_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1350,7 +1350,7 @@ class ColumnsApi
      * Create request for operation 'deleteSelectOption'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteSelectOptions $delete_select_options (optional)
+     * @param  \SeaTable\Client\Base\DeleteSelectOptions $delete_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1460,7 +1460,7 @@ class ColumnsApi
      * Insert Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
+     * @param  \SeaTable\Client\Base\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertColumn'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1479,7 +1479,7 @@ class ColumnsApi
      * Insert Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
+     * @param  \SeaTable\Client\Base\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertColumn'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1604,7 +1604,7 @@ class ColumnsApi
      * Insert Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
+     * @param  \SeaTable\Client\Base\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1626,7 +1626,7 @@ class ColumnsApi
      * Insert Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
+     * @param  \SeaTable\Client\Base\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1677,7 +1677,7 @@ class ColumnsApi
      * Create request for operation 'insertColumn'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
+     * @param  \SeaTable\Client\Base\InsertColumnRequest $insert_column_request Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2137,7 +2137,7 @@ class ColumnsApi
      * Update Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateColumn $update_column update_column (optional)
+     * @param  \SeaTable\Client\Base\UpdateColumn $update_column update_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateColumn'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2156,7 +2156,7 @@ class ColumnsApi
      * Update Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateColumn $update_column (optional)
+     * @param  \SeaTable\Client\Base\UpdateColumn $update_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateColumn'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2281,7 +2281,7 @@ class ColumnsApi
      * Update Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateColumn $update_column (optional)
+     * @param  \SeaTable\Client\Base\UpdateColumn $update_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2303,7 +2303,7 @@ class ColumnsApi
      * Update Column
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateColumn $update_column (optional)
+     * @param  \SeaTable\Client\Base\UpdateColumn $update_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2354,7 +2354,7 @@ class ColumnsApi
      * Create request for operation 'updateColumn'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateColumn $update_column (optional)
+     * @param  \SeaTable\Client\Base\UpdateColumn $update_column (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateColumn'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2791,7 +2791,7 @@ class ColumnsApi
      * Update Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options update_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options update_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSelectOption'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2810,7 +2810,7 @@ class ColumnsApi
      * Update Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSelectOption'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2935,7 +2935,7 @@ class ColumnsApi
      * Update Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2957,7 +2957,7 @@ class ColumnsApi
      * Update Single/Multiple Select Options
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3008,7 +3008,7 @@ class ColumnsApi
      * Create request for operation 'updateSelectOption'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
+     * @param  \SeaTable\Client\Base\UpdateSingleMultipleSelectOptions $update_single_multiple_select_options (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSelectOption'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

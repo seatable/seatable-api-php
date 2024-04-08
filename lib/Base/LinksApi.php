@@ -140,7 +140,7 @@ class LinksApi
      * Create Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLink $create_row_link create_row_link (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLink $create_row_link create_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -159,7 +159,7 @@ class LinksApi
      * Create Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLink $create_row_link (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLink $create_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -284,7 +284,7 @@ class LinksApi
      * Create Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLink $create_row_link (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLink $create_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -306,7 +306,7 @@ class LinksApi
      * Create Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLink $create_row_link (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLink $create_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -357,7 +357,7 @@ class LinksApi
      * Create request for operation 'createRowLink'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLink $create_row_link (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLink $create_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -467,7 +467,7 @@ class LinksApi
      * Create Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLinks $create_row_links create_row_links (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLinks $create_row_links create_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -486,7 +486,7 @@ class LinksApi
      * Create Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLinks $create_row_links (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLinks $create_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -611,7 +611,7 @@ class LinksApi
      * Create Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLinks $create_row_links (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLinks $create_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -633,7 +633,7 @@ class LinksApi
      * Create Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLinks $create_row_links (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLinks $create_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -684,7 +684,7 @@ class LinksApi
      * Create request for operation 'createRowLinks'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateRowLinks $create_row_links (optional)
+     * @param  \SeaTable\Client\Base\CreateRowLinks $create_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -794,7 +794,7 @@ class LinksApi
      * Delete Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRowLink $delete_row_link delete_row_link (optional)
+     * @param  \SeaTable\Client\Base\DeleteRowLink $delete_row_link delete_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRowLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -813,7 +813,7 @@ class LinksApi
      * Delete Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRowLink $delete_row_link (optional)
+     * @param  \SeaTable\Client\Base\DeleteRowLink $delete_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRowLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -938,7 +938,7 @@ class LinksApi
      * Delete Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRowLink $delete_row_link (optional)
+     * @param  \SeaTable\Client\Base\DeleteRowLink $delete_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRowLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -960,7 +960,7 @@ class LinksApi
      * Delete Row Link
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRowLink $delete_row_link (optional)
+     * @param  \SeaTable\Client\Base\DeleteRowLink $delete_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRowLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1011,7 +1011,7 @@ class LinksApi
      * Create request for operation 'deleteRowLink'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRowLink $delete_row_link (optional)
+     * @param  \SeaTable\Client\Base\DeleteRowLink $delete_row_link (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRowLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1121,7 +1121,7 @@ class LinksApi
      * List Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ListRowLinks $list_row_links list_row_links (optional)
+     * @param  \SeaTable\Client\Base\ListRowLinks $list_row_links list_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1140,7 +1140,7 @@ class LinksApi
      * List Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ListRowLinks $list_row_links (optional)
+     * @param  \SeaTable\Client\Base\ListRowLinks $list_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1265,7 +1265,7 @@ class LinksApi
      * List Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ListRowLinks $list_row_links (optional)
+     * @param  \SeaTable\Client\Base\ListRowLinks $list_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1287,7 +1287,7 @@ class LinksApi
      * List Row Links
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ListRowLinks $list_row_links (optional)
+     * @param  \SeaTable\Client\Base\ListRowLinks $list_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1338,7 +1338,7 @@ class LinksApi
      * Create request for operation 'listRowLinks'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ListRowLinks $list_row_links (optional)
+     * @param  \SeaTable\Client\Base\ListRowLinks $list_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1448,7 +1448,7 @@ class LinksApi
      * Update Row Links (Batch)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateLinks $update_links update_links (optional)
+     * @param  \SeaTable\Client\Base\UpdateLinks $update_links update_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1467,7 +1467,7 @@ class LinksApi
      * Update Row Links (Batch)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateLinks $update_links (optional)
+     * @param  \SeaTable\Client\Base\UpdateLinks $update_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1592,7 +1592,7 @@ class LinksApi
      * Update Row Links (Batch)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateLinks $update_links (optional)
+     * @param  \SeaTable\Client\Base\UpdateLinks $update_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1614,7 +1614,7 @@ class LinksApi
      * Update Row Links (Batch)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateLinks $update_links (optional)
+     * @param  \SeaTable\Client\Base\UpdateLinks $update_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1665,7 +1665,7 @@ class LinksApi
      * Create request for operation 'updateRowLinks'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateLinks $update_links (optional)
+     * @param  \SeaTable\Client\Base\UpdateLinks $update_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

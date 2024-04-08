@@ -141,7 +141,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\NewView $new_view new_view (optional)
+     * @param  \SeaTable\Client\Base\NewView $new_view new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -161,7 +161,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\NewView $new_view (optional)
+     * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -287,7 +287,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\NewView $new_view (optional)
+     * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -310,7 +310,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\NewView $new_view (optional)
+     * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -362,7 +362,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\NewView $new_view (optional)
+     * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1535,7 +1535,7 @@ class ViewsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\UpdateView $update_view update_view (optional)
+     * @param  \SeaTable\Client\Base\UpdateView $update_view update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1556,7 +1556,7 @@ class ViewsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\UpdateView $update_view (optional)
+     * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1683,7 +1683,7 @@ class ViewsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\UpdateView $update_view (optional)
+     * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1707,7 +1707,7 @@ class ViewsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\UpdateView $update_view (optional)
+     * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1760,7 +1760,7 @@ class ViewsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\UpdateView $update_view (optional)
+     * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

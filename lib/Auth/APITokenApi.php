@@ -142,12 +142,12 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createApiToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\ApiToken
+     * @return \SeaTable\Client\Auth\ApiToken
      */
     public function createApiToken($workspace_id, $base_name, $app_name, $permission, string $contentType = self::contentTypes['createApiToken'][0])
     {
@@ -163,12 +163,12 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createApiToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\ApiToken, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\ApiToken, HTTP status code, HTTP response headers (array of strings)
      */
     public function createApiTokenWithHttpInfo($workspace_id, $base_name, $app_name, $permission, string $contentType = self::contentTypes['createApiToken'][0])
     {
@@ -211,11 +211,11 @@ class APITokenApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\SeaTable\Client\Model\ApiToken' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\ApiToken' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\ApiToken' !== 'string') {
+                        if ('\SeaTable\Client\Auth\ApiToken' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -233,13 +233,13 @@ class APITokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\ApiToken', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\ApiToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\ApiToken';
+            $returnType = '\SeaTable\Client\Auth\ApiToken';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -272,7 +272,7 @@ class APITokenApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\ApiToken',
+                        '\SeaTable\Client\Auth\ApiToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -290,7 +290,7 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -314,7 +314,7 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -322,7 +322,7 @@ class APITokenApi
      */
     public function createApiTokenAsyncWithHttpInfo($workspace_id, $base_name, $app_name, $permission, string $contentType = self::contentTypes['createApiToken'][0])
     {
-        $returnType = '\SeaTable\Client\Model\ApiToken';
+        $returnType = '\SeaTable\Client\Auth\ApiToken';
         $request = $this->createApiTokenRequest($workspace_id, $base_name, $app_name, $permission, $contentType);
 
         return $this->client
@@ -367,7 +367,7 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -511,7 +511,7 @@ class APITokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\ApiTokenTemporary
+     * @return \SeaTable\Client\Auth\ApiTokenTemporary
      */
     public function createTempApiToken($workspace_id, $base_name, string $contentType = self::contentTypes['createTempApiToken'][0])
     {
@@ -530,7 +530,7 @@ class APITokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\ApiTokenTemporary, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\ApiTokenTemporary, HTTP status code, HTTP response headers (array of strings)
      */
     public function createTempApiTokenWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['createTempApiToken'][0])
     {
@@ -573,11 +573,11 @@ class APITokenApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\ApiTokenTemporary' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\ApiTokenTemporary' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\ApiTokenTemporary' !== 'string') {
+                        if ('\SeaTable\Client\Auth\ApiTokenTemporary' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -595,13 +595,13 @@ class APITokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\ApiTokenTemporary', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\ApiTokenTemporary', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\ApiTokenTemporary';
+            $returnType = '\SeaTable\Client\Auth\ApiTokenTemporary';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -634,7 +634,7 @@ class APITokenApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\ApiTokenTemporary',
+                        '\SeaTable\Client\Auth\ApiTokenTemporary',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -680,7 +680,7 @@ class APITokenApi
      */
     public function createTempApiTokenAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['createTempApiToken'][0])
     {
-        $returnType = '\SeaTable\Client\Model\ApiTokenTemporary';
+        $returnType = '\SeaTable\Client\Auth\ApiTokenTemporary';
         $request = $this->createTempApiTokenRequest($workspace_id, $base_name, $contentType);
 
         return $this->client
@@ -1199,7 +1199,7 @@ class APITokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\ApiTokenList
+     * @return \SeaTable\Client\Auth\ApiTokenList
      */
     public function listApiTokens($workspace_id, $base_name, string $contentType = self::contentTypes['listApiTokens'][0])
     {
@@ -1218,7 +1218,7 @@ class APITokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\ApiTokenList, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\ApiTokenList, HTTP status code, HTTP response headers (array of strings)
      */
     public function listApiTokensWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['listApiTokens'][0])
     {
@@ -1261,11 +1261,11 @@ class APITokenApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\ApiTokenList' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\ApiTokenList' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\ApiTokenList' !== 'string') {
+                        if ('\SeaTable\Client\Auth\ApiTokenList' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1283,13 +1283,13 @@ class APITokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\ApiTokenList', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\ApiTokenList', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\ApiTokenList';
+            $returnType = '\SeaTable\Client\Auth\ApiTokenList';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1322,7 +1322,7 @@ class APITokenApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\ApiTokenList',
+                        '\SeaTable\Client\Auth\ApiTokenList',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1368,7 +1368,7 @@ class APITokenApi
      */
     public function listApiTokensAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['listApiTokens'][0])
     {
-        $returnType = '\SeaTable\Client\Model\ApiTokenList';
+        $returnType = '\SeaTable\Client\Auth\ApiTokenList';
         $request = $this->listApiTokensRequest($workspace_id, $base_name, $contentType);
 
         return $this->client
@@ -1530,12 +1530,12 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApiToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\ApiToken
+     * @return \SeaTable\Client\Auth\ApiToken
      */
     public function updateApiToken($workspace_id, $base_name, $app_name, $permission, string $contentType = self::contentTypes['updateApiToken'][0])
     {
@@ -1551,12 +1551,12 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApiToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\ApiToken, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\ApiToken, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateApiTokenWithHttpInfo($workspace_id, $base_name, $app_name, $permission, string $contentType = self::contentTypes['updateApiToken'][0])
     {
@@ -1599,11 +1599,11 @@ class APITokenApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\ApiToken' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\ApiToken' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\ApiToken' !== 'string') {
+                        if ('\SeaTable\Client\Auth\ApiToken' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1621,13 +1621,13 @@ class APITokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\ApiToken', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\ApiToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\ApiToken';
+            $returnType = '\SeaTable\Client\Auth\ApiToken';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1660,7 +1660,7 @@ class APITokenApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\ApiToken',
+                        '\SeaTable\Client\Auth\ApiToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1678,7 +1678,7 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1702,7 +1702,7 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1710,7 +1710,7 @@ class APITokenApi
      */
     public function updateApiTokenAsyncWithHttpInfo($workspace_id, $base_name, $app_name, $permission, string $contentType = self::contentTypes['updateApiToken'][0])
     {
-        $returnType = '\SeaTable\Client\Model\ApiToken';
+        $returnType = '\SeaTable\Client\Auth\ApiToken';
         $request = $this->updateApiTokenRequest($workspace_id, $base_name, $app_name, $permission, $contentType);
 
         return $this->client
@@ -1755,7 +1755,7 @@ class APITokenApi
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
-     * @param  \SeaTable\Client\Model\Permission $permission (required)
+     * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

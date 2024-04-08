@@ -143,7 +143,7 @@ class BigDataApi
      * Create Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBigDataRowsLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -162,7 +162,7 @@ class BigDataApi
      * Create Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBigDataRowsLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -287,7 +287,7 @@ class BigDataApi
      * Create Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBigDataRowsLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -309,7 +309,7 @@ class BigDataApi
      * Create Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBigDataRowsLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -360,7 +360,7 @@ class BigDataApi
      * Create request for operation 'createBigDataRowsLink'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBigDataRowsLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -470,7 +470,7 @@ class BigDataApi
      * Delete Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -489,7 +489,7 @@ class BigDataApi
      * Delete Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRowLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -614,7 +614,7 @@ class BigDataApi
      * Delete Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -636,7 +636,7 @@ class BigDataApi
      * Delete Row Links in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -687,7 +687,7 @@ class BigDataApi
      * Create request for operation 'deleteBigDataRowLinks'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchivedRowLinks $archived_row_links (optional)
+     * @param  \SeaTable\Client\Base\ArchivedRowLinks $archived_row_links (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRowLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -797,7 +797,7 @@ class BigDataApi
      * Delete Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -816,7 +816,7 @@ class BigDataApi
      * Delete Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -941,7 +941,7 @@ class BigDataApi
      * Delete Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -963,7 +963,7 @@ class BigDataApi
      * Delete Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1014,7 +1014,7 @@ class BigDataApi
      * Create request for operation 'deleteBigDataRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1124,7 +1124,7 @@ class BigDataApi
      * Insert Rows into Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertRowsIntoBigData $insert_rows_into_big_data insert_rows_into_big_data (optional)
+     * @param  \SeaTable\Client\Base\InsertRowsIntoBigData $insert_rows_into_big_data insert_rows_into_big_data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertBigDataRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1143,7 +1143,7 @@ class BigDataApi
      * Insert Rows into Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
+     * @param  \SeaTable\Client\Base\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertBigDataRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1268,7 +1268,7 @@ class BigDataApi
      * Insert Rows into Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
+     * @param  \SeaTable\Client\Base\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1290,7 +1290,7 @@ class BigDataApi
      * Insert Rows into Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
+     * @param  \SeaTable\Client\Base\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1341,7 +1341,7 @@ class BigDataApi
      * Create request for operation 'insertBigDataRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
+     * @param  \SeaTable\Client\Base\InsertRowsIntoBigData $insert_rows_into_big_data (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['insertBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1451,7 +1451,7 @@ class BigDataApi
      * Move Rows to Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchiveView $archive_view archive_view (optional)
+     * @param  \SeaTable\Client\Base\ArchiveView $archive_view archive_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveRowsToBigData'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1470,7 +1470,7 @@ class BigDataApi
      * Move Rows to Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchiveView $archive_view (optional)
+     * @param  \SeaTable\Client\Base\ArchiveView $archive_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveRowsToBigData'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1595,7 +1595,7 @@ class BigDataApi
      * Move Rows to Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchiveView $archive_view (optional)
+     * @param  \SeaTable\Client\Base\ArchiveView $archive_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveRowsToBigData'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1617,7 +1617,7 @@ class BigDataApi
      * Move Rows to Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchiveView $archive_view (optional)
+     * @param  \SeaTable\Client\Base\ArchiveView $archive_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveRowsToBigData'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1668,7 +1668,7 @@ class BigDataApi
      * Create request for operation 'moveRowsToBigData'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\ArchiveView $archive_view (optional)
+     * @param  \SeaTable\Client\Base\ArchiveView $archive_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveRowsToBigData'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1778,7 +1778,7 @@ class BigDataApi
      * Update Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBigDataRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1797,7 +1797,7 @@ class BigDataApi
      * Update Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBigDataRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1922,7 +1922,7 @@ class BigDataApi
      * Update Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1944,7 +1944,7 @@ class BigDataApi
      * Update Rows in Big Data
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1995,7 +1995,7 @@ class BigDataApi
      * Create request for operation 'updateBigDataRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBigDataRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

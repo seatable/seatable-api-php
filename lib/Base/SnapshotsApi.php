@@ -128,7 +128,7 @@ class SnapshotsApi
      * Create Snapshot
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\GenerateSnapshot $generate_snapshot generate_snapshot (optional)
+     * @param  \SeaTable\Client\Base\GenerateSnapshot $generate_snapshot generate_snapshot (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createSnapshot'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -147,7 +147,7 @@ class SnapshotsApi
      * Create Snapshot
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\GenerateSnapshot $generate_snapshot (optional)
+     * @param  \SeaTable\Client\Base\GenerateSnapshot $generate_snapshot (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createSnapshot'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -272,7 +272,7 @@ class SnapshotsApi
      * Create Snapshot
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\GenerateSnapshot $generate_snapshot (optional)
+     * @param  \SeaTable\Client\Base\GenerateSnapshot $generate_snapshot (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createSnapshot'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -294,7 +294,7 @@ class SnapshotsApi
      * Create Snapshot
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\GenerateSnapshot $generate_snapshot (optional)
+     * @param  \SeaTable\Client\Base\GenerateSnapshot $generate_snapshot (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createSnapshot'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -345,7 +345,7 @@ class SnapshotsApi
      * Create request for operation 'createSnapshot'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\GenerateSnapshot $generate_snapshot (optional)
+     * @param  \SeaTable\Client\Base\GenerateSnapshot $generate_snapshot (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createSnapshot'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

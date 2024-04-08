@@ -134,7 +134,7 @@ class AccountTokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\AccountToken
+     * @return \SeaTable\Client\Auth\AccountToken
      */
     public function getAccountTokenfromUsername($username, $password, $x_seafile_otp = null, string $contentType = self::contentTypes['getAccountTokenfromUsername'][0])
     {
@@ -154,7 +154,7 @@ class AccountTokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\AccountToken, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\AccountToken, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAccountTokenfromUsernameWithHttpInfo($username, $password, $x_seafile_otp = null, string $contentType = self::contentTypes['getAccountTokenfromUsername'][0])
     {
@@ -197,11 +197,11 @@ class AccountTokenApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\AccountToken' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\AccountToken' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\AccountToken' !== 'string') {
+                        if ('\SeaTable\Client\Auth\AccountToken' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -219,13 +219,13 @@ class AccountTokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\AccountToken', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\AccountToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\AccountToken';
+            $returnType = '\SeaTable\Client\Auth\AccountToken';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -258,7 +258,7 @@ class AccountTokenApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\AccountToken',
+                        '\SeaTable\Client\Auth\AccountToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -306,7 +306,7 @@ class AccountTokenApi
      */
     public function getAccountTokenfromUsernameAsyncWithHttpInfo($username, $password, $x_seafile_otp = null, string $contentType = self::contentTypes['getAccountTokenfromUsername'][0])
     {
-        $returnType = '\SeaTable\Client\Model\AccountToken';
+        $returnType = '\SeaTable\Client\Auth\AccountToken';
         $request = $this->getAccountTokenfromUsernameRequest($username, $password, $x_seafile_otp, $contentType);
 
         return $this->client

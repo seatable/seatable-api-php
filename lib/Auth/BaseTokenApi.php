@@ -139,7 +139,7 @@ class BaseTokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\AccessToken
+     * @return \SeaTable\Client\Auth\AccessToken
      */
     public function getBaseTokenWithAccountToken($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
@@ -158,7 +158,7 @@ class BaseTokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
     public function getBaseTokenWithAccountTokenWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
@@ -201,11 +201,11 @@ class BaseTokenApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\AccessToken' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\AccessToken' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\AccessToken' !== 'string') {
+                        if ('\SeaTable\Client\Auth\AccessToken' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -223,13 +223,13 @@ class BaseTokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\AccessToken', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\AccessToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\AccessToken';
+            $returnType = '\SeaTable\Client\Auth\AccessToken';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -262,7 +262,7 @@ class BaseTokenApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\AccessToken',
+                        '\SeaTable\Client\Auth\AccessToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -308,7 +308,7 @@ class BaseTokenApi
      */
     public function getBaseTokenWithAccountTokenAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
-        $returnType = '\SeaTable\Client\Model\AccessToken';
+        $returnType = '\SeaTable\Client\Auth\AccessToken';
         $request = $this->getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, $contentType);
 
         return $this->client
@@ -798,7 +798,7 @@ class BaseTokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\AccessToken
+     * @return \SeaTable\Client\Auth\AccessToken
      */
     public function getBaseTokenWithExternLink($external_link_token, string $contentType = self::contentTypes['getBaseTokenWithExternLink'][0])
     {
@@ -816,7 +816,7 @@ class BaseTokenApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Auth\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
     public function getBaseTokenWithExternLinkWithHttpInfo($external_link_token, string $contentType = self::contentTypes['getBaseTokenWithExternLink'][0])
     {
@@ -859,11 +859,11 @@ class BaseTokenApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\AccessToken' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Auth\AccessToken' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\AccessToken' !== 'string') {
+                        if ('\SeaTable\Client\Auth\AccessToken' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -881,13 +881,13 @@ class BaseTokenApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\AccessToken', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Auth\AccessToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\AccessToken';
+            $returnType = '\SeaTable\Client\Auth\AccessToken';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -920,7 +920,7 @@ class BaseTokenApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\AccessToken',
+                        '\SeaTable\Client\Auth\AccessToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -964,7 +964,7 @@ class BaseTokenApi
      */
     public function getBaseTokenWithExternLinkAsyncWithHttpInfo($external_link_token, string $contentType = self::contentTypes['getBaseTokenWithExternLink'][0])
     {
-        $returnType = '\SeaTable\Client\Model\AccessToken';
+        $returnType = '\SeaTable\Client\Auth\AccessToken';
         $request = $this->getBaseTokenWithExternLinkRequest($external_link_token, $contentType);
 
         return $this->client

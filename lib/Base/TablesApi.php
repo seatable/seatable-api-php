@@ -137,12 +137,12 @@ class TablesApi
      * Create Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateTableRequest $create_table_request create_table_request (optional)
+     * @param  \SeaTable\Client\Base\CreateTableRequest $create_table_request create_table_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\Base
+     * @return \SeaTable\Client\Base\Base
      */
     public function createTable($base_uuid, $create_table_request = null, string $contentType = self::contentTypes['createTable'][0])
     {
@@ -156,12 +156,12 @@ class TablesApi
      * Create Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateTableRequest $create_table_request (optional)
+     * @param  \SeaTable\Client\Base\CreateTableRequest $create_table_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\Base, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\Base, HTTP status code, HTTP response headers (array of strings)
      */
     public function createTableWithHttpInfo($base_uuid, $create_table_request = null, string $contentType = self::contentTypes['createTable'][0])
     {
@@ -204,11 +204,11 @@ class TablesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\Base' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Base\Base' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\Base' !== 'string') {
+                        if ('\SeaTable\Client\Base\Base' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -226,13 +226,13 @@ class TablesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\Base', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Base\Base', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\Base';
+            $returnType = '\SeaTable\Client\Base\Base';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -265,7 +265,7 @@ class TablesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\Base',
+                        '\SeaTable\Client\Base\Base',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -281,7 +281,7 @@ class TablesApi
      * Create Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateTableRequest $create_table_request (optional)
+     * @param  \SeaTable\Client\Base\CreateTableRequest $create_table_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -303,7 +303,7 @@ class TablesApi
      * Create Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateTableRequest $create_table_request (optional)
+     * @param  \SeaTable\Client\Base\CreateTableRequest $create_table_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -311,7 +311,7 @@ class TablesApi
      */
     public function createTableAsyncWithHttpInfo($base_uuid, $create_table_request = null, string $contentType = self::contentTypes['createTable'][0])
     {
-        $returnType = '\SeaTable\Client\Model\Base';
+        $returnType = '\SeaTable\Client\Base\Base';
         $request = $this->createTableRequest($base_uuid, $create_table_request, $contentType);
 
         return $this->client
@@ -354,7 +354,7 @@ class TablesApi
      * Create request for operation 'createTable'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\CreateTableRequest $create_table_request (optional)
+     * @param  \SeaTable\Client\Base\CreateTableRequest $create_table_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -464,7 +464,7 @@ class TablesApi
      * Delete Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteTable $delete_table delete_table (optional)
+     * @param  \SeaTable\Client\Base\DeleteTable $delete_table delete_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -483,7 +483,7 @@ class TablesApi
      * Delete Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteTable $delete_table (optional)
+     * @param  \SeaTable\Client\Base\DeleteTable $delete_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -608,7 +608,7 @@ class TablesApi
      * Delete Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteTable $delete_table (optional)
+     * @param  \SeaTable\Client\Base\DeleteTable $delete_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -630,7 +630,7 @@ class TablesApi
      * Delete Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteTable $delete_table (optional)
+     * @param  \SeaTable\Client\Base\DeleteTable $delete_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -681,7 +681,7 @@ class TablesApi
      * Create request for operation 'deleteTable'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteTable $delete_table (optional)
+     * @param  \SeaTable\Client\Base\DeleteTable $delete_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -791,7 +791,7 @@ class TablesApi
      * Duplicate Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DuplicateTable $duplicate_table duplicate_table (optional)
+     * @param  \SeaTable\Client\Base\DuplicateTable $duplicate_table duplicate_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -810,7 +810,7 @@ class TablesApi
      * Duplicate Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DuplicateTable $duplicate_table (optional)
+     * @param  \SeaTable\Client\Base\DuplicateTable $duplicate_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -935,7 +935,7 @@ class TablesApi
      * Duplicate Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DuplicateTable $duplicate_table (optional)
+     * @param  \SeaTable\Client\Base\DuplicateTable $duplicate_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -957,7 +957,7 @@ class TablesApi
      * Duplicate Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DuplicateTable $duplicate_table (optional)
+     * @param  \SeaTable\Client\Base\DuplicateTable $duplicate_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1008,7 +1008,7 @@ class TablesApi
      * Create request for operation 'duplicateTable'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DuplicateTable $duplicate_table (optional)
+     * @param  \SeaTable\Client\Base\DuplicateTable $duplicate_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1118,7 +1118,7 @@ class TablesApi
      * Rename Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\RenameTable $rename_table rename_table (optional)
+     * @param  \SeaTable\Client\Base\RenameTable $rename_table rename_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1137,7 +1137,7 @@ class TablesApi
      * Rename Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\RenameTable $rename_table (optional)
+     * @param  \SeaTable\Client\Base\RenameTable $rename_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameTable'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1262,7 +1262,7 @@ class TablesApi
      * Rename Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\RenameTable $rename_table (optional)
+     * @param  \SeaTable\Client\Base\RenameTable $rename_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1284,7 +1284,7 @@ class TablesApi
      * Rename Table
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\RenameTable $rename_table (optional)
+     * @param  \SeaTable\Client\Base\RenameTable $rename_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1335,7 +1335,7 @@ class TablesApi
      * Create request for operation 'renameTable'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\RenameTable $rename_table (optional)
+     * @param  \SeaTable\Client\Base\RenameTable $rename_table (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameTable'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

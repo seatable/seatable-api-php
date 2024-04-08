@@ -161,7 +161,7 @@ class RowsApi
      * Add Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddRowRequest $add_row_request add_row_request (optional)
+     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request add_row_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -180,7 +180,7 @@ class RowsApi
      * Add Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddRowRequest $add_row_request (optional)
+     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -305,7 +305,7 @@ class RowsApi
      * Add Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddRowRequest $add_row_request (optional)
+     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -327,7 +327,7 @@ class RowsApi
      * Add Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddRowRequest $add_row_request (optional)
+     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -378,7 +378,7 @@ class RowsApi
      * Create request for operation 'addRow'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AddRowRequest $add_row_request (optional)
+     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -488,7 +488,7 @@ class RowsApi
      * Append Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendRows $append_rows append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows $append_rows append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -507,7 +507,7 @@ class RowsApi
      * Append Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -632,7 +632,7 @@ class RowsApi
      * Append Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -654,7 +654,7 @@ class RowsApi
      * Append Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -705,7 +705,7 @@ class RowsApi
      * Create request for operation 'appendRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -815,7 +815,7 @@ class RowsApi
      * Delete Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRow $delete_row delete_row (optional)
+     * @param  \SeaTable\Client\Base\DeleteRow $delete_row delete_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -834,7 +834,7 @@ class RowsApi
      * Delete Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRow $delete_row (optional)
+     * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -959,7 +959,7 @@ class RowsApi
      * Delete Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRow $delete_row (optional)
+     * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -981,7 +981,7 @@ class RowsApi
      * Delete Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRow $delete_row (optional)
+     * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1032,7 +1032,7 @@ class RowsApi
      * Create request for operation 'deleteRow'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRow $delete_row (optional)
+     * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1142,7 +1142,7 @@ class RowsApi
      * Delete Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1161,7 +1161,7 @@ class RowsApi
      * Delete Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1286,7 +1286,7 @@ class RowsApi
      * Delete Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1308,7 +1308,7 @@ class RowsApi
      * Delete Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1359,7 +1359,7 @@ class RowsApi
      * Create request for operation 'deleteRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1843,7 +1843,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\FilteredRowsFilter $filtered_rows_filter filtered_rows_filter (optional)
+     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter filtered_rows_filter (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1863,7 +1863,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\FilteredRowsFilter $filtered_rows_filter (optional)
+     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1926,7 +1926,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\FilteredRowsFilter $filtered_rows_filter (optional)
+     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1950,7 +1950,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\FilteredRowsFilter $filtered_rows_filter (optional)
+     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1990,7 +1990,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Model\FilteredRowsFilter $filtered_rows_filter (optional)
+     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2548,7 +2548,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2567,7 +2567,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2692,7 +2692,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2714,7 +2714,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2765,7 +2765,7 @@ class RowsApi
      * Create request for operation 'lockRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2875,12 +2875,12 @@ class RowsApi
      * List Rows (with SQL)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Model\SqlQueryResponse
+     * @return \SeaTable\Client\Base\SqlQueryResponse
      */
     public function querySQL($base_uuid, $sql_query = null, string $contentType = self::contentTypes['querySQL'][0])
     {
@@ -2894,12 +2894,12 @@ class RowsApi
      * List Rows (with SQL)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Model\SqlQueryResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\SqlQueryResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function querySQLWithHttpInfo($base_uuid, $sql_query = null, string $contentType = self::contentTypes['querySQL'][0])
     {
@@ -2942,11 +2942,11 @@ class RowsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\Model\SqlQueryResponse' === '\SplFileObject') {
+                    if ('\SeaTable\Client\Base\SqlQueryResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Model\SqlQueryResponse' !== 'string') {
+                        if ('\SeaTable\Client\Base\SqlQueryResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2964,13 +2964,13 @@ class RowsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Model\SqlQueryResponse', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Base\SqlQueryResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\Model\SqlQueryResponse';
+            $returnType = '\SeaTable\Client\Base\SqlQueryResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -3003,7 +3003,7 @@ class RowsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\Model\SqlQueryResponse',
+                        '\SeaTable\Client\Base\SqlQueryResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3019,7 +3019,7 @@ class RowsApi
      * List Rows (with SQL)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3041,7 +3041,7 @@ class RowsApi
      * List Rows (with SQL)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3049,7 +3049,7 @@ class RowsApi
      */
     public function querySQLAsyncWithHttpInfo($base_uuid, $sql_query = null, string $contentType = self::contentTypes['querySQL'][0])
     {
-        $returnType = '\SeaTable\Client\Model\SqlQueryResponse';
+        $returnType = '\SeaTable\Client\Base\SqlQueryResponse';
         $request = $this->querySQLRequest($base_uuid, $sql_query, $contentType);
 
         return $this->client
@@ -3092,7 +3092,7 @@ class RowsApi
      * Create request for operation 'querySQL'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3202,7 +3202,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3221,7 +3221,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3346,7 +3346,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3368,7 +3368,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3419,7 +3419,7 @@ class RowsApi
      * Create request for operation 'unlockRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3529,7 +3529,7 @@ class RowsApi
      * Update Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRow $update_row update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRow $update_row update_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3548,7 +3548,7 @@ class RowsApi
      * Update Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3673,7 +3673,7 @@ class RowsApi
      * Update Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3695,7 +3695,7 @@ class RowsApi
      * Update Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3746,7 +3746,7 @@ class RowsApi
      * Create request for operation 'updateRow'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3856,7 +3856,7 @@ class RowsApi
      * Update Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3875,7 +3875,7 @@ class RowsApi
      * Update Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4000,7 +4000,7 @@ class RowsApi
      * Update Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4022,7 +4022,7 @@ class RowsApi
      * Update Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4073,7 +4073,7 @@ class RowsApi
      * Create request for operation 'updateRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Model\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
