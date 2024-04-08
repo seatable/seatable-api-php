@@ -1,86 +1,50 @@
 {
   "name": "seatable/seatable-api-php",
-  "description": "PHP bindings for the SeaTable Web API",
+  "description": "The official SeaTable API Reference (OpenAPI 3.0).",
   "type": "library",
-  "keywords": ["SeaTable"],
-  "homepage": "https://seatable.io/",
+  "keywords": [
+    "openapitools",
+    "openapi-generator",
+    "openapi",
+    "php",
+    "sdk",
+    "rest",
+    "api",
+    "library"
+  ],
+  "homepage": "https://api.seatable.io/",
   "readme": "README.md",
   "license": "Apache-2.0",
   "authors": [
     {
-      "name": "Christoph Dyllick-Brenzinger"
+      "name": "Christoph Dyllick-Brenzinger",
+      "homepage": "https://seatable.io"
     },
     {
-      "name": "Tom Klingenberg"
+      "name": "OpenAPI",
+      "homepage": "https://openapi-generator.tech"
     }
   ],
-  "support": {
-    "docs": "https://seatable.github.io/seatable-api-php/",
-    "forum": "https://forum.seatable.io/",
-    "source": "https://github.com/seatable/seatable-api-php"
-  },
   "require": {
-    "php": ">=7.2.5",
+    "php": "^7.4 || ^8.0",
     "ext-curl": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "guzzlehttp/guzzle": "^7.3",
+    "guzzlehttp/psr7": "^1.7 || ^2.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.0.0",
-    "internations/http-mock": "^0.14.0",
-    "kubawerlos/php-cs-fixer-custom-fixers": "^2.5 || ^3.3",
-    "phpcompatibility/php-compatibility": "^9.3",
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^8.0 || ^9.0",
+    "friendsofphp/php-cs-fixer": "^3.5"
   },
   "autoload": {
-    "files": ["src/Compat/Deprecation/autoload.php"],
     "psr-4": {
-      "SeaTable\\SeaTableApi\\": "src/"
+      "SeaTable\\Client\\": "lib/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SeaTable\\SeaTableApi\\": "test/unit/"
+      "SeaTable\\Client\\Test\\": "test/"
     }
-  },
-  "scripts": {
-    "test": [
-      "@composer --no-plugins --version",
-      "@composer --no-plugins validate --no-check-lock --strict",
-      "@lint-and-load",
-      "@php-test",
-      "@php .config/composer/vcache.php",
-      "@composer --no-plugins -q install --no-scripts --no-progress",
-      "@phpunit",
-      "@php-cs-fixer",
-      "@phpcs",
-      "@composer --no-plugins outdated --direct"
-    ],
-    "lint-and-load": [
-      "printf \"%s: \" \"$PHP_BINARY\" && \"$PHP_BINARY\" -l src/SeaTableApi.php && \"$PHP_BINARY\" -r 'require \"src/SeaTableApi.php\";'"
-    ],
-    "php-cs-fixer": [
-      "@composer --no-plugins exec -- php-cs-fixer fix ${CI:+--dry-run --diff} --config=.config/php-cs-fixer/.php-cs-fixer.php",
-      "git --no-pager diff --check --ws-error-highlight=new"
-    ],
-    "php-test": [
-      "@composer --no-plugins dump-autoload",
-      "test/php/autoload.php"
-    ],
-    "phpcs": [
-      "@composer --no-plugins exec phpcs -- --standard=.config/phpcs/config.xml"
-    ],
-    "phpunit": [
-      "@php .config/composer/vcache.php",
-      "@composer --no-plugins -q install --no-scripts --no-progress",
-      "@putenv XDEBUG_MODE=coverage",
-      "\"$PHP_BINARY\" -d zend.assertions=1 -d assert.exception=1 .config/composer/vendor/bin/phpunit --configuration .config/phpunit"
-    ]
-  },
-  "scripts-descriptions": {
-    "test": "run all tests"
-  },
-  "config": {
-    "sort-packages": true,
-    "vendor-dir": ".config/composer/vendor"
   }
 }
