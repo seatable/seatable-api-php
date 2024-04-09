@@ -6,7 +6,9 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR" || exit
 
-sudo rm -r ./lib
+sudo rm -r ./lib/*
+sudo rm -r ./test/*
+sudo rm -r ./docs/*
 
 # generate sysadmin
 sudo docker run --rm \
