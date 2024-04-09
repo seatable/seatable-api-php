@@ -1,0 +1,8 @@
+{
+  "apiPackage": "File",
+  "modelPackage": "File",
+  "customDocsDir": "docs/File/Api",
+  "customEndpointHeadline": "File",
+  "invokerPackage": "SeaTable\\Client",
+  "composerPackageName": "seatable/seatable-api-php"
+}

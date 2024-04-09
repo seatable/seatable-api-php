@@ -1,0 +1,8 @@
+{
+  "apiPackage": "Auth",
+  "modelPackage": "Auth",
+  "customDocsDir": "docs/Auth/Api",
+  "customEndpointHeadline": "Auth",
+  "invokerPackage": "SeaTable\\Client",
+  "composerPackageName": "seatable/seatable-api-php"
+}

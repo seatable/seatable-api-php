@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  title: File Operations
+  description: >-
+    The official SeaTable API Reference (OpenAPI 3.0).
+  version: "4.4"
+servers:
+  - url: "https://{server}"
+    variables:
+      server:
+        default: cloud.seatable.io
+
+x-readme:
+  explorer-enabled: true
+  metrics-enabled: false
+  proxy-enabled: false
+
+components:
+  # Security scheme definitions (see Authentication)
+  securitySchemes:
+    ApiTokenAuth:
+      type: http
+      scheme: bearer
+      description: This is the [API-Token](/reference/authentication).
+
+  # Reusable path, query, header and cookie parameters
+  parameters:
+    file_path:
+      name: path
+      in: query
+      schema:
+        type: string
+        pattern: ^\/(images|files){1}\/[0-9]{4}\-[0-9]{2}\/.
+      description: "Path to the file"
+      example: "/images/2021-03/test.png"
+      required: true
+    upload_link:
+      name: upload_link
+      description: "This is the value you got from the call Get File/Image Upload Link via API Token."
+      in: path
+      schema:
+        type: string
+        pattern: ^[a-z0-9]{8}(-[a-z0-9]{4}){3}-[a-z0-9]{12}$
+      required: true
+      example: "5e666848-4152-45e5-990e-d686960f2a05"
+    custom_folder_path:
+      name: path
+      in: query
+      schema:
+        type: string
+      description: "Path of the custom folder"
+      example: "/"
+      required: true
+    custom_folder_file_name:
+      name: name
+      in: query
+      schema:
+        type: string
+      description: "Name of the file in the custom folder"
+      example: "b374.pdf"
+      required: true
+    custom_folder_path_with_filename:
+      name: path
+      in: query
+      schema:
+        type: string
+      description: "Path and name of the file in the custom folder"
+      example: "/supplierOne/b374.pdf"
+      required: true
+
+  # Reusable schemas (data models)
+  schemas:
+    upload_file_image:
+      type: object
+      properties:
+        file:
+          type: string
+          description: >-
+            The file or image you'd like to upload from your local
+            drive.
+          format: binary
+        parent_dir:
+          type: string
+          description: >-
+            This is the value of the `parent_path` you got from the call
+            **Get File/Image Upload Link via API Token**.
+          example: /asset/a275d870-fd55-48e4-8c4a-5fd6f2549765
+        replace:
+          type: string
+          enum: ["0", "1"]
+          description: >-
+            Do you want to overwrite a file/image with the same name?
+            `0` - No, `1` - Yes. Optional. `0` by default. If existing
+            file is not overwritten, the uploaded file will be renamed
+            as `filename(1).xxx`.
+          example: "0"
+        relative_path:
+          type: string
+          description: >-
+            If you are uploading a file, use the value of the
+            `file_relative_path` returned in the call **Get File/Image
+            Upload Link via API Token**; or the `img_relative_path` for
+            image.
+          example: images/2021-08
+          pattern: '^(images|files){1}\/[0-9]{4}\-[0-9]{2}$'
+      required:
+        - file
+        - parent_dir
+        - relative_path
+
+paths:
+  # Files & Images
+  /api/v2.1/dtable/app-upload-link/:
+    get:
+      tags:
+        - Files & Images
+      summary: Get Upload Link
+      operationId: getUploadLink
+      description: |
+        With the **API token** (not the Base Token), you can generate an upload link, the parent- and the relative path. These information are needed to upload a file / an image to a bases.
+        Then this file/image can be attached to a file/image column. 
+
+        > 📘 The upload link is only valid for a short time
+        > 
+        > The upload link is only valid for some minutes. After that the upload link must be created again.
+      security:
+        - ApiTokenAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                upload_link: >-
+                  https://cloud.seafile.com/seafhttp/upload-api/83e701c8-84ba-498c-91b1-ddb3789edb7e
+                parent_path: /asset/a275d870-fd55-48e4-8c4a-5fd6f2549765
+                img_relative_path: images/2021-08
+                file_relative_path: files/2021-08
+  /seafhttp/upload-api/{upload_link}?ret-json=1:
+    post:
+      tags:
+        - Files & Images
+      summary: Upload File (or Image)
+      operationId: uploadFile
+      description: |
+        Upload a file or an image as an attachment to a base. To execute this request you need to generate an upload link first. 
+
+        > 📘 Three steps to add a file/an image to a base
+        > 
+        > To add an image or a file to a base, three steps are necessary: 
+        > 1. [Generate an upload link](/reference/getUploadLink).
+        > 2. Upload the file to the base as an attachment. (this article)
+        > 3. [Update a row](/reference/updateRow) and attach the file/the image to a file or image column. 
+
+        > 📘 Different variable names
+        > 
+        > Pay attention that the return values of upload link have slightly different names, so `parent_path` is `parent_dir` in this call.
+
+        ## Attach the file/image to a file or image column
+
+        After uploading the file/image to a base, SeaTable saves the uploaded file at non-public URL in the form: `/workspace/{workspace_id}`+`parent_dir`+`relative_path`+`name`. 
+
+        Here is an example how this might look like: `https://cloud.seatable.io/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png`
+        If you are logged in with your browser, you can access this file. Otherwise you will see the login screen.
+
+        Knowing this URL, you can add a new row or update an existing row and use the URL to add this attachment to your file/image column.
+        ```
+        # Example how to add an already uploaded image to a row:
+        "row": {
+          "My Image Column": ["/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png`"]
+        }
+
+        # Example how to add an already uploaded file to a row:
+        "row": {
+          "File Column": [{
+            "name": "invoice.pdf", 
+            "size": 101454, 
+            "type": "file", 
+            "url": "/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/invoice.pdf"
+          }]
+        }
+        ```
+        > 🚧 File requires the input variables size, type and url
+        > 
+        > As you can see, in the case of an image the URL is sufficient to attach the image to an image column. In case of a file, you have to provide all four input values.
+
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/upload_file_image"
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/upload_link"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - name: favicon.ico
+                  id: b4356e3000d01a37b458524b59cecb1a5d23d964
+                  size: 67646
+  /api/v2.1/dtable/app-download-link/:
+    get:
+      tags:
+        - Files & Images
+      summary: Get File Download Link
+      operationId: getFileDownloadLink
+      description: |
+        Get the file download link of a base's attachment.
+
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/file_path"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                download_link: >-
+                  https://cloud.seatable.io/seafhttp/files/12345678-1234-4672-834c-4eca40dc104b/test.png
+
+  # Files & Images (Custom Folder)
+  /api/v2.1/dtable/custom/app-asset-dir/:
+    get:
+      tags: [Files & Images (Custom Folder)]
+      summary: Get Files from Folder
+      operationId: getCustomFiles
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/custom_folder_path"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                dir:
+                  - name: "Invoices"
+                  - name: "Requests"
+                file:
+                  - name: "b347.pdf"
+
+  /api/v2.1/dtable/custom/app-asset-file/:
+    get:
+      tags: [Files & Images (Custom Folder)]
+      summary: Get File Metadata
+      operationId: getCustomFileMetadata
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/custom_folder_path"
+        - $ref: "#/components/parameters/custom_folder_file_name"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                dirent:
+                  is_file: true
+                  obj_name: "b347.pdf"
+                  file_size: 11583
+                  last_update: "2023-04-11T14:59:53+08:00"
+                  uuid: "2bbe9499-e1df-4086-bdd3-d130d6c91bd3"
+  /api/v2.1/dtable/custom/app-upload-link/:
+    get:
+      tags: [Files & Images (Custom Folder)]
+      summary: Get Upload Link
+      operationId: getCustomUploadLink
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/custom_folder_path"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                dirent:
+                  upload_link: "https://cloud.seatable.io/seafhttp/upload-api/e943a56a-c5b3-441a-ac1d-9199819dec71"
+                  parent_path: "/asset/1338f224-8482-4d71-b8be-63c8f37b896a/custom"
+                  relative_path": "/"
+  /api/v2.1/dtable/custom/app-download-link:
+    get:
+      tags: [Files & Images (Custom Folder)]
+      summary: Get Download Link
+      operationId: getCustomDownloadLink
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/custom_folder_path_with_filename"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                dirent:
+                  download_link: "https://cloud.seatable.io/seafhttp/files/a73e26e9-0417-4d98-bb5d-92826f4af671/b347.pdf"

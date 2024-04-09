@@ -1,0 +1,8 @@
+{
+  "apiPackage": "SysAdmin",
+  "modelPackage": "SysAdmin/Model",
+  "customDocsDir": "docs/SysAdmin/Api",
+  "customEndpointHeadline": "SysAdmin",
+  "invokerPackage": "SeaTable\\Client",
+  "composerPackageName": "seatable/seatable-api-php"
+}

@@ -1,0 +1,14 @@
+{{#hasAuthMethods}}{{#authMethods}}
+{{#isBasic}}
+{{#isBasicBasic}}
+// Configure HTTP basic authorization: {{{name}}}
+$config = {{{invokerPackage}}}\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+{{/isBasicBasic}}
+{{#isBasicBearer}}
+// Configure Bearer{{#bearerFormat}} ({{{.}}}){{/bearerFormat}} authorization: {{{name}}} (use the right token for your request)
+$config = {{{invokerPackage}}}\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+{{/isBasicBearer}}
+{{/isBasic}}
+{{/authMethods}}{{/hasAuthMethods}}

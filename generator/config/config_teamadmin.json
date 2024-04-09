@@ -1,0 +1,8 @@
+{
+  "apiPackage": "TeamAdmin",
+  "modelPackage": "TeamAdmin",
+  "customDocsDir": "docs/TeamAdmin/Api",
+  "customEndpointHeadline": "TeamAdmin",
+  "invokerPackage": "SeaTable\\Client",
+  "composerPackageName": "seatable/seatable-api-php"
+}
