@@ -6,8 +6,7 @@ This SeaTable php client contains all public available API endpoints to interact
 
 ## Resources:
 
-- [Documentation](https://github.com/seatable/seatable-api-php/tree/main/docs)
-- [Developer Documentation](https://developer.seatable.io/clients/php_api/)
+- [Documentation](https://developer.seatable.io/clients/php_api/)
 - [SeaTable API Reference](https://api.seatable.io)
 - [SeaTable OpenApi Specification](https://github.com/seatable/openapi)
 - Report Issues at the [Community Forum](https://forum.seatable.io)
