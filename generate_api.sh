@@ -83,3 +83,5 @@ sudo mv ./docs/{Api,Model} ./docs/Auth
 sudo mv ./README.md ./README_Auth.md
 
 cp README.backup README.md
+echo "client_test" >> ./.gitignore
+sudo chown -R christoph: ./*
