@@ -168,8 +168,8 @@ components:
       in: query
       schema:
         type: string
-        minimum: 4
-        maximum: 4
+        minLength: 4
+        maxLength: 4
       required: true
       description: This is the key of the link column. **Do not** use the `link_id` of the link column here.
 
@@ -1424,7 +1424,7 @@ components:
             description: Define one or many options for this column
             properties:
               id:
-                type: integer
+                type: string
                 description: Select any unique id.
                 pattern: "^([A-Za-z0-9]){4}$"
               name:

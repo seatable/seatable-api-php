@@ -122,7 +122,7 @@ components:
       name: month
       in: query
       schema:
-        type: integer
+        type: string
         pattern: ^[0-9]{4}((0[1-9])|1[0-2])$
       description: >-
         For which month you'd like to list the statistics in the format of
@@ -286,7 +286,7 @@ components:
       name: department_id
       in: path
       schema:
-        type: string
+        type: integer
         minimum: 1
       required: true
       example: 1
