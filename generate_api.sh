@@ -10,9 +10,11 @@ sudo rm -r ./lib/*
 sudo rm -r ./test/*
 sudo rm -r ./docs/*
 
+TAG="v7.6.0"
+
 # generate sysadmin
 sudo docker run --rm \
- -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/system_admin_account_operations.yaml \
  -g php \
  -o /local \
@@ -24,7 +26,7 @@ sudo mv ./README.md ./README_SysAdmin.md
 
 # teamadmin
 sudo docker run --rm \
- -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/team_admin_account_operations.yaml \
  -g php \
  -o /local \
@@ -36,7 +38,7 @@ sudo mv ./README.md ./README_TeamAmin.md
 
 # user
 sudo docker run --rm \
- -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/user_account_operations.yaml \
  -g php \
  -o /local \
@@ -48,7 +50,7 @@ sudo mv ./README.md ./README_User.md
 
 # base
 sudo docker run --rm \
- -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/base_operations.yaml \
  -g php \
  -o /local \
@@ -60,7 +62,7 @@ sudo mv ./README.md ./README_Base.md
 
 # file
 sudo docker run --rm \
- -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/file_operations.yaml \
  -g php \
  -o /local \
@@ -72,7 +74,7 @@ sudo mv ./README.md ./README_File.md
 
 # auth
 sudo docker run --rm \
- -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/authentication.yaml \
  -g php \
  -o /local \
