@@ -1,6 +1,6 @@
 <?php
 /**
- * TransferGroupRequest
+ * UpdateAbuseReportRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * TransferGroupRequest Class Doc Comment
+ * UpdateAbuseReportRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'transferGroup_request';
+    protected static $openAPIModelName = 'updateAbuseReport_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'new_owner' => 'string'
+        'handled' => 'bool'
     ];
 
     /**
@@ -67,7 +67,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'new_owner' => null
+        'handled' => null
     ];
 
     /**
@@ -76,7 +76,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'new_owner' => false
+        'handled' => false
     ];
 
     /**
@@ -165,7 +165,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'new_owner' => 'new_owner'
+        'handled' => 'handled'
     ];
 
     /**
@@ -174,7 +174,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'new_owner' => 'setNewOwner'
+        'handled' => 'setHandled'
     ];
 
     /**
@@ -183,7 +183,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'new_owner' => 'getNewOwner'
+        'handled' => 'getHandled'
     ];
 
     /**
@@ -243,7 +243,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('new_owner', $data ?? [], null);
+        $this->setIfExists('handled', $data ?? [], null);
     }
 
     /**
@@ -289,28 +289,28 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets new_owner
+     * Gets handled
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getNewOwner()
+    public function getHandled()
     {
-        return $this->container['new_owner'];
+        return $this->container['handled'];
     }
 
     /**
-     * Sets new_owner
+     * Sets handled
      *
-     * @param string|null $new_owner new_owner
+     * @param bool|null $handled Required. Use `true` or `false` to mark the status of the report.
      *
      * @return self
      */
-    public function setNewOwner($new_owner)
+    public function setHandled($handled)
     {
-        if (is_null($new_owner)) {
-            throw new \InvalidArgumentException('non-nullable new_owner cannot be null');
+        if (is_null($handled)) {
+            throw new \InvalidArgumentException('non-nullable handled cannot be null');
         }
-        $this->container['new_owner'] = $new_owner;
+        $this->container['handled'] = $handled;
 
         return $this;
     }

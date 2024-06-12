@@ -135,7 +135,7 @@ class DepartmentsApi
      *
      * Add Department
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest $add_department_request add_department_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddDepartmentRequest $add_department_request add_department_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addDepartment'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -153,7 +153,7 @@ class DepartmentsApi
      *
      * Add Department
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest $add_department_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddDepartmentRequest $add_department_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addDepartment'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -277,7 +277,7 @@ class DepartmentsApi
      *
      * Add Department
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest $add_department_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddDepartmentRequest $add_department_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addDepartment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -298,7 +298,7 @@ class DepartmentsApi
      *
      * Add Department
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest $add_department_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddDepartmentRequest $add_department_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addDepartment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -348,7 +348,7 @@ class DepartmentsApi
     /**
      * Create request for operation 'addDepartment'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest $add_department_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddDepartmentRequest $add_department_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addDepartment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

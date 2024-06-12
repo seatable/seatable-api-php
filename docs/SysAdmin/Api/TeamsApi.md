@@ -42,7 +42,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$add_team_request = new \SeaTable\Client\SysAdmin/Model\AddTeamRequest(); // \SeaTable\Client\SysAdmin/Model\AddTeamRequest
+$add_team_request = new \SeaTable\Client\SysAdmin\AddTeamRequest(); // \SeaTable\Client\SysAdmin\AddTeamRequest
 
 try {
     $result = $apiInstance->addTeam($add_team_request);
@@ -56,7 +56,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **add_team_request** | [**\SeaTable\Client\SysAdmin/Model\AddTeamRequest**](../Model/AddTeamRequest.md)|  | [optional] |
+| **add_team_request** | [**\SeaTable\Client\SysAdmin\AddTeamRequest**](../Model/AddTeamRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -93,7 +93,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     $config
 );
 $org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$add_team_user_request = new \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest(); // \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest
+$add_team_user_request = new \SeaTable\Client\SysAdmin\AddTeamUserRequest(); // \SeaTable\Client\SysAdmin\AddTeamUserRequest
 
 try {
     $result = $apiInstance->addTeamUser($org_id, $add_team_user_request);
@@ -108,7 +108,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **add_team_user_request** | [**\SeaTable\Client\SysAdmin/Model\AddTeamUserRequest**](../Model/AddTeamUserRequest.md)|  | [optional] |
+| **add_team_user_request** | [**\SeaTable\Client\SysAdmin\AddTeamUserRequest**](../Model/AddTeamUserRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -604,7 +604,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     $config
 );
 $org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$update_team_request = new \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest
+$update_team_request = new \SeaTable\Client\SysAdmin\UpdateTeamRequest(); // \SeaTable\Client\SysAdmin\UpdateTeamRequest
 
 try {
     $result = $apiInstance->updateTeam($org_id, $update_team_request);
@@ -619,7 +619,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **update_team_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateTeamRequest**](../Model/UpdateTeamRequest.md)|  | [optional] |
+| **update_team_request** | [**\SeaTable\Client\SysAdmin\UpdateTeamRequest**](../Model/UpdateTeamRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -657,7 +657,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
 );
 $org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
 $user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
-$update_team_user_request = new \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest
+$update_team_user_request = new \SeaTable\Client\SysAdmin\UpdateTeamUserRequest(); // \SeaTable\Client\SysAdmin\UpdateTeamUserRequest
 
 try {
     $result = $apiInstance->updateTeamUser($org_id, $user_id, $update_team_user_request);
@@ -673,7 +673,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
-| **update_team_user_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest**](../Model/UpdateTeamUserRequest.md)|  | [optional] |
+| **update_team_user_request** | [**\SeaTable\Client\SysAdmin\UpdateTeamUserRequest**](../Model/UpdateTeamUserRequest.md)|  | [optional] |
 
 ### Return type
 

@@ -168,7 +168,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNewUserRequest $add_new_user_request add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -186,7 +186,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -310,7 +310,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -331,7 +331,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -381,7 +381,7 @@ class UsersApi
     /**
      * Create request for operation 'addNewUser'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1101,7 +1101,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest $enforce_two_factor_request enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1120,7 +1120,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1245,7 +1245,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1267,7 +1267,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1318,7 +1318,7 @@ class UsersApi
      * Create request for operation 'enforceTwoFactor'
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4156,7 +4156,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole $update_admins_role update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4174,7 +4174,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4298,7 +4298,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4319,7 +4319,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4369,7 +4369,7 @@ class UsersApi
     /**
      * Create request for operation 'updateAdminRole'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4461,7 +4461,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateUserRequest $update_user_request update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4480,7 +4480,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4605,7 +4605,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4627,7 +4627,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4678,7 +4678,7 @@ class UsersApi
      * Create request for operation 'updateUser'
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

@@ -1,6 +1,6 @@
 <?php
 /**
- * AddNotificationToUserRequest
+ * TransferGroupRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AddNotificationToUserRequest Class Doc Comment
+ * TransferGroupRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'addNotificationToUser_request';
+    protected static $openAPIModelName = 'transferGroup_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'msg' => 'string',
-        'username' => 'string'
+        'new_owner' => 'string'
     ];
 
     /**
@@ -68,8 +67,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'msg' => null,
-        'username' => null
+        'new_owner' => null
     ];
 
     /**
@@ -78,8 +76,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'msg' => false,
-        'username' => false
+        'new_owner' => false
     ];
 
     /**
@@ -168,8 +165,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'msg' => 'msg',
-        'username' => 'username'
+        'new_owner' => 'new_owner'
     ];
 
     /**
@@ -178,8 +174,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'msg' => 'setMsg',
-        'username' => 'setUsername'
+        'new_owner' => 'setNewOwner'
     ];
 
     /**
@@ -188,8 +183,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'msg' => 'getMsg',
-        'username' => 'getUsername'
+        'new_owner' => 'getNewOwner'
     ];
 
     /**
@@ -249,8 +243,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('msg', $data ?? [], null);
-        $this->setIfExists('username', $data ?? [], null);
+        $this->setIfExists('new_owner', $data ?? [], null);
     }
 
     /**
@@ -296,55 +289,28 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets msg
+     * Gets new_owner
      *
      * @return string|null
      */
-    public function getMsg()
+    public function getNewOwner()
     {
-        return $this->container['msg'];
+        return $this->container['new_owner'];
     }
 
     /**
-     * Sets msg
+     * Sets new_owner
      *
-     * @param string|null $msg msg
+     * @param string|null $new_owner new_owner
      *
      * @return self
      */
-    public function setMsg($msg)
+    public function setNewOwner($new_owner)
     {
-        if (is_null($msg)) {
-            throw new \InvalidArgumentException('non-nullable msg cannot be null');
+        if (is_null($new_owner)) {
+            throw new \InvalidArgumentException('non-nullable new_owner cannot be null');
         }
-        $this->container['msg'] = $msg;
-
-        return $this;
-    }
-
-    /**
-     * Gets username
-     *
-     * @return string|null
-     */
-    public function getUsername()
-    {
-        return $this->container['username'];
-    }
-
-    /**
-     * Sets username
-     *
-     * @param string|null $username username
-     *
-     * @return self
-     */
-    public function setUsername($username)
-    {
-        if (is_null($username)) {
-            throw new \InvalidArgumentException('non-nullable username cannot be null');
-        }
-        $this->container['username'] = $username;
+        $this->container['new_owner'] = $new_owner;
 
         return $this;
     }

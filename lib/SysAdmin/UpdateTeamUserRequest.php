@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateUserRequest
+ * UpdateTeamUserRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * UpdateUserRequest Class Doc Comment
+ * UpdateTeamUserRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateUser_request';
+    protected static $openAPIModelName = 'updateTeamUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,6 +57,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPITypes = [
         'is_staff' => 'bool',
+        'is_admin' => 'bool',
         'is_active' => 'bool',
         'role' => 'string',
         'name' => 'string',
@@ -80,6 +81,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPIFormats = [
         'is_staff' => null,
+        'is_admin' => null,
         'is_active' => null,
         'role' => null,
         'name' => null,
@@ -101,6 +103,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static array $openAPINullables = [
         'is_staff' => false,
+        'is_admin' => false,
         'is_active' => false,
         'role' => false,
         'name' => false,
@@ -202,6 +205,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $attributeMap = [
         'is_staff' => 'is_staff',
+        'is_admin' => 'is_admin',
         'is_active' => 'is_active',
         'role' => 'role',
         'name' => 'name',
@@ -223,6 +227,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $setters = [
         'is_staff' => 'setIsStaff',
+        'is_admin' => 'setIsAdmin',
         'is_active' => 'setIsActive',
         'role' => 'setRole',
         'name' => 'setName',
@@ -244,6 +249,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $getters = [
         'is_staff' => 'getIsStaff',
+        'is_admin' => 'getIsAdmin',
         'is_active' => 'getIsActive',
         'role' => 'getRole',
         'name' => 'getName',
@@ -316,6 +322,7 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function __construct(array $data = null)
     {
         $this->setIfExists('is_staff', $data ?? [], false);
+        $this->setIfExists('is_admin', $data ?? [], false);
         $this->setIfExists('is_active', $data ?? [], true);
         $this->setIfExists('role', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
@@ -395,6 +402,33 @@ class UpdateUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable is_staff cannot be null');
         }
         $this->container['is_staff'] = $is_staff;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_admin
+     *
+     * @return bool|null
+     */
+    public function getIsAdmin()
+    {
+        return $this->container['is_admin'];
+    }
+
+    /**
+     * Sets is_admin
+     *
+     * @param bool|null $is_admin `true` or `false` if the user will be an (team) admin. `false` by default.
+     *
+     * @return self
+     */
+    public function setIsAdmin($is_admin)
+    {
+        if (is_null($is_admin)) {
+            throw new \InvalidArgumentException('non-nullable is_admin cannot be null');
+        }
+        $this->container['is_admin'] = $is_admin;
 
         return $this;
     }

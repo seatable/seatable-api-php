@@ -1,6 +1,6 @@
 <?php
 /**
- * AddTeamUserRequest
+ * AddNewUserRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AddTeamUserRequest Class Doc Comment
+ * AddNewUserRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'addTeamUser_request';
+    protected static $openAPIModelName = 'addNewUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'email' => 'string',
         'password' => 'string',
         'name' => 'string',
-        'with_workspace' => 'bool'
+        'is_staff' => 'bool',
+        'is_active' => 'bool'
     ];
 
     /**
@@ -73,7 +74,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'email' => null,
         'password' => null,
         'name' => null,
-        'with_workspace' => null
+        'is_staff' => null,
+        'is_active' => null
     ];
 
     /**
@@ -85,7 +87,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'email' => false,
         'password' => false,
         'name' => false,
-        'with_workspace' => false
+        'is_staff' => false,
+        'is_active' => false
     ];
 
     /**
@@ -177,7 +180,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'email' => 'email',
         'password' => 'password',
         'name' => 'name',
-        'with_workspace' => 'with_workspace'
+        'is_staff' => 'is_staff',
+        'is_active' => 'is_active'
     ];
 
     /**
@@ -189,7 +193,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'email' => 'setEmail',
         'password' => 'setPassword',
         'name' => 'setName',
-        'with_workspace' => 'setWithWorkspace'
+        'is_staff' => 'setIsStaff',
+        'is_active' => 'setIsActive'
     ];
 
     /**
@@ -201,7 +206,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         'email' => 'getEmail',
         'password' => 'getPassword',
         'name' => 'getName',
-        'with_workspace' => 'getWithWorkspace'
+        'is_staff' => 'getIsStaff',
+        'is_active' => 'getIsActive'
     ];
 
     /**
@@ -264,7 +270,8 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('password', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('with_workspace', $data ?? [], null);
+        $this->setIfExists('is_staff', $data ?? [], false);
+        $this->setIfExists('is_active', $data ?? [], true);
     }
 
     /**
@@ -391,28 +398,55 @@ class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
-     * Gets with_workspace
+     * Gets is_staff
      *
      * @return bool|null
      */
-    public function getWithWorkspace()
+    public function getIsStaff()
     {
-        return $this->container['with_workspace'];
+        return $this->container['is_staff'];
     }
 
     /**
-     * Sets with_workspace
+     * Sets is_staff
      *
-     * @param bool|null $with_workspace If a workspace should be automatically created for the user. Optional. `false` by default.
+     * @param bool|null $is_staff `true` or `false` if the user will be an (system) admin. `false` by default.
      *
      * @return self
      */
-    public function setWithWorkspace($with_workspace)
+    public function setIsStaff($is_staff)
     {
-        if (is_null($with_workspace)) {
-            throw new \InvalidArgumentException('non-nullable with_workspace cannot be null');
+        if (is_null($is_staff)) {
+            throw new \InvalidArgumentException('non-nullable is_staff cannot be null');
         }
-        $this->container['with_workspace'] = $with_workspace;
+        $this->container['is_staff'] = $is_staff;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_active
+     *
+     * @return bool|null
+     */
+    public function getIsActive()
+    {
+        return $this->container['is_active'];
+    }
+
+    /**
+     * Sets is_active
+     *
+     * @param bool|null $is_active `true` or `false` if the user could log in. `true` by default.
+     *
+     * @return self
+     */
+    public function setIsActive($is_active)
+    {
+        if (is_null($is_active)) {
+            throw new \InvalidArgumentException('non-nullable is_active cannot be null');
+        }
+        $this->container['is_active'] = $is_active;
 
         return $this;
     }

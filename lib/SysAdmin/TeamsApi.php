@@ -162,7 +162,7 @@ class TeamsApi
      *
      * Add Team
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamRequest $add_team_request add_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamRequest $add_team_request add_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -180,7 +180,7 @@ class TeamsApi
      *
      * Add Team
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamRequest $add_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamRequest $add_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -304,7 +304,7 @@ class TeamsApi
      *
      * Add Team
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamRequest $add_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamRequest $add_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -325,7 +325,7 @@ class TeamsApi
      *
      * Add Team
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamRequest $add_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamRequest $add_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -375,7 +375,7 @@ class TeamsApi
     /**
      * Create request for operation 'addTeam'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamRequest $add_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamRequest $add_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -467,7 +467,7 @@ class TeamsApi
      * Add Team User
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest $add_team_user_request add_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request add_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -486,7 +486,7 @@ class TeamsApi
      * Add Team User
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -611,7 +611,7 @@ class TeamsApi
      * Add Team User
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -633,7 +633,7 @@ class TeamsApi
      * Add Team User
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -684,7 +684,7 @@ class TeamsApi
      * Create request for operation 'addTeamUser'
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3644,7 +3644,7 @@ class TeamsApi
      * Update Team
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest $update_team_request update_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3663,7 +3663,7 @@ class TeamsApi
      * Update Team
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest $update_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3788,7 +3788,7 @@ class TeamsApi
      * Update Team
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest $update_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3810,7 +3810,7 @@ class TeamsApi
      * Update Team
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest $update_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3861,7 +3861,7 @@ class TeamsApi
      * Create request for operation 'updateTeam'
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest $update_team_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3972,7 +3972,7 @@ class TeamsApi
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest $update_team_user_request update_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3992,7 +3992,7 @@ class TeamsApi
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest $update_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4118,7 +4118,7 @@ class TeamsApi
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest $update_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4141,7 +4141,7 @@ class TeamsApi
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest $update_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4193,7 +4193,7 @@ class TeamsApi
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest $update_team_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

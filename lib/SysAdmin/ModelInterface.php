@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  SeaTable\Client\SysAdmin/Model
+ * @package  SeaTable\Client\SysAdmin
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -25,12 +25,12 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 /**
  * Interface abstracting model access.
  *
- * @package SeaTable\Client\SysAdmin/Model
+ * @package SeaTable\Client\SysAdmin
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

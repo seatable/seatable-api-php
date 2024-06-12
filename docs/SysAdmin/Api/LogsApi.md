@@ -230,7 +230,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     $config
 );
 $abuse_report_id = 1; // int
-$update_abuse_report_request = new \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest
+$update_abuse_report_request = new \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest(); // \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest
 
 try {
     $result = $apiInstance->updateAbuseReport($abuse_report_id, $update_abuse_report_request);
@@ -245,7 +245,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **abuse_report_id** | **int**|  | |
-| **update_abuse_report_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest**](../Model/UpdateAbuseReportRequest.md)|  | [optional] |
+| **update_abuse_report_request** | [**\SeaTable\Client\SysAdmin\UpdateAbuseReportRequest**](../Model/UpdateAbuseReportRequest.md)|  | [optional] |
 
 ### Return type
 

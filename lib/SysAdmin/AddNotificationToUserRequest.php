@@ -1,6 +1,6 @@
 <?php
 /**
- * AddNewUserRequest
+ * AddNotificationToUserRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AddNewUserRequest Class Doc Comment
+ * AddNotificationToUserRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'addNewUser_request';
+    protected static $openAPIModelName = 'addNotificationToUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'email' => 'string',
-        'password' => 'string',
-        'name' => 'string',
-        'is_staff' => 'bool',
-        'is_active' => 'bool'
+        'msg' => 'string',
+        'username' => 'string'
     ];
 
     /**
@@ -71,11 +68,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'email' => null,
-        'password' => null,
-        'name' => null,
-        'is_staff' => null,
-        'is_active' => null
+        'msg' => null,
+        'username' => null
     ];
 
     /**
@@ -84,11 +78,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'email' => false,
-        'password' => false,
-        'name' => false,
-        'is_staff' => false,
-        'is_active' => false
+        'msg' => false,
+        'username' => false
     ];
 
     /**
@@ -177,11 +168,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'email' => 'email',
-        'password' => 'password',
-        'name' => 'name',
-        'is_staff' => 'is_staff',
-        'is_active' => 'is_active'
+        'msg' => 'msg',
+        'username' => 'username'
     ];
 
     /**
@@ -190,11 +178,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'email' => 'setEmail',
-        'password' => 'setPassword',
-        'name' => 'setName',
-        'is_staff' => 'setIsStaff',
-        'is_active' => 'setIsActive'
+        'msg' => 'setMsg',
+        'username' => 'setUsername'
     ];
 
     /**
@@ -203,11 +188,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'email' => 'getEmail',
-        'password' => 'getPassword',
-        'name' => 'getName',
-        'is_staff' => 'getIsStaff',
-        'is_active' => 'getIsActive'
+        'msg' => 'getMsg',
+        'username' => 'getUsername'
     ];
 
     /**
@@ -267,11 +249,8 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('password', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('is_staff', $data ?? [], false);
-        $this->setIfExists('is_active', $data ?? [], true);
+        $this->setIfExists('msg', $data ?? [], null);
+        $this->setIfExists('username', $data ?? [], null);
     }
 
     /**
@@ -317,136 +296,55 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets email
+     * Gets msg
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getMsg()
     {
-        return $this->container['email'];
+        return $this->container['msg'];
     }
 
     /**
-     * Sets email
+     * Sets msg
      *
-     * @param string|null $email Login email of the user.
+     * @param string|null $msg msg
      *
      * @return self
      */
-    public function setEmail($email)
+    public function setMsg($msg)
     {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        if (is_null($msg)) {
+            throw new \InvalidArgumentException('non-nullable msg cannot be null');
         }
-        $this->container['email'] = $email;
+        $this->container['msg'] = $msg;
 
         return $this;
     }
 
     /**
-     * Gets password
+     * Gets username
      *
      * @return string|null
      */
-    public function getPassword()
+    public function getUsername()
     {
-        return $this->container['password'];
+        return $this->container['username'];
     }
 
     /**
-     * Sets password
+     * Sets username
      *
-     * @param string|null $password Login password of the user.
+     * @param string|null $username username
      *
      * @return self
      */
-    public function setPassword($password)
+    public function setUsername($username)
     {
-        if (is_null($password)) {
-            throw new \InvalidArgumentException('non-nullable password cannot be null');
+        if (is_null($username)) {
+            throw new \InvalidArgumentException('non-nullable username cannot be null');
         }
-        $this->container['password'] = $password;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name Full name of the user.
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_staff
-     *
-     * @return bool|null
-     */
-    public function getIsStaff()
-    {
-        return $this->container['is_staff'];
-    }
-
-    /**
-     * Sets is_staff
-     *
-     * @param bool|null $is_staff `true` or `false` if the user will be an (system) admin. `false` by default.
-     *
-     * @return self
-     */
-    public function setIsStaff($is_staff)
-    {
-        if (is_null($is_staff)) {
-            throw new \InvalidArgumentException('non-nullable is_staff cannot be null');
-        }
-        $this->container['is_staff'] = $is_staff;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_active
-     *
-     * @return bool|null
-     */
-    public function getIsActive()
-    {
-        return $this->container['is_active'];
-    }
-
-    /**
-     * Sets is_active
-     *
-     * @param bool|null $is_active `true` or `false` if the user could log in. `true` by default.
-     *
-     * @return self
-     */
-    public function setIsActive($is_active)
-    {
-        if (is_null($is_active)) {
-            throw new \InvalidArgumentException('non-nullable is_active cannot be null');
-        }
-        $this->container['is_active'] = $is_active;
+        $this->container['username'] = $username;
 
         return $this;
     }

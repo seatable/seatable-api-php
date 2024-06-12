@@ -748,7 +748,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest $update_general_settings_request update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -766,7 +766,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -890,7 +890,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -911,7 +911,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -961,7 +961,7 @@ class SystemInfoCustomizingApi
     /**
      * Create request for operation 'updateGeneralSettings'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

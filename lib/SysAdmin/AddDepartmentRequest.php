@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateAdminsRole
+ * AddDepartmentRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * UpdateAdminsRole Class Doc Comment
+ * AddDepartmentRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'update_admins_role';
+    protected static $openAPIModelName = 'addDepartment_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'email' => 'string',
-        'role' => 'string'
+        'group_name' => 'string',
+        'parent_group' => 'string'
     ];
 
     /**
@@ -68,8 +68,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'email' => null,
-        'role' => null
+        'group_name' => null,
+        'parent_group' => null
     ];
 
     /**
@@ -78,8 +78,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'email' => false,
-        'role' => false
+        'group_name' => false,
+        'parent_group' => false
     ];
 
     /**
@@ -168,8 +168,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'email' => 'email',
-        'role' => 'role'
+        'group_name' => 'group_name',
+        'parent_group' => 'parent_group'
     ];
 
     /**
@@ -178,8 +178,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'email' => 'setEmail',
-        'role' => 'setRole'
+        'group_name' => 'setGroupName',
+        'parent_group' => 'setParentGroup'
     ];
 
     /**
@@ -188,8 +188,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'email' => 'getEmail',
-        'role' => 'getRole'
+        'group_name' => 'getGroupName',
+        'parent_group' => 'getParentGroup'
     ];
 
     /**
@@ -249,8 +249,8 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('group_name', $data ?? [], null);
+        $this->setIfExists('parent_group', $data ?? [], null);
     }
 
     /**
@@ -296,55 +296,55 @@ class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets email
+     * Gets group_name
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getGroupName()
     {
-        return $this->container['email'];
+        return $this->container['group_name'];
     }
 
     /**
-     * Sets email
+     * Sets group_name
      *
-     * @param string|null $email The ID of another administrator user. **Never use your own ID here!**
+     * @param string|null $group_name The name of the new department.
      *
      * @return self
      */
-    public function setEmail($email)
+    public function setGroupName($group_name)
     {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        if (is_null($group_name)) {
+            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
         }
-        $this->container['email'] = $email;
+        $this->container['group_name'] = $group_name;
 
         return $this;
     }
 
     /**
-     * Gets role
+     * Gets parent_group
      *
      * @return string|null
      */
-    public function getRole()
+    public function getParentGroup()
     {
-        return $this->container['role'];
+        return $this->container['parent_group'];
     }
 
     /**
-     * Sets role
+     * Sets parent_group
      *
-     * @param string|null $role The desired role of the administrator user. Use `default_admin`, `system_admin`, `daily_admin`, or `audit_admin`. See the table above for details.
+     * @param string|null $parent_group The ID of the parent department. Optional. -1 by default.
      *
      * @return self
      */
-    public function setRole($role)
+    public function setParentGroup($parent_group)
     {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        if (is_null($parent_group)) {
+            throw new \InvalidArgumentException('non-nullable parent_group cannot be null');
         }
-        $this->container['role'] = $role;
+        $this->container['parent_group'] = $parent_group;
 
         return $this;
     }

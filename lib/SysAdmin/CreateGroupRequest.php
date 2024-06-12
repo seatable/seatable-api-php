@@ -1,6 +1,6 @@
 <?php
 /**
- * AddTeamRequest
+ * CreateGroupRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AddTeamRequest Class Doc Comment
+ * CreateGroupRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'addTeam_request';
+    protected static $openAPIModelName = 'createGroup_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'org_name' => 'string',
-        'admin_email' => 'string',
-        'password' => 'string',
-        'admin_name' => 'string',
-        'with_workspace' => 'bool'
+        'group_name' => 'string',
+        'group_owner' => 'string'
     ];
 
     /**
@@ -71,11 +68,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'org_name' => null,
-        'admin_email' => null,
-        'password' => null,
-        'admin_name' => null,
-        'with_workspace' => null
+        'group_name' => null,
+        'group_owner' => null
     ];
 
     /**
@@ -84,11 +78,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'org_name' => false,
-        'admin_email' => false,
-        'password' => false,
-        'admin_name' => false,
-        'with_workspace' => false
+        'group_name' => false,
+        'group_owner' => false
     ];
 
     /**
@@ -177,11 +168,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'org_name' => 'org_name',
-        'admin_email' => 'admin_email',
-        'password' => 'password',
-        'admin_name' => 'admin_name',
-        'with_workspace' => 'with_workspace'
+        'group_name' => 'group_name',
+        'group_owner' => 'group_owner'
     ];
 
     /**
@@ -190,11 +178,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'org_name' => 'setOrgName',
-        'admin_email' => 'setAdminEmail',
-        'password' => 'setPassword',
-        'admin_name' => 'setAdminName',
-        'with_workspace' => 'setWithWorkspace'
+        'group_name' => 'setGroupName',
+        'group_owner' => 'setGroupOwner'
     ];
 
     /**
@@ -203,11 +188,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'org_name' => 'getOrgName',
-        'admin_email' => 'getAdminEmail',
-        'password' => 'getPassword',
-        'admin_name' => 'getAdminName',
-        'with_workspace' => 'getWithWorkspace'
+        'group_name' => 'getGroupName',
+        'group_owner' => 'getGroupOwner'
     ];
 
     /**
@@ -267,11 +249,8 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('org_name', $data ?? [], null);
-        $this->setIfExists('admin_email', $data ?? [], null);
-        $this->setIfExists('password', $data ?? [], null);
-        $this->setIfExists('admin_name', $data ?? [], null);
-        $this->setIfExists('with_workspace', $data ?? [], null);
+        $this->setIfExists('group_name', $data ?? [], null);
+        $this->setIfExists('group_owner', $data ?? [], null);
     }
 
     /**
@@ -317,136 +296,55 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets org_name
+     * Gets group_name
      *
      * @return string|null
      */
-    public function getOrgName()
+    public function getGroupName()
     {
-        return $this->container['org_name'];
+        return $this->container['group_name'];
     }
 
     /**
-     * Sets org_name
+     * Sets group_name
      *
-     * @param string|null $org_name Name of the team. Required.
+     * @param string|null $group_name The name of the new department.
      *
      * @return self
      */
-    public function setOrgName($org_name)
+    public function setGroupName($group_name)
     {
-        if (is_null($org_name)) {
-            throw new \InvalidArgumentException('non-nullable org_name cannot be null');
+        if (is_null($group_name)) {
+            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
         }
-        $this->container['org_name'] = $org_name;
+        $this->container['group_name'] = $group_name;
 
         return $this;
     }
 
     /**
-     * Gets admin_email
+     * Gets group_owner
      *
      * @return string|null
      */
-    public function getAdminEmail()
+    public function getGroupOwner()
     {
-        return $this->container['admin_email'];
+        return $this->container['group_owner'];
     }
 
     /**
-     * Sets admin_email
+     * Sets group_owner
      *
-     * @param string|null $admin_email Login email of the team administrator. Required. Has to be unique in the system.
+     * @param string|null $group_owner group_owner
      *
      * @return self
      */
-    public function setAdminEmail($admin_email)
+    public function setGroupOwner($group_owner)
     {
-        if (is_null($admin_email)) {
-            throw new \InvalidArgumentException('non-nullable admin_email cannot be null');
+        if (is_null($group_owner)) {
+            throw new \InvalidArgumentException('non-nullable group_owner cannot be null');
         }
-        $this->container['admin_email'] = $admin_email;
-
-        return $this;
-    }
-
-    /**
-     * Gets password
-     *
-     * @return string|null
-     */
-    public function getPassword()
-    {
-        return $this->container['password'];
-    }
-
-    /**
-     * Sets password
-     *
-     * @param string|null $password Login password of the user.
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        if (is_null($password)) {
-            throw new \InvalidArgumentException('non-nullable password cannot be null');
-        }
-        $this->container['password'] = $password;
-
-        return $this;
-    }
-
-    /**
-     * Gets admin_name
-     *
-     * @return string|null
-     */
-    public function getAdminName()
-    {
-        return $this->container['admin_name'];
-    }
-
-    /**
-     * Sets admin_name
-     *
-     * @param string|null $admin_name Full name of the team administrator. Optional.
-     *
-     * @return self
-     */
-    public function setAdminName($admin_name)
-    {
-        if (is_null($admin_name)) {
-            throw new \InvalidArgumentException('non-nullable admin_name cannot be null');
-        }
-        $this->container['admin_name'] = $admin_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets with_workspace
-     *
-     * @return bool|null
-     */
-    public function getWithWorkspace()
-    {
-        return $this->container['with_workspace'];
-    }
-
-    /**
-     * Sets with_workspace
-     *
-     * @param bool|null $with_workspace If a workspace should be automatically created for the user. Optional. `false` by default.
-     *
-     * @return self
-     */
-    public function setWithWorkspace($with_workspace)
-    {
-        if (is_null($with_workspace)) {
-            throw new \InvalidArgumentException('non-nullable with_workspace cannot be null');
-        }
-        $this->container['with_workspace'] = $with_workspace;
+        $this->container['group_owner'] = $group_owner;
 
         return $this;
     }

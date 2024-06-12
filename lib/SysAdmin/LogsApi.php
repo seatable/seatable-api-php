@@ -1297,7 +1297,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest $update_abuse_report_request update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1316,7 +1316,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1441,7 +1441,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1463,7 +1463,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1514,7 +1514,7 @@ class LogsApi
      * Create request for operation 'updateAbuseReport'
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

@@ -132,7 +132,7 @@ class SystemNotificationsApi
      *
      * Add Notification to User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest $add_notification_to_user_request add_notification_to_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNotificationToUserRequest $add_notification_to_user_request add_notification_to_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationToUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -150,7 +150,7 @@ class SystemNotificationsApi
      *
      * Add Notification to User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest $add_notification_to_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNotificationToUserRequest $add_notification_to_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationToUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -274,7 +274,7 @@ class SystemNotificationsApi
      *
      * Add Notification to User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest $add_notification_to_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNotificationToUserRequest $add_notification_to_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -295,7 +295,7 @@ class SystemNotificationsApi
      *
      * Add Notification to User
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest $add_notification_to_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNotificationToUserRequest $add_notification_to_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -345,7 +345,7 @@ class SystemNotificationsApi
     /**
      * Create request for operation 'addNotificationToUser'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest $add_notification_to_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNotificationToUserRequest $add_notification_to_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

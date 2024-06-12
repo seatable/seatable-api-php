@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateAbuseReportRequest
+ * AddTeamUserRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * UpdateAbuseReportRequest Class Doc Comment
+ * AddTeamUserRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateAbuseReport_request';
+    protected static $openAPIModelName = 'addTeamUser_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'handled' => 'bool'
+        'email' => 'string',
+        'password' => 'string',
+        'name' => 'string',
+        'with_workspace' => 'bool'
     ];
 
     /**
@@ -67,7 +70,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'handled' => null
+        'email' => null,
+        'password' => null,
+        'name' => null,
+        'with_workspace' => null
     ];
 
     /**
@@ -76,7 +82,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'handled' => false
+        'email' => false,
+        'password' => false,
+        'name' => false,
+        'with_workspace' => false
     ];
 
     /**
@@ -165,7 +174,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'handled' => 'handled'
+        'email' => 'email',
+        'password' => 'password',
+        'name' => 'name',
+        'with_workspace' => 'with_workspace'
     ];
 
     /**
@@ -174,7 +186,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'handled' => 'setHandled'
+        'email' => 'setEmail',
+        'password' => 'setPassword',
+        'name' => 'setName',
+        'with_workspace' => 'setWithWorkspace'
     ];
 
     /**
@@ -183,7 +198,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'handled' => 'getHandled'
+        'email' => 'getEmail',
+        'password' => 'getPassword',
+        'name' => 'getName',
+        'with_workspace' => 'getWithWorkspace'
     ];
 
     /**
@@ -243,7 +261,10 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('handled', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('with_workspace', $data ?? [], null);
     }
 
     /**
@@ -289,28 +310,109 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets handled
+     * Gets email
      *
-     * @return bool|null
+     * @return string|null
      */
-    public function getHandled()
+    public function getEmail()
     {
-        return $this->container['handled'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets handled
+     * Sets email
      *
-     * @param bool|null $handled Required. Use `true` or `false` to mark the status of the report.
+     * @param string|null $email Login email of the user.
      *
      * @return self
      */
-    public function setHandled($handled)
+    public function setEmail($email)
     {
-        if (is_null($handled)) {
-            throw new \InvalidArgumentException('non-nullable handled cannot be null');
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['handled'] = $handled;
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return string|null
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string|null $password Login password of the user.
+     *
+     * @return self
+     */
+    public function setPassword($password)
+    {
+        if (is_null($password)) {
+            throw new \InvalidArgumentException('non-nullable password cannot be null');
+        }
+        $this->container['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Full name of the user.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets with_workspace
+     *
+     * @return bool|null
+     */
+    public function getWithWorkspace()
+    {
+        return $this->container['with_workspace'];
+    }
+
+    /**
+     * Sets with_workspace
+     *
+     * @param bool|null $with_workspace If a workspace should be automatically created for the user. Optional. `false` by default.
+     *
+     * @return self
+     */
+    public function setWithWorkspace($with_workspace)
+    {
+        if (is_null($with_workspace)) {
+            throw new \InvalidArgumentException('non-nullable with_workspace cannot be null');
+        }
+        $this->container['with_workspace'] = $with_workspace;
 
         return $this;
     }

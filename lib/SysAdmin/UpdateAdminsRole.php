@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateTeamRequest
+ * UpdateAdminsRole
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * UpdateTeamRequest Class Doc Comment
+ * UpdateAdminsRole Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateAdminsRole implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'updateTeam_request';
+    protected static $openAPIModelName = 'update_admins_role';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var string[]
       */
     protected static $openAPITypes = [
-        'org_name' => 'string',
-        'role' => 'string',
-        'row_limit' => 'int',
-        'max_user_number' => 'string',
-        'asset_quota_mb' => 'string'
+        'email' => 'string',
+        'role' => 'string'
     ];
 
     /**
@@ -71,11 +68,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'org_name' => null,
-        'role' => null,
-        'row_limit' => null,
-        'max_user_number' => null,
-        'asset_quota_mb' => null
+        'email' => null,
+        'role' => null
     ];
 
     /**
@@ -84,11 +78,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'org_name' => false,
-        'role' => false,
-        'row_limit' => false,
-        'max_user_number' => false,
-        'asset_quota_mb' => false
+        'email' => false,
+        'role' => false
     ];
 
     /**
@@ -177,11 +168,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'org_name' => 'org_name',
-        'role' => 'role',
-        'row_limit' => 'row_limit',
-        'max_user_number' => 'max_user_number',
-        'asset_quota_mb' => 'asset_quota_mb'
+        'email' => 'email',
+        'role' => 'role'
     ];
 
     /**
@@ -190,11 +178,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'org_name' => 'setOrgName',
-        'role' => 'setRole',
-        'row_limit' => 'setRowLimit',
-        'max_user_number' => 'setMaxUserNumber',
-        'asset_quota_mb' => 'setAssetQuotaMb'
+        'email' => 'setEmail',
+        'role' => 'setRole'
     ];
 
     /**
@@ -203,11 +188,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'org_name' => 'getOrgName',
-        'role' => 'getRole',
-        'row_limit' => 'getRowLimit',
-        'max_user_number' => 'getMaxUserNumber',
-        'asset_quota_mb' => 'getAssetQuotaMb'
+        'email' => 'getEmail',
+        'role' => 'getRole'
     ];
 
     /**
@@ -267,11 +249,8 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('org_name', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('role', $data ?? [], null);
-        $this->setIfExists('row_limit', $data ?? [], null);
-        $this->setIfExists('max_user_number', $data ?? [], null);
-        $this->setIfExists('asset_quota_mb', $data ?? [], null);
     }
 
     /**
@@ -317,28 +296,28 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
 
 
     /**
-     * Gets org_name
+     * Gets email
      *
      * @return string|null
      */
-    public function getOrgName()
+    public function getEmail()
     {
-        return $this->container['org_name'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets org_name
+     * Sets email
      *
-     * @param string|null $org_name Name of the team. Required.
+     * @param string|null $email The ID of another administrator user. **Never use your own ID here!**
      *
      * @return self
      */
-    public function setOrgName($org_name)
+    public function setEmail($email)
     {
-        if (is_null($org_name)) {
-            throw new \InvalidArgumentException('non-nullable org_name cannot be null');
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['org_name'] = $org_name;
+        $this->container['email'] = $email;
 
         return $this;
     }
@@ -356,7 +335,7 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets role
      *
-     * @param string|null $role The class of the team. For example, on cloud.seatable.io, we have free teams (`org_default`), Plus teams (`org_plus`) and Enterprise teams (`org_enterprise`).
+     * @param string|null $role The desired role of the administrator user. Use `default_admin`, `system_admin`, `daily_admin`, or `audit_admin`. See the table above for details.
      *
      * @return self
      */
@@ -366,87 +345,6 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable role cannot be null');
         }
         $this->container['role'] = $role;
-
-        return $this;
-    }
-
-    /**
-     * Gets row_limit
-     *
-     * @return int|null
-     */
-    public function getRowLimit()
-    {
-        return $this->container['row_limit'];
-    }
-
-    /**
-     * Sets row_limit
-     *
-     * @param int|null $row_limit User's total row limit in number. For example 10000.
-     *
-     * @return self
-     */
-    public function setRowLimit($row_limit)
-    {
-        if (is_null($row_limit)) {
-            throw new \InvalidArgumentException('non-nullable row_limit cannot be null');
-        }
-        $this->container['row_limit'] = $row_limit;
-
-        return $this;
-    }
-
-    /**
-     * Gets max_user_number
-     *
-     * @return string|null
-     */
-    public function getMaxUserNumber()
-    {
-        return $this->container['max_user_number'];
-    }
-
-    /**
-     * Sets max_user_number
-     *
-     * @param string|null $max_user_number The maximum user number.
-     *
-     * @return self
-     */
-    public function setMaxUserNumber($max_user_number)
-    {
-        if (is_null($max_user_number)) {
-            throw new \InvalidArgumentException('non-nullable max_user_number cannot be null');
-        }
-        $this->container['max_user_number'] = $max_user_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets asset_quota_mb
-     *
-     * @return string|null
-     */
-    public function getAssetQuotaMb()
-    {
-        return $this->container['asset_quota_mb'];
-    }
-
-    /**
-     * Sets asset_quota_mb
-     *
-     * @param string|null $asset_quota_mb The asset quota in MB.
-     *
-     * @return self
-     */
-    public function setAssetQuotaMb($asset_quota_mb)
-    {
-        if (is_null($asset_quota_mb)) {
-            throw new \InvalidArgumentException('non-nullable asset_quota_mb cannot be null');
-        }
-        $this->container['asset_quota_mb'] = $asset_quota_mb;
 
         return $this;
     }

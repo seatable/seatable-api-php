@@ -33,7 +33,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\DepartmentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$add_department_request = new \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest(); // \SeaTable\Client\SysAdmin/Model\AddDepartmentRequest
+$add_department_request = new \SeaTable\Client\SysAdmin\AddDepartmentRequest(); // \SeaTable\Client\SysAdmin\AddDepartmentRequest
 
 try {
     $result = $apiInstance->addDepartment($add_department_request);
@@ -47,7 +47,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **add_department_request** | [**\SeaTable\Client\SysAdmin/Model\AddDepartmentRequest**](../Model/AddDepartmentRequest.md)|  | [optional] |
+| **add_department_request** | [**\SeaTable\Client\SysAdmin\AddDepartmentRequest**](../Model/AddDepartmentRequest.md)|  | [optional] |
 
 ### Return type
 

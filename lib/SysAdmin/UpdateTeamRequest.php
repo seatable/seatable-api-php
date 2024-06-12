@@ -1,6 +1,6 @@
 <?php
 /**
- * AddDepartmentRequest
+ * UpdateTeamRequest
  *
  * PHP version 7.4
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin/Model;
+namespace SeaTable\Client\SysAdmin;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AddDepartmentRequest Class Doc Comment
+ * UpdateTeamRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       *
       * @var string
       */
-    protected static $openAPIModelName = 'addDepartment_request';
+    protected static $openAPIModelName = 'updateTeam_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'group_name' => 'string',
-        'parent_group' => 'string'
+        'org_name' => 'string',
+        'role' => 'string',
+        'row_limit' => 'int',
+        'max_user_number' => 'string',
+        'asset_quota_mb' => 'string'
     ];
 
     /**
@@ -68,8 +71,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'group_name' => null,
-        'parent_group' => null
+        'org_name' => null,
+        'role' => null,
+        'row_limit' => null,
+        'max_user_number' => null,
+        'asset_quota_mb' => null
     ];
 
     /**
@@ -78,8 +84,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'group_name' => false,
-        'parent_group' => false
+        'org_name' => false,
+        'role' => false,
+        'row_limit' => false,
+        'max_user_number' => false,
+        'asset_quota_mb' => false
     ];
 
     /**
@@ -168,8 +177,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'group_name' => 'group_name',
-        'parent_group' => 'parent_group'
+        'org_name' => 'org_name',
+        'role' => 'role',
+        'row_limit' => 'row_limit',
+        'max_user_number' => 'max_user_number',
+        'asset_quota_mb' => 'asset_quota_mb'
     ];
 
     /**
@@ -178,8 +190,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'group_name' => 'setGroupName',
-        'parent_group' => 'setParentGroup'
+        'org_name' => 'setOrgName',
+        'role' => 'setRole',
+        'row_limit' => 'setRowLimit',
+        'max_user_number' => 'setMaxUserNumber',
+        'asset_quota_mb' => 'setAssetQuotaMb'
     ];
 
     /**
@@ -188,8 +203,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'group_name' => 'getGroupName',
-        'parent_group' => 'getParentGroup'
+        'org_name' => 'getOrgName',
+        'role' => 'getRole',
+        'row_limit' => 'getRowLimit',
+        'max_user_number' => 'getMaxUserNumber',
+        'asset_quota_mb' => 'getAssetQuotaMb'
     ];
 
     /**
@@ -249,8 +267,11 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('group_name', $data ?? [], null);
-        $this->setIfExists('parent_group', $data ?? [], null);
+        $this->setIfExists('org_name', $data ?? [], null);
+        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('row_limit', $data ?? [], null);
+        $this->setIfExists('max_user_number', $data ?? [], null);
+        $this->setIfExists('asset_quota_mb', $data ?? [], null);
     }
 
     /**
@@ -296,55 +317,136 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets group_name
+     * Gets org_name
      *
      * @return string|null
      */
-    public function getGroupName()
+    public function getOrgName()
     {
-        return $this->container['group_name'];
+        return $this->container['org_name'];
     }
 
     /**
-     * Sets group_name
+     * Sets org_name
      *
-     * @param string|null $group_name The name of the new department.
+     * @param string|null $org_name Name of the team. Required.
      *
      * @return self
      */
-    public function setGroupName($group_name)
+    public function setOrgName($org_name)
     {
-        if (is_null($group_name)) {
-            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
+        if (is_null($org_name)) {
+            throw new \InvalidArgumentException('non-nullable org_name cannot be null');
         }
-        $this->container['group_name'] = $group_name;
+        $this->container['org_name'] = $org_name;
 
         return $this;
     }
 
     /**
-     * Gets parent_group
+     * Gets role
      *
      * @return string|null
      */
-    public function getParentGroup()
+    public function getRole()
     {
-        return $this->container['parent_group'];
+        return $this->container['role'];
     }
 
     /**
-     * Sets parent_group
+     * Sets role
      *
-     * @param string|null $parent_group The ID of the parent department. Optional. -1 by default.
+     * @param string|null $role The class of the team. For example, on cloud.seatable.io, we have free teams (`org_default`), Plus teams (`org_plus`) and Enterprise teams (`org_enterprise`).
      *
      * @return self
      */
-    public function setParentGroup($parent_group)
+    public function setRole($role)
     {
-        if (is_null($parent_group)) {
-            throw new \InvalidArgumentException('non-nullable parent_group cannot be null');
+        if (is_null($role)) {
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
         }
-        $this->container['parent_group'] = $parent_group;
+        $this->container['role'] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets row_limit
+     *
+     * @return int|null
+     */
+    public function getRowLimit()
+    {
+        return $this->container['row_limit'];
+    }
+
+    /**
+     * Sets row_limit
+     *
+     * @param int|null $row_limit User's total row limit in number. For example 10000.
+     *
+     * @return self
+     */
+    public function setRowLimit($row_limit)
+    {
+        if (is_null($row_limit)) {
+            throw new \InvalidArgumentException('non-nullable row_limit cannot be null');
+        }
+        $this->container['row_limit'] = $row_limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_user_number
+     *
+     * @return string|null
+     */
+    public function getMaxUserNumber()
+    {
+        return $this->container['max_user_number'];
+    }
+
+    /**
+     * Sets max_user_number
+     *
+     * @param string|null $max_user_number The maximum user number.
+     *
+     * @return self
+     */
+    public function setMaxUserNumber($max_user_number)
+    {
+        if (is_null($max_user_number)) {
+            throw new \InvalidArgumentException('non-nullable max_user_number cannot be null');
+        }
+        $this->container['max_user_number'] = $max_user_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets asset_quota_mb
+     *
+     * @return string|null
+     */
+    public function getAssetQuotaMb()
+    {
+        return $this->container['asset_quota_mb'];
+    }
+
+    /**
+     * Sets asset_quota_mb
+     *
+     * @param string|null $asset_quota_mb The asset quota in MB.
+     *
+     * @return self
+     */
+    public function setAssetQuotaMb($asset_quota_mb)
+    {
+        if (is_null($asset_quota_mb)) {
+            throw new \InvalidArgumentException('non-nullable asset_quota_mb cannot be null');
+        }
+        $this->container['asset_quota_mb'] = $asset_quota_mb;
 
         return $this;
     }

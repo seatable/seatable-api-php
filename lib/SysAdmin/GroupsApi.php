@@ -135,7 +135,7 @@ class GroupsApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\CreateGroupRequest $create_group_request create_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\CreateGroupRequest $create_group_request create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -153,7 +153,7 @@ class GroupsApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\CreateGroupRequest $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -277,7 +277,7 @@ class GroupsApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\CreateGroupRequest $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -298,7 +298,7 @@ class GroupsApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\CreateGroupRequest $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -348,7 +348,7 @@ class GroupsApi
     /**
      * Create request for operation 'createGroup'
      *
-     * @param  \SeaTable\Client\SysAdmin/Model\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\CreateGroupRequest $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1096,7 +1096,7 @@ class GroupsApi
      * Transfer Group
      *
      * @param  int $group_id group_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\TransferGroupRequest $transfer_group_request transfer_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest $transfer_group_request transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1115,7 +1115,7 @@ class GroupsApi
      * Transfer Group
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\TransferGroupRequest $transfer_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1240,7 +1240,7 @@ class GroupsApi
      * Transfer Group
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\TransferGroupRequest $transfer_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1262,7 +1262,7 @@ class GroupsApi
      * Transfer Group
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\TransferGroupRequest $transfer_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1313,7 +1313,7 @@ class GroupsApi
      * Create request for operation 'transferGroup'
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\SysAdmin/Model\TransferGroupRequest $transfer_group_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
