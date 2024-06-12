@@ -83,7 +83,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\DepartmentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$department_id = 1; // string
+$department_id = 1; // int
 
 try {
     $result = $apiInstance->deleteDepartment($department_id);
@@ -97,7 +97,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **department_id** | **string**|  | |
+| **department_id** | **int**|  | |
 
 ### Return type
 
@@ -133,7 +133,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\DepartmentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$department_id = 1; // string
+$department_id = 1; // int
 $return_ancestors = true; // bool
 
 try {
@@ -148,7 +148,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **department_id** | **string**|  | |
+| **department_id** | **int**|  | |
 | **return_ancestors** | **bool**|  | [optional] |
 
 ### Return type

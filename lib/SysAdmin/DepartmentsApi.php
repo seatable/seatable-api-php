@@ -439,7 +439,7 @@ class DepartmentsApi
      *
      * Delete Department
      *
-     * @param  string $department_id department_id (required)
+     * @param  int $department_id department_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDepartment'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -457,7 +457,7 @@ class DepartmentsApi
      *
      * Delete Department
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDepartment'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -581,7 +581,7 @@ class DepartmentsApi
      *
      * Delete Department
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDepartment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -602,7 +602,7 @@ class DepartmentsApi
      *
      * Delete Department
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDepartment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -652,7 +652,7 @@ class DepartmentsApi
     /**
      * Create request for operation 'deleteDepartment'
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDepartment'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -666,6 +666,9 @@ class DepartmentsApi
             throw new \InvalidArgumentException(
                 'Missing the required parameter $department_id when calling deleteDepartment'
             );
+        }
+        if ($department_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$department_id" when calling DepartmentsApi.deleteDepartment, must be bigger than or equal to 1.');
         }
         
 
@@ -750,7 +753,7 @@ class DepartmentsApi
      *
      * Get Department
      *
-     * @param  string $department_id department_id (required)
+     * @param  int $department_id department_id (required)
      * @param  bool $return_ancestors return_ancestors (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDepartments'] to see the possible values for this operation
      *
@@ -769,7 +772,7 @@ class DepartmentsApi
      *
      * Get Department
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  bool $return_ancestors (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDepartments'] to see the possible values for this operation
      *
@@ -894,7 +897,7 @@ class DepartmentsApi
      *
      * Get Department
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  bool $return_ancestors (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDepartments'] to see the possible values for this operation
      *
@@ -916,7 +919,7 @@ class DepartmentsApi
      *
      * Get Department
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  bool $return_ancestors (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDepartments'] to see the possible values for this operation
      *
@@ -967,7 +970,7 @@ class DepartmentsApi
     /**
      * Create request for operation 'getDepartments'
      *
-     * @param  string $department_id (required)
+     * @param  int $department_id (required)
      * @param  bool $return_ancestors (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDepartments'] to see the possible values for this operation
      *
@@ -982,6 +985,9 @@ class DepartmentsApi
             throw new \InvalidArgumentException(
                 'Missing the required parameter $department_id when calling getDepartments'
             );
+        }
+        if ($department_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$department_id" when calling DepartmentsApi.getDepartments, must be bigger than or equal to 1.');
         }
         
 

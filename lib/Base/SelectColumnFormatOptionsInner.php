@@ -57,7 +57,7 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
+        'id' => 'string',
         'name' => 'string',
         'color' => 'string',
         'text_color' => 'string',
@@ -302,6 +302,10 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['id']) && !preg_match("/^([A-Za-z0-9]){4}$/", $this->container['id'])) {
+            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^([A-Za-z0-9]){4}$/.";
+        }
+
         if (!is_null($this->container['color']) && !preg_match("/#([A-Za-z0-9]){6}/", $this->container['color'])) {
             $invalidProperties[] = "invalid value for 'color', must be conform to the pattern /#([A-Za-z0-9]){6}/.";
         }
@@ -332,7 +336,7 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets id
      *
-     * @return int|null
+     * @return string|null
      */
     public function getId()
     {
@@ -342,7 +346,7 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets id
      *
-     * @param int|null $id Select any unique id.
+     * @param string|null $id Select any unique id.
      *
      * @return self
      */
@@ -352,6 +356,9 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
 
+        if ((!preg_match("/^([A-Za-z0-9]){4}$/", ObjectSerializer::toString($id)))) {
+            throw new \InvalidArgumentException("invalid value for \$id when calling SelectColumnFormatOptionsInner., must conform to the pattern /^([A-Za-z0-9]){4}$/.");
+        }
 
         $this->container['id'] = $id;
 

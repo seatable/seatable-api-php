@@ -469,7 +469,7 @@ class StatisticsApi
      * Get Automation Rules
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationRules'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -488,7 +488,7 @@ class StatisticsApi
      * Get Automation Rules
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationRules'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -613,7 +613,7 @@ class StatisticsApi
      * Get Automation Rules
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationRules'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -635,7 +635,7 @@ class StatisticsApi
      * Get Automation Rules
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationRules'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -686,7 +686,7 @@ class StatisticsApi
      * Create request for operation 'getAutomationRules'
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationRules'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -727,7 +727,7 @@ class StatisticsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $month,
             'month', // param base name
-            'integer', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -799,7 +799,7 @@ class StatisticsApi
      * Get External Apps
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getExternalApps'] to see the possible values for this operation
@@ -820,7 +820,7 @@ class StatisticsApi
      * Get External Apps
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getExternalApps'] to see the possible values for this operation
@@ -947,7 +947,7 @@ class StatisticsApi
      * Get External Apps
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getExternalApps'] to see the possible values for this operation
@@ -971,7 +971,7 @@ class StatisticsApi
      * Get External Apps
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getExternalApps'] to see the possible values for this operation
@@ -1024,7 +1024,7 @@ class StatisticsApi
      * Create request for operation 'getExternalApps'
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getExternalApps'] to see the possible values for this operation
@@ -1075,7 +1075,7 @@ class StatisticsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $month,
             'month', // param base name
-            'integer', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1166,7 +1166,7 @@ class StatisticsApi
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
      * @param  string $owner The ID of the user you are querying. Optional. If you don&#39;t define a user, all the users are queried. (optional)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScriptRunningCountByUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1186,7 +1186,7 @@ class StatisticsApi
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
      * @param  string $owner The ID of the user you are querying. Optional. If you don&#39;t define a user, all the users are queried. (optional)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScriptRunningCountByUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1312,7 +1312,7 @@ class StatisticsApi
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
      * @param  string $owner The ID of the user you are querying. Optional. If you don&#39;t define a user, all the users are queried. (optional)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScriptRunningCountByUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1335,7 +1335,7 @@ class StatisticsApi
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
      * @param  string $owner The ID of the user you are querying. Optional. If you don&#39;t define a user, all the users are queried. (optional)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScriptRunningCountByUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1387,7 +1387,7 @@ class StatisticsApi
      *
      * @param  bool $is_user Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. (required)
      * @param  string $owner The ID of the user you are querying. Optional. If you don&#39;t define a user, all the users are queried. (optional)
-     * @param  int $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
+     * @param  string $month For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getScriptRunningCountByUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1441,7 +1441,7 @@ class StatisticsApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $month,
             'month', // param base name
-            'integer', // openApiType
+            'string', // openApiType
             'form', // style
             true, // explode
             false // required
