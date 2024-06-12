@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -73,7 +73,7 @@ class LinksApiTest extends TestCase
     /**
      * Test case for createRowLink
      *
-     * Create Row Link.
+     * Create Row Link(s).
      *
      */
     public function testCreateRowLink()
@@ -83,21 +83,9 @@ class LinksApiTest extends TestCase
     }
 
     /**
-     * Test case for createRowLinks
-     *
-     * Create Row Links.
-     *
-     */
-    public function testCreateRowLinks()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for deleteRowLink
      *
-     * Delete Row Link.
+     * Delete Row Link(s).
      *
      */
     public function testDeleteRowLink()
@@ -119,12 +107,12 @@ class LinksApiTest extends TestCase
     }
 
     /**
-     * Test case for updateRowLinks
+     * Test case for updateRowLink
      *
-     * Update Row Links (Batch).
+     * Update Row Link(s).
      *
      */
-    public function testUpdateRowLinks()
+    public function testUpdateRowLink()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

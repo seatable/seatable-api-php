@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateLinksTest
+ * RowLinkCreateUpdateDeleteTest
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UpdateLinksTest Class Doc Comment
+ * RowLinkCreateUpdateDeleteTest Class Doc Comment
  *
  * @category    Class
- * @description update row links (batch)
+ * @description RowLinkCreateUpdateDelete
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UpdateLinksTest extends TestCase
+class RowLinkCreateUpdateDeleteTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class UpdateLinksTest extends TestCase
     }
 
     /**
-     * Test "UpdateLinks"
+     * Test "RowLinkCreateUpdateDelete"
      */
-    public function testUpdateLinks()
+    public function testRowLinkCreateUpdateDelete()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -100,15 +100,6 @@ class UpdateLinksTest extends TestCase
      * Test attribute "link_id"
      */
     public function testPropertyLinkId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "row_id_list"
-     */
-    public function testPropertyRowIdList()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

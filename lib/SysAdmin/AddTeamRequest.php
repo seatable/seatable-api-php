@@ -301,6 +301,15 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['org_name'] === null) {
+            $invalidProperties[] = "'org_name' can't be null";
+        }
+        if ($this->container['admin_email'] === null) {
+            $invalidProperties[] = "'admin_email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -319,7 +328,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets org_name
      *
-     * @return string|null
+     * @return string
      */
     public function getOrgName()
     {
@@ -329,7 +338,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets org_name
      *
-     * @param string|null $org_name Name of the team. Required.
+     * @param string $org_name Name of the team.
      *
      * @return self
      */
@@ -346,7 +355,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets admin_email
      *
-     * @return string|null
+     * @return string
      */
     public function getAdminEmail()
     {
@@ -356,7 +365,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets admin_email
      *
-     * @param string|null $admin_email Login email of the team administrator. Required. Has to be unique in the system.
+     * @param string $admin_email Login email of the team administrator. Required. Has to be unique in the system.
      *
      * @return self
      */
@@ -373,7 +382,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets password
      *
-     * @return string|null
+     * @return string
      */
     public function getPassword()
     {
@@ -383,7 +392,7 @@ class AddTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets password
      *
-     * @param string|null $password Login password of the user.
+     * @param string $password Login password of the user.
      *
      * @return self
      */

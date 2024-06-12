@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -91,6 +91,15 @@ class SqlQueryTest extends TestCase
      * Test attribute "convert_keys"
      */
     public function testPropertyConvertKeys()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "server_only"
+     */
+    public function testPropertyServerOnly()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

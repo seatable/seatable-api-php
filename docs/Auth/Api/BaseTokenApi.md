@@ -32,7 +32,7 @@ $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 
 try {
@@ -47,7 +47,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 
 ### Return type

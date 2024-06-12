@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -139,7 +139,7 @@ class ViewsApi
      * Create View
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\NewView $new_view new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
@@ -159,7 +159,7 @@ class ViewsApi
      * Create View
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
@@ -285,7 +285,7 @@ class ViewsApi
      * Create View
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
@@ -308,7 +308,7 @@ class ViewsApi
      * Create View
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
@@ -360,7 +360,7 @@ class ViewsApi
      * Create request for operation 'createView'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\NewView $new_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createView'] to see the possible values for this operation
      *
@@ -389,7 +389,7 @@ class ViewsApi
 
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/views/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/views/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -488,7 +488,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -508,7 +508,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -634,7 +634,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -657,7 +657,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -709,7 +709,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -743,7 +743,7 @@ class ViewsApi
         }
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/views/{view_name}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -843,7 +843,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -863,7 +863,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -989,7 +989,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1012,7 +1012,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1064,7 +1064,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1098,7 +1098,7 @@ class ViewsApi
         }
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/views/{view_name}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1197,7 +1197,7 @@ class ViewsApi
      * List Views
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViews'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1216,7 +1216,7 @@ class ViewsApi
      * List Views
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViews'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1341,7 +1341,7 @@ class ViewsApi
      * List Views
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViews'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1363,7 +1363,7 @@ class ViewsApi
      * List Views
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViews'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1414,7 +1414,7 @@ class ViewsApi
      * Create request for operation 'listViews'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViews'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1441,7 +1441,7 @@ class ViewsApi
         }
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/views/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/views/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1533,7 +1533,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\UpdateView $update_view update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
@@ -1554,7 +1554,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
@@ -1681,7 +1681,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
@@ -1705,7 +1705,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
@@ -1758,7 +1758,7 @@ class ViewsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $view_name The name of the view. (required)
-     * @param  string $table_name The name of the table. (required)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  \SeaTable\Client\Base\UpdateView $update_view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateView'] to see the possible values for this operation
      *
@@ -1794,7 +1794,7 @@ class ViewsApi
 
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/views/{view_name}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

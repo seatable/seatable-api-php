@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -71,21 +71,9 @@ class RowsApiTest extends TestCase
     }
 
     /**
-     * Test case for addRow
-     *
-     * Add Row.
-     *
-     */
-    public function testAddRow()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for appendRows
      *
-     * Append Rows.
+     * Append Row(s).
      *
      */
     public function testAppendRows()
@@ -97,22 +85,10 @@ class RowsApiTest extends TestCase
     /**
      * Test case for deleteRow
      *
-     * Delete Row.
+     * Delete Row(s).
      *
      */
     public function testDeleteRow()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for deleteRows
-     *
-     * Delete Rows.
-     *
-     */
-    public function testDeleteRows()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -125,18 +101,6 @@ class RowsApiTest extends TestCase
      *
      */
     public function testGetRow()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listFilteredRows
-     *
-     * List Filtered Rows.
-     *
-     */
-    public function testListFilteredRows()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -169,7 +133,7 @@ class RowsApiTest extends TestCase
     /**
      * Test case for querySQL
      *
-     * List Rows (with SQL).
+     * Query SeaTable with SQL.
      *
      */
     public function testQuerySQL()
@@ -193,22 +157,10 @@ class RowsApiTest extends TestCase
     /**
      * Test case for updateRow
      *
-     * Update Row.
+     * Update Row(s).
      *
      */
     public function testUpdateRow()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateRows
-     *
-     * Update Rows.
-     *
-     */
-    public function testUpdateRows()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -4,11 +4,11 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**createView()**](ViewsApi.md#createView) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/views/ | Create View |
-| [**deleteView()**](ViewsApi.md#deleteView) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/views/{view_name}/ | Delete View |
-| [**getView()**](ViewsApi.md#getView) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/views/{view_name}/ | Get View |
-| [**listViews()**](ViewsApi.md#listViews) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/views/ | List Views |
-| [**updateView()**](ViewsApi.md#updateView) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/views/{view_name}/ | Update View |
+| [**createView()**](ViewsApi.md#createView) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/views/ | Create View |
+| [**deleteView()**](ViewsApi.md#deleteView) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/ | Delete View |
+| [**getView()**](ViewsApi.md#getView) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/ | Get View |
+| [**listViews()**](ViewsApi.md#listViews) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/views/ | List Views |
+| [**updateView()**](ViewsApi.md#updateView) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/ | Update View |
 
 
 ## `createView()`
@@ -19,7 +19,7 @@ createView($base_uuid, $table_name, $new_view): object
 
 Create View
 
-Create a new view in the current table. In the **request body**, use `name` for the name of the new view. After creating the new view, use the request [Update View](/reference/update-view) to further define your view.
+Create a new view in the current table. In the **request body**, use `name` for the name of the new view. After creating the new view, use the request [Update View](/reference/updateview) to further define your view.
 
 ### Example
 
@@ -35,7 +35,7 @@ $apiInstance = new SeaTable\Client\Base\ViewsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$table_name = Table1; // string | The name of the table.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 $new_view = new \SeaTable\Client\Base\NewView(); // \SeaTable\Client\Base\NewView
 
 try {
@@ -51,7 +51,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **table_name** | **string**| The name of the table. | |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 | **new_view** | [**\SeaTable\Client\Base\NewView**](../Model/NewView.md)|  | [optional] |
 
 ### Return type
@@ -90,7 +90,7 @@ $apiInstance = new SeaTable\Client\Base\ViewsApi(
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $view_name = Default View; // string | The name of the view.
-$table_name = Table1; // string | The name of the table.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 
 try {
     $result = $apiInstance->deleteView($base_uuid, $view_name, $table_name);
@@ -106,7 +106,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **view_name** | **string**| The name of the view. | |
-| **table_name** | **string**| The name of the table. | |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 
 ### Return type
 
@@ -144,7 +144,7 @@ $apiInstance = new SeaTable\Client\Base\ViewsApi(
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $view_name = Default View; // string | The name of the view.
-$table_name = Table1; // string | The name of the table.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 
 try {
     $result = $apiInstance->getView($base_uuid, $view_name, $table_name);
@@ -160,7 +160,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **view_name** | **string**| The name of the view. | |
-| **table_name** | **string**| The name of the table. | |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 
 ### Return type
 
@@ -197,7 +197,7 @@ $apiInstance = new SeaTable\Client\Base\ViewsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$table_name = Table1; // string | The name of the table.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 
 try {
     $result = $apiInstance->listViews($base_uuid, $table_name);
@@ -212,7 +212,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **table_name** | **string**| The name of the table. | |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 
 ### Return type
 
@@ -250,7 +250,7 @@ $apiInstance = new SeaTable\Client\Base\ViewsApi(
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $view_name = Default View; // string | The name of the view.
-$table_name = Table1; // string | The name of the table.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 $update_view = new \SeaTable\Client\Base\UpdateView(); // \SeaTable\Client\Base\UpdateView
 
 try {
@@ -267,7 +267,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **view_name** | **string**| The name of the view. | |
-| **table_name** | **string**| The name of the table. | |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 | **update_view** | [**\SeaTable\Client\Base\UpdateView**](../Model/UpdateView.md)|  | [optional] |
 
 ### Return type

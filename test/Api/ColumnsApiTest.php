@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -157,7 +157,7 @@ class ColumnsApiTest extends TestCase
     /**
      * Test case for updateColumnCascade
      *
-     * Update Column Cascade.
+     * Update Column Cascade Settings.
      *
      */
     public function testUpdateColumnCascade()

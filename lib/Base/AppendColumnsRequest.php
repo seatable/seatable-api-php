@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -57,7 +57,7 @@ class AppendColumnsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPITypes = [
         'table_name' => 'string',
-        'columns' => '\SeaTable\Client\Base\CreateTableRequestColumnsInner[]'
+        'columns' => '\SeaTable\Client\Base\AppendColumnsRequestColumnsInner[]'
     ];
 
     /**
@@ -308,7 +308,7 @@ class AppendColumnsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets table_name
      *
-     * @param string|null $table_name The name of the table.
+     * @param string|null $table_name The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly.
      *
      * @return self
      */
@@ -325,7 +325,7 @@ class AppendColumnsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets columns
      *
-     * @return \SeaTable\Client\Base\CreateTableRequestColumnsInner[]|null
+     * @return \SeaTable\Client\Base\AppendColumnsRequestColumnsInner[]|null
      */
     public function getColumns()
     {
@@ -335,7 +335,7 @@ class AppendColumnsRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets columns
      *
-     * @param \SeaTable\Client\Base\CreateTableRequestColumnsInner[]|null $columns columns
+     * @param \SeaTable\Client\Base\AppendColumnsRequestColumnsInner[]|null $columns columns
      *
      * @return self
      */

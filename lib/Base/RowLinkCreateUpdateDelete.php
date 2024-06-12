@@ -1,6 +1,6 @@
 <?php
 /**
- * FilteredRowsFilter
+ * RowLinkCreateUpdateDelete
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * FilteredRowsFilter Class Doc Comment
+ * RowLinkCreateUpdateDelete Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializable
+class RowLinkCreateUpdateDelete implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
       *
       * @var string
       */
-    protected static $openAPIModelName = 'filtered-rows-filter';
+    protected static $openAPIModelName = 'row_link_create_update_delete';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'filters' => '\SeaTable\Client\Base\FilteredRowsFilterFiltersInner[]'
+        'table_id' => 'string',
+        'other_table_id' => 'string',
+        'link_id' => 'string',
+        'other_rows_ids_map' => 'array<string,string[]>'
     ];
 
     /**
@@ -67,7 +70,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'filters' => null
+        'table_id' => null,
+        'other_table_id' => null,
+        'link_id' => null,
+        'other_rows_ids_map' => null
     ];
 
     /**
@@ -76,7 +82,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'filters' => false
+        'table_id' => false,
+        'other_table_id' => false,
+        'link_id' => false,
+        'other_rows_ids_map' => false
     ];
 
     /**
@@ -165,7 +174,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'filters' => 'filters'
+        'table_id' => 'table_id',
+        'other_table_id' => 'other_table_id',
+        'link_id' => 'link_id',
+        'other_rows_ids_map' => 'other_rows_ids_map'
     ];
 
     /**
@@ -174,7 +186,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'filters' => 'setFilters'
+        'table_id' => 'setTableId',
+        'other_table_id' => 'setOtherTableId',
+        'link_id' => 'setLinkId',
+        'other_rows_ids_map' => 'setOtherRowsIdsMap'
     ];
 
     /**
@@ -183,7 +198,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'filters' => 'getFilters'
+        'table_id' => 'getTableId',
+        'other_table_id' => 'getOtherTableId',
+        'link_id' => 'getLinkId',
+        'other_rows_ids_map' => 'getOtherRowsIdsMap'
     ];
 
     /**
@@ -243,7 +261,10 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('filters', $data ?? [], null);
+        $this->setIfExists('table_id', $data ?? [], null);
+        $this->setIfExists('other_table_id', $data ?? [], null);
+        $this->setIfExists('link_id', $data ?? [], null);
+        $this->setIfExists('other_rows_ids_map', $data ?? [], null);
     }
 
     /**
@@ -273,6 +294,34 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
+        if ($this->container['table_id'] === null) {
+            $invalidProperties[] = "'table_id' can't be null";
+        }
+        if (!preg_match("/^[a-zA-Z0-9]{4}$/", $this->container['table_id'])) {
+            $invalidProperties[] = "invalid value for 'table_id', must be conform to the pattern /^[a-zA-Z0-9]{4}$/.";
+        }
+
+        if ($this->container['other_table_id'] === null) {
+            $invalidProperties[] = "'other_table_id' can't be null";
+        }
+        if (!preg_match("/^[a-zA-Z0-9]{4}$/", $this->container['other_table_id'])) {
+            $invalidProperties[] = "invalid value for 'other_table_id', must be conform to the pattern /^[a-zA-Z0-9]{4}$/.";
+        }
+
+        if ($this->container['link_id'] === null) {
+            $invalidProperties[] = "'link_id' can't be null";
+        }
+        if ((mb_strlen($this->container['link_id']) > 4)) {
+            $invalidProperties[] = "invalid value for 'link_id', the character length must be smaller than or equal to 4.";
+        }
+
+        if ((mb_strlen($this->container['link_id']) < 4)) {
+            $invalidProperties[] = "invalid value for 'link_id', the character length must be bigger than or equal to 4.";
+        }
+
+        if ($this->container['other_rows_ids_map'] === null) {
+            $invalidProperties[] = "'other_rows_ids_map' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -289,28 +338,126 @@ class FilteredRowsFilter implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets filters
+     * Gets table_id
      *
-     * @return \SeaTable\Client\Base\FilteredRowsFilterFiltersInner[]|null
+     * @return string
      */
-    public function getFilters()
+    public function getTableId()
     {
-        return $this->container['filters'];
+        return $this->container['table_id'];
     }
 
     /**
-     * Sets filters
+     * Sets table_id
      *
-     * @param \SeaTable\Client\Base\FilteredRowsFilterFiltersInner[]|null $filters filters
+     * @param string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. In most calls it is possible to replace the `table_id` with the `table_name`.
      *
      * @return self
      */
-    public function setFilters($filters)
+    public function setTableId($table_id)
     {
-        if (is_null($filters)) {
-            throw new \InvalidArgumentException('non-nullable filters cannot be null');
+        if (is_null($table_id)) {
+            throw new \InvalidArgumentException('non-nullable table_id cannot be null');
         }
-        $this->container['filters'] = $filters;
+
+        if ((!preg_match("/^[a-zA-Z0-9]{4}$/", ObjectSerializer::toString($table_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$table_id when calling RowLinkCreateUpdateDelete., must conform to the pattern /^[a-zA-Z0-9]{4}$/.");
+        }
+
+        $this->container['table_id'] = $table_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets other_table_id
+     *
+     * @return string
+     */
+    public function getOtherTableId()
+    {
+        return $this->container['other_table_id'];
+    }
+
+    /**
+     * Sets other_table_id
+     *
+     * @param string $other_table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. In most calls it is possible to replace the `table_id` with the `table_name`.
+     *
+     * @return self
+     */
+    public function setOtherTableId($other_table_id)
+    {
+        if (is_null($other_table_id)) {
+            throw new \InvalidArgumentException('non-nullable other_table_id cannot be null');
+        }
+
+        if ((!preg_match("/^[a-zA-Z0-9]{4}$/", ObjectSerializer::toString($other_table_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$other_table_id when calling RowLinkCreateUpdateDelete., must conform to the pattern /^[a-zA-Z0-9]{4}$/.");
+        }
+
+        $this->container['other_table_id'] = $other_table_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets link_id
+     *
+     * @return string
+     */
+    public function getLinkId()
+    {
+        return $this->container['link_id'];
+    }
+
+    /**
+     * Sets link_id
+     *
+     * @param string $link_id Every *link column* has a `key` and `link_id` in the column object. Use [Get Metadata](/reference/getmetadata) or [Get Base Info](/reference/getbaseinfo) to get this `link_id`. Don't use the `key` of the link column.
+     *
+     * @return self
+     */
+    public function setLinkId($link_id)
+    {
+        if (is_null($link_id)) {
+            throw new \InvalidArgumentException('non-nullable link_id cannot be null');
+        }
+        if ((mb_strlen($link_id) > 4)) {
+            throw new \InvalidArgumentException('invalid length for $link_id when calling RowLinkCreateUpdateDelete., must be smaller than or equal to 4.');
+        }
+        if ((mb_strlen($link_id) < 4)) {
+            throw new \InvalidArgumentException('invalid length for $link_id when calling RowLinkCreateUpdateDelete., must be bigger than or equal to 4.');
+        }
+
+        $this->container['link_id'] = $link_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets other_rows_ids_map
+     *
+     * @return array<string,string[]>
+     */
+    public function getOtherRowsIdsMap()
+    {
+        return $this->container['other_rows_ids_map'];
+    }
+
+    /**
+     * Sets other_rows_ids_map
+     *
+     * @param array<string,string[]> $other_rows_ids_map Provide an object where each key is a `row_id` and each value is an array of other row_ids.
+     *
+     * @return self
+     */
+    public function setOtherRowsIdsMap($other_rows_ids_map)
+    {
+        if (is_null($other_rows_ids_map)) {
+            throw new \InvalidArgumentException('non-nullable other_rows_ids_map cannot be null');
+        }
+        $this->container['other_rows_ids_map'] = $other_rows_ids_map;
 
         return $this;
     }

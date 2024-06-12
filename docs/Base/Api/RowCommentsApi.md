@@ -4,11 +4,11 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**deleteComment()**](RowCommentsApi.md#deleteComment) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment |
-| [**getComment()**](RowCommentsApi.md#getComment) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment |
-| [**getRowCommentsCount()**](RowCommentsApi.md#getRowCommentsCount) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/comments-count/ | Get Row Comments Count |
-| [**listCommentsWithinDays()**](RowCommentsApi.md#listCommentsWithinDays) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/comments-within-days/ | List Comments within Days |
-| [**listRowComments()**](RowCommentsApi.md#listRowComments) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/comments/ | List Row Comments |
+| [**deleteComment()**](RowCommentsApi.md#deleteComment) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment |
+| [**getComment()**](RowCommentsApi.md#getComment) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment |
+| [**getRowCommentsCount()**](RowCommentsApi.md#getRowCommentsCount) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-count/ | Get Row Comments Count |
+| [**listCommentsWithinDays()**](RowCommentsApi.md#listCommentsWithinDays) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-within-days/ | List Comments within Days |
+| [**listRowComments()**](RowCommentsApi.md#listRowComments) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/ | List Row Comments |
 
 
 ## `deleteComment()`

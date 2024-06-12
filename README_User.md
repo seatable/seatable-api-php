@@ -104,7 +104,7 @@ Class | Method | HTTP request | Description
 *SharingApi* | [**deleteUserShare**](docs/User/Api/SharingApi.md#deleteusershare) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/share/ | Delete User Share
 *SharingApi* | [**deleteUserViewShare**](docs/User/Api/SharingApi.md#deleteuserviewshare) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/user-view-shares/{user_view_share_id}/ | Delete User View Share
 *SharingApi* | [**leaveSharedView**](docs/User/Api/SharingApi.md#leavesharedview) | **DELETE** /api/v2.1/dtables/view-shares-user-shared/{user_view_share_id}/ | Leave Shared View
-*SharingApi* | [**listCollaborators**](docs/User/Api/SharingApi.md#listcollaborators) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/related-users/ | List Collaborators
+*SharingApi* | [**listCollaboratorsAsUser**](docs/User/Api/SharingApi.md#listcollaboratorsasuser) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/related-users/ | List Collaborators
 *SharingApi* | [**listGroupShares**](docs/User/Api/SharingApi.md#listgroupshares) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/group-shares/ | List Group Shares
 *SharingApi* | [**listGroupViewShares**](docs/User/Api/SharingApi.md#listgroupviewshares) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/group-view-shares/ | List Group View Shares
 *SharingApi* | [**listMyGroupShares**](docs/User/Api/SharingApi.md#listmygroupshares) | **GET** /api/v2.1/dtables/group-shared/ | List My Group Shares

@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -386,7 +386,7 @@ class RowCommentsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/comments/{comment_id}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -723,7 +723,7 @@ class RowCommentsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/comments/{comment_id}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1055,12 +1055,12 @@ class RowCommentsApi
                 'Missing the required parameter $row_id when calling getRowCommentsCount'
             );
         }
-        if (!preg_match("/^[A-Za-z0-9]{22}$/", $row_id)) {
-            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling RowCommentsApi.getRowCommentsCount, must conform to the pattern /^[A-Za-z0-9]{22}$/.");
+        if (!preg_match("/^[A-Za-z0-9\\-\\_]{22}$/", $row_id)) {
+            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling RowCommentsApi.getRowCommentsCount, must conform to the pattern /^[A-Za-z0-9\\-\\_]{22}$/.");
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/comments-count/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/comments-count/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1392,7 +1392,7 @@ class RowCommentsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/comments-within-days/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/comments-within-days/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1725,12 +1725,12 @@ class RowCommentsApi
                 'Missing the required parameter $row_id when calling listRowComments'
             );
         }
-        if (!preg_match("/^[A-Za-z0-9]{22}$/", $row_id)) {
-            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling RowCommentsApi.listRowComments, must conform to the pattern /^[A-Za-z0-9]{22}$/.");
+        if (!preg_match("/^[A-Za-z0-9\\-\\_]{22}$/", $row_id)) {
+            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling RowCommentsApi.listRowComments, must conform to the pattern /^[A-Za-z0-9\\-\\_]{22}$/.");
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/comments/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/comments/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

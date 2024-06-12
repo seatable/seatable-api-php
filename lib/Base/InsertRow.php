@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -60,7 +60,8 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         'table_name' => 'string',
         'anchor_row_id' => 'string',
         'row_insert_position' => 'string',
-        'row' => 'object'
+        'row' => 'object',
+        'apply_default' => 'bool'
     ];
 
     /**
@@ -74,7 +75,8 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         'table_name' => null,
         'anchor_row_id' => null,
         'row_insert_position' => null,
-        'row' => null
+        'row' => null,
+        'apply_default' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         'table_name' => false,
         'anchor_row_id' => false,
         'row_insert_position' => false,
-        'row' => false
+        'row' => false,
+        'apply_default' => false
     ];
 
     /**
@@ -178,7 +181,8 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         'table_name' => 'table_name',
         'anchor_row_id' => 'anchor_row_id',
         'row_insert_position' => 'row_insert_position',
-        'row' => 'row'
+        'row' => 'row',
+        'apply_default' => 'apply_default'
     ];
 
     /**
@@ -190,7 +194,8 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         'table_name' => 'setTableName',
         'anchor_row_id' => 'setAnchorRowId',
         'row_insert_position' => 'setRowInsertPosition',
-        'row' => 'setRow'
+        'row' => 'setRow',
+        'apply_default' => 'setApplyDefault'
     ];
 
     /**
@@ -202,7 +207,8 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         'table_name' => 'getTableName',
         'anchor_row_id' => 'getAnchorRowId',
         'row_insert_position' => 'getRowInsertPosition',
-        'row' => 'getRow'
+        'row' => 'getRow',
+        'apply_default' => 'getApplyDefault'
     ];
 
     /**
@@ -283,6 +289,7 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('anchor_row_id', $data ?? [], null);
         $this->setIfExists('row_insert_position', $data ?? [], null);
         $this->setIfExists('row', $data ?? [], null);
+        $this->setIfExists('apply_default', $data ?? [], null);
     }
 
     /**
@@ -355,7 +362,7 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets table_name
      *
-     * @param string $table_name The name of the table.
+     * @param string $table_name The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly.
      *
      * @return self
      */
@@ -456,6 +463,33 @@ class InsertRow implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable row cannot be null');
         }
         $this->container['row'] = $row;
+
+        return $this;
+    }
+
+    /**
+     * Gets apply_default
+     *
+     * @return bool|null
+     */
+    public function getApplyDefault()
+    {
+        return $this->container['apply_default'];
+    }
+
+    /**
+     * Sets apply_default
+     *
+     * @param bool|null $apply_default Use the column default values to populate new rows during creation. False by default.
+     *
+     * @return self
+     */
+    public function setApplyDefault($apply_default)
+    {
+        if (is_null($apply_default)) {
+            throw new \InvalidArgumentException('non-nullable apply_default cannot be null');
+        }
+        $this->container['apply_default'] = $apply_default;
 
         return $this;
     }

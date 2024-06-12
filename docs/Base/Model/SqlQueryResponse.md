@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | **array<string,mixed>** |  | [optional]
-**results** | **array<string,mixed>** |  | [optional]
+**metadata** | **object[]** |  | [optional]
+**results** | **object[]** |  | [optional]
 **success** | **bool** |  | [optional]
 

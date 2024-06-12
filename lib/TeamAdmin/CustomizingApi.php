@@ -132,7 +132,7 @@ class CustomizingApi
      *
      * Delete Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamLogo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -149,7 +149,7 @@ class CustomizingApi
      *
      * Delete Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamLogo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -209,7 +209,7 @@ class CustomizingApi
      *
      * Delete Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -230,7 +230,7 @@ class CustomizingApi
      *
      * Delete Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -267,7 +267,7 @@ class CustomizingApi
     /**
      * Create request for operation 'deleteTeamLogo'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -368,7 +368,7 @@ class CustomizingApi
      *
      * Get Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamLogo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -385,7 +385,7 @@ class CustomizingApi
      *
      * Get Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamLogo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -445,7 +445,7 @@ class CustomizingApi
      *
      * Get Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -466,7 +466,7 @@ class CustomizingApi
      *
      * Get Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -503,7 +503,7 @@ class CustomizingApi
     /**
      * Create request for operation 'getTeamLogo'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTeamLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -604,7 +604,7 @@ class CustomizingApi
      *
      * Update Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SplFileObject $file The image you&#39;d like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamLogo'] to see the possible values for this operation
      *
@@ -622,7 +622,7 @@ class CustomizingApi
      *
      * Update Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SplFileObject $file The image you&#39;d like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamLogo'] to see the possible values for this operation
      *
@@ -683,7 +683,7 @@ class CustomizingApi
      *
      * Update Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SplFileObject $file The image you&#39;d like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamLogo'] to see the possible values for this operation
      *
@@ -705,7 +705,7 @@ class CustomizingApi
      *
      * Update Team Logo
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SplFileObject $file The image you&#39;d like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamLogo'] to see the possible values for this operation
      *
@@ -743,7 +743,7 @@ class CustomizingApi
     /**
      * Create request for operation 'updateTeamLogo'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SplFileObject $file The image you&#39;d like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamLogo'] to see the possible values for this operation
      *

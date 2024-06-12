@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -365,7 +365,7 @@ class SnapshotsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/snapshot/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/snapshot/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

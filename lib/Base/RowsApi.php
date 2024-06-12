@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -70,22 +70,13 @@ class RowsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'addRow' => [
-            'application/json',
-        ],
         'appendRows' => [
             'application/json',
         ],
         'deleteRow' => [
             'application/json',
         ],
-        'deleteRows' => [
-            'application/json',
-        ],
         'getRow' => [
-            'application/json',
-        ],
-        'listFilteredRows' => [
             'application/json',
         ],
         'listRows' => [
@@ -101,9 +92,6 @@ class RowsApi
             'application/json',
         ],
         'updateRow' => [
-            'application/json',
-        ],
-        'updateRows' => [
             'application/json',
         ],
     ];
@@ -155,336 +143,9 @@ class RowsApi
     }
 
     /**
-     * Operation addRow
-     *
-     * Add Row
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request add_row_request (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return object
-     */
-    public function addRow($base_uuid, $add_row_request = null, string $contentType = self::contentTypes['addRow'][0])
-    {
-        list($response) = $this->addRowWithHttpInfo($base_uuid, $add_row_request, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation addRowWithHttpInfo
-     *
-     * Add Row
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function addRowWithHttpInfo($base_uuid, $add_row_request = null, string $contentType = self::contentTypes['addRow'][0])
-    {
-        $request = $this->addRowRequest($base_uuid, $add_row_request, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation addRowAsync
-     *
-     * Add Row
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function addRowAsync($base_uuid, $add_row_request = null, string $contentType = self::contentTypes['addRow'][0])
-    {
-        return $this->addRowAsyncWithHttpInfo($base_uuid, $add_row_request, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation addRowAsyncWithHttpInfo
-     *
-     * Add Row
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function addRowAsyncWithHttpInfo($base_uuid, $add_row_request = null, string $contentType = self::contentTypes['addRow'][0])
-    {
-        $returnType = 'object';
-        $request = $this->addRowRequest($base_uuid, $add_row_request, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'addRow'
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AddRowRequest $add_row_request (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addRow'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function addRowRequest($base_uuid, $add_row_request = null, string $contentType = self::contentTypes['addRow'][0])
-    {
-
-        // verify the required parameter 'base_uuid' is set
-        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $base_uuid when calling addRow'
-            );
-        }
-        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling RowsApi.addRow, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
-        }
-        
-
-
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/rows/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($base_uuid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
-                ObjectSerializer::toPathValue($base_uuid),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($add_row_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($add_row_request));
-            } else {
-                $httpBody = $add_row_request;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation appendRows
      *
-     * Append Rows
+     * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\AppendRows $append_rows append_rows (optional)
@@ -503,7 +164,7 @@ class RowsApi
     /**
      * Operation appendRowsWithHttpInfo
      *
-     * Append Rows
+     * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
@@ -628,7 +289,7 @@ class RowsApi
     /**
      * Operation appendRowsAsync
      *
-     * Append Rows
+     * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
@@ -650,7 +311,7 @@ class RowsApi
     /**
      * Operation appendRowsAsyncWithHttpInfo
      *
-     * Append Rows
+     * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
@@ -725,7 +386,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/batch-append-rows/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -811,7 +472,7 @@ class RowsApi
     /**
      * Operation deleteRow
      *
-     * Delete Row
+     * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\DeleteRow $delete_row delete_row (optional)
@@ -830,7 +491,7 @@ class RowsApi
     /**
      * Operation deleteRowWithHttpInfo
      *
-     * Delete Row
+     * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
@@ -955,7 +616,7 @@ class RowsApi
     /**
      * Operation deleteRowAsync
      *
-     * Delete Row
+     * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
@@ -977,7 +638,7 @@ class RowsApi
     /**
      * Operation deleteRowAsyncWithHttpInfo
      *
-     * Delete Row
+     * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\DeleteRow $delete_row (optional)
@@ -1052,7 +713,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/rows/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1136,350 +797,23 @@ class RowsApi
     }
 
     /**
-     * Operation deleteRows
-     *
-     * Delete Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows delete_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return object
-     */
-    public function deleteRows($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRows'][0])
-    {
-        list($response) = $this->deleteRowsWithHttpInfo($base_uuid, $delete_rows, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation deleteRowsWithHttpInfo
-     *
-     * Delete Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function deleteRowsWithHttpInfo($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRows'][0])
-    {
-        $request = $this->deleteRowsRequest($base_uuid, $delete_rows, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation deleteRowsAsync
-     *
-     * Delete Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteRowsAsync($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRows'][0])
-    {
-        return $this->deleteRowsAsyncWithHttpInfo($base_uuid, $delete_rows, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation deleteRowsAsyncWithHttpInfo
-     *
-     * Delete Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function deleteRowsAsyncWithHttpInfo($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRows'][0])
-    {
-        $returnType = 'object';
-        $request = $this->deleteRowsRequest($base_uuid, $delete_rows, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'deleteRows'
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function deleteRowsRequest($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRows'][0])
-    {
-
-        // verify the required parameter 'base_uuid' is set
-        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $base_uuid when calling deleteRows'
-            );
-        }
-        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling RowsApi.deleteRows, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
-        }
-        
-
-
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/batch-delete-rows/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($base_uuid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
-                ObjectSerializer::toPathValue($base_uuid),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($delete_rows)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($delete_rows));
-            } else {
-                $httpBody = $delete_rows;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getRow
      *
      * Get Row
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  bool $convert If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function getRow($base_uuid, $row_id, $table_name, $convert = null, string $contentType = self::contentTypes['getRow'][0])
+    public function getRow($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
-        list($response) = $this->getRowWithHttpInfo($base_uuid, $row_id, $table_name, $convert, $contentType);
+        list($response) = $this->getRowWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys, $contentType);
         return $response;
     }
 
@@ -1490,17 +824,17 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  bool $convert If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getRowWithHttpInfo($base_uuid, $row_id, $table_name, $convert = null, string $contentType = self::contentTypes['getRow'][0])
+    public function getRowWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
-        $request = $this->getRowRequest($base_uuid, $row_id, $table_name, $convert, $contentType);
+        $request = $this->getRowRequest($base_uuid, $row_id, $table_name, $convert_keys, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1617,16 +951,16 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  bool $convert If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getRowAsync($base_uuid, $row_id, $table_name, $convert = null, string $contentType = self::contentTypes['getRow'][0])
+    public function getRowAsync($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
-        return $this->getRowAsyncWithHttpInfo($base_uuid, $row_id, $table_name, $convert, $contentType)
+        return $this->getRowAsyncWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1641,17 +975,17 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  bool $convert If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getRowAsyncWithHttpInfo($base_uuid, $row_id, $table_name, $convert = null, string $contentType = self::contentTypes['getRow'][0])
+    public function getRowAsyncWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
         $returnType = 'object';
-        $request = $this->getRowRequest($base_uuid, $row_id, $table_name, $convert, $contentType);
+        $request = $this->getRowRequest($base_uuid, $row_id, $table_name, $convert_keys, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1694,14 +1028,14 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  bool $convert If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getRowRequest($base_uuid, $row_id, $table_name, $convert = null, string $contentType = self::contentTypes['getRow'][0])
+    public function getRowRequest($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
 
         // verify the required parameter 'base_uuid' is set
@@ -1733,7 +1067,7 @@ class RowsApi
 
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/rows/{row_id}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/rows/{row_id}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1751,8 +1085,8 @@ class RowsApi
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $convert,
-            'convert', // param base name
+            $convert_keys,
+            'convert_keys', // param base name
             'boolean', // openApiType
             'form', // style
             true, // explode
@@ -1836,302 +1170,25 @@ class RowsApi
     }
 
     /**
-     * Operation listFilteredRows
-     *
-     * List Filtered Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter filtered_rows_filter (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     * @deprecated
-     */
-    public function listFilteredRows($base_uuid, $table_name, $filtered_rows_filter = null, string $contentType = self::contentTypes['listFilteredRows'][0])
-    {
-        $this->listFilteredRowsWithHttpInfo($base_uuid, $table_name, $filtered_rows_filter, $contentType);
-    }
-
-    /**
-     * Operation listFilteredRowsWithHttpInfo
-     *
-     * List Filtered Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     * @deprecated
-     */
-    public function listFilteredRowsWithHttpInfo($base_uuid, $table_name, $filtered_rows_filter = null, string $contentType = self::contentTypes['listFilteredRows'][0])
-    {
-        $request = $this->listFilteredRowsRequest($base_uuid, $table_name, $filtered_rows_filter, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listFilteredRowsAsync
-     *
-     * List Filtered Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @deprecated
-     */
-    public function listFilteredRowsAsync($base_uuid, $table_name, $filtered_rows_filter = null, string $contentType = self::contentTypes['listFilteredRows'][0])
-    {
-        return $this->listFilteredRowsAsyncWithHttpInfo($base_uuid, $table_name, $filtered_rows_filter, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listFilteredRowsAsyncWithHttpInfo
-     *
-     * List Filtered Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     * @deprecated
-     */
-    public function listFilteredRowsAsyncWithHttpInfo($base_uuid, $table_name, $filtered_rows_filter = null, string $contentType = self::contentTypes['listFilteredRows'][0])
-    {
-        $returnType = '';
-        $request = $this->listFilteredRowsRequest($base_uuid, $table_name, $filtered_rows_filter, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listFilteredRows'
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  \SeaTable\Client\Base\FilteredRowsFilter $filtered_rows_filter (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFilteredRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     * @deprecated
-     */
-    public function listFilteredRowsRequest($base_uuid, $table_name, $filtered_rows_filter = null, string $contentType = self::contentTypes['listFilteredRows'][0])
-    {
-
-        // verify the required parameter 'base_uuid' is set
-        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $base_uuid when calling listFilteredRows'
-            );
-        }
-        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling RowsApi.listFilteredRows, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
-        }
-        
-        // verify the required parameter 'table_name' is set
-        if ($table_name === null || (is_array($table_name) && count($table_name) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $table_name when calling listFilteredRows'
-            );
-        }
-
-
-
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/filtered-rows/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $table_name,
-            'table_name', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-
-        // path params
-        if ($base_uuid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
-                ObjectSerializer::toPathValue($base_uuid),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            [],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($filtered_rows_filter)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($filtered_rows_filter));
-            } else {
-                $httpBody = $filtered_rows_filter;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation listRows
      *
      * List Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  string $view_name The name of the view. (optional)
-     * @param  bool $convert_link_id Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default. (optional)
-     * @param  string $order_by The name or id of a column that is used to sort the results. (optional)
-     * @param  string $direction The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Works only if start and limit are set, too. (optional, default to '')
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listRows($base_uuid, $table_name, $view_name = null, $convert_link_id = null, $order_by = null, $direction = '', $start = null, $limit = null, string $contentType = self::contentTypes['listRows'][0])
+    public function listRows($base_uuid, $table_name, $view_name = null, $start = null, $limit = null, $convert_keys = null, string $contentType = self::contentTypes['listRows'][0])
     {
-        list($response) = $this->listRowsWithHttpInfo($base_uuid, $table_name, $view_name, $convert_link_id, $order_by, $direction, $start, $limit, $contentType);
+        list($response) = $this->listRowsWithHttpInfo($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys, $contentType);
         return $response;
     }
 
@@ -2141,22 +1198,20 @@ class RowsApi
      * List Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  string $view_name The name of the view. (optional)
-     * @param  bool $convert_link_id Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default. (optional)
-     * @param  string $order_by The name or id of a column that is used to sort the results. (optional)
-     * @param  string $direction The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Works only if start and limit are set, too. (optional, default to '')
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listRowsWithHttpInfo($base_uuid, $table_name, $view_name = null, $convert_link_id = null, $order_by = null, $direction = '', $start = null, $limit = null, string $contentType = self::contentTypes['listRows'][0])
+    public function listRowsWithHttpInfo($base_uuid, $table_name, $view_name = null, $start = null, $limit = null, $convert_keys = null, string $contentType = self::contentTypes['listRows'][0])
     {
-        $request = $this->listRowsRequest($base_uuid, $table_name, $view_name, $convert_link_id, $order_by, $direction, $start, $limit, $contentType);
+        $request = $this->listRowsRequest($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2272,21 +1327,19 @@ class RowsApi
      * List Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  string $view_name The name of the view. (optional)
-     * @param  bool $convert_link_id Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default. (optional)
-     * @param  string $order_by The name or id of a column that is used to sort the results. (optional)
-     * @param  string $direction The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Works only if start and limit are set, too. (optional, default to '')
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listRowsAsync($base_uuid, $table_name, $view_name = null, $convert_link_id = null, $order_by = null, $direction = '', $start = null, $limit = null, string $contentType = self::contentTypes['listRows'][0])
+    public function listRowsAsync($base_uuid, $table_name, $view_name = null, $start = null, $limit = null, $convert_keys = null, string $contentType = self::contentTypes['listRows'][0])
     {
-        return $this->listRowsAsyncWithHttpInfo($base_uuid, $table_name, $view_name, $convert_link_id, $order_by, $direction, $start, $limit, $contentType)
+        return $this->listRowsAsyncWithHttpInfo($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2300,22 +1353,20 @@ class RowsApi
      * List Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  string $view_name The name of the view. (optional)
-     * @param  bool $convert_link_id Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default. (optional)
-     * @param  string $order_by The name or id of a column that is used to sort the results. (optional)
-     * @param  string $direction The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Works only if start and limit are set, too. (optional, default to '')
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listRowsAsyncWithHttpInfo($base_uuid, $table_name, $view_name = null, $convert_link_id = null, $order_by = null, $direction = '', $start = null, $limit = null, string $contentType = self::contentTypes['listRows'][0])
+    public function listRowsAsyncWithHttpInfo($base_uuid, $table_name, $view_name = null, $start = null, $limit = null, $convert_keys = null, string $contentType = self::contentTypes['listRows'][0])
     {
         $returnType = 'object';
-        $request = $this->listRowsRequest($base_uuid, $table_name, $view_name, $convert_link_id, $order_by, $direction, $start, $limit, $contentType);
+        $request = $this->listRowsRequest($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2357,19 +1408,17 @@ class RowsApi
      * Create request for operation 'listRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $table_name The name of the table. (required)
-     * @param  string $view_name The name of the view. (optional)
-     * @param  bool $convert_link_id Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default. (optional)
-     * @param  string $order_by The name or id of a column that is used to sort the results. (optional)
-     * @param  string $direction The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Works only if start and limit are set, too. (optional, default to '')
+     * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
+     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool $convert_keys If &#39;true&#39;, the column&#39;s id will be converted to column names. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listRowsRequest($base_uuid, $table_name, $view_name = null, $convert_link_id = null, $order_by = null, $direction = '', $start = null, $limit = null, string $contentType = self::contentTypes['listRows'][0])
+    public function listRowsRequest($base_uuid, $table_name, $view_name = null, $start = null, $limit = null, $convert_keys = null, string $contentType = self::contentTypes['listRows'][0])
     {
 
         // verify the required parameter 'base_uuid' is set
@@ -2391,9 +1440,6 @@ class RowsApi
 
 
 
-
-
-
         if ($limit !== null && $limit > 1000) {
             throw new \InvalidArgumentException('invalid value for "$limit" when calling RowsApi.listRows, must be smaller than or equal to 1000.');
         }
@@ -2402,7 +1448,8 @@ class RowsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/rows/';
+
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2429,33 +1476,6 @@ class RowsApi
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $convert_link_id,
-            'convert_link_id', // param base name
-            'boolean', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $order_by,
-            'order_by', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $direction,
-            'direction', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $start,
             'start', // param base name
             'integer', // openApiType
@@ -2468,6 +1488,15 @@ class RowsApi
             $limit,
             'limit', // param base name
             'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $convert_keys,
+            'convert_keys', // param base name
+            'boolean', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -2785,7 +1814,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/lock-rows/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/lock-rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2871,10 +1900,10 @@ class RowsApi
     /**
      * Operation querySQL
      *
-     * List Rows (with SQL)
+     * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2890,10 +1919,10 @@ class RowsApi
     /**
      * Operation querySQLWithHttpInfo
      *
-     * List Rows (with SQL)
+     * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3015,10 +2044,10 @@ class RowsApi
     /**
      * Operation querySQLAsync
      *
-     * List Rows (with SQL)
+     * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3037,10 +2066,10 @@ class RowsApi
     /**
      * Operation querySQLAsyncWithHttpInfo
      *
-     * List Rows (with SQL)
+     * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3091,7 +2120,7 @@ class RowsApi
      * Create request for operation 'querySQL'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query description des requestBody (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3112,7 +2141,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/dtable-db/api/v1/query/{base_uuid}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/sql';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3439,7 +2468,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/unlock-rows/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/unlock-rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3525,38 +2554,38 @@ class RowsApi
     /**
      * Operation updateRow
      *
-     * Update Row
+     * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRow $update_row update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function updateRow($base_uuid, $update_row = null, string $contentType = self::contentTypes['updateRow'][0])
+    public function updateRow($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
-        list($response) = $this->updateRowWithHttpInfo($base_uuid, $update_row, $contentType);
+        list($response) = $this->updateRowWithHttpInfo($base_uuid, $update_rows, $contentType);
         return $response;
     }
 
     /**
      * Operation updateRowWithHttpInfo
      *
-     * Update Row
+     * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateRowWithHttpInfo($base_uuid, $update_row = null, string $contentType = self::contentTypes['updateRow'][0])
+    public function updateRowWithHttpInfo($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
-        $request = $this->updateRowRequest($base_uuid, $update_row, $contentType);
+        $request = $this->updateRowRequest($base_uuid, $update_rows, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3669,18 +2698,18 @@ class RowsApi
     /**
      * Operation updateRowAsync
      *
-     * Update Row
+     * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateRowAsync($base_uuid, $update_row = null, string $contentType = self::contentTypes['updateRow'][0])
+    public function updateRowAsync($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
-        return $this->updateRowAsyncWithHttpInfo($base_uuid, $update_row, $contentType)
+        return $this->updateRowAsyncWithHttpInfo($base_uuid, $update_rows, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3691,19 +2720,19 @@ class RowsApi
     /**
      * Operation updateRowAsyncWithHttpInfo
      *
-     * Update Row
+     * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateRowAsyncWithHttpInfo($base_uuid, $update_row = null, string $contentType = self::contentTypes['updateRow'][0])
+    public function updateRowAsyncWithHttpInfo($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
         $returnType = 'object';
-        $request = $this->updateRowRequest($base_uuid, $update_row, $contentType);
+        $request = $this->updateRowRequest($base_uuid, $update_rows, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3745,13 +2774,13 @@ class RowsApi
      * Create request for operation 'updateRow'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRow $update_row (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateRowRequest($base_uuid, $update_row = null, string $contentType = self::contentTypes['updateRow'][0])
+    public function updateRowRequest($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
 
         // verify the required parameter 'base_uuid' is set
@@ -3766,334 +2795,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/rows/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($base_uuid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
-                ObjectSerializer::toPathValue($base_uuid),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($update_row)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_row));
-            } else {
-                $httpBody = $update_row;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'PUT',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation updateRows
-     *
-     * Update Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows update_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return object
-     */
-    public function updateRows($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRows'][0])
-    {
-        list($response) = $this->updateRowsWithHttpInfo($base_uuid, $update_rows, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation updateRowsWithHttpInfo
-     *
-     * Update Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function updateRowsWithHttpInfo($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRows'][0])
-    {
-        $request = $this->updateRowsRequest($base_uuid, $update_rows, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation updateRowsAsync
-     *
-     * Update Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function updateRowsAsync($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRows'][0])
-    {
-        return $this->updateRowsAsyncWithHttpInfo($base_uuid, $update_rows, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation updateRowsAsyncWithHttpInfo
-     *
-     * Update Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function updateRowsAsyncWithHttpInfo($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRows'][0])
-    {
-        $returnType = 'object';
-        $request = $this->updateRowsRequest($base_uuid, $update_rows, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'updateRows'
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRows'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function updateRowsRequest($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRows'][0])
-    {
-
-        // verify the required parameter 'base_uuid' is set
-        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $base_uuid when calling updateRows'
-            );
-        }
-        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling RowsApi.updateRows, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
-        }
-        
-
-
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/batch-update-rows/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

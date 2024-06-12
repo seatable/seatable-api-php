@@ -1,6 +1,6 @@
 <?php
 /**
- * FilteredRowsFilterTest
+ * MoveRowsToNormalBackendRequestTest
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FilteredRowsFilterTest Class Doc Comment
+ * MoveRowsToNormalBackendRequestTest Class Doc Comment
  *
  * @category    Class
- * @description FilteredRowsFilter
+ * @description MoveRowsToNormalBackendRequest
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class FilteredRowsFilterTest extends TestCase
+class MoveRowsToNormalBackendRequestTest extends TestCase
 {
 
     /**
@@ -70,18 +70,27 @@ class FilteredRowsFilterTest extends TestCase
     }
 
     /**
-     * Test "FilteredRowsFilter"
+     * Test "MoveRowsToNormalBackendRequest"
      */
-    public function testFilteredRowsFilter()
+    public function testMoveRowsToNormalBackendRequest()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "filters"
+     * Test attribute "table_id"
      */
-    public function testPropertyFilters()
+    public function testPropertyTableId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "row_ids"
+     */
+    public function testPropertyRowIds()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

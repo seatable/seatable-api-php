@@ -15,7 +15,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**deleteUserShare()**](SharingApi.md#deleteUserShare) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/share/ | Delete User Share |
 | [**deleteUserViewShare()**](SharingApi.md#deleteUserViewShare) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/user-view-shares/{user_view_share_id}/ | Delete User View Share |
 | [**leaveSharedView()**](SharingApi.md#leaveSharedView) | **DELETE** /api/v2.1/dtables/view-shares-user-shared/{user_view_share_id}/ | Leave Shared View |
-| [**listCollaborators()**](SharingApi.md#listCollaborators) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/related-users/ | List Collaborators |
+| [**listCollaboratorsAsUser()**](SharingApi.md#listCollaboratorsAsUser) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/related-users/ | List Collaborators |
 | [**listGroupShares()**](SharingApi.md#listGroupShares) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/group-shares/ | List Group Shares |
 | [**listGroupViewShares()**](SharingApi.md#listGroupViewShares) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/group-view-shares/ | List Group View Shares |
 | [**listMyGroupShares()**](SharingApi.md#listMyGroupShares) | **GET** /api/v2.1/dtables/group-shared/ | List My Group Shares |
@@ -638,10 +638,10 @@ AccountTokenAuth
 
 
 
-## `listCollaborators()`
+## `listCollaboratorsAsUser()`
 
 ```php
-listCollaborators($workspace_id, $base_name): object
+listCollaboratorsAsUser($workspace_id, $base_name): object
 ```
 
 List Collaborators
@@ -665,10 +665,10 @@ $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
 
 try {
-    $result = $apiInstance->listCollaborators($workspace_id, $base_name);
+    $result = $apiInstance->listCollaboratorsAsUser($workspace_id, $base_name);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling SharingApi->listCollaborators: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling SharingApi->listCollaboratorsAsUser: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -990,7 +990,7 @@ listUserShares($workspace_id, $base_name): object
 
 List User Shares
 
-List all the users sharing a base (except the current user). This request only lists off all the individual users sharing the base, which does not includ groups and group members sharing this base.  To see which groups are sharing this base, use the request [List Groups Base is Shared To](/reference/get_api-v2-1-workspace-workspace-id-dtable-base-name-group-shares-1).
+List all the users sharing a base (except the current user). This request only lists off all the individual users sharing the base, which does not includ groups and group members sharing this base.  To see which groups are sharing this base, use the request [List Groups Base is Shared To](/reference/listgroupshares).
 
 ### Example
 

@@ -329,7 +329,7 @@ class UpdateTeamRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets org_name
      *
-     * @param string|null $org_name Name of the team. Required.
+     * @param string|null $org_name Name of the team.
      *
      * @return self
      */

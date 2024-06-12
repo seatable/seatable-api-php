@@ -132,7 +132,7 @@ class ActivitiesLogsApi
      *
      * List Team Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
@@ -151,7 +151,7 @@ class ActivitiesLogsApi
      *
      * List Team Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
@@ -213,7 +213,7 @@ class ActivitiesLogsApi
      *
      * List Team Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
@@ -236,7 +236,7 @@ class ActivitiesLogsApi
      *
      * List Team Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
@@ -275,7 +275,7 @@ class ActivitiesLogsApi
     /**
      * Create request for operation 'listTeamLogins'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
@@ -404,7 +404,7 @@ class ActivitiesLogsApi
      *
      * List Team Operations
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
@@ -423,7 +423,7 @@ class ActivitiesLogsApi
      *
      * List Team Operations
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
@@ -485,7 +485,7 @@ class ActivitiesLogsApi
      *
      * List Team Operations
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
@@ -508,7 +508,7 @@ class ActivitiesLogsApi
      *
      * List Team Operations
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
@@ -547,7 +547,7 @@ class ActivitiesLogsApi
     /**
      * Create request for operation 'listTeamOperationLog'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
@@ -676,7 +676,7 @@ class ActivitiesLogsApi
      *
      * List User Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -696,7 +696,7 @@ class ActivitiesLogsApi
      *
      * List User Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -759,7 +759,7 @@ class ActivitiesLogsApi
      *
      * List User Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -783,7 +783,7 @@ class ActivitiesLogsApi
      *
      * List User Logins
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -823,7 +823,7 @@ class ActivitiesLogsApi
     /**
      * Create request for operation 'listUserLogins'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)

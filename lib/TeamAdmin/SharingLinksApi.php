@@ -144,7 +144,7 @@ class SharingLinksApi
      *
      * Delete External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $external_link_token external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
@@ -163,7 +163,7 @@ class SharingLinksApi
      *
      * Delete External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
@@ -288,7 +288,7 @@ class SharingLinksApi
      *
      * Delete External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
@@ -310,7 +310,7 @@ class SharingLinksApi
      *
      * Delete External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
@@ -361,7 +361,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'deleteExternalLink'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
@@ -481,7 +481,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token invite_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
@@ -500,7 +500,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
@@ -625,7 +625,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
@@ -647,7 +647,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
@@ -698,7 +698,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'deleteInviteLink'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
@@ -818,7 +818,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $view_external_link_token view_external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
@@ -837,7 +837,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $view_external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
@@ -962,7 +962,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $view_external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
@@ -984,7 +984,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $view_external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
@@ -1035,7 +1035,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'deleteViewExternalLink'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $view_external_link_token (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
@@ -1155,7 +1155,7 @@ class SharingLinksApi
      *
      * List Base External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseExternalLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1173,7 +1173,7 @@ class SharingLinksApi
      *
      * List Base External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseExternalLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1297,7 +1297,7 @@ class SharingLinksApi
      *
      * List Base External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseExternalLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1318,7 +1318,7 @@ class SharingLinksApi
      *
      * List Base External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseExternalLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1368,7 +1368,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'listBaseExternalLinks'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseExternalLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1469,7 +1469,7 @@ class SharingLinksApi
      *
      * List Invite Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInviteLinks'] to see the possible values for this operation
@@ -1489,7 +1489,7 @@ class SharingLinksApi
      *
      * List Invite Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInviteLinks'] to see the possible values for this operation
@@ -1615,7 +1615,7 @@ class SharingLinksApi
      *
      * List Invite Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInviteLinks'] to see the possible values for this operation
@@ -1638,7 +1638,7 @@ class SharingLinksApi
      *
      * List Invite Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInviteLinks'] to see the possible values for this operation
@@ -1690,7 +1690,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'listInviteLinks'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listInviteLinks'] to see the possible values for this operation
@@ -1819,7 +1819,7 @@ class SharingLinksApi
      *
      * List View External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViewExternalLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1837,7 +1837,7 @@ class SharingLinksApi
      *
      * List View External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViewExternalLinks'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1961,7 +1961,7 @@ class SharingLinksApi
      *
      * List View External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViewExternalLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1982,7 +1982,7 @@ class SharingLinksApi
      *
      * List View External Links
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViewExternalLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2032,7 +2032,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'listViewExternalLinks'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listViewExternalLinks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2133,7 +2133,7 @@ class SharingLinksApi
      *
      * Update Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token invite_link_token (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest $update_invite_link_request update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
@@ -2153,7 +2153,7 @@ class SharingLinksApi
      *
      * Update Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
@@ -2279,7 +2279,7 @@ class SharingLinksApi
      *
      * Update Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
@@ -2302,7 +2302,7 @@ class SharingLinksApi
      *
      * Update Invite Link
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
@@ -2354,7 +2354,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'updateInviteLink'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $invite_link_token (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation

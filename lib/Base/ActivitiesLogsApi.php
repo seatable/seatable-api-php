@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -74,9 +74,6 @@ class ActivitiesLogsApi
             'application/json',
         ],
         'listDeleteOperations' => [
-            'application/json',
-        ],
-        'listDeletedRows' => [
             'application/json',
         ],
         'listRowActivities' => [
@@ -377,7 +374,7 @@ class ActivitiesLogsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/operations/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/operations/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -465,329 +462,36 @@ class ActivitiesLogsApi
     /**
      * Operation listDeleteOperations
      *
-     * List Delete Operations
+     * List Deleted Operations
      *
-     * @param  string $op_type Type of delete operation that should be listed. Optional. Choose from &#x60;delete_row&#x60;, &#x60;delete_rows&#x60;, &#x60;delete_table&#x60;, and &#x60;delete_column&#x60;. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function listDeleteOperations($op_type, $base_uuid, $page = null, $per_page = null, string $contentType = self::contentTypes['listDeleteOperations'][0])
-    {
-        $this->listDeleteOperationsWithHttpInfo($op_type, $base_uuid, $page, $per_page, $contentType);
-    }
-
-    /**
-     * Operation listDeleteOperationsWithHttpInfo
-     *
-     * List Delete Operations
-     *
-     * @param  string $op_type Type of delete operation that should be listed. Optional. Choose from &#x60;delete_row&#x60;, &#x60;delete_rows&#x60;, &#x60;delete_table&#x60;, and &#x60;delete_column&#x60;. (required)
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function listDeleteOperationsWithHttpInfo($op_type, $base_uuid, $page = null, $per_page = null, string $contentType = self::contentTypes['listDeleteOperations'][0])
-    {
-        $request = $this->listDeleteOperationsRequest($op_type, $base_uuid, $page, $per_page, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listDeleteOperationsAsync
-     *
-     * List Delete Operations
-     *
-     * @param  string $op_type Type of delete operation that should be listed. Optional. Choose from &#x60;delete_row&#x60;, &#x60;delete_rows&#x60;, &#x60;delete_table&#x60;, and &#x60;delete_column&#x60;. (required)
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listDeleteOperationsAsync($op_type, $base_uuid, $page = null, $per_page = null, string $contentType = self::contentTypes['listDeleteOperations'][0])
-    {
-        return $this->listDeleteOperationsAsyncWithHttpInfo($op_type, $base_uuid, $page, $per_page, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listDeleteOperationsAsyncWithHttpInfo
-     *
-     * List Delete Operations
-     *
-     * @param  string $op_type Type of delete operation that should be listed. Optional. Choose from &#x60;delete_row&#x60;, &#x60;delete_rows&#x60;, &#x60;delete_table&#x60;, and &#x60;delete_column&#x60;. (required)
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listDeleteOperationsAsyncWithHttpInfo($op_type, $base_uuid, $page = null, $per_page = null, string $contentType = self::contentTypes['listDeleteOperations'][0])
-    {
-        $returnType = '';
-        $request = $this->listDeleteOperationsRequest($op_type, $base_uuid, $page, $per_page, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listDeleteOperations'
-     *
-     * @param  string $op_type Type of delete operation that should be listed. Optional. Choose from &#x60;delete_row&#x60;, &#x60;delete_rows&#x60;, &#x60;delete_table&#x60;, and &#x60;delete_column&#x60;. (required)
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function listDeleteOperationsRequest($op_type, $base_uuid, $page = null, $per_page = null, string $contentType = self::contentTypes['listDeleteOperations'][0])
-    {
-
-        // verify the required parameter 'op_type' is set
-        if ($op_type === null || (is_array($op_type) && count($op_type) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $op_type when calling listDeleteOperations'
-            );
-        }
-
-        // verify the required parameter 'base_uuid' is set
-        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $base_uuid when calling listDeleteOperations'
-            );
-        }
-        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling ActivitiesLogsApi.listDeleteOperations, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
-        }
-        
-        if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listDeleteOperations, must be bigger than or equal to 1.');
-        }
-        
-        if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listDeleteOperations, must be bigger than or equal to 1.');
-        }
-        
-
-        $resourcePath = '/api/v2.1/dtables/{base_uuid}/delete-operation-logs/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $page,
-            'page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $per_page,
-            'per_page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $op_type,
-            'op_type', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-
-        // path params
-        if ($base_uuid !== null) {
-            $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
-                ObjectSerializer::toPathValue($base_uuid),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation listDeletedRows
-     *
-     * List Deleted Rows
-     *
-     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeletedRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listDeletedRows($base_uuid, string $contentType = self::contentTypes['listDeletedRows'][0])
+    public function listDeleteOperations($base_uuid, string $contentType = self::contentTypes['listDeleteOperations'][0])
     {
-        list($response) = $this->listDeletedRowsWithHttpInfo($base_uuid, $contentType);
+        list($response) = $this->listDeleteOperationsWithHttpInfo($base_uuid, $contentType);
         return $response;
     }
 
     /**
-     * Operation listDeletedRowsWithHttpInfo
+     * Operation listDeleteOperationsWithHttpInfo
      *
-     * List Deleted Rows
+     * List Deleted Operations
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeletedRows'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listDeletedRowsWithHttpInfo($base_uuid, string $contentType = self::contentTypes['listDeletedRows'][0])
+    public function listDeleteOperationsWithHttpInfo($base_uuid, string $contentType = self::contentTypes['listDeleteOperations'][0])
     {
-        $request = $this->listDeletedRowsRequest($base_uuid, $contentType);
+        $request = $this->listDeleteOperationsRequest($base_uuid, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -898,19 +602,19 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listDeletedRowsAsync
+     * Operation listDeleteOperationsAsync
      *
-     * List Deleted Rows
+     * List Deleted Operations
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeletedRows'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listDeletedRowsAsync($base_uuid, string $contentType = self::contentTypes['listDeletedRows'][0])
+    public function listDeleteOperationsAsync($base_uuid, string $contentType = self::contentTypes['listDeleteOperations'][0])
     {
-        return $this->listDeletedRowsAsyncWithHttpInfo($base_uuid, $contentType)
+        return $this->listDeleteOperationsAsyncWithHttpInfo($base_uuid, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -919,20 +623,20 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listDeletedRowsAsyncWithHttpInfo
+     * Operation listDeleteOperationsAsyncWithHttpInfo
      *
-     * List Deleted Rows
+     * List Deleted Operations
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeletedRows'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listDeletedRowsAsyncWithHttpInfo($base_uuid, string $contentType = self::contentTypes['listDeletedRows'][0])
+    public function listDeleteOperationsAsyncWithHttpInfo($base_uuid, string $contentType = self::contentTypes['listDeleteOperations'][0])
     {
         $returnType = 'object';
-        $request = $this->listDeletedRowsRequest($base_uuid, $contentType);
+        $request = $this->listDeleteOperationsRequest($base_uuid, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -971,29 +675,29 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Create request for operation 'listDeletedRows'
+     * Create request for operation 'listDeleteOperations'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeletedRows'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDeleteOperations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listDeletedRowsRequest($base_uuid, string $contentType = self::contentTypes['listDeletedRows'][0])
+    public function listDeleteOperationsRequest($base_uuid, string $contentType = self::contentTypes['listDeleteOperations'][0])
     {
 
         // verify the required parameter 'base_uuid' is set
         if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $base_uuid when calling listDeletedRows'
+                'Missing the required parameter $base_uuid when calling listDeleteOperations'
             );
         }
         if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling ActivitiesLogsApi.listDeletedRows, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
+            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling ActivitiesLogsApi.listDeleteOperations, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/deleted-rows/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1317,8 +1021,8 @@ class ActivitiesLogsApi
                 'Missing the required parameter $row_id when calling listRowActivities'
             );
         }
-        if (!preg_match("/^[A-Za-z0-9]{22}$/", $row_id)) {
-            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling ActivitiesLogsApi.listRowActivities, must conform to the pattern /^[A-Za-z0-9]{22}$/.");
+        if (!preg_match("/^[A-Za-z0-9\\-\\_]{22}$/", $row_id)) {
+            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling ActivitiesLogsApi.listRowActivities, must conform to the pattern /^[A-Za-z0-9\\-\\_]{22}$/.");
         }
         
         // verify the required parameter 'base_uuid' is set
@@ -1340,7 +1044,7 @@ class ActivitiesLogsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/activities/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/activities/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

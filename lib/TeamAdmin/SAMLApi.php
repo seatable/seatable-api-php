@@ -132,7 +132,7 @@ class SAMLApi
      *
      * Get SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSamlConfig'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -149,7 +149,7 @@ class SAMLApi
      *
      * Get SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSamlConfig'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -209,7 +209,7 @@ class SAMLApi
      *
      * Get SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSamlConfig'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -230,7 +230,7 @@ class SAMLApi
      *
      * Get SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSamlConfig'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -267,7 +267,7 @@ class SAMLApi
     /**
      * Create request for operation 'getSamlConfig'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSamlConfig'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -368,7 +368,7 @@ class SAMLApi
      *
      * Update SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
@@ -388,7 +388,7 @@ class SAMLApi
      *
      * Update SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
@@ -451,7 +451,7 @@ class SAMLApi
      *
      * Update SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
@@ -475,7 +475,7 @@ class SAMLApi
      *
      * Update SAML Config
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
@@ -515,7 +515,7 @@ class SAMLApi
     /**
      * Create request for operation 'updateSamlConfig'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
@@ -634,7 +634,7 @@ class SAMLApi
      *
      * Verify SAML domain
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
@@ -652,7 +652,7 @@ class SAMLApi
      *
      * Verify SAML domain
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
@@ -713,7 +713,7 @@ class SAMLApi
      *
      * Verify SAML domain
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
@@ -735,7 +735,7 @@ class SAMLApi
      *
      * Verify SAML domain
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
@@ -773,7 +773,7 @@ class SAMLApi
     /**
      * Create request for operation 'verifySamlDomain'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *

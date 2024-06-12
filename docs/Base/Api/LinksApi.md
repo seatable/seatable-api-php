@@ -4,22 +4,21 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**createRowLink()**](LinksApi.md#createRowLink) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/links/ | Create Row Link |
-| [**createRowLinks()**](LinksApi.md#createRowLinks) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/links/ | Create Row Links |
-| [**deleteRowLink()**](LinksApi.md#deleteRowLink) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/links/ | Delete Row Link |
-| [**listRowLinks()**](LinksApi.md#listRowLinks) | **POST** /dtable-db/api/v1/linked-records/{base_uuid} | List Row Links |
-| [**updateRowLinks()**](LinksApi.md#updateRowLinks) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/batch-update-links/ | Update Row Links (Batch) |
+| [**createRowLink()**](LinksApi.md#createRowLink) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Create Row Link(s) |
+| [**deleteRowLink()**](LinksApi.md#deleteRowLink) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Delete Row Link(s) |
+| [**listRowLinks()**](LinksApi.md#listRowLinks) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/query-links/ | List Row Links |
+| [**updateRowLink()**](LinksApi.md#updateRowLink) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Update Row Link(s) |
 
 
 ## `createRowLink()`
 
 ```php
-createRowLink($base_uuid, $create_row_link): object
+createRowLink($base_uuid, $row_link_create_update_delete): object
 ```
 
-Create Row Link
+Create Row Link(s)
 
-You can link a row to another row in the same table, or in another table in the same base. **Before you use this request**, you should create a link column first, and retrieve its `link_id`. This value is an attribute of a link column, and can also be retrieved from the call [Get Metadata](/reference/get-metadata).  Check out the [Models](/reference/models#a-link) page to get more information about the structure of a link.
+Creates multiple links between one column and many others (1:n relation). It is not possible to create a link twice. This will result in an error.  Here is an example, how the body with `other_rows_ids_map` can look like:  ``` \"other_rows_ids_map\": {   \"ZEZuAL_8QS6p0tJ2vyKgKw\": [\"Qtf7xPmoRaiFyQPO1aENTj\", \"PSnPPXD6SranQwA4_MhN8A\"],   \"PCFS8gY9R8yok5ZZOSqbHg\": [\"WO2IlomAQVeACVVg8liOMA\", \"PSnPPXD6SranQwA4_MhN8A\"] } ```
 
 ### Example
 
@@ -35,10 +34,10 @@ $apiInstance = new SeaTable\Client\Base\LinksApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$create_row_link = new \SeaTable\Client\Base\CreateRowLink(); // \SeaTable\Client\Base\CreateRowLink
+$row_link_create_update_delete = new \SeaTable\Client\Base\RowLinkCreateUpdateDelete(); // \SeaTable\Client\Base\RowLinkCreateUpdateDelete
 
 try {
-    $result = $apiInstance->createRowLink($base_uuid, $create_row_link);
+    $result = $apiInstance->createRowLink($base_uuid, $row_link_create_update_delete);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling LinksApi->createRowLink: ', $e->getMessage(), PHP_EOL;
@@ -50,59 +49,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **create_row_link** | [**\SeaTable\Client\Base\CreateRowLink**](../Model/CreateRowLink.md)|  | [optional] |
-
-### Return type
-
-**object**
-
-### Authorization
-
-BaseTokenAuth
-
-
-
-
-## `createRowLinks()`
-
-```php
-createRowLinks($base_uuid, $create_row_links): object
-```
-
-Create Row Links
-
-Creates multiple links between one column and many others (1:n relation).  > 🚧 No support for Big Data > > This request does not support to add links in big data rows. There is another call [supporting big data](/reference/post_dtable-db-api-v1-base-base-uuid-links).
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
-$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
-$apiInstance = new SeaTable\Client\Base\LinksApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$create_row_links = new \SeaTable\Client\Base\CreateRowLinks(); // \SeaTable\Client\Base\CreateRowLinks
-
-try {
-    $result = $apiInstance->createRowLinks($base_uuid, $create_row_links);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling LinksApi->createRowLinks: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **create_row_links** | [**\SeaTable\Client\Base\CreateRowLinks**](../Model/CreateRowLinks.md)|  | [optional] |
+| **row_link_create_update_delete** | [**\SeaTable\Client\Base\RowLinkCreateUpdateDelete**](../Model/RowLinkCreateUpdateDelete.md)|  | [optional] |
 
 ### Return type
 
@@ -118,12 +65,12 @@ BaseTokenAuth
 ## `deleteRowLink()`
 
 ```php
-deleteRowLink($base_uuid, $delete_row_link): object
+deleteRowLink($base_uuid, $row_link_create_update_delete): object
 ```
 
-Delete Row Link
+Delete Row Link(s)
 
-Delete an existing link between two rows.
+Deletes one or multiple links between two rows. Only the links between the row_ids mentioned in the mapping, will be removed. Other links will stay and not touched.
 
 ### Example
 
@@ -139,10 +86,10 @@ $apiInstance = new SeaTable\Client\Base\LinksApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$delete_row_link = new \SeaTable\Client\Base\DeleteRowLink(); // \SeaTable\Client\Base\DeleteRowLink
+$row_link_create_update_delete = new \SeaTable\Client\Base\RowLinkCreateUpdateDelete(); // \SeaTable\Client\Base\RowLinkCreateUpdateDelete
 
 try {
-    $result = $apiInstance->deleteRowLink($base_uuid, $delete_row_link);
+    $result = $apiInstance->deleteRowLink($base_uuid, $row_link_create_update_delete);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling LinksApi->deleteRowLink: ', $e->getMessage(), PHP_EOL;
@@ -154,7 +101,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **delete_row_link** | [**\SeaTable\Client\Base\DeleteRowLink**](../Model/DeleteRowLink.md)|  | [optional] |
+| **row_link_create_update_delete** | [**\SeaTable\Client\Base\RowLinkCreateUpdateDelete**](../Model/RowLinkCreateUpdateDelete.md)|  | [optional] |
 
 ### Return type
 
@@ -175,7 +122,7 @@ listRowLinks($base_uuid, $list_row_links): object
 
 List Row Links
 
-When you have a \"Link to other records\" column in your table and you have created some links to the current or another table, you can use this request to query each row's linked records' IDs and display values. In the request body (see example request for demonstration): - `table_id` is the ID of the table you are querying; - `link_column` is the `key` of the \"Link to other records\" column. **Attention**: do not use the `link_id` of the link column here. - `rows` is an array. Include the following details of each row you are querying in every object:     - `row_id` is the ID of the row you are querying;     - `offset` is the beginning number of your query. If your record is linked to multiple records, use e.g. `0` to start quering from the 1st element or e.g. `5` to start querying from the 6th element, etc. **Attention**: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (`ctime`).     - `limit` lets you to set a limit to the number of records returned. Use e.g. `10` to return no more than 10 records.  In the response: - `row_id` is the ID of each linked record; - `display_value` is how this record is displayed on the web interface.      To get more information about each linked record, retrieve their `row_id` and use the **Query with SQL** request, for example: ``` SELECT * FROM Table2 WHERE _id IN (row_id1, row_id2, ...); ```
+When you have a \"Link to other records\" column in your table and you have created some links to the current or another table, you can use this request to query each row's linked records' IDs and display values.  > 📘 id or name >  > In the request body you can as keys either: > - `table_id` or `table_name` > - `link_column_key` or `link_column_name`      To get more information about each linked record, retrieve their `row_id` and use the [Query SeaTable with SQL](/reference/querysql) request, for example:  ``` SELECT * FROM Table1 WHERE _id IN (row_id1, row_id2, ...); ```
 
 ### Example
 
@@ -219,15 +166,15 @@ BaseTokenAuth
 
 
 
-## `updateRowLinks()`
+## `updateRowLink()`
 
 ```php
-updateRowLinks($base_uuid, $update_links): object
+updateRowLink($base_uuid, $row_link_create_update_delete): object
 ```
 
-Update Row Links (Batch)
+Update Row Link(s)
 
-Update multiple links in batch in one table for one link column. It is possible to create multiple links with a n:m relation. Here is an example how the body with `row_id_list` and `other_rows_ids_map` should look like:  ``` \"row_id_list\": [         \"Qtf7xPmoRaiFyQPO1aENTjb\",         \"Qtf7xPmoRaiFyQPO1aENTjc\"     ],     \"other_rows_ids_map\": {         \"Qtf7xPmoRaiFyQPO1aENTjb\": [\"Qtf7xPmoRaiFyQPO1aENTjc\", \"{{row3_id}}\"],         \"Qtf7xPmoRaiFyQPO1aENTjc\": [\"Qtf7xPmoRaiFyQPO1aENTjb\", \"{{row3_id}}\"]     } ```
+Updates the link(s) between one column and many others (1:n relation). Existings links will be removed and replaced with this new mapping.
 
 ### Example
 
@@ -243,13 +190,13 @@ $apiInstance = new SeaTable\Client\Base\LinksApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$update_links = new \SeaTable\Client\Base\UpdateLinks(); // \SeaTable\Client\Base\UpdateLinks
+$row_link_create_update_delete = new \SeaTable\Client\Base\RowLinkCreateUpdateDelete(); // \SeaTable\Client\Base\RowLinkCreateUpdateDelete
 
 try {
-    $result = $apiInstance->updateRowLinks($base_uuid, $update_links);
+    $result = $apiInstance->updateRowLink($base_uuid, $row_link_create_update_delete);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling LinksApi->updateRowLinks: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling LinksApi->updateRowLink: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -258,7 +205,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **update_links** | [**\SeaTable\Client\Base\UpdateLinks**](../Model/UpdateLinks.md)|  | [optional] |
+| **row_link_create_update_delete** | [**\SeaTable\Client\Base\RowLinkCreateUpdateDelete**](../Model/RowLinkCreateUpdateDelete.md)|  | [optional] |
 
 ### Return type
 

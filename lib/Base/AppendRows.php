@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -58,7 +58,8 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'table_name' => 'string',
-        'rows' => 'object[]'
+        'rows' => 'object[]',
+        'apply_default' => 'bool'
     ];
 
     /**
@@ -70,7 +71,8 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'table_name' => null,
-        'rows' => null
+        'rows' => null,
+        'apply_default' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'table_name' => false,
-        'rows' => false
+        'rows' => false,
+        'apply_default' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'table_name' => 'table_name',
-        'rows' => 'rows'
+        'rows' => 'rows',
+        'apply_default' => 'apply_default'
     ];
 
     /**
@@ -180,7 +184,8 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'table_name' => 'setTableName',
-        'rows' => 'setRows'
+        'rows' => 'setRows',
+        'apply_default' => 'setApplyDefault'
     ];
 
     /**
@@ -190,7 +195,8 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'table_name' => 'getTableName',
-        'rows' => 'getRows'
+        'rows' => 'getRows',
+        'apply_default' => 'getApplyDefault'
     ];
 
     /**
@@ -252,6 +258,7 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('table_name', $data ?? [], null);
         $this->setIfExists('rows', $data ?? [], null);
+        $this->setIfExists('apply_default', $data ?? [], null);
     }
 
     /**
@@ -315,7 +322,7 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets table_name
      *
-     * @param string $table_name The name of the table.
+     * @param string $table_name The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly.
      *
      * @return self
      */
@@ -352,6 +359,33 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable rows cannot be null');
         }
         $this->container['rows'] = $rows;
+
+        return $this;
+    }
+
+    /**
+     * Gets apply_default
+     *
+     * @return bool|null
+     */
+    public function getApplyDefault()
+    {
+        return $this->container['apply_default'];
+    }
+
+    /**
+     * Sets apply_default
+     *
+     * @param bool|null $apply_default Use the column default values to populate new rows during creation. False by default.
+     *
+     * @return self
+     */
+    public function setApplyDefault($apply_default)
+    {
+        if (is_null($apply_default)) {
+            throw new \InvalidArgumentException('non-nullable apply_default cannot be null');
+        }
+        $this->container['apply_default'] = $apply_default;
 
         return $this;
     }

@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -57,7 +57,8 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'sql' => 'string',
-        'convert_keys' => 'bool'
+        'convert_keys' => 'bool',
+        'server_only' => 'bool'
     ];
 
     /**
@@ -69,7 +70,8 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'sql' => 'SQL-Query',
-        'convert_keys' => null
+        'convert_keys' => null,
+        'server_only' => null
     ];
 
     /**
@@ -79,7 +81,8 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'sql' => false,
-        'convert_keys' => false
+        'convert_keys' => false,
+        'server_only' => false
     ];
 
     /**
@@ -169,7 +172,8 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'sql' => 'sql',
-        'convert_keys' => 'convert_keys'
+        'convert_keys' => 'convert_keys',
+        'server_only' => 'server_only'
     ];
 
     /**
@@ -179,7 +183,8 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'sql' => 'setSql',
-        'convert_keys' => 'setConvertKeys'
+        'convert_keys' => 'setConvertKeys',
+        'server_only' => 'setServerOnly'
     ];
 
     /**
@@ -189,7 +194,8 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'sql' => 'getSql',
-        'convert_keys' => 'getConvertKeys'
+        'convert_keys' => 'getConvertKeys',
+        'server_only' => 'getServerOnly'
     ];
 
     /**
@@ -251,6 +257,7 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('sql', $data ?? [], null);
         $this->setIfExists('convert_keys', $data ?? [], null);
+        $this->setIfExists('server_only', $data ?? [], null);
     }
 
     /**
@@ -351,6 +358,33 @@ class SqlQuery implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable convert_keys cannot be null');
         }
         $this->container['convert_keys'] = $convert_keys;
+
+        return $this;
+    }
+
+    /**
+     * Gets server_only
+     *
+     * @return bool|null
+     */
+    public function getServerOnly()
+    {
+        return $this->container['server_only'];
+    }
+
+    /**
+     * Sets server_only
+     *
+     * @param bool|null $server_only Show rows from normal and Big Data backend (false by default) or limit the output only to the normal backend (true).
+     *
+     * @return self
+     */
+    public function setServerOnly($server_only)
+    {
+        if (is_null($server_only)) {
+            throw new \InvalidArgumentException('non-nullable server_only cannot be null');
+        }
+        $this->container['server_only'] = $server_only;
 
         return $this;
     }

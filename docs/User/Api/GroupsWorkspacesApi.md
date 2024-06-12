@@ -124,12 +124,12 @@ AccountTokenAuth
 ## `copyBaseFromWorkspace()`
 
 ```php
-copyBaseFromWorkspace($src_workspace_id, $name, $dst_workspace_id): object
+copyBaseFromWorkspace($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs): object
 ```
 
 Copy Base from Workspace
 
-Copy a base from a workspace to the destination workspace.  A workspace could be your own \"My library\", or a group's workspace. Therefore you need to define the `src_workspace_id` and `dst_workspace_id` in the call.   For the source workspace, you at least have to have the read permission of the base; for the source workspace, you must have write permission.
+Copy a base from a workspace to the destination workspace. A workspace could be your own \"My library\", or a group's workspace. Therefore you need to define the `src_workspace_id` and `dst_workspace_id` in the call.  For the source workspace, you at least have to have the read permission of the base; for the source workspace, you must have write permission.
 
 ### Example
 
@@ -147,9 +147,10 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
 $src_workspace_id = 56; // int | Source workspace's ID.
 $name = 'name_example'; // string | Name of the base.
 $dst_workspace_id = 56; // int | Destination workspace's ID.
+$is_copy_dataset_syncs = True; // bool | Select whether common datasets should be synchronous too. False by default.
 
 try {
-    $result = $apiInstance->copyBaseFromWorkspace($src_workspace_id, $name, $dst_workspace_id);
+    $result = $apiInstance->copyBaseFromWorkspace($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GroupsWorkspacesApi->copyBaseFromWorkspace: ', $e->getMessage(), PHP_EOL;
@@ -163,6 +164,7 @@ try {
 | **src_workspace_id** | **int**| Source workspace&#39;s ID. | |
 | **name** | **string**| Name of the base. | |
 | **dst_workspace_id** | **int**| Destination workspace&#39;s ID. | |
+| **is_copy_dataset_syncs** | **bool**| Select whether common datasets should be synchronous too. False by default. | [optional] |
 
 ### Return type
 

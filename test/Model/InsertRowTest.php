@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -109,6 +109,15 @@ class InsertRowTest extends TestCase
      * Test attribute "row"
      */
     public function testPropertyRow()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "apply_default"
+     */
+    public function testPropertyApplyDefault()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -77,18 +77,6 @@ class BaseInfoApiTest extends TestCase
      *
      */
     public function testGetBaseInfo()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getBigDataStatus
-     *
-     * Get Big Data Status.
-     *
-     */
-    public function testGetBigDataStatus()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

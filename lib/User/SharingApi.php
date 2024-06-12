@@ -103,7 +103,7 @@ class SharingApi
         'leaveSharedView' => [
             'application/json',
         ],
-        'listCollaborators' => [
+        'listCollaboratorsAsUser' => [
             'application/json',
         ],
         'listGroupShares' => [
@@ -4124,40 +4124,40 @@ class SharingApi
     }
 
     /**
-     * Operation listCollaborators
+     * Operation listCollaboratorsAsUser
      *
      * List Collaborators
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaborators'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaboratorsAsUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listCollaborators($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaborators'][0])
+    public function listCollaboratorsAsUser($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaboratorsAsUser'][0])
     {
-        list($response) = $this->listCollaboratorsWithHttpInfo($workspace_id, $base_name, $contentType);
+        list($response) = $this->listCollaboratorsAsUserWithHttpInfo($workspace_id, $base_name, $contentType);
         return $response;
     }
 
     /**
-     * Operation listCollaboratorsWithHttpInfo
+     * Operation listCollaboratorsAsUserWithHttpInfo
      *
      * List Collaborators
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaborators'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaboratorsAsUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listCollaboratorsWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaborators'][0])
+    public function listCollaboratorsAsUserWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaboratorsAsUser'][0])
     {
-        $request = $this->listCollaboratorsRequest($workspace_id, $base_name, $contentType);
+        $request = $this->listCollaboratorsAsUserRequest($workspace_id, $base_name, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4268,20 +4268,20 @@ class SharingApi
     }
 
     /**
-     * Operation listCollaboratorsAsync
+     * Operation listCollaboratorsAsUserAsync
      *
      * List Collaborators
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaborators'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaboratorsAsUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listCollaboratorsAsync($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaborators'][0])
+    public function listCollaboratorsAsUserAsync($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaboratorsAsUser'][0])
     {
-        return $this->listCollaboratorsAsyncWithHttpInfo($workspace_id, $base_name, $contentType)
+        return $this->listCollaboratorsAsUserAsyncWithHttpInfo($workspace_id, $base_name, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4290,21 +4290,21 @@ class SharingApi
     }
 
     /**
-     * Operation listCollaboratorsAsyncWithHttpInfo
+     * Operation listCollaboratorsAsUserAsyncWithHttpInfo
      *
      * List Collaborators
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaborators'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaboratorsAsUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listCollaboratorsAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaborators'][0])
+    public function listCollaboratorsAsUserAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaboratorsAsUser'][0])
     {
         $returnType = 'object';
-        $request = $this->listCollaboratorsRequest($workspace_id, $base_name, $contentType);
+        $request = $this->listCollaboratorsAsUserRequest($workspace_id, $base_name, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4343,32 +4343,32 @@ class SharingApi
     }
 
     /**
-     * Create request for operation 'listCollaborators'
+     * Create request for operation 'listCollaboratorsAsUser'
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaborators'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCollaboratorsAsUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listCollaboratorsRequest($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaborators'][0])
+    public function listCollaboratorsAsUserRequest($workspace_id, $base_name, string $contentType = self::contentTypes['listCollaboratorsAsUser'][0])
     {
 
         // verify the required parameter 'workspace_id' is set
         if ($workspace_id === null || (is_array($workspace_id) && count($workspace_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $workspace_id when calling listCollaborators'
+                'Missing the required parameter $workspace_id when calling listCollaboratorsAsUser'
             );
         }
         if ($workspace_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$workspace_id" when calling SharingApi.listCollaborators, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$workspace_id" when calling SharingApi.listCollaboratorsAsUser, must be bigger than or equal to 1.');
         }
         
         // verify the required parameter 'base_name' is set
         if ($base_name === null || (is_array($base_name) && count($base_name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $base_name when calling listCollaborators'
+                'Missing the required parameter $base_name when calling listCollaboratorsAsUser'
             );
         }
 

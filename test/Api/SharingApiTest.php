@@ -203,12 +203,12 @@ class SharingApiTest extends TestCase
     }
 
     /**
-     * Test case for listCollaborators
+     * Test case for listCollaboratorsAsUser
      *
      * List Collaborators.
      *
      */
-    public function testListCollaborators()
+    public function testListCollaboratorsAsUser()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

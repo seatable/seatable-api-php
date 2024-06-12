@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -60,7 +60,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         'id' => 'int',
         'name' => 'string',
         'color' => 'string',
-        'text_color' => 'string'
+        'text_color' => 'string',
+        'border_color' => 'string'
     ];
 
     /**
@@ -74,7 +75,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         'id' => null,
         'name' => null,
         'color' => null,
-        'text_color' => null
+        'text_color' => null,
+        'border_color' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         'id' => false,
         'name' => false,
         'color' => false,
-        'text_color' => false
+        'text_color' => false,
+        'border_color' => false
     ];
 
     /**
@@ -178,7 +181,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         'id' => 'id',
         'name' => 'name',
         'color' => 'color',
-        'text_color' => 'text-color'
+        'text_color' => 'textColor',
+        'border_color' => 'borderColor'
     ];
 
     /**
@@ -190,7 +194,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         'id' => 'setId',
         'name' => 'setName',
         'color' => 'setColor',
-        'text_color' => 'setTextColor'
+        'text_color' => 'setTextColor',
+        'border_color' => 'setBorderColor'
     ];
 
     /**
@@ -202,7 +207,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         'id' => 'getId',
         'name' => 'getName',
         'color' => 'getColor',
-        'text_color' => 'getTextColor'
+        'text_color' => 'getTextColor',
+        'border_color' => 'getBorderColor'
     ];
 
     /**
@@ -266,6 +272,7 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('color', $data ?? [], null);
         $this->setIfExists('text_color', $data ?? [], null);
+        $this->setIfExists('border_color', $data ?? [], null);
     }
 
     /**
@@ -301,6 +308,10 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
 
         if (!is_null($this->container['text_color']) && !preg_match("/#([A-Za-z0-9]){6}/", $this->container['text_color'])) {
             $invalidProperties[] = "invalid value for 'text_color', must be conform to the pattern /#([A-Za-z0-9]){6}/.";
+        }
+
+        if (!is_null($this->container['border_color']) && !preg_match("/#([A-Za-z0-9]){6}/", $this->container['border_color'])) {
+            $invalidProperties[] = "invalid value for 'border_color', must be conform to the pattern /#([A-Za-z0-9]){6}/.";
         }
 
         return $invalidProperties;
@@ -434,6 +445,38 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
         }
 
         $this->container['text_color'] = $text_color;
+
+        return $this;
+    }
+
+    /**
+     * Gets border_color
+     *
+     * @return string|null
+     */
+    public function getBorderColor()
+    {
+        return $this->container['border_color'];
+    }
+
+    /**
+     * Sets border_color
+     *
+     * @param string|null $border_color select your color-code for the text.
+     *
+     * @return self
+     */
+    public function setBorderColor($border_color)
+    {
+        if (is_null($border_color)) {
+            throw new \InvalidArgumentException('non-nullable border_color cannot be null');
+        }
+
+        if ((!preg_match("/#([A-Za-z0-9]){6}/", ObjectSerializer::toString($border_color)))) {
+            throw new \InvalidArgumentException("invalid value for \$border_color when calling SelectColumnFormatOptionsInner., must conform to the pattern /#([A-Za-z0-9]){6}/.");
+        }
+
+        $this->container['border_color'] = $border_color;
 
         return $this;
     }

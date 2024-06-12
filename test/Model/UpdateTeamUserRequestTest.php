@@ -79,15 +79,6 @@ class UpdateTeamUserRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "is_staff"
-     */
-    public function testPropertyIsStaff()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "is_admin"
      */
     public function testPropertyIsAdmin()
@@ -97,18 +88,9 @@ class UpdateTeamUserRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "is_active"
+     * Test attribute "active"
      */
-    public function testPropertyIsActive()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "role"
-     */
-    public function testPropertyRole()
+    public function testPropertyActive()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -124,15 +106,6 @@ class UpdateTeamUserRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "login_id"
-     */
-    public function testPropertyLoginId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "contact_email"
      */
     public function testPropertyContactEmail()
@@ -142,63 +115,9 @@ class UpdateTeamUserRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "id_in_org"
-     */
-    public function testPropertyIdInOrg()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "unit"
-     */
-    public function testPropertyUnit()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "password"
-     */
-    public function testPropertyPassword()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "institution"
-     */
-    public function testPropertyInstitution()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "row_limit"
-     */
-    public function testPropertyRowLimit()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "quota_total"
      */
     public function testPropertyQuotaTotal()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "asset_quota_mb"
-     */
-    public function testPropertyAssetQuotaMb()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

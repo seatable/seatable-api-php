@@ -79,7 +79,7 @@ deleteUser($user_id): object
 
 Delete User
 
-Delete a user by their ID.  If the user is in a team, you cannot delete them with this request, but with the request [Delete Team User](/reference/delete-team-user).
+Delete a user by their ID.  If the user is in a team, you cannot delete them with this request, but with the request [Delete Team User](/reference/deleteteamuser).
 
 ### Example
 
@@ -179,7 +179,7 @@ enforceTwoFactor($user_id, $enforce_two_factor_request): object
 
 Enforce 2FA
 
-As the system administrator, you can force each user to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the user will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in System](/reference/disable-2fa), which serves a different purpose.
+As the system administrator, you can force each user to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the user will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in System](/reference/disabletwofactor), which serves a different purpose.
 
 ### Example
 

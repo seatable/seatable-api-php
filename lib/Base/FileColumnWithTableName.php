@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -357,7 +357,7 @@ class FileColumnWithTableName implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets table_name
      *
-     * @param string $table_name The name of the table.
+     * @param string $table_name The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly.
      *
      * @return self
      */

@@ -56,20 +56,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'is_staff' => 'bool',
         'is_admin' => 'bool',
-        'is_active' => 'bool',
-        'role' => 'string',
+        'active' => 'bool',
         'name' => 'string',
-        'login_id' => 'string',
         'contact_email' => 'string',
-        'id_in_org' => 'string',
-        'unit' => 'string',
-        'password' => 'string',
-        'institution' => 'string',
-        'row_limit' => 'int',
-        'quota_total' => 'string',
-        'asset_quota_mb' => 'string'
+        'quota_total' => 'string'
     ];
 
     /**
@@ -80,20 +71,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'is_staff' => null,
         'is_admin' => null,
-        'is_active' => null,
-        'role' => null,
+        'active' => null,
         'name' => null,
-        'login_id' => null,
         'contact_email' => null,
-        'id_in_org' => null,
-        'unit' => null,
-        'password' => null,
-        'institution' => null,
-        'row_limit' => null,
-        'quota_total' => null,
-        'asset_quota_mb' => null
+        'quota_total' => null
     ];
 
     /**
@@ -102,20 +84,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'is_staff' => false,
         'is_admin' => false,
-        'is_active' => false,
-        'role' => false,
+        'active' => false,
         'name' => false,
-        'login_id' => false,
         'contact_email' => false,
-        'id_in_org' => false,
-        'unit' => false,
-        'password' => false,
-        'institution' => false,
-        'row_limit' => false,
-        'quota_total' => false,
-        'asset_quota_mb' => false
+        'quota_total' => false
     ];
 
     /**
@@ -204,20 +177,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'is_staff' => 'is_staff',
         'is_admin' => 'is_admin',
-        'is_active' => 'is_active',
-        'role' => 'role',
+        'active' => 'active',
         'name' => 'name',
-        'login_id' => 'login_id',
         'contact_email' => 'contact_email',
-        'id_in_org' => 'id_in_org',
-        'unit' => 'unit',
-        'password' => 'password',
-        'institution' => 'institution',
-        'row_limit' => 'row_limit',
-        'quota_total' => 'quota_total',
-        'asset_quota_mb' => 'asset_quota_mb'
+        'quota_total' => 'quota_total'
     ];
 
     /**
@@ -226,20 +190,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'is_staff' => 'setIsStaff',
         'is_admin' => 'setIsAdmin',
-        'is_active' => 'setIsActive',
-        'role' => 'setRole',
+        'active' => 'setActive',
         'name' => 'setName',
-        'login_id' => 'setLoginId',
         'contact_email' => 'setContactEmail',
-        'id_in_org' => 'setIdInOrg',
-        'unit' => 'setUnit',
-        'password' => 'setPassword',
-        'institution' => 'setInstitution',
-        'row_limit' => 'setRowLimit',
-        'quota_total' => 'setQuotaTotal',
-        'asset_quota_mb' => 'setAssetQuotaMb'
+        'quota_total' => 'setQuotaTotal'
     ];
 
     /**
@@ -248,20 +203,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'is_staff' => 'getIsStaff',
         'is_admin' => 'getIsAdmin',
-        'is_active' => 'getIsActive',
-        'role' => 'getRole',
+        'active' => 'getActive',
         'name' => 'getName',
-        'login_id' => 'getLoginId',
         'contact_email' => 'getContactEmail',
-        'id_in_org' => 'getIdInOrg',
-        'unit' => 'getUnit',
-        'password' => 'getPassword',
-        'institution' => 'getInstitution',
-        'row_limit' => 'getRowLimit',
-        'quota_total' => 'getQuotaTotal',
-        'asset_quota_mb' => 'getAssetQuotaMb'
+        'quota_total' => 'getQuotaTotal'
     ];
 
     /**
@@ -321,20 +267,11 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('is_staff', $data ?? [], false);
         $this->setIfExists('is_admin', $data ?? [], false);
-        $this->setIfExists('is_active', $data ?? [], true);
-        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('active', $data ?? [], true);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('login_id', $data ?? [], null);
         $this->setIfExists('contact_email', $data ?? [], null);
-        $this->setIfExists('id_in_org', $data ?? [], null);
-        $this->setIfExists('unit', $data ?? [], null);
-        $this->setIfExists('password', $data ?? [], null);
-        $this->setIfExists('institution', $data ?? [], null);
-        $this->setIfExists('row_limit', $data ?? [], null);
         $this->setIfExists('quota_total', $data ?? [], null);
-        $this->setIfExists('asset_quota_mb', $data ?? [], null);
     }
 
     /**
@@ -380,33 +317,6 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets is_staff
-     *
-     * @return bool|null
-     */
-    public function getIsStaff()
-    {
-        return $this->container['is_staff'];
-    }
-
-    /**
-     * Sets is_staff
-     *
-     * @param bool|null $is_staff `true` or `false` if the user will be an (system) admin. `false` by default.
-     *
-     * @return self
-     */
-    public function setIsStaff($is_staff)
-    {
-        if (is_null($is_staff)) {
-            throw new \InvalidArgumentException('non-nullable is_staff cannot be null');
-        }
-        $this->container['is_staff'] = $is_staff;
-
-        return $this;
-    }
-
-    /**
      * Gets is_admin
      *
      * @return bool|null
@@ -434,55 +344,28 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets is_active
+     * Gets active
      *
      * @return bool|null
      */
-    public function getIsActive()
+    public function getActive()
     {
-        return $this->container['is_active'];
+        return $this->container['active'];
     }
 
     /**
-     * Sets is_active
+     * Sets active
      *
-     * @param bool|null $is_active `true` or `false` if the user could log in. `true` by default.
+     * @param bool|null $active `true` or `false` if the user could log in. `true` by default.
      *
      * @return self
      */
-    public function setIsActive($is_active)
+    public function setActive($active)
     {
-        if (is_null($is_active)) {
-            throw new \InvalidArgumentException('non-nullable is_active cannot be null');
+        if (is_null($active)) {
+            throw new \InvalidArgumentException('non-nullable active cannot be null');
         }
-        $this->container['is_active'] = $is_active;
-
-        return $this;
-    }
-
-    /**
-     * Gets role
-     *
-     * @return string|null
-     */
-    public function getRole()
-    {
-        return $this->container['role'];
-    }
-
-    /**
-     * Sets role
-     *
-     * @param string|null $role Update their role. For details about roles, refer to [SeaTable Roles and Permissions](https://manual.seatable.io/config/enterprise/roles_permissions/).
-     *
-     * @return self
-     */
-    public function setRole($role)
-    {
-        if (is_null($role)) {
-            throw new \InvalidArgumentException('non-nullable role cannot be null');
-        }
-        $this->container['role'] = $role;
+        $this->container['active'] = $active;
 
         return $this;
     }
@@ -515,33 +398,6 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets login_id
-     *
-     * @return string|null
-     */
-    public function getLoginId()
-    {
-        return $this->container['login_id'];
-    }
-
-    /**
-     * Sets login_id
-     *
-     * @param string|null $login_id Optional login ID. Valid only if the system configuration allows login ID.
-     *
-     * @return self
-     */
-    public function setLoginId($login_id)
-    {
-        if (is_null($login_id)) {
-            throw new \InvalidArgumentException('non-nullable login_id cannot be null');
-        }
-        $this->container['login_id'] = $login_id;
-
-        return $this;
-    }
-
-    /**
      * Gets contact_email
      *
      * @return string|null
@@ -569,141 +425,6 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets id_in_org
-     *
-     * @return string|null
-     */
-    public function getIdInOrg()
-    {
-        return $this->container['id_in_org'];
-    }
-
-    /**
-     * Sets id_in_org
-     *
-     * @param string|null $id_in_org The team ID of the user, could be a student's ID or employee ID. String.
-     *
-     * @return self
-     */
-    public function setIdInOrg($id_in_org)
-    {
-        if (is_null($id_in_org)) {
-            throw new \InvalidArgumentException('non-nullable id_in_org cannot be null');
-        }
-        $this->container['id_in_org'] = $id_in_org;
-
-        return $this;
-    }
-
-    /**
-     * Gets unit
-     *
-     * @return string|null
-     */
-    public function getUnit()
-    {
-        return $this->container['unit'];
-    }
-
-    /**
-     * Sets unit
-     *
-     * @param string|null $unit Business unit. Only valid if the system configuration allows the feature.
-     *
-     * @return self
-     */
-    public function setUnit($unit)
-    {
-        if (is_null($unit)) {
-            throw new \InvalidArgumentException('non-nullable unit cannot be null');
-        }
-        $this->container['unit'] = $unit;
-
-        return $this;
-    }
-
-    /**
-     * Gets password
-     *
-     * @return string|null
-     */
-    public function getPassword()
-    {
-        return $this->container['password'];
-    }
-
-    /**
-     * Sets password
-     *
-     * @param string|null $password Login password of the user.
-     *
-     * @return self
-     */
-    public function setPassword($password)
-    {
-        if (is_null($password)) {
-            throw new \InvalidArgumentException('non-nullable password cannot be null');
-        }
-        $this->container['password'] = $password;
-
-        return $this;
-    }
-
-    /**
-     * Gets institution
-     *
-     * @return string|null
-     */
-    public function getInstitution()
-    {
-        return $this->container['institution'];
-    }
-
-    /**
-     * Sets institution
-     *
-     * @param string|null $institution Institution. Only valid if the system configuration allows the feature.
-     *
-     * @return self
-     */
-    public function setInstitution($institution)
-    {
-        if (is_null($institution)) {
-            throw new \InvalidArgumentException('non-nullable institution cannot be null');
-        }
-        $this->container['institution'] = $institution;
-
-        return $this;
-    }
-
-    /**
-     * Gets row_limit
-     *
-     * @return int|null
-     */
-    public function getRowLimit()
-    {
-        return $this->container['row_limit'];
-    }
-
-    /**
-     * Sets row_limit
-     *
-     * @param int|null $row_limit User's total row limit in number. For example 10000.
-     *
-     * @return self
-     */
-    public function setRowLimit($row_limit)
-    {
-        if (is_null($row_limit)) {
-            throw new \InvalidArgumentException('non-nullable row_limit cannot be null');
-        }
-        $this->container['row_limit'] = $row_limit;
-
-        return $this;
-    }
-
-    /**
      * Gets quota_total
      *
      * @return string|null
@@ -726,33 +447,6 @@ class UpdateTeamUserRequest implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable quota_total cannot be null');
         }
         $this->container['quota_total'] = $quota_total;
-
-        return $this;
-    }
-
-    /**
-     * Gets asset_quota_mb
-     *
-     * @return string|null
-     */
-    public function getAssetQuotaMb()
-    {
-        return $this->container['asset_quota_mb'];
-    }
-
-    /**
-     * Sets asset_quota_mb
-     *
-     * @param string|null $asset_quota_mb The asset quota in MB.
-     *
-     * @return self
-     */
-    public function setAssetQuotaMb($asset_quota_mb)
-    {
-        if (is_null($asset_quota_mb)) {
-            throw new \InvalidArgumentException('non-nullable asset_quota_mb cannot be null');
-        }
-        $this->container['asset_quota_mb'] = $asset_quota_mb;
 
         return $this;
     }

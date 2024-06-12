@@ -144,7 +144,7 @@ class UsersApi
      *
      * Add User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $email User&#39;s contact email to login. (optional)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $password User&#39;s password to login. (optional)
@@ -166,7 +166,7 @@ class UsersApi
      *
      * Add User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $email User&#39;s contact email to login. (optional)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $password User&#39;s password to login. (optional)
@@ -294,7 +294,7 @@ class UsersApi
      *
      * Add User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $email User&#39;s contact email to login. (optional)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $password User&#39;s password to login. (optional)
@@ -319,7 +319,7 @@ class UsersApi
      *
      * Add User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $email User&#39;s contact email to login. (optional)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $password User&#39;s password to login. (optional)
@@ -373,7 +373,7 @@ class UsersApi
     /**
      * Create request for operation 'addUser'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $email User&#39;s contact email to login. (optional)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $password User&#39;s password to login. (optional)
@@ -498,7 +498,7 @@ class UsersApi
      *
      * Delete User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
@@ -517,7 +517,7 @@ class UsersApi
      *
      * Delete User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
@@ -642,7 +642,7 @@ class UsersApi
      *
      * Delete User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
@@ -664,7 +664,7 @@ class UsersApi
      *
      * Delete User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
@@ -715,7 +715,7 @@ class UsersApi
     /**
      * Create request for operation 'deleteUser'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
@@ -835,7 +835,7 @@ class UsersApi
      *
      * Disable 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
@@ -854,7 +854,7 @@ class UsersApi
      *
      * Disable 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
@@ -979,7 +979,7 @@ class UsersApi
      *
      * Disable 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
@@ -1001,7 +1001,7 @@ class UsersApi
      *
      * Disable 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
@@ -1052,7 +1052,7 @@ class UsersApi
     /**
      * Create request for operation 'disableTwoFactor'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
@@ -1172,7 +1172,7 @@ class UsersApi
      *
      * Enforce 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
@@ -1192,7 +1192,7 @@ class UsersApi
      *
      * Enforce 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
@@ -1318,7 +1318,7 @@ class UsersApi
      *
      * Enforce 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
@@ -1341,7 +1341,7 @@ class UsersApi
      *
      * Enforce 2FA
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
@@ -1393,7 +1393,7 @@ class UsersApi
     /**
      * Create request for operation 'enforceTwofactor'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
@@ -1522,7 +1522,7 @@ class UsersApi
      *
      * List Users (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
@@ -1542,7 +1542,7 @@ class UsersApi
      *
      * List Users (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
@@ -1668,7 +1668,7 @@ class UsersApi
      *
      * List Users (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
@@ -1691,7 +1691,7 @@ class UsersApi
      *
      * List Users (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
@@ -1743,7 +1743,7 @@ class UsersApi
     /**
      * Create request for operation 'listTeamUsers'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
@@ -1872,7 +1872,7 @@ class UsersApi
      *
      * Reset User Password
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
@@ -1891,7 +1891,7 @@ class UsersApi
      *
      * Reset User Password
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
@@ -2016,7 +2016,7 @@ class UsersApi
      *
      * Reset User Password
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
@@ -2038,7 +2038,7 @@ class UsersApi
      *
      * Reset User Password
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
@@ -2089,7 +2089,7 @@ class UsersApi
     /**
      * Create request for operation 'resetUserPassword'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
@@ -2209,7 +2209,7 @@ class UsersApi
      *
      * Update User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
@@ -2234,7 +2234,7 @@ class UsersApi
      *
      * Update User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
@@ -2365,7 +2365,7 @@ class UsersApi
      *
      * Update User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
@@ -2393,7 +2393,7 @@ class UsersApi
      *
      * Update User
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
@@ -2450,7 +2450,7 @@ class UsersApi
     /**
      * Create request for operation 'updateUser'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)

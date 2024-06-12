@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -79,18 +79,18 @@ class ListRowLinksTest extends TestCase
     }
 
     /**
-     * Test attribute "table_id"
+     * Test attribute "table_name"
      */
-    public function testPropertyTableId()
+    public function testPropertyTableName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "link_column"
+     * Test attribute "link_column_name"
      */
-    public function testPropertyLinkColumn()
+    public function testPropertyLinkColumnName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

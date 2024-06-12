@@ -128,12 +128,12 @@ AccountTokenAuth
 ## `createBase()`
 
 ```php
-createBase($name, $workspace_id, $icon, $color): object
+createBase($name, $workspace_id, $icon, $color): \SeaTable\Client\User\Base
 ```
 
 Create Base
 
-Create a new base.   When you create a new base with this API request or on the web UI, SeaTable automatically adds the following content into the new base:  - A new table \"Table1\" (with the `table_id` of `0000`), and - A \"Default View\" (with the `view_id` of `0000`), and - A new text column \"Name\" (with the column's `key` of `0000`); - Three empty rows (The row's IDs are randomly generated. Use the call [List Rows](/reference/get_dtable-server-api-v1-dtables-base-uuid-rows-1) to see their IDs).       Optionally, you can select icons and colors from the following list to customize your base's icon in the web UI:  **SeaTable base icon list**  ``` DTABLE_ICON_LIST = [   'icon-worksheet',   'icon-task-management',   'icon-software-test-management',   'icon-design-assignment',   'icon-video-production',   'icon-market-analysis',   'icon-data-analysis',   'icon-product-knowledge-base',   'icon-asset-management',   'icon-financial-information-record',   'icon-dollar',   'icon-company-inventory',   'icon-customer-inquiry',   'icon-customer-list',   'icon-product-list',   'icon-store-address',   'icon-leave-record',   'icon-administrative-matters-calendar',   'icon-customer-relationship',   'icon-teachers-list',   'icon-book-library',   'icon-server-management',   'icon-time-management',   'icon-work-log',   'icon-online-promotion',   'icon-research',   'icon-user-interview',   'icon-client-review',   'icon-club-members', ]  ```  **SeaTable base icon color list**  ``` DTABLE_ICON_COLORS = [   '#FF8000',   '#FFB600',   '#E91E63',   '#EB00B1',   '#7626FD',   '#972CB0',   '#1DDD1D',   '#4CAF50',   '#02C0FF',   '#00C9C7',   '#1688FC',   '#656463' ]  ```  You can create a base in your personal workspace (\"My bases\"), or in a group you have write permission to. Just specify the optional `workspace_id` parameter in the request.  The returned `id` value is the ID of your base, this numeric ID is to be distinguished from the base's UUID.
+Create a new base.   When you create a new base with this API request or on the web UI, SeaTable automatically adds the following content into the new base:  - A new table \"Table1\" (with the `table_id` of `0000`), and - A \"Default View\" (with the `view_id` of `0000`), and - A new text column \"Name\" (with the column's `key` of `0000`); - Three empty rows (The row's IDs are randomly generated. Use the call [List Rows](/reference/listrows) to see their IDs).       Optionally, you can select icons and colors from the following list to customize your base's icon in the web UI:  **SeaTable base icon list**  ``` DTABLE_ICON_LIST = [   'icon-worksheet',   'icon-task-management',   'icon-software-test-management',   'icon-design-assignment',   'icon-video-production',   'icon-market-analysis',   'icon-data-analysis',   'icon-product-knowledge-base',   'icon-asset-management',   'icon-financial-information-record',   'icon-dollar',   'icon-company-inventory',   'icon-customer-inquiry',   'icon-customer-list',   'icon-product-list',   'icon-store-address',   'icon-leave-record',   'icon-administrative-matters-calendar',   'icon-customer-relationship',   'icon-teachers-list',   'icon-book-library',   'icon-server-management',   'icon-time-management',   'icon-work-log',   'icon-online-promotion',   'icon-research',   'icon-user-interview',   'icon-client-review',   'icon-club-members', ]  ```  **SeaTable base icon color list**  ``` DTABLE_ICON_COLORS = [   '#FF8000',   '#FFB600',   '#E91E63',   '#EB00B1',   '#7626FD',   '#972CB0',   '#1DDD1D',   '#4CAF50',   '#02C0FF',   '#00C9C7',   '#1688FC',   '#656463' ]  ```  You can create a base in your personal workspace (\"My bases\"), or in a group you have write permission to. Just specify the optional `workspace_id` parameter in the request.  The returned `id` value is the ID of your base, this numeric ID is to be distinguished from the base's UUID.
 
 ### Example
 
@@ -150,8 +150,8 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
 );
 $name = 'name_example'; // string
 $workspace_id = 'workspace_id_example'; // string | The workspace ID where your base is.
-$icon = 'icon_example'; // string | The icon of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/post_api-v2-1-dtables) for the list of available icons.
-$color = 'color_example'; // string | The icon color of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/post_api-v2-1-dtables) for the list of available icon colors.
+$icon = 'icon_example'; // string | The icon of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/createbase) for the list of available icons.
+$color = 'color_example'; // string | The icon color of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/createbase) for the list of available icon colors.
 
 try {
     $result = $apiInstance->createBase($name, $workspace_id, $icon, $color);
@@ -167,12 +167,12 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **name** | **string**|  | [optional] |
 | **workspace_id** | **string**| The workspace ID where your base is. | [optional] |
-| **icon** | **string**| The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. | [optional] |
-| **color** | **string**| The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. | [optional] |
+| **icon** | **string**| The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. | [optional] |
+| **color** | **string**| The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\Base**](../Model/Base.md)
 
 ### Authorization
 
@@ -236,7 +236,7 @@ AccountTokenAuth
 ## `deleteBase()`
 
 ```php
-deleteBase($workspace_id): object
+deleteBase($workspace_id, $name): object
 ```
 
 Delete Base
@@ -257,9 +257,10 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
+$name = 'name_example'; // string
 
 try {
-    $result = $apiInstance->deleteBase($workspace_id);
+    $result = $apiInstance->deleteBase($workspace_id, $name);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BasesApi->deleteBase: ', $e->getMessage(), PHP_EOL;
@@ -271,6 +272,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
+| **name** | **string**|  | [optional] |
 
 ### Return type
 
@@ -699,7 +701,7 @@ restoreTrashedBase($trashed_base_id): object
 
 Restore Trashed Base
 
-Restore a trashed base from the trash bin. The base's ID can be retrieved from the call [List Trashed Bases](/reference/get_api-v2-1-trash-dtables-1). The base's ID is written directly in the URL, like in this example, `497`.
+Restore a trashed base from the trash bin. The base's ID can be retrieved from the call [List Trashed Bases](/reference/listtrashedbases-1). The base's ID is written directly in the URL, like in this example, `497`.
 
 ### Example
 
@@ -869,8 +871,8 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
 $workspace_id = 127; // int | id of your workspace.
 $name = 'name_example'; // string | The old name of the base. Required.
 $new_name = 'new_name_example'; // string | The new name of the base. Optional.
-$icon = 'icon_example'; // string | The icon of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/post_api-v2-1-dtables) for the list of available icons.
-$color = 'color_example'; // string | The icon color of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/post_api-v2-1-dtables) for the list of available icon colors.
+$icon = 'icon_example'; // string | The icon of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/createbase) for the list of available icons.
+$color = 'color_example'; // string | The icon color of the base. Optional. Refer to [\\\"Create A Base\\\"](/reference/createbase) for the list of available icon colors.
 
 try {
     $result = $apiInstance->updateBase($workspace_id, $name, $new_name, $icon, $color);
@@ -887,8 +889,8 @@ try {
 | **workspace_id** | **int**| id of your workspace. | |
 | **name** | **string**| The old name of the base. Required. | [optional] |
 | **new_name** | **string**| The new name of the base. Optional. | [optional] |
-| **icon** | **string**| The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. | [optional] |
-| **color** | **string**| The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. | [optional] |
+| **icon** | **string**| The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. | [optional] |
+| **color** | **string**| The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. | [optional] |
 
 ### Return type
 

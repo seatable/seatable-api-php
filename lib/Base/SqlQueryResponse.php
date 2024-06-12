@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -56,8 +56,8 @@ class SqlQueryResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'array<string,mixed>',
-        'results' => 'array<string,mixed>',
+        'metadata' => 'object[]',
+        'results' => 'object[]',
         'success' => 'bool'
     ];
 
@@ -305,7 +305,7 @@ class SqlQueryResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets metadata
      *
-     * @return array<string,mixed>|null
+     * @return object[]|null
      */
     public function getMetadata()
     {
@@ -315,7 +315,7 @@ class SqlQueryResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param array<string,mixed>|null $metadata metadata
+     * @param object[]|null $metadata metadata
      *
      * @return self
      */
@@ -332,7 +332,7 @@ class SqlQueryResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets results
      *
-     * @return array<string,mixed>|null
+     * @return object[]|null
      */
     public function getResults()
     {
@@ -342,7 +342,7 @@ class SqlQueryResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets results
      *
-     * @param array<string,mixed>|null $results results
+     * @param object[]|null $results results
      *
      * @return self
      */

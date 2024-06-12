@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -368,7 +368,7 @@ class NotificationsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/notifications/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/notifications/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -682,7 +682,7 @@ class NotificationsApi
         }
         
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/notifications/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/notifications/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1017,7 +1017,7 @@ class NotificationsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/notifications/{notification_id}/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/notifications/{notification_id}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1349,7 +1349,7 @@ class NotificationsApi
         
 
 
-        $resourcePath = '/dtable-server/api/v1/dtables/{base_uuid}/notifications/';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/notifications/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

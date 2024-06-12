@@ -747,7 +747,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object[]
      */
     public function uploadFile($upload_link, $file, $parent_dir, $relative_path, $replace = null, string $contentType = self::contentTypes['uploadFile'][0])
     {
@@ -769,7 +769,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object[], HTTP status code, HTTP response headers (array of strings)
      */
     public function uploadFileWithHttpInfo($upload_link, $file, $parent_dir, $relative_path, $replace = null, string $contentType = self::contentTypes['uploadFile'][0])
     {
@@ -812,11 +812,11 @@ class FilesImagesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('object' === '\SplFileObject') {
+                    if ('object[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
+                        if ('object[]' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -834,13 +834,13 @@ class FilesImagesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, 'object[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'object';
+            $returnType = 'object[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -873,7 +873,7 @@ class FilesImagesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        'object[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -925,7 +925,7 @@ class FilesImagesApi
      */
     public function uploadFileAsyncWithHttpInfo($upload_link, $file, $parent_dir, $relative_path, $replace = null, string $contentType = self::contentTypes['uploadFile'][0])
     {
-        $returnType = 'object';
+        $returnType = 'object[]';
         $request = $this->uploadFileRequest($upload_link, $file, $parent_dir, $relative_path, $replace, $contentType);
 
         return $this->client

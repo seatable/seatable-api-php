@@ -1,6 +1,6 @@
 <?php
 /**
- * BaseMetadata
+ * Base
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,22 +25,21 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\Base;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * BaseMetadata Class Doc Comment
+ * Base Class Doc Comment
  *
  * @category Class
- * @description Metadata object of the base
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
+class Base implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'base_metadata';
+    protected static $openAPIModelName = 'Base';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +56,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'key' => 'string',
-        'name' => 'string',
-        'type' => 'string',
-        'data' => '\SeaTable\Client\Base\BaseMetadataData'
+        'table' => '\SeaTable\Client\User\BaseTable'
     ];
 
     /**
@@ -71,10 +67,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'key' => null,
-        'name' => null,
-        'type' => null,
-        'data' => null
+        'table' => null
     ];
 
     /**
@@ -83,10 +76,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'key' => false,
-        'name' => false,
-        'type' => false,
-        'data' => false
+        'table' => false
     ];
 
     /**
@@ -175,10 +165,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'key' => 'key',
-        'name' => 'name',
-        'type' => 'type',
-        'data' => 'data'
+        'table' => 'table'
     ];
 
     /**
@@ -187,10 +174,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'key' => 'setKey',
-        'name' => 'setName',
-        'type' => 'setType',
-        'data' => 'setData'
+        'table' => 'setTable'
     ];
 
     /**
@@ -199,10 +183,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'key' => 'getKey',
-        'name' => 'getName',
-        'type' => 'getType',
-        'data' => 'getData'
+        'table' => 'getTable'
     ];
 
     /**
@@ -262,10 +243,7 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('key', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('table', $data ?? [], null);
     }
 
     /**
@@ -311,109 +289,28 @@ class BaseMetadata implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets key
+     * Gets table
      *
-     * @return string|null
+     * @return \SeaTable\Client\User\BaseTable|null
      */
-    public function getKey()
+    public function getTable()
     {
-        return $this->container['key'];
+        return $this->container['table'];
     }
 
     /**
-     * Sets key
+     * Sets table
      *
-     * @param string|null $key key
+     * @param \SeaTable\Client\User\BaseTable|null $table table
      *
      * @return self
      */
-    public function setKey($key)
+    public function setTable($table)
     {
-        if (is_null($key)) {
-            throw new \InvalidArgumentException('non-nullable key cannot be null');
+        if (is_null($table)) {
+            throw new \InvalidArgumentException('non-nullable table cannot be null');
         }
-        $this->container['key'] = $key;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string|null $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets data
-     *
-     * @return \SeaTable\Client\Base\BaseMetadataData|null
-     */
-    public function getData()
-    {
-        return $this->container['data'];
-    }
-
-    /**
-     * Sets data
-     *
-     * @param \SeaTable\Client\Base\BaseMetadataData|null $data data
-     *
-     * @return self
-     */
-    public function setData($data)
-    {
-        if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
-        }
-        $this->container['data'] = $data;
+        $this->container['table'] = $table;
 
         return $this;
     }

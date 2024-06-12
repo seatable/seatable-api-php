@@ -1,6 +1,6 @@
 <?php
 /**
- * FilteredRowsFilterFiltersInner
+ * AppendColumnsRequestColumnsInner
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * FilteredRowsFilterFiltersInner Class Doc Comment
+ * AppendColumnsRequestColumnsInner Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppendColumnsRequestColumnsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
       *
       * @var string
       */
-    protected static $openAPIModelName = 'filtered_rows_filter_filters_inner';
+    protected static $openAPIModelName = 'appendColumns_request_columns_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPITypes = [
         'column_name' => 'string',
-        'filter_predicate' => 'string',
-        'filter_term' => 'string',
-        'filter_term_modifier' => 'string'
+        'column_type' => 'string',
+        'anchor_column' => 'string',
+        'column_data' => '\SeaTable\Client\Base\ButtonColumnFormat'
     ];
 
     /**
@@ -71,9 +71,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
       */
     protected static $openAPIFormats = [
         'column_name' => null,
-        'filter_predicate' => null,
-        'filter_term' => null,
-        'filter_term_modifier' => null
+        'column_type' => null,
+        'anchor_column' => null,
+        'column_data' => null
     ];
 
     /**
@@ -83,9 +83,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
       */
     protected static array $openAPINullables = [
         'column_name' => false,
-        'filter_predicate' => false,
-        'filter_term' => false,
-        'filter_term_modifier' => false
+        'column_type' => false,
+        'anchor_column' => false,
+        'column_data' => false
     ];
 
     /**
@@ -175,9 +175,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
      */
     protected static $attributeMap = [
         'column_name' => 'column_name',
-        'filter_predicate' => 'filter_predicate',
-        'filter_term' => 'filter_term',
-        'filter_term_modifier' => 'filter_term_modifier'
+        'column_type' => 'column_type',
+        'anchor_column' => 'anchor_column',
+        'column_data' => 'column_data'
     ];
 
     /**
@@ -187,9 +187,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
      */
     protected static $setters = [
         'column_name' => 'setColumnName',
-        'filter_predicate' => 'setFilterPredicate',
-        'filter_term' => 'setFilterTerm',
-        'filter_term_modifier' => 'setFilterTermModifier'
+        'column_type' => 'setColumnType',
+        'anchor_column' => 'setAnchorColumn',
+        'column_data' => 'setColumnData'
     ];
 
     /**
@@ -199,9 +199,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
      */
     protected static $getters = [
         'column_name' => 'getColumnName',
-        'filter_predicate' => 'getFilterPredicate',
-        'filter_term' => 'getFilterTerm',
-        'filter_term_modifier' => 'getFilterTermModifier'
+        'column_type' => 'getColumnType',
+        'anchor_column' => 'getAnchorColumn',
+        'column_data' => 'getColumnData'
     ];
 
     /**
@@ -245,6 +245,19 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
+    public const COLUMN_TYPE_FILE = 'file';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getColumnTypeAllowableValues()
+    {
+        return [
+            self::COLUMN_TYPE_FILE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -262,9 +275,9 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
     public function __construct(array $data = null)
     {
         $this->setIfExists('column_name', $data ?? [], null);
-        $this->setIfExists('filter_predicate', $data ?? [], null);
-        $this->setIfExists('filter_term', $data ?? [], null);
-        $this->setIfExists('filter_term_modifier', $data ?? [], null);
+        $this->setIfExists('column_type', $data ?? [], null);
+        $this->setIfExists('anchor_column', $data ?? [], null);
+        $this->setIfExists('column_data', $data ?? [], null);
     }
 
     /**
@@ -294,6 +307,28 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
     {
         $invalidProperties = [];
 
+        if ($this->container['column_name'] === null) {
+            $invalidProperties[] = "'column_name' can't be null";
+        }
+        if (!preg_match("/^[^.}{`]*$/", $this->container['column_name'])) {
+            $invalidProperties[] = "invalid value for 'column_name', must be conform to the pattern /^[^.}{`]*$/.";
+        }
+
+        if ($this->container['column_type'] === null) {
+            $invalidProperties[] = "'column_type' can't be null";
+        }
+        $allowedValues = $this->getColumnTypeAllowableValues();
+        if (!is_null($this->container['column_type']) && !in_array($this->container['column_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'column_type', must be one of '%s'",
+                $this->container['column_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['column_data'] === null) {
+            $invalidProperties[] = "'column_data' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -312,7 +347,7 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets column_name
      *
-     * @return string|null
+     * @return string
      */
     public function getColumnName()
     {
@@ -322,7 +357,7 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets column_name
      *
-     * @param string|null $column_name column_name
+     * @param string $column_name The name of the column.
      *
      * @return self
      */
@@ -331,88 +366,103 @@ class FilteredRowsFilterFiltersInner implements ModelInterface, ArrayAccess, \Js
         if (is_null($column_name)) {
             throw new \InvalidArgumentException('non-nullable column_name cannot be null');
         }
+
+        if ((!preg_match("/^[^.}{`]*$/", ObjectSerializer::toString($column_name)))) {
+            throw new \InvalidArgumentException("invalid value for \$column_name when calling AppendColumnsRequestColumnsInner., must conform to the pattern /^[^.}{`]*$/.");
+        }
+
         $this->container['column_name'] = $column_name;
 
         return $this;
     }
 
     /**
-     * Gets filter_predicate
+     * Gets column_type
      *
-     * @return string|null
+     * @return string
      */
-    public function getFilterPredicate()
+    public function getColumnType()
     {
-        return $this->container['filter_predicate'];
+        return $this->container['column_type'];
     }
 
     /**
-     * Sets filter_predicate
+     * Sets column_type
      *
-     * @param string|null $filter_predicate filter_predicate
+     * @param string $column_type column_type
      *
      * @return self
      */
-    public function setFilterPredicate($filter_predicate)
+    public function setColumnType($column_type)
     {
-        if (is_null($filter_predicate)) {
-            throw new \InvalidArgumentException('non-nullable filter_predicate cannot be null');
+        if (is_null($column_type)) {
+            throw new \InvalidArgumentException('non-nullable column_type cannot be null');
         }
-        $this->container['filter_predicate'] = $filter_predicate;
+        $allowedValues = $this->getColumnTypeAllowableValues();
+        if (!in_array($column_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'column_type', must be one of '%s'",
+                    $column_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['column_type'] = $column_type;
 
         return $this;
     }
 
     /**
-     * Gets filter_term
+     * Gets anchor_column
      *
      * @return string|null
      */
-    public function getFilterTerm()
+    public function getAnchorColumn()
     {
-        return $this->container['filter_term'];
+        return $this->container['anchor_column'];
     }
 
     /**
-     * Sets filter_term
+     * Sets anchor_column
      *
-     * @param string|null $filter_term filter_term
+     * @param string|null $anchor_column Give the name or the key of a column after you would like to add this new column. If you leave this empty, the new column will be created at the end.
      *
      * @return self
      */
-    public function setFilterTerm($filter_term)
+    public function setAnchorColumn($anchor_column)
     {
-        if (is_null($filter_term)) {
-            throw new \InvalidArgumentException('non-nullable filter_term cannot be null');
+        if (is_null($anchor_column)) {
+            throw new \InvalidArgumentException('non-nullable anchor_column cannot be null');
         }
-        $this->container['filter_term'] = $filter_term;
+        $this->container['anchor_column'] = $anchor_column;
 
         return $this;
     }
 
     /**
-     * Gets filter_term_modifier
+     * Gets column_data
      *
-     * @return string|null
+     * @return \SeaTable\Client\Base\ButtonColumnFormat
      */
-    public function getFilterTermModifier()
+    public function getColumnData()
     {
-        return $this->container['filter_term_modifier'];
+        return $this->container['column_data'];
     }
 
     /**
-     * Sets filter_term_modifier
+     * Sets column_data
      *
-     * @param string|null $filter_term_modifier filter_term_modifier
+     * @param \SeaTable\Client\Base\ButtonColumnFormat $column_data column_data
      *
      * @return self
      */
-    public function setFilterTermModifier($filter_term_modifier)
+    public function setColumnData($column_data)
     {
-        if (is_null($filter_term_modifier)) {
-            throw new \InvalidArgumentException('non-nullable filter_term_modifier cannot be null');
+        if (is_null($column_data)) {
+            throw new \InvalidArgumentException('non-nullable column_data cannot be null');
         }
-        $this->container['filter_term_modifier'] = $filter_term_modifier;
+        $this->container['column_data'] = $column_data;
 
         return $this;
     }

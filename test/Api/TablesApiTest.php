@@ -10,7 +10,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -89,18 +89,6 @@ class TablesApiTest extends TestCase
      *
      */
     public function testDeleteTable()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for duplicateTable
-     *
-     * Duplicate Table.
-     *
-     */
-    public function testDuplicateTable()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

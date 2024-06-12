@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -61,9 +61,9 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'is_header_locked' => 'bool',
         'summary_configs' => 'object',
-        'columns' => 'object',
+        'columns' => 'object[]',
         'rows' => 'string[]',
-        'views' => 'object',
+        'views' => 'object[]',
         'id_row_map' => 'object'
     ];
 
@@ -323,8 +323,8 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['_id']) && !preg_match("/^[a-zA-Z]{4}$/", $this->container['_id'])) {
-            $invalidProperties[] = "invalid value for '_id', must be conform to the pattern /^[a-zA-Z]{4}$/.";
+        if (!is_null($this->container['_id']) && !preg_match("/^[a-zA-Z0-9]{4}$/", $this->container['_id'])) {
+            $invalidProperties[] = "invalid value for '_id', must be conform to the pattern /^[a-zA-Z0-9]{4}$/.";
         }
 
         return $invalidProperties;
@@ -365,8 +365,8 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable _id cannot be null');
         }
 
-        if ((!preg_match("/^[a-zA-Z]{4}$/", ObjectSerializer::toString($_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$_id when calling Base., must conform to the pattern /^[a-zA-Z]{4}$/.");
+        if ((!preg_match("/^[a-zA-Z0-9]{4}$/", ObjectSerializer::toString($_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$_id when calling Base., must conform to the pattern /^[a-zA-Z0-9]{4}$/.");
         }
 
         $this->container['_id'] = $_id;
@@ -458,7 +458,7 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets columns
      *
-     * @return object|null
+     * @return object[]|null
      */
     public function getColumns()
     {
@@ -468,7 +468,7 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets columns
      *
-     * @param object|null $columns columns
+     * @param object[]|null $columns columns
      *
      * @return self
      */
@@ -512,7 +512,7 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets views
      *
-     * @return object|null
+     * @return object[]|null
      */
     public function getViews()
     {
@@ -522,7 +522,7 @@ class Base implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets views
      *
-     * @param object|null $views views
+     * @param object[]|null $views views
      *
      * @return self
      */

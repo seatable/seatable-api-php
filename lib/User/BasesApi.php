@@ -83,7 +83,7 @@ class BasesApi
             'multipart/form-data',
         ],
         'deleteBase' => [
-            'application/json',
+            'multipart/form-data',
         ],
         'deleteFolder' => [
             'application/json',
@@ -817,13 +817,13 @@ class BasesApi
      *
      * @param  string $name name (optional)
      * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\Base
      */
     public function createBase($name = null, $workspace_id = null, $icon = null, $color = null, string $contentType = self::contentTypes['createBase'][0])
     {
@@ -838,13 +838,13 @@ class BasesApi
      *
      * @param  string $name (optional)
      * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\Base, HTTP status code, HTTP response headers (array of strings)
      */
     public function createBaseWithHttpInfo($name = null, $workspace_id = null, $icon = null, $color = null, string $contentType = self::contentTypes['createBase'][0])
     {
@@ -887,11 +887,11 @@ class BasesApi
 
             switch($statusCode) {
                 case 201:
-                    if ('object' === '\SplFileObject') {
+                    if ('\SeaTable\Client\User\Base' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
+                        if ('\SeaTable\Client\User\Base' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -909,13 +909,13 @@ class BasesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'object', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\User\Base', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'object';
+            $returnType = '\SeaTable\Client\User\Base';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -948,7 +948,7 @@ class BasesApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\Base',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -965,8 +965,8 @@ class BasesApi
      *
      * @param  string $name (optional)
      * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -989,8 +989,8 @@ class BasesApi
      *
      * @param  string $name (optional)
      * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -998,7 +998,7 @@ class BasesApi
      */
     public function createBaseAsyncWithHttpInfo($name = null, $workspace_id = null, $icon = null, $color = null, string $contentType = self::contentTypes['createBase'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\Base';
         $request = $this->createBaseRequest($name, $workspace_id, $icon, $color, $contentType);
 
         return $this->client
@@ -1042,8 +1042,8 @@ class BasesApi
      *
      * @param  string $name (optional)
      * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1471,15 +1471,16 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
+     * @param  string $name name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function deleteBase($workspace_id, string $contentType = self::contentTypes['deleteBase'][0])
+    public function deleteBase($workspace_id, $name = null, string $contentType = self::contentTypes['deleteBase'][0])
     {
-        list($response) = $this->deleteBaseWithHttpInfo($workspace_id, $contentType);
+        list($response) = $this->deleteBaseWithHttpInfo($workspace_id, $name, $contentType);
         return $response;
     }
 
@@ -1489,15 +1490,16 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
+     * @param  string $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteBaseWithHttpInfo($workspace_id, string $contentType = self::contentTypes['deleteBase'][0])
+    public function deleteBaseWithHttpInfo($workspace_id, $name = null, string $contentType = self::contentTypes['deleteBase'][0])
     {
-        $request = $this->deleteBaseRequest($workspace_id, $contentType);
+        $request = $this->deleteBaseRequest($workspace_id, $name, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1613,14 +1615,15 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
+     * @param  string $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteBaseAsync($workspace_id, string $contentType = self::contentTypes['deleteBase'][0])
+    public function deleteBaseAsync($workspace_id, $name = null, string $contentType = self::contentTypes['deleteBase'][0])
     {
-        return $this->deleteBaseAsyncWithHttpInfo($workspace_id, $contentType)
+        return $this->deleteBaseAsyncWithHttpInfo($workspace_id, $name, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1634,15 +1637,16 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
+     * @param  string $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteBaseAsyncWithHttpInfo($workspace_id, string $contentType = self::contentTypes['deleteBase'][0])
+    public function deleteBaseAsyncWithHttpInfo($workspace_id, $name = null, string $contentType = self::contentTypes['deleteBase'][0])
     {
         $returnType = 'object';
-        $request = $this->deleteBaseRequest($workspace_id, $contentType);
+        $request = $this->deleteBaseRequest($workspace_id, $name, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1684,12 +1688,13 @@ class BasesApi
      * Create request for operation 'deleteBase'
      *
      * @param  int $workspace_id id of your workspace. (required)
+     * @param  string $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteBaseRequest($workspace_id, string $contentType = self::contentTypes['deleteBase'][0])
+    public function deleteBaseRequest($workspace_id, $name = null, string $contentType = self::contentTypes['deleteBase'][0])
     {
 
         // verify the required parameter 'workspace_id' is set
@@ -1702,6 +1707,7 @@ class BasesApi
             throw new \InvalidArgumentException('invalid value for "$workspace_id" when calling BasesApi.deleteBase, must be bigger than or equal to 1.');
         }
         
+
 
         $resourcePath = '/api/v2.1/workspace/{workspace_id}/dtable/';
         $formParams = [];
@@ -1721,6 +1727,10 @@ class BasesApi
             );
         }
 
+        // form params
+        if ($name !== null) {
+            $formParams['name'] = ObjectSerializer::toFormValue($name);
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -5283,8 +5293,8 @@ class BasesApi
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $name The old name of the base. Required. (optional)
      * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5305,8 +5315,8 @@ class BasesApi
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $name The old name of the base. Required. (optional)
      * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5433,8 +5443,8 @@ class BasesApi
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $name The old name of the base. Required. (optional)
      * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5458,8 +5468,8 @@ class BasesApi
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $name The old name of the base. Required. (optional)
      * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5512,8 +5522,8 @@ class BasesApi
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $name The old name of the base. Required. (optional)
      * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/post_api-v2-1-dtables) for the list of available icon colors. (optional)
+     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

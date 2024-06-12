@@ -138,7 +138,7 @@ class APITokenApi
      *
      * Create API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission permission (required)
@@ -159,7 +159,7 @@ class APITokenApi
      *
      * Create API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -286,7 +286,7 @@ class APITokenApi
      *
      * Create API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -310,7 +310,7 @@ class APITokenApi
      *
      * Create API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -363,7 +363,7 @@ class APITokenApi
     /**
      * Create request for operation 'createApiToken'
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -504,7 +504,7 @@ class APITokenApi
      *
      * Create API-Token (temporary)
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTempApiToken'] to see the possible values for this operation
      *
@@ -523,7 +523,7 @@ class APITokenApi
      *
      * Create API-Token (temporary)
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTempApiToken'] to see the possible values for this operation
      *
@@ -648,7 +648,7 @@ class APITokenApi
      *
      * Create API-Token (temporary)
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTempApiToken'] to see the possible values for this operation
      *
@@ -670,7 +670,7 @@ class APITokenApi
      *
      * Create API-Token (temporary)
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTempApiToken'] to see the possible values for this operation
      *
@@ -721,7 +721,7 @@ class APITokenApi
     /**
      * Create request for operation 'createTempApiToken'
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createTempApiToken'] to see the possible values for this operation
      *
@@ -838,7 +838,7 @@ class APITokenApi
      *
      * Delete API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
@@ -858,7 +858,7 @@ class APITokenApi
      *
      * Delete API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
@@ -984,7 +984,7 @@ class APITokenApi
      *
      * Delete API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
@@ -1007,7 +1007,7 @@ class APITokenApi
      *
      * Delete API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
@@ -1059,7 +1059,7 @@ class APITokenApi
     /**
      * Create request for operation 'deleteApiToken'
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
@@ -1192,7 +1192,7 @@ class APITokenApi
      *
      * List API-Tokens
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
      *
@@ -1211,7 +1211,7 @@ class APITokenApi
      *
      * List API-Tokens
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
      *
@@ -1336,7 +1336,7 @@ class APITokenApi
      *
      * List API-Tokens
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
      *
@@ -1358,7 +1358,7 @@ class APITokenApi
      *
      * List API-Tokens
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
      *
@@ -1409,7 +1409,7 @@ class APITokenApi
     /**
      * Create request for operation 'listApiTokens'
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
      *
@@ -1526,7 +1526,7 @@ class APITokenApi
      *
      * Update API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission permission (required)
@@ -1547,7 +1547,7 @@ class APITokenApi
      *
      * Update API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -1674,7 +1674,7 @@ class APITokenApi
      *
      * Update API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -1698,7 +1698,7 @@ class APITokenApi
      *
      * Update API-Token
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)
@@ -1751,7 +1751,7 @@ class APITokenApi
     /**
      * Create request for operation 'updateApiToken'
      *
-     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/get-metadata) can be used. (required)
+     * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
      * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
      * @param  \SeaTable\Client\Auth\AuthenticationPermission $permission (required)

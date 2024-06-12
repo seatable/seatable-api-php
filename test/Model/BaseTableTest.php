@@ -1,6 +1,6 @@
 <?php
 /**
- * DeleteRowLinkTest
+ * BaseTableTest
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * DeleteRowLinkTest Class Doc Comment
+ * BaseTableTest Class Doc Comment
  *
  * @category    Class
- * @description DeleteRowLink
+ * @description BaseTable
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class DeleteRowLinkTest extends TestCase
+class BaseTableTest extends TestCase
 {
 
     /**
@@ -70,54 +70,108 @@ class DeleteRowLinkTest extends TestCase
     }
 
     /**
-     * Test "DeleteRowLink"
+     * Test "BaseTable"
      */
-    public function testDeleteRowLink()
+    public function testBaseTable()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "table_name"
+     * Test attribute "id"
      */
-    public function testPropertyTableName()
+    public function testPropertyId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "other_table_name"
+     * Test attribute "workspace_id"
      */
-    public function testPropertyOtherTableName()
+    public function testPropertyWorkspaceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "link_id"
+     * Test attribute "uuid"
      */
-    public function testPropertyLinkId()
+    public function testPropertyUuid()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "table_row_id"
+     * Test attribute "name"
      */
-    public function testPropertyTableRowId()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "other_table_row_id"
+     * Test attribute "created_at"
      */
-    public function testPropertyOtherTableRowId()
+    public function testPropertyCreatedAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "updated_at"
+     */
+    public function testPropertyUpdatedAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "color"
+     */
+    public function testPropertyColor()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "text_color"
+     */
+    public function testPropertyTextColor()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "icon"
+     */
+    public function testPropertyIcon()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "is_encrypted"
+     */
+    public function testPropertyIsEncrypted()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "in_storage"
+     */
+    public function testPropertyInStorage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

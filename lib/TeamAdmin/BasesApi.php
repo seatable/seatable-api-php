@@ -144,7 +144,7 @@ class BasesApi
      *
      * Clear Team Trash Bin
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['clearTeamTrashBin'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -162,7 +162,7 @@ class BasesApi
      *
      * Clear Team Trash Bin
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['clearTeamTrashBin'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -286,7 +286,7 @@ class BasesApi
      *
      * Clear Team Trash Bin
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['clearTeamTrashBin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -307,7 +307,7 @@ class BasesApi
      *
      * Clear Team Trash Bin
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['clearTeamTrashBin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -357,7 +357,7 @@ class BasesApi
     /**
      * Create request for operation 'clearTeamTrashBin'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['clearTeamTrashBin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -458,7 +458,7 @@ class BasesApi
      *
      * Delete Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
@@ -477,7 +477,7 @@ class BasesApi
      *
      * Delete Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
@@ -602,7 +602,7 @@ class BasesApi
      *
      * Delete Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
@@ -624,7 +624,7 @@ class BasesApi
      *
      * Delete Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
@@ -675,7 +675,7 @@ class BasesApi
     /**
      * Create request for operation 'deleteBase'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
@@ -792,7 +792,7 @@ class BasesApi
      *
      * List Base Sharings
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseSharings'] to see the possible values for this operation
      *
@@ -810,7 +810,7 @@ class BasesApi
      *
      * List Base Sharings
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseSharings'] to see the possible values for this operation
      *
@@ -871,7 +871,7 @@ class BasesApi
      *
      * List Base Sharings
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseSharings'] to see the possible values for this operation
      *
@@ -893,7 +893,7 @@ class BasesApi
      *
      * List Base Sharings
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseSharings'] to see the possible values for this operation
      *
@@ -931,7 +931,7 @@ class BasesApi
     /**
      * Create request for operation 'listBaseSharings'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseSharings'] to see the possible values for this operation
      *
@@ -1051,7 +1051,7 @@ class BasesApi
      *
      * List Bases (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBases'] to see the possible values for this operation
@@ -1071,7 +1071,7 @@ class BasesApi
      *
      * List Bases (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBases'] to see the possible values for this operation
@@ -1197,7 +1197,7 @@ class BasesApi
      *
      * List Bases (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBases'] to see the possible values for this operation
@@ -1220,7 +1220,7 @@ class BasesApi
      *
      * List Bases (Team)
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBases'] to see the possible values for this operation
@@ -1272,7 +1272,7 @@ class BasesApi
     /**
      * Create request for operation 'listBases'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBases'] to see the possible values for this operation
@@ -1401,7 +1401,7 @@ class BasesApi
      *
      * List Trash Bases
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashBases'] to see the possible values for this operation
@@ -1421,7 +1421,7 @@ class BasesApi
      *
      * List Trash Bases
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashBases'] to see the possible values for this operation
@@ -1547,7 +1547,7 @@ class BasesApi
      *
      * List Trash Bases
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashBases'] to see the possible values for this operation
@@ -1570,7 +1570,7 @@ class BasesApi
      *
      * List Trash Bases
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashBases'] to see the possible values for this operation
@@ -1622,7 +1622,7 @@ class BasesApi
     /**
      * Create request for operation 'listTrashBases'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashBases'] to see the possible values for this operation
@@ -1751,7 +1751,7 @@ class BasesApi
      *
      * Restore Base from Trash
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreBaseFromTrash'] to see the possible values for this operation
      *
@@ -1770,7 +1770,7 @@ class BasesApi
      *
      * Restore Base from Trash
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreBaseFromTrash'] to see the possible values for this operation
      *
@@ -1895,7 +1895,7 @@ class BasesApi
      *
      * Restore Base from Trash
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreBaseFromTrash'] to see the possible values for this operation
      *
@@ -1917,7 +1917,7 @@ class BasesApi
      *
      * Restore Base from Trash
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreBaseFromTrash'] to see the possible values for this operation
      *
@@ -1968,7 +1968,7 @@ class BasesApi
     /**
      * Create request for operation 'restoreBaseFromTrash'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $base_id The ID of the base. Don&#39;t mix this up with the base_uuid! (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreBaseFromTrash'] to see the possible values for this operation
      *
@@ -2085,7 +2085,7 @@ class BasesApi
      *
      * Search Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $query Exact name or a part of the name of the base, case insensitive. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBase'] to see the possible values for this operation
      *
@@ -2104,7 +2104,7 @@ class BasesApi
      *
      * Search Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $query Exact name or a part of the name of the base, case insensitive. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBase'] to see the possible values for this operation
      *
@@ -2229,7 +2229,7 @@ class BasesApi
      *
      * Search Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $query Exact name or a part of the name of the base, case insensitive. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBase'] to see the possible values for this operation
      *
@@ -2251,7 +2251,7 @@ class BasesApi
      *
      * Search Base
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $query Exact name or a part of the name of the base, case insensitive. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBase'] to see the possible values for this operation
      *
@@ -2302,7 +2302,7 @@ class BasesApi
     /**
      * Create request for operation 'searchBase'
      *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $query Exact name or a part of the name of the base, case insensitive. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBase'] to see the possible values for this operation
      *

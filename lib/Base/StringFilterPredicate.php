@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -43,17 +43,17 @@ class StringFilterPredicate
      */
     public const CONTAINS = 'contains';
 
-    public const DOES_NOT_CONTAIN = 'does not contain';
+    public const DOES_NOT_CONTAIN = 'does_not_contain';
 
     public const IS = 'is';
 
-    public const IS_NOT = 'is not';
+    public const IS_NOT = 'is_not';
 
-    public const IS_EMPTY = 'is empty';
+    public const IS_EMPTY = 'is_empty';
 
-    public const IS_NOT_EMPTY = 'is not empty';
+    public const IS_NOT_EMPTY = 'is_not_empty';
 
-    public const IS_CURRENT_USERS_ID = 'is current user's ID';
+    public const IS_CURRENT_USER_ID = 'is_current_user_ID';
 
     /**
      * Gets allowable values of the enum
@@ -68,7 +68,7 @@ class StringFilterPredicate
             self::IS_NOT,
             self::IS_EMPTY,
             self::IS_NOT_EMPTY,
-            self::IS_CURRENT_USERS_ID
+            self::IS_CURRENT_USER_ID
         ];
     }
 }

@@ -4,15 +4,15 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**addSelectOption()**](ColumnsApi.md#addSelectOption) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/column-options/ | Add Single/Multiple Select Options |
-| [**appendColumns()**](ColumnsApi.md#appendColumns) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/batch-append-columns/ | Append Columns |
-| [**deleteColumn()**](ColumnsApi.md#deleteColumn) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/columns/ | Delete Column |
-| [**deleteSelectOption()**](ColumnsApi.md#deleteSelectOption) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/column-options/ | Delete Single/Multiple Select Options |
-| [**insertColumn()**](ColumnsApi.md#insertColumn) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/columns/ | Insert Column |
-| [**listColumns()**](ColumnsApi.md#listColumns) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/columns/ | List Columns |
-| [**updateColumn()**](ColumnsApi.md#updateColumn) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/columns/ | Update Column |
-| [**updateColumnCascade()**](ColumnsApi.md#updateColumnCascade) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/column-cascade-settings/ | Update Column Cascade |
-| [**updateSelectOption()**](ColumnsApi.md#updateSelectOption) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/column-options/ | Update Single/Multiple Select Options |
+| [**addSelectOption()**](ColumnsApi.md#addSelectOption) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/column-options/ | Add Single/Multiple Select Options |
+| [**appendColumns()**](ColumnsApi.md#appendColumns) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/batch-append-columns/ | Append Columns |
+| [**deleteColumn()**](ColumnsApi.md#deleteColumn) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/columns/ | Delete Column |
+| [**deleteSelectOption()**](ColumnsApi.md#deleteSelectOption) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/column-options/ | Delete Single/Multiple Select Options |
+| [**insertColumn()**](ColumnsApi.md#insertColumn) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/columns/ | Insert Column |
+| [**listColumns()**](ColumnsApi.md#listColumns) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/columns/ | List Columns |
+| [**updateColumn()**](ColumnsApi.md#updateColumn) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/columns/ | Update Column |
+| [**updateColumnCascade()**](ColumnsApi.md#updateColumnCascade) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/column-cascade-settings/ | Update Column Cascade Settings |
+| [**updateSelectOption()**](ColumnsApi.md#updateSelectOption) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/column-options/ | Update Single/Multiple Select Options |
 
 
 ## `addSelectOption()`
@@ -75,7 +75,7 @@ appendColumns($base_uuid, $append_columns_request): object
 
 Append Columns
 
-Use this request to append multiple columns to your table at once. As for the request body, refer to the previous call, [Insert Column](/reference/insert-column), for a detailed list of column formats. These requested and optional params can be used in the request body: `table_name` is the name of your table, required. `columns` is a list of columns you'd like to append, in each object of which: *   `column_name` is the name of your new column, required; *   `column_type` is the type of your new column, required; *   `data` is the format setting of a special column, required in case. For details, refer to the call [Insert Column](/reference/insert-column).
+Use this request to append multiple columns to your table at once. As for the request body, refer to the previous call, [Insert Column](/reference/insertcolumn-1), for a detailed list of column formats. These requested and optional params can be used in the request body: `table_name` is the name of your table, required. `columns` is a list of columns you'd like to append, in each object of which: *   `column_name` is the name of your new column, required; *   `column_type` is the type of your new column, required; *   `column_data` is the format setting of a special column, required in case. For details, refer to the call [Insert Column](/reference/insertcolumn-1). Please note that you can't append `formula`, `link` or `link-formula` columns using this endpoint. Use the [Insert Column](https://api.seatable.io/reference/insertcolumn-1) endpoint instead.
 
 ### Example
 
@@ -247,7 +247,7 @@ $apiInstance = new SeaTable\Client\Base\ColumnsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$insert_column_request = new \SeaTable\Client\Base\InsertColumnRequest(); // \SeaTable\Client\Base\InsertColumnRequest | Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns).
+$insert_column_request = new \SeaTable\Client\Base\InsertColumnRequest(); // \SeaTable\Client\Base\InsertColumnRequest | Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/appendcolumns-1).
 
 try {
     $result = $apiInstance->insertColumn($base_uuid, $insert_column_request);
@@ -262,7 +262,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **insert_column_request** | [**\SeaTable\Client\Base\InsertColumnRequest**](../Model/InsertColumnRequest.md)| Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/append-columns). | [optional] |
+| **insert_column_request** | [**\SeaTable\Client\Base\InsertColumnRequest**](../Model/InsertColumnRequest.md)| Choose which column type you want to add. If you want to add multiple columns, use the request [Append Columns](/reference/appendcolumns-1). | [optional] |
 
 ### Return type
 
@@ -298,9 +298,9 @@ $apiInstance = new SeaTable\Client\Base\ColumnsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$table_name = Table1; // string | The name of the table.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$view_name = Default View; // string | The name of the view.
+$view_name = Default View; // string | The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
 
 try {
     $result = $apiInstance->listColumns($table_name, $base_uuid, $view_name);
@@ -314,9 +314,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **table_name** | **string**| The name of the table. | |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **view_name** | **string**| The name of the view. | [optional] |
+| **view_name** | **string**| The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. | [optional] |
 
 ### Return type
 
@@ -337,7 +337,7 @@ updateColumn($base_uuid, $update_column): object
 
 Update Column
 
-Allows various changes of the column: name, column_type, freeze/unfreeze, resize, etc... `op_type` is required. The following options are available: - rename_column - modify_column_type - resize_column - move_column - freeze_column (eventuell weglassen) `column` is the name or `key` of the target column. `new_column_type` is the new type of the target column. For a list of column type params refer to the SeaTable API Parameter. Get more information about columns and column types in [Models](https://api.seatable.io/reference/models).
+Allows various changes of the column: name, column_type, freeze/unfreeze, resize, etc... `op_type` is required. The following options are available: - rename_column - modify_column_type - resize_column - move_column - freeze_column (eventuell weglassen) `column` is the name or `key` of the target column. `new_column_type` is the new type of the target column. For a list of column type params refer to the SeaTable API Parameter. For further information on column types, check the page [Models](https://api.seatable.io/reference/models).
 
 ### Example
 
@@ -387,9 +387,9 @@ BaseTokenAuth
 updateColumnCascade($base_uuid, $body): object
 ```
 
-Update Column Cascade
+Update Column Cascade Settings
 
-After you have added at least two single select columns and have added relevant options, you can start to set the cascade relationships between these single select columns. ## What are cascade settings? With cascade settings for the single select column, you can set up a \"parent\" single select column and a \"child\" single select column, so that when you select one option in the parent, the child column will only show you the options belonging to that parent.  For example, if the parent column is \"continent\" and you've selected \"Europe\", then the child column will only show you the countries in Europe. Of course, this doesn't happen automatically - you have to set up the cascade relationship with this API request first.  ![](https://seatable.io/wp-content/uploads/2021/11/cascade.png)  ## What are the preconditions? This API request has the following preconditions:  - The table already exists (This API request cannot create a new table); - The parent and child column already exist (same as above); - The parent and child column already have options (same as above).  ## How to set up the cascade relationship? It's so easy: just like demonstrated in the example request, define the following parameters/objects and you'll get `success`:  - `table_name`: The name of the table. - `parent_column`: The 1st level of single select column's name or `key`. - `child_column`: The 2nd level of single select column's name or `key`. - `cascade_settings`: In this object, list all the child options for each parent option, like demonstrated in the example request.
+After you have added at least two single select columns and have added relevant options, you can start to set the cascade relationships between these single select columns.  ## What are cascade settings? With cascade settings for the single select column, you can set up a \"parent\" single select column and a \"child\" single select column, so that when you select one option in the parent, the child column will only show you the options belonging to that parent.  For example, if the parent column is \"continent\" and you've selected \"Europe\", then the child column will only show you the countries in Europe. Of course, this doesn't happen automatically - you have to set up the cascade relationship with this API request first.  ![](https://seatable.io/wp-content/uploads/2021/11/cascade.png)  ## What are the preconditions? This API request has the following preconditions:  - The table already exists (This API request cannot create a new table); - The parent and child column already exist (same as above); - The parent and child column already have options (same as above).  ## How to set up the cascade relationship? It's so easy: just like demonstrated in the example request, define the following parameters/objects and you'll get `success`:  - `table_name`: The name of the table. - `parent_column`: The 1st level of single select column's name or `key`. - `child_column`: The 2nd level of single select column's name or `key`. - `cascade_settings`: In this object, list all the child options for each parent option, like demonstrated in the example request.
 
 ### Example
 

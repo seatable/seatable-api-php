@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -294,8 +294,8 @@ class UpdateRow implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['row_id'] === null) {
             $invalidProperties[] = "'row_id' can't be null";
         }
-        if (!preg_match("/^[a-zA-Z0-9\\-]{22}$/", $this->container['row_id'])) {
-            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[a-zA-Z0-9\\-]{22}$/.";
+        if (!preg_match("/^[a-zA-Z0-9\\-\\_]{22}$/", $this->container['row_id'])) {
+            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[a-zA-Z0-9\\-\\_]{22}$/.";
         }
 
         if ($this->container['row'] === null) {
@@ -329,7 +329,7 @@ class UpdateRow implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets table_name
      *
-     * @param string $table_name The name of the table.
+     * @param string $table_name The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly.
      *
      * @return self
      */
@@ -366,8 +366,8 @@ class UpdateRow implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable row_id cannot be null');
         }
 
-        if ((!preg_match("/^[a-zA-Z0-9\\-]{22}$/", ObjectSerializer::toString($row_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$row_id when calling UpdateRow., must conform to the pattern /^[a-zA-Z0-9\\-]{22}$/.");
+        if ((!preg_match("/^[a-zA-Z0-9\\-\\_]{22}$/", ObjectSerializer::toString($row_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$row_id when calling UpdateRow., must conform to the pattern /^[a-zA-Z0-9\\-\\_]{22}$/.");
         }
 
         $this->container['row_id'] = $row_id;

@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -287,8 +287,11 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['row_id']) && !preg_match("/^[a-zA-Z0-9\\-]{22}$/", $this->container['row_id'])) {
-            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[a-zA-Z0-9\\-]{22}$/.";
+        if ($this->container['row_id'] === null) {
+            $invalidProperties[] = "'row_id' can't be null";
+        }
+        if (!preg_match("/^[a-zA-Z0-9\\-\\_]{22}$/", $this->container['row_id'])) {
+            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[a-zA-Z0-9\\-\\_]{22}$/.";
         }
 
         return $invalidProperties;
@@ -309,7 +312,7 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets row_id
      *
-     * @return string|null
+     * @return string
      */
     public function getRowId()
     {
@@ -319,7 +322,7 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets row_id
      *
-     * @param string|null $row_id The id of the row. The id of a row is unique inside a base and is often used to identify one specific row.
+     * @param string $row_id The id of the row. The id of a row is unique inside a base and is often used to identify one specific row.
      *
      * @return self
      */
@@ -329,8 +332,8 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable row_id cannot be null');
         }
 
-        if ((!preg_match("/^[a-zA-Z0-9\\-]{22}$/", ObjectSerializer::toString($row_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$row_id when calling ListRowLinksRowsInner., must conform to the pattern /^[a-zA-Z0-9\\-]{22}$/.");
+        if ((!preg_match("/^[a-zA-Z0-9\\-\\_]{22}$/", ObjectSerializer::toString($row_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$row_id when calling ListRowLinksRowsInner., must conform to the pattern /^[a-zA-Z0-9\\-\\_]{22}$/.");
         }
 
         $this->container['row_id'] = $row_id;
@@ -351,7 +354,7 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets offset
      *
-     * @param int|null $offset offset is the beginning number of your query. If your record is linked to multiple records, use e.g. 0 to start quering from the 1st element or e.g. 5 to start querying from the 6th element, etc. Attention: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime).
+     * @param int|null $offset Offset is the beginning number of your query. If your record is linked to multiple records, use e.g. 0 to start quering from the 1st element or e.g. 5 to start querying from the 6th element, etc. Attention: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime). Default is 0.
      *
      * @return self
      */
@@ -378,7 +381,7 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets limit
      *
-     * @param int|null $limit limit lets you to set a limit to the number of records returned. Use e.g. 10 to return no more than 10 records.
+     * @param int|null $limit Specify the maximum number of records to be returned. For example, use 20 to retrieve more than the default 10 records.
      *
      * @return self
      */

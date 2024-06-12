@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateRowLinks
+ * MoveRowsToNormalBackendRequest
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * CreateRowLinks Class Doc Comment
+ * MoveRowsToNormalBackendRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
+class MoveRowsToNormalBackendRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'create_row_links';
+    protected static $openAPIModelName = 'moveRowsToNormalBackend_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'table_name' => 'string',
-        'other_table_name' => 'string',
-        'link_id' => 'string',
-        'row_id' => 'string',
-        'other_rows_ids' => 'string[]'
+        'table_id' => 'string',
+        'row_ids' => 'string[]'
     ];
 
     /**
@@ -71,11 +68,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'table_name' => null,
-        'other_table_name' => null,
-        'link_id' => null,
-        'row_id' => null,
-        'other_rows_ids' => null
+        'table_id' => null,
+        'row_ids' => null
     ];
 
     /**
@@ -84,11 +78,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'table_name' => false,
-        'other_table_name' => false,
-        'link_id' => false,
-        'row_id' => false,
-        'other_rows_ids' => false
+        'table_id' => false,
+        'row_ids' => false
     ];
 
     /**
@@ -177,11 +168,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'table_name' => 'table_name',
-        'other_table_name' => 'other_table_name',
-        'link_id' => 'link_id',
-        'row_id' => 'row_id',
-        'other_rows_ids' => 'other_rows_ids'
+        'table_id' => 'table_id',
+        'row_ids' => 'row_ids'
     ];
 
     /**
@@ -190,11 +178,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'table_name' => 'setTableName',
-        'other_table_name' => 'setOtherTableName',
-        'link_id' => 'setLinkId',
-        'row_id' => 'setRowId',
-        'other_rows_ids' => 'setOtherRowsIds'
+        'table_id' => 'setTableId',
+        'row_ids' => 'setRowIds'
     ];
 
     /**
@@ -203,11 +188,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'table_name' => 'getTableName',
-        'other_table_name' => 'getOtherTableName',
-        'link_id' => 'getLinkId',
-        'row_id' => 'getRowId',
-        'other_rows_ids' => 'getOtherRowsIds'
+        'table_id' => 'getTableId',
+        'row_ids' => 'getRowIds'
     ];
 
     /**
@@ -267,11 +249,8 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('table_name', $data ?? [], null);
-        $this->setIfExists('other_table_name', $data ?? [], null);
-        $this->setIfExists('link_id', $data ?? [], null);
-        $this->setIfExists('row_id', $data ?? [], null);
-        $this->setIfExists('other_rows_ids', $data ?? [], null);
+        $this->setIfExists('table_id', $data ?? [], null);
+        $this->setIfExists('row_ids', $data ?? [], null);
     }
 
     /**
@@ -301,30 +280,6 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['table_name'] === null) {
-            $invalidProperties[] = "'table_name' can't be null";
-        }
-        if ($this->container['other_table_name'] === null) {
-            $invalidProperties[] = "'other_table_name' can't be null";
-        }
-        if ($this->container['link_id'] === null) {
-            $invalidProperties[] = "'link_id' can't be null";
-        }
-        if ((mb_strlen($this->container['link_id']) > 4)) {
-            $invalidProperties[] = "invalid value for 'link_id', the character length must be smaller than or equal to 4.";
-        }
-
-        if ((mb_strlen($this->container['link_id']) < 4)) {
-            $invalidProperties[] = "invalid value for 'link_id', the character length must be bigger than or equal to 4.";
-        }
-
-        if ($this->container['row_id'] === null) {
-            $invalidProperties[] = "'row_id' can't be null";
-        }
-        if (!preg_match("/^[a-zA-Z0-9\\-]{22}$/", $this->container['row_id'])) {
-            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[a-zA-Z0-9\\-]{22}$/.";
-        }
-
         return $invalidProperties;
     }
 
@@ -341,148 +296,55 @@ class CreateRowLinks implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets table_name
+     * Gets table_id
      *
-     * @return string
+     * @return string|null
      */
-    public function getTableName()
+    public function getTableId()
     {
-        return $this->container['table_name'];
+        return $this->container['table_id'];
     }
 
     /**
-     * Sets table_name
+     * Sets table_id
      *
-     * @param string $table_name The name of the table.
+     * @param string|null $table_id The unique identifier of the table.
      *
      * @return self
      */
-    public function setTableName($table_name)
+    public function setTableId($table_id)
     {
-        if (is_null($table_name)) {
-            throw new \InvalidArgumentException('non-nullable table_name cannot be null');
+        if (is_null($table_id)) {
+            throw new \InvalidArgumentException('non-nullable table_id cannot be null');
         }
-        $this->container['table_name'] = $table_name;
+        $this->container['table_id'] = $table_id;
 
         return $this;
     }
 
     /**
-     * Gets other_table_name
-     *
-     * @return string
-     */
-    public function getOtherTableName()
-    {
-        return $this->container['other_table_name'];
-    }
-
-    /**
-     * Sets other_table_name
-     *
-     * @param string $other_table_name The name of the table.
-     *
-     * @return self
-     */
-    public function setOtherTableName($other_table_name)
-    {
-        if (is_null($other_table_name)) {
-            throw new \InvalidArgumentException('non-nullable other_table_name cannot be null');
-        }
-        $this->container['other_table_name'] = $other_table_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets link_id
-     *
-     * @return string
-     */
-    public function getLinkId()
-    {
-        return $this->container['link_id'];
-    }
-
-    /**
-     * Sets link_id
-     *
-     * @param string $link_id Every *link column* has a `key` and `link_id` in the column object. Use [Get Metadata](/reference/get-metadata) or [Get Base Info](/reference/get-base-info) to get this `link_id`. Don't use the `key` of the link column.
-     *
-     * @return self
-     */
-    public function setLinkId($link_id)
-    {
-        if (is_null($link_id)) {
-            throw new \InvalidArgumentException('non-nullable link_id cannot be null');
-        }
-        if ((mb_strlen($link_id) > 4)) {
-            throw new \InvalidArgumentException('invalid length for $link_id when calling CreateRowLinks., must be smaller than or equal to 4.');
-        }
-        if ((mb_strlen($link_id) < 4)) {
-            throw new \InvalidArgumentException('invalid length for $link_id when calling CreateRowLinks., must be bigger than or equal to 4.');
-        }
-
-        $this->container['link_id'] = $link_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets row_id
-     *
-     * @return string
-     */
-    public function getRowId()
-    {
-        return $this->container['row_id'];
-    }
-
-    /**
-     * Sets row_id
-     *
-     * @param string $row_id The id of the row. The id of a row is unique inside a base and is often used to identify one specific row.
-     *
-     * @return self
-     */
-    public function setRowId($row_id)
-    {
-        if (is_null($row_id)) {
-            throw new \InvalidArgumentException('non-nullable row_id cannot be null');
-        }
-
-        if ((!preg_match("/^[a-zA-Z0-9\\-]{22}$/", ObjectSerializer::toString($row_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$row_id when calling CreateRowLinks., must conform to the pattern /^[a-zA-Z0-9\\-]{22}$/.");
-        }
-
-        $this->container['row_id'] = $row_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets other_rows_ids
+     * Gets row_ids
      *
      * @return string[]|null
      */
-    public function getOtherRowsIds()
+    public function getRowIds()
     {
-        return $this->container['other_rows_ids'];
+        return $this->container['row_ids'];
     }
 
     /**
-     * Sets other_rows_ids
+     * Sets row_ids
      *
-     * @param string[]|null $other_rows_ids ID of the rows
+     * @param string[]|null $row_ids An array containing the row_ids of the rows you want to move from big data backend to normal.
      *
      * @return self
      */
-    public function setOtherRowsIds($other_rows_ids)
+    public function setRowIds($row_ids)
     {
-        if (is_null($other_rows_ids)) {
-            throw new \InvalidArgumentException('non-nullable other_rows_ids cannot be null');
+        if (is_null($row_ids)) {
+            throw new \InvalidArgumentException('non-nullable row_ids cannot be null');
         }
-        $this->container['other_rows_ids'] = $other_rows_ids;
+        $this->container['row_ids'] = $row_ids;
 
         return $this;
     }

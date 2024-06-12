@@ -74,7 +74,7 @@ class TeamsApi
             'application/json',
         ],
         'addTeamUser' => [
-            'application/json',
+            'multipart/form-data',
         ],
         'deleteTeam' => [
             'application/json',
@@ -466,17 +466,20 @@ class TeamsApi
      *
      * Add Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request add_team_user_request (optional)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $email Login email of the user. (required)
+     * @param  string $password Login password of the user. (required)
+     * @param  string $name Full name of the user. (optional)
+     * @param  bool $with_workspace If a workspace should be automatically created for the user. Optional. &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function addTeamUser($org_id, $add_team_user_request = null, string $contentType = self::contentTypes['addTeamUser'][0])
+    public function addTeamUser($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
-        list($response) = $this->addTeamUserWithHttpInfo($org_id, $add_team_user_request, $contentType);
+        list($response) = $this->addTeamUserWithHttpInfo($org_id, $email, $password, $name, $with_workspace, $contentType);
         return $response;
     }
 
@@ -485,17 +488,20 @@ class TeamsApi
      *
      * Add Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $email Login email of the user. (required)
+     * @param  string $password Login password of the user. (required)
+     * @param  string $name Full name of the user. (optional)
+     * @param  bool $with_workspace If a workspace should be automatically created for the user. Optional. &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function addTeamUserWithHttpInfo($org_id, $add_team_user_request = null, string $contentType = self::contentTypes['addTeamUser'][0])
+    public function addTeamUserWithHttpInfo($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
-        $request = $this->addTeamUserRequest($org_id, $add_team_user_request, $contentType);
+        $request = $this->addTeamUserRequest($org_id, $email, $password, $name, $with_workspace, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -610,16 +616,19 @@ class TeamsApi
      *
      * Add Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $email Login email of the user. (required)
+     * @param  string $password Login password of the user. (required)
+     * @param  string $name Full name of the user. (optional)
+     * @param  bool $with_workspace If a workspace should be automatically created for the user. Optional. &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addTeamUserAsync($org_id, $add_team_user_request = null, string $contentType = self::contentTypes['addTeamUser'][0])
+    public function addTeamUserAsync($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
-        return $this->addTeamUserAsyncWithHttpInfo($org_id, $add_team_user_request, $contentType)
+        return $this->addTeamUserAsyncWithHttpInfo($org_id, $email, $password, $name, $with_workspace, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -632,17 +641,20 @@ class TeamsApi
      *
      * Add Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $email Login email of the user. (required)
+     * @param  string $password Login password of the user. (required)
+     * @param  string $name Full name of the user. (optional)
+     * @param  bool $with_workspace If a workspace should be automatically created for the user. Optional. &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addTeamUserAsyncWithHttpInfo($org_id, $add_team_user_request = null, string $contentType = self::contentTypes['addTeamUser'][0])
+    public function addTeamUserAsyncWithHttpInfo($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
         $returnType = 'object';
-        $request = $this->addTeamUserRequest($org_id, $add_team_user_request, $contentType);
+        $request = $this->addTeamUserRequest($org_id, $email, $password, $name, $with_workspace, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -683,14 +695,17 @@ class TeamsApi
     /**
      * Create request for operation 'addTeamUser'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
-     * @param  \SeaTable\Client\SysAdmin\AddTeamUserRequest $add_team_user_request (optional)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $email Login email of the user. (required)
+     * @param  string $password Login password of the user. (required)
+     * @param  string $name Full name of the user. (optional)
+     * @param  bool $with_workspace If a workspace should be automatically created for the user. Optional. &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addTeamUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addTeamUserRequest($org_id, $add_team_user_request = null, string $contentType = self::contentTypes['addTeamUser'][0])
+    public function addTeamUserRequest($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
 
         // verify the required parameter 'org_id' is set
@@ -703,6 +718,21 @@ class TeamsApi
             throw new \InvalidArgumentException('invalid value for "$org_id" when calling TeamsApi.addTeamUser, must be bigger than or equal to 1.');
         }
         
+        // verify the required parameter 'email' is set
+        if ($email === null || (is_array($email) && count($email) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $email when calling addTeamUser'
+            );
+        }
+
+        // verify the required parameter 'password' is set
+        if ($password === null || (is_array($password) && count($password) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $password when calling addTeamUser'
+            );
+        }
+
+
 
 
         $resourcePath = '/api/v2.1/admin/organizations/{org_id}/users/';
@@ -723,6 +753,22 @@ class TeamsApi
             );
         }
 
+        // form params
+        if ($email !== null) {
+            $formParams['email'] = ObjectSerializer::toFormValue($email);
+        }
+        // form params
+        if ($password !== null) {
+            $formParams['password'] = ObjectSerializer::toFormValue($password);
+        }
+        // form params
+        if ($name !== null) {
+            $formParams['name'] = ObjectSerializer::toFormValue($name);
+        }
+        // form params
+        if ($with_workspace !== null) {
+            $formParams['with_workspace'] = ObjectSerializer::toFormValue($with_workspace);
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -731,14 +777,7 @@ class TeamsApi
         );
 
         // for model (json/xml)
-        if (isset($add_team_user_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($add_team_user_request));
-            } else {
-                $httpBody = $add_team_user_request;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -793,7 +832,7 @@ class TeamsApi
      *
      * Delete Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -811,7 +850,7 @@ class TeamsApi
      *
      * Delete Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -935,7 +974,7 @@ class TeamsApi
      *
      * Delete Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -956,7 +995,7 @@ class TeamsApi
      *
      * Delete Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1006,7 +1045,7 @@ class TeamsApi
     /**
      * Create request for operation 'deleteTeam'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1107,7 +1146,7 @@ class TeamsApi
      *
      * Delete Group
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id group_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
@@ -1126,7 +1165,7 @@ class TeamsApi
      *
      * Delete Group
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
@@ -1251,7 +1290,7 @@ class TeamsApi
      *
      * Delete Group
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
@@ -1273,7 +1312,7 @@ class TeamsApi
      *
      * Delete Group
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
@@ -1324,7 +1363,7 @@ class TeamsApi
     /**
      * Create request for operation 'deleteTeamGroup'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
@@ -1444,7 +1483,7 @@ class TeamsApi
      *
      * Delete Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamUser'] to see the possible values for this operation
      *
@@ -1463,7 +1502,7 @@ class TeamsApi
      *
      * Delete Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamUser'] to see the possible values for this operation
      *
@@ -1588,7 +1627,7 @@ class TeamsApi
      *
      * Delete Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamUser'] to see the possible values for this operation
      *
@@ -1610,7 +1649,7 @@ class TeamsApi
      *
      * Delete Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamUser'] to see the possible values for this operation
      *
@@ -1661,7 +1700,7 @@ class TeamsApi
     /**
      * Create request for operation 'deleteTeamUser'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamUser'] to see the possible values for this operation
      *
@@ -2009,7 +2048,7 @@ class TeamsApi
      *
      * List Team Bases
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamBases'] to see the possible values for this operation
@@ -2029,7 +2068,7 @@ class TeamsApi
      *
      * List Team Bases
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamBases'] to see the possible values for this operation
@@ -2155,7 +2194,7 @@ class TeamsApi
      *
      * List Team Bases
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamBases'] to see the possible values for this operation
@@ -2178,7 +2217,7 @@ class TeamsApi
      *
      * List Team Bases
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamBases'] to see the possible values for this operation
@@ -2230,7 +2269,7 @@ class TeamsApi
     /**
      * Create request for operation 'listTeamBases'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamBases'] to see the possible values for this operation
@@ -2359,7 +2398,7 @@ class TeamsApi
      *
      * List Team Groups
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamGroups'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2377,7 +2416,7 @@ class TeamsApi
      *
      * List Team Groups
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamGroups'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2501,7 +2540,7 @@ class TeamsApi
      *
      * List Team Groups
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2522,7 +2561,7 @@ class TeamsApi
      *
      * List Team Groups
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2572,7 +2611,7 @@ class TeamsApi
     /**
      * Create request for operation 'listTeamGroups'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2673,7 +2712,7 @@ class TeamsApi
      *
      * List Team Users
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2691,7 +2730,7 @@ class TeamsApi
      *
      * List Team Users
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2815,7 +2854,7 @@ class TeamsApi
      *
      * List Team Users
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2836,7 +2875,7 @@ class TeamsApi
      *
      * List Team Users
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2886,7 +2925,7 @@ class TeamsApi
     /**
      * Create request for operation 'listTeamUsers'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3329,7 +3368,7 @@ class TeamsApi
      *
      * Search Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3347,7 +3386,7 @@ class TeamsApi
      *
      * Search Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchTeam'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3471,7 +3510,7 @@ class TeamsApi
      *
      * Search Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3492,7 +3531,7 @@ class TeamsApi
      *
      * Search Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3542,7 +3581,7 @@ class TeamsApi
     /**
      * Create request for operation 'searchTeam'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchTeam'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3643,7 +3682,7 @@ class TeamsApi
      *
      * Update Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
@@ -3662,7 +3701,7 @@ class TeamsApi
      *
      * Update Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
@@ -3787,7 +3826,7 @@ class TeamsApi
      *
      * Update Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
@@ -3809,7 +3848,7 @@ class TeamsApi
      *
      * Update Team
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
@@ -3860,7 +3899,7 @@ class TeamsApi
     /**
      * Create request for operation 'updateTeam'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamRequest $update_team_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeam'] to see the possible values for this operation
      *
@@ -3970,7 +4009,7 @@ class TeamsApi
      *
      * Update Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
@@ -3990,7 +4029,7 @@ class TeamsApi
      *
      * Update Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
@@ -4116,7 +4155,7 @@ class TeamsApi
      *
      * Update Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
@@ -4139,7 +4178,7 @@ class TeamsApi
      *
      * Update Team User
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation
@@ -4191,7 +4230,7 @@ class TeamsApi
     /**
      * Create request for operation 'updateTeamUser'
      *
-     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. (required)
+     * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\SysAdmin\UpdateTeamUserRequest $update_team_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateTeamUser'] to see the possible values for this operation

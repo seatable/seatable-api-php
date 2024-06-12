@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * BaseTest Class Doc Comment
  *
  * @category    Class
- * @description base (database) in SeaTable
+ * @description Base
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -79,72 +79,9 @@ class BaseTest extends TestCase
     }
 
     /**
-     * Test attribute "_id"
+     * Test attribute "table"
      */
-    public function testPropertyId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_header_locked"
-     */
-    public function testPropertyIsHeaderLocked()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "summary_configs"
-     */
-    public function testPropertySummaryConfigs()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "columns"
-     */
-    public function testPropertyColumns()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "rows"
-     */
-    public function testPropertyRows()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "views"
-     */
-    public function testPropertyViews()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "id_row_map"
-     */
-    public function testPropertyIdRowMap()
+    public function testPropertyTable()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

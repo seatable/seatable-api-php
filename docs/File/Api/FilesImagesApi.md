@@ -109,12 +109,12 @@ ApiTokenAuth
 ## `uploadFile()`
 
 ```php
-uploadFile($upload_link, $file, $parent_dir, $relative_path, $replace): object
+uploadFile($upload_link, $file, $parent_dir, $relative_path, $replace): object[]
 ```
 
 Upload File (or Image)
 
-Upload a file or an image as an attachment to a base. To execute this request you need to generate an upload link first.   > 📘 Three steps to add a file/an image to a base >  > To add an image or a file to a base, three steps are necessary:  > 1. [Generate an upload link](/reference/getUploadLink). > 2. Upload the file to the base as an attachment. (this article) > 3. [Update a row](/reference/updateRow) and attach the file/the image to a file or image column.   > 📘 Different variable names >  > Pay attention that the return values of upload link have slightly different names, so `parent_path` is `parent_dir` in this call.  ## Attach the file/image to a file or image column  After uploading the file/image to a base, SeaTable saves the uploaded file at non-public URL in the form: `/workspace/{workspace_id}`+`parent_dir`+`relative_path`+`name`.   Here is an example how this might look like: `https://cloud.seatable.io/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png` If you are logged in with your browser, you can access this file. Otherwise you will see the login screen.  Knowing this URL, you can add a new row or update an existing row and use the URL to add this attachment to your file/image column. ``` # Example how to add an already uploaded image to a row: \"row\": {   \"My Image Column\": [\"/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png`\"] }  # Example how to add an already uploaded file to a row: \"row\": {   \"File Column\": [{     \"name\": \"invoice.pdf\",      \"size\": 101454,      \"type\": \"file\",      \"url\": \"/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/invoice.pdf\"   }] } ``` > 🚧 File requires the input variables size, type and url >  > As you can see, in the case of an image the URL is sufficient to attach the image to an image column. In case of a file, you have to provide all four input values.
+Upload a file or an image as an attachment to a base. To execute this request you need to generate an upload link first.   > 📘 Three steps to add a file/an image to a base >  > To add an image or a file to a base, three steps are necessary:  > 1. [Generate an upload link](/reference/getuploadlink). > 2. Upload the file to the base as an attachment. (this article) > 3. [Update a row](/reference/updaterow) and attach the file/the image to a file or image column.   > 📘 Different variable names >  > Pay attention that the return values of upload link have slightly different names, so `parent_path` is `parent_dir` in this call.  ## Attach the file/image to a file or image column  After uploading the file/image to a base, SeaTable saves the uploaded file at non-public URL in the form: `/workspace/{workspace_id}`+`parent_dir`+`relative_path`+`name`.   Here is an example how this might look like: `https://cloud.seatable.io/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png` If you are logged in with your browser, you can access this file. Otherwise you will see the login screen.  Knowing this URL, you can add a new row or update an existing row and use the URL to add this attachment to your file/image column. ``` # Example how to add an already uploaded image to a row: \"row\": {   \"My Image Column\": [\"/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png`\"] }  # Example how to add an already uploaded file to a row: \"row\": {   \"File Column\": [{     \"name\": \"invoice.pdf\",      \"size\": 101454,      \"type\": \"file\",      \"url\": \"/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/invoice.pdf\"   }] } ``` > 🚧 File requires the input variables size, type and url >  > As you can see, in the case of an image the URL is sufficient to attach the image to an image column. In case of a file, you have to provide all four input values.
 
 ### Example
 
@@ -155,7 +155,7 @@ try {
 
 ### Return type
 
-**object**
+**object[]**
 
 ### Authorization
 

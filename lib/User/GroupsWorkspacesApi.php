@@ -736,15 +736,16 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
+     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function copyBaseFromWorkspace($src_workspace_id, $name, $dst_workspace_id, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
+    public function copyBaseFromWorkspace($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs = null, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
     {
-        list($response) = $this->copyBaseFromWorkspaceWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, $contentType);
+        list($response) = $this->copyBaseFromWorkspaceWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs, $contentType);
         return $response;
     }
 
@@ -756,15 +757,16 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
+     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function copyBaseFromWorkspaceWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
+    public function copyBaseFromWorkspaceWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs = null, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
     {
-        $request = $this->copyBaseFromWorkspaceRequest($src_workspace_id, $name, $dst_workspace_id, $contentType);
+        $request = $this->copyBaseFromWorkspaceRequest($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -882,14 +884,15 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
+     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function copyBaseFromWorkspaceAsync($src_workspace_id, $name, $dst_workspace_id, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
+    public function copyBaseFromWorkspaceAsync($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs = null, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
     {
-        return $this->copyBaseFromWorkspaceAsyncWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, $contentType)
+        return $this->copyBaseFromWorkspaceAsyncWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -905,15 +908,16 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
+     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function copyBaseFromWorkspaceAsyncWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
+    public function copyBaseFromWorkspaceAsyncWithHttpInfo($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs = null, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
     {
         $returnType = 'object';
-        $request = $this->copyBaseFromWorkspaceRequest($src_workspace_id, $name, $dst_workspace_id, $contentType);
+        $request = $this->copyBaseFromWorkspaceRequest($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -957,12 +961,13 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
+     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function copyBaseFromWorkspaceRequest($src_workspace_id, $name, $dst_workspace_id, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
+    public function copyBaseFromWorkspaceRequest($src_workspace_id, $name, $dst_workspace_id, $is_copy_dataset_syncs = null, string $contentType = self::contentTypes['copyBaseFromWorkspace'][0])
     {
 
         // verify the required parameter 'src_workspace_id' is set
@@ -987,6 +992,7 @@ class GroupsWorkspacesApi
         }
 
 
+
         $resourcePath = '/api/v2.1/dtable-copy/';
         $formParams = [];
         $queryParams = [];
@@ -1008,6 +1014,10 @@ class GroupsWorkspacesApi
         // form params
         if ($dst_workspace_id !== null) {
             $formParams['dst_workspace_id'] = ObjectSerializer::toFormValue($dst_workspace_id);
+        }
+        // form params
+        if ($is_copy_dataset_syncs !== null) {
+            $formParams['is_copy_dataset_syncs'] = ObjectSerializer::toFormValue($is_copy_dataset_syncs);
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1137,7 +1147,7 @@ class GroupsWorkspacesApi
             }
 
             switch($statusCode) {
-                case 200:
+                case 201:
                     if ('object' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
@@ -1196,7 +1206,7 @@ class GroupsWorkspacesApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',

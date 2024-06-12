@@ -1,6 +1,6 @@
 <?php
 /**
- * FilteredRowsFilterFiltersInnerTest
+ * AppendColumnsRequestColumnsInnerTest
  *
  * PHP version 7.4
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Base Operations (from 4.4)
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FilteredRowsFilterFiltersInnerTest Class Doc Comment
+ * AppendColumnsRequestColumnsInnerTest Class Doc Comment
  *
  * @category    Class
- * @description FilteredRowsFilterFiltersInner
+ * @description AppendColumnsRequestColumnsInner
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class FilteredRowsFilterFiltersInnerTest extends TestCase
+class AppendColumnsRequestColumnsInnerTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class FilteredRowsFilterFiltersInnerTest extends TestCase
     }
 
     /**
-     * Test "FilteredRowsFilterFiltersInner"
+     * Test "AppendColumnsRequestColumnsInner"
      */
-    public function testFilteredRowsFilterFiltersInner()
+    public function testAppendColumnsRequestColumnsInner()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -88,27 +88,27 @@ class FilteredRowsFilterFiltersInnerTest extends TestCase
     }
 
     /**
-     * Test attribute "filter_predicate"
+     * Test attribute "column_type"
      */
-    public function testPropertyFilterPredicate()
+    public function testPropertyColumnType()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "filter_term"
+     * Test attribute "anchor_column"
      */
-    public function testPropertyFilterTerm()
+    public function testPropertyAnchorColumn()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "filter_term_modifier"
+     * Test attribute "column_data"
      */
-    public function testPropertyFilterTermModifier()
+    public function testPropertyColumnData()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
