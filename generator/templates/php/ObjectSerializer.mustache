@@ -20,7 +20,12 @@
 namespace {{invokerPackage}};
 
 use GuzzleHttp\Psr7\Utils;
-use {{modelPackage}}\ModelInterface;
+use SeaTable\Client\Auth\ModelInterface as AuthModelInterface;
+use SeaTable\Client\Base\ModelInterface as BaseModelInterface;
+use SeaTable\Client\File\ModelInterface as FileModelInterface;
+use SeaTable\Client\SysAdmin\ModelInterface as SysAdminModelInterface;
+use SeaTable\Client\TeamAdmin\ModelInterface as TeamAdminModelInterface;
+use SeaTable\Client\User\ModelInterface as UserModelInterface;
 
 /**
  * ObjectSerializer Class Doc Comment
@@ -73,7 +78,14 @@ class ObjectSerializer
 
         if (is_object($data)) {
             $values = [];
-            if ($data instanceof ModelInterface) {
+            if (
+                $data instanceof AuthModelInterface
+                || $data instanceof BaseModelInterface
+                || $data instanceof FileModelInterface
+                || $data instanceof SysAdminModelInterface
+                || $data instanceof TeamAdminModelInterface
+                || $data instanceof UserModelInterface
+            ) {
                 $formats = $data::openAPIFormats();
                 foreach ($data::openAPITypes() as $property => $openAPIType) {
                     $getter = $data::getters()[$property];
