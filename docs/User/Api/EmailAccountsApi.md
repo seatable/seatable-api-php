@@ -275,7 +275,7 @@ updateEmailAccount($base_uuid, $_3rd_party_account_id, $add_email_account_reques
 
 Update Email Account
 
-Change the account name, type, or detail (host, port, username or password) of a third party account using the account's ID in the URL. This ID can be retrieved by the call [List 3rd Party Email Accounts](/reference/get_api-v2-1-third-party-accounts-base-uuid-1), or by [Add 3rd Party Email Account](/reference/post_api-v2-1-third-party-accounts-base-uuid-1).
+Change the account name, type, or detail (host, port, username or password) of a third party account using the account's ID in the URL. This ID can be retrieved by the call [List 3rd Party Email Accounts](/reference/listemailaccounts), or by [Add 3rd Party Email Account](/reference/addemailaccount).
 
 ### Example
 

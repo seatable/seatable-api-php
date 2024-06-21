@@ -31,7 +31,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$create_group_request = new \SeaTable\Client\SysAdmin/Model\CreateGroupRequest(); // \SeaTable\Client\SysAdmin/Model\CreateGroupRequest
+$create_group_request = new \SeaTable\Client\SysAdmin\CreateGroupRequest(); // \SeaTable\Client\SysAdmin\CreateGroupRequest
 
 try {
     $result = $apiInstance->createGroup($create_group_request);
@@ -45,7 +45,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **create_group_request** | [**\SeaTable\Client\SysAdmin/Model\CreateGroupRequest**](../Model/CreateGroupRequest.md)|  | [optional] |
+| **create_group_request** | [**\SeaTable\Client\SysAdmin\CreateGroupRequest**](../Model/CreateGroupRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -184,7 +184,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\GroupsApi(
     $config
 );
 $group_id = 48; // int
-$transfer_group_request = new \SeaTable\Client\SysAdmin/Model\TransferGroupRequest(); // \SeaTable\Client\SysAdmin/Model\TransferGroupRequest
+$transfer_group_request = new \SeaTable\Client\SysAdmin\TransferGroupRequest(); // \SeaTable\Client\SysAdmin\TransferGroupRequest
 
 try {
     $result = $apiInstance->transferGroup($group_id, $transfer_group_request);
@@ -199,7 +199,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **group_id** | **int**|  | |
-| **transfer_group_request** | [**\SeaTable\Client\SysAdmin/Model\TransferGroupRequest**](../Model/TransferGroupRequest.md)|  | [optional] |
+| **transfer_group_request** | [**\SeaTable\Client\SysAdmin\TransferGroupRequest**](../Model/TransferGroupRequest.md)|  | [optional] |
 
 ### Return type
 

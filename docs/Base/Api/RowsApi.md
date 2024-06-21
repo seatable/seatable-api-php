@@ -4,70 +4,14 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**addRow()**](RowsApi.md#addRow) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/rows/ | Add Row |
-| [**appendRows()**](RowsApi.md#appendRows) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/batch-append-rows/ | Append Rows |
-| [**deleteRow()**](RowsApi.md#deleteRow) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/rows/ | Delete Row |
-| [**deleteRows()**](RowsApi.md#deleteRows) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/batch-delete-rows/ | Delete Rows |
-| [**getRow()**](RowsApi.md#getRow) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/rows/{row_id}/ | Get Row |
-| [**listFilteredRows()**](RowsApi.md#listFilteredRows) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/filtered-rows/ | List Filtered Rows |
-| [**listRows()**](RowsApi.md#listRows) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/rows/ | List Rows |
-| [**lockRows()**](RowsApi.md#lockRows) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/lock-rows/ | Lock Rows |
-| [**querySQL()**](RowsApi.md#querySQL) | **POST** /dtable-db/api/v1/query/{base_uuid}/ | List Rows (with SQL) |
-| [**unlockRows()**](RowsApi.md#unlockRows) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/unlock-rows/ | Unlock Rows |
-| [**updateRow()**](RowsApi.md#updateRow) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/rows/ | Update Row |
-| [**updateRows()**](RowsApi.md#updateRows) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/batch-update-rows/ | Update Rows |
-
-
-## `addRow()`
-
-```php
-addRow($base_uuid, $add_row_request): object
-```
-
-Add Row
-
-Appends or inserts a single row.  > 📘 How to define the row object >  > The row object contains key:value pairs with the column name as key and the desired values. Check the page [Models](/reference/models) to get a better understanding of the row object.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
-$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
-$apiInstance = new SeaTable\Client\Base\RowsApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$add_row_request = new \SeaTable\Client\Base\AddRowRequest(); // \SeaTable\Client\Base\AddRowRequest
-
-try {
-    $result = $apiInstance->addRow($base_uuid, $add_row_request);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling RowsApi->addRow: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **add_row_request** | [**\SeaTable\Client\Base\AddRowRequest**](../Model/AddRowRequest.md)|  | [optional] |
-
-### Return type
-
-**object**
-
-### Authorization
-
-BaseTokenAuth
-
-
+| [**appendRows()**](RowsApi.md#appendRows) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Append Row(s) |
+| [**deleteRow()**](RowsApi.md#deleteRow) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Delete Row(s) |
+| [**getRow()**](RowsApi.md#getRow) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/{row_id}/ | Get Row |
+| [**listRows()**](RowsApi.md#listRows) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | List Rows |
+| [**lockRows()**](RowsApi.md#lockRows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/ | Lock Rows |
+| [**querySQL()**](RowsApi.md#querySQL) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql | Query SeaTable with SQL |
+| [**unlockRows()**](RowsApi.md#unlockRows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/unlock-rows/ | Unlock Rows |
+| [**updateRow()**](RowsApi.md#updateRow) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Update Row(s) |
 
 
 ## `appendRows()`
@@ -76,9 +20,9 @@ BaseTokenAuth
 appendRows($base_uuid, $append_rows): object
 ```
 
-Append Rows
+Append Row(s)
 
-Appends multiple rows.  > 🚧 Appends at most 1 000 rows > > A maximum of 1 000 rows can be appended with a single request.
+Append multiple rows to a table. Define the column:values pairs of each column in the [rows object](/reference/models).
 
 ### Example
 
@@ -128,9 +72,9 @@ BaseTokenAuth
 deleteRow($base_uuid, $delete_row): object
 ```
 
-Delete Row
+Delete Row(s)
 
-Deletes a single row.
+Deletes one or multiple rows from the table, identified by its row id no matter if the row is stored in big data or normal backend.
 
 ### Example
 
@@ -174,67 +118,15 @@ BaseTokenAuth
 
 
 
-## `deleteRows()`
-
-```php
-deleteRows($base_uuid, $delete_rows): object
-```
-
-Delete Rows
-
-Deletes multiple rows. > 🚧 Deletes at most 10 000 rows > > A maximum of 10 000 rows can be deleted with a single request.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
-$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
-$apiInstance = new SeaTable\Client\Base\RowsApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$delete_rows = new \SeaTable\Client\Base\DeleteRows(); // \SeaTable\Client\Base\DeleteRows
-
-try {
-    $result = $apiInstance->deleteRows($base_uuid, $delete_rows);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling RowsApi->deleteRows: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **delete_rows** | [**\SeaTable\Client\Base\DeleteRows**](../Model/DeleteRows.md)|  | [optional] |
-
-### Return type
-
-**object**
-
-### Authorization
-
-BaseTokenAuth
-
-
-
-
 ## `getRow()`
 
 ```php
-getRow($base_uuid, $row_id, $table_name, $convert): object
+getRow($base_uuid, $row_id, $table_name, $convert_keys): object
 ```
 
 Get Row
 
-Retrieves a single row.
+Get the values of one row with all columns and values, according to the row id provided. Depending of `convert` the response will contain the column names or the column keys.
 
 ### Example
 
@@ -251,11 +143,11 @@ $apiInstance = new SeaTable\Client\Base\RowsApi(
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $row_id = Qtf7xPmoRaiFyQPO1aENTjb; // string | The id of the row.
-$table_name = Table1; // string | The name of the table.
-$convert = true; // bool | If 'true', the column's id will be converted to column names.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
+$convert_keys = true; // bool | If 'true', the column's id will be converted to column names.
 
 try {
-    $result = $apiInstance->getRow($base_uuid, $row_id, $table_name, $convert);
+    $result = $apiInstance->getRow($base_uuid, $row_id, $table_name, $convert_keys);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling RowsApi->getRow: ', $e->getMessage(), PHP_EOL;
@@ -268,8 +160,8 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **row_id** | **string**| The id of the row. | |
-| **table_name** | **string**| The name of the table. | |
-| **convert** | **bool**| If &#39;true&#39;, the column&#39;s id will be converted to column names. | [optional] |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
+| **convert_keys** | **bool**| If &#39;true&#39;, the column&#39;s id will be converted to column names. | [optional] |
 
 ### Return type
 
@@ -282,68 +174,15 @@ BaseTokenAuth
 
 
 
-## `listFilteredRows()`
-
-```php
-listFilteredRows($base_uuid, $table_name, $filtered_rows_filter)
-```
-
-List Filtered Rows
-
-List rows by filter conditions. This is especially useful when you want to filter out records and only see those records. > 🚧 Deprecated since version 2.3 >  > This request has been depricated since SeaTable 2.3. This means you can probably still use it, but it will not be maintained and will probably be removed/deactivated any time without further notice in the future. > Please use [List rows (with SQL)](/reference/list-rows-with-sql) or [List rows](/reference/list-rows) instead.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
-$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
-$apiInstance = new SeaTable\Client\Base\RowsApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$table_name = Table1; // string | The name of the table.
-$filtered_rows_filter = new \SeaTable\Client\Base\FilteredRowsFilter(); // \SeaTable\Client\Base\FilteredRowsFilter
-
-try {
-    $apiInstance->listFilteredRows($base_uuid, $table_name, $filtered_rows_filter);
-} catch (Exception $e) {
-    echo 'Exception when calling RowsApi->listFilteredRows: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **table_name** | **string**| The name of the table. | |
-| **filtered_rows_filter** | [**\SeaTable\Client\Base\FilteredRowsFilter**](../Model/FilteredRowsFilter.md)|  | [optional] |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-BaseTokenAuth
-
-
-
-
 ## `listRows()`
 
 ```php
-listRows($base_uuid, $table_name, $view_name, $convert_link_id, $order_by, $direction, $start, $limit): object
+listRows($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys): object
 ```
 
 List Rows
 
-Lists rows in a table (or in a view if provided), ordered according to the filter conditions and sort criteria provided in the request.   > 📘 Returns no data from the big data backend >  > This request does not return rows stored in the big data backend. To query the big data backend, use the request [List Rows (with SQL)](/reference/list-rows-with-sql) instead.  > 🚧 Returns at most 1 000 rows > > The request returns a maximum of 1 000 rows regardless of the limit specified in the SQL-statement.
+Returns a list of rows contained in a table (or in a view if provided).  The usage of a view in SeaTable could be much more convenient then the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).  > 👍 Big Data support added  >  > Since Version 4.4 this endpoint also supports the big data backend.  Every row consists of the columns, you defined in your base but also *hidden* informations like `_id`, `_mtime`, `_ctime`, `_creator` and so on. Get more details about these information in the [Models](/reference/models) area.  > 📘 Hidden Columns  > > If no view is selected, all columns (even hidden one) are returned. If a view is selected, only the visible columns of that view are returned with the request.
 
 ### Example
 
@@ -359,16 +198,14 @@ $apiInstance = new SeaTable\Client\Base\RowsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$table_name = Table1; // string | The name of the table.
-$view_name = Default View; // string | The name of the view.
-$convert_link_id = false; // bool | Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default.
-$order_by = Likes; // string | The name or id of a column that is used to sort the results.
-$direction = desc; // string | The direction of the sort, ascending `asc` or descending `desc`. asc by default. Works only if start and limit are set, too.
+$table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
+$view_name = Default View; // string | The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
 $start = 0; // int | Starting position (number) of the returned rows. 0 by default.
 $limit = 100; // int | Number of rows that should be returned. 1000 by default.
+$convert_keys = true; // bool | If 'true', the column's id will be converted to column names.
 
 try {
-    $result = $apiInstance->listRows($base_uuid, $table_name, $view_name, $convert_link_id, $order_by, $direction, $start, $limit);
+    $result = $apiInstance->listRows($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling RowsApi->listRows: ', $e->getMessage(), PHP_EOL;
@@ -380,13 +217,11 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **table_name** | **string**| The name of the table. | |
-| **view_name** | **string**| The name of the view. | [optional] |
-| **convert_link_id** | **bool**| Whether the link column in the returned row is the ID (false) of the linked row or the name (true) of the linked row. If no value is provided, false is the default. | [optional] |
-| **order_by** | **string**| The name or id of a column that is used to sort the results. | [optional] |
-| **direction** | **string**| The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Works only if start and limit are set, too. | [optional] [default to &#39;&#39;] |
+| **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
+| **view_name** | **string**| The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. | [optional] |
 | **start** | **int**| Starting position (number) of the returned rows. 0 by default. | [optional] |
 | **limit** | **int**| Number of rows that should be returned. 1000 by default. | [optional] |
+| **convert_keys** | **bool**| If &#39;true&#39;, the column&#39;s id will be converted to column names. | [optional] |
 
 ### Return type
 
@@ -407,7 +242,7 @@ lockRows($base_uuid, $table_with_row_ids): object
 
 Lock Rows
 
-Locks a single or multiple rows.   The request ensures that all specified rows are locked. Locked rows are ignored.  > 📘 Advanced feature >  > Row locking is only available in [SeaTable Cloud Plus and Enterprise](https://seatable.io/preise/?lang=auto) as well as SeaTable Server Enterprise Edition.
+Locks one or more rows. It is ok to include rows that were already locked. Rows in big data backend can not be locked.  > 📘 Advanced feature >  > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.io/preise/?lang=auto).
 
 ### Example
 
@@ -457,9 +292,9 @@ BaseTokenAuth
 querySQL($base_uuid, $sql_query): \SeaTable\Client\Base\SqlQueryResponse
 ```
 
-List Rows (with SQL)
+Query SeaTable with SQL
 
-Lists rows in a table based on an SQL-query provided in the request. Also returns the metadata of the table.  Typical SQL-statements are supported. Below some basic examples: `SELECT name, age, birthday, gender FROM Participants`<br/> `SELECT name, surname FROM Participants ORDER BY name`<br/> `SELECT * FROM Participants LIMIT 25` For more details, check the [SQL-syntax supported by SeaTable](https://developer.seatable.io/scripts/sql/reference/).  > 📘 Returns also data from the big data backend >  > This request is the only available endpoint that returns rows stored in the big data backend.   > 🚧 Returns at most 10 000 rows > > The request returns a maximum of 10 000 rows regardless of the limit specified in the SQL-statement.
+SeaTable offers a SQL like interface that supports `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements.   If you are familiar with SQL, you will have no difficulties to use this endpoint because typical SQL-statements are supported.          This endpoint is the **most powerful** one that SeaTable can offer and it does not differentiate between the two SeaTable backend (normal and big data). Also the metadata of the table is returned.   > 📘 `INSERT` and big data >  > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.  The complete [SQL Reference](https://developer.seatable.io/scripts/sql/reference/) can be found documentation in the developer manual.   Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:  - `SELECT * FROM Family LIMIT 3` - `SELECT name, age, birthday FROM Family` - `SELECT name, age FROM Family ORDER BY name` - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)`  > 🚧 Max return limit > > The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement.
 
 ### Example
 
@@ -475,7 +310,7 @@ $apiInstance = new SeaTable\Client\Base\RowsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$sql_query = new \SeaTable\Client\Base\SqlQuery(); // \SeaTable\Client\Base\SqlQuery | description des requestBody
+$sql_query = new \SeaTable\Client\Base\SqlQuery(); // \SeaTable\Client\Base\SqlQuery
 
 try {
     $result = $apiInstance->querySQL($base_uuid, $sql_query);
@@ -490,7 +325,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **sql_query** | [**\SeaTable\Client\Base\SqlQuery**](../Model/SqlQuery.md)| description des requestBody | [optional] |
+| **sql_query** | [**\SeaTable\Client\Base\SqlQuery**](../Model/SqlQuery.md)|  | [optional] |
 
 ### Return type
 
@@ -511,7 +346,7 @@ unlockRows($base_uuid, $table_with_row_ids): object
 
 Unlock Rows
 
-Unlocks a single or multiple rows.  The request ensures that all specified rows are unlocked. Unlocked rows are ignored.  > 📘 Advanced feature >  > Row locking is only available in [SeaTable Cloud Plus and Enterprise](https://seatable.io/preise/?lang=auto) as well as SeaTable Server Enterprise Edition.
+Use this API request to unlock one or more locked rows. As this request makes sure that all the mentioned rows are unlocked, it's OK to include rows that were not locked.
 
 ### Example
 
@@ -558,64 +393,12 @@ BaseTokenAuth
 ## `updateRow()`
 
 ```php
-updateRow($base_uuid, $update_row): object
+updateRow($base_uuid, $update_rows): object
 ```
 
-Update Row
+Update Row(s)
 
-Updates a single row.  > 📘 Structure of the row object >  > The row object contains key:value pairs with the column name as key and the desired values. Check the page [Models](/reference/models) to get a better understanding of the row object.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
-$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
-$apiInstance = new SeaTable\Client\Base\RowsApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$update_row = new \SeaTable\Client\Base\UpdateRow(); // \SeaTable\Client\Base\UpdateRow
-
-try {
-    $result = $apiInstance->updateRow($base_uuid, $update_row);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling RowsApi->updateRow: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **update_row** | [**\SeaTable\Client\Base\UpdateRow**](../Model/UpdateRow.md)|  | [optional] |
-
-### Return type
-
-**object**
-
-### Authorization
-
-BaseTokenAuth
-
-
-
-
-## `updateRows()`
-
-```php
-updateRows($base_uuid, $update_rows): object
-```
-
-Update Rows
-
-Updates multiple rows. > 🚧 Updates at most 1 000 rows > > A maximum of 1 000 rows can be updated with a single request.
+Change the values in one or multiple existing row(s) by defining the new values for necessary columns in the row object. Both SeaTable backends are supported.  > 📘 Structure of the row object >  > The row object contains key:value pairs with the column name as key and the desired values. Check the page [Models](/reference/models) to get a better understanding of the row object.
 
 ### Example
 
@@ -634,10 +417,10 @@ $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identi
 $update_rows = new \SeaTable\Client\Base\UpdateRows(); // \SeaTable\Client\Base\UpdateRows
 
 try {
-    $result = $apiInstance->updateRows($base_uuid, $update_rows);
+    $result = $apiInstance->updateRow($base_uuid, $update_rows);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling RowsApi->updateRows: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling RowsApi->updateRow: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

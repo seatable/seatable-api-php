@@ -119,7 +119,7 @@ listBaseExternalLinks($base_id): object
 
 List Base External Links
 
-List all the external links and view external links of a base. For this request, you'll need the base's `base_id`, which is to be distinguished from the base's `base_uuid`. You can retrieve a base's `base_id` with the API request e.g. [List User's Bases](/reference/list-users-bases).
+List all the external links and view external links of a base. For this request, you'll need the base's `base_id`, which is to be distinguished from the base's `base_uuid`. You can retrieve a base's `base_id` with the API request e.g. [List User's Bases](/reference/listusersbases).
 
 ### Example
 

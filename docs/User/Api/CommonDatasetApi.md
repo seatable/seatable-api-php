@@ -24,7 +24,7 @@ deleteCommonDataset($dataset_id): object
 
 Delete Common Dataset
 
-Delete a common dataset by its ID. This ID could be retrieved by the call e.g. [List Common Datasets A Base Can Access](/reference/get_api-v2-1-dtable-common-datasets-1).  This request doesn't delete anything in real. It just stops sharing that view from the original base. The data in the original base is intact.
+Delete a common dataset by its ID. This ID could be retrieved by the call e.g. [List Common Datasets A Base Can Access](/reference/listcommondataset-1).  This request doesn't delete anything in real. It just stops sharing that view from the original base. The data in the original base is intact.
 
 ### Example
 
@@ -174,7 +174,7 @@ importCommonDataset($dataset_id, $dst_dtable_uuid): object
 
 Import Common Dataset
 
-Import a common dataset into your destination base. This will create a new table labeled as a common dataset table.    To import a common dataset into a base, the following conditions have to be met:    - The destination base is in a group, and  - You are the admin or owner of this group, and  - This group has access to the common dataset.    The ID of the common dataset can be retrieved via the request e.g. [List Common Datasets A Base Can Access](/reference/get_api-v2-1-dtable-common-datasets-1).
+Import a common dataset into your destination base. This will create a new table labeled as a common dataset table.    To import a common dataset into a base, the following conditions have to be met:    - The destination base is in a group, and  - You are the admin or owner of this group, and  - This group has access to the common dataset.    The ID of the common dataset can be retrieved via the request e.g. [List Common Datasets A Base Can Access](/reference/listcommondataset-1).
 
 ### Example
 

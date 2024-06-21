@@ -133,7 +133,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$update_general_settings_request = new \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest
+$update_general_settings_request = new \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest(); // \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest
 
 try {
     $result = $apiInstance->updateGeneralSettings($update_general_settings_request);
@@ -147,7 +147,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **update_general_settings_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateGeneralSettingsRequest**](../Model/UpdateGeneralSettingsRequest.md)|  | [optional] |
+| **update_general_settings_request** | [**\SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest**](../Model/UpdateGeneralSettingsRequest.md)|  | [optional] |
 
 ### Return type
 

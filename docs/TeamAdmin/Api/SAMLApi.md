@@ -32,7 +32,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $apiInstance->getSamlConfig($org_id);
@@ -45,7 +45,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -81,7 +81,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $metadata_url = 'metadata_url_example'; // string | URL pointing to the metadata of your Identity Provider (IdP).
 $domain = 'domain_example'; // string | Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP).
 $idp_certificate = 'idp_certificate_example'; // string | Provide the certificate from your IdP for this service.
@@ -97,7 +97,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **metadata_url** | **string**| URL pointing to the metadata of your Identity Provider (IdP). | [optional] |
 | **domain** | **string**| Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). | [optional] |
 | **idp_certificate** | **string**| Provide the certificate from your IdP for this service. | [optional] |
@@ -136,7 +136,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $domain = 'domain_example'; // string | Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP).
 
 try {
@@ -150,7 +150,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **domain** | **string**| Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). | [optional] |
 
 ### Return type

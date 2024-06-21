@@ -32,7 +32,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\CustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $apiInstance->deleteTeamLogo($org_id);
@@ -45,7 +45,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -81,7 +81,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\CustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $apiInstance->getTeamLogo($org_id);
@@ -94,7 +94,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -130,7 +130,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\CustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $file = "/path/to/file.txt"; // \SplFileObject | The image you'd like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed.
 
 try {
@@ -144,7 +144,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **file** | **\SplFileObject****\SplFileObject**| The image you&#39;d like to upload from your local drive. Only .jpg, .jpeg, .gif or .png are allowed. | [optional] |
 
 ### Return type

@@ -80,7 +80,7 @@ createInviteLink($table_name, $workspace_id, $permission, $password, $expire_day
 
 Create Invite Link
 
-Use this request to generate an invite link for your base. See below for the details for the params.  In the **response:**  *   If you have set a password, it won't be returned in the response. As soon as the response code is 200, your password has been successfully set. *   The `token` returned is the invite link's token. You'd need it in other requests like [Get Base-Token with Invite-Link](/reference/get_api-v2-1-dtable-share-link-access-token-1), or [Delete Invite Link](/reference/delete_api-v2-1-dtables-invite-links-invite-link-token-1).
+Use this request to generate an invite link for your base. See below for the details for the params.  In the **response:**  *   If you have set a password, it won't be returned in the response. As soon as the response code is 200, your password has been successfully set. *   The `token` returned is the invite link's token. You'd need it in other requests like [Delete Invite Link](/reference/deleteinvitelink-1).
 
 ### Example
 
@@ -254,7 +254,7 @@ deleteInviteLink($invite_link_token): object
 
 Delete Invite Link
 
-Delete an invite link via its `token`.  Deleting an invite link won't stop sharing the base with the other users. If you want to stop sharing it, you can  *   either use the base sharing dialogue on the web interface to stop sharing the base to certain users, or *   use the API request to [Stop Sharing Base to a user](/reference/delete_api-v2-1-workspace-workspace-id-dtable-base-name-share-1).
+Delete an invite link via its `token`.  Deleting an invite link won't stop sharing the base with the other users. If you want to stop sharing it, you can  *   either use the base sharing dialogue on the web interface to stop sharing the base to certain users, or *   use the API request to [Stop Sharing Base to a user](/reference/deleteusershare).
 
 ### Example
 

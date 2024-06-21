@@ -71,7 +71,7 @@ deletePlugin($plugin_id): object
 
 Delete Plugin
 
-Delete a plugin via its ID (retrieved from the call [List Plugins](/reference/list-plugins)).
+Delete a plugin via its ID (retrieved from the call [List Plugins](/reference/listplugins)).
 
 ### Example
 
@@ -214,7 +214,7 @@ updatePlugin($plugin_id, $content_type, $plugin): object
 
 Update Plugin
 
-Update a plugin via its ID (retrieved from the call [List Plugins](/reference/list-plugins)) with a .zip file.
+Update a plugin via its ID (retrieved from the call [List Plugins](/reference/listplugins)) with a .zip file.
 
 ### Example
 

@@ -88,7 +88,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\StatisticsApi(
     $config
 );
 $is_user = false; // bool | Whether you'd like to list automation rules triggered by single users who are not in any teams (`true`) or by teams (`false`).  The usage of `true` here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users.
-$month = 202109; // int | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
+$month = 202109; // string | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
 
 try {
     $result = $apiInstance->getAutomationRules($is_user, $month);
@@ -103,7 +103,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **is_user** | **bool**| Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. | |
-| **month** | **int**| For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. | [optional] |
+| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. | [optional] |
 
 ### Return type
 
@@ -140,7 +140,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\StatisticsApi(
     $config
 );
 $is_user = false; // bool | Whether you'd like to list automation rules triggered by single users who are not in any teams (`true`) or by teams (`false`).  The usage of `true` here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users.
-$month = 202109; // int | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
+$month = 202109; // string | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -157,7 +157,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **is_user** | **bool**| Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. | |
-| **month** | **int**| For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. | [optional] |
+| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. | [optional] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -197,7 +197,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\StatisticsApi(
 );
 $is_user = false; // bool | Whether you'd like to list automation rules triggered by single users who are not in any teams (`true`) or by teams (`false`).  The usage of `true` here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users.
 $owner = 123abc456def789ghi123jkl456mno789@auth.local; // string | The ID of the user you are querying. Optional. If you don't define a user, all the users are queried.
-$month = 202109; // int | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
+$month = 202109; // string | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
 
 try {
     $result = $apiInstance->getScriptRunningCountByUser($is_user, $owner, $month);
@@ -213,7 +213,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **is_user** | **bool**| Whether you&#39;d like to list automation rules triggered by single users who are not in any teams (&#x60;true&#x60;) or by teams (&#x60;false&#x60;).  The usage of &#x60;true&#x60; here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users. | |
 | **owner** | **string**| The ID of the user you are querying. Optional. If you don&#39;t define a user, all the users are queried. | [optional] |
-| **month** | **int**| For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. | [optional] |
+| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized. | [optional] |
 
 ### Return type
 

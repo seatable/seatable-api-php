@@ -36,7 +36,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->clearTeamTrashBin($org_id);
@@ -50,7 +50,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -86,7 +86,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $base_id = 000; // string | The ID of the base. Don't mix this up with the base_uuid!
 
 try {
@@ -101,7 +101,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **base_id** | **string**| The ID of the base. Don&#39;t mix this up with the base_uuid! | |
 
 ### Return type
@@ -138,7 +138,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 
 try {
@@ -152,7 +152,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 
 ### Return type
@@ -189,7 +189,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -205,7 +205,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -243,7 +243,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -259,7 +259,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -297,7 +297,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $base_id = 000; // string | The ID of the base. Don't mix this up with the base_uuid!
 
 try {
@@ -312,7 +312,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **base_id** | **string**| The ID of the base. Don&#39;t mix this up with the base_uuid! | |
 
 ### Return type
@@ -349,7 +349,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $query = Example; // string | Exact name or a part of the name of the base, case insensitive.
 
 try {
@@ -364,7 +364,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **query** | **string**| Exact name or a part of the name of the base, case insensitive. | [optional] |
 
 ### Return type

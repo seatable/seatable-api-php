@@ -36,7 +36,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $email = 'email_example'; // string | User's contact email to login.
 $name = 'name_example'; // string | User's full name.
 $password = 'password_example'; // string | User's password to login.
@@ -54,7 +54,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **email** | **string**| User&#39;s contact email to login. | [optional] |
 | **name** | **string**| User&#39;s full name. | [optional] |
 | **password** | **string**| User&#39;s password to login. | [optional] |
@@ -94,7 +94,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
@@ -109,7 +109,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
@@ -131,7 +131,7 @@ disableTwoFactor($org_id, $user_id): object
 
 Disable 2FA
 
-If a user in your team has lost their phone or deleted the authenticator App by accident, they cannot log in to SeaTable anymore if 2FA is enabled for them. In this case, you as the team administrator can disable 2FA for them. Again, this is to be distinguished from the request [Enforce 2FA for A User in Team](/reference/team-admin-users-enforce-2fa) when you use `force_2fa = 0`, which only cancels the enforcement of 2FA but doesn't necessarily disable it for them.
+If a user in your team has lost their phone or deleted the authenticator App by accident, they cannot log in to SeaTable anymore if 2FA is enabled for them. In this case, you as the team administrator can disable 2FA for them. Again, this is to be distinguished from the request [Enforce 2FA for A User in Team](/reference/enforcetwofactor-1) when you use `force_2fa = 0`, which only cancels the enforcement of 2FA but doesn't necessarily disable it for them.
 
 ### Example
 
@@ -146,7 +146,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
@@ -161,7 +161,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
@@ -183,7 +183,7 @@ enforceTwofactor($org_id, $user_id, $enforce_twofactor_request): object
 
 Enforce 2FA
 
-As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/team-admin-users-disable-2fa), which serves a different purpose.
+As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
 
 ### Example
 
@@ -198,7 +198,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $enforce_twofactor_request = new \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest(); // \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest
 
@@ -214,7 +214,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 | **enforce_twofactor_request** | [**\SeaTable\Client\TeamAdmin\EnforceTwofactorRequest**](../Model/EnforceTwofactorRequest.md)|  | [optional] |
 
@@ -252,7 +252,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -268,7 +268,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -306,7 +306,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
@@ -321,7 +321,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
@@ -358,7 +358,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $name = 'name_example'; // string | User's full name.
 $contact_email = 'contact_email_example'; // string | User's contact email.
@@ -379,7 +379,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 | **name** | **string**| User&#39;s full name. | [optional] |
 | **contact_email** | **string**| User&#39;s contact email. | [optional] |

@@ -150,9 +150,9 @@ paths:
         > 📘 Three steps to add a file/an image to a base
         > 
         > To add an image or a file to a base, three steps are necessary: 
-        > 1. [Generate an upload link](/reference/getUploadLink).
+        > 1. [Generate an upload link](/reference/getuploadlink).
         > 2. Upload the file to the base as an attachment. (this article)
-        > 3. [Update a row](/reference/updateRow) and attach the file/the image to a file or image column. 
+        > 3. [Update a row](/reference/updaterow) and attach the file/the image to a file or image column. 
 
         > 📘 Different variable names
         > 
@@ -201,7 +201,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  type: object
               example:
                 - name: favicon.ico
                   id: b4356e3000d01a37b458524b59cecb1a5d23d964

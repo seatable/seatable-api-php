@@ -18,7 +18,7 @@ deleteDataCollectionForms($collection_table_token): object
 
 Delete Data Collection Forms
 
-Delete a data collection table with its token. The token can be retrieved with the call [List Data Collection Tables](/reference/list-data-collection-forms), or from the table's URL as its suffix.
+Delete a data collection table with its token. The token can be retrieved with the call [List Data Collection Tables](/reference/listdatacollectionforms), or from the table's URL as its suffix.
 
 ### Example
 
@@ -68,7 +68,7 @@ deleteForm($form_token): object
 
 Delete Form
 
-Delete a form with its token. Get a form's token with the call [List Forms](/reference/user-forms-list-forms).
+Delete a form with its token. Get a form's token with the call [List Forms](/reference/listforms).
 
 ### Example
 

@@ -4,10 +4,10 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**deleteBaseNotifications()**](NotificationsApi.md#deleteBaseNotifications) | **DELETE** /dtable-server/api/v1/dtables/{base_uuid}/notifications/ | Delete Base Notifications |
-| [**listBaseNotifications()**](NotificationsApi.md#listBaseNotifications) | **GET** /dtable-server/api/v1/dtables/{base_uuid}/notifications/ | List Base Notifications |
-| [**markBaseNotificationAsSeen()**](NotificationsApi.md#markBaseNotificationAsSeen) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/notifications/{notification_id}/ | Mark Notification Read/Unread |
-| [**markBaseNotificationsAsSeen()**](NotificationsApi.md#markBaseNotificationsAsSeen) | **PUT** /dtable-server/api/v1/dtables/{base_uuid}/notifications/ | Mark Base Notifications as seen |
+| [**deleteBaseNotifications()**](NotificationsApi.md#deleteBaseNotifications) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | Delete Base Notifications |
+| [**listBaseNotifications()**](NotificationsApi.md#listBaseNotifications) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | List Base Notifications |
+| [**markBaseNotificationAsSeen()**](NotificationsApi.md#markBaseNotificationAsSeen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/{notification_id}/ | Mark Notification Read/Unread |
+| [**markBaseNotificationsAsSeen()**](NotificationsApi.md#markBaseNotificationsAsSeen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | Mark Base Notifications as seen |
 
 
 ## `deleteBaseNotifications()`

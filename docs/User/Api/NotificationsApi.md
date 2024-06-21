@@ -73,7 +73,7 @@ deleteNotificationRule($workspace_id, $base_name, $notification_rule_id): object
 
 Delete Notification Rule
 
-Delete an existing notification rule.  The `notification_rule_id` is the ID of the notification to be deleted. This can be retrieved by [List Notification Rules](/reference/get_api-v2-1-workspace-workspace-id-dtable-base-name-notification-rules-1) or can be seen when you [Add Base Notification Rule](/reference/post_api-v2-1-workspace-workspace-id-dtable-base-name-notification-rules-1).
+Delete an existing notification rule.  The `notification_rule_id` is the ID of the notification to be deleted. This can be retrieved by [List Notification Rules](/reference/listnotificationrules-1) or can be seen when you [Add Base Notification Rule](/reference/addnotificationrule).
 
 ### Example
 
@@ -226,7 +226,7 @@ updateNotificationRule($workspace_id, $base_name, $notification_rule_id, $update
 
 Update Notification Rule
 
-Update the params of an existing notification rule.  The `notification_rule_id` is the ID of the notification to be updated. This can be retrieved by [List Notification Rules](/reference/get_api-v2-1-workspace-workspace-id-dtable-base-name-notification-rules-1) or can be seen when you [Add Base Notification Rule](/reference/post_api-v2-1-workspace-workspace-id-dtable-base-name-notification-rules-1).  For the exact params that you can update, refer to the params list in the call [Add Base Notification Rule](/reference/post_api-v2-1-workspace-workspace-id-dtable-base-name-notification-rules-1).
+Update the params of an existing notification rule.  The `notification_rule_id` is the ID of the notification to be updated. This can be retrieved by [List Notification Rules](/reference/listnotificationrules-1) or can be seen when you [Add Base Notification Rule](/reference/addnotificationrule).  For the exact params that you can update, refer to the params list in the call [Add Base Notification Rule](/reference/addnotificationrule).
 
 ### Example
 

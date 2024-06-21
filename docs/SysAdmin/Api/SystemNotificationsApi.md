@@ -32,7 +32,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SystemNotificationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$add_notification_to_user_request = new \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest(); // \SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest
+$add_notification_to_user_request = new \SeaTable\Client\SysAdmin\AddNotificationToUserRequest(); // \SeaTable\Client\SysAdmin\AddNotificationToUserRequest
 
 try {
     $result = $apiInstance->addNotificationToUser($add_notification_to_user_request);
@@ -46,7 +46,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **add_notification_to_user_request** | [**\SeaTable\Client\SysAdmin/Model\AddNotificationToUserRequest**](../Model/AddNotificationToUserRequest.md)|  | [optional] |
+| **add_notification_to_user_request** | [**\SeaTable\Client\SysAdmin\AddNotificationToUserRequest**](../Model/AddNotificationToUserRequest.md)|  | [optional] |
 
 ### Return type
 

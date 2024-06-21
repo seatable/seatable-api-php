@@ -36,7 +36,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $external_link_token = d6d006b319ca4d2aa060; // string
 
 try {
@@ -51,7 +51,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **external_link_token** | **string**|  | |
 
 ### Return type
@@ -88,7 +88,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $invite_link_token = 0366b8995d7f47d8eu3t; // string
 
 try {
@@ -103,7 +103,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **invite_link_token** | **string**|  | |
 
 ### Return type
@@ -140,7 +140,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $view_external_link_token = d6d006b319ca4d2aa060; // string
 
 try {
@@ -155,7 +155,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **view_external_link_token** | **string**|  | |
 
 ### Return type
@@ -192,7 +192,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->listBaseExternalLinks($org_id);
@@ -206,7 +206,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -242,7 +242,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -258,7 +258,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -296,7 +296,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->listViewExternalLinks($org_id);
@@ -310,7 +310,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -346,7 +346,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $invite_link_token = 0366b8995d7f47d8eu3t; // string
 $update_invite_link_request = new \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest(); // \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest
 
@@ -362,7 +362,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **invite_link_token** | **string**|  | |
 | **update_invite_link_request** | [**\SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest**](../Model/UpdateInviteLinkRequest.md)|  | [optional] |
 

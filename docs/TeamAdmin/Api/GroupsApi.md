@@ -39,7 +39,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $group_name = 'group_name_example'; // string | The name of the group.
 $group_owner = 'group_owner_example'; // string | The `user_id` of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable.
 
@@ -55,7 +55,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_name** | **string**| The name of the group. | [optional] |
 | **group_owner** | **string**| The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. | [optional] |
 
@@ -93,8 +93,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 $user_id = 'user_id_example'; // string | The `user_id`
 
 try {
@@ -109,8 +109,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 | **user_id** | **string**| The &#x60;user_id&#x60; | [optional] |
 
 ### Return type
@@ -147,8 +147,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 
 try {
     $result = $apiInstance->deleteGroup($org_id, $group_id);
@@ -162,8 +162,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 
 ### Return type
 
@@ -199,8 +199,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 
 try {
     $result = $apiInstance->getGroup($org_id, $group_id);
@@ -214,8 +214,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 
 ### Return type
 
@@ -251,8 +251,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 
 try {
     $result = $apiInstance->listGroupBases($org_id, $group_id);
@@ -266,8 +266,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 
 ### Return type
 
@@ -303,8 +303,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 
 try {
     $result = $apiInstance->listGroupMembers($org_id, $group_id);
@@ -318,8 +318,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 
 ### Return type
 
@@ -355,7 +355,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -371,7 +371,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -463,8 +463,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 $user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
@@ -479,8 +479,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
@@ -517,8 +517,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team).
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
 $update_group_request = new \SeaTable\Client\TeamAdmin\UpdateGroupRequest(); // \SeaTable\Client\TeamAdmin\UpdateGroupRequest
 
 try {
@@ -533,8 +533,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/list-groups-team). | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 | **update_group_request** | [**\SeaTable\Client\TeamAdmin\UpdateGroupRequest**](../Model/UpdateGroupRequest.md)|  | [optional] |
 
 ### Return type

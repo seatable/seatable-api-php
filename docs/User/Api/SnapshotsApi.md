@@ -72,7 +72,7 @@ restoreSnapshot($workspace_id, $base_name, $commit_id, $snapshot_name): object
 
 Restore Snapshot
 
-Restore a snapshot and save it as a new base besides the existing base.   The `commit_id` is the ID of the snapshot to be restored. This can be retrieved with the call [List Snapshots](/reference/get_api-v2-1-workspace-workspace-id-dtable-base-name-snapshots).  You can give the restored base a new name by defining the value of the `snapshot_name` param. If left blank, SeaTable gives the restored base a default name which is a combination of the original base name and \"(restored)\" or similar.
+Restore a snapshot and save it as a new base besides the existing base.   The `commit_id` is the ID of the snapshot to be restored. This can be retrieved with the call [List Snapshots](/reference/listsnapshots).  You can give the restored base a new name by defining the value of the `snapshot_name` param. If left blank, SeaTable gives the restored base a default name which is a combination of the original base name and \"(restored)\" or similar.
 
 ### Example
 

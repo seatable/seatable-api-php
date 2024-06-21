@@ -1,6 +1,6 @@
 {
   "apiPackage": "SysAdmin",
-  "modelPackage": "SysAdmin/Model",
+  "modelPackage": "SysAdmin",
   "customDocsDir": "docs/SysAdmin/Api",
   "customEndpointHeadline": "SysAdmin",
   "invokerPackage": "SeaTable\\Client",

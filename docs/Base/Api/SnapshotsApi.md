@@ -4,7 +4,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**createSnapshot()**](SnapshotsApi.md#createSnapshot) | **POST** /dtable-server/api/v1/dtables/{base_uuid}/snapshot/ | Create Snapshot |
+| [**createSnapshot()**](SnapshotsApi.md#createSnapshot) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/snapshot/ | Create Snapshot |
 
 
 ## `createSnapshot()`
@@ -15,7 +15,7 @@ createSnapshot($base_uuid, $generate_snapshot): object
 
 Create Snapshot
 
-Creates a snapshot for the current base. The pre-conditions are, that there's at least one change since the last snapshot and at least 10 minutes have passed.  To get a list of already existing snapshots, use the the request [List Snapshots](/reference/list-snapshots).
+Creates a snapshot for the current base. The pre-conditions are, that there's at least one change since the last snapshot and at least 10 minutes have passed.  To get a list of already existing snapshots, use the the request [List Snapshots](/reference/listsnapshots).
 
 ### Example
 

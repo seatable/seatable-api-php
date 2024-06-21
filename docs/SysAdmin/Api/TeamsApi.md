@@ -42,7 +42,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$add_team_request = new \SeaTable\Client\SysAdmin/Model\AddTeamRequest(); // \SeaTable\Client\SysAdmin/Model\AddTeamRequest
+$add_team_request = new \SeaTable\Client\SysAdmin\AddTeamRequest(); // \SeaTable\Client\SysAdmin\AddTeamRequest
 
 try {
     $result = $apiInstance->addTeam($add_team_request);
@@ -56,7 +56,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **add_team_request** | [**\SeaTable\Client\SysAdmin/Model\AddTeamRequest**](../Model/AddTeamRequest.md)|  | [optional] |
+| **add_team_request** | [**\SeaTable\Client\SysAdmin\AddTeamRequest**](../Model/AddTeamRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -72,7 +72,7 @@ AccountTokenAuth
 ## `addTeamUser()`
 
 ```php
-addTeamUser($org_id, $add_team_user_request): object
+addTeamUser($org_id, $email, $password, $name, $with_workspace): object
 ```
 
 Add Team User
@@ -92,11 +92,14 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$add_team_user_request = new \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest(); // \SeaTable\Client\SysAdmin/Model\AddTeamUserRequest
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$email = 'email_example'; // string | Login email of the user.
+$password = 'password_example'; // string | Login password of the user.
+$name = 'name_example'; // string | Full name of the user.
+$with_workspace = True; // bool | If a workspace should be automatically created for the user. Optional. `false` by default.
 
 try {
-    $result = $apiInstance->addTeamUser($org_id, $add_team_user_request);
+    $result = $apiInstance->addTeamUser($org_id, $email, $password, $name, $with_workspace);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TeamsApi->addTeamUser: ', $e->getMessage(), PHP_EOL;
@@ -107,8 +110,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **add_team_user_request** | [**\SeaTable\Client\SysAdmin/Model\AddTeamUserRequest**](../Model/AddTeamUserRequest.md)|  | [optional] |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **email** | **string**| Login email of the user. | |
+| **password** | **string**| Login password of the user. | |
+| **name** | **string**| Full name of the user. | [optional] |
+| **with_workspace** | **bool**| If a workspace should be automatically created for the user. Optional. &#x60;false&#x60; by default. | [optional] |
 
 ### Return type
 
@@ -144,7 +150,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->deleteTeam($org_id);
@@ -158,7 +164,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -194,7 +200,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $group_id = 48; // int
 
 try {
@@ -209,7 +215,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_id** | **int**|  | |
 
 ### Return type
@@ -246,7 +252,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
@@ -261,7 +267,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
@@ -345,7 +351,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -361,7 +367,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
@@ -399,7 +405,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->listTeamGroups($org_id);
@@ -413,7 +419,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -449,7 +455,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->listTeamUsers($org_id);
@@ -463,7 +469,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -553,7 +559,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
     $result = $apiInstance->searchTeam($org_id);
@@ -567,7 +573,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 
 ### Return type
 
@@ -603,8 +609,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
-$update_team_request = new \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateTeamRequest
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$update_team_request = new \SeaTable\Client\SysAdmin\UpdateTeamRequest(); // \SeaTable\Client\SysAdmin\UpdateTeamRequest
 
 try {
     $result = $apiInstance->updateTeam($org_id, $update_team_request);
@@ -618,8 +624,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
-| **update_team_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateTeamRequest**](../Model/UpdateTeamRequest.md)|  | [optional] |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **update_team_request** | [**\SeaTable\Client\SysAdmin\UpdateTeamRequest**](../Model/UpdateTeamRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -655,9 +661,9 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin.
+$org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
-$update_team_user_request = new \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest
+$update_team_user_request = new \SeaTable\Client\SysAdmin\UpdateTeamUserRequest(); // \SeaTable\Client\SysAdmin\UpdateTeamUserRequest
 
 try {
     $result = $apiInstance->updateTeamUser($org_id, $user_id, $update_team_user_request);
@@ -671,9 +677,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/get-team-info). Contact your team admin, if you are not the admin. | |
+| **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
-| **update_team_user_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateTeamUserRequest**](../Model/UpdateTeamUserRequest.md)|  | [optional] |
+| **update_team_user_request** | [**\SeaTable\Client\SysAdmin\UpdateTeamUserRequest**](../Model/UpdateTeamUserRequest.md)|  | [optional] |
 
 ### Return type
 

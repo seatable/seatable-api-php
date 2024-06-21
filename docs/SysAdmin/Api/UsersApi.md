@@ -44,7 +44,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$add_new_user_request = new \SeaTable\Client\SysAdmin/Model\AddNewUserRequest(); // \SeaTable\Client\SysAdmin/Model\AddNewUserRequest
+$add_new_user_request = new \SeaTable\Client\SysAdmin\AddNewUserRequest(); // \SeaTable\Client\SysAdmin\AddNewUserRequest
 
 try {
     $result = $apiInstance->addNewUser($add_new_user_request);
@@ -58,7 +58,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **add_new_user_request** | [**\SeaTable\Client\SysAdmin/Model\AddNewUserRequest**](../Model/AddNewUserRequest.md)|  | [optional] |
+| **add_new_user_request** | [**\SeaTable\Client\SysAdmin\AddNewUserRequest**](../Model/AddNewUserRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -79,7 +79,7 @@ deleteUser($user_id): object
 
 Delete User
 
-Delete a user by their ID.  If the user is in a team, you cannot delete them with this request, but with the request [Delete Team User](/reference/delete-team-user).
+Delete a user by their ID.  If the user is in a team, you cannot delete them with this request, but with the request [Delete Team User](/reference/deleteteamuser).
 
 ### Example
 
@@ -179,7 +179,7 @@ enforceTwoFactor($user_id, $enforce_two_factor_request): object
 
 Enforce 2FA
 
-As the system administrator, you can force each user to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the user will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in System](/reference/disable-2fa), which serves a different purpose.
+As the system administrator, you can force each user to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the user will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in System](/reference/disabletwofactor), which serves a different purpose.
 
 ### Example
 
@@ -195,7 +195,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     $config
 );
 $user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
-$enforce_two_factor_request = new \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest(); // \SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest
+$enforce_two_factor_request = new \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest(); // \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest
 
 try {
     $result = $apiInstance->enforceTwoFactor($user_id, $enforce_two_factor_request);
@@ -210,7 +210,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
-| **enforce_two_factor_request** | [**\SeaTable\Client\SysAdmin/Model\EnforceTwoFactorRequest**](../Model/EnforceTwoFactorRequest.md)|  | [optional] |
+| **enforce_two_factor_request** | [**\SeaTable\Client\SysAdmin\EnforceTwoFactorRequest**](../Model/EnforceTwoFactorRequest.md)|  | [optional] |
 
 ### Return type
 
@@ -699,7 +699,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$update_admins_role = new \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole(); // \SeaTable\Client\SysAdmin/Model\UpdateAdminsRole
+$update_admins_role = new \SeaTable\Client\SysAdmin\UpdateAdminsRole(); // \SeaTable\Client\SysAdmin\UpdateAdminsRole
 
 try {
     $result = $apiInstance->updateAdminRole($update_admins_role);
@@ -713,7 +713,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **update_admins_role** | [**\SeaTable\Client\SysAdmin/Model\UpdateAdminsRole**](../Model/UpdateAdminsRole.md)|  | [optional] |
+| **update_admins_role** | [**\SeaTable\Client\SysAdmin\UpdateAdminsRole**](../Model/UpdateAdminsRole.md)|  | [optional] |
 
 ### Return type
 
@@ -750,7 +750,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     $config
 );
 $user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
-$update_user_request = new \SeaTable\Client\SysAdmin/Model\UpdateUserRequest(); // \SeaTable\Client\SysAdmin/Model\UpdateUserRequest
+$update_user_request = new \SeaTable\Client\SysAdmin\UpdateUserRequest(); // \SeaTable\Client\SysAdmin\UpdateUserRequest
 
 try {
     $result = $apiInstance->updateUser($user_id, $update_user_request);
@@ -765,7 +765,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
-| **update_user_request** | [**\SeaTable\Client\SysAdmin/Model\UpdateUserRequest**](../Model/UpdateUserRequest.md)|  | [optional] |
+| **update_user_request** | [**\SeaTable\Client\SysAdmin\UpdateUserRequest**](../Model/UpdateUserRequest.md)|  | [optional] |
 
 ### Return type
 

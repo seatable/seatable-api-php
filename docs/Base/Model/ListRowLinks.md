@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**table_id** | **string** | The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. |
-**link_column** | **string** | This is the key of the link column. Do not use the &#x60;link_id&#x60; of the link column here. |
-**rows** | [**\SeaTable\Client\Base\ListRowLinksRowsInner[]**](ListRowLinksRowsInner.md) | the rows you want to get the links for. | [optional]
+**table_name** | **string** | The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. |
+**link_column_name** | **string** | The name of the link-column. Alternatively, you can use &#x60;link_column_key&#x60; instead. Do not use the &#x60;link_id&#x60; of the link column here. |
+**rows** | [**\SeaTable\Client\Base\ListRowLinksRowsInner[]**](ListRowLinksRowsInner.md) | The rows (identified by their ids) you want to get the links for. |
 
