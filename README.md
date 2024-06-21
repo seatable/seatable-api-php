@@ -1,6 +1,6 @@
 # SeaTable API PHP Client
 
-This is the official "SeaTable PHP client", generated with [OpenAPI Generator](https://openapi-generator.tech/).
+This is the official **SeaTable PHP client**, generated with [OpenAPI Generator](https://openapi-generator.tech/).
 
 The SeaTable PHP client provides access to all publicly available API endpoints, allowing you to interact with user accounts, bases, and files.
 
@@ -27,6 +27,7 @@ Additional resources and documentation that might help you are available at:
 - [SeaTable Developer Manual](https://developer.seatable.io/clients/php_api/)
 - [SeaTable API Reference](https://api.seatable.io)
 - [SeaTable OpenApi Specification](https://github.com/seatable/openapi)
+- [Packagist](https://packagist.org/packages/seatable/seatable-api-php)
 
 ## Versioning
 
