@@ -408,6 +408,10 @@ class ColumnsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -734,6 +738,10 @@ class ColumnsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1062,6 +1070,10 @@ class ColumnsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1389,6 +1401,10 @@ class ColumnsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1715,6 +1731,10 @@ class ColumnsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2073,6 +2093,10 @@ class ColumnsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2392,6 +2416,10 @@ class ColumnsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2720,6 +2748,10 @@ class ColumnsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3046,6 +3078,10 @@ class ColumnsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],

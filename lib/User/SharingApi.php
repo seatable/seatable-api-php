@@ -487,6 +487,10 @@ class SharingApi
             $formParams['permission'] = ObjectSerializer::toFormValue($permission);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -861,6 +865,10 @@ class SharingApi
             $formParams['to_group_id'] = ObjectSerializer::toFormValue($to_group_id);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1213,6 +1221,10 @@ class SharingApi
         // form params
         if ($email !== null) {
             $formParams['email'] = ObjectSerializer::toFormValue($email);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1587,6 +1599,10 @@ class SharingApi
         // form params
         if ($view_id !== null) {
             $formParams['view_id'] = ObjectSerializer::toFormValue($view_id);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1968,6 +1984,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2325,6 +2345,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2681,6 +2705,10 @@ class SharingApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3061,6 +3089,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3394,6 +3426,10 @@ class SharingApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3752,6 +3788,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -4065,6 +4105,10 @@ class SharingApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -4400,6 +4444,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -4733,6 +4781,10 @@ class SharingApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -5068,6 +5120,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -5358,6 +5414,10 @@ class SharingApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -5650,6 +5710,10 @@ class SharingApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -5941,6 +6005,10 @@ class SharingApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -6231,6 +6299,10 @@ class SharingApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -6566,6 +6638,10 @@ class SharingApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -6899,6 +6975,10 @@ class SharingApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -7265,6 +7345,10 @@ class SharingApi
         // form params
         if ($permission !== null) {
             $formParams['permission'] = ObjectSerializer::toFormValue($permission);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -7634,6 +7718,10 @@ class SharingApi
             $formParams['permission'] = ObjectSerializer::toFormValue($permission);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -7986,6 +8074,10 @@ class SharingApi
         // form params
         if ($email !== null) {
             $formParams['email'] = ObjectSerializer::toFormValue($email);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -8353,6 +8445,10 @@ class SharingApi
         // form params
         if ($permission !== null) {
             $formParams['permission'] = ObjectSerializer::toFormValue($permission);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

@@ -437,6 +437,10 @@ class SnapshotsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -802,6 +806,10 @@ class SnapshotsApi
         // form params
         if ($snapshot_name !== null) {
             $formParams['snapshot_name'] = ObjectSerializer::toFormValue($snapshot_name);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

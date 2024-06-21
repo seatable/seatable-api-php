@@ -399,6 +399,10 @@ class EmailAccountsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -740,6 +744,10 @@ class EmailAccountsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -998,6 +1006,10 @@ class EmailAccountsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1304,6 +1316,10 @@ class EmailAccountsApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1618,6 +1634,10 @@ class EmailAccountsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1958,6 +1978,10 @@ class EmailAccountsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],

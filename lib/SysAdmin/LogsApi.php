@@ -367,6 +367,10 @@ class LogsApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -693,6 +697,10 @@ class LogsApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1021,6 +1029,10 @@ class LogsApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1233,6 +1245,10 @@ class LogsApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1553,6 +1569,10 @@ class LogsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],

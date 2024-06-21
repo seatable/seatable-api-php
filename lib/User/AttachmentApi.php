@@ -431,6 +431,10 @@ class AttachmentApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -760,6 +764,10 @@ class AttachmentApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1073,6 +1081,10 @@ class AttachmentApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1409,6 +1421,10 @@ class AttachmentApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1737,6 +1753,10 @@ class AttachmentApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2073,6 +2093,10 @@ class AttachmentApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2405,6 +2429,10 @@ class AttachmentApi
         // form params
         if ($new_name !== null) {
             $formParams['new_name'] = ObjectSerializer::toFormValue($new_name);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

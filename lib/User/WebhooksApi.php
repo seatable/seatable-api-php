@@ -427,6 +427,10 @@ class WebhooksApi
             $formParams['secret'] = ObjectSerializer::toFormValue($secret);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -784,6 +788,10 @@ class WebhooksApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1117,6 +1125,10 @@ class WebhooksApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1493,6 +1505,10 @@ class WebhooksApi
         // form params
         if ($secret !== null) {
             $formParams['secret'] = ObjectSerializer::toFormValue($secret);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

@@ -306,6 +306,10 @@ class SAMLApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -572,6 +576,10 @@ class SAMLApi
             $formParams['idp_certificate'] = ObjectSerializer::toFormValue($idp_certificate);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -816,6 +824,10 @@ class SAMLApi
         // form params
         if ($domain !== null) {
             $formParams['domain'] = ObjectSerializer::toFormValue($domain);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

@@ -385,6 +385,10 @@ class FilesImagesApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -675,6 +679,10 @@ class FilesImagesApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1057,6 +1065,10 @@ class FilesImagesApi
         // form params
         if ($relative_path !== null) {
             $formParams['relative_path'] = ObjectSerializer::toFormValue($relative_path);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

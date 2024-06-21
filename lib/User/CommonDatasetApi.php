@@ -405,6 +405,10 @@ class CommonDatasetApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -719,6 +723,10 @@ class CommonDatasetApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1032,6 +1040,10 @@ class CommonDatasetApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1355,6 +1367,10 @@ class CommonDatasetApi
         // form params
         if ($dst_dtable_uuid !== null) {
             $formParams['dst_dtable_uuid'] = ObjectSerializer::toFormValue($dst_dtable_uuid);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1687,6 +1703,10 @@ class CommonDatasetApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2001,6 +2021,10 @@ class CommonDatasetApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2343,6 +2367,10 @@ class CommonDatasetApi
             $formParams['view_name'] = ObjectSerializer::toFormValue($view_name);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2667,6 +2695,10 @@ class CommonDatasetApi
             $formParams['dataset_name'] = ObjectSerializer::toFormValue($dataset_name);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2941,6 +2973,10 @@ class CommonDatasetApi
         // form params
         if ($dst_view_id !== null) {
             $formParams['dst_view_id'] = ObjectSerializer::toFormValue($dst_view_id);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -3262,6 +3298,10 @@ class CommonDatasetApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],

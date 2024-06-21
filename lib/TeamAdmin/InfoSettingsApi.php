@@ -364,6 +364,10 @@ class InfoSettingsApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -654,6 +658,10 @@ class InfoSettingsApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -954,6 +962,10 @@ class InfoSettingsApi
         // form params
         if ($new_org_name !== null) {
             $formParams['new_org_name'] = ObjectSerializer::toFormValue($new_org_name);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1285,6 +1297,10 @@ class InfoSettingsApi
         // form params
         if ($enable_member_modify_name !== null) {
             $formParams['enable_member_modify_name'] = ObjectSerializer::toFormValue($enable_member_modify_name);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

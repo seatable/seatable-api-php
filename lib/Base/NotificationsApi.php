@@ -387,6 +387,10 @@ class NotificationsApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -700,6 +704,10 @@ class NotificationsApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1048,6 +1056,10 @@ class NotificationsApi
             $formParams['seen'] = ObjectSerializer::toFormValue($seen);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1370,6 +1382,10 @@ class NotificationsApi
         // form params
         if ($seen !== null) {
             $formParams['seen'] = ObjectSerializer::toFormValue($seen);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

@@ -440,6 +440,10 @@ class ImportExportApi
             $formParams['table_name'] = ObjectSerializer::toFormValue($table_name);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -727,6 +731,10 @@ class ImportExportApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -959,6 +967,10 @@ class ImportExportApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1256,6 +1268,10 @@ class ImportExportApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1558,6 +1574,10 @@ class ImportExportApi
             );
         }
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1906,6 +1926,10 @@ class ImportExportApi
         }
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2248,6 +2272,10 @@ class ImportExportApi
             $formParams['folder'] = ObjectSerializer::toFormValue($folder);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2588,6 +2616,10 @@ class ImportExportApi
         // form params
         if ($dtable_uuid !== null) {
             $formParams['dtable_uuid'] = ObjectSerializer::toFormValue($dtable_uuid);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
@@ -2950,6 +2982,10 @@ class ImportExportApi
         // form params
         if ($selected_columns !== null) {
             $formParams['selected_columns'] = ObjectSerializer::toFormValue($selected_columns);
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(

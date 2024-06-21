@@ -367,6 +367,10 @@ class SystemInfoCustomizingApi
 
 
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -686,6 +690,10 @@ class SystemInfoCustomizingApi
             $formParams['with_notify'] = ObjectSerializer::toFormValue($with_notify);
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -982,6 +990,10 @@ class SystemInfoCustomizingApi
 
 
 
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1299,6 +1311,10 @@ class SystemInfoCustomizingApi
             }
         }
 
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
+        }
+
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1606,6 +1622,10 @@ class SystemInfoCustomizingApi
                     'rb'
                 );
             }
+        }
+
+        if ($contentType === 'multipart/form-data') {
+            $multipart = true;
         }
 
         $headers = $this->headerSelector->selectHeaders(
