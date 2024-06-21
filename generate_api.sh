@@ -92,3 +92,6 @@ mv ./README.md ./README_Auth.md
 
 cp README.backup README.md
 echo "client_test" >> ./.gitignore
+
+# Check PHP files for syntax errors
+find . -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
