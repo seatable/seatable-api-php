@@ -14,7 +14,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addPlugin()`
 
 ```php
-addPlugin($content_type, $plugin): object
+addPlugin($plugin): object
 ```
 
 Add Plugin
@@ -34,11 +34,10 @@ $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$content_type = multipart/form-data;; // string
 $plugin = "/path/to/file.txt"; // \SplFileObject | Path and file name to the plugin file.
 
 try {
-    $result = $apiInstance->addPlugin($content_type, $plugin);
+    $result = $apiInstance->addPlugin($plugin);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PluginsApi->addPlugin: ', $e->getMessage(), PHP_EOL;
@@ -49,7 +48,6 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **content_type** | **string**|  | [optional] |
 | **plugin** | **\SplFileObject****\SplFileObject**| Path and file name to the plugin file. | [optional] |
 
 ### Return type
@@ -209,7 +207,7 @@ AccountTokenAuth
 ## `updatePlugin()`
 
 ```php
-updatePlugin($plugin_id, $content_type, $plugin): object
+updatePlugin($plugin_id, $plugin): object
 ```
 
 Update Plugin
@@ -230,11 +228,10 @@ $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     $config
 );
 $plugin_id = 5; // int
-$content_type = multipart/form-data; boundary; // string
 $plugin = "/path/to/file.txt"; // \SplFileObject | Path and file name to the plugin file.
 
 try {
-    $result = $apiInstance->updatePlugin($plugin_id, $content_type, $plugin);
+    $result = $apiInstance->updatePlugin($plugin_id, $plugin);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PluginsApi->updatePlugin: ', $e->getMessage(), PHP_EOL;
@@ -246,7 +243,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **plugin_id** | **int**|  | |
-| **content_type** | **string**|  | [optional] |
 | **plugin** | **\SplFileObject****\SplFileObject**| Path and file name to the plugin file. | [optional] |
 
 ### Return type
