@@ -13,6 +13,4 @@ composer.phar
 
 # PHPUnit cache
 .phpunit.result.cache
-
-# local tests
 client_test

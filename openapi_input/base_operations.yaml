@@ -3,7 +3,7 @@ info:
   title: Base Operations (from 4.4)
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "4.4"
+  version: "5.0"
 servers:
   - url: "https://{server}"
     variables:
@@ -161,7 +161,7 @@ components:
       in: query
       schema:
         type: boolean
-      description: If 'true', the column's id will be converted to column names.
+      description: Determines if the columns are returned as their keys (false by default) or their names (true).
       example: true
     link_column_key:
       name: link_column_key
@@ -316,10 +316,20 @@ components:
         sql:
           type: string
           format: SQL-Query
-          description: SQL-Query to get rows from base
+          description: SQL-Query to get rows from base.
         convert_keys:
           type: boolean
-          description: Determines if the columns are returned as their keys (true) or their names (false by default).
+          description: Determines if the columns are returned as their keys (false by default) or their names (true).
+        parameters:
+          type: array
+          description: Parameters in SQL clause to avoid sql injection. Only needed, if you use `?` in the SQL statement. The parameters will replace the `?` according to their order in the array.
+          items:
+            oneOf:
+              - title: Add a String
+                type: string
+              - title: Add an integer
+                type: integer
+          example: ["Max", 12]
         server_only:
           type: boolean
           description: Show rows from normal and Big Data backend (false by default) or limit the output only to the normal backend (true).
@@ -329,7 +339,6 @@ components:
         server_only: false
       required:
         - sql
-        - convert_keys
 
     sql_query_response:
       type: object
@@ -1426,7 +1435,7 @@ components:
               id:
                 type: string
                 description: Select any unique id.
-                pattern: "^([A-Za-z0-9]){4}$"
+                pattern: "^([A-Za-z0-9]){6}$"
               name:
                 type: string
                 description: The name of your option.
@@ -1746,6 +1755,9 @@ components:
         level1_linked_column:
           type: string
           description: Name of the column in the linked table to look up.
+        level2_linked_column:
+          type: string
+          description: Name of the column in the linked table linked by level1_linked_column to look up. The type of level1_linked_column should be 'link'.
       required:
         - formula
         - link_column
@@ -2089,6 +2101,8 @@ components:
         new_column_type:
           type: string
           example: "number"
+        column_data:
+          type: object
       required:
         - op_type
         - table_name
@@ -2472,6 +2486,13 @@ paths:
         - `SELECT name, age, birthday FROM Family`
         - `SELECT name, age FROM Family ORDER BY name`
         - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)`
+        - `SELECT * FROM Family WHERE Name=? AND Age=?`
+
+        SELECT does not support column keys. You can only limit the output by column names.
+
+        > 📘 Avoid SQL injection
+        > 
+        > If you use `?` in your SQL-statement, you have to provide values to replace the placeholders with parameters. This protects against SQL injections. 
 
         > 🚧 Max return limit
         >
@@ -2626,7 +2647,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delete_row"
+              $ref: "#/components/schemas/delete_rows"
       responses:
         "200":
           description: OK

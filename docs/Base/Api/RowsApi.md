@@ -69,7 +69,7 @@ BaseTokenAuth
 ## `deleteRow()`
 
 ```php
-deleteRow($base_uuid, $delete_row): object
+deleteRow($base_uuid, $delete_rows): object
 ```
 
 Delete Row(s)
@@ -90,10 +90,10 @@ $apiInstance = new SeaTable\Client\Base\RowsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$delete_row = new \SeaTable\Client\Base\DeleteRow(); // \SeaTable\Client\Base\DeleteRow
+$delete_rows = new \SeaTable\Client\Base\DeleteRows(); // \SeaTable\Client\Base\DeleteRows
 
 try {
-    $result = $apiInstance->deleteRow($base_uuid, $delete_row);
+    $result = $apiInstance->deleteRow($base_uuid, $delete_rows);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling RowsApi->deleteRow: ', $e->getMessage(), PHP_EOL;
@@ -105,7 +105,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **delete_row** | [**\SeaTable\Client\Base\DeleteRow**](../Model/DeleteRow.md)|  | [optional] |
+| **delete_rows** | [**\SeaTable\Client\Base\DeleteRows**](../Model/DeleteRows.md)|  | [optional] |
 
 ### Return type
 
@@ -144,7 +144,7 @@ $apiInstance = new SeaTable\Client\Base\RowsApi(
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $row_id = Qtf7xPmoRaiFyQPO1aENTjb; // string | The id of the row.
 $table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
-$convert_keys = true; // bool | If 'true', the column's id will be converted to column names.
+$convert_keys = true; // bool | Determines if the columns are returned as their keys (false by default) or their names (true).
 
 try {
     $result = $apiInstance->getRow($base_uuid, $row_id, $table_name, $convert_keys);
@@ -161,7 +161,7 @@ try {
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **row_id** | **string**| The id of the row. | |
 | **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
-| **convert_keys** | **bool**| If &#39;true&#39;, the column&#39;s id will be converted to column names. | [optional] |
+| **convert_keys** | **bool**| Determines if the columns are returned as their keys (false by default) or their names (true). | [optional] |
 
 ### Return type
 
@@ -202,7 +202,7 @@ $table_name = Table1; // string | The name of the table to perform the operation
 $view_name = Default View; // string | The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
 $start = 0; // int | Starting position (number) of the returned rows. 0 by default.
 $limit = 100; // int | Number of rows that should be returned. 1000 by default.
-$convert_keys = true; // bool | If 'true', the column's id will be converted to column names.
+$convert_keys = true; // bool | Determines if the columns are returned as their keys (false by default) or their names (true).
 
 try {
     $result = $apiInstance->listRows($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys);
@@ -221,7 +221,7 @@ try {
 | **view_name** | **string**| The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. | [optional] |
 | **start** | **int**| Starting position (number) of the returned rows. 0 by default. | [optional] |
 | **limit** | **int**| Number of rows that should be returned. 1000 by default. | [optional] |
-| **convert_keys** | **bool**| If &#39;true&#39;, the column&#39;s id will be converted to column names. | [optional] |
+| **convert_keys** | **bool**| Determines if the columns are returned as their keys (false by default) or their names (true). | [optional] |
 
 ### Return type
 
@@ -294,7 +294,7 @@ querySQL($base_uuid, $sql_query): \SeaTable\Client\Base\SqlQueryResponse
 
 Query SeaTable with SQL
 
-SeaTable offers a SQL like interface that supports `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements.   If you are familiar with SQL, you will have no difficulties to use this endpoint because typical SQL-statements are supported.          This endpoint is the **most powerful** one that SeaTable can offer and it does not differentiate between the two SeaTable backend (normal and big data). Also the metadata of the table is returned.   > 📘 `INSERT` and big data >  > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.  The complete [SQL Reference](https://developer.seatable.io/scripts/sql/reference/) can be found documentation in the developer manual.   Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:  - `SELECT * FROM Family LIMIT 3` - `SELECT name, age, birthday FROM Family` - `SELECT name, age FROM Family ORDER BY name` - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)`  > 🚧 Max return limit > > The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement.
+SeaTable offers a SQL like interface that supports `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements.   If you are familiar with SQL, you will have no difficulties to use this endpoint because typical SQL-statements are supported.          This endpoint is the **most powerful** one that SeaTable can offer and it does not differentiate between the two SeaTable backend (normal and big data). Also the metadata of the table is returned.   > 📘 `INSERT` and big data >  > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.  The complete [SQL Reference](https://developer.seatable.io/scripts/sql/reference/) can be found documentation in the developer manual.   Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:  - `SELECT * FROM Family LIMIT 3` - `SELECT name, age, birthday FROM Family` - `SELECT name, age FROM Family ORDER BY name` - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)` - `SELECT * FROM Family WHERE Name=? AND Age=?`  SELECT does not support column keys. You can only limit the output by column names.  > 📘 Avoid SQL injection >  > If you use `?` in your SQL-statement, you have to provide values to replace the placeholders with parameters. This protects against SQL injections.   > 🚧 Max return limit > > The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement.
 
 ### Example
 
