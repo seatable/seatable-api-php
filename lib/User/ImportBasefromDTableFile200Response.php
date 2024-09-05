@@ -1,6 +1,6 @@
 <?php
 /**
- * ImportBasefromDTableFiled200Response
+ * ImportBasefromDTableFile200Response
  *
  * PHP version 7.4
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ImportBasefromDTableFiled200Response Class Doc Comment
+ * ImportBasefromDTableFile200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ImportBasefromDTableFiled200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ImportBasefromDTableFile200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ImportBasefromDTableFiled200Response implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'importBasefromDTableFiled_200_response';
+    protected static $openAPIModelName = 'importBasefromDTableFile_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class ImportBasefromDTableFiled200Response implements ModelInterface, ArrayAcces
       */
     protected static $openAPITypes = [
         'task_id' => 'string',
-        'table' => '\SeaTable\Client\User\ImportBasefromDTableFiled200ResponseTable'
+        'table' => '\SeaTable\Client\User\ImportBasefromDTableFile200ResponseTable'
     ];
 
     /**
@@ -325,7 +325,7 @@ class ImportBasefromDTableFiled200Response implements ModelInterface, ArrayAcces
     /**
      * Gets table
      *
-     * @return \SeaTable\Client\User\ImportBasefromDTableFiled200ResponseTable|null
+     * @return \SeaTable\Client\User\ImportBasefromDTableFile200ResponseTable|null
      */
     public function getTable()
     {
@@ -335,7 +335,7 @@ class ImportBasefromDTableFiled200Response implements ModelInterface, ArrayAcces
     /**
      * Sets table
      *
-     * @param \SeaTable\Client\User\ImportBasefromDTableFiled200ResponseTable|null $table table
+     * @param \SeaTable\Client\User\ImportBasefromDTableFile200ResponseTable|null $table table
      *
      * @return self
      */

@@ -143,12 +143,12 @@ class ImportExportApiTest extends TestCase
     }
 
     /**
-     * Test case for importBasefromDTableFiled
+     * Test case for importBasefromDTableFile
      *
      * Import Base from dtable file.
      *
      */
-    public function testImportBasefromDTableFiled()
+    public function testImportBasefromDTableFile()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

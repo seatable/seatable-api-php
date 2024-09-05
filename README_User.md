@@ -85,7 +85,7 @@ Class | Method | HTTP request | Description
 *ImportExportApi* | [**exportBigDataView**](docs/User/Api/ImportExportApi.md#exportbigdataview) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/convert-big-data-view-to-excel/ | Export Big Data View to Excel
 *ImportExportApi* | [**exportTable**](docs/User/Api/ImportExportApi.md#exporttable) | **GET** /api/v2.1/workspace/{workspace_id}/synchronous-export/export-table-to-excel/ | Export Table
 *ImportExportApi* | [**exportView**](docs/User/Api/ImportExportApi.md#exportview) | **GET** /api/v2.1/workspace/{workspace_id}/synchronous-export/export-view-to-excel/ | Export View
-*ImportExportApi* | [**importBasefromDTableFiled**](docs/User/Api/ImportExportApi.md#importbasefromdtablefiled) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file
+*ImportExportApi* | [**importBasefromDTableFile**](docs/User/Api/ImportExportApi.md#importbasefromdtablefile) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file
 *ImportExportApi* | [**importBasefromFile**](docs/User/Api/ImportExportApi.md#importbasefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-base/ | Import Base from xlsx or csv
 *ImportExportApi* | [**importTableFromFile**](docs/User/Api/ImportExportApi.md#importtablefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-table/ | Import Table from xlsx or csv
 *ImportExportApi* | [**updateFromFile**](docs/User/Api/ImportExportApi.md#updatefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from xlsx or csv

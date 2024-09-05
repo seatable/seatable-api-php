@@ -10,7 +10,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**exportBigDataView()**](ImportExportApi.md#exportBigDataView) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/convert-big-data-view-to-excel/ | Export Big Data View to Excel |
 | [**exportTable()**](ImportExportApi.md#exportTable) | **GET** /api/v2.1/workspace/{workspace_id}/synchronous-export/export-table-to-excel/ | Export Table |
 | [**exportView()**](ImportExportApi.md#exportView) | **GET** /api/v2.1/workspace/{workspace_id}/synchronous-export/export-view-to-excel/ | Export View |
-| [**importBasefromDTableFiled()**](ImportExportApi.md#importBasefromDTableFiled) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file |
+| [**importBasefromDTableFile()**](ImportExportApi.md#importBasefromDTableFile) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file |
 | [**importBasefromFile()**](ImportExportApi.md#importBasefromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-base/ | Import Base from xlsx or csv |
 | [**importTableFromFile()**](ImportExportApi.md#importTableFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-table/ | Import Table from xlsx or csv |
 | [**updateFromFile()**](ImportExportApi.md#updateFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from xlsx or csv |
@@ -334,10 +334,10 @@ AccountTokenAuth
 
 
 
-## `importBasefromDTableFiled()`
+## `importBasefromDTableFile()`
 
 ```php
-importBasefromDTableFiled($workspace_id, $dtable): \SeaTable\Client\User\ImportBasefromDTableFiled200Response
+importBasefromDTableFile($workspace_id, $dtable): \SeaTable\Client\User\ImportBasefromDTableFile200Response
 ```
 
 Import Base from dtable file
@@ -361,10 +361,10 @@ $workspace_id = 127; // int | id of your workspace.
 $dtable = "/path/to/file.txt"; // \SplFileObject
 
 try {
-    $result = $apiInstance->importBasefromDTableFiled($workspace_id, $dtable);
+    $result = $apiInstance->importBasefromDTableFile($workspace_id, $dtable);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling ImportExportApi->importBasefromDTableFiled: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling ImportExportApi->importBasefromDTableFile: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -377,7 +377,7 @@ try {
 
 ### Return type
 
-[**\SeaTable\Client\User\ImportBasefromDTableFiled200Response**](../Model/ImportBasefromDTableFiled200Response.md)
+[**\SeaTable\Client\User\ImportBasefromDTableFile200Response**](../Model/ImportBasefromDTableFile200Response.md)
 
 ### Authorization
 

@@ -88,7 +88,7 @@ class ImportExportApi
         'exportView' => [
             'application/json',
         ],
-        'importBasefromDTableFiled' => [
+        'importBasefromDTableFile' => [
             'multipart/form-data',
         ],
         'importBasefromFile' => [
@@ -1991,40 +1991,40 @@ class ImportExportApi
     }
 
     /**
-     * Operation importBasefromDTableFiled
+     * Operation importBasefromDTableFile
      *
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $dtable dtable (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFiled'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\User\ImportBasefromDTableFiled200Response
+     * @return \SeaTable\Client\User\ImportBasefromDTableFile200Response
      */
-    public function importBasefromDTableFiled($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFiled'][0])
+    public function importBasefromDTableFile($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFile'][0])
     {
-        list($response) = $this->importBasefromDTableFiledWithHttpInfo($workspace_id, $dtable, $contentType);
+        list($response) = $this->importBasefromDTableFileWithHttpInfo($workspace_id, $dtable, $contentType);
         return $response;
     }
 
     /**
-     * Operation importBasefromDTableFiledWithHttpInfo
+     * Operation importBasefromDTableFileWithHttpInfo
      *
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $dtable (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFiled'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\User\ImportBasefromDTableFiled200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\ImportBasefromDTableFile200Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function importBasefromDTableFiledWithHttpInfo($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFiled'][0])
+    public function importBasefromDTableFileWithHttpInfo($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFile'][0])
     {
-        $request = $this->importBasefromDTableFiledRequest($workspace_id, $dtable, $contentType);
+        $request = $this->importBasefromDTableFileRequest($workspace_id, $dtable, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2063,11 +2063,11 @@ class ImportExportApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\SeaTable\Client\User\ImportBasefromDTableFiled200Response' === '\SplFileObject') {
+                    if ('\SeaTable\Client\User\ImportBasefromDTableFile200Response' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\User\ImportBasefromDTableFiled200Response' !== 'string') {
+                        if ('\SeaTable\Client\User\ImportBasefromDTableFile200Response' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2085,13 +2085,13 @@ class ImportExportApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\User\ImportBasefromDTableFiled200Response', []),
+                        ObjectSerializer::deserialize($content, '\SeaTable\Client\User\ImportBasefromDTableFile200Response', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SeaTable\Client\User\ImportBasefromDTableFiled200Response';
+            $returnType = '\SeaTable\Client\User\ImportBasefromDTableFile200Response';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2124,7 +2124,7 @@ class ImportExportApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SeaTable\Client\User\ImportBasefromDTableFiled200Response',
+                        '\SeaTable\Client\User\ImportBasefromDTableFile200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2135,20 +2135,20 @@ class ImportExportApi
     }
 
     /**
-     * Operation importBasefromDTableFiledAsync
+     * Operation importBasefromDTableFileAsync
      *
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $dtable (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFiled'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importBasefromDTableFiledAsync($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFiled'][0])
+    public function importBasefromDTableFileAsync($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFile'][0])
     {
-        return $this->importBasefromDTableFiledAsyncWithHttpInfo($workspace_id, $dtable, $contentType)
+        return $this->importBasefromDTableFileAsyncWithHttpInfo($workspace_id, $dtable, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2157,21 +2157,21 @@ class ImportExportApi
     }
 
     /**
-     * Operation importBasefromDTableFiledAsyncWithHttpInfo
+     * Operation importBasefromDTableFileAsyncWithHttpInfo
      *
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $dtable (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFiled'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importBasefromDTableFiledAsyncWithHttpInfo($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFiled'][0])
+    public function importBasefromDTableFileAsyncWithHttpInfo($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFile'][0])
     {
-        $returnType = '\SeaTable\Client\User\ImportBasefromDTableFiled200Response';
-        $request = $this->importBasefromDTableFiledRequest($workspace_id, $dtable, $contentType);
+        $returnType = '\SeaTable\Client\User\ImportBasefromDTableFile200Response';
+        $request = $this->importBasefromDTableFileRequest($workspace_id, $dtable, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2210,26 +2210,26 @@ class ImportExportApi
     }
 
     /**
-     * Create request for operation 'importBasefromDTableFiled'
+     * Create request for operation 'importBasefromDTableFile'
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $dtable (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFiled'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function importBasefromDTableFiledRequest($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFiled'][0])
+    public function importBasefromDTableFileRequest($workspace_id, $dtable = null, string $contentType = self::contentTypes['importBasefromDTableFile'][0])
     {
 
         // verify the required parameter 'workspace_id' is set
         if ($workspace_id === null || (is_array($workspace_id) && count($workspace_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $workspace_id when calling importBasefromDTableFiled'
+                'Missing the required parameter $workspace_id when calling importBasefromDTableFile'
             );
         }
         if ($workspace_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$workspace_id" when calling ImportExportApi.importBasefromDTableFiled, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$workspace_id" when calling ImportExportApi.importBasefromDTableFile, must be bigger than or equal to 1.');
         }
         
 

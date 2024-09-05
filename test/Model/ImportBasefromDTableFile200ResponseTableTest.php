@@ -1,6 +1,6 @@
 <?php
 /**
- * ImportBasefromDTableFiled200ResponseTableTest
+ * ImportBasefromDTableFile200ResponseTableTest
  *
  * PHP version 7.4
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ImportBasefromDTableFiled200ResponseTableTest Class Doc Comment
+ * ImportBasefromDTableFile200ResponseTableTest Class Doc Comment
  *
  * @category    Class
- * @description ImportBasefromDTableFiled200ResponseTable
+ * @description ImportBasefromDTableFile200ResponseTable
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ImportBasefromDTableFiled200ResponseTableTest extends TestCase
+class ImportBasefromDTableFile200ResponseTableTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class ImportBasefromDTableFiled200ResponseTableTest extends TestCase
     }
 
     /**
-     * Test "ImportBasefromDTableFiled200ResponseTable"
+     * Test "ImportBasefromDTableFile200ResponseTable"
      */
-    public function testImportBasefromDTableFiled200ResponseTable()
+    public function testImportBasefromDTableFile200ResponseTable()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

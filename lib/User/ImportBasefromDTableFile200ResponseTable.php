@@ -1,6 +1,6 @@
 <?php
 /**
- * ImportBasefromDTableFiled200ResponseTable
+ * ImportBasefromDTableFile200ResponseTable
  *
  * PHP version 7.4
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ImportBasefromDTableFiled200ResponseTable Class Doc Comment
+ * ImportBasefromDTableFile200ResponseTable Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ImportBasefromDTableFiled200ResponseTable implements ModelInterface, ArrayAccess, \JsonSerializable
+class ImportBasefromDTableFile200ResponseTable implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ImportBasefromDTableFiled200ResponseTable implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'importBasefromDTableFiled_200_response_table';
+    protected static $openAPIModelName = 'importBasefromDTableFile_200_response_table';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
