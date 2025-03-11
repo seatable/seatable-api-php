@@ -3,7 +3,7 @@ info:
   title: Account Operations - User
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.0"
+  version: "5.2"
 servers:
   - url: "https://{server}"
     variables:
@@ -69,6 +69,7 @@ components:
       in: query
       schema:
         type: string
+        pattern: "^[A-Za-z0-9]{4}$"
       required: true
       description: id of view, string
       example: "Jz4d"
@@ -77,7 +78,6 @@ components:
       in: query
       schema:
         type: string
-        pattern: "^[a-z0-9]{4}$"
       required: true
       description: name of view, required, string
       example: "Default View"
@@ -4102,82 +4102,6 @@ paths:
                 type: object
               example:
                 success: true
-  /api/v2.1/workspace/{workspace_id}/import-dtable/:
-    post:
-      tags:
-        - Import & Export
-      summary: Import Base from dtable file
-      operationId: importBasefromDTableFile
-      description: >-
-        With this request, you can create a base by uploading a .dtable file.
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                dtable:
-                  $ref: "#/components/schemas/dtable"
-      security:
-        - AccountTokenAuth: []
-      parameters:
-        - $ref: "#/components/parameters/workspace_id"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  task_id:
-                    type: string
-                    format: uuid
-                  table:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      workspace_id:
-                        type: integer
-                      uuid:
-                        type: string
-                        format: uuid
-                      name:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      updated_at:
-                        type: string
-                        format: date-time
-                      color:
-                        type: string
-                        nullable: true
-                      text_color:
-                        type: string
-                        nullable: true
-                      icon:
-                        type: string
-                        nullable: true
-                      is_encrypted:
-                        type: boolean
-                      in_storage:
-                        type: boolean
-              example:
-                task_id: "50a61dbe-7859-43ce-9998-fab221ef589e"
-                table:
-                  id: 12
-                  workspace_id: 2
-                  uuid: "ac36a16e-d2ab-410e-897d-087cba95fc71"
-                  name: "Test base for import"
-                  created_at: "2024-09-04T17:40:00+02:00"
-                  updated_at: "2024-09-04T17:40:00+02:00"
-                  color: null
-                  text_color: null
-                  icon: null
-                  is_encrypted: false
-                  in_storage: true
   /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/:
     post:
       tags:
@@ -5908,36 +5832,23 @@ paths:
         - Forms
       summary: Create Form
       operationId: createForm
-      description: >-
+      description: |
         Create a form in the base.
-
 
         To customize this form, you can use the following request body in the
         `form_config` parameter and:
 
-
         * Define the name of the form;
-
         * Choose which columns to include in it;
-
         * Set required fields;
-
         * Add descriptions;
-
         * Add remarks;
-
         * Send notifications;
-
         * Add a notice on the top of the form;
-
         * Add a notice on the bottom of the form;
-
         * Show a notice after submission;
-
         * Add a redirect link after submission;
-
         * Set a submission deadline.
-
 
         ```
             {
@@ -5992,6 +5903,11 @@ paths:
                     }
             }
         ```
+
+        > 🚧 Resolving the White Page Issue in Edit Mode
+        >
+        > If you cannot open the newly generated form in edit mode, please check the browser console for error messages. Typically, the page remains blank if a configuration option is missing.
+
       requestBody:
         content:
           multipart/form-data:
@@ -7641,6 +7557,51 @@ paths:
                   color: null
                   text_color: null
                   icon: null
+  /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/archive-backups/:
+    get:
+      tags:
+        - Snapshots
+      summary: List Big Data Backups
+      operationId: listBigDataBackups
+      description: List all all available big data backups.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/workspace_id"
+        - $ref: "#/components/parameters/base_name"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                backup_list:
+                  - dtable_name: "Example"
+                    version: "16"
+                    ctime: "2021-03-10T16:01:12+00:00"
+  /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/big-data-state/:
+    get:
+      tags:
+        - Snapshots
+      summary: Get Big Data Status
+      operationId: getBigDataStatus
+      description: Verifies if Big Data is activated in the base.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/workspace_id"
+        - $ref: "#/components/parameters/base_name"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                big_data_enabled: true
 
   /api/v2.1/universal-apps/:
     get:
@@ -7943,3 +7904,92 @@ paths:
                     row_data: [...]
                     op_app: null
                     avatar_url: "https://cloud.seatable.io/media/avatars/default.png"
+  /api/v2.1/dtables/{base_uuid}/big-data-operation-logs/:
+    get:
+      tags: [Activities & Logs]
+      summary: Get Big Data Operation Logs
+
+      operationId: getBigDataOperationLogs
+      description: Fetches big data operation logs for a specified base identified by its base_uuid. Every page returns 100 entries by default.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: Successful response with the queried big data operation logs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  operations:
+                    type: array
+                    description: A list of big data operation logs.
+                    items:
+                      type: object
+                      properties:
+                        dtable_uuid:
+                          type: string
+                          format: uuid
+                          description: The UUID of the dtable where the operation occurred.
+                          example: "36b5bf9994054ef2bc33ba762deaecb7"
+                        id:
+                          type: integer
+                          description: The ID of the operation.
+                          example: 8
+                        op_time:
+                          type: integer
+                          description: The Unix timestamp of when the operation occurred.
+                          example: 1724039595
+                        author:
+                          type: string
+                          description: The username of the person who performed the operation.
+                          example: "509fe338ed4f44099158d7143e4e4de3@auth.local"
+                        operation:
+                          type: object
+                          description: Details of the specific operation.
+                          properties:
+                            row_id:
+                              type: string
+                              description: The ID of the row affected by the operation.
+                              example: "SQNJkddjSDGBdWBtdLZC6g"
+                            table_id:
+                              type: string
+                              description: The ID of the table affected by the operation.
+                              example: "plBR"
+                            op_type:
+                              type: string
+                              description: The type of operation (e.g., `update_row`, `add_row`).
+                              example: "update_row"
+                            updated:
+                              type: object
+                              description: The updated values in the row after the operation.
+                              additionalProperties:
+                                type: string
+                              example:
+                                _last_modifier: "509fe338ed4f44099158d7143e4e4de3@auth.local"
+                                _mtime: "2024-08-19T11:53:15.971162964+08:00"
+                                h1Xs: "wwww"
+                            old_row:
+                              type: object
+                              description: The original values in the row before the operation.
+                              additionalProperties:
+                                type: string
+                              example:
+                                _last_modifier: "509fe338ed4f44099158d7143e4e4de3@auth.local"
+                                _mtime: "2024-08-19T11:53:14.969+08:00"
+                                h1Xs: null
+                            row_data:
+                              type: object
+                              description: Data of the row being added (for `add_row` operation).
+                              additionalProperties:
+                                type: string
+                              example:
+                                _creator: "509fe338ed4f44099158d7143e4e4de3@auth.local"
+                                _ctime: "2024-08-19T11:53:13.103871879+08:00"
+                                _id: "SQNJkddjSDGBdWBtdLZC6g"
+                                _last_modifier: "509fe338ed4f44099158d7143e4e4de3@auth.local"
+                                _mtime: "2024-08-19T11:53:13.103871879+08:00"

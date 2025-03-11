@@ -4,10 +4,116 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**autoLinkTask()**](LinksApi.md#autoLinkTask) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/auto-link-task/ | Auto Link task |
+| [**autoLinks()**](LinksApi.md#autoLinks) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/auto-links/ | Auto Links |
 | [**createRowLink()**](LinksApi.md#createRowLink) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Create Row Link(s) |
 | [**deleteRowLink()**](LinksApi.md#deleteRowLink) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Delete Row Link(s) |
 | [**listRowLinks()**](LinksApi.md#listRowLinks) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/query-links/ | List Row Links |
 | [**updateRowLink()**](LinksApi.md#updateRowLink) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Update Row Link(s) |
+
+
+## `autoLinkTask()`
+
+```php
+autoLinkTask($base_uuid, $body): object
+```
+
+Auto Link task
+
+Query the status of auto add links task.There are 3 different status: - success - failed - running
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\Base\LinksApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$body = 'body_example'; // string
+
+try {
+    $result = $apiInstance->autoLinkTask($base_uuid, $body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling LinksApi->autoLinkTask: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **body** | **string**|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+BaseTokenAuth
+
+
+
+
+## `autoLinks()`
+
+```php
+autoLinks($base_uuid, $match_link_columns): object
+```
+
+Auto Links
+
+Automatically create link relationships.  The caller needs to create a link column before calling the API,  supporting both archived and unarchived data. It will return a task ID, by quering which you can get the status of the link creation in the backend wihtin 5 minutes. The matched data in the link column in the 2 tables must have the similar  data structure (not same column type). For example, the text column can match email, auto-number or url type column, and so on. Currently, there are a few restrictions: - Formula and link-formula columns are not supported as matching columns - Single-select columns cannot be matched with text columns.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\Base\LinksApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$match_link_columns = new \SeaTable\Client\Base\MatchLinkColumns(); // \SeaTable\Client\Base\MatchLinkColumns
+
+try {
+    $result = $apiInstance->autoLinks($base_uuid, $match_link_columns);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling LinksApi->autoLinks: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **match_link_columns** | [**\SeaTable\Client\Base\MatchLinkColumns**](../Model/MatchLinkColumns.md)|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+BaseTokenAuth
+
+
 
 
 ## `createRowLink()`

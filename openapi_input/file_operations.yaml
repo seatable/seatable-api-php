@@ -3,7 +3,7 @@ info:
   title: File Operations
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.0"
+  version: "5.2"
 servers:
   - url: "https://{server}"
     variables:
@@ -215,7 +215,12 @@ paths:
       summary: Get File Download Link
       operationId: getFileDownloadLink
       description: |
-        Get the file download link of a base's attachment.
+        Get the file download link of a base's attachment. 
+
+        > 📘 The download link is only valid for a short time
+        > 
+        > The download link is only valid for some hours. After that the download link must be created again. We recommend
+        to store images on public hosting services like AWS S3 and saving only the links in SeaTable, allowing direct use of image links in web pages.
 
       security:
         - ApiTokenAuth: []
@@ -231,6 +236,28 @@ paths:
               example:
                 download_link: >-
                   https://cloud.seatable.io/seafhttp/files/12345678-1234-4672-834c-4eca40dc104b/test.png
+  /api/v2.1/dtable/app-asset/:
+    delete:
+      tags:
+        - Files & Images
+      summary: Delete a Base Asset
+      operationId: DeleteBaseAsset
+      description: |
+        Delete a base's attachment.
+
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/file_path"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
 
   # Files & Images (Custom Folder)
   /api/v2.1/dtable/custom/app-asset-dir/:
@@ -280,6 +307,26 @@ paths:
                   file_size: 11583
                   last_update: "2023-04-11T14:59:53+08:00"
                   uuid: "2bbe9499-e1df-4086-bdd3-d130d6c91bd3"
+    delete:
+      tags: [Files & Images (Custom Folder)]
+      summary: Delete a Base Asset in Custom Folder
+      operationId: DeleteBaseCustomFolderAsset
+      description: |
+        Delete a base's attachment in custom folder.
+
+      security:
+        - ApiTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/custom_folder_path_with_filename"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
   /api/v2.1/dtable/custom/app-upload-link/:
     get:
       tags: [Files & Images (Custom Folder)]

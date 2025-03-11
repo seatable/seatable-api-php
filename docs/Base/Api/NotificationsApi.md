@@ -8,6 +8,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**listBaseNotifications()**](NotificationsApi.md#listBaseNotifications) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | List Base Notifications |
 | [**markBaseNotificationAsSeen()**](NotificationsApi.md#markBaseNotificationAsSeen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/{notification_id}/ | Mark Notification Read/Unread |
 | [**markBaseNotificationsAsSeen()**](NotificationsApi.md#markBaseNotificationsAsSeen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | Mark Base Notifications as seen |
+| [**sendToastNotification()**](NotificationsApi.md#sendToastNotification) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/ui-toasts/ | Send toast notification |
 
 
 ## `deleteBaseNotifications()`
@@ -204,6 +205,58 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **seen** | **bool**| true or false for read or unread. Otherwise invalid. | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+BaseTokenAuth
+
+
+
+
+## `sendToastNotification()`
+
+```php
+sendToastNotification($base_uuid, $send_toast_notification_request): object
+```
+
+Send toast notification
+
+Send a toast notification
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\Base\NotificationsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$send_toast_notification_request = new \SeaTable\Client\Base\SendToastNotificationRequest(); // \SeaTable\Client\Base\SendToastNotificationRequest
+
+try {
+    $result = $apiInstance->sendToastNotification($base_uuid, $send_toast_notification_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling NotificationsApi->sendToastNotification: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **send_toast_notification_request** | [**\SeaTable\Client\Base\SendToastNotificationRequest**](../Model/SendToastNotificationRequest.md)|  | [optional] |
 
 ### Return type
 

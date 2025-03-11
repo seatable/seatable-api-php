@@ -6,6 +6,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | ------------- | ------------- | ------------- |
 | [**getBaseActivities()**](ActivitiesLogsApi.md#getBaseActivities) | **GET** /api/v2.1/dtable-activities/ | Get Base Activities |
 | [**getBaseActivityDetails()**](ActivitiesLogsApi.md#getBaseActivityDetails) | **GET** /api/v2.1/dtable-activities/detail | Get Base Activity Details |
+| [**getBigDataOperationLogs()**](ActivitiesLogsApi.md#getBigDataOperationLogs) | **GET** /api/v2.1/dtables/{base_uuid}/big-data-operation-logs/ | Get Big Data Operation Logs |
 
 
 ## `getBaseActivities()`
@@ -110,6 +111,60 @@ try {
 ### Return type
 
 **object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `getBigDataOperationLogs()`
+
+```php
+getBigDataOperationLogs($base_uuid, $page, $per_page): \SeaTable\Client\User\GetBigDataOperationLogs200Response
+```
+
+Get Big Data Operation Logs
+
+Fetches big data operation logs for a specified base identified by its base_uuid. Every page returns 100 entries by default.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\User\ActivitiesLogsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$page = 1; // int
+$per_page = 2; // int
+
+try {
+    $result = $apiInstance->getBigDataOperationLogs($base_uuid, $page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ActivitiesLogsApi->getBigDataOperationLogs: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **page** | **int**|  | [optional] |
+| **per_page** | **int**|  | [optional] |
+
+### Return type
+
+[**\SeaTable\Client\User\GetBigDataOperationLogs200Response**](../Model/GetBigDataOperationLogs200Response.md)
 
 ### Authorization
 

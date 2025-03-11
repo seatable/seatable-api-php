@@ -5,7 +5,7 @@
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActivitiesLogsApi* | [**getBaseActivityLog**](docs/Base/Api/ActivitiesLogsApi.md#getbaseactivitylog) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/operations/ | Get Base Activity Log
-*ActivitiesLogsApi* | [**listDeleteOperations**](docs/Base/Api/ActivitiesLogsApi.md#listdeleteoperations) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/ | List Deleted Operations
+*ActivitiesLogsApi* | [**listDeleteOperations**](docs/Base/Api/ActivitiesLogsApi.md#listdeleteoperations) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/ | List Delete Operations
 *ActivitiesLogsApi* | [**listRowActivities**](docs/Base/Api/ActivitiesLogsApi.md#listrowactivities) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/activities/ | List Row Activities
 *BaseInfoApi* | [**getBaseInfo**](docs/Base/Api/BaseInfoApi.md#getbaseinfo) | **GET** /api-gateway/api/v2/dtables/{base_uuid} | Get Base Info
 *BaseInfoApi* | [**getMetadata**](docs/Base/Api/BaseInfoApi.md#getmetadata) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/metadata/ | Get Metadata
@@ -22,6 +22,8 @@ Class | Method | HTTP request | Description
 *ColumnsApi* | [**updateColumn**](docs/Base/Api/ColumnsApi.md#updatecolumn) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/columns/ | Update Column
 *ColumnsApi* | [**updateColumnCascade**](docs/Base/Api/ColumnsApi.md#updatecolumncascade) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/column-cascade-settings/ | Update Column Cascade Settings
 *ColumnsApi* | [**updateSelectOption**](docs/Base/Api/ColumnsApi.md#updateselectoption) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/column-options/ | Update Single/Multiple Select Options
+*LinksApi* | [**autoLinkTask**](docs/Base/Api/LinksApi.md#autolinktask) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/auto-link-task/ | Auto Link task
+*LinksApi* | [**autoLinks**](docs/Base/Api/LinksApi.md#autolinks) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/auto-links/ | Auto Links
 *LinksApi* | [**createRowLink**](docs/Base/Api/LinksApi.md#createrowlink) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Create Row Link(s)
 *LinksApi* | [**deleteRowLink**](docs/Base/Api/LinksApi.md#deleterowlink) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/links/ | Delete Row Link(s)
 *LinksApi* | [**listRowLinks**](docs/Base/Api/LinksApi.md#listrowlinks) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/query-links/ | List Row Links
@@ -30,6 +32,7 @@ Class | Method | HTTP request | Description
 *NotificationsApi* | [**listBaseNotifications**](docs/Base/Api/NotificationsApi.md#listbasenotifications) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | List Base Notifications
 *NotificationsApi* | [**markBaseNotificationAsSeen**](docs/Base/Api/NotificationsApi.md#markbasenotificationasseen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/{notification_id}/ | Mark Notification Read/Unread
 *NotificationsApi* | [**markBaseNotificationsAsSeen**](docs/Base/Api/NotificationsApi.md#markbasenotificationsasseen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | Mark Base Notifications as seen
+*NotificationsApi* | [**sendToastNotification**](docs/Base/Api/NotificationsApi.md#sendtoastnotification) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/ui-toasts/ | Send toast notification
 *RowCommentsApi* | [**deleteComment**](docs/Base/Api/RowCommentsApi.md#deletecomment) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment
 *RowCommentsApi* | [**getComment**](docs/Base/Api/RowCommentsApi.md#getcomment) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment
 *RowCommentsApi* | [**getRowCommentsCount**](docs/Base/Api/RowCommentsApi.md#getrowcommentscount) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-count/ | Get Row Comments Count
@@ -46,6 +49,7 @@ Class | Method | HTTP request | Description
 *SnapshotsApi* | [**createSnapshot**](docs/Base/Api/SnapshotsApi.md#createsnapshot) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/snapshot/ | Create Snapshot
 *TablesApi* | [**createTable**](docs/Base/Api/TablesApi.md#createtable) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/tables/ | Create Table
 *TablesApi* | [**deleteTable**](docs/Base/Api/TablesApi.md#deletetable) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/tables/ | Delete Table
+*TablesApi* | [**duplicateTable**](docs/Base/Api/TablesApi.md#duplicatetable) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/tables/duplicate-table/ | Duplicate Table
 *TablesApi* | [**renameTable**](docs/Base/Api/TablesApi.md#renametable) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/tables/ | Rename Table
 *ViewsApi* | [**createView**](docs/Base/Api/ViewsApi.md#createview) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/views/ | Create View
 *ViewsApi* | [**deleteView**](docs/Base/Api/ViewsApi.md#deleteview) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/views/{view_name}/ | Delete View
@@ -58,5 +62,5 @@ Class | Method | HTTP request | Description
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `5.0`
+- API version: `5.2`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

@@ -116,7 +116,7 @@ AccountTokenAuth
 ## `listAllBases()`
 
 ```php
-listAllBases($per_page, $page)
+listAllBases($per_page, $page): object
 ```
 
 List All Bases
@@ -138,7 +138,8 @@ $per_page = 25; // int | The number of results that should be returned. If no va
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 
 try {
-    $apiInstance->listAllBases($per_page, $page);
+    $result = $apiInstance->listAllBases($per_page, $page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BasesApi->listAllBases: ', $e->getMessage(), PHP_EOL;
 }
@@ -153,7 +154,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

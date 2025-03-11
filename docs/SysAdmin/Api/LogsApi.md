@@ -5,7 +5,9 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**listAbuseReports()**](LogsApi.md#listAbuseReports) | **GET** /api/v2.1/admin/abuse-reports/ | List Abuse Reports |
+| [**listAuditLogs()**](LogsApi.md#listAuditLogs) | **GET** /api/v2.1/admin/audit-logs/ | List Audit Logs |
 | [**listEmailLogs()**](LogsApi.md#listEmailLogs) | **GET** /api/v2.1/admin/email-sending-logs/ | List Email Logs |
+| [**listFileAccessLogs()**](LogsApi.md#listFileAccessLogs) | **GET** /api/v2.1/admin/file-access-logs/ | List File Access Logs |
 | [**listLoginLogs()**](LogsApi.md#listLoginLogs) | **GET** /api/v2.1/admin/logs/login-logs/ | List Login Logs |
 | [**listRegistrationLogs()**](LogsApi.md#listRegistrationLogs) | **GET** /api/v2.1/admin/registration-logs/ | List Registration Logs |
 | [**updateAbuseReport()**](LogsApi.md#updateAbuseReport) | **PUT** /api/v2.1/admin/abuse-reports/{abuse_report_id}/ | Update Abuse Report |
@@ -58,6 +60,58 @@ AccountTokenAuth
 
 
 
+## `listAuditLogs()`
+
+```php
+listAuditLogs($page, $per_page): \SeaTable\Client\SysAdmin\ListAuditLogs200Response
+```
+
+List Audit Logs
+
+Fetches audit logs for the system administrator.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+
+try {
+    $result = $apiInstance->listAuditLogs($page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling LogsApi->listAuditLogs: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+
+### Return type
+
+[**\SeaTable\Client\SysAdmin\ListAuditLogs200Response**](../Model/ListAuditLogs200Response.md)
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
 ## `listEmailLogs()`
 
 ```php
@@ -102,6 +156,57 @@ try {
 ### Return type
 
 **object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `listFileAccessLogs()`
+
+```php
+listFileAccessLogs($page, $per_page)
+```
+
+List File Access Logs
+
+Returns a list of accessed files.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+
+try {
+    $apiInstance->listFileAccessLogs($page, $per_page);
+} catch (Exception $e) {
+    echo 'Exception when calling LogsApi->listFileAccessLogs: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 

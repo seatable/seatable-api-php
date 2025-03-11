@@ -3,7 +3,7 @@ info:
   title: "Account Operations: System admin"
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.0"
+  version: "5.2"
 servers:
   - url: "https://{server}"
     variables:
@@ -1368,10 +1368,35 @@ paths:
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
       responses:
-        "403":
-          description: Successful response
+        "200":
+          description: OK
           content:
-            application/json: {}
+            application/json:
+              schema:
+                type: object
+              example:
+                page_info:
+                  has_next_page: false
+                  current_page: 1
+                dtables:
+                  - id: 6
+                    workspace_id: 1
+                    uuid: "0558d382-ef80-4d5d-9eb4-e682a2eaa99d"
+                    name: "invoices"
+                    created_at: "2024-09-03T23:50:50+02:00"
+                    updated_at: "2024-12-09T16:30:14+01:00"
+                    color: "#4CAF50"
+                    text_color: null
+                    icon: null
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: -1
+                    email: "1bd28d36f01840f7a4db3d813851b951@auth.local"
+                    group_id: -1
+                    owner: "admin"
+                    owner_deleted: false
+                    file_size: 4239
+                    rows_count: 23
   /api/v2.1/admin/dtable/{base_uuid}/:
     delete:
       tags:
@@ -3248,6 +3273,126 @@ paths:
                 description: This is a test
                 handled: true
                 dtable_name: Guest registration
+  /api/v2.1/admin/audit-logs/:
+    get:
+      tags:
+        - Logs
+      summary: List Audit Logs
+      operationId: listAuditLogs
+      description: Fetches audit logs for the system administrator.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: Successful response with the queried audit logs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audit_log_list:
+                    type: array
+                    description: A list of big data operation logs.
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                          description: The username associated with the operation.
+                          example: "509fe338ed4f44099158d7143e4e4de3@auth.local"
+                        name:
+                          type: string
+                          description: The name of the user who performed the operation.
+                          example: "admin"
+                        operation:
+                          type: string
+                          description: The type of operation performed.
+                          example: "group_delete"
+                        org_id:
+                          type: integer
+                          description: The ID of the organization associated with the operation.
+                          example: 0
+                        detail:
+                          type: object
+                          description: Additional details about the operation.
+                          properties:
+                            id:
+                              type: integer
+                              description: The ID associated with the detail of the operation.
+                              example: 17
+                            name:
+                              type: string
+                              description: The name associated with the detail of the operation.
+                              example: "xxoooaaa"
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: The timestamp of when the operation occurred.
+                          example: "2024-08-14T15:23:24+08:00"
+                        org_name:
+                          type: string
+                          description: The name of the organization associated with the operation.
+                          example: ""
+                  total_count:
+                    type: integer
+                    description: The total number of logs available.
+                    example: 15
+  /api/v2.1/admin/file-access-logs/:
+    get:
+      tags:
+        - Logs
+      summary: List File Access Logs
+      operationId: listFileAccessLogs
+      description: Returns a list of accessed files.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                {
+                  "file_access_log_list": [
+                    {
+                      "timestamp": "2024-09-27T09:17:38+08:00",
+                      "etype": "download",
+                      "device": "",
+                      "user": "af57b7dda06b4928b255339d92294853@auth.local",
+                      "name": "org_admin1",
+                      "contact_email": "org_admin1@qq.com",
+                      "ip": "172.18.0.1",
+                      "org_id": 1,
+                      "dtable_uuid": "8e7ad4a8-73dc-4be4-abae-057fd5203a0e",
+                      "file_path": "/custom/aaa (1) (1).md",
+                      "dtable_name": "1\u5bfc\u5165\u534f\u4f5c\u4eba",
+                      "org_name": "org1",
+                      "file_or_dir_name": "aaa (1) (1).md"
+                    },
+                    {
+                      "timestamp": "2024-09-27T03:07:59+08:00",
+                      "etype": "web",
+                      "device": "",
+                      "user": "fc7043070b1d40878570f666de8d3481@auth.local",
+                      "name": "view",
+                      "contact_email": "yangtong1009@163.com",
+                      "ip": "172.18.0.1",
+                      "org_id": -1,
+                      "dtable_uuid": "96908687-8713-4b81-9856-77f9d96af4b3",
+                      "file_path": "/custom/aaa.md",
+                      "dtable_name": "\u5bfc\u5165\u4f18\u5316",
+                      "org_name": "",
+                      "file_or_dir_name": "aaa.md"
+                    }
+                  ],
+                  "count": 2
+                }
 
   # Plugins
   /api/v2.1/admin/dtable-system-plugins/:
@@ -3385,6 +3530,12 @@ paths:
                   $ref: "#/components/schemas/plugin"
       security:
         - AccountTokenAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: multipart/form-data;
       responses:
         "200":
           description: OK
@@ -3463,6 +3614,11 @@ paths:
       security:
         - AccountTokenAuth: []
       parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: multipart/form-data; boundary
         - $ref: "#/components/parameters/plugin_id"
       responses:
         "200":
@@ -3740,6 +3896,30 @@ paths:
                     latest_visit_at: "2022-07-02T14:09:37+00:00"
                     org_name: SeaTable GmbH
                 count: 1
+
+  # Maintenance
+  /api/v2.1/admin/dtable/{base_uuid}/repair/:
+    put:
+      tags:
+        - Maintenance
+      summary: Repair Base
+      operationId: repairBase
+      description: Repairs a base identified by its base_uuid. This repair scripts tries to detect errors in the json object and fix common problems.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+      responses:
+        "200":
+          description: Successful response indicating that the dtable was repaired.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
 
   # System Notifications
   /api/v2.1/admin/sys-user-notifications/:

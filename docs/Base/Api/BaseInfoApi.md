@@ -17,7 +17,7 @@ getBaseInfo($base_uuid): object
 
 Get Base Info
 
-Get various information of a base like the tables, (normal and big data) views, links, data statistics and collaborators (currently always empty).
+Get various information of a base like the tables, (normal and big data) views, links, data statistics and collaborators.
 
 ### Example
 

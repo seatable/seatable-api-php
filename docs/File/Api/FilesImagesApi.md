@@ -4,9 +4,60 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**deleteBaseAsset()**](FilesImagesApi.md#deleteBaseAsset) | **DELETE** /api/v2.1/dtable/app-asset/ | Delete a Base Asset |
 | [**getFileDownloadLink()**](FilesImagesApi.md#getFileDownloadLink) | **GET** /api/v2.1/dtable/app-download-link/ | Get File Download Link |
 | [**getUploadLink()**](FilesImagesApi.md#getUploadLink) | **GET** /api/v2.1/dtable/app-upload-link/ | Get Upload Link |
 | [**uploadFile()**](FilesImagesApi.md#uploadFile) | **POST** /seafhttp/upload-api/{upload_link}?ret-json&#x3D;1 | Upload File (or Image) |
+
+
+## `deleteBaseAsset()`
+
+```php
+deleteBaseAsset($path): object
+```
+
+Delete a Base Asset
+
+Delete a base's attachment.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\File\FilesImagesApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$path = /images/2021-03/test.png; // string | Path to the file
+
+try {
+    $result = $apiInstance->deleteBaseAsset($path);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling FilesImagesApi->deleteBaseAsset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **path** | **string**| Path to the file | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+ApiTokenAuth
+
+
 
 
 ## `getFileDownloadLink()`
@@ -17,7 +68,7 @@ getFileDownloadLink($path): object
 
 Get File Download Link
 
-Get the file download link of a base's attachment.
+Get the file download link of a base's attachment.   > 📘 The download link is only valid for a short time >  > The download link is only valid for some hours. After that the download link must be created again. We recommend to store images on public hosting services like AWS S3 and saving only the links in SeaTable, allowing direct use of image links in web pages.
 
 ### Example
 

@@ -4,8 +4,114 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**getBigDataStatus()**](SnapshotsApi.md#getBigDataStatus) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/big-data-state/ | Get Big Data Status |
+| [**listBigDataBackups()**](SnapshotsApi.md#listBigDataBackups) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/archive-backups/ | List Big Data Backups |
 | [**listSnapshots()**](SnapshotsApi.md#listSnapshots) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/snapshots/ | List Snapshots |
 | [**restoreSnapshot()**](SnapshotsApi.md#restoreSnapshot) | **POST** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/snapshots/{commit_id}/restore/ | Restore Snapshot |
+
+
+## `getBigDataStatus()`
+
+```php
+getBigDataStatus($workspace_id, $base_name): object
+```
+
+Get Big Data Status
+
+Verifies if Big Data is activated in the base.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\User\SnapshotsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$workspace_id = 127; // int | id of your workspace.
+$base_name = My Projects; // string | name of your base.
+
+try {
+    $result = $apiInstance->getBigDataStatus($workspace_id, $base_name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SnapshotsApi->getBigDataStatus: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **workspace_id** | **int**| id of your workspace. | |
+| **base_name** | **string**| name of your base. | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `listBigDataBackups()`
+
+```php
+listBigDataBackups($workspace_id, $base_name): object
+```
+
+List Big Data Backups
+
+List all all available big data backups.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\User\SnapshotsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$workspace_id = 127; // int | id of your workspace.
+$base_name = My Projects; // string | name of your base.
+
+try {
+    $result = $apiInstance->listBigDataBackups($workspace_id, $base_name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SnapshotsApi->listBigDataBackups: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **workspace_id** | **int**| id of your workspace. | |
+| **base_name** | **string**| name of your base. | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
 
 
 ## `listSnapshots()`

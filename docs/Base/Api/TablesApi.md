@@ -6,6 +6,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | ------------- | ------------- | ------------- |
 | [**createTable()**](TablesApi.md#createTable) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/tables/ | Create Table |
 | [**deleteTable()**](TablesApi.md#deleteTable) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/tables/ | Delete Table |
+| [**duplicateTable()**](TablesApi.md#duplicateTable) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/tables/duplicate-table/ | Duplicate Table |
 | [**renameTable()**](TablesApi.md#renameTable) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/tables/ | Rename Table |
 
 
@@ -101,6 +102,58 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **delete_table** | [**\SeaTable\Client\Base\DeleteTable**](../Model/DeleteTable.md)|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+BaseTokenAuth
+
+
+
+
+## `duplicateTable()`
+
+```php
+duplicateTable($base_uuid, $duplicate_table): object
+```
+
+Duplicate Table
+
+Duplicate an existing table in your base with or without the existing data in it.  > 🚧 Rename the table in a second step > > If you duplicate one table, the name of this new table will always be the same like the original one plus the appendix **(copy)**. To rename the table, you will need another call.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+
+$apiInstance = new SeaTable\Client\Base\TablesApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$duplicate_table = new \SeaTable\Client\Base\DuplicateTable(); // \SeaTable\Client\Base\DuplicateTable
+
+try {
+    $result = $apiInstance->duplicateTable($base_uuid, $duplicate_table);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling TablesApi->duplicateTable: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **duplicate_table** | [**\SeaTable\Client\Base\DuplicateTable**](../Model/DuplicateTable.md)|  | [optional] |
 
 ### Return type
 

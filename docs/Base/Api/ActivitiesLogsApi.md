@@ -5,7 +5,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**getBaseActivityLog()**](ActivitiesLogsApi.md#getBaseActivityLog) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/operations/ | Get Base Activity Log |
-| [**listDeleteOperations()**](ActivitiesLogsApi.md#listDeleteOperations) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/ | List Deleted Operations |
+| [**listDeleteOperations()**](ActivitiesLogsApi.md#listDeleteOperations) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/ | List Delete Operations |
 | [**listRowActivities()**](ActivitiesLogsApi.md#listRowActivities) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/activities/ | List Row Activities |
 
 
@@ -64,12 +64,12 @@ BaseTokenAuth
 ## `listDeleteOperations()`
 
 ```php
-listDeleteOperations($base_uuid): object
+listDeleteOperations($op_type, $base_uuid, $page, $per_page)
 ```
 
-List Deleted Operations
+List Delete Operations
 
-List all the deleted rows in the last 7 days. If you are looking for rows deleted before that, you can view a snapshot of this base.
+Deleted rows, tables and columns are saved in SeaTable for 7 days. You can list these in the operation log with this request. To restore them, you'll need to log into the web UI.  For `op_type` notice:  `delete_row` returns the single operations which have deleted 1 row each time.  `delete_rows` returns the operations in which multiple rows were deleted.  `delete_column` returns the column that was deleted by each operation.  `delete_table` returns the table that was deleted by each operation.
 
 ### Example
 
@@ -84,11 +84,13 @@ $apiInstance = new SeaTable\Client\Base\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
 );
+$op_type = delete_row; // string | Type of delete operation that should be listed. Optional. Choose from `delete_row`, `delete_rows`, `delete_table`, and `delete_column`.
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $result = $apiInstance->listDeleteOperations($base_uuid);
-    print_r($result);
+    $apiInstance->listDeleteOperations($op_type, $base_uuid, $page, $per_page);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listDeleteOperations: ', $e->getMessage(), PHP_EOL;
 }
@@ -98,11 +100,14 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
+| **op_type** | **string**| Type of delete operation that should be listed. Optional. Choose from &#x60;delete_row&#x60;, &#x60;delete_rows&#x60;, &#x60;delete_table&#x60;, and &#x60;delete_column&#x60;. | |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 

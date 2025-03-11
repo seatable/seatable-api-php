@@ -73,7 +73,7 @@ AccountTokenAuth
 ## `addGroupMembers()`
 
 ```php
-addGroupMembers($org_id, $group_id, $email): object
+addGroupMembers($org_id, $group_id, $user_id): object
 ```
 
 Add Group Members
@@ -95,10 +95,10 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
-$email = array('email_example'); // string[] | List of emails (xxx@auth.local)
+$user_id = 'user_id_example'; // string | The `user_id`
 
 try {
-    $result = $apiInstance->addGroupMembers($org_id, $group_id, $email);
+    $result = $apiInstance->addGroupMembers($org_id, $group_id, $user_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GroupsApi->addGroupMembers: ', $e->getMessage(), PHP_EOL;
@@ -111,7 +111,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
-| **email** | [**string[]**](../Model/string.md)| List of emails (xxx@auth.local) | [optional] |
+| **user_id** | **string**| The &#x60;user_id&#x60; | [optional] |
 
 ### Return type
 

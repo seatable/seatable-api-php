@@ -10,7 +10,6 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**exportBigDataView()**](ImportExportApi.md#exportBigDataView) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/convert-big-data-view-to-excel/ | Export Big Data View to Excel |
 | [**exportTable()**](ImportExportApi.md#exportTable) | **GET** /api/v2.1/workspace/{workspace_id}/synchronous-export/export-table-to-excel/ | Export Table |
 | [**exportView()**](ImportExportApi.md#exportView) | **GET** /api/v2.1/workspace/{workspace_id}/synchronous-export/export-view-to-excel/ | Export View |
-| [**importBasefromDTableFile()**](ImportExportApi.md#importBasefromDTableFile) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file |
 | [**importBasefromFile()**](ImportExportApi.md#importBasefromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-base/ | Import Base from xlsx or csv |
 | [**importTableFromFile()**](ImportExportApi.md#importTableFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-table/ | Import Table from xlsx or csv |
 | [**updateFromFile()**](ImportExportApi.md#updateFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from xlsx or csv |
@@ -326,58 +325,6 @@ try {
 ### Return type
 
 void (empty response body)
-
-### Authorization
-
-AccountTokenAuth
-
-
-
-
-## `importBasefromDTableFile()`
-
-```php
-importBasefromDTableFile($workspace_id, $dtable): \SeaTable\Client\User\ImportBasefromDTableFile200Response
-```
-
-Import Base from dtable file
-
-With this request, you can create a base by uploading a .dtable file.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
-$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
-$apiInstance = new SeaTable\Client\User\ImportExportApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$workspace_id = 127; // int | id of your workspace.
-$dtable = "/path/to/file.txt"; // \SplFileObject
-
-try {
-    $result = $apiInstance->importBasefromDTableFile($workspace_id, $dtable);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling ImportExportApi->importBasefromDTableFile: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| id of your workspace. | |
-| **dtable** | **\SplFileObject****\SplFileObject**|  | [optional] |
-
-### Return type
-
-[**\SeaTable\Client\User\ImportBasefromDTableFile200Response**](../Model/ImportBasefromDTableFile200Response.md)
 
 ### Authorization
 
