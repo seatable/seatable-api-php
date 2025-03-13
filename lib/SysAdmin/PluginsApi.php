@@ -138,7 +138,6 @@ class PluginsApi
      *
      * Add Plugin
      *
-     * @param  string $content_type content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addPlugin'] to see the possible values for this operation
      *
@@ -146,9 +145,9 @@ class PluginsApi
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function addPlugin($content_type = null, $plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
+    public function addPlugin($plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
     {
-        list($response) = $this->addPluginWithHttpInfo($content_type, $plugin, $contentType);
+        list($response) = $this->addPluginWithHttpInfo($plugin, $contentType);
         return $response;
     }
 
@@ -157,7 +156,6 @@ class PluginsApi
      *
      * Add Plugin
      *
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addPlugin'] to see the possible values for this operation
      *
@@ -165,9 +163,9 @@ class PluginsApi
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function addPluginWithHttpInfo($content_type = null, $plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
+    public function addPluginWithHttpInfo($plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
     {
-        $request = $this->addPluginRequest($content_type, $plugin, $contentType);
+        $request = $this->addPluginRequest($plugin, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -282,16 +280,15 @@ class PluginsApi
      *
      * Add Plugin
      *
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addPlugin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addPluginAsync($content_type = null, $plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
+    public function addPluginAsync($plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
     {
-        return $this->addPluginAsyncWithHttpInfo($content_type, $plugin, $contentType)
+        return $this->addPluginAsyncWithHttpInfo($plugin, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -304,17 +301,16 @@ class PluginsApi
      *
      * Add Plugin
      *
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addPlugin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addPluginAsyncWithHttpInfo($content_type = null, $plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
+    public function addPluginAsyncWithHttpInfo($plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
     {
         $returnType = 'object';
-        $request = $this->addPluginRequest($content_type, $plugin, $contentType);
+        $request = $this->addPluginRequest($plugin, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -355,16 +351,14 @@ class PluginsApi
     /**
      * Create request for operation 'addPlugin'
      *
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addPlugin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addPluginRequest($content_type = null, $plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
+    public function addPluginRequest($plugin = null, string $contentType = self::contentTypes['addPlugin'][0])
     {
-
 
 
 
@@ -376,10 +370,6 @@ class PluginsApi
         $multipart = false;
 
 
-        // header params
-        if ($content_type !== null) {
-            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
-        }
 
 
         // form params
@@ -1292,7 +1282,6 @@ class PluginsApi
      * Update Plugin
      *
      * @param  int $plugin_id plugin_id (required)
-     * @param  string $content_type content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePlugin'] to see the possible values for this operation
      *
@@ -1300,9 +1289,9 @@ class PluginsApi
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function updatePlugin($plugin_id, $content_type = null, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
+    public function updatePlugin($plugin_id, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
     {
-        list($response) = $this->updatePluginWithHttpInfo($plugin_id, $content_type, $plugin, $contentType);
+        list($response) = $this->updatePluginWithHttpInfo($plugin_id, $plugin, $contentType);
         return $response;
     }
 
@@ -1312,7 +1301,6 @@ class PluginsApi
      * Update Plugin
      *
      * @param  int $plugin_id (required)
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePlugin'] to see the possible values for this operation
      *
@@ -1320,9 +1308,9 @@ class PluginsApi
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updatePluginWithHttpInfo($plugin_id, $content_type = null, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
+    public function updatePluginWithHttpInfo($plugin_id, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
     {
-        $request = $this->updatePluginRequest($plugin_id, $content_type, $plugin, $contentType);
+        $request = $this->updatePluginRequest($plugin_id, $plugin, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1438,16 +1426,15 @@ class PluginsApi
      * Update Plugin
      *
      * @param  int $plugin_id (required)
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePlugin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePluginAsync($plugin_id, $content_type = null, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
+    public function updatePluginAsync($plugin_id, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
     {
-        return $this->updatePluginAsyncWithHttpInfo($plugin_id, $content_type, $plugin, $contentType)
+        return $this->updatePluginAsyncWithHttpInfo($plugin_id, $plugin, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1461,17 +1448,16 @@ class PluginsApi
      * Update Plugin
      *
      * @param  int $plugin_id (required)
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePlugin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updatePluginAsyncWithHttpInfo($plugin_id, $content_type = null, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
+    public function updatePluginAsyncWithHttpInfo($plugin_id, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
     {
         $returnType = 'object';
-        $request = $this->updatePluginRequest($plugin_id, $content_type, $plugin, $contentType);
+        $request = $this->updatePluginRequest($plugin_id, $plugin, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1513,14 +1499,13 @@ class PluginsApi
      * Create request for operation 'updatePlugin'
      *
      * @param  int $plugin_id (required)
-     * @param  string $content_type (optional)
      * @param  \SplFileObject $plugin Path and file name to the plugin file. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updatePlugin'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updatePluginRequest($plugin_id, $content_type = null, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
+    public function updatePluginRequest($plugin_id, $plugin = null, string $contentType = self::contentTypes['updatePlugin'][0])
     {
 
         // verify the required parameter 'plugin_id' is set
@@ -1535,7 +1520,6 @@ class PluginsApi
         
 
 
-
         $resourcePath = '/api/v2.1/admin/dtable-system-plugins/{plugin_id}/';
         $formParams = [];
         $queryParams = [];
@@ -1544,10 +1528,6 @@ class PluginsApi
         $multipart = false;
 
 
-        // header params
-        if ($content_type !== null) {
-            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
-        }
 
         // path params
         if ($plugin_id !== null) {

@@ -493,7 +493,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string $email The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (optional)
+     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -513,7 +513,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string $email The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (optional)
+     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -639,7 +639,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string $email The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (optional)
+     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -662,7 +662,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string $email The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (optional)
+     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -714,7 +714,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string $email The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (optional)
+     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

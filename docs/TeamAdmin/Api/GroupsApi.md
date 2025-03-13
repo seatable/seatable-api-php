@@ -95,7 +95,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
-$email = 'email_example'; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+$email = array('email_example'); // string[] | List of `user_ids` (xxx@auth.local).
 
 try {
     $result = $apiInstance->addGroupMembers($org_id, $group_id, $email);
@@ -111,7 +111,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
-| **email** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | [optional] |
+| **email** | [**string[]**](../Model/string.md)| List of &#x60;user_ids&#x60; (xxx@auth.local). | [optional] |
 
 ### Return type
 
