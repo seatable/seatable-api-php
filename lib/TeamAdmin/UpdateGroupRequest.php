@@ -308,7 +308,7 @@ class UpdateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets new_owner
      *
-     * @param string|null $new_owner The `user_id`
+     * @param string|null $new_owner The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
      *
      * @return self
      */

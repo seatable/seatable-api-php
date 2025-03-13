@@ -95,7 +95,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->deleteUser($org_id, $user_id);
@@ -110,7 +110,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
 
@@ -147,7 +147,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->disableTwoFactor($org_id, $user_id);
@@ -162,7 +162,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
 
@@ -199,7 +199,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 $enforce_twofactor_request = new \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest(); // \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest
 
 try {
@@ -215,7 +215,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 | **enforce_twofactor_request** | [**\SeaTable\Client\TeamAdmin\EnforceTwofactorRequest**](../Model/EnforceTwofactorRequest.md)|  | [optional] |
 
 ### Return type
@@ -307,7 +307,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->resetUserPassword($org_id, $user_id);
@@ -322,7 +322,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
 
@@ -359,7 +359,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 $name = 'name_example'; // string | User's full name.
 $contact_email = 'contact_email_example'; // string | User's contact email.
 $is_staff = True; // bool | Determines if the user account has access to the system administration area.
@@ -380,7 +380,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 | **name** | **string**| User&#39;s full name. | [optional] |
 | **contact_email** | **string**| User&#39;s contact email. | [optional] |
 | **is_staff** | **bool**| Determines if the user account has access to the system administration area. | [optional] |

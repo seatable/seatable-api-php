@@ -964,7 +964,7 @@ class ActivitiesLogsApi
      * List User Logins
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
@@ -984,7 +984,7 @@ class ActivitiesLogsApi
      * List User Logins
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
@@ -1047,7 +1047,7 @@ class ActivitiesLogsApi
      * List User Logins
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
@@ -1071,7 +1071,7 @@ class ActivitiesLogsApi
      * List User Logins
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
@@ -1111,7 +1111,7 @@ class ActivitiesLogsApi
      * Create request for operation 'listUserLogins'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation

@@ -22,10 +22,3 @@ The client will contain all available endpoints of the specification.
 The `./generate_api.sh` script causes quite a lot of errors such as `[main] ERROR o.o.codegen.DefaultCodegen - Required var column_data not in properties`.
 They are caused by https://github.com/OpenAPITools/openapi-generator/issues/17863, which does not have a fix yet.
 The errors do not cause any problems and can be ignored.
-
-## How to update
-
-- Clone the YAML files from the [SeaTable openapi repository](https://github.com/seatable/openapi) and place them in the `openapi_input` folder.
-- Run the `generate_api.sh` script from your terminal.
-- Create a tag, commit, and push all changes to the GitHub repository.
-- [Packagist.org]([htt](https://packagist.org/packages/seatable/seatable-api-php)) will automatically update the package (an admin can force an immediate update if needed).

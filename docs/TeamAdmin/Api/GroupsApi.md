@@ -73,7 +73,7 @@ AccountTokenAuth
 ## `addGroupMembers()`
 
 ```php
-addGroupMembers($org_id, $group_id, $user_id): object
+addGroupMembers($org_id, $group_id, $email): object
 ```
 
 Add Group Members
@@ -95,10 +95,10 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
-$user_id = 'user_id_example'; // string | The `user_id`
+$email = 'email_example'; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 
 try {
-    $result = $apiInstance->addGroupMembers($org_id, $group_id, $user_id);
+    $result = $apiInstance->addGroupMembers($org_id, $group_id, $email);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GroupsApi->addGroupMembers: ', $e->getMessage(), PHP_EOL;
@@ -111,7 +111,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
-| **user_id** | **string**| The &#x60;user_id&#x60; | [optional] |
+| **email** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | [optional] |
 
 ### Return type
 
@@ -465,7 +465,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->removeGroupMembers($org_id, $group_id, $user_id);
@@ -481,7 +481,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
-| **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
 

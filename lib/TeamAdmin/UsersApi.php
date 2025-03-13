@@ -503,7 +503,7 @@ class UsersApi
      * Delete User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -522,7 +522,7 @@ class UsersApi
      * Delete User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -647,7 +647,7 @@ class UsersApi
      * Delete User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -669,7 +669,7 @@ class UsersApi
      * Delete User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -720,7 +720,7 @@ class UsersApi
      * Create request for operation 'deleteUser'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -844,7 +844,7 @@ class UsersApi
      * Disable 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -863,7 +863,7 @@ class UsersApi
      * Disable 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -988,7 +988,7 @@ class UsersApi
      * Disable 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1010,7 +1010,7 @@ class UsersApi
      * Disable 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1061,7 +1061,7 @@ class UsersApi
      * Create request for operation 'disableTwoFactor'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['disableTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1185,7 +1185,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
      *
@@ -1205,7 +1205,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
      *
@@ -1331,7 +1331,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
      *
@@ -1354,7 +1354,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
      *
@@ -1406,7 +1406,7 @@ class UsersApi
      * Create request for operation 'enforceTwofactor'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  \SeaTable\Client\TeamAdmin\EnforceTwofactorRequest $enforce_twofactor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwofactor'] to see the possible values for this operation
      *
@@ -1893,7 +1893,7 @@ class UsersApi
      * Reset User Password
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1912,7 +1912,7 @@ class UsersApi
      * Reset User Password
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2037,7 +2037,7 @@ class UsersApi
      * Reset User Password
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2059,7 +2059,7 @@ class UsersApi
      * Reset User Password
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2110,7 +2110,7 @@ class UsersApi
      * Create request for operation 'resetUserPassword'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['resetUserPassword'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2234,7 +2234,7 @@ class UsersApi
      * Update User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
      * @param  bool $is_staff Determines if the user account has access to the system administration area. (optional)
@@ -2259,7 +2259,7 @@ class UsersApi
      * Update User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
      * @param  bool $is_staff Determines if the user account has access to the system administration area. (optional)
@@ -2390,7 +2390,7 @@ class UsersApi
      * Update User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
      * @param  bool $is_staff Determines if the user account has access to the system administration area. (optional)
@@ -2418,7 +2418,7 @@ class UsersApi
      * Update User
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
      * @param  bool $is_staff Determines if the user account has access to the system administration area. (optional)
@@ -2475,7 +2475,7 @@ class UsersApi
      * Create request for operation 'updateUser'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
      * @param  string $name User&#39;s full name. (optional)
      * @param  string $contact_email User&#39;s contact email. (optional)
      * @param  bool $is_staff Determines if the user account has access to the system administration area. (optional)
