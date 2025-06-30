@@ -1,8 +1,8 @@
 <?php
 /**
- * TheDayRunningTheTaskTest
+ * TheDayRunningTheTaskValueTest
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TheDayRunningTheTaskTest Class Doc Comment
+ * TheDayRunningTheTaskValueTest Class Doc Comment
  *
  * @category    Class
- * @description TheDayRunningTheTask
+ * @description TheDayRunningTheTaskValue
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class TheDayRunningTheTaskTest extends TestCase
+class TheDayRunningTheTaskValueTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class TheDayRunningTheTaskTest extends TestCase
     }
 
     /**
-     * Test "TheDayRunningTheTask"
+     * Test "TheDayRunningTheTaskValue"
      */
-    public function testTheDayRunningTheTask()
+    public function testTheDayRunningTheTaskValue()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

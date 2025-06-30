@@ -342,7 +342,7 @@ $apiInstance = new SeaTable\Client\User\FormsApi(
     $config
 );
 $form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
-$form_logo = "/path/to/file.txt"; // \SplFileObject | Path and file name to your logo image.
+$form_logo = '/path/to/file.txt'; // \SplFileObject | Path and file name to your logo image.
 
 try {
     $result = $apiInstance->uploadFormLogo($form_token, $form_logo);

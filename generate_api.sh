@@ -10,7 +10,7 @@ rm -r ./lib/*
 rm -r ./test/*
 rm -r ./docs/*
 
-TAG="v7.6.0"
+TAG="v7.14.0"
 
 # generate sysadmin
 docker run --rm \

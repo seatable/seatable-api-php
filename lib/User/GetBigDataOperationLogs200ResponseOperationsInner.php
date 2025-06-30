@@ -2,7 +2,7 @@
 /**
  * GetBigDataOperationLogs200ResponseOperationsInner
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -262,10 +262,10 @@ class GetBigDataOperationLogs200ResponseOperationsInner implements ModelInterfac
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('dtable_uuid', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);

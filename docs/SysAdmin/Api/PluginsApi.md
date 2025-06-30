@@ -34,7 +34,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$plugin = "/path/to/file.txt"; // \SplFileObject | Path and file name to the plugin file.
+$plugin = '/path/to/file.txt'; // \SplFileObject | Path and file name to the plugin file.
 
 try {
     $result = $apiInstance->addPlugin($plugin);
@@ -228,7 +228,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     $config
 );
 $plugin_id = 5; // int
-$plugin = "/path/to/file.txt"; // \SplFileObject | Path and file name to the plugin file.
+$plugin = '/path/to/file.txt'; // \SplFileObject | Path and file name to the plugin file.
 
 try {
     $result = $apiInstance->updatePlugin($plugin_id, $plugin);

@@ -35,7 +35,7 @@ $apiInstance = new SeaTable\Client\User\UserApi(
     new GuzzleHttp\Client(),
     $config
 );
-$avatar = "/path/to/file.txt"; // \SplFileObject | Upload an image file. Authorized extensions are : .jpg, .png, .jpeg, .gif. Accepted max. size is 1.0 MB.
+$avatar = '/path/to/file.txt'; // \SplFileObject | Upload an image file. Authorized extensions are : .jpg, .png, .jpeg, .gif. Accepted max. size is 1.0 MB.
 $avatar_size = 'avatar_size_example'; // string
 
 try {

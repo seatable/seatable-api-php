@@ -1,8 +1,8 @@
 <?php
 /**
- * XDaysBeforeRunningTheTaskTest
+ * SpecificDateValueTest
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * XDaysBeforeRunningTheTaskTest Class Doc Comment
+ * SpecificDateValueTest Class Doc Comment
  *
  * @category    Class
- * @description XDaysBeforeRunningTheTask
+ * @description SpecificDateValue
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class XDaysBeforeRunningTheTaskTest extends TestCase
+class SpecificDateValueTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class XDaysBeforeRunningTheTaskTest extends TestCase
     }
 
     /**
-     * Test "XDaysBeforeRunningTheTask"
+     * Test "SpecificDateValue"
      */
-    public function testXDaysBeforeRunningTheTask()
+    public function testSpecificDateValue()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -88,18 +88,9 @@ class XDaysBeforeRunningTheTaskTest extends TestCase
     }
 
     /**
-     * Test attribute "offset"
+     * Test attribute "value"
      */
-    public function testPropertyOffset()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "offset_by"
-     */
-    public function testPropertyOffsetBy()
+    public function testPropertyValue()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

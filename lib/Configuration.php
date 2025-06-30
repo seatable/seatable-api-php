@@ -1,7 +1,7 @@
 <?php
 /**
  * Configuration
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -28,7 +28,7 @@ namespace SeaTable\Client;
 
 /**
  * Configuration Class Doc Comment
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -491,7 +491,7 @@ class Configuration
     * @param array|null $variables    hash of variable and the corresponding value (optional)
     * @return string URL based on host settings
     */
-    public static function getHostString(array $hostSettings, $hostIndex, array $variables = null)
+    public static function getHostString(array $hostSettings, $hostIndex, ?array $variables = null)
     {
         if (null === $variables) {
             $variables = [];

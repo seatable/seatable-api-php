@@ -1,8 +1,8 @@
 <?php
 /**
- * XDaysBeforeRunningTheTask
+ * ChooseADateColumnValue
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * XDaysBeforeRunningTheTask Class Doc Comment
+ * ChooseADateColumnValue Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSerializable
+class ChooseADateColumnValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
       *
       * @var string
       */
-    protected static $openAPIModelName = 'X_Days_before_running_the_task';
+    protected static $openAPIModelName = 'choose_a_date_column_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPITypes = [
         'set_type' => 'string',
-        'offset' => 'int',
-        'offset_by' => 'string'
+        'date_column_key' => 'string'
     ];
 
     /**
@@ -70,8 +69,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPIFormats = [
         'set_type' => null,
-        'offset' => null,
-        'offset_by' => null
+        'date_column_key' => null
     ];
 
     /**
@@ -81,8 +79,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static array $openAPINullables = [
         'set_type' => false,
-        'offset' => false,
-        'offset_by' => false
+        'date_column_key' => false
     ];
 
     /**
@@ -172,8 +169,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $attributeMap = [
         'set_type' => 'set_type',
-        'offset' => 'offset',
-        'offset_by' => 'offset_by'
+        'date_column_key' => 'date_column_key'
     ];
 
     /**
@@ -183,8 +179,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $setters = [
         'set_type' => 'setSetType',
-        'offset' => 'setOffset',
-        'offset_by' => 'setOffsetBy'
+        'date_column_key' => 'setDateColumnKey'
     ];
 
     /**
@@ -194,8 +189,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $getters = [
         'set_type' => 'getSetType',
-        'offset' => 'getOffset',
-        'offset_by' => 'getOffsetBy'
+        'date_column_key' => 'getDateColumnKey'
     ];
 
     /**
@@ -239,8 +233,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
         return self::$openAPIModelName;
     }
 
-    public const SET_TYPE_RELATIVE_DAY = 'relative_day';
-    public const OFFSET_BY_DAY = 'day';
+    public const SET_TYPE_DATE_COLUMN = 'date_column';
 
     /**
      * Gets allowable values of the enum
@@ -250,19 +243,7 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
     public function getSetTypeAllowableValues()
     {
         return [
-            self::SET_TYPE_RELATIVE_DAY,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getOffsetByAllowableValues()
-    {
-        return [
-            self::OFFSET_BY_DAY,
+            self::SET_TYPE_DATE_COLUMN,
         ];
     }
 
@@ -276,14 +257,13 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('set_type', $data ?? [], null);
-        $this->setIfExists('offset', $data ?? [], null);
-        $this->setIfExists('offset_by', $data ?? [], null);
+        $this->setIfExists('date_column_key', $data ?? [], null);
     }
 
     /**
@@ -318,15 +298,6 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'set_type', must be one of '%s'",
                 $this->container['set_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        $allowedValues = $this->getOffsetByAllowableValues();
-        if (!is_null($this->container['offset_by']) && !in_array($this->container['offset_by'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'offset_by', must be one of '%s'",
-                $this->container['offset_by'],
                 implode("', '", $allowedValues)
             );
         }
@@ -384,65 +355,28 @@ class XDaysBeforeRunningTheTask implements ModelInterface, ArrayAccess, \JsonSer
     }
 
     /**
-     * Gets offset
-     *
-     * @return int|null
-     */
-    public function getOffset()
-    {
-        return $this->container['offset'];
-    }
-
-    /**
-     * Sets offset
-     *
-     * @param int|null $offset offset
-     *
-     * @return self
-     */
-    public function setOffset($offset)
-    {
-        if (is_null($offset)) {
-            throw new \InvalidArgumentException('non-nullable offset cannot be null');
-        }
-        $this->container['offset'] = $offset;
-
-        return $this;
-    }
-
-    /**
-     * Gets offset_by
+     * Gets date_column_key
      *
      * @return string|null
      */
-    public function getOffsetBy()
+    public function getDateColumnKey()
     {
-        return $this->container['offset_by'];
+        return $this->container['date_column_key'];
     }
 
     /**
-     * Sets offset_by
+     * Sets date_column_key
      *
-     * @param string|null $offset_by offset_by
+     * @param string|null $date_column_key date_column_key
      *
      * @return self
      */
-    public function setOffsetBy($offset_by)
+    public function setDateColumnKey($date_column_key)
     {
-        if (is_null($offset_by)) {
-            throw new \InvalidArgumentException('non-nullable offset_by cannot be null');
+        if (is_null($date_column_key)) {
+            throw new \InvalidArgumentException('non-nullable date_column_key cannot be null');
         }
-        $allowedValues = $this->getOffsetByAllowableValues();
-        if (!in_array($offset_by, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'offset_by', must be one of '%s'",
-                    $offset_by,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['offset_by'] = $offset_by;
+        $this->container['date_column_key'] = $date_column_key;
 
         return $this;
     }

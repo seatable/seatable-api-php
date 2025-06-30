@@ -1,8 +1,8 @@
 <?php
 /**
- * SpecificDateTest
+ * ChooseADateColumnValueTest
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SpecificDateTest Class Doc Comment
+ * ChooseADateColumnValueTest Class Doc Comment
  *
  * @category    Class
- * @description SpecificDate
+ * @description ChooseADateColumnValue
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SpecificDateTest extends TestCase
+class ChooseADateColumnValueTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class SpecificDateTest extends TestCase
     }
 
     /**
-     * Test "SpecificDate"
+     * Test "ChooseADateColumnValue"
      */
-    public function testSpecificDate()
+    public function testChooseADateColumnValue()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -88,9 +88,9 @@ class SpecificDateTest extends TestCase
     }
 
     /**
-     * Test attribute "value"
+     * Test attribute "date_column_key"
      */
-    public function testPropertyValue()
+    public function testPropertyDateColumnKey()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

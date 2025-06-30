@@ -2,7 +2,7 @@
 /**
  * ImportBasefromDTableFile200ResponseTableTest
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client

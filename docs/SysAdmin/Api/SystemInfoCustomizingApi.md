@@ -81,7 +81,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$favicon = "/path/to/file.txt"; // \SplFileObject | The path and filename of the image file of your favicon.
+$favicon = '/path/to/file.txt'; // \SplFileObject | The path and filename of the image file of your favicon.
 $with_notify = True; // bool | Leave this param as its default (`false`) to upload your favicon, and use this param as `true` to upload a favicon with a notification sign.
 
 try {
@@ -183,7 +183,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$login_bg_image = "/path/to/file.txt"; // \SplFileObject | The path and filename of the background image.
+$login_bg_image = '/path/to/file.txt'; // \SplFileObject | The path and filename of the background image.
 
 try {
     $result = $apiInstance->updateLoginBackgroundImage($login_bg_image);
@@ -233,7 +233,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$logo = "/path/to/file.txt"; // \SplFileObject | The path and filename of the image file of your logo.
+$logo = '/path/to/file.txt'; // \SplFileObject | The path and filename of the image file of your logo.
 
 try {
     $result = $apiInstance->updateLogo($logo);

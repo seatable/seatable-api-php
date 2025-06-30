@@ -2,7 +2,7 @@
 /**
  * DurationColumnFormat
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -236,8 +236,8 @@ class DurationColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializ
 
     public const FORMAT_DURATION = 'duration';
     public const DURATION_FORMAT_EMPTY = '';
-    public const DURATION_FORMAT_HMM = 'h:mm';
-    public const DURATION_FORMAT_HMMSS = 'h:mm:ss';
+    public const DURATION_FORMAT_H_MM = 'h:mm';
+    public const DURATION_FORMAT_H_MM_SS = 'h:mm:ss';
 
     /**
      * Gets allowable values of the enum
@@ -260,8 +260,8 @@ class DurationColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         return [
             self::DURATION_FORMAT_EMPTY,
-            self::DURATION_FORMAT_HMM,
-            self::DURATION_FORMAT_HMMSS,
+            self::DURATION_FORMAT_H_MM,
+            self::DURATION_FORMAT_H_MM_SS,
         ];
     }
 
@@ -275,10 +275,10 @@ class DurationColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('format', $data ?? [], null);
         $this->setIfExists('duration_format', $data ?? [], null);

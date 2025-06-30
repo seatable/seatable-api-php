@@ -2,7 +2,7 @@
 /**
  * RatingColumnFormat
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -240,10 +240,10 @@ class RatingColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
-    public const RATE_STYLE_TYPE_RATE = 'dtable-icon-rate';
-    public const RATE_STYLE_TYPE_LIKE = 'dtable-icon-like';
-    public const RATE_STYLE_TYPE_PRAISE = 'dtable-icon-praise';
-    public const RATE_STYLE_TYPE_FLAG = 'dtable-icon-flag';
+    public const RATE_STYLE_TYPE_DTABLE_ICON_RATE = 'dtable-icon-rate';
+    public const RATE_STYLE_TYPE_DTABLE_ICON_LIKE = 'dtable-icon-like';
+    public const RATE_STYLE_TYPE_DTABLE_ICON_PRAISE = 'dtable-icon-praise';
+    public const RATE_STYLE_TYPE_DTABLE_ICON_FLAG = 'dtable-icon-flag';
 
     /**
      * Gets allowable values of the enum
@@ -253,10 +253,10 @@ class RatingColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializab
     public function getRateStyleTypeAllowableValues()
     {
         return [
-            self::RATE_STYLE_TYPE_RATE,
-            self::RATE_STYLE_TYPE_LIKE,
-            self::RATE_STYLE_TYPE_PRAISE,
-            self::RATE_STYLE_TYPE_FLAG,
+            self::RATE_STYLE_TYPE_DTABLE_ICON_RATE,
+            self::RATE_STYLE_TYPE_DTABLE_ICON_LIKE,
+            self::RATE_STYLE_TYPE_DTABLE_ICON_PRAISE,
+            self::RATE_STYLE_TYPE_DTABLE_ICON_FLAG,
         ];
     }
 
@@ -270,10 +270,10 @@ class RatingColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('rate_max_number', $data ?? [], null);
         $this->setIfExists('rate_style_color', $data ?? [], null);

@@ -2,7 +2,7 @@
 /**
  * ImageFilterPredicate
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -41,9 +41,9 @@ class ImageFilterPredicate
     /**
      * Possible values of this enum
      */
-    public const _EMPTY = 'is_empty';
+    public const IS_EMPTY = 'is_empty';
 
-    public const NOT_EMPTY = 'is_not_empty';
+    public const IS_NOT_EMPTY = 'is_not_empty';
 
     /**
      * Gets allowable values of the enum
@@ -52,8 +52,8 @@ class ImageFilterPredicate
     public static function getAllowableEnumValues()
     {
         return [
-            self::_EMPTY,
-            self::NOT_EMPTY
+            self::IS_EMPTY,
+            self::IS_NOT_EMPTY
         ];
     }
 }

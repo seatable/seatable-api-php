@@ -1,9 +1,9 @@
-# # SpecificDate
+# # ChooseADateColumnValue
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **set_type** | **string** |  | [optional]
-**value** | **string** |  | [optional]
+**date_column_key** | **string** |  | [optional]
 

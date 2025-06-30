@@ -40,7 +40,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 $table_name = 'table_name_example'; // string | The name of the table.
 
@@ -358,7 +358,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$dtable = "/path/to/file.txt"; // \SplFileObject
+$dtable = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->importBasefromDTableFile($workspace_id, $dtable);
@@ -410,7 +410,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$dtable = "/path/to/file.txt"; // \SplFileObject
+$dtable = '/path/to/file.txt'; // \SplFileObject
 $folder = 'folder_example'; // string | If you would like to create the base into a folder, give its `folder_id` here. A base is created in the root folder by default. Optional.
 
 try {
@@ -464,7 +464,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 
 try {
@@ -516,7 +516,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 $table_name = 'table_name_example'; // string | The name of the table.
 $selected_columns = 'selected_columns_example'; // string | Columns for matching chosen when updating. Use comma (,) to separate column names. Required.

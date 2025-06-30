@@ -293,7 +293,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->importUsers($file);

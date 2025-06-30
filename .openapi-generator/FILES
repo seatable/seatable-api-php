@@ -25,6 +25,7 @@ lib/Auth/AuthenticationPermission.php
 lib/Auth/BaseTokenApi.php
 lib/Auth/ModelInterface.php
 lib/Configuration.php
+lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/ObjectSerializer.php
 phpunit.xml.dist

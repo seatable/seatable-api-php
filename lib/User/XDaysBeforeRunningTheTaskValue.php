@@ -1,8 +1,8 @@
 <?php
 /**
- * ChooseADateColumn
+ * XDaysBeforeRunningTheTaskValue
  *
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ChooseADateColumn Class Doc Comment
+ * XDaysBeforeRunningTheTaskValue Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializable
+class XDaysBeforeRunningTheTaskValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Choose_a_date_column';
+    protected static $openAPIModelName = 'x_days_before_running_the_task_value';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPITypes = [
         'set_type' => 'string',
-        'date_column_key' => 'string'
+        'offset' => 'int',
+        'offset_by' => 'string'
     ];
 
     /**
@@ -69,7 +70,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static $openAPIFormats = [
         'set_type' => null,
-        'date_column_key' => null
+        'offset' => null,
+        'offset_by' => null
     ];
 
     /**
@@ -79,7 +81,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
       */
     protected static array $openAPINullables = [
         'set_type' => false,
-        'date_column_key' => false
+        'offset' => false,
+        'offset_by' => false
     ];
 
     /**
@@ -169,7 +172,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $attributeMap = [
         'set_type' => 'set_type',
-        'date_column_key' => 'date_column_key'
+        'offset' => 'offset',
+        'offset_by' => 'offset_by'
     ];
 
     /**
@@ -179,7 +183,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $setters = [
         'set_type' => 'setSetType',
-        'date_column_key' => 'setDateColumnKey'
+        'offset' => 'setOffset',
+        'offset_by' => 'setOffsetBy'
     ];
 
     /**
@@ -189,7 +194,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static $getters = [
         'set_type' => 'getSetType',
-        'date_column_key' => 'getDateColumnKey'
+        'offset' => 'getOffset',
+        'offset_by' => 'getOffsetBy'
     ];
 
     /**
@@ -233,7 +239,8 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const SET_TYPE_DATE_COLUMN = 'date_column';
+    public const SET_TYPE_RELATIVE_DAY = 'relative_day';
+    public const OFFSET_BY_DAY = 'day';
 
     /**
      * Gets allowable values of the enum
@@ -243,7 +250,19 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function getSetTypeAllowableValues()
     {
         return [
-            self::SET_TYPE_DATE_COLUMN,
+            self::SET_TYPE_RELATIVE_DAY,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOffsetByAllowableValues()
+    {
+        return [
+            self::OFFSET_BY_DAY,
         ];
     }
 
@@ -257,13 +276,14 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
+     * @param mixed[]|null $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->setIfExists('set_type', $data ?? [], null);
-        $this->setIfExists('date_column_key', $data ?? [], null);
+        $this->setIfExists('offset', $data ?? [], null);
+        $this->setIfExists('offset_by', $data ?? [], null);
     }
 
     /**
@@ -298,6 +318,15 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'set_type', must be one of '%s'",
                 $this->container['set_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getOffsetByAllowableValues();
+        if (!is_null($this->container['offset_by']) && !in_array($this->container['offset_by'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'offset_by', must be one of '%s'",
+                $this->container['offset_by'],
                 implode("', '", $allowedValues)
             );
         }
@@ -355,28 +384,65 @@ class ChooseADateColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
-     * Gets date_column_key
+     * Gets offset
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getDateColumnKey()
+    public function getOffset()
     {
-        return $this->container['date_column_key'];
+        return $this->container['offset'];
     }
 
     /**
-     * Sets date_column_key
+     * Sets offset
      *
-     * @param string|null $date_column_key date_column_key
+     * @param int|null $offset offset
      *
      * @return self
      */
-    public function setDateColumnKey($date_column_key)
+    public function setOffset($offset)
     {
-        if (is_null($date_column_key)) {
-            throw new \InvalidArgumentException('non-nullable date_column_key cannot be null');
+        if (is_null($offset)) {
+            throw new \InvalidArgumentException('non-nullable offset cannot be null');
         }
-        $this->container['date_column_key'] = $date_column_key;
+        $this->container['offset'] = $offset;
+
+        return $this;
+    }
+
+    /**
+     * Gets offset_by
+     *
+     * @return string|null
+     */
+    public function getOffsetBy()
+    {
+        return $this->container['offset_by'];
+    }
+
+    /**
+     * Sets offset_by
+     *
+     * @param string|null $offset_by offset_by
+     *
+     * @return self
+     */
+    public function setOffsetBy($offset_by)
+    {
+        if (is_null($offset_by)) {
+            throw new \InvalidArgumentException('non-nullable offset_by cannot be null');
+        }
+        $allowedValues = $this->getOffsetByAllowableValues();
+        if (!in_array($offset_by, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'offset_by', must be one of '%s'",
+                    $offset_by,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['offset_by'] = $offset_by;
 
         return $this;
     }

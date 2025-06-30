@@ -181,7 +181,7 @@ $apiInstance = new SeaTable\Client\File\FilesImagesApi(
     $config
 );
 $upload_link = 5e666848-4152-45e5-990e-d686960f2a05; // string | This is the value you got from the call Get File/Image Upload Link via API Token.
-$file = "/path/to/file.txt"; // \SplFileObject | The file or image you'd like to upload from your local drive.
+$file = '/path/to/file.txt'; // \SplFileObject | The file or image you'd like to upload from your local drive.
 $parent_dir = 'parent_dir_example'; // string | This is the value of the `parent_path` you got from the call **Get File/Image Upload Link via API Token**.
 $relative_path = 'relative_path_example'; // string | If you are uploading a file, use the value of the `file_relative_path` returned in the call **Get File/Image Upload Link via API Token**; or the `img_relative_path` for image.
 $replace = 'replace_example'; // string | Do you want to overwrite a file/image with the same name? `0` - No, `1` - Yes. Optional. `0` by default. If existing file is not overwritten, the uploaded file will be renamed as `filename(1).xxx`.
