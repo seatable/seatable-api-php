@@ -61,7 +61,7 @@ AccountTokenAuth
 ## `getTeamLogo()`
 
 ```php
-getTeamLogo($org_id)
+getTeamLogo($org_id): object
 ```
 
 Get Team Logo
@@ -84,7 +84,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\CustomizingApi(
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
-    $apiInstance->getTeamLogo($org_id);
+    $result = $apiInstance->getTeamLogo($org_id);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CustomizingApi->getTeamLogo: ', $e->getMessage(), PHP_EOL;
 }
@@ -98,7 +99,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
