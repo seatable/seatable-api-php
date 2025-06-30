@@ -66,7 +66,7 @@ updateFavicon($favicon, $with_notify): object
 
 Update Favicon
 
-Upload an image (.png with a transparent background is recommended) as the favicon of your SeaTable installation. As per the `with_notify` param in the request body: you can use this API request twice to upload two favicons: - one is the \"normal\" favicon（leave `with_nofity` blank). - the other one is the \"notifying\" favicon which should have something like a \"notifying\" red dot on it (set `with_notify` to `true`). ![Image](https://seatable.io/wp-content/uploads/2021/11/favicon.png)
+Upload an image (.png with a transparent background is recommended) as the favicon of your SeaTable installation. As per the `with_notify` param in the request body: you can use this API request twice to upload two favicons: - one is the \"normal\" favicon（leave `with_nofity` blank). - the other one is the \"notifying\" favicon which should have something like a \"notifying\" red dot on it (set `with_notify` to `true`). ![Image](https://seatable.com/openapi/favicon.png)
 
 ### Example
 
@@ -118,7 +118,7 @@ updateGeneralSettings($update_general_settings_request): object
 
 Update General Settings
 
-Change the general settings of your system. For details, see the description for each parameter in the request body. Just like the settings via web interface, these settings via API request are also saved in the database table (dtable-db/constance_config). They have a higher priority over the settings in the config files. However, in the `dtable_web_settings` you'll find more setting options. For details, visit the [SeaTable Admin Manual](https://manual.seatable.io/config/dtable_web_settings/#user-management-options).
+Change the general settings of your system. For details, see the description for each parameter in the request body. Just like the settings via web interface, these settings via API request are also saved in the database table (dtable-db/constance_config). They have a higher priority over the settings in the config files. However, in the `dtable_web_settings` you'll find more setting options. For details, visit the [SeaTable Admin Manual](https://admin.seatable.com).
 
 ### Example
 

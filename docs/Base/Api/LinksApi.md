@@ -228,7 +228,7 @@ listRowLinks($base_uuid, $list_row_links): object
 
 List Row Links
 
-When you have a \"Link to other records\" column in your table and you have created some links to the current or another table, you can use this request to query each row's linked records' IDs and display values.  > 📘 id or name >  > In the request body you can as keys either: > - `table_id` or `table_name` > - `link_column_key` or `link_column_name`      To get more information about each linked record, retrieve their `row_id` and use the [Query SeaTable with SQL](/reference/querysql) request, for example:  ``` SELECT * FROM Table1 WHERE _id IN (row_id1, row_id2, ...); ```
+When you have a \"Link to other records\" column in your table and you have created some links to the current or another table, you can use this request to query each row's linked records' IDs and display values.  By default, it returns 10 records per row. To query more records, please set the \"offset\" and \"limit\" values for a row in the rows parameter.  > 📘 id or name >  > In the request body you can as keys either: > - `table_id` or `table_name` > - `link_column_key` or `link_column_name`      To get more information about each linked record, retrieve their `row_id` and use the [Query SeaTable with SQL](/reference/querysql) request, for example:  ``` SELECT * FROM Table1 WHERE _id IN (row_id1, row_id2, ...); ```
 
 ### Example
 

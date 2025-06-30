@@ -35,8 +35,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\StatisticsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$start = 2021-02-21+00:00:00; // string | Starting time of the statistics in ISO format like in the example. Required.
-$end = 2021-02-24+00:00:00; // string | Ending time of the statistics in ISO format like in the example. Required.
+$start = 2021-02-21 00:00:00; // string | Starting time of the statistics like in the example. Required.
+$end = 2021-02-24 00:00:00; // string | Ending time of the statistics like in the example. Required.
 
 try {
     $result = $apiInstance->getActiveUsersPerDay($start, $end);
@@ -50,8 +50,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **start** | **string**| Starting time of the statistics in ISO format like in the example. Required. | [optional] |
-| **end** | **string**| Ending time of the statistics in ISO format like in the example. Required. | [optional] |
+| **start** | **string**| Starting time of the statistics like in the example. Required. | [optional] |
+| **end** | **string**| Ending time of the statistics like in the example. Required. | [optional] |
 
 ### Return type
 
@@ -249,7 +249,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\StatisticsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$date = 2020-06-19+00:00:00; // string | The date in ISO format. Required.
+$date = 2020-06-19 00:00:00; // string | The date. Required.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -265,7 +265,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **date** | **string**| The date in ISO format. Required. | [optional] |
+| **date** | **string**| The date. Required. | [optional] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
