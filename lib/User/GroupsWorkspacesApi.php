@@ -1,7 +1,7 @@
 <?php
 /**
  * GroupsWorkspacesApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -121,13 +124,13 @@ class GroupsWorkspacesApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -166,7 +169,7 @@ class GroupsWorkspacesApi
      * Add Group Member
      *
      * @param  int $group_id group_id (required)
-     * @param  \SeaTable\Client\User\AddGroupMemberRequest $add_group_member_request add_group_member_request (optional)
+     * @param  \SeaTable\Client\User\AddGroupMemberRequest|null $add_group_member_request add_group_member_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMember'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -185,7 +188,7 @@ class GroupsWorkspacesApi
      * Add Group Member
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\AddGroupMemberRequest $add_group_member_request (optional)
+     * @param  \SeaTable\Client\User\AddGroupMemberRequest|null $add_group_member_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMember'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -218,6 +221,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -231,64 +246,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -298,8 +260,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -310,7 +274,7 @@ class GroupsWorkspacesApi
      * Add Group Member
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\AddGroupMemberRequest $add_group_member_request (optional)
+     * @param  \SeaTable\Client\User\AddGroupMemberRequest|null $add_group_member_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -332,7 +296,7 @@ class GroupsWorkspacesApi
      * Add Group Member
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\AddGroupMemberRequest $add_group_member_request (optional)
+     * @param  \SeaTable\Client\User\AddGroupMemberRequest|null $add_group_member_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -383,7 +347,7 @@ class GroupsWorkspacesApi
      * Create request for operation 'addGroupMember'
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\AddGroupMemberRequest $add_group_member_request (optional)
+     * @param  \SeaTable\Client\User\AddGroupMemberRequest|null $add_group_member_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMember'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -422,10 +386,6 @@ class GroupsWorkspacesApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -496,8 +456,8 @@ class GroupsWorkspacesApi
      *
      * Copy Base from External Link
      *
-     * @param  string $link Source external link. (optional)
-     * @param  int $dst_workspace_id Destination workspace&#39;s ID. (optional)
+     * @param  string|null $link Source external link. (optional)
+     * @param  int|null $dst_workspace_id Destination workspace&#39;s ID. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -514,8 +474,8 @@ class GroupsWorkspacesApi
      *
      * Copy Base from External Link
      *
-     * @param  string $link Source external link. (optional)
-     * @param  int $dst_workspace_id Destination workspace&#39;s ID. (optional)
+     * @param  string|null $link Source external link. (optional)
+     * @param  int|null $dst_workspace_id Destination workspace&#39;s ID. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -548,21 +508,8 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 500:
@@ -572,8 +519,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -583,8 +532,8 @@ class GroupsWorkspacesApi
      *
      * Copy Base from External Link
      *
-     * @param  string $link Source external link. (optional)
-     * @param  int $dst_workspace_id Destination workspace&#39;s ID. (optional)
+     * @param  string|null $link Source external link. (optional)
+     * @param  int|null $dst_workspace_id Destination workspace&#39;s ID. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -605,8 +554,8 @@ class GroupsWorkspacesApi
      *
      * Copy Base from External Link
      *
-     * @param  string $link Source external link. (optional)
-     * @param  int $dst_workspace_id Destination workspace&#39;s ID. (optional)
+     * @param  string|null $link Source external link. (optional)
+     * @param  int|null $dst_workspace_id Destination workspace&#39;s ID. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -643,8 +592,8 @@ class GroupsWorkspacesApi
     /**
      * Create request for operation 'copyBaseFromExternalLink'
      *
-     * @param  string $link Source external link. (optional)
-     * @param  int $dst_workspace_id Destination workspace&#39;s ID. (optional)
+     * @param  string|null $link Source external link. (optional)
+     * @param  int|null $dst_workspace_id Destination workspace&#39;s ID. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -667,18 +616,17 @@ class GroupsWorkspacesApi
 
 
         // form params
-        if ($link !== null) {
-            $formParams['link'] = ObjectSerializer::toFormValue($link);
-        }
-        // form params
-        if ($dst_workspace_id !== null) {
-            $formParams['dst_workspace_id'] = ObjectSerializer::toFormValue($dst_workspace_id);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'link' => $link,
+            'dst_workspace_id' => $dst_workspace_id,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -744,7 +692,7 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
-     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
+     * @param  bool|null $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -765,7 +713,7 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
-     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
+     * @param  bool|null $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -798,6 +746,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -811,64 +771,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -878,8 +785,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -892,7 +801,7 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
-     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
+     * @param  bool|null $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -916,7 +825,7 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
-     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
+     * @param  bool|null $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -969,7 +878,7 @@ class GroupsWorkspacesApi
      * @param  int $src_workspace_id Source workspace&#39;s ID. (required)
      * @param  string $name Name of the base. (required)
      * @param  int $dst_workspace_id Destination workspace&#39;s ID. (required)
-     * @param  bool $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
+     * @param  bool|null $is_copy_dataset_syncs Select whether common datasets should be synchronous too. False by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['copyBaseFromWorkspace'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1012,26 +921,19 @@ class GroupsWorkspacesApi
 
 
         // form params
-        if ($src_workspace_id !== null) {
-            $formParams['src_workspace_id'] = ObjectSerializer::toFormValue($src_workspace_id);
-        }
-        // form params
-        if ($name !== null) {
-            $formParams['name'] = ObjectSerializer::toFormValue($name);
-        }
-        // form params
-        if ($dst_workspace_id !== null) {
-            $formParams['dst_workspace_id'] = ObjectSerializer::toFormValue($dst_workspace_id);
-        }
-        // form params
-        if ($is_copy_dataset_syncs !== null) {
-            $formParams['is_copy_dataset_syncs'] = ObjectSerializer::toFormValue($is_copy_dataset_syncs);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'src_workspace_id' => $src_workspace_id,
+            'name' => $name,
+            'dst_workspace_id' => $dst_workspace_id,
+            'is_copy_dataset_syncs' => $is_copy_dataset_syncs,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1094,7 +996,7 @@ class GroupsWorkspacesApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\User\CreateGroupRequest $create_group_request create_group_request (optional)
+     * @param  \SeaTable\Client\User\CreateGroupRequest|null $create_group_request create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1112,7 +1014,7 @@ class GroupsWorkspacesApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\User\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\User\CreateGroupRequest|null $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1145,6 +1047,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 201:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1158,64 +1072,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 201:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 201:
@@ -1225,8 +1086,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1236,7 +1099,7 @@ class GroupsWorkspacesApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\User\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\User\CreateGroupRequest|null $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1257,7 +1120,7 @@ class GroupsWorkspacesApi
      *
      * Create Group
      *
-     * @param  \SeaTable\Client\User\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\User\CreateGroupRequest|null $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1307,7 +1170,7 @@ class GroupsWorkspacesApi
     /**
      * Create request for operation 'createGroup'
      *
-     * @param  \SeaTable\Client\User\CreateGroupRequest $create_group_request (optional)
+     * @param  \SeaTable\Client\User\CreateGroupRequest|null $create_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1328,10 +1191,6 @@ class GroupsWorkspacesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1453,6 +1312,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1466,64 +1337,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1533,8 +1351,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1654,10 +1474,6 @@ class GroupsWorkspacesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1771,6 +1587,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1784,64 +1612,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1851,8 +1626,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1972,10 +1749,6 @@ class GroupsWorkspacesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2089,6 +1862,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2102,64 +1887,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2169,8 +1901,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2290,10 +2024,6 @@ class GroupsWorkspacesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2405,6 +2135,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2418,64 +2160,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2485,8 +2174,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2585,10 +2276,6 @@ class GroupsWorkspacesApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2651,7 +2338,7 @@ class GroupsWorkspacesApi
      *
      * List Workspaces
      *
-     * @param  bool $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
+     * @param  bool|null $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkspaces'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2669,7 +2356,7 @@ class GroupsWorkspacesApi
      *
      * List Workspaces
      *
-     * @param  bool $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
+     * @param  bool|null $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkspaces'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2702,6 +2389,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2715,64 +2414,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2782,8 +2428,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2793,7 +2441,7 @@ class GroupsWorkspacesApi
      *
      * List Workspaces
      *
-     * @param  bool $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
+     * @param  bool|null $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkspaces'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2814,7 +2462,7 @@ class GroupsWorkspacesApi
      *
      * List Workspaces
      *
-     * @param  bool $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
+     * @param  bool|null $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkspaces'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2864,7 +2512,7 @@ class GroupsWorkspacesApi
     /**
      * Create request for operation 'listWorkspaces'
      *
-     * @param  bool $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
+     * @param  bool|null $detail &#x60;true&#x60; or &#x60;false&#x60;, optional, &#x60;true&#x60; by default. When &#x60;false&#x60;, only the ID, name and type of each workspace is listed. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listWorkspaces'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2894,10 +2542,6 @@ class GroupsWorkspacesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3014,6 +2658,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3027,64 +2683,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3094,8 +2697,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3236,10 +2841,6 @@ class GroupsWorkspacesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3302,7 +2903,7 @@ class GroupsWorkspacesApi
      *
      * Search Group
      *
-     * @param  string $q q (optional)
+     * @param  string|null $q q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3320,7 +2921,7 @@ class GroupsWorkspacesApi
      *
      * Search Group
      *
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3353,6 +2954,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3366,64 +2979,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3433,8 +2993,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3444,7 +3006,7 @@ class GroupsWorkspacesApi
      *
      * Search Group
      *
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3465,7 +3027,7 @@ class GroupsWorkspacesApi
      *
      * Search Group
      *
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3515,7 +3077,7 @@ class GroupsWorkspacesApi
     /**
      * Create request for operation 'searchGroup'
      *
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3545,10 +3107,6 @@ class GroupsWorkspacesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3613,7 +3171,7 @@ class GroupsWorkspacesApi
      * Search Group Members
      *
      * @param  int $group_id group_id (required)
-     * @param  string $q q (optional)
+     * @param  string|null $q q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroupMembers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3632,7 +3190,7 @@ class GroupsWorkspacesApi
      * Search Group Members
      *
      * @param  int $group_id (required)
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroupMembers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3665,6 +3223,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3678,64 +3248,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3745,8 +3262,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3757,7 +3276,7 @@ class GroupsWorkspacesApi
      * Search Group Members
      *
      * @param  int $group_id (required)
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3779,7 +3298,7 @@ class GroupsWorkspacesApi
      * Search Group Members
      *
      * @param  int $group_id (required)
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3830,7 +3349,7 @@ class GroupsWorkspacesApi
      * Create request for operation 'searchGroupMembers'
      *
      * @param  int $group_id (required)
-     * @param  string $q (optional)
+     * @param  string|null $q (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3878,10 +3397,6 @@ class GroupsWorkspacesApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3946,7 +3461,7 @@ class GroupsWorkspacesApi
      * Update Group
      *
      * @param  int $group_id group_id (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRequest $update_group_request update_group_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRequest|null $update_group_request update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3965,7 +3480,7 @@ class GroupsWorkspacesApi
      * Update Group
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3998,6 +3513,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4011,64 +3538,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4078,8 +3552,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4090,7 +3566,7 @@ class GroupsWorkspacesApi
      * Update Group
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4112,7 +3588,7 @@ class GroupsWorkspacesApi
      * Update Group
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4163,7 +3639,7 @@ class GroupsWorkspacesApi
      * Create request for operation 'updateGroup'
      *
      * @param  int $group_id (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4202,10 +3678,6 @@ class GroupsWorkspacesApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -4278,7 +3750,7 @@ class GroupsWorkspacesApi
      *
      * @param  int $group_id group_id (required)
      * @param  string $group_member group_member (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest $update_group_role_request update_group_role_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest|null $update_group_role_request update_group_role_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupRole'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4298,7 +3770,7 @@ class GroupsWorkspacesApi
      *
      * @param  int $group_id (required)
      * @param  string $group_member (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest $update_group_role_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest|null $update_group_role_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupRole'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4331,6 +3803,18 @@ class GroupsWorkspacesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4344,64 +3828,11 @@ class GroupsWorkspacesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4411,8 +3842,10 @@ class GroupsWorkspacesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4424,7 +3857,7 @@ class GroupsWorkspacesApi
      *
      * @param  int $group_id (required)
      * @param  string $group_member (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest $update_group_role_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest|null $update_group_role_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4447,7 +3880,7 @@ class GroupsWorkspacesApi
      *
      * @param  int $group_id (required)
      * @param  string $group_member (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest $update_group_role_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest|null $update_group_role_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4499,7 +3932,7 @@ class GroupsWorkspacesApi
      *
      * @param  int $group_id (required)
      * @param  string $group_member (required)
-     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest $update_group_role_request (optional)
+     * @param  \SeaTable\Client\User\UpdateGroupRoleRequest|null $update_group_role_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4556,10 +3989,6 @@ class GroupsWorkspacesApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -4642,5 +4071,48 @@ class GroupsWorkspacesApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

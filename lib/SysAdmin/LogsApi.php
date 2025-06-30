@@ -1,7 +1,7 @@
 <?php
 /**
  * LogsApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -100,13 +103,13 @@ class LogsApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -193,6 +196,18 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -206,64 +221,11 @@ class LogsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -273,8 +235,10 @@ class LogsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -373,10 +337,6 @@ class LogsApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -439,8 +399,8 @@ class LogsApi
      *
      * List Audit Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAuditLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -458,8 +418,8 @@ class LogsApi
      *
      * List Audit Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAuditLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -492,6 +452,18 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\SysAdmin\ListAuditLogs200Response',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -505,64 +477,11 @@ class LogsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('\SeaTable\Client\SysAdmin\ListAuditLogs200Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\SysAdmin\ListAuditLogs200Response' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\SysAdmin\ListAuditLogs200Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SeaTable\Client\SysAdmin\ListAuditLogs200Response';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                '\SeaTable\Client\SysAdmin\ListAuditLogs200Response',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -572,8 +491,10 @@ class LogsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -583,8 +504,8 @@ class LogsApi
      *
      * List Audit Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAuditLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -605,8 +526,8 @@ class LogsApi
      *
      * List Audit Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAuditLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -656,8 +577,8 @@ class LogsApi
     /**
      * Create request for operation 'listAuditLogs'
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAuditLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -703,10 +624,6 @@ class LogsApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -770,8 +687,8 @@ class LogsApi
      *
      * List Email Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listEmailLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -789,8 +706,8 @@ class LogsApi
      *
      * List Email Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listEmailLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -823,6 +740,18 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -836,64 +765,11 @@ class LogsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -903,8 +779,10 @@ class LogsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -914,8 +792,8 @@ class LogsApi
      *
      * List Email Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listEmailLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -936,8 +814,8 @@ class LogsApi
      *
      * List Email Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listEmailLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -987,8 +865,8 @@ class LogsApi
     /**
      * Create request for operation 'listEmailLogs'
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listEmailLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1034,10 +912,6 @@ class LogsApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1101,8 +975,8 @@ class LogsApi
      *
      * List File Access Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1119,8 +993,8 @@ class LogsApi
      *
      * List File Access Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1153,24 +1027,13 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1180,8 +1043,8 @@ class LogsApi
      *
      * List File Access Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1202,8 +1065,8 @@ class LogsApi
      *
      * List File Access Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1240,8 +1103,8 @@ class LogsApi
     /**
      * Create request for operation 'listFileAccessLogs'
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1287,10 +1150,6 @@ class LogsApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1354,8 +1213,8 @@ class LogsApi
      *
      * List Login Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoginLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1373,8 +1232,8 @@ class LogsApi
      *
      * List Login Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoginLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1407,6 +1266,18 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1420,64 +1291,11 @@ class LogsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1487,8 +1305,10 @@ class LogsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1498,8 +1318,8 @@ class LogsApi
      *
      * List Login Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoginLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1520,8 +1340,8 @@ class LogsApi
      *
      * List Login Logs
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoginLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1571,8 +1391,8 @@ class LogsApi
     /**
      * Create request for operation 'listLoginLogs'
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listLoginLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1618,10 +1438,6 @@ class LogsApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1733,24 +1549,13 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1836,10 +1641,6 @@ class LogsApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1903,7 +1704,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest|null $update_abuse_report_request update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1922,7 +1723,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest|null $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1955,6 +1756,18 @@ class LogsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1968,64 +1781,11 @@ class LogsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2035,8 +1795,10 @@ class LogsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2047,7 +1809,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest|null $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2069,7 +1831,7 @@ class LogsApi
      * Update Abuse Report
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest|null $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2120,7 +1882,7 @@ class LogsApi
      * Create request for operation 'updateAbuseReport'
      *
      * @param  int $abuse_report_id (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest $update_abuse_report_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest|null $update_abuse_report_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAbuseReport'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2159,10 +1921,6 @@ class LogsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2245,5 +2003,48 @@ class LogsApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

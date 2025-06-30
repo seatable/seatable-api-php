@@ -1,7 +1,7 @@
 <?php
 /**
  * GroupsApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -109,13 +112,13 @@ class GroupsApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -154,8 +157,8 @@ class GroupsApi
      * Add Group
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $group_name The name of the group. (optional)
-     * @param  string $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
+     * @param  string|null $group_name The name of the group. (optional)
+     * @param  string|null $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -174,8 +177,8 @@ class GroupsApi
      * Add Group
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $group_name The name of the group. (optional)
-     * @param  string $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
+     * @param  string|null $group_name The name of the group. (optional)
+     * @param  string|null $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -208,6 +211,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -221,64 +236,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -288,8 +250,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -300,8 +264,8 @@ class GroupsApi
      * Add Group
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $group_name The name of the group. (optional)
-     * @param  string $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
+     * @param  string|null $group_name The name of the group. (optional)
+     * @param  string|null $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -323,8 +287,8 @@ class GroupsApi
      * Add Group
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $group_name The name of the group. (optional)
-     * @param  string $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
+     * @param  string|null $group_name The name of the group. (optional)
+     * @param  string|null $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -375,8 +339,8 @@ class GroupsApi
      * Create request for operation 'addGroup'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $group_name The name of the group. (optional)
-     * @param  string $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
+     * @param  string|null $group_name The name of the group. (optional)
+     * @param  string|null $group_owner The &#x60;user_id&#x60; of the owner of the group. Optional. If left blank, the newly added group will not be visible to anyone but still operatable. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -417,18 +381,17 @@ class GroupsApi
         }
 
         // form params
-        if ($group_name !== null) {
-            $formParams['group_name'] = ObjectSerializer::toFormValue($group_name);
-        }
-        // form params
-        if ($group_owner !== null) {
-            $formParams['group_owner'] = ObjectSerializer::toFormValue($group_owner);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'group_name' => $group_name,
+            'group_owner' => $group_owner,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -493,7 +456,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
+     * @param  string[]|null $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -513,7 +476,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
+     * @param  string[]|null $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -546,6 +509,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -559,64 +534,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -626,8 +548,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -639,7 +563,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
+     * @param  string[]|null $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -662,7 +586,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
+     * @param  string[]|null $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -714,7 +638,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  string[] $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
+     * @param  string[]|null $email List of &#x60;user_ids&#x60; (xxx@auth.local). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addGroupMembers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -772,14 +696,16 @@ class GroupsApi
         }
 
         // form params
-        if ($email !== null) {
-            $formParams['email'] = ObjectSerializer::toFormValue($email);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'email' => $email,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -895,6 +821,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -908,64 +846,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -975,8 +860,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1117,10 +1004,6 @@ class GroupsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1236,6 +1119,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1249,64 +1144,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1316,8 +1158,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1458,10 +1302,6 @@ class GroupsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1577,6 +1417,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1590,64 +1442,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1657,8 +1456,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1799,10 +1600,6 @@ class GroupsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1918,6 +1715,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1931,64 +1740,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1998,8 +1754,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2140,10 +1898,6 @@ class GroupsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2207,8 +1961,8 @@ class GroupsApi
      * List Groups (Team)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2227,8 +1981,8 @@ class GroupsApi
      * List Groups (Team)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2261,6 +2015,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2274,64 +2040,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2341,8 +2054,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2353,8 +2068,8 @@ class GroupsApi
      * List Groups (Team)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2376,8 +2091,8 @@ class GroupsApi
      * List Groups (Team)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2428,8 +2143,8 @@ class GroupsApi
      * Create request for operation 'listGroups'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2494,10 +2209,6 @@ class GroupsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2560,9 +2271,9 @@ class GroupsApi
      *
      * Re-order Your Groups
      *
-     * @param  string $group_id The ID of the group you&#39;d like to move. (optional)
-     * @param  string $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
-     * @param  bool $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
+     * @param  string|null $group_id The ID of the group you&#39;d like to move. (optional)
+     * @param  string|null $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
+     * @param  bool|null $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['orderGroups'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2580,9 +2291,9 @@ class GroupsApi
      *
      * Re-order Your Groups
      *
-     * @param  string $group_id The ID of the group you&#39;d like to move. (optional)
-     * @param  string $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
-     * @param  bool $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
+     * @param  string|null $group_id The ID of the group you&#39;d like to move. (optional)
+     * @param  string|null $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
+     * @param  bool|null $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['orderGroups'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2615,6 +2326,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2628,64 +2351,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2695,8 +2365,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2706,9 +2378,9 @@ class GroupsApi
      *
      * Re-order Your Groups
      *
-     * @param  string $group_id The ID of the group you&#39;d like to move. (optional)
-     * @param  string $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
-     * @param  bool $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
+     * @param  string|null $group_id The ID of the group you&#39;d like to move. (optional)
+     * @param  string|null $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
+     * @param  bool|null $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['orderGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2729,9 +2401,9 @@ class GroupsApi
      *
      * Re-order Your Groups
      *
-     * @param  string $group_id The ID of the group you&#39;d like to move. (optional)
-     * @param  string $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
-     * @param  bool $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
+     * @param  string|null $group_id The ID of the group you&#39;d like to move. (optional)
+     * @param  string|null $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
+     * @param  bool|null $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['orderGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2781,9 +2453,9 @@ class GroupsApi
     /**
      * Create request for operation 'orderGroups'
      *
-     * @param  string $group_id The ID of the group you&#39;d like to move. (optional)
-     * @param  string $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
-     * @param  bool $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
+     * @param  string|null $group_id The ID of the group you&#39;d like to move. (optional)
+     * @param  string|null $anchor_group_id The ID of the group where you&#39;d like your group to be moved under. (optional)
+     * @param  bool|null $to_last Whether you&#39;d like to move your group to the bottom of the list (&#x60;true&#x60;). &#x60;false&#x60; by default. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['orderGroups'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2807,22 +2479,18 @@ class GroupsApi
 
 
         // form params
-        if ($group_id !== null) {
-            $formParams['group_id'] = ObjectSerializer::toFormValue($group_id);
-        }
-        // form params
-        if ($anchor_group_id !== null) {
-            $formParams['anchor_group_id'] = ObjectSerializer::toFormValue($anchor_group_id);
-        }
-        // form params
-        if ($to_last !== null) {
-            $formParams['to_last'] = ObjectSerializer::toFormValue($to_last);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'group_id' => $group_id,
+            'anchor_group_id' => $anchor_group_id,
+            'to_last' => $to_last,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2940,6 +2608,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2953,64 +2633,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3020,8 +2647,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3183,10 +2812,6 @@ class GroupsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3251,7 +2876,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest $update_group_request update_group_request (optional)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest|null $update_group_request update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3271,7 +2896,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3304,6 +2929,18 @@ class GroupsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3317,64 +2954,11 @@ class GroupsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3384,8 +2968,10 @@ class GroupsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3397,7 +2983,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3420,7 +3006,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3472,7 +3058,7 @@ class GroupsApi
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
-     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest $update_group_request (optional)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupRequest|null $update_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3529,10 +3115,6 @@ class GroupsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3615,5 +3197,48 @@ class GroupsApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * UsersApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -124,13 +127,13 @@ class UsersApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -168,7 +171,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest|null $add_new_user_request add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -186,7 +189,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest|null $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -219,6 +222,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -232,64 +247,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -299,8 +261,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -310,7 +274,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest|null $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -331,7 +295,7 @@ class UsersApi
      *
      * Add New User
      *
-     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest|null $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -381,7 +345,7 @@ class UsersApi
     /**
      * Create request for operation 'addNewUser'
      *
-     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest $add_new_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\AddNewUserRequest|null $add_new_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNewUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -402,10 +366,6 @@ class UsersApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -527,6 +487,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -540,64 +512,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -607,8 +526,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -728,10 +649,6 @@ class UsersApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -845,6 +762,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -858,64 +787,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -925,8 +801,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1046,10 +924,6 @@ class UsersApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1113,7 +987,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest|null $enforce_two_factor_request enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1132,7 +1006,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest|null $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1165,6 +1039,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1178,64 +1064,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1245,8 +1078,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1257,7 +1092,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest|null $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1279,7 +1114,7 @@ class UsersApi
      * Enforce 2FA
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest|null $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1330,7 +1165,7 @@ class UsersApi
      * Create request for operation 'enforceTwoFactor'
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest $enforce_two_factor_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest|null $enforce_two_factor_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['enforceTwoFactor'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1369,10 +1204,6 @@ class UsersApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1493,24 +1324,13 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1617,10 +1437,6 @@ class UsersApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1683,7 +1499,7 @@ class UsersApi
      *
      * Import users
      *
-     * @param  \SplFileObject $file file (optional)
+     * @param  \SplFileObject|null $file file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1701,7 +1517,7 @@ class UsersApi
      *
      * Import users
      *
-     * @param  \SplFileObject $file (optional)
+     * @param  \SplFileObject|null $file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1734,6 +1550,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1747,64 +1575,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1814,8 +1589,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1825,7 +1602,7 @@ class UsersApi
      *
      * Import users
      *
-     * @param  \SplFileObject $file (optional)
+     * @param  \SplFileObject|null $file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1846,7 +1623,7 @@ class UsersApi
      *
      * Import users
      *
-     * @param  \SplFileObject $file (optional)
+     * @param  \SplFileObject|null $file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1896,7 +1673,7 @@ class UsersApi
     /**
      * Create request for operation 'importUsers'
      *
-     * @param  \SplFileObject $file (optional)
+     * @param  \SplFileObject|null $file (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1918,22 +1695,16 @@ class UsersApi
 
 
         // form params
-        if ($file !== null) {
-            $multipart = true;
-            $formParams['file'] = [];
-            $paramFiles = is_array($file) ? $file : [$file];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['file'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'file' => $file,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2045,6 +1816,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2058,64 +1841,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2125,8 +1855,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2225,10 +1957,6 @@ class UsersApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2292,8 +2020,8 @@ class UsersApi
      * List Bases Shared to User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBasesSharedToUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2312,8 +2040,8 @@ class UsersApi
      * List Bases Shared to User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBasesSharedToUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2346,6 +2074,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2359,64 +2099,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2426,8 +2113,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2438,8 +2127,8 @@ class UsersApi
      * List Bases Shared to User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBasesSharedToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2461,8 +2150,8 @@ class UsersApi
      * List Bases Shared to User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBasesSharedToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2513,8 +2202,8 @@ class UsersApi
      * Create request for operation 'listBasesSharedToUser'
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBasesSharedToUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2579,10 +2268,6 @@ class UsersApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2646,7 +2331,7 @@ class UsersApi
      * List User&#39;s Storage Objects
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  string $parent_dir parent_dir (optional)
+     * @param  string|null $parent_dir parent_dir (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserStorageObjects'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2665,7 +2350,7 @@ class UsersApi
      * List User&#39;s Storage Objects
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  string $parent_dir (optional)
+     * @param  string|null $parent_dir (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserStorageObjects'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2698,6 +2383,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2711,64 +2408,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2778,8 +2422,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2790,7 +2436,7 @@ class UsersApi
      * List User&#39;s Storage Objects
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  string $parent_dir (optional)
+     * @param  string|null $parent_dir (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserStorageObjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2812,7 +2458,7 @@ class UsersApi
      * List User&#39;s Storage Objects
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  string $parent_dir (optional)
+     * @param  string|null $parent_dir (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserStorageObjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2863,7 +2509,7 @@ class UsersApi
      * Create request for operation 'listUserStorageObjects'
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  string $parent_dir (optional)
+     * @param  string|null $parent_dir (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserStorageObjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2911,10 +2557,6 @@ class UsersApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2978,8 +2620,8 @@ class UsersApi
      *
      * List Users
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2997,8 +2639,8 @@ class UsersApi
      *
      * List Users
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3031,6 +2673,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3044,64 +2698,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3111,8 +2712,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3122,8 +2725,8 @@ class UsersApi
      *
      * List Users
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3144,8 +2747,8 @@ class UsersApi
      *
      * List Users
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3195,8 +2798,8 @@ class UsersApi
     /**
      * Create request for operation 'listUsers'
      *
-     * @param  int $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsers'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3242,10 +2845,6 @@ class UsersApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3360,6 +2959,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3373,64 +2984,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3440,8 +2998,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3561,10 +3121,6 @@ class UsersApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3627,7 +3183,7 @@ class UsersApi
      *
      * Search User / Users
      *
-     * @param  string $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
+     * @param  string|null $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3645,7 +3201,7 @@ class UsersApi
      *
      * Search User / Users
      *
-     * @param  string $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
+     * @param  string|null $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3678,6 +3234,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3691,64 +3259,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3758,8 +3273,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3769,7 +3286,7 @@ class UsersApi
      *
      * Search User / Users
      *
-     * @param  string $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
+     * @param  string|null $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3790,7 +3307,7 @@ class UsersApi
      *
      * Search User / Users
      *
-     * @param  string $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
+     * @param  string|null $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3840,7 +3357,7 @@ class UsersApi
     /**
      * Create request for operation 'searchUser'
      *
-     * @param  string $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
+     * @param  string|null $query Enter any query string from the user&#39;s name, ID, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3873,10 +3390,6 @@ class UsersApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3940,9 +3453,9 @@ class UsersApi
      *
      * Search User by Org-ID
      *
-     * @param  string $query query (optional)
-     * @param  int $org_id org_id (optional)
-     * @param  int $limit Limit of search User (optional)
+     * @param  string|null $query query (optional)
+     * @param  int|null $org_id org_id (optional)
+     * @param  int|null $limit Limit of search User (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUserByOrgId'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3959,9 +3472,9 @@ class UsersApi
      *
      * Search User by Org-ID
      *
-     * @param  string $query (optional)
-     * @param  int $org_id (optional)
-     * @param  int $limit Limit of search User (optional)
+     * @param  string|null $query (optional)
+     * @param  int|null $org_id (optional)
+     * @param  int|null $limit Limit of search User (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUserByOrgId'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3994,24 +3507,13 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -4021,9 +3523,9 @@ class UsersApi
      *
      * Search User by Org-ID
      *
-     * @param  string $query (optional)
-     * @param  int $org_id (optional)
-     * @param  int $limit Limit of search User (optional)
+     * @param  string|null $query (optional)
+     * @param  int|null $org_id (optional)
+     * @param  int|null $limit Limit of search User (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUserByOrgId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4044,9 +3546,9 @@ class UsersApi
      *
      * Search User by Org-ID
      *
-     * @param  string $query (optional)
-     * @param  int $org_id (optional)
-     * @param  int $limit Limit of search User (optional)
+     * @param  string|null $query (optional)
+     * @param  int|null $org_id (optional)
+     * @param  int|null $limit Limit of search User (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUserByOrgId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4083,9 +3585,9 @@ class UsersApi
     /**
      * Create request for operation 'searchUserByOrgId'
      *
-     * @param  string $query (optional)
-     * @param  int $org_id (optional)
-     * @param  int $limit Limit of search User (optional)
+     * @param  string|null $query (optional)
+     * @param  int|null $org_id (optional)
+     * @param  int|null $limit Limit of search User (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUserByOrgId'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4141,10 +3643,6 @@ class UsersApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -4208,7 +3706,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole|null $update_admins_role update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4226,7 +3724,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole|null $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4259,6 +3757,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4272,64 +3782,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4339,8 +3796,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4350,7 +3809,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole|null $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4371,7 +3830,7 @@ class UsersApi
      *
      * Update Admin&#39;s Role
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole|null $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4421,7 +3880,7 @@ class UsersApi
     /**
      * Create request for operation 'updateAdminRole'
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole $update_admins_role (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateAdminsRole|null $update_admins_role (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAdminRole'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4442,10 +3901,6 @@ class UsersApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -4517,7 +3972,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest|null $update_user_request update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4536,7 +3991,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest|null $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4569,6 +4024,18 @@ class UsersApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4582,64 +4049,11 @@ class UsersApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4649,8 +4063,10 @@ class UsersApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4661,7 +4077,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest|null $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4683,7 +4099,7 @@ class UsersApi
      * Update User
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest|null $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4734,7 +4150,7 @@ class UsersApi
      * Create request for operation 'updateUser'
      *
      * @param  string $user_id The unique user id in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest $update_user_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateUserRequest|null $update_user_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4773,10 +4189,6 @@ class UsersApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -4859,5 +4271,48 @@ class UsersApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

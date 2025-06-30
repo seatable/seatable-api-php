@@ -1,7 +1,7 @@
 <?php
 /**
  * CommonDatasetApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -109,13 +112,13 @@ class CommonDatasetApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -204,6 +207,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -217,64 +232,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -284,8 +246,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -405,10 +369,6 @@ class CommonDatasetApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -522,6 +482,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -535,64 +507,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -602,8 +521,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -723,10 +644,6 @@ class CommonDatasetApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -840,6 +757,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -853,64 +782,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -920,8 +796,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1041,10 +919,6 @@ class CommonDatasetApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1108,7 +982,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1127,7 +1001,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1160,6 +1034,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1173,64 +1059,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1240,8 +1073,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1252,7 +1087,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1274,7 +1109,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1325,7 +1160,7 @@ class CommonDatasetApi
      * Create request for operation 'importCommonDataset'
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1365,14 +1200,16 @@ class CommonDatasetApi
         }
 
         // form params
-        if ($dst_dtable_uuid !== null) {
-            $formParams['dst_dtable_uuid'] = ObjectSerializer::toFormValue($dst_dtable_uuid);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dst_dtable_uuid' => $dst_dtable_uuid,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1436,7 +1273,7 @@ class CommonDatasetApi
      * List Common Datasets
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  bool $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
+     * @param  bool|null $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1455,7 +1292,7 @@ class CommonDatasetApi
      * List Common Datasets
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  bool $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
+     * @param  bool|null $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1488,6 +1325,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1501,64 +1350,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1568,8 +1364,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1580,7 +1378,7 @@ class CommonDatasetApi
      * List Common Datasets
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  bool $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
+     * @param  bool|null $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1602,7 +1400,7 @@ class CommonDatasetApi
      * List Common Datasets
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  bool $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
+     * @param  bool|null $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1653,7 +1451,7 @@ class CommonDatasetApi
      * Create request for operation 'listCommonDataset'
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  bool $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
+     * @param  bool|null $by_group Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1702,10 +1500,6 @@ class CommonDatasetApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1820,6 +1614,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1833,64 +1639,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1900,8 +1653,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2022,10 +1777,6 @@ class CommonDatasetApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2088,11 +1839,11 @@ class CommonDatasetApi
      *
      * Publish Common Dataset
      *
-     * @param  string $dataset_name The name of the common dataset. (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $dtable_name The name of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $view_name The name of the view (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $dtable_name The name of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $view_name The name of the view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['publishCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2110,11 +1861,11 @@ class CommonDatasetApi
      *
      * Publish Common Dataset
      *
-     * @param  string $dataset_name The name of the common dataset. (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $dtable_name The name of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $view_name The name of the view (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $dtable_name The name of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $view_name The name of the view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['publishCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2147,6 +1898,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2160,64 +1923,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2227,8 +1937,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2238,11 +1950,11 @@ class CommonDatasetApi
      *
      * Publish Common Dataset
      *
-     * @param  string $dataset_name The name of the common dataset. (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $dtable_name The name of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $view_name The name of the view (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $dtable_name The name of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $view_name The name of the view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['publishCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2263,11 +1975,11 @@ class CommonDatasetApi
      *
      * Publish Common Dataset
      *
-     * @param  string $dataset_name The name of the common dataset. (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $dtable_name The name of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $view_name The name of the view (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $dtable_name The name of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $view_name The name of the view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['publishCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2317,11 +2029,11 @@ class CommonDatasetApi
     /**
      * Create request for operation 'publishCommonDataset'
      *
-     * @param  string $dataset_name The name of the common dataset. (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $dtable_name The name of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $view_name The name of the view (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $dtable_name The name of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $view_name The name of the view (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['publishCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2347,29 +2059,18 @@ class CommonDatasetApi
 
 
         // form params
-        if ($dataset_name !== null) {
-            $formParams['dataset_name'] = ObjectSerializer::toFormValue($dataset_name);
-        }
-        // form params
-        if ($workspace_id !== null) {
-            $formParams['workspace_id'] = ObjectSerializer::toFormValue($workspace_id);
-        }
-        // form params
-        if ($dtable_name !== null) {
-            $formParams['dtable_name'] = ObjectSerializer::toFormValue($dtable_name);
-        }
-        // form params
-        if ($table_name !== null) {
-            $formParams['table_name'] = ObjectSerializer::toFormValue($table_name);
-        }
-        // form params
-        if ($view_name !== null) {
-            $formParams['view_name'] = ObjectSerializer::toFormValue($view_name);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dataset_name' => $dataset_name,
+            'workspace_id' => $workspace_id,
+            'dtable_name' => $dtable_name,
+            'table_name' => $table_name,
+            'view_name' => $view_name,
+        ]);
+
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2434,7 +2135,7 @@ class CommonDatasetApi
      * Rename Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2453,7 +2154,7 @@ class CommonDatasetApi
      * Rename Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2486,6 +2187,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2499,64 +2212,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2566,8 +2226,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2578,7 +2240,7 @@ class CommonDatasetApi
      * Rename Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2600,7 +2262,7 @@ class CommonDatasetApi
      * Rename Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2651,7 +2313,7 @@ class CommonDatasetApi
      * Create request for operation 'renameCommonDataset'
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dataset_name The name of the common dataset. (optional)
+     * @param  string|null $dataset_name The name of the common dataset. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['renameCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2691,14 +2353,16 @@ class CommonDatasetApi
         }
 
         // form params
-        if ($dataset_name !== null) {
-            $formParams['dataset_name'] = ObjectSerializer::toFormValue($dataset_name);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dataset_name' => $dataset_name,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2762,10 +2426,10 @@ class CommonDatasetApi
      * Sync Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The UUID of the destination base. (optional)
-     * @param  bool $is_sync is_sync (optional)
-     * @param  string $dst_table_id dst_table_id (optional)
-     * @param  string $dst_view_id dst_view_id (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the destination base. (optional)
+     * @param  bool|null $is_sync is_sync (optional)
+     * @param  string|null $dst_table_id dst_table_id (optional)
+     * @param  string|null $dst_view_id dst_view_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2783,10 +2447,10 @@ class CommonDatasetApi
      * Sync Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The UUID of the destination base. (optional)
-     * @param  bool $is_sync (optional)
-     * @param  string $dst_table_id (optional)
-     * @param  string $dst_view_id (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the destination base. (optional)
+     * @param  bool|null $is_sync (optional)
+     * @param  string|null $dst_table_id (optional)
+     * @param  string|null $dst_view_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2819,24 +2483,13 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -2847,10 +2500,10 @@ class CommonDatasetApi
      * Sync Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The UUID of the destination base. (optional)
-     * @param  bool $is_sync (optional)
-     * @param  string $dst_table_id (optional)
-     * @param  string $dst_view_id (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the destination base. (optional)
+     * @param  bool|null $is_sync (optional)
+     * @param  string|null $dst_table_id (optional)
+     * @param  string|null $dst_view_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2872,10 +2525,10 @@ class CommonDatasetApi
      * Sync Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The UUID of the destination base. (optional)
-     * @param  bool $is_sync (optional)
-     * @param  string $dst_table_id (optional)
-     * @param  string $dst_view_id (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the destination base. (optional)
+     * @param  bool|null $is_sync (optional)
+     * @param  string|null $dst_table_id (optional)
+     * @param  string|null $dst_view_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2913,10 +2566,10 @@ class CommonDatasetApi
      * Create request for operation 'syncCommonDataset'
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string $dst_dtable_uuid The UUID of the destination base. (optional)
-     * @param  bool $is_sync (optional)
-     * @param  string $dst_table_id (optional)
-     * @param  string $dst_view_id (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the destination base. (optional)
+     * @param  bool|null $is_sync (optional)
+     * @param  string|null $dst_table_id (optional)
+     * @param  string|null $dst_view_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['syncCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2959,26 +2612,19 @@ class CommonDatasetApi
         }
 
         // form params
-        if ($dst_dtable_uuid !== null) {
-            $formParams['dst_dtable_uuid'] = ObjectSerializer::toFormValue($dst_dtable_uuid);
-        }
-        // form params
-        if ($is_sync !== null) {
-            $formParams['is_sync'] = ObjectSerializer::toFormValue($is_sync);
-        }
-        // form params
-        if ($dst_table_id !== null) {
-            $formParams['dst_table_id'] = ObjectSerializer::toFormValue($dst_table_id);
-        }
-        // form params
-        if ($dst_view_id !== null) {
-            $formParams['dst_view_id'] = ObjectSerializer::toFormValue($dst_view_id);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dst_dtable_uuid' => $dst_dtable_uuid,
+            'is_sync' => $is_sync,
+            'dst_table_id' => $dst_table_id,
+            'dst_view_id' => $dst_view_id,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3042,7 +2688,7 @@ class CommonDatasetApi
      * Update Common Dataset Sync
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest $update_common_dataset_sync_request update_common_dataset_sync_request (optional)
+     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest|null $update_common_dataset_sync_request update_common_dataset_sync_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCommonDatasetSync'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3061,7 +2707,7 @@ class CommonDatasetApi
      * Update Common Dataset Sync
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest $update_common_dataset_sync_request (optional)
+     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest|null $update_common_dataset_sync_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCommonDatasetSync'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3094,6 +2740,18 @@ class CommonDatasetApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3107,64 +2765,11 @@ class CommonDatasetApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3174,8 +2779,10 @@ class CommonDatasetApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3186,7 +2793,7 @@ class CommonDatasetApi
      * Update Common Dataset Sync
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest $update_common_dataset_sync_request (optional)
+     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest|null $update_common_dataset_sync_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCommonDatasetSync'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3208,7 +2815,7 @@ class CommonDatasetApi
      * Update Common Dataset Sync
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest $update_common_dataset_sync_request (optional)
+     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest|null $update_common_dataset_sync_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCommonDatasetSync'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3259,7 +2866,7 @@ class CommonDatasetApi
      * Create request for operation 'updateCommonDatasetSync'
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest $update_common_dataset_sync_request (optional)
+     * @param  \SeaTable\Client\User\UpdateCommonDatasetSyncRequest|null $update_common_dataset_sync_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCommonDatasetSync'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3298,10 +2905,6 @@ class CommonDatasetApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3384,5 +2987,48 @@ class CommonDatasetApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

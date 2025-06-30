@@ -1,7 +1,7 @@
 <?php
 /**
  * ImportExportApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -109,13 +112,13 @@ class ImportExportApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -154,9 +157,9 @@ class ImportExportApi
      * Append Excel CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
+     * @param  \SplFileObject|null $file file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendToTableFromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -175,9 +178,9 @@ class ImportExportApi
      * Append Excel CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendToTableFromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -210,6 +213,18 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -223,64 +238,11 @@ class ImportExportApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -290,8 +252,10 @@ class ImportExportApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -302,9 +266,9 @@ class ImportExportApi
      * Append Excel CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendToTableFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -326,9 +290,9 @@ class ImportExportApi
      * Append Excel CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendToTableFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -379,9 +343,9 @@ class ImportExportApi
      * Create request for operation 'appendToTableFromFile'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendToTableFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -423,30 +387,18 @@ class ImportExportApi
         }
 
         // form params
-        if ($file !== null) {
-            $multipart = true;
-            $formParams['file'] = [];
-            $paramFiles = is_array($file) ? $file : [$file];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['file'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
-        // form params
-        if ($dtable_uuid !== null) {
-            $formParams['dtable_uuid'] = ObjectSerializer::toFormValue($dtable_uuid);
-        }
-        // form params
-        if ($table_name !== null) {
-            $formParams['table_name'] = ObjectSerializer::toFormValue($table_name);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'file' => $file,
+            'dtable_uuid' => $dtable_uuid,
+            'table_name' => $table_name,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -511,8 +463,8 @@ class ImportExportApi
      *
      * @param  string $dtable_name dtable_name (required)
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $password The password of your Base. (optional)
-     * @param  bool $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
+     * @param  string|null $password The password of your Base. (optional)
+     * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -531,8 +483,8 @@ class ImportExportApi
      *
      * @param  string $dtable_name (required)
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $password The password of your Base. (optional)
-     * @param  bool $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
+     * @param  string|null $password The password of your Base. (optional)
+     * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -565,24 +517,13 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -594,8 +535,8 @@ class ImportExportApi
      *
      * @param  string $dtable_name (required)
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $password The password of your Base. (optional)
-     * @param  bool $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
+     * @param  string|null $password The password of your Base. (optional)
+     * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -618,8 +559,8 @@ class ImportExportApi
      *
      * @param  string $dtable_name (required)
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $password The password of your Base. (optional)
-     * @param  bool $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
+     * @param  string|null $password The password of your Base. (optional)
+     * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -658,8 +599,8 @@ class ImportExportApi
      *
      * @param  string $dtable_name (required)
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $password The password of your Base. (optional)
-     * @param  bool $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
+     * @param  string|null $password The password of your Base. (optional)
+     * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -733,10 +674,6 @@ class ImportExportApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -850,24 +787,13 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -970,10 +896,6 @@ class ImportExportApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1089,24 +1011,13 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1275,10 +1186,6 @@ class ImportExportApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1397,24 +1304,13 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1581,10 +1477,6 @@ class ImportExportApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1707,24 +1599,13 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1932,10 +1813,6 @@ class ImportExportApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1999,7 +1876,7 @@ class ImportExportApi
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable dtable (optional)
+     * @param  \SplFileObject|null $dtable dtable (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2018,7 +1895,7 @@ class ImportExportApi
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
+     * @param  \SplFileObject|null $dtable (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2051,6 +1928,18 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\User\ImportBasefromDTableFile200Response',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2064,64 +1953,11 @@ class ImportExportApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('\SeaTable\Client\User\ImportBasefromDTableFile200Response' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\User\ImportBasefromDTableFile200Response' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\User\ImportBasefromDTableFile200Response', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SeaTable\Client\User\ImportBasefromDTableFile200Response';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                '\SeaTable\Client\User\ImportBasefromDTableFile200Response',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2131,8 +1967,10 @@ class ImportExportApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2143,7 +1981,7 @@ class ImportExportApi
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
+     * @param  \SplFileObject|null $dtable (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2165,7 +2003,7 @@ class ImportExportApi
      * Import Base from dtable file
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
+     * @param  \SplFileObject|null $dtable (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2216,7 +2054,7 @@ class ImportExportApi
      * Create request for operation 'importBasefromDTableFile'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
+     * @param  \SplFileObject|null $dtable (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromDTableFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2256,22 +2094,16 @@ class ImportExportApi
         }
 
         // form params
-        if ($dtable !== null) {
-            $multipart = true;
-            $formParams['dtable'] = [];
-            $paramFiles = is_array($dtable) ? $dtable : [$dtable];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['dtable'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dtable' => $dtable,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2335,8 +2167,8 @@ class ImportExportApi
      * Import Base from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable dtable (optional)
-     * @param  string $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
+     * @param  \SplFileObject|null $dtable dtable (optional)
+     * @param  string|null $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2355,8 +2187,8 @@ class ImportExportApi
      * Import Base from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
-     * @param  string $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
+     * @param  \SplFileObject|null $dtable (optional)
+     * @param  string|null $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2389,6 +2221,18 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2402,64 +2246,11 @@ class ImportExportApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2469,8 +2260,10 @@ class ImportExportApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2481,8 +2274,8 @@ class ImportExportApi
      * Import Base from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
-     * @param  string $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
+     * @param  \SplFileObject|null $dtable (optional)
+     * @param  string|null $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2504,8 +2297,8 @@ class ImportExportApi
      * Import Base from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
-     * @param  string $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
+     * @param  \SplFileObject|null $dtable (optional)
+     * @param  string|null $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2556,8 +2349,8 @@ class ImportExportApi
      * Create request for operation 'importBasefromFile'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $dtable (optional)
-     * @param  string $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
+     * @param  \SplFileObject|null $dtable (optional)
+     * @param  string|null $folder If you would like to create the base into a folder, give its &#x60;folder_id&#x60; here. A base is created in the root folder by default. Optional. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importBasefromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2598,26 +2391,17 @@ class ImportExportApi
         }
 
         // form params
-        if ($dtable !== null) {
-            $multipart = true;
-            $formParams['dtable'] = [];
-            $paramFiles = is_array($dtable) ? $dtable : [$dtable];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['dtable'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
-        // form params
-        if ($folder !== null) {
-            $formParams['folder'] = ObjectSerializer::toFormValue($folder);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dtable' => $dtable,
+            'folder' => $folder,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2681,8 +2465,8 @@ class ImportExportApi
      * Import Table from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  \SplFileObject|null $file file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importTableFromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2701,8 +2485,8 @@ class ImportExportApi
      * Import Table from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importTableFromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2735,6 +2519,18 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2748,64 +2544,11 @@ class ImportExportApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2815,8 +2558,10 @@ class ImportExportApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2827,8 +2572,8 @@ class ImportExportApi
      * Import Table from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importTableFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2850,8 +2595,8 @@ class ImportExportApi
      * Import Table from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importTableFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2902,8 +2647,8 @@ class ImportExportApi
      * Create request for operation 'importTableFromFile'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importTableFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2944,26 +2689,17 @@ class ImportExportApi
         }
 
         // form params
-        if ($file !== null) {
-            $multipart = true;
-            $formParams['file'] = [];
-            $paramFiles = is_array($file) ? $file : [$file];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['file'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
-        // form params
-        if ($dtable_uuid !== null) {
-            $formParams['dtable_uuid'] = ObjectSerializer::toFormValue($dtable_uuid);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'file' => $file,
+            'dtable_uuid' => $dtable_uuid,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3027,10 +2763,10 @@ class ImportExportApi
      * Update from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
+     * @param  \SplFileObject|null $file file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3049,10 +2785,10 @@ class ImportExportApi
      * Update from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFromFile'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3085,6 +2821,18 @@ class ImportExportApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3098,64 +2846,11 @@ class ImportExportApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3165,8 +2860,10 @@ class ImportExportApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3177,10 +2874,10 @@ class ImportExportApi
      * Update from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3202,10 +2899,10 @@ class ImportExportApi
      * Update from xlsx or csv
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3256,10 +2953,10 @@ class ImportExportApi
      * Create request for operation 'updateFromFile'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  \SplFileObject $file (optional)
-     * @param  string $dtable_uuid The UUID of the base. (optional)
-     * @param  string $table_name The name of the table. (optional)
-     * @param  string $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
+     * @param  \SplFileObject|null $file (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $table_name The name of the table. (optional)
+     * @param  string|null $selected_columns Columns for matching chosen when updating. Use comma (,) to separate column names. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFromFile'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3302,34 +2999,19 @@ class ImportExportApi
         }
 
         // form params
-        if ($file !== null) {
-            $multipart = true;
-            $formParams['file'] = [];
-            $paramFiles = is_array($file) ? $file : [$file];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['file'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
-        // form params
-        if ($dtable_uuid !== null) {
-            $formParams['dtable_uuid'] = ObjectSerializer::toFormValue($dtable_uuid);
-        }
-        // form params
-        if ($table_name !== null) {
-            $formParams['table_name'] = ObjectSerializer::toFormValue($table_name);
-        }
-        // form params
-        if ($selected_columns !== null) {
-            $formParams['selected_columns'] = ObjectSerializer::toFormValue($selected_columns);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'file' => $file,
+            'dtable_uuid' => $dtable_uuid,
+            'table_name' => $table_name,
+            'selected_columns' => $selected_columns,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3404,5 +3086,48 @@ class ImportExportApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

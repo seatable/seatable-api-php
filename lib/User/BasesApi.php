@@ -1,7 +1,7 @@
 <?php
 /**
  * BasesApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -133,13 +136,13 @@ class BasesApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -179,7 +182,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  \SeaTable\Client\User\BasePasswordRequest $base_password_request base_password_request (optional)
+     * @param  \SeaTable\Client\User\BasePasswordRequest|null $base_password_request base_password_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['basePassword'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -199,7 +202,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  \SeaTable\Client\User\BasePasswordRequest $base_password_request (optional)
+     * @param  \SeaTable\Client\User\BasePasswordRequest|null $base_password_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['basePassword'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -232,6 +235,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -245,64 +260,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -312,8 +274,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -325,7 +289,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  \SeaTable\Client\User\BasePasswordRequest $base_password_request (optional)
+     * @param  \SeaTable\Client\User\BasePasswordRequest|null $base_password_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['basePassword'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -348,7 +312,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  \SeaTable\Client\User\BasePasswordRequest $base_password_request (optional)
+     * @param  \SeaTable\Client\User\BasePasswordRequest|null $base_password_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['basePassword'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -400,7 +364,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  \SeaTable\Client\User\BasePasswordRequest $base_password_request (optional)
+     * @param  \SeaTable\Client\User\BasePasswordRequest|null $base_password_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['basePassword'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -454,10 +418,6 @@ class BasesApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -577,6 +537,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -590,64 +562,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -657,8 +576,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -757,10 +678,6 @@ class BasesApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -823,10 +740,10 @@ class BasesApi
      *
      * Create Base
      *
-     * @param  string $name name (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name name (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -844,10 +761,10 @@ class BasesApi
      *
      * Create Base
      *
-     * @param  string $name (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -880,6 +797,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 201:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\User\Base',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -893,64 +822,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 201:
-                    if ('\SeaTable\Client\User\Base' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\User\Base' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\User\Base', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SeaTable\Client\User\Base';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                '\SeaTable\Client\User\Base',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 201:
@@ -960,8 +836,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -971,10 +849,10 @@ class BasesApi
      *
      * Create Base
      *
-     * @param  string $name (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -995,10 +873,10 @@ class BasesApi
      *
      * Create Base
      *
-     * @param  string $name (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1048,10 +926,10 @@ class BasesApi
     /**
      * Create request for operation 'createBase'
      *
-     * @param  string $name (optional)
-     * @param  string $workspace_id The workspace ID where your base is. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name (optional)
+     * @param  string|null $workspace_id The workspace ID where your base is. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1076,26 +954,19 @@ class BasesApi
 
 
         // form params
-        if ($name !== null) {
-            $formParams['name'] = ObjectSerializer::toFormValue($name);
-        }
-        // form params
-        if ($workspace_id !== null) {
-            $formParams['workspace_id'] = ObjectSerializer::toFormValue($workspace_id);
-        }
-        // form params
-        if ($icon !== null) {
-            $formParams['icon'] = ObjectSerializer::toFormValue($icon);
-        }
-        // form params
-        if ($color !== null) {
-            $formParams['color'] = ObjectSerializer::toFormValue($color);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'name' => $name,
+            'workspace_id' => $workspace_id,
+            'icon' => $icon,
+            'color' => $color,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1159,7 +1030,7 @@ class BasesApi
      * Create Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1178,7 +1049,7 @@ class BasesApi
      * Create Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1211,6 +1082,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1224,64 +1107,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1291,8 +1121,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1303,7 +1135,7 @@ class BasesApi
      * Create Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1325,7 +1157,7 @@ class BasesApi
      * Create Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1376,7 +1208,7 @@ class BasesApi
      * Create request for operation 'createFolder'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1416,14 +1248,16 @@ class BasesApi
         }
 
         // form params
-        if ($name !== null) {
-            $formParams['name'] = ObjectSerializer::toFormValue($name);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'name' => $name,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1487,7 +1321,7 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name name (optional)
+     * @param  string|null $name name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1506,7 +1340,7 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name (optional)
+     * @param  string|null $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1539,6 +1373,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1552,64 +1398,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1619,8 +1412,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1631,7 +1426,7 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name (optional)
+     * @param  string|null $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1653,7 +1448,7 @@ class BasesApi
      * Delete Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name (optional)
+     * @param  string|null $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1704,7 +1499,7 @@ class BasesApi
      * Create request for operation 'deleteBase'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name (optional)
+     * @param  string|null $name (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1744,14 +1539,16 @@ class BasesApi
         }
 
         // form params
-        if ($name !== null) {
-            $formParams['name'] = ObjectSerializer::toFormValue($name);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'name' => $name,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1867,6 +1664,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1880,64 +1689,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1947,8 +1703,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2086,10 +1844,6 @@ class BasesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2152,7 +1906,7 @@ class BasesApi
      *
      * Favorite Base
      *
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['favoriteBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2170,7 +1924,7 @@ class BasesApi
      *
      * Favorite Base
      *
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['favoriteBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2203,6 +1957,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2216,64 +1982,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2283,8 +1996,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2294,7 +2009,7 @@ class BasesApi
      *
      * Favorite Base
      *
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['favoriteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2315,7 +2030,7 @@ class BasesApi
      *
      * Favorite Base
      *
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['favoriteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2365,7 +2080,7 @@ class BasesApi
     /**
      * Create request for operation 'favoriteBase'
      *
-     * @param  string $dtable_uuid The UUID of the base. (optional)
+     * @param  string|null $dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['favoriteBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2387,14 +2102,16 @@ class BasesApi
 
 
         // form params
-        if ($dtable_uuid !== null) {
-            $formParams['dtable_uuid'] = ObjectSerializer::toFormValue($dtable_uuid);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'dtable_uuid' => $dtable_uuid,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -2506,6 +2223,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2519,64 +2248,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2586,8 +2262,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2685,10 +2363,6 @@ class BasesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2801,6 +2475,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2814,64 +2500,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2881,8 +2514,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2980,10 +2615,6 @@ class BasesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3098,6 +2729,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3111,64 +2754,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3178,8 +2768,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3299,10 +2891,6 @@ class BasesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -3365,8 +2953,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int $page page (optional)
-     * @param  int $per_page per_page (optional)
+     * @param  int|null $page page (optional)
+     * @param  int|null $per_page per_page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3384,8 +2972,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int $page (optional)
-     * @param  int $per_page (optional)
+     * @param  int|null $page (optional)
+     * @param  int|null $per_page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3418,6 +3006,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3431,64 +3031,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3498,8 +3045,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3509,8 +3058,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int $page (optional)
-     * @param  int $per_page (optional)
+     * @param  int|null $page (optional)
+     * @param  int|null $per_page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3531,8 +3080,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int $page (optional)
-     * @param  int $per_page (optional)
+     * @param  int|null $page (optional)
+     * @param  int|null $per_page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3582,8 +3131,8 @@ class BasesApi
     /**
      * Create request for operation 'listTrashedBases'
      *
-     * @param  int $page (optional)
-     * @param  int $per_page (optional)
+     * @param  int|null $page (optional)
+     * @param  int|null $per_page (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3629,10 +3178,6 @@ class BasesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -3697,10 +3242,10 @@ class BasesApi
      * Move Base into Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $item_type Required. (optional)
-     * @param  string $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
-     * @param  string $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
-     * @param  string $to The ID of the target folder. Required. (optional)
+     * @param  string|null $item_type Required. (optional)
+     * @param  string|null $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
+     * @param  string|null $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
+     * @param  string|null $to The ID of the target folder. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveBaseIntoFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3719,10 +3264,10 @@ class BasesApi
      * Move Base into Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $item_type Required. (optional)
-     * @param  string $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
-     * @param  string $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
-     * @param  string $to The ID of the target folder. Required. (optional)
+     * @param  string|null $item_type Required. (optional)
+     * @param  string|null $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
+     * @param  string|null $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
+     * @param  string|null $to The ID of the target folder. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveBaseIntoFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3755,6 +3300,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -3768,64 +3325,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -3835,8 +3339,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -3847,10 +3353,10 @@ class BasesApi
      * Move Base into Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $item_type Required. (optional)
-     * @param  string $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
-     * @param  string $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
-     * @param  string $to The ID of the target folder. Required. (optional)
+     * @param  string|null $item_type Required. (optional)
+     * @param  string|null $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
+     * @param  string|null $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
+     * @param  string|null $to The ID of the target folder. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveBaseIntoFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3872,10 +3378,10 @@ class BasesApi
      * Move Base into Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $item_type Required. (optional)
-     * @param  string $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
-     * @param  string $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
-     * @param  string $to The ID of the target folder. Required. (optional)
+     * @param  string|null $item_type Required. (optional)
+     * @param  string|null $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
+     * @param  string|null $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
+     * @param  string|null $to The ID of the target folder. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveBaseIntoFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3926,10 +3432,10 @@ class BasesApi
      * Create request for operation 'moveBaseIntoFolder'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $item_type Required. (optional)
-     * @param  string $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
-     * @param  string $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
-     * @param  string $to The ID of the target folder. Required. (optional)
+     * @param  string|null $item_type Required. (optional)
+     * @param  string|null $item_id When moving a base, use its &#x60;UUID&#x60;. Required. (optional)
+     * @param  string|null $from From which folder are you moving the base out of? If from the root, use &#39;/&#39;. Otherwise use a &#x60;folder_id&#x60;. Required. (optional)
+     * @param  string|null $to The ID of the target folder. Required. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['moveBaseIntoFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3972,26 +3478,19 @@ class BasesApi
         }
 
         // form params
-        if ($item_type !== null) {
-            $formParams['item_type'] = ObjectSerializer::toFormValue($item_type);
-        }
-        // form params
-        if ($item_id !== null) {
-            $formParams['item_id'] = ObjectSerializer::toFormValue($item_id);
-        }
-        // form params
-        if ($from !== null) {
-            $formParams['from'] = ObjectSerializer::toFormValue($from);
-        }
-        // form params
-        if ($to !== null) {
-            $formParams['to'] = ObjectSerializer::toFormValue($to);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'item_type' => $item_type,
+            'item_id' => $item_id,
+            'from' => $from,
+            'to' => $to,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -4107,6 +3606,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4120,64 +3631,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4187,8 +3645,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4329,10 +3789,6 @@ class BasesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -4446,6 +3902,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4459,64 +3927,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4526,8 +3941,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4644,10 +4061,6 @@ class BasesApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -4710,8 +4123,8 @@ class BasesApi
      *
      * Search base or apps
      *
-     * @param  string $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string $query_type query_type (optional)
+     * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
+     * @param  string|null $query_type query_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4729,8 +4142,8 @@ class BasesApi
      *
      * Search base or apps
      *
-     * @param  string $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string $query_type (optional)
+     * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
+     * @param  string|null $query_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4763,6 +4176,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -4776,64 +4201,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -4843,8 +4215,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -4854,8 +4228,8 @@ class BasesApi
      *
      * Search base or apps
      *
-     * @param  string $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string $query_type (optional)
+     * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
+     * @param  string|null $query_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4876,8 +4250,8 @@ class BasesApi
      *
      * Search base or apps
      *
-     * @param  string $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string $query_type (optional)
+     * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
+     * @param  string|null $query_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4927,8 +4301,8 @@ class BasesApi
     /**
      * Create request for operation 'searchBaseOrApps'
      *
-     * @param  string $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string $query_type (optional)
+     * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
+     * @param  string|null $query_type (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4968,10 +4342,6 @@ class BasesApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -5086,6 +4456,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -5099,64 +4481,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -5166,8 +4495,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -5288,10 +4619,6 @@ class BasesApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -5355,10 +4682,10 @@ class BasesApi
      * Update Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name The old name of the base. Required. (optional)
-     * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name The old name of the base. Required. (optional)
+     * @param  string|null $new_name The new name of the base. Optional. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5377,10 +4704,10 @@ class BasesApi
      * Update Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name The old name of the base. Required. (optional)
-     * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name The old name of the base. Required. (optional)
+     * @param  string|null $new_name The new name of the base. Optional. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5413,6 +4740,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -5426,64 +4765,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -5493,8 +4779,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -5505,10 +4793,10 @@ class BasesApi
      * Update Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name The old name of the base. Required. (optional)
-     * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name The old name of the base. Required. (optional)
+     * @param  string|null $new_name The new name of the base. Optional. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5530,10 +4818,10 @@ class BasesApi
      * Update Base
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name The old name of the base. Required. (optional)
-     * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name The old name of the base. Required. (optional)
+     * @param  string|null $new_name The new name of the base. Optional. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5584,10 +4872,10 @@ class BasesApi
      * Create request for operation 'updateBase'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $name The old name of the base. Required. (optional)
-     * @param  string $new_name The new name of the base. Optional. (optional)
-     * @param  string $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
-     * @param  string $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
+     * @param  string|null $name The old name of the base. Required. (optional)
+     * @param  string|null $new_name The new name of the base. Optional. (optional)
+     * @param  string|null $icon The icon of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icons. (optional)
+     * @param  string|null $color The icon color of the base. Optional. Refer to [\\\&quot;Create A Base\\\&quot;](/reference/createbase) for the list of available icon colors. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5630,26 +4918,19 @@ class BasesApi
         }
 
         // form params
-        if ($name !== null) {
-            $formParams['name'] = ObjectSerializer::toFormValue($name);
-        }
-        // form params
-        if ($new_name !== null) {
-            $formParams['new_name'] = ObjectSerializer::toFormValue($new_name);
-        }
-        // form params
-        if ($icon !== null) {
-            $formParams['icon'] = ObjectSerializer::toFormValue($icon);
-        }
-        // form params
-        if ($color !== null) {
-            $formParams['color'] = ObjectSerializer::toFormValue($color);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'name' => $name,
+            'new_name' => $new_name,
+            'icon' => $icon,
+            'color' => $color,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -5714,7 +4995,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $folder_id folder_id (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5734,7 +5015,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $folder_id (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -5767,6 +5048,18 @@ class BasesApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -5780,64 +5073,11 @@ class BasesApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -5847,8 +5087,10 @@ class BasesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -5860,7 +5102,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $folder_id (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5883,7 +5125,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $folder_id (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5935,7 +5177,7 @@ class BasesApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $folder_id (required)
-     * @param  string $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
+     * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -5990,14 +5232,16 @@ class BasesApi
         }
 
         // form params
-        if ($name !== null) {
-            $formParams['name'] = ObjectSerializer::toFormValue($name);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'name' => $name,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -6072,5 +5316,48 @@ class BasesApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

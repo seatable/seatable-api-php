@@ -1,7 +1,7 @@
 <?php
 /**
  * AppsApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -94,13 +97,13 @@ class AppsApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -139,7 +142,7 @@ class AppsApi
      * Change App Status
      *
      * @param  string $app_token app_token (required)
-     * @param  \SeaTable\Client\User\IsInactive $is_inactive is_inactive (optional)
+     * @param  \SeaTable\Client\User\IsInactive|null $is_inactive is_inactive (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeAppStatus'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -157,7 +160,7 @@ class AppsApi
      * Change App Status
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\IsInactive $is_inactive (optional)
+     * @param  \SeaTable\Client\User\IsInactive|null $is_inactive (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeAppStatus'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -190,24 +193,13 @@ class AppsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -218,7 +210,7 @@ class AppsApi
      * Change App Status
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\IsInactive $is_inactive (optional)
+     * @param  \SeaTable\Client\User\IsInactive|null $is_inactive (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeAppStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -240,7 +232,7 @@ class AppsApi
      * Change App Status
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\IsInactive $is_inactive (optional)
+     * @param  \SeaTable\Client\User\IsInactive|null $is_inactive (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeAppStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -278,7 +270,7 @@ class AppsApi
      * Create request for operation 'changeAppStatus'
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\IsInactive $is_inactive (optional)
+     * @param  \SeaTable\Client\User\IsInactive|null $is_inactive (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['changeAppStatus'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -317,10 +309,6 @@ class AppsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -392,7 +380,7 @@ class AppsApi
      * Import Users to App
      *
      * @param  string $app_token app_token (required)
-     * @param  \SeaTable\Client\User\ImportUsersToAppRequest $import_users_to_app_request import_users_to_app_request (optional)
+     * @param  \SeaTable\Client\User\ImportUsersToAppRequest|null $import_users_to_app_request import_users_to_app_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsersToApp'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -410,7 +398,7 @@ class AppsApi
      * Import Users to App
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\ImportUsersToAppRequest $import_users_to_app_request (optional)
+     * @param  \SeaTable\Client\User\ImportUsersToAppRequest|null $import_users_to_app_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsersToApp'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -443,24 +431,13 @@ class AppsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -471,7 +448,7 @@ class AppsApi
      * Import Users to App
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\ImportUsersToAppRequest $import_users_to_app_request (optional)
+     * @param  \SeaTable\Client\User\ImportUsersToAppRequest|null $import_users_to_app_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsersToApp'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -493,7 +470,7 @@ class AppsApi
      * Import Users to App
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\ImportUsersToAppRequest $import_users_to_app_request (optional)
+     * @param  \SeaTable\Client\User\ImportUsersToAppRequest|null $import_users_to_app_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsersToApp'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -531,7 +508,7 @@ class AppsApi
      * Create request for operation 'importUsersToApp'
      *
      * @param  string $app_token (required)
-     * @param  \SeaTable\Client\User\ImportUsersToAppRequest $import_users_to_app_request (optional)
+     * @param  \SeaTable\Client\User\ImportUsersToAppRequest|null $import_users_to_app_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importUsersToApp'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -570,10 +547,6 @@ class AppsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -694,24 +667,13 @@ class AppsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -817,10 +779,6 @@ class AppsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -932,24 +890,13 @@ class AppsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1034,10 +981,6 @@ class AppsApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1151,24 +1094,13 @@ class AppsApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -1275,10 +1207,6 @@ class AppsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1353,5 +1281,48 @@ class AppsApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

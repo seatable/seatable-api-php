@@ -1,7 +1,7 @@
 <?php
 /**
  * RowsApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -103,13 +106,13 @@ class RowsApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -148,7 +151,7 @@ class RowsApi
      * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AppendRows $append_rows append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows|null $append_rows append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -167,7 +170,7 @@ class RowsApi
      * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows|null $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -200,6 +203,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -213,64 +228,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -280,8 +242,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -292,7 +256,7 @@ class RowsApi
      * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows|null $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -314,7 +278,7 @@ class RowsApi
      * Append Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows|null $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -365,7 +329,7 @@ class RowsApi
      * Create request for operation 'appendRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\AppendRows $append_rows (optional)
+     * @param  \SeaTable\Client\Base\AppendRows|null $append_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appendRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -404,10 +368,6 @@ class RowsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -479,7 +439,7 @@ class RowsApi
      * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows|null $delete_rows delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -498,7 +458,7 @@ class RowsApi
      * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows|null $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -531,6 +491,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -544,64 +516,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -611,8 +530,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -623,7 +544,7 @@ class RowsApi
      * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows|null $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -645,7 +566,7 @@ class RowsApi
      * Delete Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows|null $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -696,7 +617,7 @@ class RowsApi
      * Create request for operation 'deleteRow'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\DeleteRows $delete_rows (optional)
+     * @param  \SeaTable\Client\Base\DeleteRows|null $delete_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -735,10 +656,6 @@ class RowsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -812,7 +729,7 @@ class RowsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -833,7 +750,7 @@ class RowsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -866,6 +783,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -879,64 +808,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -946,8 +822,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -960,7 +838,7 @@ class RowsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -984,7 +862,7 @@ class RowsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1037,7 +915,7 @@ class RowsApi
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $row_id The id of the row. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1120,10 +998,6 @@ class RowsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1188,10 +1062,10 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
-     * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1211,10 +1085,10 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
-     * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1247,6 +1121,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1260,64 +1146,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1327,8 +1160,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1340,10 +1175,10 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
-     * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1366,10 +1201,10 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
-     * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1421,10 +1256,10 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
-     * @param  int $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int $limit Number of rows that should be returned. 1000 by default. (optional)
-     * @param  bool $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1525,10 +1360,6 @@ class RowsApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1592,7 +1423,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1611,7 +1442,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1644,6 +1475,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1657,64 +1500,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1724,8 +1514,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1736,7 +1528,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1758,7 +1550,7 @@ class RowsApi
      * Lock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1809,7 +1601,7 @@ class RowsApi
      * Create request for operation 'lockRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['lockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1848,10 +1640,6 @@ class RowsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1923,7 +1711,7 @@ class RowsApi
      * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query sql_query (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery|null $sql_query sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1942,7 +1730,7 @@ class RowsApi
      * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery|null $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1975,6 +1763,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\Base\SqlQueryResponse',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1988,64 +1788,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('\SeaTable\Client\Base\SqlQueryResponse' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\SeaTable\Client\Base\SqlQueryResponse' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SeaTable\Client\Base\SqlQueryResponse', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\SeaTable\Client\Base\SqlQueryResponse';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                '\SeaTable\Client\Base\SqlQueryResponse',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2055,8 +1802,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2067,7 +1816,7 @@ class RowsApi
      * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery|null $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2089,7 +1838,7 @@ class RowsApi
      * Query SeaTable with SQL
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery|null $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2140,7 +1889,7 @@ class RowsApi
      * Create request for operation 'querySQL'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\SqlQuery $sql_query (optional)
+     * @param  \SeaTable\Client\Base\SqlQuery|null $sql_query (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['querySQL'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2179,10 +1928,6 @@ class RowsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2254,7 +1999,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2273,7 +2018,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2306,6 +2051,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2319,64 +2076,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2386,8 +2090,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2398,7 +2104,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2420,7 +2126,7 @@ class RowsApi
      * Unlock Rows
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2471,7 +2177,7 @@ class RowsApi
      * Create request for operation 'unlockRows'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\TableWithRowIds $table_with_row_ids (optional)
+     * @param  \SeaTable\Client\Base\TableWithRowIds|null $table_with_row_ids (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['unlockRows'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2510,10 +2216,6 @@ class RowsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2585,7 +2287,7 @@ class RowsApi
      * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows|null $update_rows update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2604,7 +2306,7 @@ class RowsApi
      * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows|null $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2637,6 +2339,18 @@ class RowsApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -2650,64 +2364,11 @@ class RowsApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -2717,8 +2378,10 @@ class RowsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -2729,7 +2392,7 @@ class RowsApi
      * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows|null $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2751,7 +2414,7 @@ class RowsApi
      * Update Row(s)
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows|null $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2802,7 +2465,7 @@ class RowsApi
      * Create request for operation 'updateRow'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  \SeaTable\Client\Base\UpdateRows $update_rows (optional)
+     * @param  \SeaTable\Client\Base\UpdateRows|null $update_rows (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateRow'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2841,10 +2504,6 @@ class RowsApi
             );
         }
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -2927,5 +2586,48 @@ class RowsApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

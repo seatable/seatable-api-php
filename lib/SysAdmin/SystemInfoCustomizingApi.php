@@ -1,7 +1,7 @@
 <?php
 /**
  * SystemInfoCustomizingApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -94,13 +97,13 @@ class SystemInfoCustomizingApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -187,6 +190,18 @@ class SystemInfoCustomizingApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -200,64 +215,11 @@ class SystemInfoCustomizingApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -267,8 +229,10 @@ class SystemInfoCustomizingApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -367,10 +331,6 @@ class SystemInfoCustomizingApi
 
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -433,8 +393,8 @@ class SystemInfoCustomizingApi
      *
      * Update Favicon
      *
-     * @param  \SplFileObject $favicon The path and filename of the image file of your favicon. (optional)
-     * @param  bool $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
+     * @param  \SplFileObject|null $favicon The path and filename of the image file of your favicon. (optional)
+     * @param  bool|null $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFavicon'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -452,8 +412,8 @@ class SystemInfoCustomizingApi
      *
      * Update Favicon
      *
-     * @param  \SplFileObject $favicon The path and filename of the image file of your favicon. (optional)
-     * @param  bool $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
+     * @param  \SplFileObject|null $favicon The path and filename of the image file of your favicon. (optional)
+     * @param  bool|null $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFavicon'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -486,6 +446,18 @@ class SystemInfoCustomizingApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -499,64 +471,11 @@ class SystemInfoCustomizingApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -566,8 +485,10 @@ class SystemInfoCustomizingApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -577,8 +498,8 @@ class SystemInfoCustomizingApi
      *
      * Update Favicon
      *
-     * @param  \SplFileObject $favicon The path and filename of the image file of your favicon. (optional)
-     * @param  bool $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
+     * @param  \SplFileObject|null $favicon The path and filename of the image file of your favicon. (optional)
+     * @param  bool|null $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFavicon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -599,8 +520,8 @@ class SystemInfoCustomizingApi
      *
      * Update Favicon
      *
-     * @param  \SplFileObject $favicon The path and filename of the image file of your favicon. (optional)
-     * @param  bool $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
+     * @param  \SplFileObject|null $favicon The path and filename of the image file of your favicon. (optional)
+     * @param  bool|null $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFavicon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -650,8 +571,8 @@ class SystemInfoCustomizingApi
     /**
      * Create request for operation 'updateFavicon'
      *
-     * @param  \SplFileObject $favicon The path and filename of the image file of your favicon. (optional)
-     * @param  bool $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
+     * @param  \SplFileObject|null $favicon The path and filename of the image file of your favicon. (optional)
+     * @param  bool|null $with_notify Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFavicon'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -674,26 +595,17 @@ class SystemInfoCustomizingApi
 
 
         // form params
-        if ($favicon !== null) {
-            $multipart = true;
-            $formParams['favicon'] = [];
-            $paramFiles = is_array($favicon) ? $favicon : [$favicon];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['favicon'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
-        // form params
-        if ($with_notify !== null) {
-            $formParams['with_notify'] = ObjectSerializer::toFormValue($with_notify);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'favicon' => $favicon,
+            'with_notify' => $with_notify,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -756,7 +668,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest|null $update_general_settings_request update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -774,7 +686,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest|null $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -807,6 +719,18 @@ class SystemInfoCustomizingApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -820,64 +744,11 @@ class SystemInfoCustomizingApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -887,8 +758,10 @@ class SystemInfoCustomizingApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -898,7 +771,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest|null $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -919,7 +792,7 @@ class SystemInfoCustomizingApi
      *
      * Update General Settings
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest|null $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -969,7 +842,7 @@ class SystemInfoCustomizingApi
     /**
      * Create request for operation 'updateGeneralSettings'
      *
-     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest $update_general_settings_request (optional)
+     * @param  \SeaTable\Client\SysAdmin\UpdateGeneralSettingsRequest|null $update_general_settings_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGeneralSettings'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -990,10 +863,6 @@ class SystemInfoCustomizingApi
 
 
 
-
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
@@ -1064,7 +933,7 @@ class SystemInfoCustomizingApi
      *
      * Update Login Background Image
      *
-     * @param  \SplFileObject $login_bg_image The path and filename of the background image. (optional)
+     * @param  \SplFileObject|null $login_bg_image The path and filename of the background image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLoginBackgroundImage'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1082,7 +951,7 @@ class SystemInfoCustomizingApi
      *
      * Update Login Background Image
      *
-     * @param  \SplFileObject $login_bg_image The path and filename of the background image. (optional)
+     * @param  \SplFileObject|null $login_bg_image The path and filename of the background image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLoginBackgroundImage'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1115,6 +984,18 @@ class SystemInfoCustomizingApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1128,64 +1009,11 @@ class SystemInfoCustomizingApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1195,8 +1023,10 @@ class SystemInfoCustomizingApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1206,7 +1036,7 @@ class SystemInfoCustomizingApi
      *
      * Update Login Background Image
      *
-     * @param  \SplFileObject $login_bg_image The path and filename of the background image. (optional)
+     * @param  \SplFileObject|null $login_bg_image The path and filename of the background image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLoginBackgroundImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1227,7 +1057,7 @@ class SystemInfoCustomizingApi
      *
      * Update Login Background Image
      *
-     * @param  \SplFileObject $login_bg_image The path and filename of the background image. (optional)
+     * @param  \SplFileObject|null $login_bg_image The path and filename of the background image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLoginBackgroundImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1277,7 +1107,7 @@ class SystemInfoCustomizingApi
     /**
      * Create request for operation 'updateLoginBackgroundImage'
      *
-     * @param  \SplFileObject $login_bg_image The path and filename of the background image. (optional)
+     * @param  \SplFileObject|null $login_bg_image The path and filename of the background image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLoginBackgroundImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1299,22 +1129,16 @@ class SystemInfoCustomizingApi
 
 
         // form params
-        if ($login_bg_image !== null) {
-            $multipart = true;
-            $formParams['login_bg_image'] = [];
-            $paramFiles = is_array($login_bg_image) ? $login_bg_image : [$login_bg_image];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['login_bg_image'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'login_bg_image' => $login_bg_image,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1377,7 +1201,7 @@ class SystemInfoCustomizingApi
      *
      * Update Logo
      *
-     * @param  \SplFileObject $logo The path and filename of the image file of your logo. (optional)
+     * @param  \SplFileObject|null $logo The path and filename of the image file of your logo. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLogo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1395,7 +1219,7 @@ class SystemInfoCustomizingApi
      *
      * Update Logo
      *
-     * @param  \SplFileObject $logo The path and filename of the image file of your logo. (optional)
+     * @param  \SplFileObject|null $logo The path and filename of the image file of your logo. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLogo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1428,6 +1252,18 @@ class SystemInfoCustomizingApi
 
             $statusCode = $response->getStatusCode();
 
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
             if ($statusCode < 200 || $statusCode > 299) {
                 throw new ApiException(
                     sprintf(
@@ -1441,64 +1277,11 @@ class SystemInfoCustomizingApi
                 );
             }
 
-            switch($statusCode) {
-                case 200:
-                    if ('object' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
@@ -1508,8 +1291,10 @@ class SystemInfoCustomizingApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
-                    break;
+                    throw $e;
             }
+        
+
             throw $e;
         }
     }
@@ -1519,7 +1304,7 @@ class SystemInfoCustomizingApi
      *
      * Update Logo
      *
-     * @param  \SplFileObject $logo The path and filename of the image file of your logo. (optional)
+     * @param  \SplFileObject|null $logo The path and filename of the image file of your logo. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1540,7 +1325,7 @@ class SystemInfoCustomizingApi
      *
      * Update Logo
      *
-     * @param  \SplFileObject $logo The path and filename of the image file of your logo. (optional)
+     * @param  \SplFileObject|null $logo The path and filename of the image file of your logo. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1590,7 +1375,7 @@ class SystemInfoCustomizingApi
     /**
      * Create request for operation 'updateLogo'
      *
-     * @param  \SplFileObject $logo The path and filename of the image file of your logo. (optional)
+     * @param  \SplFileObject|null $logo The path and filename of the image file of your logo. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateLogo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1612,22 +1397,16 @@ class SystemInfoCustomizingApi
 
 
         // form params
-        if ($logo !== null) {
-            $multipart = true;
-            $formParams['logo'] = [];
-            $paramFiles = is_array($logo) ? $logo : [$logo];
-            foreach ($paramFiles as $paramFile) {
-                $formParams['logo'][] = \GuzzleHttp\Psr7\Utils::tryFopen(
-                    ObjectSerializer::toFormValue($paramFile),
-                    'rb'
-                );
-            }
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'logo' => $logo,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -1702,5 +1481,48 @@ class SystemInfoCustomizingApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }

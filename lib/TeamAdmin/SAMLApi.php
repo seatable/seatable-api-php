@@ -1,7 +1,7 @@
 <?php
 /**
  * SAMLApi
- * PHP version 7.4
+ * PHP version 8.1
  *
  * @category Class
  * @package  SeaTable\Client
@@ -33,8 +33,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
 use SeaTable\Client\Configuration;
+use SeaTable\Client\FormDataProcessor;
 use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
@@ -88,13 +91,13 @@ class SAMLApi
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        ClientInterface $client = null,
-        Configuration $config = null,
-        HeaderSelector $selector = null,
-        $hostIndex = 0
+        ?ClientInterface $client = null,
+        ?Configuration $config = null,
+        ?HeaderSelector $selector = null,
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config ?: new Configuration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -182,24 +185,13 @@ class SAMLApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -306,10 +298,6 @@ class SAMLApi
         }
 
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
-
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -373,9 +361,9 @@ class SAMLApi
      * Update SAML Config
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
-     * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
+     * @param  string|null $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $idp_certificate Provide the certificate from your IdP for this service. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSamlConfig'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -393,9 +381,9 @@ class SAMLApi
      * Update SAML Config
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
-     * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
+     * @param  string|null $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $idp_certificate Provide the certificate from your IdP for this service. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSamlConfig'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -428,24 +416,13 @@ class SAMLApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -456,9 +433,9 @@ class SAMLApi
      * Update SAML Config
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
-     * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
+     * @param  string|null $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $idp_certificate Provide the certificate from your IdP for this service. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSamlConfig'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -480,9 +457,9 @@ class SAMLApi
      * Update SAML Config
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
-     * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
+     * @param  string|null $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $idp_certificate Provide the certificate from your IdP for this service. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSamlConfig'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -520,9 +497,9 @@ class SAMLApi
      * Create request for operation 'updateSamlConfig'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
-     * @param  string $idp_certificate Provide the certificate from your IdP for this service. (optional)
+     * @param  string|null $metadata_url URL pointing to the metadata of your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $idp_certificate Provide the certificate from your IdP for this service. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateSamlConfig'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -564,22 +541,18 @@ class SAMLApi
         }
 
         // form params
-        if ($metadata_url !== null) {
-            $formParams['metadata_url'] = ObjectSerializer::toFormValue($metadata_url);
-        }
-        // form params
-        if ($domain !== null) {
-            $formParams['domain'] = ObjectSerializer::toFormValue($domain);
-        }
-        // form params
-        if ($idp_certificate !== null) {
-            $formParams['idp_certificate'] = ObjectSerializer::toFormValue($idp_certificate);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'metadata_url' => $metadata_url,
+            'domain' => $domain,
+            'idp_certificate' => $idp_certificate,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -643,7 +616,7 @@ class SAMLApi
      * Verify SAML domain
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -661,7 +634,7 @@ class SAMLApi
      * Verify SAML domain
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -694,24 +667,13 @@ class SAMLApi
 
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
 
             return [null, $statusCode, $response->getHeaders()];
-
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+        
+
             throw $e;
         }
     }
@@ -722,7 +684,7 @@ class SAMLApi
      * Verify SAML domain
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -744,7 +706,7 @@ class SAMLApi
      * Verify SAML domain
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -782,7 +744,7 @@ class SAMLApi
      * Create request for operation 'verifySamlDomain'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
+     * @param  string|null $domain Domain that should be connected to your SeaTable Team. Only email addresses with this domain will be redirected to your Identity Provider (IdP). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['verifySamlDomain'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -822,14 +784,16 @@ class SAMLApi
         }
 
         // form params
-        if ($domain !== null) {
-            $formParams['domain'] = ObjectSerializer::toFormValue($domain);
-        }
+        $formDataProcessor = new FormDataProcessor();
 
-        if ($contentType === 'multipart/form-data') {
-            $multipart = true;
-        }
+        $formData = $formDataProcessor->prepare([
+            'domain' => $domain,
+        ]);
 
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $multipart = true;
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
             $contentType,
@@ -904,5 +868,48 @@ class SAMLApi
         }
 
         return $options;
+    }
+
+    private function handleResponseWithDataType(
+        string $dataType,
+        RequestInterface $request,
+        ResponseInterface $response
+    ): array {
+        if ($dataType === '\SplFileObject') {
+            $content = $response->getBody(); //stream goes to serializer
+        } else {
+            $content = (string) $response->getBody();
+            if ($dataType !== 'string') {
+                try {
+                    $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $exception) {
+                    throw new ApiException(
+                        sprintf(
+                            'Error JSON decoding server response (%s)',
+                            $request->getUri()
+                        ),
+                        $response->getStatusCode(),
+                        $response->getHeaders(),
+                        $content
+                    );
+                }
+            }
+        }
+
+        return [
+            ObjectSerializer::deserialize($content, $dataType, []),
+            $response->getStatusCode(),
+            $response->getHeaders()
+        ];
+    }
+
+    private function responseWithinRangeCode(
+        string $rangeCode,
+        int $statusCode
+    ): bool {
+        $left = (int) ($rangeCode[0].'00');
+        $right = (int) ($rangeCode[0].'99');
+
+        return $statusCode >= $left && $statusCode <= $right;
     }
 }
