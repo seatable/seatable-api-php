@@ -165,7 +165,7 @@ AccountTokenAuth
 ## `listApps()`
 
 ```php
-listApps()
+listApps(): object
 ```
 
 List Apps
@@ -187,7 +187,8 @@ $apiInstance = new SeaTable\Client\User\AppsApi(
 );
 
 try {
-    $apiInstance->listApps();
+    $result = $apiInstance->listApps();
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AppsApi->listApps: ', $e->getMessage(), PHP_EOL;
 }
@@ -199,7 +200,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
