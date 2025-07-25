@@ -118,7 +118,7 @@ AccountTokenAuth
 ## `listBaseSharings()`
 
 ```php
-listBaseSharings($org_id, $base_uuid)
+listBaseSharings($org_id, $base_uuid): object
 ```
 
 List Base Sharings
@@ -142,7 +142,8 @@ $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Ge
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 
 try {
-    $apiInstance->listBaseSharings($org_id, $base_uuid);
+    $result = $apiInstance->listBaseSharings($org_id, $base_uuid);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BasesApi->listBaseSharings: ', $e->getMessage(), PHP_EOL;
 }
@@ -157,7 +158,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
