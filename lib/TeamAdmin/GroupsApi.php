@@ -103,6 +103,9 @@ class GroupsApi
         'updateGroup' => [
             'application/json',
         ],
+        'updateGroupMemberRole' => [
+            'application/json',
+        ],
     ];
 
     /**
@@ -3129,6 +3132,340 @@ class GroupsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_group_request));
             } else {
                 $httpBody = $update_group_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateGroupMemberRole
+     *
+     * Update Group Member Role
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest|null $update_group_member_role_request update_group_member_role_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupMemberRole'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function updateGroupMemberRole($org_id, $group_id, $user_id, $update_group_member_role_request = null, string $contentType = self::contentTypes['updateGroupMemberRole'][0])
+    {
+        list($response) = $this->updateGroupMemberRoleWithHttpInfo($org_id, $group_id, $user_id, $update_group_member_role_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateGroupMemberRoleWithHttpInfo
+     *
+     * Update Group Member Role
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest|null $update_group_member_role_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupMemberRole'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateGroupMemberRoleWithHttpInfo($org_id, $group_id, $user_id, $update_group_member_role_request = null, string $contentType = self::contentTypes['updateGroupMemberRole'][0])
+    {
+        $request = $this->updateGroupMemberRoleRequest($org_id, $group_id, $user_id, $update_group_member_role_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateGroupMemberRoleAsync
+     *
+     * Update Group Member Role
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest|null $update_group_member_role_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupMemberRole'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateGroupMemberRoleAsync($org_id, $group_id, $user_id, $update_group_member_role_request = null, string $contentType = self::contentTypes['updateGroupMemberRole'][0])
+    {
+        return $this->updateGroupMemberRoleAsyncWithHttpInfo($org_id, $group_id, $user_id, $update_group_member_role_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateGroupMemberRoleAsyncWithHttpInfo
+     *
+     * Update Group Member Role
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest|null $update_group_member_role_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupMemberRole'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateGroupMemberRoleAsyncWithHttpInfo($org_id, $group_id, $user_id, $update_group_member_role_request = null, string $contentType = self::contentTypes['updateGroupMemberRole'][0])
+    {
+        $returnType = 'object';
+        $request = $this->updateGroupMemberRoleRequest($org_id, $group_id, $user_id, $update_group_member_role_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateGroupMemberRole'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int $group_id The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest|null $update_group_member_role_request (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupMemberRole'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateGroupMemberRoleRequest($org_id, $group_id, $user_id, $update_group_member_role_request = null, string $contentType = self::contentTypes['updateGroupMemberRole'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling updateGroupMemberRole'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling GroupsApi.updateGroupMemberRole, must be bigger than or equal to 1.');
+        }
+        
+        // verify the required parameter 'group_id' is set
+        if ($group_id === null || (is_array($group_id) && count($group_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $group_id when calling updateGroupMemberRole'
+            );
+        }
+        if ($group_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$group_id" when calling GroupsApi.updateGroupMemberRole, must be bigger than or equal to 1.');
+        }
+        
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling updateGroupMemberRole'
+            );
+        }
+        if (!preg_match("/^[a-f0-9]{32}(@auth.local)$/", $user_id)) {
+            throw new \InvalidArgumentException("invalid value for \"user_id\" when calling GroupsApi.updateGroupMemberRole, must conform to the pattern /^[a-f0-9]{32}(@auth.local)$/.");
+        }
+        
+
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/groups/{group_id}/members/{user_id}/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($group_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'group_id' . '}',
+                ObjectSerializer::toPathValue($group_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($update_group_member_role_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_group_member_role_request));
+            } else {
+                $httpBody = $update_group_member_role_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

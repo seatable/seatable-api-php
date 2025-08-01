@@ -28,6 +28,7 @@ Class | Method | HTTP request | Description
 *GroupsApi* | [**orderGroups**](docs/TeamAdmin/Api/GroupsApi.md#ordergroups) | **PUT** /api/v2.1/groups/move-group/ | Re-order Your Groups
 *GroupsApi* | [**removeGroupMembers**](docs/TeamAdmin/Api/GroupsApi.md#removegroupmembers) | **DELETE** /api/v2.1/org/{org_id}/admin/groups/{group_id}/members/{user_id}/ | Remove Group Members
 *GroupsApi* | [**updateGroup**](docs/TeamAdmin/Api/GroupsApi.md#updategroup) | **PUT** /api/v2.1/org/{org_id}/admin/groups/{group_id}/ | Update Group
+*GroupsApi* | [**updateGroupMemberRole**](docs/TeamAdmin/Api/GroupsApi.md#updategroupmemberrole) | **PUT** /api/v2.1/org/{org_id}/admin/groups/{group_id}/members/{user_id}/ | Update Group Member Role
 *InfoSettingsApi* | [**getTeamInfo**](docs/TeamAdmin/Api/InfoSettingsApi.md#getteaminfo) | **GET** /api/v2.1/org/admin/info/ | Get Team Info
 *InfoSettingsApi* | [**getTeamSettings**](docs/TeamAdmin/Api/InfoSettingsApi.md#getteamsettings) | **GET** /api/v2.1/org/admin/settings/ | Get Team Settings
 *InfoSettingsApi* | [**updateTeam**](docs/TeamAdmin/Api/InfoSettingsApi.md#updateteam) | **PUT** /api/v2.1/org/admin/info/ | Update Team
