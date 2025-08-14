@@ -1109,7 +1109,7 @@ paths:
                 type: object
               example:
                 success: true
-  /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares:
+  /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/:
     get:
       tags:
         - Bases
@@ -1633,7 +1633,7 @@ paths:
                     ],
                   "total_count": 70,
                 }
-  /api/v2.1/org/{org_id}/admin/login-logs/{user_id}:
+  /api/v2.1/org/{org_id}/admin/login-logs/{user_id}/:
     get:
       tags:
         - Activities & Logs
@@ -1808,6 +1808,8 @@ paths:
           description: OK
           content:
             application/json:
+              schema:
+                type: object
               example:
                 {
                   "saml_config":
