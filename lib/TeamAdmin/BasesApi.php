@@ -926,7 +926,7 @@ class BasesApi
         }
         
 
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares';
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

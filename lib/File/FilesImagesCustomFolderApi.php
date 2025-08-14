@@ -605,7 +605,7 @@ class FilesImagesCustomFolderApi
         }
 
 
-        $resourcePath = '/api/v2.1/dtable/custom/app-download-link';
+        $resourcePath = '/api/v2.1/dtable/custom/app-download-link/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

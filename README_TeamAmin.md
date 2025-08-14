@@ -7,10 +7,10 @@ Class | Method | HTTP request | Description
 *ActivitiesLogsApi* | [**listFileAccessLogs**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listfileaccesslogs) | **GET** /api/v2.1/org/{org_id}/admin/file-access-logs/ | List File Access Logs
 *ActivitiesLogsApi* | [**listTeamLogins**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listteamlogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/ | List Team Logins
 *ActivitiesLogsApi* | [**listTeamOperationLog**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listteamoperationlog) | **GET** /api/v2.1/org/{org_id}/admin/admin-logs/ | List Team Operations
-*ActivitiesLogsApi* | [**listUserLogins**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listuserlogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id} | List User Logins
+*ActivitiesLogsApi* | [**listUserLogins**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listuserlogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id}/ | List User Logins
 *BasesApi* | [**clearTeamTrashBin**](docs/TeamAdmin/Api/BasesApi.md#clearteamtrashbin) | **DELETE** /api/v2.1/org/{org_id}/admin/trash-dtables/ | Clear Team Trash Bin
 *BasesApi* | [**deleteBase**](docs/TeamAdmin/Api/BasesApi.md#deletebase) | **DELETE** /api/v2.1/org/{org_id}/admin/dtables/{base_id}/ | Delete Base
-*BasesApi* | [**listBaseSharings**](docs/TeamAdmin/Api/BasesApi.md#listbasesharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares | List Base Sharings
+*BasesApi* | [**listBaseSharings**](docs/TeamAdmin/Api/BasesApi.md#listbasesharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/ | List Base Sharings
 *BasesApi* | [**listBases**](docs/TeamAdmin/Api/BasesApi.md#listbases) | **GET** /api/v2.1/org/{org_id}/admin/dtables/ | List Bases (Team)
 *BasesApi* | [**listTrashBases**](docs/TeamAdmin/Api/BasesApi.md#listtrashbases) | **GET** /api/v2.1/org/{org_id}/admin/trash-dtables/ | List Trash Bases
 *BasesApi* | [**restoreBaseFromTrash**](docs/TeamAdmin/Api/BasesApi.md#restorebasefromtrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_id}/ | Restore Base from Trash

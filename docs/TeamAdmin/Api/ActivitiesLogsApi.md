@@ -7,7 +7,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**listFileAccessLogs()**](ActivitiesLogsApi.md#listFileAccessLogs) | **GET** /api/v2.1/org/{org_id}/admin/file-access-logs/ | List File Access Logs |
 | [**listTeamLogins()**](ActivitiesLogsApi.md#listTeamLogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/ | List Team Logins |
 | [**listTeamOperationLog()**](ActivitiesLogsApi.md#listTeamOperationLog) | **GET** /api/v2.1/org/{org_id}/admin/admin-logs/ | List Team Operations |
-| [**listUserLogins()**](ActivitiesLogsApi.md#listUserLogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id} | List User Logins |
+| [**listUserLogins()**](ActivitiesLogsApi.md#listUserLogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id}/ | List User Logins |
 
 
 ## `listFileAccessLogs()`

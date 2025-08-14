@@ -43,7 +43,7 @@ Class | Method | HTTP request | Description
 *RowsApi* | [**getRow**](docs/Base/Api/RowsApi.md#getrow) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/{row_id}/ | Get Row
 *RowsApi* | [**listRows**](docs/Base/Api/RowsApi.md#listrows) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | List Rows
 *RowsApi* | [**lockRows**](docs/Base/Api/RowsApi.md#lockrows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/ | Lock Rows
-*RowsApi* | [**querySQL**](docs/Base/Api/RowsApi.md#querysql) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql | Query SeaTable with SQL
+*RowsApi* | [**querySQL**](docs/Base/Api/RowsApi.md#querysql) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql/ | Query SeaTable with SQL
 *RowsApi* | [**unlockRows**](docs/Base/Api/RowsApi.md#unlockrows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/unlock-rows/ | Unlock Rows
 *RowsApi* | [**updateRow**](docs/Base/Api/RowsApi.md#updaterow) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Update Row(s)
 *SnapshotsApi* | [**createSnapshot**](docs/Base/Api/SnapshotsApi.md#createsnapshot) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/snapshot/ | Create Snapshot

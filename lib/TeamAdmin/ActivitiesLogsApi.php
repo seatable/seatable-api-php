@@ -1098,7 +1098,7 @@ class ActivitiesLogsApi
         }
         
 
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/login-logs/{user_id}';
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/login-logs/{user_id}/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

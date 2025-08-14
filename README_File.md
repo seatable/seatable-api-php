@@ -9,7 +9,7 @@ Class | Method | HTTP request | Description
 *FilesImagesApi* | [**getUploadLink**](docs/File/Api/FilesImagesApi.md#getuploadlink) | **GET** /api/v2.1/dtable/app-upload-link/ | Get Upload Link
 *FilesImagesApi* | [**uploadFile**](docs/File/Api/FilesImagesApi.md#uploadfile) | **POST** /seafhttp/upload-api/{upload_link}?ret-json&#x3D;1 | Upload File (or Image)
 *FilesImagesCustomFolderApi* | [**deleteBaseCustomFolderAsset**](docs/File/Api/FilesImagesCustomFolderApi.md#deletebasecustomfolderasset) | **DELETE** /api/v2.1/dtable/custom/app-asset-file/ | Delete a Base Asset in Custom Folder
-*FilesImagesCustomFolderApi* | [**getCustomDownloadLink**](docs/File/Api/FilesImagesCustomFolderApi.md#getcustomdownloadlink) | **GET** /api/v2.1/dtable/custom/app-download-link | Get Download Link
+*FilesImagesCustomFolderApi* | [**getCustomDownloadLink**](docs/File/Api/FilesImagesCustomFolderApi.md#getcustomdownloadlink) | **GET** /api/v2.1/dtable/custom/app-download-link/ | Get Download Link
 *FilesImagesCustomFolderApi* | [**getCustomFileMetadata**](docs/File/Api/FilesImagesCustomFolderApi.md#getcustomfilemetadata) | **GET** /api/v2.1/dtable/custom/app-asset-file/ | Get File Metadata
 *FilesImagesCustomFolderApi* | [**getCustomFiles**](docs/File/Api/FilesImagesCustomFolderApi.md#getcustomfiles) | **GET** /api/v2.1/dtable/custom/app-asset-dir/ | Get Files from Folder
 *FilesImagesCustomFolderApi* | [**getCustomUploadLink**](docs/File/Api/FilesImagesCustomFolderApi.md#getcustomuploadlink) | **GET** /api/v2.1/dtable/custom/app-upload-link/ | Get Upload Link

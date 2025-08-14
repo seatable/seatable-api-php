@@ -5,7 +5,7 @@
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActivitiesLogsApi* | [**getBaseActivities**](docs/User/Api/ActivitiesLogsApi.md#getbaseactivities) | **GET** /api/v2.1/dtable-activities/ | Get Base Activities
-*ActivitiesLogsApi* | [**getBaseActivityDetails**](docs/User/Api/ActivitiesLogsApi.md#getbaseactivitydetails) | **GET** /api/v2.1/dtable-activities/detail | Get Base Activity Details
+*ActivitiesLogsApi* | [**getBaseActivityDetails**](docs/User/Api/ActivitiesLogsApi.md#getbaseactivitydetails) | **GET** /api/v2.1/dtable-activities/detail/ | Get Base Activity Details
 *ActivitiesLogsApi* | [**getBigDataOperationLogs**](docs/User/Api/ActivitiesLogsApi.md#getbigdataoperationlogs) | **GET** /api/v2.1/dtables/{base_uuid}/big-data-operation-logs/ | Get Big Data Operation Logs
 *AppsApi* | [**changeAppStatus**](docs/User/Api/AppsApi.md#changeappstatus) | **PUT** /api/v2.1/external-apps/{app_token}/status/ | Change App Status
 *AppsApi* | [**importUsersToApp**](docs/User/Api/AppsApi.md#importuserstoapp) | **POST** /api/v2.1/universal-apps/{app_token}/app-users/batch/ | Import Users to App

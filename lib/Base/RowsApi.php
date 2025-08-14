@@ -1910,7 +1910,7 @@ class RowsApi
         
 
 
-        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/sql';
+        $resourcePath = '/api-gateway/api/v2/dtables/{base_uuid}/sql/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -9,7 +9,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**getRow()**](RowsApi.md#getRow) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/{row_id}/ | Get Row |
 | [**listRows()**](RowsApi.md#listRows) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | List Rows |
 | [**lockRows()**](RowsApi.md#lockRows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/ | Lock Rows |
-| [**querySQL()**](RowsApi.md#querySQL) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql | Query SeaTable with SQL |
+| [**querySQL()**](RowsApi.md#querySQL) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql/ | Query SeaTable with SQL |
 | [**unlockRows()**](RowsApi.md#unlockRows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/unlock-rows/ | Unlock Rows |
 | [**updateRow()**](RowsApi.md#updateRow) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Update Row(s) |
 

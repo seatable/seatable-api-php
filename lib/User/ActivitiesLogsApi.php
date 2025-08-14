@@ -668,7 +668,7 @@ class ActivitiesLogsApi
         }
         
 
-        $resourcePath = '/api/v2.1/dtable-activities/detail';
+        $resourcePath = '/api/v2.1/dtable-activities/detail/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -6,7 +6,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | ------------- | ------------- | ------------- |
 | [**clearTeamTrashBin()**](BasesApi.md#clearTeamTrashBin) | **DELETE** /api/v2.1/org/{org_id}/admin/trash-dtables/ | Clear Team Trash Bin |
 | [**deleteBase()**](BasesApi.md#deleteBase) | **DELETE** /api/v2.1/org/{org_id}/admin/dtables/{base_id}/ | Delete Base |
-| [**listBaseSharings()**](BasesApi.md#listBaseSharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares | List Base Sharings |
+| [**listBaseSharings()**](BasesApi.md#listBaseSharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/ | List Base Sharings |
 | [**listBases()**](BasesApi.md#listBases) | **GET** /api/v2.1/org/{org_id}/admin/dtables/ | List Bases (Team) |
 | [**listTrashBases()**](BasesApi.md#listTrashBases) | **GET** /api/v2.1/org/{org_id}/admin/trash-dtables/ | List Trash Bases |
 | [**restoreBaseFromTrash()**](BasesApi.md#restoreBaseFromTrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_id}/ | Restore Base from Trash |

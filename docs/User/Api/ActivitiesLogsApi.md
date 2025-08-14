@@ -5,7 +5,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**getBaseActivities()**](ActivitiesLogsApi.md#getBaseActivities) | **GET** /api/v2.1/dtable-activities/ | Get Base Activities |
-| [**getBaseActivityDetails()**](ActivitiesLogsApi.md#getBaseActivityDetails) | **GET** /api/v2.1/dtable-activities/detail | Get Base Activity Details |
+| [**getBaseActivityDetails()**](ActivitiesLogsApi.md#getBaseActivityDetails) | **GET** /api/v2.1/dtable-activities/detail/ | Get Base Activity Details |
 | [**getBigDataOperationLogs()**](ActivitiesLogsApi.md#getBigDataOperationLogs) | **GET** /api/v2.1/dtables/{base_uuid}/big-data-operation-logs/ | Get Big Data Operation Logs |
 
 
