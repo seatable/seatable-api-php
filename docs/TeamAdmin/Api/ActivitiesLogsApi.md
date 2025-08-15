@@ -13,7 +13,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `listFileAccessLogs()`
 
 ```php
-listFileAccessLogs($org_id, $page, $per_page)
+listFileAccessLogs($org_id, $page, $per_page): object
 ```
 
 List File Access Logs
@@ -38,7 +38,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listFileAccessLogs($org_id, $page, $per_page);
+    $result = $apiInstance->listFileAccessLogs($org_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listFileAccessLogs: ', $e->getMessage(), PHP_EOL;
 }
@@ -54,7 +55,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -66,7 +67,7 @@ AccountTokenAuth
 ## `listTeamLogins()`
 
 ```php
-listTeamLogins($org_id, $page, $per_page)
+listTeamLogins($org_id, $page, $per_page): object
 ```
 
 List Team Logins
@@ -91,7 +92,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listTeamLogins($org_id, $page, $per_page);
+    $result = $apiInstance->listTeamLogins($org_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listTeamLogins: ', $e->getMessage(), PHP_EOL;
 }
@@ -107,7 +109,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -119,7 +121,7 @@ AccountTokenAuth
 ## `listTeamOperationLog()`
 
 ```php
-listTeamOperationLog($org_id, $page, $per_page)
+listTeamOperationLog($org_id, $page, $per_page): object
 ```
 
 List Team Operations
@@ -144,7 +146,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listTeamOperationLog($org_id, $page, $per_page);
+    $result = $apiInstance->listTeamOperationLog($org_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listTeamOperationLog: ', $e->getMessage(), PHP_EOL;
 }
@@ -160,7 +163,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -172,7 +175,7 @@ AccountTokenAuth
 ## `listUserLogins()`
 
 ```php
-listUserLogins($org_id, $user_id, $page, $per_page)
+listUserLogins($org_id, $user_id, $page, $per_page): object
 ```
 
 List User Logins
@@ -198,7 +201,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listUserLogins($org_id, $user_id, $page, $per_page);
+    $result = $apiInstance->listUserLogins($org_id, $user_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listUserLogins: ', $e->getMessage(), PHP_EOL;
 }
@@ -215,7 +219,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

@@ -145,11 +145,12 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function listFileAccessLogs($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
     {
-        $this->listFileAccessLogsWithHttpInfo($org_id, $page, $per_page, $contentType);
+        list($response) = $this->listFileAccessLogsWithHttpInfo($org_id, $page, $per_page, $contentType);
+        return $response;
     }
 
     /**
@@ -164,7 +165,7 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function listFileAccessLogsWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
     {
@@ -193,9 +194,45 @@ class ActivitiesLogsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -241,14 +278,27 @@ class ActivitiesLogsApi
      */
     public function listFileAccessLogsAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->listFileAccessLogsRequest($org_id, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -406,11 +456,12 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function listTeamLogins($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listTeamLogins'][0])
     {
-        $this->listTeamLoginsWithHttpInfo($org_id, $page, $per_page, $contentType);
+        list($response) = $this->listTeamLoginsWithHttpInfo($org_id, $page, $per_page, $contentType);
+        return $response;
     }
 
     /**
@@ -425,7 +476,7 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function listTeamLoginsWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listTeamLogins'][0])
     {
@@ -454,9 +505,45 @@ class ActivitiesLogsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -502,14 +589,27 @@ class ActivitiesLogsApi
      */
     public function listTeamLoginsAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listTeamLogins'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->listTeamLoginsRequest($org_id, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -667,11 +767,12 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function listTeamOperationLog($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
     {
-        $this->listTeamOperationLogWithHttpInfo($org_id, $page, $per_page, $contentType);
+        list($response) = $this->listTeamOperationLogWithHttpInfo($org_id, $page, $per_page, $contentType);
+        return $response;
     }
 
     /**
@@ -686,7 +787,7 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function listTeamOperationLogWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
     {
@@ -715,9 +816,45 @@ class ActivitiesLogsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -763,14 +900,27 @@ class ActivitiesLogsApi
      */
     public function listTeamOperationLogAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->listTeamOperationLogRequest($org_id, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -929,11 +1079,12 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function listUserLogins($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
     {
-        $this->listUserLoginsWithHttpInfo($org_id, $user_id, $page, $per_page, $contentType);
+        list($response) = $this->listUserLoginsWithHttpInfo($org_id, $user_id, $page, $per_page, $contentType);
+        return $response;
     }
 
     /**
@@ -949,7 +1100,7 @@ class ActivitiesLogsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function listUserLoginsWithHttpInfo($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
     {
@@ -978,9 +1129,45 @@ class ActivitiesLogsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -1028,14 +1215,27 @@ class ActivitiesLogsApi
      */
     public function listUserLoginsAsyncWithHttpInfo($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->listUserLoginsRequest($org_id, $user_id, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
