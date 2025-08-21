@@ -95,6 +95,18 @@ class RowCommentsApiTest extends TestCase
     }
 
     /**
+     * Test case for getNumberOfComments
+     *
+     * Get Number of Comments.
+     *
+     */
+    public function testGetNumberOfComments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getRowCommentsCount
      *
      * Get Row Comments Count.

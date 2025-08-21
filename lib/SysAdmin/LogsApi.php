@@ -73,6 +73,9 @@ class LogsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'deleteVirusFile' => [
+            'application/json',
+        ],
         'listAbuseReports' => [
             'application/json',
         ],
@@ -91,8 +94,14 @@ class LogsApi
         'listRegistrationLogs' => [
             'application/json',
         ],
+        'listVirusFiles' => [
+            'application/json',
+        ],
         'updateAbuseReport' => [
             'application/json',
+        ],
+        'updateVirusFile' => [
+            'application/x-www-form-urlencoded',
         ],
     ];
 
@@ -140,6 +149,278 @@ class LogsApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation deleteVirusFile
+     *
+     * Delete Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVirusFile'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function deleteVirusFile($virus_id, string $contentType = self::contentTypes['deleteVirusFile'][0])
+    {
+        list($response) = $this->deleteVirusFileWithHttpInfo($virus_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteVirusFileWithHttpInfo
+     *
+     * Delete Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVirusFile'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteVirusFileWithHttpInfo($virus_id, string $contentType = self::contentTypes['deleteVirusFile'][0])
+    {
+        $request = $this->deleteVirusFileRequest($virus_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteVirusFileAsync
+     *
+     * Delete Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVirusFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteVirusFileAsync($virus_id, string $contentType = self::contentTypes['deleteVirusFile'][0])
+    {
+        return $this->deleteVirusFileAsyncWithHttpInfo($virus_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteVirusFileAsyncWithHttpInfo
+     *
+     * Delete Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVirusFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteVirusFileAsyncWithHttpInfo($virus_id, string $contentType = self::contentTypes['deleteVirusFile'][0])
+    {
+        $returnType = 'object';
+        $request = $this->deleteVirusFileRequest($virus_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteVirusFile'
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteVirusFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteVirusFileRequest($virus_id, string $contentType = self::contentTypes['deleteVirusFile'][0])
+    {
+
+        // verify the required parameter 'virus_id' is set
+        if ($virus_id === null || (is_array($virus_id) && count($virus_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $virus_id when calling deleteVirusFile'
+            );
+        }
+
+
+        $resourcePath = '/api/v2.1/admin/virus-files/{virus_id}/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($virus_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'virus_id' . '}',
+                ObjectSerializer::toPathValue($virus_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**
@@ -1699,6 +1980,259 @@ class LogsApi
     }
 
     /**
+     * Operation listVirusFiles
+     *
+     * List Virus Files
+     *
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string|null $has_handled has_handled (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listVirusFiles'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function listVirusFiles($page = null, $per_page = null, $has_handled = null, string $contentType = self::contentTypes['listVirusFiles'][0])
+    {
+        $this->listVirusFilesWithHttpInfo($page, $per_page, $has_handled, $contentType);
+    }
+
+    /**
+     * Operation listVirusFilesWithHttpInfo
+     *
+     * List Virus Files
+     *
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string|null $has_handled (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listVirusFiles'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listVirusFilesWithHttpInfo($page = null, $per_page = null, $has_handled = null, string $contentType = self::contentTypes['listVirusFiles'][0])
+    {
+        $request = $this->listVirusFilesRequest($page, $per_page, $has_handled, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listVirusFilesAsync
+     *
+     * List Virus Files
+     *
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string|null $has_handled (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listVirusFiles'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listVirusFilesAsync($page = null, $per_page = null, $has_handled = null, string $contentType = self::contentTypes['listVirusFiles'][0])
+    {
+        return $this->listVirusFilesAsyncWithHttpInfo($page, $per_page, $has_handled, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listVirusFilesAsyncWithHttpInfo
+     *
+     * List Virus Files
+     *
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string|null $has_handled (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listVirusFiles'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listVirusFilesAsyncWithHttpInfo($page = null, $per_page = null, $has_handled = null, string $contentType = self::contentTypes['listVirusFiles'][0])
+    {
+        $returnType = '';
+        $request = $this->listVirusFilesRequest($page, $per_page, $has_handled, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listVirusFiles'
+     *
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string|null $has_handled (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listVirusFiles'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listVirusFilesRequest($page = null, $per_page = null, $has_handled = null, string $contentType = self::contentTypes['listVirusFiles'][0])
+    {
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling LogsApi.listVirusFiles, must be bigger than or equal to 1.');
+        }
+        
+        if ($per_page !== null && $per_page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling LogsApi.listVirusFiles, must be bigger than or equal to 1.');
+        }
+        
+
+
+        $resourcePath = '/api/v2.1/admin/virus-files/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $per_page,
+            'per_page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $has_handled,
+            'has_handled', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateAbuseReport
      *
      * Update Abuse Report
@@ -1937,6 +2471,249 @@ class LogsApi
                 $httpBody = $update_abuse_report_request;
             }
         } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateVirusFile
+     *
+     * Update Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $ignore ignore (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirusFile'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function updateVirusFile($virus_id, $ignore, string $contentType = self::contentTypes['updateVirusFile'][0])
+    {
+        $this->updateVirusFileWithHttpInfo($virus_id, $ignore, $contentType);
+    }
+
+    /**
+     * Operation updateVirusFileWithHttpInfo
+     *
+     * Update Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $ignore (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirusFile'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateVirusFileWithHttpInfo($virus_id, $ignore, string $contentType = self::contentTypes['updateVirusFile'][0])
+    {
+        $request = $this->updateVirusFileRequest($virus_id, $ignore, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            return [null, $statusCode, $response->getHeaders()];
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateVirusFileAsync
+     *
+     * Update Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $ignore (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirusFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateVirusFileAsync($virus_id, $ignore, string $contentType = self::contentTypes['updateVirusFile'][0])
+    {
+        return $this->updateVirusFileAsyncWithHttpInfo($virus_id, $ignore, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateVirusFileAsyncWithHttpInfo
+     *
+     * Update Virus File
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $ignore (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirusFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateVirusFileAsyncWithHttpInfo($virus_id, $ignore, string $contentType = self::contentTypes['updateVirusFile'][0])
+    {
+        $returnType = '';
+        $request = $this->updateVirusFileRequest($virus_id, $ignore, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateVirusFile'
+     *
+     * @param  int $virus_id The ID of the virus file (required)
+     * @param  string $ignore (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateVirusFile'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateVirusFileRequest($virus_id, $ignore, string $contentType = self::contentTypes['updateVirusFile'][0])
+    {
+
+        // verify the required parameter 'virus_id' is set
+        if ($virus_id === null || (is_array($virus_id) && count($virus_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $virus_id when calling updateVirusFile'
+            );
+        }
+
+        // verify the required parameter 'ignore' is set
+        if ($ignore === null || (is_array($ignore) && count($ignore) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $ignore when calling updateVirusFile'
+            );
+        }
+
+
+        $resourcePath = '/api/v2.1/admin/virus-files/{virus_id}/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($virus_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'virus_id' . '}',
+                ObjectSerializer::toPathValue($virus_id),
+                $resourcePath
+            );
+        }
+
+        // form params
+        $formDataProcessor = new FormDataProcessor();
+
+        $formData = $formDataProcessor->prepare([
+            'ignore' => $ignore,
+        ]);
+
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

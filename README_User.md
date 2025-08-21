@@ -30,6 +30,7 @@ Class | Method | HTTP request | Description
 *BasesApi* | [**deleteBase**](docs/User/Api/BasesApi.md#deletebase) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/ | Delete Base
 *BasesApi* | [**deleteFolder**](docs/User/Api/BasesApi.md#deletefolder) | **DELETE** /api/v2.1/workspace/{workspace_id}/folders/{folder_id}/ | Delete Folder
 *BasesApi* | [**favoriteBase**](docs/User/Api/BasesApi.md#favoritebase) | **POST** /api/v2.1/starred-dtables/ | Favorite Base
+*BasesApi* | [**getBaseSize**](docs/User/Api/BasesApi.md#getbasesize) | **GET** /api/v2.1/dtable/{base_uuid}/size/ | Get Base Size
 *BasesApi* | [**listBases**](docs/User/Api/BasesApi.md#listbases) | **GET** /api/v2.1/user-admin-dtables/ | List Bases
 *BasesApi* | [**listFavorites**](docs/User/Api/BasesApi.md#listfavorites) | **GET** /api/v2.1/starred-dtables/ | List Favorites
 *BasesApi* | [**listGroupTrashedBases**](docs/User/Api/BasesApi.md#listgrouptrashedbases) | **GET** /api/v2.1/groups/{group_id}/trash-dtables/ | List Group Trashed Bases
@@ -90,6 +91,7 @@ Class | Method | HTTP request | Description
 *ImportExportApi* | [**importBasefromFile**](docs/User/Api/ImportExportApi.md#importbasefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-base/ | Import Base from xlsx or csv
 *ImportExportApi* | [**importTableFromFile**](docs/User/Api/ImportExportApi.md#importtablefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-table/ | Import Table from xlsx or csv
 *ImportExportApi* | [**updateFromFile**](docs/User/Api/ImportExportApi.md#updatefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from xlsx or csv
+*MaintenanceApi* | [**repairBase**](docs/User/Api/MaintenanceApi.md#repairbase) | **PUT** /api/v2.1/dtable/{base_uuid}/repair/ | Repair Base
 *NotificationsApi* | [**addNotificationRule**](docs/User/Api/NotificationsApi.md#addnotificationrule) | **POST** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/ | Add Notification Rule
 *NotificationsApi* | [**deleteNotificationRule**](docs/User/Api/NotificationsApi.md#deletenotificationrule) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/{notification_rule_id}/ | Delete Notification Rule
 *NotificationsApi* | [**listNotificationRules**](docs/User/Api/NotificationsApi.md#listnotificationrules) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/ | List Notification Rules

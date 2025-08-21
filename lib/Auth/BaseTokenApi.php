@@ -137,15 +137,16 @@ class BaseTokenApi
      *
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithAccountToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \SeaTable\Client\Auth\AccessToken
      */
-    public function getBaseTokenWithAccountToken($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
+    public function getBaseTokenWithAccountToken($workspace_id, $base_name, $exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
-        list($response) = $this->getBaseTokenWithAccountTokenWithHttpInfo($workspace_id, $base_name, $contentType);
+        list($response) = $this->getBaseTokenWithAccountTokenWithHttpInfo($workspace_id, $base_name, $exp, $contentType);
         return $response;
     }
 
@@ -156,15 +157,16 @@ class BaseTokenApi
      *
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithAccountToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \SeaTable\Client\Auth\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getBaseTokenWithAccountTokenWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
+    public function getBaseTokenWithAccountTokenWithHttpInfo($workspace_id, $base_name, $exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
-        $request = $this->getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, $contentType);
+        $request = $this->getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, $exp, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -242,14 +244,15 @@ class BaseTokenApi
      *
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithAccountToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getBaseTokenWithAccountTokenAsync($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
+    public function getBaseTokenWithAccountTokenAsync($workspace_id, $base_name, $exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
-        return $this->getBaseTokenWithAccountTokenAsyncWithHttpInfo($workspace_id, $base_name, $contentType)
+        return $this->getBaseTokenWithAccountTokenAsyncWithHttpInfo($workspace_id, $base_name, $exp, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -264,15 +267,16 @@ class BaseTokenApi
      *
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithAccountToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getBaseTokenWithAccountTokenAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
+    public function getBaseTokenWithAccountTokenAsyncWithHttpInfo($workspace_id, $base_name, $exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
         $returnType = '\SeaTable\Client\Auth\AccessToken';
-        $request = $this->getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, $contentType);
+        $request = $this->getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, $exp, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -315,12 +319,13 @@ class BaseTokenApi
      *
      * @param  int $workspace_id The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. (required)
      * @param  string $base_name The name of your base. (required)
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithAccountToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
+    public function getBaseTokenWithAccountTokenRequest($workspace_id, $base_name, $exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithAccountToken'][0])
     {
 
         // verify the required parameter 'workspace_id' is set
@@ -341,6 +346,7 @@ class BaseTokenApi
         }
 
 
+
         $resourcePath = '/api/v2.1/workspace/{workspace_id}/dtable/{base_name}/access-token/';
         $formParams = [];
         $queryParams = [];
@@ -348,6 +354,15 @@ class BaseTokenApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $exp,
+            'exp', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
@@ -430,15 +445,16 @@ class BaseTokenApi
      *
      * Get Base-Token with API-Token
      *
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithApiToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object|object
      */
-    public function getBaseTokenWithApiToken(string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
+    public function getBaseTokenWithApiToken($exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
     {
-        list($response) = $this->getBaseTokenWithApiTokenWithHttpInfo($contentType);
+        list($response) = $this->getBaseTokenWithApiTokenWithHttpInfo($exp, $contentType);
         return $response;
     }
 
@@ -447,15 +463,16 @@ class BaseTokenApi
      *
      * Get Base-Token with API-Token
      *
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithApiToken'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getBaseTokenWithApiTokenWithHttpInfo(string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
+    public function getBaseTokenWithApiTokenWithHttpInfo($exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
     {
-        $request = $this->getBaseTokenWithApiTokenRequest($contentType);
+        $request = $this->getBaseTokenWithApiTokenRequest($exp, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -545,14 +562,15 @@ class BaseTokenApi
      *
      * Get Base-Token with API-Token
      *
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getBaseTokenWithApiTokenAsync(string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
+    public function getBaseTokenWithApiTokenAsync($exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
     {
-        return $this->getBaseTokenWithApiTokenAsyncWithHttpInfo($contentType)
+        return $this->getBaseTokenWithApiTokenAsyncWithHttpInfo($exp, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -565,15 +583,16 @@ class BaseTokenApi
      *
      * Get Base-Token with API-Token
      *
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getBaseTokenWithApiTokenAsyncWithHttpInfo(string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
+    public function getBaseTokenWithApiTokenAsyncWithHttpInfo($exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
     {
         $returnType = 'object';
-        $request = $this->getBaseTokenWithApiTokenRequest($contentType);
+        $request = $this->getBaseTokenWithApiTokenRequest($exp, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -614,13 +633,15 @@ class BaseTokenApi
     /**
      * Create request for operation 'getBaseTokenWithApiToken'
      *
+     * @param  string|null $exp Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) (optional, default to '3d')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithApiToken'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getBaseTokenWithApiTokenRequest(string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
+    public function getBaseTokenWithApiTokenRequest($exp = '3d', string $contentType = self::contentTypes['getBaseTokenWithApiToken'][0])
     {
+
 
 
         $resourcePath = '/api/v2.1/dtable/app-access-token/';
@@ -630,6 +651,15 @@ class BaseTokenApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $exp,
+            'exp', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
 

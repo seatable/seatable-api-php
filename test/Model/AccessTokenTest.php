@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * AccessTokenTest Class Doc Comment
  *
  * @category    Class
- * @description blub
+ * @description Access Token
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -79,15 +79,6 @@ class AccessTokenTest extends TestCase
     }
 
     /**
-     * Test attribute "app_name"
-     */
-    public function testPropertyAppName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "access_token"
      */
     public function testPropertyAccessToken()
@@ -100,42 +91,6 @@ class AccessTokenTest extends TestCase
      * Test attribute "dtable_uuid"
      */
     public function testPropertyDtableUuid()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "dtable_server"
-     */
-    public function testPropertyDtableServer()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "dtable_socket"
-     */
-    public function testPropertyDtableSocket()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "workspace_id"
-     */
-    public function testPropertyWorkspaceId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "dtable_name"
-     */
-    public function testPropertyDtableName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

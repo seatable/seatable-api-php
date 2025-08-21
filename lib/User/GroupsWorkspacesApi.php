@@ -462,11 +462,12 @@ class GroupsWorkspacesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function copyBaseFromExternalLink($link = null, $dst_workspace_id = null, string $contentType = self::contentTypes['copyBaseFromExternalLink'][0])
     {
-        $this->copyBaseFromExternalLinkWithHttpInfo($link, $dst_workspace_id, $contentType);
+        list($response) = $this->copyBaseFromExternalLinkWithHttpInfo($link, $dst_workspace_id, $contentType);
+        return $response;
     }
 
     /**
@@ -480,7 +481,7 @@ class GroupsWorkspacesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function copyBaseFromExternalLinkWithHttpInfo($link = null, $dst_workspace_id = null, string $contentType = self::contentTypes['copyBaseFromExternalLink'][0])
     {
@@ -509,10 +510,38 @@ class GroupsWorkspacesApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 500:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',
@@ -563,14 +592,27 @@ class GroupsWorkspacesApi
      */
     public function copyBaseFromExternalLinkAsyncWithHttpInfo($link = null, $dst_workspace_id = null, string $contentType = self::contentTypes['copyBaseFromExternalLink'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->copyBaseFromExternalLinkRequest($link, $dst_workspace_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();

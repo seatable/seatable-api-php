@@ -1,6 +1,6 @@
 <?php
 /**
- * AccessToken
+ * RepairBase200Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Authentication
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,22 +25,21 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\Auth;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AccessToken Class Doc Comment
+ * RepairBase200Response Class Doc Comment
  *
  * @category Class
- * @description Access Token
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
+class RepairBase200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AccessToken';
+    protected static $openAPIModelName = 'repairBase_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +56,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'access_token' => 'string',
-        'dtable_uuid' => 'string'
+        'success' => 'bool'
     ];
 
     /**
@@ -69,8 +67,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'access_token' => null,
-        'dtable_uuid' => 'uuid'
+        'success' => null
     ];
 
     /**
@@ -79,8 +76,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'access_token' => false,
-        'dtable_uuid' => false
+        'success' => false
     ];
 
     /**
@@ -169,8 +165,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'access_token' => 'access_token',
-        'dtable_uuid' => 'dtable_uuid'
+        'success' => 'success'
     ];
 
     /**
@@ -179,8 +174,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'access_token' => 'setAccessToken',
-        'dtable_uuid' => 'setDtableUuid'
+        'success' => 'setSuccess'
     ];
 
     /**
@@ -189,8 +183,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'access_token' => 'getAccessToken',
-        'dtable_uuid' => 'getDtableUuid'
+        'success' => 'getSuccess'
     ];
 
     /**
@@ -250,8 +243,7 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('access_token', $data ?? [], null);
-        $this->setIfExists('dtable_uuid', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
     }
 
     /**
@@ -297,55 +289,28 @@ class AccessToken implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets access_token
+     * Gets success
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getAccessToken()
+    public function getSuccess()
     {
-        return $this->container['access_token'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets access_token
+     * Sets success
      *
-     * @param string|null $access_token access_token
+     * @param bool|null $success success
      *
      * @return self
      */
-    public function setAccessToken($access_token)
+    public function setSuccess($success)
     {
-        if (is_null($access_token)) {
-            throw new \InvalidArgumentException('non-nullable access_token cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['access_token'] = $access_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets dtable_uuid
-     *
-     * @return string|null
-     */
-    public function getDtableUuid()
-    {
-        return $this->container['dtable_uuid'];
-    }
-
-    /**
-     * Sets dtable_uuid
-     *
-     * @param string|null $dtable_uuid dtable_uuid
-     *
-     * @return self
-     */
-    public function setDtableUuid($dtable_uuid)
-    {
-        if (is_null($dtable_uuid)) {
-            throw new \InvalidArgumentException('non-nullable dtable_uuid cannot be null');
-        }
-        $this->container['dtable_uuid'] = $dtable_uuid;
+        $this->container['success'] = $success;
 
         return $this;
     }

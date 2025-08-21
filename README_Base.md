@@ -35,6 +35,7 @@ Class | Method | HTTP request | Description
 *NotificationsApi* | [**sendToastNotification**](docs/Base/Api/NotificationsApi.md#sendtoastnotification) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/ui-toasts/ | Send toast notification
 *RowCommentsApi* | [**deleteComment**](docs/Base/Api/RowCommentsApi.md#deletecomment) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment
 *RowCommentsApi* | [**getComment**](docs/Base/Api/RowCommentsApi.md#getcomment) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment
+*RowCommentsApi* | [**getNumberOfComments**](docs/Base/Api/RowCommentsApi.md#getnumberofcomments) | **GET** /api/v2.1/dtables/{base_uuid}/rows-comments-num/ | Get Number of Comments
 *RowCommentsApi* | [**getRowCommentsCount**](docs/Base/Api/RowCommentsApi.md#getrowcommentscount) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-count/ | Get Row Comments Count
 *RowCommentsApi* | [**listCommentsWithinDays**](docs/Base/Api/RowCommentsApi.md#listcommentswithindays) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-within-days/ | List Comments within Days
 *RowCommentsApi* | [**listRowComments**](docs/Base/Api/RowCommentsApi.md#listrowcomments) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/ | List Row Comments

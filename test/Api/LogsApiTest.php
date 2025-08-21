@@ -71,6 +71,18 @@ class LogsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteVirusFile
+     *
+     * Delete Virus File.
+     *
+     */
+    public function testDeleteVirusFile()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAbuseReports
      *
      * List Abuse Reports.
@@ -143,12 +155,36 @@ class LogsApiTest extends TestCase
     }
 
     /**
+     * Test case for listVirusFiles
+     *
+     * List Virus Files.
+     *
+     */
+    public function testListVirusFiles()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateAbuseReport
      *
      * Update Abuse Report.
      *
      */
     public function testUpdateAbuseReport()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateVirusFile
+     *
+     * Update Virus File.
+     *
+     */
+    public function testUpdateVirusFile()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
