@@ -29,7 +29,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
@@ -66,7 +65,7 @@ updateFavicon($favicon, $with_notify): object
 
 Update Favicon
 
-Upload an image (.png with a transparent background is recommended) as the favicon of your SeaTable installation. As per the `with_notify` param in the request body: you can use this API request twice to upload two favicons: - one is the \"normal\" favicon（leave `with_nofity` blank). - the other one is the \"notifying\" favicon which should have something like a \"notifying\" red dot on it (set `with_notify` to `true`). ![Image](https://seatable.io/wp-content/uploads/2021/11/favicon.png)
+Upload an image (.png with a transparent background is recommended) as the favicon of your SeaTable installation. As per the `with_notify` param in the request body: you can use this API request twice to upload two favicons: - one is the \"normal\" favicon（leave `with_nofity` blank). - the other one is the \"notifying\" favicon which should have something like a \"notifying\" red dot on it (set `with_notify` to `true`). ![Image](https://seatable.com/openapi/favicon.png)
 
 ### Example
 
@@ -76,12 +75,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$favicon = "/path/to/file.txt"; // \SplFileObject | The path and filename of the image file of your favicon.
+$favicon = '/path/to/file.txt'; // \SplFileObject | The path and filename of the image file of your favicon.
 $with_notify = True; // bool | Leave this param as its default (`false`) to upload your favicon, and use this param as `true` to upload a favicon with a notification sign.
 
 try {
@@ -118,7 +116,7 @@ updateGeneralSettings($update_general_settings_request): object
 
 Update General Settings
 
-Change the general settings of your system. For details, see the description for each parameter in the request body. Just like the settings via web interface, these settings via API request are also saved in the database table (dtable-db/constance_config). They have a higher priority over the settings in the config files. However, in the `dtable_web_settings` you'll find more setting options. For details, visit the [SeaTable Admin Manual](https://manual.seatable.io/config/dtable_web_settings/#user-management-options).
+Change the general settings of your system. For details, see the description for each parameter in the request body. Just like the settings via web interface, these settings via API request are also saved in the database table (dtable-db/constance_config). They have a higher priority over the settings in the config files. However, in the `dtable_web_settings` you'll find more setting options. For details, visit the [SeaTable Admin Manual](https://admin.seatable.com).
 
 ### Example
 
@@ -128,7 +126,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
@@ -178,12 +175,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$login_bg_image = "/path/to/file.txt"; // \SplFileObject | The path and filename of the background image.
+$login_bg_image = '/path/to/file.txt'; // \SplFileObject | The path and filename of the background image.
 
 try {
     $result = $apiInstance->updateLoginBackgroundImage($login_bg_image);
@@ -228,12 +224,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\SystemInfoCustomizingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$logo = "/path/to/file.txt"; // \SplFileObject | The path and filename of the image file of your logo.
+$logo = '/path/to/file.txt'; // \SplFileObject | The path and filename of the image file of your logo.
 
 try {
     $result = $apiInstance->updateLogo($logo);

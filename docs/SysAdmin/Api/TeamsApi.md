@@ -37,7 +37,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -87,7 +86,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -145,7 +143,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -195,7 +192,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -247,7 +243,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -297,7 +292,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -346,7 +340,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -400,7 +393,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -450,7 +442,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -500,7 +491,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -554,7 +544,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -604,7 +593,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
@@ -656,7 +644,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config

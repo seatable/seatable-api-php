@@ -11,6 +11,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**deleteBase()**](BasesApi.md#deleteBase) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/ | Delete Base |
 | [**deleteFolder()**](BasesApi.md#deleteFolder) | **DELETE** /api/v2.1/workspace/{workspace_id}/folders/{folder_id}/ | Delete Folder |
 | [**favoriteBase()**](BasesApi.md#favoriteBase) | **POST** /api/v2.1/starred-dtables/ | Favorite Base |
+| [**getBaseSize()**](BasesApi.md#getBaseSize) | **GET** /api/v2.1/dtable/{base_uuid}/size/ | Get Base Size |
 | [**listBases()**](BasesApi.md#listBases) | **GET** /api/v2.1/user-admin-dtables/ | List Bases |
 | [**listFavorites()**](BasesApi.md#listFavorites) | **GET** /api/v2.1/starred-dtables/ | List Favorites |
 | [**listGroupTrashedBases()**](BasesApi.md#listGroupTrashedBases) | **GET** /api/v2.1/groups/{group_id}/trash-dtables/ | List Group Trashed Bases |
@@ -42,7 +43,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -96,7 +96,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -143,7 +142,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -199,7 +197,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -251,7 +248,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -303,7 +299,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -355,7 +350,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -387,6 +381,55 @@ AccountTokenAuth
 
 
 
+## `getBaseSize()`
+
+```php
+getBaseSize($base_uuid): object
+```
+
+Get Base Size
+
+Get the storage usage of a base in bytes. This is the size of the JSON file stored on the filesystem or in S3 (depending on your server configuration). Please note that this does not include assets stored inside the base, snapshots or rows stored in the big data backend.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\User\BasesApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+
+try {
+    $result = $apiInstance->getBaseSize($base_uuid);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BasesApi->getBaseSize: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
 ## `listBases()`
 
 ```php
@@ -405,7 +448,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -452,7 +494,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -499,7 +540,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -549,7 +589,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -601,7 +640,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -659,7 +697,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -711,7 +748,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -761,7 +797,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -813,7 +848,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -863,7 +897,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
@@ -921,7 +954,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config

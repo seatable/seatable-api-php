@@ -36,7 +36,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -73,7 +72,7 @@ AccountTokenAuth
 ## `copyBaseFromExternalLink()`
 
 ```php
-copyBaseFromExternalLink($link, $dst_workspace_id)
+copyBaseFromExternalLink($link, $dst_workspace_id): object
 ```
 
 Copy Base from External Link
@@ -88,7 +87,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -97,7 +95,8 @@ $link = 'link_example'; // string | Source external link.
 $dst_workspace_id = 56; // int | Destination workspace's ID.
 
 try {
-    $apiInstance->copyBaseFromExternalLink($link, $dst_workspace_id);
+    $result = $apiInstance->copyBaseFromExternalLink($link, $dst_workspace_id);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling GroupsWorkspacesApi->copyBaseFromExternalLink: ', $e->getMessage(), PHP_EOL;
 }
@@ -112,7 +111,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -139,7 +138,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -193,7 +191,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -243,7 +240,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -291,7 +287,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -339,7 +334,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -389,7 +383,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -436,7 +429,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -486,7 +478,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -538,7 +529,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -588,7 +578,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -640,7 +629,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
@@ -690,7 +678,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config

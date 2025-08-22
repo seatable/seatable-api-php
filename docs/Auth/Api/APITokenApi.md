@@ -29,12 +29,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\APITokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 $app_name = 'app_name_example'; // string | The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base.
 $permission = new \SeaTable\Client\Auth\AuthenticationPermission(); // \SeaTable\Client\Auth\AuthenticationPermission
@@ -51,7 +50,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 | **app_name** | **string**| The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. | |
 | **permission** | [**\SeaTable\Client\Auth\AuthenticationPermission**](../Model/AuthenticationPermission.md)|  | |
@@ -85,12 +84,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\APITokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 
 try {
@@ -105,7 +103,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 
 ### Return type
@@ -137,12 +135,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\APITokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 $app_name = My App; // string | The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base.
 
@@ -158,7 +155,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 | **app_name** | **string**| The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. | |
 
@@ -191,12 +188,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\APITokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 
 try {
@@ -211,7 +207,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 
 ### Return type
@@ -243,12 +239,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\APITokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 $app_name = My App; // string | The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base.
 $permission = new \SeaTable\Client\Auth\AuthenticationPermission(); // \SeaTable\Client\Auth\AuthenticationPermission
@@ -265,7 +260,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 | **app_name** | **string**| The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. | |
 | **permission** | [**\SeaTable\Client\Auth\AuthenticationPermission**](../Model/AuthenticationPermission.md)|  | |

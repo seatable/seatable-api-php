@@ -29,7 +29,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
@@ -80,7 +79,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
@@ -131,7 +129,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
@@ -165,7 +162,7 @@ AccountTokenAuth
 ## `listApps()`
 
 ```php
-listApps()
+listApps(): object
 ```
 
 List Apps
@@ -180,14 +177,14 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
 );
 
 try {
-    $apiInstance->listApps();
+    $result = $apiInstance->listApps();
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AppsApi->listApps: ', $e->getMessage(), PHP_EOL;
 }
@@ -199,7 +196,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -226,7 +223,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config

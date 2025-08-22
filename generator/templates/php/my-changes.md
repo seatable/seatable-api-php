@@ -1,6 +1,3 @@
-# api.mustache
-- Set `$multipart` to `true` if `Content-Type` is `multipart/form-data`
-
 # api_doc.mustace
 
 in line 43 I replaces \API\ with {{apiPackage}}.

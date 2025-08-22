@@ -3,7 +3,7 @@ info:
   title: "Account Operations: System admin"
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.2"
+  version: "5.3"
 servers:
   - url: "https://{server}"
     variables:
@@ -83,29 +83,29 @@ components:
       in: query
       schema:
         type: string
-        pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))?-(([0-2][0-9])|(3[01]))?\+(2[0-3]|[01]?[0-9])(:[0-5]?[0-9]){2}$
+        pattern: ^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$
       description: >-
-        Starting time of the statistics in ISO format like in the example.
+        Starting time of the statistics like in the example.
         Required.
-      example: 2021-02-21+00:00:00
+      example: 2021-02-21 00:00:00
     ending_time:
       name: end
       in: query
       schema:
         type: string
-        pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))?-(([0-2][0-9])|(3[01]))?\+(2[0-3]|[01]?[0-9])(:[0-5]?[0-9]){2}$
+        pattern: ^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$
       description: >-
-        Ending time of the statistics in ISO format like in the example.
+        Ending time of the statistics like in the example.
         Required.
-      example: 2021-02-24+00:00:00
+      example: 2021-02-24 00:00:00
     date:
       name: date
       in: query
       schema:
         type: string
-        pattern: ^[0-9]{4}-((0[1-9])|(1[0-2]))?-(([0-2][0-9])|(3[01]))?\+(2[0-3]|[01]?[0-9])(:[0-5]?[0-9]){2}$
-      description: The date in ISO format. Required.
-      example: 2020-06-19+00:00:00
+        pattern: ^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$
+      description: The date. Required.
+      example: 2020-06-19 00:00:00
     is_user:
       name: is_user
       in: query
@@ -398,8 +398,7 @@ components:
       type: string
       description: >-
         Update their role. For details about roles, refer to
-        [SeaTable Roles and
-        Permissions](https://manual.seatable.io/config/enterprise/roles_permissions/).
+        [SeaTable Roles and Permissions](https://admin.seatable.com/configuration/roles-and-permissions/).
     login_id:
       type: string
       description: >-
@@ -851,7 +850,7 @@ paths:
         another superuser and change your role back with that account. If
         there's no further superuser available, you can create one. Don't
         remember how to create a superuser? Read the
-        [Manual](https://manual.seatable.io/).
+        [Manual](https://admin.seatable.com/).
 
 
         ### There are 4 types of system administrators:
@@ -939,7 +938,7 @@ paths:
         Add another super user, login as that super user and change your role
         back. Unfortunately, you cannot do this with the API. Refer to [SeaTable
         Admin Manual - Starting SeaTable
-        Server](https://manual.seatable.io/docker/Developer-Edition/Deploy%20SeaTable-DE%20with%20Docker/#starting-seatable-server)
+        Server](https://admin.seatable.com/maintenance/password-reset/)
         for details.
       requestBody:
         content:
@@ -1164,7 +1163,7 @@ paths:
         An example user list Excel file looks like this:
 
 
-        <img src="https://seatable.io/wp-content/uploads/2022/12/example.png">
+        <img src="https://seatable.com/openapi/excel.png">
       requestBody:
         content:
           multipart/form-data:
@@ -3393,6 +3392,126 @@ paths:
                   ],
                   "count": 2
                 }
+  /api/v2.1/admin/virus-files/:
+    get:
+      tags:
+        - Logs
+      summary: List Virus Files
+      operationId: listVirusFiles
+      description: |
+        Returns a list of files that were detected by the virus scanner.
+
+        Note: The API returns different fields per object depending on the workspace ownership (group vs. personal workspaces).
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - in: query
+          name: has_handled
+          schema:
+            type: string
+            enum: [true, false, null]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                virus_file_list:
+                  - repo_id: 696b27df-173e-4628-8ac2-10347c58a428
+                    file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com.txt
+                    has_deleted: true
+                    has_ignored": false,
+                    virus_id: 1
+                    group_id: 1,
+                    group_name: group-11
+                    org_id: 1
+                    org_name: org-1
+                    dtable_uuid: af5fa655-ef97-4573-8f2d-c3812e17a548
+                    dtable_name: rows
+                  - repo_id: 696b27df-173e-4628-8ac2-10347c58a428
+                    file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com (1).txt
+                    has_deleted: false
+                    has_ignored: false
+                    virus_id: 2,
+                    username: ac8961c4118f4400ad71bada398675b7@auth.local
+                    nickname: test@demo.com
+                    org_id: 1
+                    org_name: org-1
+                    dtable_uuid: af5fa655-ef97-4573-8f2d-c3812e17a548
+                    dtable_name: rows
+                has_next_page: false
+  /api/v2.1/admin/virus-files/{virus_id}/:
+    put:
+      tags:
+        - Logs
+      summary: Update Virus File
+      operationId: updateVirusFile
+      description: Updates the status of a virus file.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - in: path
+          name: virus_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the virus file
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                ignore:
+                  type: string
+                  enum: [true, false]
+              required:
+                - ignore
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              example:
+                virus_file:
+                  repo_id: 696b27df-173e-4628-8ac2-10347c58a428
+                  file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com (1).txt
+                  has_deleted: false
+                  has_ignored: true
+                  virus_id: 2
+                  group_id: 1
+                  group_name: group-11
+                  org_id: 1
+                  org_name: org-1
+                  dtable_uuid: af5fa655-ef97-4573-8f2d-c3812e17a548
+                  dtable_name: rows
+    delete:
+      tags:
+        - Logs
+      summary: Delete Virus File
+      operationId: deleteVirusFile
+      description: Delete a virus file. You can retrieve the `virus_id` by calling the [List Virus Files](/reference/listvirusfiles) endpoint.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - in: path
+          name: virus_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the virus file
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
 
   # Plugins
   /api/v2.1/admin/dtable-system-plugins/:
@@ -4059,8 +4178,7 @@ paths:
         are also saved in the database table (dtable-db/constance_config). They
         have a higher priority over the settings in the config files.
         However, in the `dtable_web_settings` you'll find more setting options.
-        For details, visit the [SeaTable Admin
-        Manual](https://manual.seatable.io/config/dtable_web_settings/#user-management-options).
+        For details, visit the [SeaTable Admin Manual](https://admin.seatable.com).
       requestBody:
         content:
           application/json:
@@ -4164,7 +4282,7 @@ paths:
         - one is the "normal" favicon（leave `with_nofity` blank).
         - the other one is the "notifying" favicon which should have something
         like a "notifying" red dot on it (set `with_notify` to `true`).
-        ![Image](https://seatable.io/wp-content/uploads/2021/11/favicon.png)
+        ![Image](https://seatable.com/openapi/favicon.png)
       requestBody:
         content:
           multipart/form-data:

@@ -7,13 +7,13 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**listFileAccessLogs()**](ActivitiesLogsApi.md#listFileAccessLogs) | **GET** /api/v2.1/org/{org_id}/admin/file-access-logs/ | List File Access Logs |
 | [**listTeamLogins()**](ActivitiesLogsApi.md#listTeamLogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/ | List Team Logins |
 | [**listTeamOperationLog()**](ActivitiesLogsApi.md#listTeamOperationLog) | **GET** /api/v2.1/org/{org_id}/admin/admin-logs/ | List Team Operations |
-| [**listUserLogins()**](ActivitiesLogsApi.md#listUserLogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id} | List User Logins |
+| [**listUserLogins()**](ActivitiesLogsApi.md#listUserLogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id}/ | List User Logins |
 
 
 ## `listFileAccessLogs()`
 
 ```php
-listFileAccessLogs($org_id, $page, $per_page)
+listFileAccessLogs($org_id, $page, $per_page): object
 ```
 
 List File Access Logs
@@ -28,7 +28,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -38,7 +37,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listFileAccessLogs($org_id, $page, $per_page);
+    $result = $apiInstance->listFileAccessLogs($org_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listFileAccessLogs: ', $e->getMessage(), PHP_EOL;
 }
@@ -54,7 +54,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -66,7 +66,7 @@ AccountTokenAuth
 ## `listTeamLogins()`
 
 ```php
-listTeamLogins($org_id, $page, $per_page)
+listTeamLogins($org_id, $page, $per_page): object
 ```
 
 List Team Logins
@@ -81,7 +81,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -91,7 +90,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listTeamLogins($org_id, $page, $per_page);
+    $result = $apiInstance->listTeamLogins($org_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listTeamLogins: ', $e->getMessage(), PHP_EOL;
 }
@@ -107,7 +107,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -119,7 +119,7 @@ AccountTokenAuth
 ## `listTeamOperationLog()`
 
 ```php
-listTeamOperationLog($org_id, $page, $per_page)
+listTeamOperationLog($org_id, $page, $per_page): object
 ```
 
 List Team Operations
@@ -134,7 +134,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -144,7 +143,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listTeamOperationLog($org_id, $page, $per_page);
+    $result = $apiInstance->listTeamOperationLog($org_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listTeamOperationLog: ', $e->getMessage(), PHP_EOL;
 }
@@ -160,7 +160,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -172,7 +172,7 @@ AccountTokenAuth
 ## `listUserLogins()`
 
 ```php
-listUserLogins($org_id, $user_id, $page, $per_page)
+listUserLogins($org_id, $user_id, $page, $per_page): object
 ```
 
 List User Logins
@@ -187,7 +187,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -198,7 +197,8 @@ $page = 1; // int | The page number you want to start showing the entries. If no
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $apiInstance->listUserLogins($org_id, $user_id, $page, $per_page);
+    $result = $apiInstance->listUserLogins($org_id, $user_id, $page, $per_page);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listUserLogins: ', $e->getMessage(), PHP_EOL;
 }
@@ -215,7 +215,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

@@ -29,12 +29,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$plugin = "/path/to/file.txt"; // \SplFileObject | Path and file name to the plugin file.
+$plugin = '/path/to/file.txt'; // \SplFileObject | Path and file name to the plugin file.
 
 try {
     $result = $apiInstance->addPlugin($plugin);
@@ -79,7 +78,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
@@ -129,7 +127,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
@@ -176,7 +173,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
@@ -222,13 +218,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
 );
 $plugin_id = 5; // int
-$plugin = "/path/to/file.txt"; // \SplFileObject | Path and file name to the plugin file.
+$plugin = '/path/to/file.txt'; // \SplFileObject | Path and file name to the plugin file.
 
 try {
     $result = $apiInstance->updatePlugin($plugin_id, $plugin);

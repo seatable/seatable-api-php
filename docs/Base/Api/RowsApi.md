@@ -9,7 +9,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**getRow()**](RowsApi.md#getRow) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/{row_id}/ | Get Row |
 | [**listRows()**](RowsApi.md#listRows) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | List Rows |
 | [**lockRows()**](RowsApi.md#lockRows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/ | Lock Rows |
-| [**querySQL()**](RowsApi.md#querySQL) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql | Query SeaTable with SQL |
+| [**querySQL()**](RowsApi.md#querySQL) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql/ | Query SeaTable with SQL |
 | [**unlockRows()**](RowsApi.md#unlockRows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/unlock-rows/ | Unlock Rows |
 | [**updateRow()**](RowsApi.md#updateRow) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Update Row(s) |
 
@@ -32,7 +32,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -84,7 +83,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -136,7 +134,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -182,7 +179,7 @@ listRows($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys): ob
 
 List Rows
 
-Returns a list of rows contained in a table (or in a view if provided).  The usage of a view in SeaTable could be much more convenient then the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).  > 👍 Big Data support added  >  > Since Version 4.4 this endpoint also supports the big data backend.  Every row consists of the columns, you defined in your base but also *hidden* informations like `_id`, `_mtime`, `_ctime`, `_creator` and so on. Get more details about these information in the [Models](/reference/models) area.  > 📘 Hidden Columns  > > If no view is selected, all columns (even hidden one) are returned. If a view is selected, only the visible columns of that view are returned with the request.
+Returns a list of rows contained in a table (or in a view if provided).  The usage of a view in SeaTable could be much more convenient then the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).  > 👍 Big Data support added  >  > Since Version 4.4 this endpoint also supports the big data backend.  Every row consists of the columns, you defined in your base but also *hidden* informations like `_id`, `_mtime`, `_ctime`, `_creator` and so on. Get more details about these information in the [Models](/reference/models) area.  > 📘 Hidden Columns  > > If no view is selected, all columns (even hidden one) are returned. If a view is selected, only the visible columns of that view are returned with the request.  > 📘 Link Columns > > From version 5.3 onward, the link column of a row returns a maximum of 50 records.
 
 ### Example
 
@@ -192,7 +189,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -242,7 +238,7 @@ lockRows($base_uuid, $table_with_row_ids): object
 
 Lock Rows
 
-Locks one or more rows. It is ok to include rows that were already locked. Rows in big data backend can not be locked.  > 📘 Advanced feature >  > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.io/preise/?lang=auto).
+Locks one or more rows. It is ok to include rows that were already locked. Rows in big data backend can not be locked.  > 📘 Advanced feature >  > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.com/prices/).
 
 ### Example
 
@@ -252,7 +248,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -294,7 +289,7 @@ querySQL($base_uuid, $sql_query): \SeaTable\Client\Base\SqlQueryResponse
 
 Query SeaTable with SQL
 
-SeaTable offers a SQL like interface that supports `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements.   If you are familiar with SQL, you will have no difficulties to use this endpoint because typical SQL-statements are supported.          This endpoint is the **most powerful** one that SeaTable can offer and it does not differentiate between the two SeaTable backend (normal and big data). Also the metadata of the table is returned.   > 📘 `INSERT` and big data >  > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.  The complete [SQL Reference](https://developer.seatable.io/scripts/sql/reference/) can be found documentation in the developer manual.   Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:  - `SELECT * FROM Family LIMIT 3` - `SELECT name, age, birthday FROM Family` - `SELECT name, age FROM Family ORDER BY name` - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)` - `SELECT * FROM Family WHERE Name=? AND Age=?`  SELECT does not support column keys. You can only limit the output by column names.  > 📘 Avoid SQL injection >  > If you use `?` in your SQL-statement, you have to provide values to replace the placeholders with parameters. This protects against SQL injections.   > 🚧 Max and default return limit > > - The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement.  > - If you don't specify a limit, max 100 rows are returned.
+SeaTable offers a SQL like interface that supports `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements.   If you are familiar with SQL, you will have no difficulties to use this endpoint because typical SQL-statements are supported.          This endpoint is the **most powerful** one that SeaTable can offer and it does not differentiate between the two SeaTable backend (normal and big data). Also the metadata of the table is returned.   > 📘 `INSERT` and big data >  > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.  The complete [SQL Reference](https://developer.seatable.com/scripts/sql/reference/) can be found documentation in the developer manual.   Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:  - `SELECT * FROM Family LIMIT 3` - `SELECT name, age, birthday FROM Family` - `SELECT name, age FROM Family ORDER BY name` - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)` - `SELECT * FROM Family WHERE Name=? AND Age=?`  SELECT does not support column keys. You can only limit the output by column names.  > 📘 Avoid SQL injection >  > If you use `?` in your SQL-statement, you have to provide values to replace the placeholders with parameters. This protects against SQL injections.   > 🚧 Max and default return limit > > - The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement.  > - If you don't specify a limit, max 100 rows are returned.  > 📘 Link Columns > > Link columns return a maximum of 50 records per row.
 
 ### Example
 
@@ -304,7 +299,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -356,7 +350,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config
@@ -408,7 +401,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowsApi(
     new GuzzleHttp\Client(),
     $config

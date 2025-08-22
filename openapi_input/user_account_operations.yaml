@@ -3,7 +3,7 @@ info:
   title: Account Operations - User
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.2"
+  version: "5.3"
 servers:
   - url: "https://{server}"
     variables:
@@ -2120,7 +2120,7 @@ components:
     selected_columns:
       type: string
       description: >-
-        The columns to update. Use comma (,) to separate column
+        Columns for matching chosen when updating. Use comma (,) to separate column
         names. Required.
       example: Field1
     permission:
@@ -2740,6 +2740,31 @@ paths:
                 type: object
               example:
                 success: true
+
+  /api/v2.1/dtable/{base_uuid}/size/:
+    get:
+      tags:
+        - Bases
+      summary: Get Base Size
+      operationId: getBaseSize
+      description: |
+        Get the storage usage of a base in bytes. This is the size of the JSON file stored on the filesystem or in S3 (depending on your server configuration).
+        Please note that this does not include assets stored inside the base, snapshots or rows stored in the big data backend.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                # FIXME: API returns a string...
+                result: "171982"
+
   /api/v2.1/starred-dtables/:
     get:
       tags:
@@ -3803,8 +3828,8 @@ paths:
       security:
         - AccountTokenAuth: []
       responses:
-        "500":
-          description: Internal Server Error
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -6731,6 +6756,30 @@ paths:
               example:
                 success: true
 
+  # Maintenance
+  /api/v2.1/dtable/{base_uuid}/repair/:
+    put:
+      tags:
+        - Maintenance
+      summary: Repair Base
+      operationId: repairBase
+      description: Repairs a base identified by its base_uuid. This repair scripts tries to detect errors in the json object and fix common problems.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+      responses:
+        "200":
+          description: Successful response indicating that the dtable was repaired.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
   # Notifications
   /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/:
     get:
@@ -7693,6 +7742,8 @@ paths:
           description: OK
           content:
             application/json:
+              schema:
+                type: object
               example:
                 {
                   "my_managed_apps":
@@ -7943,7 +7994,7 @@ paths:
                     insert_row: 0
                     modify_row: 1
                     delete_row: 0
-  /api/v2.1/dtable-activities/detail:
+  /api/v2.1/dtable-activities/detail/:
     get:
       tags: [Activities & Logs]
       summary: Get Base Activity Details

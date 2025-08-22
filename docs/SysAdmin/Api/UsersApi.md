@@ -39,7 +39,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -89,7 +88,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -139,7 +137,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -189,7 +186,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -239,7 +235,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -278,7 +273,7 @@ importUsers($file): object
 
 Import users
 
-As system administrator, you can batch import users with an Excel file, which lists the users'  - `email` as their contact email address, which is also used to login as their username; - `password` as their initial login password; - Optionally, also define their display name, role, and quota.       An example user list Excel file looks like this:  <img src=\"https://seatable.io/wp-content/uploads/2022/12/example.png\">
+As system administrator, you can batch import users with an Excel file, which lists the users'  - `email` as their contact email address, which is also used to login as their username; - `password` as their initial login password; - Optionally, also define their display name, role, and quota.       An example user list Excel file looks like this:  <img src=\"https://seatable.com/openapi/excel.png\">
 
 ### Example
 
@@ -288,12 +283,11 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->importUsers($file);
@@ -338,7 +332,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -385,7 +378,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -439,7 +431,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -489,7 +480,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -541,7 +531,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -591,7 +580,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -641,7 +629,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -684,7 +671,7 @@ updateAdminRole($update_admins_role): object
 
 Update Admin's Role
 
-> Use this request with caution!! > - > Do not change your own role! Once your role has been changed, you **cannot use this API request to change it back**: You'll get a permission error, and lose access to a majority of admin functions. If you already did that, the only solution left for you is to login as another superuser and change your role back with that account. If there's no further superuser available, you can create one. Don't remember how to create a superuser? Read the [Manual](https://manual.seatable.io/).  ### There are 4 types of system administrators: - default admin (can use this request) - system admin (cannot use this request) - daily admin (cannot use this request) - audit admin (cannot use this request)    The default admin has the most permissions, while the other 3 types have limited permissions:  |      Permissions         | Default admin     | Daily admin        | System admin       | Audit admin        | |   -------------: |:--------------------:|:--------------------:|:--------------------:|:--------------------:| |               Info | &check; | &check; | &check; | &check; | |         Statistics | &check; | &check; |                    |                    | |           Settings | &check; |                    | &check; |                    | |              Bases | &check; |                    |                    |                    | |              Forms | &check; |                    |                    |                    | |              Users | &check; | &check; |                    |                    | |             Groups | &check; | &check; |                    |                    | |     External links | &check; |                    |                    |                    | |      Organizations | &check; |                    |                    |                    | |      Notifications | &check; |                    |                    |                    | | Administrator-logs | &check; |                    |                    | &check; | |            Plugins | &check; |                    |                    |                    | |              Rules | &check; |                    |                    |                    | |      Abuse reports | &check; |                    |                    |                    | |            Scripts | &check; |                    |                    |                    | | Email sending logs | &check; |                    |                    |                    |  ### Do not change your own admin role  As seen from the table above - If you change your role from \"default admin\" to \"system admin\" or \"audit admin\", you won't be able to change it back because the \"Users\" page is gone.  ### What to do if you already did that  Add another super user, login as that super user and change your role back. Unfortunately, you cannot do this with the API. Refer to [SeaTable Admin Manual - Starting SeaTable Server](https://manual.seatable.io/docker/Developer-Edition/Deploy%20SeaTable-DE%20with%20Docker/#starting-seatable-server) for details.
+> Use this request with caution!! > - > Do not change your own role! Once your role has been changed, you **cannot use this API request to change it back**: You'll get a permission error, and lose access to a majority of admin functions. If you already did that, the only solution left for you is to login as another superuser and change your role back with that account. If there's no further superuser available, you can create one. Don't remember how to create a superuser? Read the [Manual](https://admin.seatable.com/).  ### There are 4 types of system administrators: - default admin (can use this request) - system admin (cannot use this request) - daily admin (cannot use this request) - audit admin (cannot use this request)    The default admin has the most permissions, while the other 3 types have limited permissions:  |      Permissions         | Default admin     | Daily admin        | System admin       | Audit admin        | |   -------------: |:--------------------:|:--------------------:|:--------------------:|:--------------------:| |               Info | &check; | &check; | &check; | &check; | |         Statistics | &check; | &check; |                    |                    | |           Settings | &check; |                    | &check; |                    | |              Bases | &check; |                    |                    |                    | |              Forms | &check; |                    |                    |                    | |              Users | &check; | &check; |                    |                    | |             Groups | &check; | &check; |                    |                    | |     External links | &check; |                    |                    |                    | |      Organizations | &check; |                    |                    |                    | |      Notifications | &check; |                    |                    |                    | | Administrator-logs | &check; |                    |                    | &check; | |            Plugins | &check; |                    |                    |                    | |              Rules | &check; |                    |                    |                    | |      Abuse reports | &check; |                    |                    |                    | |            Scripts | &check; |                    |                    |                    | | Email sending logs | &check; |                    |                    |                    |  ### Do not change your own admin role  As seen from the table above - If you change your role from \"default admin\" to \"system admin\" or \"audit admin\", you won't be able to change it back because the \"Users\" page is gone.  ### What to do if you already did that  Add another super user, login as that super user and change your role back. Unfortunately, you cannot do this with the API. Refer to [SeaTable Admin Manual - Starting SeaTable Server](https://admin.seatable.com/maintenance/password-reset/) for details.
 
 ### Example
 
@@ -694,7 +681,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
@@ -744,7 +730,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config

@@ -1,9 +1,8 @@
-# # SpecificDate
+# # UpdateGroupMemberRoleRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**set_type** | **string** |  | [optional]
-**value** | **string** |  | [optional]
+**is_admin** | **string** |  |
 

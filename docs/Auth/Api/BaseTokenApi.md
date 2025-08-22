@@ -12,7 +12,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `getBaseTokenWithAccountToken()`
 
 ```php
-getBaseTokenWithAccountToken($workspace_id, $base_name): \SeaTable\Client\Auth\AccessToken
+getBaseTokenWithAccountToken($workspace_id, $base_name, $exp): \SeaTable\Client\Auth\AccessToken
 ```
 
 Get Base-Token with Account-Token
@@ -27,16 +27,16 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang=auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
+$exp = '3d'; // string | Expiration time of the generated access token. Examples: 5h (= 5 hours) or 3d (= 3 days)
 
 try {
-    $result = $apiInstance->getBaseTokenWithAccountToken($workspace_id, $base_name);
+    $result = $apiInstance->getBaseTokenWithAccountToken($workspace_id, $base_name, $exp);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BaseTokenApi->getBaseTokenWithAccountToken: ', $e->getMessage(), PHP_EOL;
@@ -47,8 +47,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.io/docs/arbeiten-mit-gruppen/workspace-id-einer-gruppe-ermitteln/?lang&#x3D;auto).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
+| **exp** | **string**| Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) | [optional] [default to &#39;3d&#39;] |
 
 ### Return type
 
@@ -64,7 +65,7 @@ AccountTokenAuth
 ## `getBaseTokenWithApiToken()`
 
 ```php
-getBaseTokenWithApiToken(): object
+getBaseTokenWithApiToken($exp): object
 ```
 
 Get Base-Token with API-Token
@@ -79,14 +80,14 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (API-Token) authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client(),
     $config
 );
+$exp = '3d'; // string | Expiration time of the generated access token. Examples: 5h (= 5 hours) or 3d (= 3 days)
 
 try {
-    $result = $apiInstance->getBaseTokenWithApiToken();
+    $result = $apiInstance->getBaseTokenWithApiToken($exp);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BaseTokenApi->getBaseTokenWithApiToken: ', $e->getMessage(), PHP_EOL;
@@ -95,7 +96,9 @@ try {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **exp** | **string**| Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) | [optional] [default to &#39;3d&#39;] |
 
 ### Return type
 
@@ -123,7 +126,6 @@ Generate a Base-Token from an external link to this base. Because external links
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client()
 );

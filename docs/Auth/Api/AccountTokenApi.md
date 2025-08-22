@@ -22,7 +22,6 @@ Generate an *Account-Token* with your username and password. This Account-Token 
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 $apiInstance = new SeaTable\Client\Auth\AccountTokenApi(
     new GuzzleHttp\Client()
 );

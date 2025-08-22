@@ -4,13 +4,65 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**deleteVirusFile()**](LogsApi.md#deleteVirusFile) | **DELETE** /api/v2.1/admin/virus-files/{virus_id}/ | Delete Virus File |
 | [**listAbuseReports()**](LogsApi.md#listAbuseReports) | **GET** /api/v2.1/admin/abuse-reports/ | List Abuse Reports |
 | [**listAuditLogs()**](LogsApi.md#listAuditLogs) | **GET** /api/v2.1/admin/audit-logs/ | List Audit Logs |
 | [**listEmailLogs()**](LogsApi.md#listEmailLogs) | **GET** /api/v2.1/admin/email-sending-logs/ | List Email Logs |
 | [**listFileAccessLogs()**](LogsApi.md#listFileAccessLogs) | **GET** /api/v2.1/admin/file-access-logs/ | List File Access Logs |
 | [**listLoginLogs()**](LogsApi.md#listLoginLogs) | **GET** /api/v2.1/admin/logs/login-logs/ | List Login Logs |
 | [**listRegistrationLogs()**](LogsApi.md#listRegistrationLogs) | **GET** /api/v2.1/admin/registration-logs/ | List Registration Logs |
+| [**listVirusFiles()**](LogsApi.md#listVirusFiles) | **GET** /api/v2.1/admin/virus-files/ | List Virus Files |
 | [**updateAbuseReport()**](LogsApi.md#updateAbuseReport) | **PUT** /api/v2.1/admin/abuse-reports/{abuse_report_id}/ | Update Abuse Report |
+| [**updateVirusFile()**](LogsApi.md#updateVirusFile) | **PUT** /api/v2.1/admin/virus-files/{virus_id}/ | Update Virus File |
+
+
+## `deleteVirusFile()`
+
+```php
+deleteVirusFile($virus_id): object
+```
+
+Delete Virus File
+
+Delete a virus file. You can retrieve the `virus_id` by calling the [List Virus Files](/reference/listvirusfiles) endpoint.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$virus_id = 56; // int | The ID of the virus file
+
+try {
+    $result = $apiInstance->deleteVirusFile($virus_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling LogsApi->deleteVirusFile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **virus_id** | **int**| The ID of the virus file | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
 
 
 ## `listAbuseReports()`
@@ -31,7 +83,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -78,7 +129,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -130,7 +180,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -182,7 +231,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -233,7 +281,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -283,7 +330,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -299,6 +345,58 @@ try {
 ### Parameters
 
 This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `listVirusFiles()`
+
+```php
+listVirusFiles($page, $per_page, $has_handled)
+```
+
+List Virus Files
+
+Returns a list of files that were detected by the virus scanner.  Note: The API returns different fields per object depending on the workspace ownership (group vs. personal workspaces).
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+$has_handled = 'has_handled_example'; // string
+
+try {
+    $apiInstance->listVirusFiles($page, $per_page, $has_handled);
+} catch (Exception $e) {
+    echo 'Exception when calling LogsApi->listVirusFiles: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+| **has_handled** | **string**|  | [optional] |
 
 ### Return type
 
@@ -329,7 +427,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
@@ -355,6 +452,56 @@ try {
 ### Return type
 
 **object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `updateVirusFile()`
+
+```php
+updateVirusFile($virus_id, $ignore)
+```
+
+Update Virus File
+
+Updates the status of a virus file.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$virus_id = 56; // int | The ID of the virus file
+$ignore = 'ignore_example'; // string
+
+try {
+    $apiInstance->updateVirusFile($virus_id, $ignore);
+} catch (Exception $e) {
+    echo 'Exception when calling LogsApi->updateVirusFile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **virus_id** | **int**| The ID of the virus file | |
+| **ignore** | **string**|  | |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 

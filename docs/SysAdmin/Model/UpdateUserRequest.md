@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **is_staff** | **bool** | &#x60;true&#x60; or &#x60;false&#x60; if the user will be an (system) admin. &#x60;false&#x60; by default. | [optional] [default to false]
 **is_active** | **bool** | &#x60;true&#x60; or &#x60;false&#x60; if the user could log in. &#x60;true&#x60; by default. | [optional] [default to true]
-**role** | **string** | Update their role. For details about roles, refer to [SeaTable Roles and Permissions](https://manual.seatable.io/config/enterprise/roles_permissions/). | [optional]
+**role** | **string** | Update their role. For details about roles, refer to [SeaTable Roles and Permissions](https://admin.seatable.com/configuration/roles-and-permissions/). | [optional]
 **name** | **string** | Full name of the user. | [optional]
 **login_id** | **string** | Optional login ID. Valid only if the system configuration allows login ID. | [optional]
 **contact_email** | **string** | The contact email address of the user. | [optional]

@@ -34,13 +34,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 $table_name = 'table_name_example'; // string | The name of the table.
 
@@ -88,7 +87,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
@@ -140,7 +138,6 @@ Download a base with its external link as a .dtable zip file. **Password protect
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client()
 );
@@ -187,7 +184,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
@@ -240,7 +236,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
@@ -293,7 +288,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
@@ -352,13 +346,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$dtable = "/path/to/file.txt"; // \SplFileObject
+$dtable = '/path/to/file.txt'; // \SplFileObject
 
 try {
     $result = $apiInstance->importBasefromDTableFile($workspace_id, $dtable);
@@ -404,13 +397,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$dtable = "/path/to/file.txt"; // \SplFileObject
+$dtable = '/path/to/file.txt'; // \SplFileObject
 $folder = 'folder_example'; // string | If you would like to create the base into a folder, give its `folder_id` here. A base is created in the root folder by default. Optional.
 
 try {
@@ -458,13 +450,12 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 
 try {
@@ -510,16 +501,15 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$file = "/path/to/file.txt"; // \SplFileObject
+$file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 $table_name = 'table_name_example'; // string | The name of the table.
-$selected_columns = 'selected_columns_example'; // string | The columns to update. Use comma (,) to separate column names. Required.
+$selected_columns = 'selected_columns_example'; // string | Columns for matching chosen when updating. Use comma (,) to separate column names. Required.
 
 try {
     $result = $apiInstance->updateFromFile($workspace_id, $file, $dtable_uuid, $table_name, $selected_columns);
@@ -537,7 +527,7 @@ try {
 | **file** | **\SplFileObject****\SplFileObject**|  | [optional] |
 | **dtable_uuid** | **string**| The UUID of the base. | [optional] |
 | **table_name** | **string**| The name of the table. | [optional] |
-| **selected_columns** | **string**| The columns to update. Use comma (,) to separate column names. Required. | [optional] |
+| **selected_columns** | **string**| Columns for matching chosen when updating. Use comma (,) to separate column names. Required. | [optional] |
 
 ### Return type
 

@@ -5,7 +5,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**deleteBaseCustomFolderAsset()**](FilesImagesCustomFolderApi.md#deleteBaseCustomFolderAsset) | **DELETE** /api/v2.1/dtable/custom/app-asset-file/ | Delete a Base Asset in Custom Folder |
-| [**getCustomDownloadLink()**](FilesImagesCustomFolderApi.md#getCustomDownloadLink) | **GET** /api/v2.1/dtable/custom/app-download-link | Get Download Link |
+| [**getCustomDownloadLink()**](FilesImagesCustomFolderApi.md#getCustomDownloadLink) | **GET** /api/v2.1/dtable/custom/app-download-link/ | Get Download Link |
 | [**getCustomFileMetadata()**](FilesImagesCustomFolderApi.md#getCustomFileMetadata) | **GET** /api/v2.1/dtable/custom/app-asset-file/ | Get File Metadata |
 | [**getCustomFiles()**](FilesImagesCustomFolderApi.md#getCustomFiles) | **GET** /api/v2.1/dtable/custom/app-asset-dir/ | Get Files from Folder |
 | [**getCustomUploadLink()**](FilesImagesCustomFolderApi.md#getCustomUploadLink) | **GET** /api/v2.1/dtable/custom/app-upload-link/ | Get Upload Link |
@@ -29,7 +29,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesCustomFolderApi(
     new GuzzleHttp\Client(),
     $config
@@ -77,7 +76,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesCustomFolderApi(
     new GuzzleHttp\Client(),
     $config
@@ -125,7 +123,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesCustomFolderApi(
     new GuzzleHttp\Client(),
     $config
@@ -175,7 +172,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesCustomFolderApi(
     new GuzzleHttp\Client(),
     $config
@@ -223,7 +219,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesCustomFolderApi(
     new GuzzleHttp\Client(),
     $config

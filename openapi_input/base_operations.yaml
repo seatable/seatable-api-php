@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
-  title: Base Operations (from 4.4)
+  title: Base Operations
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.2"
+  version: "5.3"
 servers:
   - url: "https://{server}"
     variables:
@@ -212,6 +212,15 @@ components:
     notification_id:
       name: notification_id
       description: The id of the notification.
+      in: path
+      schema:
+        type: integer
+        minimum: 1
+      required: true
+      example: 1
+    op_id_big_data_path:
+      name: op_id
+      description: The id of the big data operation logs.
       in: path
       schema:
         type: integer
@@ -566,7 +575,7 @@ components:
 
     link_id:
       type: string
-      description: Every *link column* has a `key` and `link_id` in the column object. Use [Get Metadata](/reference/getmetadata) or [Get Base Info](/reference/getbaseinfo) to get this `link_id`. Don't use the `key` of the link column.
+      description: Every *link column* has a `key` and `link_id` in the column object. Use [Get Metadata](/reference/getmetadata) to get this `link_id`. Don't use the `key` of the link column.
       minLength: 4
       maxLength: 4
       example: jYc7
@@ -2297,108 +2306,6 @@ components:
           example: Example
 
 paths:
-  # Base Info
-  # question: super powerful call. extension of metadata?!? Contains all links (even more than 10?), statistics
-  # it does not contain apps, forms. Collaborators are always empty. What is the purpose of this call?
-  # question: why does this call contains data? But it is difficult to get the full picture => link formula columns are not shown
-  /api-gateway/api/v2/dtables/{base_uuid}:
-    get:
-      tags: [Base Info]
-      summary: Get Base Info
-      operationId: getBaseInfo
-      description: |
-        Get various information of a base like the tables, (normal and big data) views, links, data statistics and collaborators.
-      security:
-        - BaseTokenAuth: []
-      parameters:
-        - $ref: "#/components/parameters/base_uuid"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-              example:
-                version: 33
-                format_version: 9
-                statistics: []
-                links: []
-                settings:
-                  enable_archive: true
-                tables:
-                  - _id: "0000"
-                    name: Table1
-                    rows:
-                      - _id: Qtf7xPmoRaiFyQPO1aNTjA
-                        _participants: []
-                        _creator: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _ctime: "2020-11-18T12:42:14.779+00:00"
-                        _last_modifier: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _mtime: "2021-01-14T09:01:57.357+00:00"
-                        "0000": Meng
-                        BydO: "2020-08-19"
-                      - _id: V_jBEGOXQ3mC3rJkQi-DOQ
-                        _participants: []
-                        _creator: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _ctime: "2021-01-14T08:56:05.666+00:00"
-                        _last_modifier: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _mtime: "2021-01-14T08:56:59.458+00:00"
-                        "0000": Bao
-                        BydO: "2020-09-18"
-                      - _id: HtZb516CTwCZRuBlY8d7Wg
-                        _participants: []
-                        _creator: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _ctime: "2021-01-14T08:56:07.135+00:00"
-                        _last_modifier: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _mtime: "2021-01-14T08:57:04.073+00:00"
-                        "0000": Daniel
-                        BydO: "2020-10-22"
-                      - _id: fS8qtN6FQ1uPOaNAC0Locw
-                        _participants: []
-                        _creator: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _ctime: "2021-01-14T08:56:08.259+00:00"
-                        _last_modifier: 8ch7ft46r69491ba42905bf1647fd3f@auth.local
-                        _mtime: "2021-01-14T08:57:06.657+00:00"
-                        "0000": Jonas
-                        BydO: "2021-01-20"
-                    columns:
-                      - key: "0000"
-                        name: Name
-                        type: text
-                        width: 200
-                        editable: true
-                        resizable: true
-                      - key: BydO
-                        type: date
-                        name: Date
-                        editable: true
-                        width: 200
-                        resizable: true
-                        draggable: true
-                        data:
-                          format: YYYY-MM-DD
-                        permission_type: ""
-                        permitted_users: []
-                    view_structure:
-                      - folders: []
-                      - view_ids: ["0000"]
-                    views:
-                      - _id: "0000"
-                        name: "Default\r\n> View"
-                        type: table
-                        is_locked: false
-                        rows: []
-                        formula_rows: {}
-                        summaries: []
-                        filter_conjunction: And
-                        filters: []
-                        sorts: []
-                        hidden_columns: []
-                        groupbys: []
-                        groups: []
-                    id_row_map: {}
-                collaborators: []
   /api-gateway/api/v2/dtables/{base_uuid}/metadata/:
     get:
       tags:
@@ -2515,8 +2422,7 @@ paths:
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
 
   # Rows
-  # question: shows only up to 10 linked records. Base Info shows all. Is there any reason?
-  /api-gateway/api/v2/dtables/{base_uuid}/sql:
+  /api-gateway/api/v2/dtables/{base_uuid}/sql/:
     post:
       tags:
         - Rows
@@ -2533,7 +2439,7 @@ paths:
         > 
         > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.
 
-        The complete [SQL Reference](https://developer.seatable.io/scripts/sql/reference/) can be found documentation in the developer manual. 
+        The complete [SQL Reference](https://developer.seatable.com/scripts/sql/reference/) can be found documentation in the developer manual. 
 
         Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:
 
@@ -2553,6 +2459,10 @@ paths:
         >
         > - The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement. 
         > - If you don't specify a limit, max 100 rows are returned.
+
+        > 📘 Link Columns
+        >
+        > Link columns return a maximum of 50 records per row.
       requestBody:
         content:
           application/json:
@@ -2590,6 +2500,10 @@ paths:
         > 📘 Hidden Columns 
         >
         > If no view is selected, all columns (even hidden one) are returned. If a view is selected, only the visible columns of that view are returned with the request.
+
+        > 📘 Link Columns
+        >
+        > From version 5.3 onward, the link column of a row returns a maximum of 50 records.
 
       security:
         - BaseTokenAuth: []
@@ -2754,7 +2668,7 @@ paths:
 
         > 📘 Advanced feature
         > 
-        > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.io/preise/?lang=auto).
+        > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.com/prices/).
       requestBody:
         content:
           application/json:
@@ -2814,6 +2728,9 @@ paths:
         When you have a "Link to other records" column in your table and you
         have created some links to the current or another table, you can use
         this request to query each row's linked records' IDs and display values.
+
+        By default, it returns 10 records per row. To query more records, please
+        set the "offset" and "limit" values for a row in the rows parameter.
 
         > 📘 id or name
         > 
@@ -3506,7 +3423,7 @@ paths:
 
         `new_column_type` is the new type of the target column. For a list of
         column type params refer to the SeaTable API Parameter.
-        For further information on column types, check the page [Models](https://api.seatable.io/reference/models).
+        For further information on column types, check the page [Models](https://api.seatable.com/reference/models).
       requestBody:
         content:
           application/json:
@@ -3584,7 +3501,7 @@ paths:
         For details, refer to the call [Insert Column](/reference/insertcolumn-1).
 
         Please note that you can't append `formula`, `link` or `link-formula` columns using this endpoint.
-        Use the [Insert Column](https://api.seatable.io/reference/insertcolumn-1) endpoint instead.
+        Use the [Insert Column](https://api.seatable.com/reference/insertcolumn-1) endpoint instead.
       requestBody:
         content:
           application/json:
@@ -3679,7 +3596,7 @@ paths:
         (`color`) and the color of the arrow (`textColor`):
 
 
-        ![Options](https://seatable.io/wp-content/uploads/2021/11/Screenshot-2021-04-28-105719.png)
+        ![Options](https://seatable.com/openapi/selectoptioncolor.png)
       requestBody:
         content:
           application/json:
@@ -3816,7 +3733,7 @@ paths:
         up the cascade relationship with this API request first.
 
 
-        ![](https://seatable.io/wp-content/uploads/2021/11/cascade.png)
+        ![](https://seatable.com/openapi/cascade.png)
 
 
         ## What are the preconditions?
@@ -3957,6 +3874,69 @@ paths:
       responses:
         "200":
           description: OK
+  /api-gateway/api/v2/dtables/{base_uuid}/db-operations/:
+    get:
+      tags: [Big Data]
+      summary: Get Base Big Data Operations
+      operationId: getBaseBigDataOperations
+      description: Get the operation logs of big data in a base. With the base's `base_uuid`.
+      security:
+        - BaseTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/base_uuid"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                operations:
+                  - dtable_uuid: 91a377f36bce4e80a894b421b2801fce
+                    id: 77
+                    op_time: 1721009252
+                    op_type: update_links
+                    author: 12345678d1754bb4afa2c2cb7369d244@auth.local
+                    operation: >-
+                      {"count":2, "link_id":"3847", "table_id": "0000 ", "other_table_id ": "jCoR"}
+                  - dtable_uuid: 91a377f36bce4e80a894b421b2801fce
+                    id: 76
+                    op_time: 1721009225
+                    op_type: add_row
+                    author: 12345678d1754bb4afa2c2cb7369d244@auth.local
+                    operation: >-
+                      {"row_id":"171jHKAXRP69hD_NRApaRg", "table_id":"0000", "row_data":{"0000":"aaa", "_creator":"c6580a35560244bb9678c70bcdb55df5@auth.local", "_ctime": "2024-07-15T10:07:05.046579+08:00", "_id": "171jHKAXRP69hD_NRApaRg", "_last_modifier":"c6580a35560244bb9678c70bcdb55df5@auth.local","_mtime":"2024-07-15T10:07:05.046579+08:00"}}
+                  - dtable_uuid: 91a377f36bce4e80a894b421b2801fce
+                    id: 73
+                    op_time: 1721009225
+                    op_type: delete_links
+                    author: 12345678d1754bb4afa2c2cb7369d244@auth.local
+                    operation: >-
+                      {"count":2, "link_id":"3847", "table_id": "0000 ", "other_table_id ": "jCoR"}
+                  
+  /api-gateway/api/v2/dtables/{base_uuid}/restore-operations/{op_id}/:
+    put:
+      tags: [Big Data]
+      summary: Restore Big Data Operations
+      operationId: restoreBigDataOperations
+      description: Restore the operations by `op_id` of big data operation logs in a base. With the base's `base_uuid`.
+      security:
+        - BaseTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+        - $ref: "#/components/parameters/op_id_big_data_path"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success:true
 
   # Row Comments
   /api-gateway/api/v2/dtables/{base_uuid}/comments/:
@@ -4107,6 +4087,28 @@ paths:
                     created_at: "2021-03-09T15:54:22.000Z"
                     updated_at: "2021-03-09T15:54:22.000Z"
                     resolved: 0
+  /api/v2.1/dtables/{base_uuid}/rows-comments-num/:
+    get:
+      tags:
+        - Row Comments
+      summary: Get Number of Comments
+      operationId: getNumberOfComments
+      description: Get the number of comments for all rows.
+      security:
+        - BaseTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                rows_comments_num:
+                  H44KC2bvThyMFD4ZtcD_-A: 2
+                  C0LWRVCHT0OoAGjoXBuKMA: 1
 
   # Notifications (Base)
   /api-gateway/api/v2/dtables/{base_uuid}/notifications/:
@@ -4386,46 +4388,6 @@ paths:
                           value: ""
                 total_count: 3
 
-  /api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/:
-    get:
-      tags:
-        - Activities & Logs
-      summary: List Delete Operations
-      operationId: listDeleteOperations
-      description: >-
-        Deleted rows, tables and columns are saved in SeaTable for 7 days. You
-        can list these in the operation log with this request. To restore them,
-        you'll need to log into the web UI.
-
-
-        For `op_type` notice:
-
-
-        `delete_row` returns the single operations which have deleted 1 row each
-        time.
-
-
-        `delete_rows` returns the operations in which multiple rows were
-        deleted.
-
-
-        `delete_column` returns the column that was deleted by each operation.
-
-
-        `delete_table` returns the table that was deleted by each operation.
-      security:
-        - BaseTokenAuth: []
-      parameters:
-        - $ref: "#/components/parameters/page"
-        - $ref: "#/components/parameters/per_page"
-        - $ref: "#/components/parameters/op_type"
-        - $ref: "#/components/parameters/base_uuid"
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json: {}
-
   # Snapshots
   # tested create: ok
   /api-gateway/api/v2/dtables/{base_uuid}/snapshot/:
@@ -4459,3 +4421,5 @@ paths:
                   dtable_name: Example.dtable
                   commit_id: 1234567813a3e0950d4d4f32bd744137929cef23
                   ctime: 1622111992159
+
+  

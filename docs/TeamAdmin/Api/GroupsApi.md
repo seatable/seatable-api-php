@@ -14,6 +14,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**orderGroups()**](GroupsApi.md#orderGroups) | **PUT** /api/v2.1/groups/move-group/ | Re-order Your Groups |
 | [**removeGroupMembers()**](GroupsApi.md#removeGroupMembers) | **DELETE** /api/v2.1/org/{org_id}/admin/groups/{group_id}/members/{user_id}/ | Remove Group Members |
 | [**updateGroup()**](GroupsApi.md#updateGroup) | **PUT** /api/v2.1/org/{org_id}/admin/groups/{group_id}/ | Update Group |
+| [**updateGroupMemberRole()**](GroupsApi.md#updateGroupMemberRole) | **PUT** /api/v2.1/org/{org_id}/admin/groups/{group_id}/members/{user_id}/ | Update Group Member Role |
 
 
 ## `addGroup()`
@@ -34,7 +35,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -88,7 +88,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -142,7 +141,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -194,7 +192,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -246,7 +243,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -298,7 +294,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -350,7 +345,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -404,7 +398,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -458,7 +451,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -512,7 +504,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
@@ -536,6 +527,61 @@ try {
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
 | **update_group_request** | [**\SeaTable\Client\TeamAdmin\UpdateGroupRequest**](../Model/UpdateGroupRequest.md)|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `updateGroupMemberRole()`
+
+```php
+updateGroupMemberRole($org_id, $group_id, $user_id, $update_group_member_role_request): object
+```
+
+Update Group Member Role
+
+Update a member's role.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\GroupsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$group_id = 1; // int | The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1).
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+$update_group_member_role_request = new \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest(); // \SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest
+
+try {
+    $result = $apiInstance->updateGroupMemberRole($org_id, $group_id, $user_id, $update_group_member_role_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling GroupsApi->updateGroupMemberRole: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **group_id** | **int**| The ID of the group to query. Can be retrieved from the call [List Groups in Your Team](/reference/listgroups-1). | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
+| **update_group_member_role_request** | [**\SeaTable\Client\TeamAdmin\UpdateGroupMemberRoleRequest**](../Model/UpdateGroupMemberRoleRequest.md)|  | [optional] |
 
 ### Return type
 

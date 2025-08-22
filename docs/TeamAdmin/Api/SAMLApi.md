@@ -12,7 +12,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `getSamlConfig()`
 
 ```php
-getSamlConfig($org_id)
+getSamlConfig($org_id): object
 ```
 
 Get SAML Config
@@ -27,7 +27,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
     new GuzzleHttp\Client(),
     $config
@@ -35,7 +34,8 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 
 try {
-    $apiInstance->getSamlConfig($org_id);
+    $result = $apiInstance->getSamlConfig($org_id);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SAMLApi->getSamlConfig: ', $e->getMessage(), PHP_EOL;
 }
@@ -49,7 +49,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -76,7 +76,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
     new GuzzleHttp\Client(),
     $config
@@ -131,7 +130,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
     new GuzzleHttp\Client(),
     $config

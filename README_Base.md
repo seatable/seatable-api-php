@@ -5,14 +5,14 @@
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActivitiesLogsApi* | [**getBaseActivityLog**](docs/Base/Api/ActivitiesLogsApi.md#getbaseactivitylog) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/operations/ | Get Base Activity Log
-*ActivitiesLogsApi* | [**listDeleteOperations**](docs/Base/Api/ActivitiesLogsApi.md#listdeleteoperations) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/deleted-rows/ | List Delete Operations
 *ActivitiesLogsApi* | [**listRowActivities**](docs/Base/Api/ActivitiesLogsApi.md#listrowactivities) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/activities/ | List Row Activities
-*BaseInfoApi* | [**getBaseInfo**](docs/Base/Api/BaseInfoApi.md#getbaseinfo) | **GET** /api-gateway/api/v2/dtables/{base_uuid} | Get Base Info
 *BaseInfoApi* | [**getMetadata**](docs/Base/Api/BaseInfoApi.md#getmetadata) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/metadata/ | Get Metadata
 *BaseInfoApi* | [**listCollaborators**](docs/Base/Api/BaseInfoApi.md#listcollaborators) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/related-users/ | List Collaborators
 *BigDataApi* | [**addBigDataRows**](docs/Base/Api/BigDataApi.md#addbigdatarows) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/add-archived-rows/ | Add Rows into Big Data Backend
+*BigDataApi* | [**getBaseBigDataOperations**](docs/Base/Api/BigDataApi.md#getbasebigdataoperations) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/db-operations/ | Get Base Big Data Operations
 *BigDataApi* | [**moveRowsToBigData**](docs/Base/Api/BigDataApi.md#moverowstobigdata) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/archive-view/ | Move Rows to Big Data Backend
 *BigDataApi* | [**moveRowsToNormalBackend**](docs/Base/Api/BigDataApi.md#moverowstonormalbackend) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/unarchive/ | Move Rows to Normal Backend
+*BigDataApi* | [**restoreBigDataOperations**](docs/Base/Api/BigDataApi.md#restorebigdataoperations) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/restore-operations/{op_id}/ | Restore Big Data Operations
 *ColumnsApi* | [**addSelectOption**](docs/Base/Api/ColumnsApi.md#addselectoption) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/column-options/ | Add Single/Multiple Select Options
 *ColumnsApi* | [**appendColumns**](docs/Base/Api/ColumnsApi.md#appendcolumns) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/batch-append-columns/ | Append Columns
 *ColumnsApi* | [**deleteColumn**](docs/Base/Api/ColumnsApi.md#deletecolumn) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/columns/ | Delete Column
@@ -35,6 +35,7 @@ Class | Method | HTTP request | Description
 *NotificationsApi* | [**sendToastNotification**](docs/Base/Api/NotificationsApi.md#sendtoastnotification) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/ui-toasts/ | Send toast notification
 *RowCommentsApi* | [**deleteComment**](docs/Base/Api/RowCommentsApi.md#deletecomment) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment
 *RowCommentsApi* | [**getComment**](docs/Base/Api/RowCommentsApi.md#getcomment) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment
+*RowCommentsApi* | [**getNumberOfComments**](docs/Base/Api/RowCommentsApi.md#getnumberofcomments) | **GET** /api/v2.1/dtables/{base_uuid}/rows-comments-num/ | Get Number of Comments
 *RowCommentsApi* | [**getRowCommentsCount**](docs/Base/Api/RowCommentsApi.md#getrowcommentscount) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-count/ | Get Row Comments Count
 *RowCommentsApi* | [**listCommentsWithinDays**](docs/Base/Api/RowCommentsApi.md#listcommentswithindays) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-within-days/ | List Comments within Days
 *RowCommentsApi* | [**listRowComments**](docs/Base/Api/RowCommentsApi.md#listrowcomments) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/ | List Row Comments
@@ -43,7 +44,7 @@ Class | Method | HTTP request | Description
 *RowsApi* | [**getRow**](docs/Base/Api/RowsApi.md#getrow) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/{row_id}/ | Get Row
 *RowsApi* | [**listRows**](docs/Base/Api/RowsApi.md#listrows) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | List Rows
 *RowsApi* | [**lockRows**](docs/Base/Api/RowsApi.md#lockrows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/ | Lock Rows
-*RowsApi* | [**querySQL**](docs/Base/Api/RowsApi.md#querysql) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql | Query SeaTable with SQL
+*RowsApi* | [**querySQL**](docs/Base/Api/RowsApi.md#querysql) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/sql/ | Query SeaTable with SQL
 *RowsApi* | [**unlockRows**](docs/Base/Api/RowsApi.md#unlockrows) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/unlock-rows/ | Unlock Rows
 *RowsApi* | [**updateRow**](docs/Base/Api/RowsApi.md#updaterow) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/rows/ | Update Row(s)
 *SnapshotsApi* | [**createSnapshot**](docs/Base/Api/SnapshotsApi.md#createsnapshot) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/snapshot/ | Create Snapshot
@@ -62,5 +63,5 @@ Class | Method | HTTP request | Description
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `5.2`
+- API version: `5.3`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

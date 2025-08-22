@@ -6,6 +6,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | ------------- | ------------- | ------------- |
 | [**deleteComment()**](RowCommentsApi.md#deleteComment) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment |
 | [**getComment()**](RowCommentsApi.md#getComment) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment |
+| [**getNumberOfComments()**](RowCommentsApi.md#getNumberOfComments) | **GET** /api/v2.1/dtables/{base_uuid}/rows-comments-num/ | Get Number of Comments |
 | [**getRowCommentsCount()**](RowCommentsApi.md#getRowCommentsCount) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-count/ | Get Row Comments Count |
 | [**listCommentsWithinDays()**](RowCommentsApi.md#listCommentsWithinDays) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-within-days/ | List Comments within Days |
 | [**listRowComments()**](RowCommentsApi.md#listRowComments) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/ | List Row Comments |
@@ -29,7 +30,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowCommentsApi(
     new GuzzleHttp\Client(),
     $config
@@ -81,7 +81,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowCommentsApi(
     new GuzzleHttp\Client(),
     $config
@@ -115,6 +114,55 @@ BaseTokenAuth
 
 
 
+## `getNumberOfComments()`
+
+```php
+getNumberOfComments($base_uuid): object
+```
+
+Get Number of Comments
+
+Get the number of comments for all rows.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\Base\RowCommentsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+
+try {
+    $result = $apiInstance->getNumberOfComments($base_uuid);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling RowCommentsApi->getNumberOfComments: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+BaseTokenAuth
+
+
+
+
 ## `getRowCommentsCount()`
 
 ```php
@@ -133,7 +181,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowCommentsApi(
     new GuzzleHttp\Client(),
     $config
@@ -185,7 +232,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowCommentsApi(
     new GuzzleHttp\Client(),
     $config
@@ -237,7 +283,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Base\RowCommentsApi(
     new GuzzleHttp\Client(),
     $config
