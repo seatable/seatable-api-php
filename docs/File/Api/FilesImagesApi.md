@@ -28,7 +28,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesApi(
     new GuzzleHttp\Client(),
     $config
@@ -78,7 +77,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesApi(
     new GuzzleHttp\Client(),
     $config
@@ -128,7 +126,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesApi(
     new GuzzleHttp\Client(),
     $config
@@ -175,7 +172,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\File\FilesImagesApi(
     new GuzzleHttp\Client(),
     $config

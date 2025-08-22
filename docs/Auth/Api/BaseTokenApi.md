@@ -27,7 +27,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (Account-Token) authorization: AccountTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client(),
     $config
@@ -81,7 +80,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure Bearer (API-Token) authorization: ApiTokenAuth (use the right token for your request)
 $config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
-
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client(),
     $config
@@ -128,7 +126,6 @@ Generate a Base-Token from an external link to this base. Because external links
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
-
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client()
 );
