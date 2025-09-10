@@ -123,7 +123,7 @@ moveRowsToBigData($base_uuid, $archive_view): object
 
 Move Rows to Big Data Backend
 
-Use an sql-like where clause to select the rows that should be moved into the big data backend. Big data backend has to be activated in this base.
+Select a view to move its rows to the big data backend. Note that the big data backend must be enabled in this base.
 
 ### Example
 

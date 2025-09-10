@@ -5,11 +5,12 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**clearTeamTrashBin()**](BasesApi.md#clearTeamTrashBin) | **DELETE** /api/v2.1/org/{org_id}/admin/trash-dtables/ | Clear Team Trash Bin |
-| [**deleteBase()**](BasesApi.md#deleteBase) | **DELETE** /api/v2.1/org/{org_id}/admin/dtables/{base_id}/ | Delete Base |
+| [**deleteBase()**](BasesApi.md#deleteBase) | **DELETE** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/ | Delete Base |
+| [**getBase()**](BasesApi.md#getBase) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/ | Get Base |
 | [**listBaseSharings()**](BasesApi.md#listBaseSharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/ | List Base Sharings |
 | [**listBases()**](BasesApi.md#listBases) | **GET** /api/v2.1/org/{org_id}/admin/dtables/ | List Bases (Team) |
 | [**listTrashBases()**](BasesApi.md#listTrashBases) | **GET** /api/v2.1/org/{org_id}/admin/trash-dtables/ | List Trash Bases |
-| [**restoreBaseFromTrash()**](BasesApi.md#restoreBaseFromTrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_id}/ | Restore Base from Trash |
+| [**restoreBaseFromTrash()**](BasesApi.md#restoreBaseFromTrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_uuid}/ | Restore Base from Trash |
 | [**searchBase()**](BasesApi.md#searchBase) | **GET** /api/v2.1/org/{org_id}/admin/search-dtables/ | Search Base |
 
 
@@ -65,7 +66,7 @@ AccountTokenAuth
 ## `deleteBase()`
 
 ```php
-deleteBase($org_id, $base_id): object
+deleteBase($org_id, $base_uuid): object
 ```
 
 Delete Base
@@ -85,10 +86,10 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$base_id = 000; // string | The ID of the base. Don't mix this up with the base_uuid!
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 
 try {
-    $result = $apiInstance->deleteBase($org_id, $base_id);
+    $result = $apiInstance->deleteBase($org_id, $base_uuid);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BasesApi->deleteBase: ', $e->getMessage(), PHP_EOL;
@@ -100,7 +101,58 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **base_id** | **string**| The ID of the base. Don&#39;t mix this up with the base_uuid! | |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `getBase()`
+
+```php
+getBase($org_id, $base_uuid): object
+```
+
+Get Base
+
+Get the details of a base in a team
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+
+try {
+    $result = $apiInstance->getBase($org_id, $base_uuid);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BasesApi->getBase: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 
 ### Return type
 
@@ -273,7 +325,7 @@ AccountTokenAuth
 ## `restoreBaseFromTrash()`
 
 ```php
-restoreBaseFromTrash($org_id, $base_id): object
+restoreBaseFromTrash($org_id, $base_uuid): object
 ```
 
 Restore Base from Trash
@@ -293,10 +345,10 @@ $apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$base_id = 000; // string | The ID of the base. Don't mix this up with the base_uuid!
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 
 try {
-    $result = $apiInstance->restoreBaseFromTrash($org_id, $base_id);
+    $result = $apiInstance->restoreBaseFromTrash($org_id, $base_uuid);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BasesApi->restoreBaseFromTrash: ', $e->getMessage(), PHP_EOL;
@@ -308,7 +360,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **base_id** | **string**| The ID of the base. Don&#39;t mix this up with the base_uuid! | |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 
 ### Return type
 
