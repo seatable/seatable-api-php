@@ -3,7 +3,7 @@ info:
   title: Base Operations
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.3"
+  version: "6.0"
 servers:
   - url: "https://{server}"
     variables:
@@ -709,6 +709,13 @@ components:
         - is_locked: false
 
     view_name:
+      type: string
+      description: |
+        The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly.
+        **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+      example: "Default View"
+
+    view_name_only:
       type: string
       description: "The new name of the view, if you want to give the view a new name."
       example: "Default View"
@@ -2279,17 +2286,11 @@ components:
       properties:
         table_name:
           $ref: "#/components/schemas/table_name"
-        where:
-          type: string
-          description: >
-            Use an sql-like clause to select the rows you want to archive. If not set, all rows in the table will be archived. 
-            More examples are: <br/>
-            \`Name\` = 'Michael' <br/>
-            \`Gender\` != 'Michael' <br/>
-            \`Name of the column\` ilike '%error%'
-          example: "`Name` like '%Hans%'"
+        view_name:
+          $ref: "#/components/schemas/view_name"
       required:
         - table_name
+        - view_name
 
     create_row_comment:
       type: object
@@ -3824,7 +3825,7 @@ paths:
       tags: [Big Data]
       summary: Move Rows to Big Data Backend
       operationId: moveRowsToBigData
-      description: Use an sql-like where clause to select the rows that should be moved into the big data backend. Big data backend has to be activated in this base.
+      description: Select a view to move its rows to the big data backend. Note that the big data backend must be enabled in this base.
       security:
         - BaseTokenAuth: []
       requestBody:
