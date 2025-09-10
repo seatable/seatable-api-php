@@ -911,6 +911,7 @@ class InfoSettingsApi
      * Update Team Settings
      *
      * @param  bool|null $enable_force_2fa if the 2-factor-authentication is forced (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
+     * @param  bool|null $enable_force_sso_login Whether login via SSO is enforced for all team members (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_new_user_email if newly added users will get a system email (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_external_user_access_invite_link if external users can access bases via invite links (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_member_modify_name if members are allowed to change their names (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
@@ -920,9 +921,9 @@ class InfoSettingsApi
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function updateTeamSettings($enable_force_2fa = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
+    public function updateTeamSettings($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
-        list($response) = $this->updateTeamSettingsWithHttpInfo($enable_force_2fa, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
+        list($response) = $this->updateTeamSettingsWithHttpInfo($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
         return $response;
     }
 
@@ -932,6 +933,7 @@ class InfoSettingsApi
      * Update Team Settings
      *
      * @param  bool|null $enable_force_2fa if the 2-factor-authentication is forced (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
+     * @param  bool|null $enable_force_sso_login Whether login via SSO is enforced for all team members (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_new_user_email if newly added users will get a system email (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_external_user_access_invite_link if external users can access bases via invite links (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_member_modify_name if members are allowed to change their names (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
@@ -941,9 +943,9 @@ class InfoSettingsApi
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateTeamSettingsWithHttpInfo($enable_force_2fa = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
+    public function updateTeamSettingsWithHttpInfo($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
-        $request = $this->updateTeamSettingsRequest($enable_force_2fa, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
+        $request = $this->updateTeamSettingsRequest($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1020,6 +1022,7 @@ class InfoSettingsApi
      * Update Team Settings
      *
      * @param  bool|null $enable_force_2fa if the 2-factor-authentication is forced (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
+     * @param  bool|null $enable_force_sso_login Whether login via SSO is enforced for all team members (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_new_user_email if newly added users will get a system email (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_external_user_access_invite_link if external users can access bases via invite links (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_member_modify_name if members are allowed to change their names (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
@@ -1028,9 +1031,9 @@ class InfoSettingsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateTeamSettingsAsync($enable_force_2fa = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
+    public function updateTeamSettingsAsync($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
-        return $this->updateTeamSettingsAsyncWithHttpInfo($enable_force_2fa, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType)
+        return $this->updateTeamSettingsAsyncWithHttpInfo($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1044,6 +1047,7 @@ class InfoSettingsApi
      * Update Team Settings
      *
      * @param  bool|null $enable_force_2fa if the 2-factor-authentication is forced (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
+     * @param  bool|null $enable_force_sso_login Whether login via SSO is enforced for all team members (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_new_user_email if newly added users will get a system email (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_external_user_access_invite_link if external users can access bases via invite links (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_member_modify_name if members are allowed to change their names (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
@@ -1052,10 +1056,10 @@ class InfoSettingsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateTeamSettingsAsyncWithHttpInfo($enable_force_2fa = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
+    public function updateTeamSettingsAsyncWithHttpInfo($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
         $returnType = 'object';
-        $request = $this->updateTeamSettingsRequest($enable_force_2fa, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
+        $request = $this->updateTeamSettingsRequest($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1097,6 +1101,7 @@ class InfoSettingsApi
      * Create request for operation 'updateTeamSettings'
      *
      * @param  bool|null $enable_force_2fa if the 2-factor-authentication is forced (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
+     * @param  bool|null $enable_force_sso_login Whether login via SSO is enforced for all team members (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_new_user_email if newly added users will get a system email (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_external_user_access_invite_link if external users can access bases via invite links (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
      * @param  bool|null $enable_member_modify_name if members are allowed to change their names (&#x60;true&#x60; or &#x60;false&#x60;). (optional)
@@ -1105,8 +1110,9 @@ class InfoSettingsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateTeamSettingsRequest($enable_force_2fa = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
+    public function updateTeamSettingsRequest($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
+
 
 
 
@@ -1128,6 +1134,7 @@ class InfoSettingsApi
 
         $formData = $formDataProcessor->prepare([
             'enable_force_2fa' => $enable_force_2fa,
+            'enable_force_sso_login' => $enable_force_sso_login,
             'enable_new_user_email' => $enable_new_user_email,
             'enable_external_user_access_invite_link' => $enable_external_user_access_invite_link,
             'enable_member_modify_name' => $enable_member_modify_name,
