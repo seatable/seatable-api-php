@@ -129,7 +129,7 @@ disableTwoFactor($org_id, $user_id): object
 
 Disable 2FA
 
-If a user in your team has lost their phone or deleted the authenticator App by accident, they cannot log in to SeaTable anymore if 2FA is enabled for them. In this case, you as the team administrator can disable 2FA for them. Again, this is to be distinguished from the request [Enforce 2FA for A User in Team](/reference/enforcetwofactor-1) when you use `force_2fa = 0`, which only cancels the enforcement of 2FA but doesn't necessarily disable it for them.
+If a user in your team has lost their phone or deleted the authenticator App by accident, they cannot log in to SeaTable anymore if 2FA is enabled for them. In this case, you as the team administrator can disable 2FA for them. Again, this is to be distinguished from the request [Enforce 2FA for A User in Team](/reference/enforcetwofactor-1) when you use `force_2fa = false`, which only cancels the enforcement of 2FA but doesn't necessarily disable it for them.
 
 ### Example
 
@@ -180,7 +180,7 @@ enforceTwofactor($org_id, $user_id, $enforce_twofactor_request): object
 
 Enforce 2FA
 
-As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
+As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `true` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `false` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
 
 ### Example
 
