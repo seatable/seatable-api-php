@@ -50,6 +50,7 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**deleteUser**](docs/TeamAdmin/Api/UsersApi.md#deleteuser) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Delete User
 *UsersApi* | [**disableTwoFactor**](docs/TeamAdmin/Api/UsersApi.md#disabletwofactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA
 *UsersApi* | [**enforceTwofactor**](docs/TeamAdmin/Api/UsersApi.md#enforcetwofactor) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA
+*UsersApi* | [**getUser**](docs/TeamAdmin/Api/UsersApi.md#getuser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Get User
 *UsersApi* | [**listTeamUsers**](docs/TeamAdmin/Api/UsersApi.md#listteamusers) | **GET** /api/v2.1/org/{org_id}/admin/users/ | List Users (Team)
 *UsersApi* | [**resetUserPassword**](docs/TeamAdmin/Api/UsersApi.md#resetuserpassword) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/set-password/ | Reset User Password
 *UsersApi* | [**updateUser**](docs/TeamAdmin/Api/UsersApi.md#updateuser) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Update User

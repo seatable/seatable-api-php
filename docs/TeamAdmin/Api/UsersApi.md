@@ -8,6 +8,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**deleteUser()**](UsersApi.md#deleteUser) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Delete User |
 | [**disableTwoFactor()**](UsersApi.md#disableTwoFactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA |
 | [**enforceTwofactor()**](UsersApi.md#enforceTwofactor) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA |
+| [**getUser()**](UsersApi.md#getUser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Get User |
 | [**listTeamUsers()**](UsersApi.md#listTeamUsers) | **GET** /api/v2.1/org/{org_id}/admin/users/ | List Users (Team) |
 | [**resetUserPassword()**](UsersApi.md#resetUserPassword) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/set-password/ | Reset User Password |
 | [**updateUser()**](UsersApi.md#updateUser) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Update User |
@@ -213,6 +214,57 @@ try {
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 | **enforce_twofactor_request** | [**\SeaTable\Client\TeamAdmin\EnforceTwofactorRequest**](../Model/EnforceTwofactorRequest.md)|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `getUser()`
+
+```php
+getUser($org_id, $user_id): object
+```
+
+Get User
+
+Get a user's details.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+
+try {
+    $result = $apiInstance->getUser($org_id, $user_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UsersApi->getUser: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
 
