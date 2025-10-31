@@ -143,16 +143,16 @@ class NotificationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  object|null $body body (optional)
+     * @param  \SeaTable\Client\User\AddNotificationRuleRequest $add_notification_rule_request add_notification_rule_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function addNotificationRule($workspace_id, $base_name, $body = null, string $contentType = self::contentTypes['addNotificationRule'][0])
+    public function addNotificationRule($workspace_id, $base_name, $add_notification_rule_request, string $contentType = self::contentTypes['addNotificationRule'][0])
     {
-        list($response) = $this->addNotificationRuleWithHttpInfo($workspace_id, $base_name, $body, $contentType);
+        list($response) = $this->addNotificationRuleWithHttpInfo($workspace_id, $base_name, $add_notification_rule_request, $contentType);
         return $response;
     }
 
@@ -163,16 +163,16 @@ class NotificationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  object|null $body (optional)
+     * @param  \SeaTable\Client\User\AddNotificationRuleRequest $add_notification_rule_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function addNotificationRuleWithHttpInfo($workspace_id, $base_name, $body = null, string $contentType = self::contentTypes['addNotificationRule'][0])
+    public function addNotificationRuleWithHttpInfo($workspace_id, $base_name, $add_notification_rule_request, string $contentType = self::contentTypes['addNotificationRule'][0])
     {
-        $request = $this->addNotificationRuleRequest($workspace_id, $base_name, $body, $contentType);
+        $request = $this->addNotificationRuleRequest($workspace_id, $base_name, $add_notification_rule_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -250,15 +250,15 @@ class NotificationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  object|null $body (optional)
+     * @param  \SeaTable\Client\User\AddNotificationRuleRequest $add_notification_rule_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addNotificationRuleAsync($workspace_id, $base_name, $body = null, string $contentType = self::contentTypes['addNotificationRule'][0])
+    public function addNotificationRuleAsync($workspace_id, $base_name, $add_notification_rule_request, string $contentType = self::contentTypes['addNotificationRule'][0])
     {
-        return $this->addNotificationRuleAsyncWithHttpInfo($workspace_id, $base_name, $body, $contentType)
+        return $this->addNotificationRuleAsyncWithHttpInfo($workspace_id, $base_name, $add_notification_rule_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -273,16 +273,16 @@ class NotificationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  object|null $body (optional)
+     * @param  \SeaTable\Client\User\AddNotificationRuleRequest $add_notification_rule_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addNotificationRuleAsyncWithHttpInfo($workspace_id, $base_name, $body = null, string $contentType = self::contentTypes['addNotificationRule'][0])
+    public function addNotificationRuleAsyncWithHttpInfo($workspace_id, $base_name, $add_notification_rule_request, string $contentType = self::contentTypes['addNotificationRule'][0])
     {
         $returnType = 'object';
-        $request = $this->addNotificationRuleRequest($workspace_id, $base_name, $body, $contentType);
+        $request = $this->addNotificationRuleRequest($workspace_id, $base_name, $add_notification_rule_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -325,13 +325,13 @@ class NotificationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  object|null $body (optional)
+     * @param  \SeaTable\Client\User\AddNotificationRuleRequest $add_notification_rule_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addNotificationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addNotificationRuleRequest($workspace_id, $base_name, $body = null, string $contentType = self::contentTypes['addNotificationRule'][0])
+    public function addNotificationRuleRequest($workspace_id, $base_name, $add_notification_rule_request, string $contentType = self::contentTypes['addNotificationRule'][0])
     {
 
         // verify the required parameter 'workspace_id' is set
@@ -351,6 +351,12 @@ class NotificationsApi
             );
         }
 
+        // verify the required parameter 'add_notification_rule_request' is set
+        if ($add_notification_rule_request === null || (is_array($add_notification_rule_request) && count($add_notification_rule_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $add_notification_rule_request when calling addNotificationRule'
+            );
+        }
 
 
         $resourcePath = '/api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/';
@@ -387,12 +393,12 @@ class NotificationsApi
         );
 
         // for model (json/xml)
-        if (isset($body)) {
+        if (isset($add_notification_rule_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($add_notification_rule_request));
             } else {
-                $httpBody = $body;
+                $httpBody = $add_notification_rule_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
