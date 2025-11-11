@@ -30,6 +30,7 @@ use GuzzleHttp\Psr7\Utils;
 use SeaTable\Client\Auth\ModelInterface as AuthModelInterface;
 use SeaTable\Client\Base\ModelInterface as BaseModelInterface;
 use SeaTable\Client\File\ModelInterface as FileModelInterface;
+use SeaTable\Client\PythonScheduler\ModelInterface as PythonSchedulerModelInterface;
 use SeaTable\Client\SysAdmin\ModelInterface as SysAdminModelInterface;
 use SeaTable\Client\TeamAdmin\ModelInterface as TeamAdminModelInterface;
 use SeaTable\Client\User\ModelInterface as UserModelInterface;
@@ -89,6 +90,7 @@ class ObjectSerializer
                 $data instanceof AuthModelInterface
                 || $data instanceof BaseModelInterface
                 || $data instanceof FileModelInterface
+                || $data instanceof PythonSchedulerModelInterface
                 || $data instanceof SysAdminModelInterface
                 || $data instanceof TeamAdminModelInterface
                 || $data instanceof UserModelInterface

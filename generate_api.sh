@@ -83,6 +83,20 @@ mkdir ./docs/File
 mv ./docs/{Api,Model} ./docs/File
 mv ./README.md ./README_File.md
 
+# python-scheduler
+docker run --rm \
+ --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
+ -i /local/openapi_input/python-scheduler.yaml \
+ -g php \
+ -o /local \
+ -c /local/generator/config/config_python-scheduler.json \
+ -t /local/generator/templates/php/
+mkdir ./docs/PythonScheduler
+mv ./docs/{Api,Model} ./docs/PythonScheduler
+mv ./README.md ./README_PythonScheduler.md
+
 # auth
 docker run --rm \
  --user $(id -u):$(id -g) \
