@@ -351,11 +351,11 @@ class ActionLinkRecordMatchConditionsInner implements ModelInterface, ArrayAcces
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param integer|string $offset Offset
      *
      * @return boolean
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -363,12 +363,12 @@ class ActionLinkRecordMatchConditionsInner implements ModelInterface, ArrayAcces
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param integer|string $offset Offset
      *
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset)
     {
         return $this->container[$offset] ?? null;
     }
@@ -393,11 +393,11 @@ class ActionLinkRecordMatchConditionsInner implements ModelInterface, ArrayAcces
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param integer|string $offset Offset
      *
      * @return void
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->container[$offset]);
     }

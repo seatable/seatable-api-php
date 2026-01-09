@@ -7517,6 +7517,14 @@ class SharingApi
             }
         }
 
+        if ($this->config->getCertFile()) {
+            $options[RequestOptions::CERT] = $this->config->getCertFile();
+        }
+
+        if ($this->config->getKeyFile()) {
+            $options[RequestOptions::SSL_KEY] = $this->config->getKeyFile();
+        }
+
         return $options;
     }
 
