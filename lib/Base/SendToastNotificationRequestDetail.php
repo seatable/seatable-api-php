@@ -1,6 +1,6 @@
 <?php
 /**
- * SendToastNotificationRequestDetial
+ * SendToastNotificationRequestDetail
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * SendToastNotificationRequestDetial Class Doc Comment
+ * SendToastNotificationRequestDetail Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SendToastNotificationRequestDetial implements ModelInterface, ArrayAccess, \JsonSerializable
+class SendToastNotificationRequestDetail implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class SendToastNotificationRequestDetial implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SendToastNotification_request_detial';
+    protected static $openAPIModelName = 'SendToastNotification_request_detail';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

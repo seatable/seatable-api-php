@@ -141,7 +141,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client()
 );
-$external_link_token = fleischkaesebroetchen; // string
+$external_link_token = f84903f9aa454a2481f3; // string
 
 try {
     $apiInstance->exportBaseFromExternalLink($external_link_token);

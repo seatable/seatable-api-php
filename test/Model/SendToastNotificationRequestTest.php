@@ -97,9 +97,9 @@ class SendToastNotificationRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "detial"
+     * Test attribute "detail"
      */
-    public function testPropertyDetial()
+    public function testPropertyDetail()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -58,7 +58,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     protected static $openAPITypes = [
         'to_user' => 'string',
         'toast_type' => 'string',
-        'detial' => '\SeaTable\Client\Base\SendToastNotificationRequestDetial'
+        'detail' => '\SeaTable\Client\Base\SendToastNotificationRequestDetail'
     ];
 
     /**
@@ -71,7 +71,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     protected static $openAPIFormats = [
         'to_user' => null,
         'toast_type' => null,
-        'detial' => null
+        'detail' => null
     ];
 
     /**
@@ -82,7 +82,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     protected static array $openAPINullables = [
         'to_user' => false,
         'toast_type' => false,
-        'detial' => false
+        'detail' => false
     ];
 
     /**
@@ -173,7 +173,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     protected static $attributeMap = [
         'to_user' => 'to_user',
         'toast_type' => 'toast_type',
-        'detial' => 'detial'
+        'detail' => 'detail'
     ];
 
     /**
@@ -184,7 +184,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     protected static $setters = [
         'to_user' => 'setToUser',
         'toast_type' => 'setToastType',
-        'detial' => 'setDetial'
+        'detail' => 'setDetail'
     ];
 
     /**
@@ -195,7 +195,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     protected static $getters = [
         'to_user' => 'getToUser',
         'toast_type' => 'getToastType',
-        'detial' => 'getDetial'
+        'detail' => 'getDetail'
     ];
 
     /**
@@ -274,7 +274,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     {
         $this->setIfExists('to_user', $data ?? [], null);
         $this->setIfExists('toast_type', $data ?? [], null);
-        $this->setIfExists('detial', $data ?? [], null);
+        $this->setIfExists('detail', $data ?? [], null);
     }
 
     /**
@@ -393,28 +393,28 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
     }
 
     /**
-     * Gets detial
+     * Gets detail
      *
-     * @return \SeaTable\Client\Base\SendToastNotificationRequestDetial|null
+     * @return \SeaTable\Client\Base\SendToastNotificationRequestDetail|null
      */
-    public function getDetial()
+    public function getDetail()
     {
-        return $this->container['detial'];
+        return $this->container['detail'];
     }
 
     /**
-     * Sets detial
+     * Sets detail
      *
-     * @param \SeaTable\Client\Base\SendToastNotificationRequestDetial|null $detial detial
+     * @param \SeaTable\Client\Base\SendToastNotificationRequestDetail|null $detail detail
      *
      * @return self
      */
-    public function setDetial($detial)
+    public function setDetail($detail)
     {
-        if (is_null($detial)) {
-            throw new \InvalidArgumentException('non-nullable detial cannot be null');
+        if (is_null($detail)) {
+            throw new \InvalidArgumentException('non-nullable detail cannot be null');
         }
-        $this->container['detial'] = $detial;
+        $this->container['detail'] = $detail;
 
         return $this;
     }

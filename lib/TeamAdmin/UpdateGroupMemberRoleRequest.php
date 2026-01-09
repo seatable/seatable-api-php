@@ -56,7 +56,7 @@ class UpdateGroupMemberRoleRequest implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'is_admin' => 'string'
+        'is_admin' => 'bool'
     ];
 
     /**
@@ -294,7 +294,7 @@ class UpdateGroupMemberRoleRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets is_admin
      *
-     * @return string
+     * @return bool
      */
     public function getIsAdmin()
     {
@@ -304,7 +304,7 @@ class UpdateGroupMemberRoleRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets is_admin
      *
-     * @param string $is_admin is_admin
+     * @param bool $is_admin is_admin
      *
      * @return self
      */

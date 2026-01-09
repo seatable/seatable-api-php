@@ -369,7 +369,7 @@ AccountTokenAuth
 ## `listRegistrationLogs()`
 
 ```php
-listRegistrationLogs()
+listRegistrationLogs(): object
 ```
 
 List Registration Logs
@@ -388,7 +388,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
 );
 
 try {
-    $apiInstance->listRegistrationLogs();
+    $result = $apiInstance->listRegistrationLogs();
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling LogsApi->listRegistrationLogs: ', $e->getMessage(), PHP_EOL;
 }
@@ -400,7 +401,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

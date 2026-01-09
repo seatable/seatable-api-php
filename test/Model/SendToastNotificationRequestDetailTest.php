@@ -1,6 +1,6 @@
 <?php
 /**
- * SendToastNotificationRequestDetialTest
+ * SendToastNotificationRequestDetailTest
  *
  * PHP version 8.1
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * SendToastNotificationRequestDetialTest Class Doc Comment
+ * SendToastNotificationRequestDetailTest Class Doc Comment
  *
  * @category    Class
- * @description SendToastNotificationRequestDetial
+ * @description SendToastNotificationRequestDetail
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SendToastNotificationRequestDetialTest extends TestCase
+class SendToastNotificationRequestDetailTest extends TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class SendToastNotificationRequestDetialTest extends TestCase
     }
 
     /**
-     * Test "SendToastNotificationRequestDetial"
+     * Test "SendToastNotificationRequestDetail"
      */
-    public function testSendToastNotificationRequestDetial()
+    public function testSendToastNotificationRequestDetail()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
