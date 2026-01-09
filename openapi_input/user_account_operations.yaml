@@ -22,6 +22,46 @@ x-readme:
 # - why is workspace_id_query a query param?
 # - why is base_name in one case a query param?
 
+tags:
+  - name: User
+    description: Manage users
+  - name: Bases
+    description: Manage bases
+  - name: Groups & Workspaces
+    description: Manage groups and workspaces
+  - name: Attachment
+    description: Manage attachments
+  - name: Import & Export
+    description: Import and export data
+  - name: Sharing
+    description: Manage shares
+  - name: Sharing Links
+    description: Manage sharing links
+  - name: Common Dataset
+    description: Manage common datasets
+  - name: Departments
+    description: Manage departments
+  - name: Forms
+    description: Manage forms
+  - name: Automations
+    description: Manage automations
+  - name: Maintenance
+    description: Execute maintenance operations
+  - name: Notifications
+    description: Manage notifications
+  - name: System Notifications
+    description: Manage notifications
+  - name: Email Accounts
+    description: Manage email accounts
+  - name: Webhooks
+    description: Manage webhooks
+  - name: Snapshots
+    description: Manage base snapshots
+  - name: Apps
+    description: Manage apps
+  - name: Activities & Logs
+    description: Retrieve activities and logs
+
 components:
   securitySchemes:
     AccountTokenAuth:
@@ -261,7 +301,7 @@ components:
       schema:
         type: string
       required: true
-      example: fleischkaesebroetchen
+      example: f84903f9aa454a2481f3
     form_token:
       name: form_token
       in: path
@@ -4267,6 +4307,7 @@ paths:
         "200":
           description: Successful response
           content:
+            # TODO: Actually "application/x-zip-compressed", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
   /api/v2.1/workspace/{workspace_id}/synchronous-export/export-table-to-excel/:
     get:
@@ -4285,6 +4326,7 @@ paths:
         "200":
           description: Successful response
           content:
+            # TODO: Actually "application/ms-excel", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
   /api/v2.1/workspace/{workspace_id}/synchronous-export/export-view-to-excel/:
     get:
@@ -4305,6 +4347,7 @@ paths:
         "200":
           description: Successful response
           content:
+            # TODO: Actually "application/ms-excel", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
   /dtable/external-links/{external_link_token}/download-zip/:
     get:
@@ -4321,6 +4364,7 @@ paths:
         "200":
           description: Successful response
           content:
+            # TODO: Actually "application/x-zip-compressed", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
 
   /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/convert-big-data-view-to-excel/:
@@ -5784,10 +5828,14 @@ paths:
       parameters:
         - $ref: "#/components/parameters/dataset_id"
       responses:
-        "404":
+        "200":
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                type: object
+              example:
+                task_id: a375e995-ed2b-4064-ae34-03a18bb0627e
   /api/v2.1/dtable/common-datasets/syncs/:
     get:
       tags:
