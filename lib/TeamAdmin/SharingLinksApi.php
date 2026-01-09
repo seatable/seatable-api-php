@@ -88,6 +88,9 @@ class SharingLinksApi
         'listInviteLinks' => [
             'application/json',
         ],
+        'listShares' => [
+            'application/json',
+        ],
         'listViewExternalLinks' => [
             'application/json',
         ],
@@ -1553,6 +1556,281 @@ class SharingLinksApi
             true, // explode
             false // required
         ) ?? []);
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listShares
+     *
+     * List Shares
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listShares'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function listShares($org_id, string $contentType = self::contentTypes['listShares'][0])
+    {
+        list($response) = $this->listSharesWithHttpInfo($org_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listSharesWithHttpInfo
+     *
+     * List Shares
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listShares'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listSharesWithHttpInfo($org_id, string $contentType = self::contentTypes['listShares'][0])
+    {
+        $request = $this->listSharesRequest($org_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listSharesAsync
+     *
+     * List Shares
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listShares'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listSharesAsync($org_id, string $contentType = self::contentTypes['listShares'][0])
+    {
+        return $this->listSharesAsyncWithHttpInfo($org_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listSharesAsyncWithHttpInfo
+     *
+     * List Shares
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listShares'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listSharesAsyncWithHttpInfo($org_id, string $contentType = self::contentTypes['listShares'][0])
+    {
+        $returnType = 'object';
+        $request = $this->listSharesRequest($org_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listShares'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listShares'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listSharesRequest($org_id, string $contentType = self::contentTypes['listShares'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling listShares'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling SharingLinksApi.listShares, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/shares/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
 
 
         // path params

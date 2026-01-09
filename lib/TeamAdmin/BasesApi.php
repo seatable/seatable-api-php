@@ -76,10 +76,19 @@ class BasesApi
         'clearTeamTrashBin' => [
             'application/json',
         ],
+        'deleteApiToken' => [
+            'application/json',
+        ],
         'deleteBase' => [
             'application/json',
         ],
         'getBase' => [
+            'application/json',
+        ],
+        'listApiTokens' => [
+            'application/json',
+        ],
+        'listApiTokensOfAllBases' => [
             'application/json',
         ],
         'listBaseSharings' => [
@@ -89,6 +98,9 @@ class BasesApi
             'application/json',
         ],
         'listTrashBases' => [
+            'application/json',
+        ],
+        'listUsersBases' => [
             'application/json',
         ],
         'restoreBaseFromTrash' => [
@@ -358,6 +370,324 @@ class BasesApi
             $resourcePath = str_replace(
                 '{' . 'org_id' . '}',
                 ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteApiToken
+     *
+     * Delete API-Token
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function deleteApiToken($org_id, $base_uuid, $app_name, string $contentType = self::contentTypes['deleteApiToken'][0])
+    {
+        list($response) = $this->deleteApiTokenWithHttpInfo($org_id, $base_uuid, $app_name, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteApiTokenWithHttpInfo
+     *
+     * Delete API-Token
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteApiTokenWithHttpInfo($org_id, $base_uuid, $app_name, string $contentType = self::contentTypes['deleteApiToken'][0])
+    {
+        $request = $this->deleteApiTokenRequest($org_id, $base_uuid, $app_name, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteApiTokenAsync
+     *
+     * Delete API-Token
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteApiTokenAsync($org_id, $base_uuid, $app_name, string $contentType = self::contentTypes['deleteApiToken'][0])
+    {
+        return $this->deleteApiTokenAsyncWithHttpInfo($org_id, $base_uuid, $app_name, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteApiTokenAsyncWithHttpInfo
+     *
+     * Delete API-Token
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteApiTokenAsyncWithHttpInfo($org_id, $base_uuid, $app_name, string $contentType = self::contentTypes['deleteApiToken'][0])
+    {
+        $returnType = 'object';
+        $request = $this->deleteApiTokenRequest($org_id, $base_uuid, $app_name, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteApiToken'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $app_name The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteApiToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteApiTokenRequest($org_id, $base_uuid, $app_name, string $contentType = self::contentTypes['deleteApiToken'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling deleteApiToken'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling BasesApi.deleteApiToken, must be bigger than or equal to 1.');
+        }
+        
+        // verify the required parameter 'base_uuid' is set
+        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $base_uuid when calling deleteApiToken'
+            );
+        }
+        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
+            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling BasesApi.deleteApiToken, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
+        }
+        
+        // verify the required parameter 'app_name' is set
+        if ($app_name === null || (is_array($app_name) && count($app_name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $app_name when calling deleteApiToken'
+            );
+        }
+
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/api-tokens/{app_name}/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($base_uuid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'base_uuid' . '}',
+                ObjectSerializer::toPathValue($base_uuid),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($app_name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'app_name' . '}',
+                ObjectSerializer::toPathValue($app_name),
                 $resourcePath
             );
         }
@@ -954,6 +1284,615 @@ class BasesApi
             $resourcePath = str_replace(
                 '{' . 'base_uuid' . '}',
                 ObjectSerializer::toPathValue($base_uuid),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listApiTokens
+     *
+     * List API-Tokens
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function listApiTokens($org_id, $base_uuid, string $contentType = self::contentTypes['listApiTokens'][0])
+    {
+        list($response) = $this->listApiTokensWithHttpInfo($org_id, $base_uuid, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listApiTokensWithHttpInfo
+     *
+     * List API-Tokens
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listApiTokensWithHttpInfo($org_id, $base_uuid, string $contentType = self::contentTypes['listApiTokens'][0])
+    {
+        $request = $this->listApiTokensRequest($org_id, $base_uuid, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listApiTokensAsync
+     *
+     * List API-Tokens
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listApiTokensAsync($org_id, $base_uuid, string $contentType = self::contentTypes['listApiTokens'][0])
+    {
+        return $this->listApiTokensAsyncWithHttpInfo($org_id, $base_uuid, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listApiTokensAsyncWithHttpInfo
+     *
+     * List API-Tokens
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listApiTokensAsyncWithHttpInfo($org_id, $base_uuid, string $contentType = self::contentTypes['listApiTokens'][0])
+    {
+        $returnType = 'object';
+        $request = $this->listApiTokensRequest($org_id, $base_uuid, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listApiTokens'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokens'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listApiTokensRequest($org_id, $base_uuid, string $contentType = self::contentTypes['listApiTokens'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling listApiTokens'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling BasesApi.listApiTokens, must be bigger than or equal to 1.');
+        }
+        
+        // verify the required parameter 'base_uuid' is set
+        if ($base_uuid === null || (is_array($base_uuid) && count($base_uuid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $base_uuid when calling listApiTokens'
+            );
+        }
+        if (!preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
+            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling BasesApi.listApiTokens, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/api-tokens/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($base_uuid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'base_uuid' . '}',
+                ObjectSerializer::toPathValue($base_uuid),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listApiTokensOfAllBases
+     *
+     * List API-Tokens of All Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokensOfAllBases'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function listApiTokensOfAllBases($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listApiTokensOfAllBases'][0])
+    {
+        list($response) = $this->listApiTokensOfAllBasesWithHttpInfo($org_id, $page, $per_page, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listApiTokensOfAllBasesWithHttpInfo
+     *
+     * List API-Tokens of All Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokensOfAllBases'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listApiTokensOfAllBasesWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listApiTokensOfAllBases'][0])
+    {
+        $request = $this->listApiTokensOfAllBasesRequest($org_id, $page, $per_page, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listApiTokensOfAllBasesAsync
+     *
+     * List API-Tokens of All Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokensOfAllBases'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listApiTokensOfAllBasesAsync($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listApiTokensOfAllBases'][0])
+    {
+        return $this->listApiTokensOfAllBasesAsyncWithHttpInfo($org_id, $page, $per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listApiTokensOfAllBasesAsyncWithHttpInfo
+     *
+     * List API-Tokens of All Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokensOfAllBases'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listApiTokensOfAllBasesAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listApiTokensOfAllBases'][0])
+    {
+        $returnType = 'object';
+        $request = $this->listApiTokensOfAllBasesRequest($org_id, $page, $per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listApiTokensOfAllBases'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApiTokensOfAllBases'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listApiTokensOfAllBasesRequest($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listApiTokensOfAllBases'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling listApiTokensOfAllBases'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling BasesApi.listApiTokensOfAllBases, must be bigger than or equal to 1.');
+        }
+        
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling BasesApi.listApiTokensOfAllBases, must be bigger than or equal to 1.');
+        }
+        
+        if ($per_page !== null && $per_page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling BasesApi.listApiTokensOfAllBases, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/api-tokens/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $per_page,
+            'per_page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
                 $resourcePath
             );
         }
@@ -1874,6 +2813,340 @@ class BasesApi
             $resourcePath = str_replace(
                 '{' . 'org_id' . '}',
                 ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listUsersBases
+     *
+     * List User&#39;s Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsersBases'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function listUsersBases($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUsersBases'][0])
+    {
+        list($response) = $this->listUsersBasesWithHttpInfo($org_id, $user_id, $page, $per_page, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listUsersBasesWithHttpInfo
+     *
+     * List User&#39;s Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsersBases'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listUsersBasesWithHttpInfo($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUsersBases'][0])
+    {
+        $request = $this->listUsersBasesRequest($org_id, $user_id, $page, $per_page, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listUsersBasesAsync
+     *
+     * List User&#39;s Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsersBases'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listUsersBasesAsync($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUsersBases'][0])
+    {
+        return $this->listUsersBasesAsyncWithHttpInfo($org_id, $user_id, $page, $per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listUsersBasesAsyncWithHttpInfo
+     *
+     * List User&#39;s Bases
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsersBases'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listUsersBasesAsyncWithHttpInfo($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUsersBases'][0])
+    {
+        $returnType = 'object';
+        $request = $this->listUsersBasesRequest($org_id, $user_id, $page, $per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listUsersBases'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUsersBases'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listUsersBasesRequest($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUsersBases'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling listUsersBases'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling BasesApi.listUsersBases, must be bigger than or equal to 1.');
+        }
+        
+        // verify the required parameter 'user_id' is set
+        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $user_id when calling listUsersBases'
+            );
+        }
+        if (!preg_match("/^[a-f0-9]{32}(@auth.local)$/", $user_id)) {
+            throw new \InvalidArgumentException("invalid value for \"user_id\" when calling BasesApi.listUsersBases, must conform to the pattern /^[a-f0-9]{32}(@auth.local)$/.");
+        }
+        
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling BasesApi.listUsersBases, must be bigger than or equal to 1.');
+        }
+        
+        if ($per_page !== null && $per_page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling BasesApi.listUsersBases, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/users/{user_id}/dtables/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $per_page,
+            'per_page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($user_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'user_id' . '}',
+                ObjectSerializer::toPathValue($user_id),
                 $resourcePath
             );
         }

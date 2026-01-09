@@ -1,6 +1,6 @@
 <?php
 /**
- * ActivitiesLogsApi
+ * StatisticsApi
  * PHP version 8.1
  *
  * @category Class
@@ -42,14 +42,14 @@ use SeaTable\Client\HeaderSelector;
 use SeaTable\Client\ObjectSerializer;
 
 /**
- * ActivitiesLogsApi Class Doc Comment
+ * StatisticsApi Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ActivitiesLogsApi
+class StatisticsApi
 {
     /**
      * @var ClientInterface
@@ -73,25 +73,22 @@ class ActivitiesLogsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'listAutomationLogs' => [
+        'getAdminLogStatisticsByDay' => [
             'application/json',
         ],
-        'listFileAccessLogs' => [
+        'getAutomationLogStatisticsByBase' => [
             'application/json',
         ],
-        'listGroupMemberAuditLogs' => [
+        'getAutomationLogStatisticsByDay' => [
             'application/json',
         ],
-        'listPythonRuns' => [
+        'getLoginLogStatisticsByDay' => [
             'application/json',
         ],
-        'listTeamLogins' => [
+        'getPythonRunStatisticsByBase' => [
             'application/json',
         ],
-        'listTeamOperationLog' => [
-            'application/json',
-        ],
-        'listUserLogins' => [
+        'getPythonRunStatisticsByDay' => [
             'application/json',
         ],
     ];
@@ -143,46 +140,46 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listAutomationLogs
+     * Operation getAdminLogStatisticsByDay
      *
-     * List Automation Logs
+     * Admin Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAutomationLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listAutomationLogs($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function getAdminLogStatisticsByDay($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAdminLogStatisticsByDay'][0])
     {
-        list($response) = $this->listAutomationLogsWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType);
+        list($response) = $this->getAdminLogStatisticsByDayWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType);
         return $response;
     }
 
     /**
-     * Operation listAutomationLogsWithHttpInfo
+     * Operation getAdminLogStatisticsByDayWithHttpInfo
      *
-     * List Automation Logs
+     * Admin Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAutomationLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAutomationLogsWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function getAdminLogStatisticsByDayWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAdminLogStatisticsByDay'][0])
     {
-        $request = $this->listAutomationLogsRequest($org_id, $start, $end, $page, $per_page, $contentType);
+        $request = $this->getAdminLogStatisticsByDayRequest($org_id, $start, $end, $page, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -254,23 +251,23 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listAutomationLogsAsync
+     * Operation getAdminLogStatisticsByDayAsync
      *
-     * List Automation Logs
+     * Admin Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAutomationLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAutomationLogsAsync($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function getAdminLogStatisticsByDayAsync($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAdminLogStatisticsByDay'][0])
     {
-        return $this->listAutomationLogsAsyncWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType)
+        return $this->getAdminLogStatisticsByDayAsyncWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -279,24 +276,24 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listAutomationLogsAsyncWithHttpInfo
+     * Operation getAdminLogStatisticsByDayAsyncWithHttpInfo
      *
-     * List Automation Logs
+     * Admin Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAutomationLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAutomationLogsAsyncWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function getAdminLogStatisticsByDayAsyncWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAdminLogStatisticsByDay'][0])
     {
         $returnType = 'object';
-        $request = $this->listAutomationLogsRequest($org_id, $start, $end, $page, $per_page, $contentType);
+        $request = $this->getAdminLogStatisticsByDayRequest($org_id, $start, $end, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -335,43 +332,43 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Create request for operation 'listAutomationLogs'
+     * Create request for operation 'getAdminLogStatisticsByDay'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAutomationLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAdminLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAutomationLogsRequest($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function getAdminLogStatisticsByDayRequest($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAdminLogStatisticsByDay'][0])
     {
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listAutomationLogs'
+                'Missing the required parameter $org_id when calling getAdminLogStatisticsByDay'
             );
         }
         if ($org_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listAutomationLogs, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling StatisticsApi.getAdminLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
 
 
         if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listAutomationLogs, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling StatisticsApi.getAdminLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
         if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listAutomationLogs, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling StatisticsApi.getAdminLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
 
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/automation-logs/';
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/statistics/admin-logs/by-day/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -484,42 +481,46 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listFileAccessLogs
+     * Operation getAutomationLogStatisticsByBase
      *
-     * List File Access Logs
+     * Automation Logs (by Base)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listFileAccessLogs($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
+    public function getAutomationLogStatisticsByBase($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByBase'][0])
     {
-        list($response) = $this->listFileAccessLogsWithHttpInfo($org_id, $page, $per_page, $contentType);
+        list($response) = $this->getAutomationLogStatisticsByBaseWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType);
         return $response;
     }
 
     /**
-     * Operation listFileAccessLogsWithHttpInfo
+     * Operation getAutomationLogStatisticsByBaseWithHttpInfo
      *
-     * List File Access Logs
+     * Automation Logs (by Base)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByBase'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listFileAccessLogsWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
+    public function getAutomationLogStatisticsByBaseWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByBase'][0])
     {
-        $request = $this->listFileAccessLogsRequest($org_id, $page, $per_page, $contentType);
+        $request = $this->getAutomationLogStatisticsByBaseRequest($org_id, $start, $end, $page, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -591,21 +592,23 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listFileAccessLogsAsync
+     * Operation getAutomationLogStatisticsByBaseAsync
      *
-     * List File Access Logs
+     * Automation Logs (by Base)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listFileAccessLogsAsync($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
+    public function getAutomationLogStatisticsByBaseAsync($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByBase'][0])
     {
-        return $this->listFileAccessLogsAsyncWithHttpInfo($org_id, $page, $per_page, $contentType)
+        return $this->getAutomationLogStatisticsByBaseAsyncWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -614,22 +617,24 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listFileAccessLogsAsyncWithHttpInfo
+     * Operation getAutomationLogStatisticsByBaseAsyncWithHttpInfo
      *
-     * List File Access Logs
+     * Automation Logs (by Base)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listFileAccessLogsAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
+    public function getAutomationLogStatisticsByBaseAsyncWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByBase'][0])
     {
         $returnType = 'object';
-        $request = $this->listFileAccessLogsRequest($org_id, $page, $per_page, $contentType);
+        $request = $this->getAutomationLogStatisticsByBaseRequest($org_id, $start, $end, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -668,45 +673,67 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Create request for operation 'listFileAccessLogs'
+     * Create request for operation 'getAutomationLogStatisticsByBase'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listFileAccessLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByBase'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listFileAccessLogsRequest($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listFileAccessLogs'][0])
+    public function getAutomationLogStatisticsByBaseRequest($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByBase'][0])
     {
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listFileAccessLogs'
+                'Missing the required parameter $org_id when calling getAutomationLogStatisticsByBase'
             );
         }
         if ($org_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listFileAccessLogs, must be bigger than or equal to 1.');
-        }
-        
-        if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listFileAccessLogs, must be bigger than or equal to 1.');
-        }
-        
-        if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listFileAccessLogs, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling StatisticsApi.getAutomationLogStatisticsByBase, must be bigger than or equal to 1.');
         }
         
 
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/file-access-logs/';
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling StatisticsApi.getAutomationLogStatisticsByBase, must be bigger than or equal to 1.');
+        }
+        
+        if ($per_page !== null && $per_page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling StatisticsApi.getAutomationLogStatisticsByBase, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/statistics/automation-logs/by-base/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $start,
+            'start', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $end,
+            'end', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $page,
@@ -795,42 +822,48 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listGroupMemberAuditLogs
+     * Operation getAutomationLogStatisticsByDay
      *
-     * List Group Member Audit Logs
+     * Automation Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupMemberAuditLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listGroupMemberAuditLogs($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroupMemberAuditLogs'][0])
+    public function getAutomationLogStatisticsByDay($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByDay'][0])
     {
-        list($response) = $this->listGroupMemberAuditLogsWithHttpInfo($org_id, $page, $per_page, $contentType);
+        list($response) = $this->getAutomationLogStatisticsByDayWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
         return $response;
     }
 
     /**
-     * Operation listGroupMemberAuditLogsWithHttpInfo
+     * Operation getAutomationLogStatisticsByDayWithHttpInfo
      *
-     * List Group Member Audit Logs
+     * Automation Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupMemberAuditLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listGroupMemberAuditLogsWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroupMemberAuditLogs'][0])
+    public function getAutomationLogStatisticsByDayWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByDay'][0])
     {
-        $request = $this->listGroupMemberAuditLogsRequest($org_id, $page, $per_page, $contentType);
+        $request = $this->getAutomationLogStatisticsByDayRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -902,21 +935,24 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listGroupMemberAuditLogsAsync
+     * Operation getAutomationLogStatisticsByDayAsync
      *
-     * List Group Member Audit Logs
+     * Automation Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupMemberAuditLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listGroupMemberAuditLogsAsync($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroupMemberAuditLogs'][0])
+    public function getAutomationLogStatisticsByDayAsync($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByDay'][0])
     {
-        return $this->listGroupMemberAuditLogsAsyncWithHttpInfo($org_id, $page, $per_page, $contentType)
+        return $this->getAutomationLogStatisticsByDayAsyncWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -925,22 +961,25 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listGroupMemberAuditLogsAsyncWithHttpInfo
+     * Operation getAutomationLogStatisticsByDayAsyncWithHttpInfo
      *
-     * List Group Member Audit Logs
+     * Automation Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupMemberAuditLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listGroupMemberAuditLogsAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroupMemberAuditLogs'][0])
+    public function getAutomationLogStatisticsByDayAsyncWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByDay'][0])
     {
         $returnType = 'object';
-        $request = $this->listGroupMemberAuditLogsRequest($org_id, $page, $per_page, $contentType);
+        $request = $this->getAutomationLogStatisticsByDayRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -979,356 +1018,48 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Create request for operation 'listGroupMemberAuditLogs'
+     * Create request for operation 'getAutomationLogStatisticsByDay'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupMemberAuditLogs'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAutomationLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listGroupMemberAuditLogsRequest($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroupMemberAuditLogs'][0])
+    public function getAutomationLogStatisticsByDayRequest($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getAutomationLogStatisticsByDay'][0])
     {
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listGroupMemberAuditLogs'
+                'Missing the required parameter $org_id when calling getAutomationLogStatisticsByDay'
             );
         }
         if ($org_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listGroupMemberAuditLogs, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling StatisticsApi.getAutomationLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
-        if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listGroupMemberAuditLogs, must be bigger than or equal to 1.');
-        }
-        
-        if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listGroupMemberAuditLogs, must be bigger than or equal to 1.');
-        }
-        
-
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/group-member-audit/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $page,
-            'page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $per_page,
-            'per_page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-
-        // path params
-        if ($org_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'org_id' . '}',
-                ObjectSerializer::toPathValue($org_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation listPythonRuns
-     *
-     * List Python Runs
-     *
-     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPythonRuns'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return object
-     */
-    public function listPythonRuns($dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
-    {
-        list($response) = $this->listPythonRunsWithHttpInfo($dtable_uuid, $start, $end, $page, $per_page, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation listPythonRunsWithHttpInfo
-     *
-     * List Python Runs
-     *
-     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPythonRuns'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function listPythonRunsWithHttpInfo($dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
-    {
-        $request = $this->listPythonRunsRequest($dtable_uuid, $start, $end, $page, $per_page, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'object',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                'object',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listPythonRunsAsync
-     *
-     * List Python Runs
-     *
-     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPythonRuns'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listPythonRunsAsync($dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
-    {
-        return $this->listPythonRunsAsyncWithHttpInfo($dtable_uuid, $start, $end, $page, $per_page, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listPythonRunsAsyncWithHttpInfo
-     *
-     * List Python Runs
-     *
-     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPythonRuns'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listPythonRunsAsyncWithHttpInfo($dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
-    {
-        $returnType = 'object';
-        $request = $this->listPythonRunsRequest($dtable_uuid, $start, $end, $page, $per_page, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listPythonRuns'
-     *
-     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPythonRuns'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function listPythonRunsRequest($dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
-    {
-
         if ($dtable_uuid !== null && !preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $dtable_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"dtable_uuid\" when calling ActivitiesLogsApi.listPythonRuns, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
+            throw new \InvalidArgumentException("invalid value for \"dtable_uuid\" when calling StatisticsApi.getAutomationLogStatisticsByDay, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
         }
         
 
 
         if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listPythonRuns, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling StatisticsApi.getAutomationLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
         if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listPythonRuns, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling StatisticsApi.getAutomationLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
 
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/python-runs/';
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/statistics/automation-logs/by-day/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1382,6 +1113,14 @@ class ActivitiesLogsApi
         ) ?? []);
 
 
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1442,48 +1181,46 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listTeamLogins
+     * Operation getLoginLogStatisticsByDay
      *
-     * List Team Logins
+     * Login Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $login_status Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLoginLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listTeamLogins($org_id, $page = null, $per_page = null, $login_status = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamLogins'][0])
+    public function getLoginLogStatisticsByDay($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getLoginLogStatisticsByDay'][0])
     {
-        list($response) = $this->listTeamLoginsWithHttpInfo($org_id, $page, $per_page, $login_status, $start, $end, $contentType);
+        list($response) = $this->getLoginLogStatisticsByDayWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType);
         return $response;
     }
 
     /**
-     * Operation listTeamLoginsWithHttpInfo
+     * Operation getLoginLogStatisticsByDayWithHttpInfo
      *
-     * List Team Logins
+     * Login Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $login_status Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLoginLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listTeamLoginsWithHttpInfo($org_id, $page = null, $per_page = null, $login_status = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamLogins'][0])
+    public function getLoginLogStatisticsByDayWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getLoginLogStatisticsByDay'][0])
     {
-        $request = $this->listTeamLoginsRequest($org_id, $page, $per_page, $login_status, $start, $end, $contentType);
+        $request = $this->getLoginLogStatisticsByDayRequest($org_id, $start, $end, $page, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1555,24 +1292,23 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listTeamLoginsAsync
+     * Operation getLoginLogStatisticsByDayAsync
      *
-     * List Team Logins
+     * Login Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $login_status Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLoginLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTeamLoginsAsync($org_id, $page = null, $per_page = null, $login_status = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamLogins'][0])
+    public function getLoginLogStatisticsByDayAsync($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getLoginLogStatisticsByDay'][0])
     {
-        return $this->listTeamLoginsAsyncWithHttpInfo($org_id, $page, $per_page, $login_status, $start, $end, $contentType)
+        return $this->getLoginLogStatisticsByDayAsyncWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1581,25 +1317,24 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Operation listTeamLoginsAsyncWithHttpInfo
+     * Operation getLoginLogStatisticsByDayAsyncWithHttpInfo
      *
-     * List Team Logins
+     * Login Logs (by Day)
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $login_status Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLoginLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTeamLoginsAsyncWithHttpInfo($org_id, $page = null, $per_page = null, $login_status = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamLogins'][0])
+    public function getLoginLogStatisticsByDayAsyncWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getLoginLogStatisticsByDay'][0])
     {
         $returnType = 'object';
-        $request = $this->listTeamLoginsRequest($org_id, $page, $per_page, $login_status, $start, $end, $contentType);
+        $request = $this->getLoginLogStatisticsByDayRequest($org_id, $start, $end, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1638,51 +1373,67 @@ class ActivitiesLogsApi
     }
 
     /**
-     * Create request for operation 'listTeamLogins'
+     * Create request for operation 'getLoginLogStatisticsByDay'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $login_status Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamLogins'] to see the possible values for this operation
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getLoginLogStatisticsByDay'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listTeamLoginsRequest($org_id, $page = null, $per_page = null, $login_status = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamLogins'][0])
+    public function getLoginLogStatisticsByDayRequest($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getLoginLogStatisticsByDay'][0])
     {
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listTeamLogins'
+                'Missing the required parameter $org_id when calling getLoginLogStatisticsByDay'
             );
         }
         if ($org_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listTeamLogins, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling StatisticsApi.getLoginLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
+
+
         if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listTeamLogins, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling StatisticsApi.getLoginLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
         if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listTeamLogins, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling StatisticsApi.getLoginLogStatisticsByDay, must be bigger than or equal to 1.');
         }
         
 
-
-
-
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/login-logs/';
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/statistics/login-logs/by-day/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $start,
+            'start', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $end,
+            'end', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $page,
@@ -1701,10 +1452,665 @@ class ActivitiesLogsApi
             true, // explode
             false // required
         ) ?? []);
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByBase
+     *
+     * Python Runs (by Base)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByBase'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function getPythonRunStatisticsByBase($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByBase'][0])
+    {
+        list($response) = $this->getPythonRunStatisticsByBaseWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByBaseWithHttpInfo
+     *
+     * Python Runs (by Base)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByBase'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPythonRunStatisticsByBaseWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByBase'][0])
+    {
+        $request = $this->getPythonRunStatisticsByBaseRequest($org_id, $start, $end, $page, $per_page, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByBaseAsync
+     *
+     * Python Runs (by Base)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByBase'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPythonRunStatisticsByBaseAsync($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByBase'][0])
+    {
+        return $this->getPythonRunStatisticsByBaseAsyncWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByBaseAsyncWithHttpInfo
+     *
+     * Python Runs (by Base)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByBase'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPythonRunStatisticsByBaseAsyncWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByBase'][0])
+    {
+        $returnType = 'object';
+        $request = $this->getPythonRunStatisticsByBaseRequest($org_id, $start, $end, $page, $per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPythonRunStatisticsByBase'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByBase'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPythonRunStatisticsByBaseRequest($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByBase'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling getPythonRunStatisticsByBase'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling StatisticsApi.getPythonRunStatisticsByBase, must be bigger than or equal to 1.');
+        }
+        
+
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling StatisticsApi.getPythonRunStatisticsByBase, must be bigger than or equal to 1.');
+        }
+        
+        if ($per_page !== null && $per_page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling StatisticsApi.getPythonRunStatisticsByBase, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/statistics/python-runs/by-base/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $login_status,
-            'login_status', // param base name
+            $start,
+            'start', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $end,
+            'end', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $per_page,
+            'per_page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($org_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'org_id' . '}',
+                ObjectSerializer::toPathValue($org_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByDay
+     *
+     * Python Runs (by Day)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByDay'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return object
+     */
+    public function getPythonRunStatisticsByDay($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByDay'][0])
+    {
+        list($response) = $this->getPythonRunStatisticsByDayWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByDayWithHttpInfo
+     *
+     * Python Runs (by Day)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByDay'] to see the possible values for this operation
+     *
+     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPythonRunStatisticsByDayWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByDay'][0])
+    {
+        $request = $this->getPythonRunStatisticsByDayRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByDayAsync
+     *
+     * Python Runs (by Day)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByDay'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPythonRunStatisticsByDayAsync($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByDay'][0])
+    {
+        return $this->getPythonRunStatisticsByDayAsyncWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPythonRunStatisticsByDayAsyncWithHttpInfo
+     *
+     * Python Runs (by Day)
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByDay'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPythonRunStatisticsByDayAsyncWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByDay'][0])
+    {
+        $returnType = 'object';
+        $request = $this->getPythonRunStatisticsByDayRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPythonRunStatisticsByDay'
+     *
+     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
+     * @param  \DateTime|null $start Start date in ISO format. (optional)
+     * @param  \DateTime|null $end End date in ISO format. (optional)
+     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
+     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPythonRunStatisticsByDay'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPythonRunStatisticsByDayRequest($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['getPythonRunStatisticsByDay'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling getPythonRunStatisticsByDay'
+            );
+        }
+        if ($org_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$org_id" when calling StatisticsApi.getPythonRunStatisticsByDay, must be bigger than or equal to 1.');
+        }
+        
+        if ($dtable_uuid !== null && !preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $dtable_uuid)) {
+            throw new \InvalidArgumentException("invalid value for \"dtable_uuid\" when calling StatisticsApi.getPythonRunStatisticsByDay, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
+        }
+        
+
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling StatisticsApi.getPythonRunStatisticsByDay, must be bigger than or equal to 1.');
+        }
+        
+        if ($per_page !== null && $per_page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$per_page" when calling StatisticsApi.getPythonRunStatisticsByDay, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/api/v2.1/org/{org_id}/admin/statistics/python-runs/by-day/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $dtable_uuid,
+            'dtable_uuid', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -1728,670 +2134,6 @@ class ActivitiesLogsApi
             true, // explode
             false // required
         ) ?? []);
-
-
-        // path params
-        if ($org_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'org_id' . '}',
-                ObjectSerializer::toPathValue($org_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation listTeamOperationLog
-     *
-     * List Team Operations
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $operation_group Filter by a specific operation group. By default, all operations are returned. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return object
-     */
-    public function listTeamOperationLog($org_id, $page = null, $per_page = null, $operation_group = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
-    {
-        list($response) = $this->listTeamOperationLogWithHttpInfo($org_id, $page, $per_page, $operation_group, $start, $end, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation listTeamOperationLogWithHttpInfo
-     *
-     * List Team Operations
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $operation_group Filter by a specific operation group. By default, all operations are returned. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function listTeamOperationLogWithHttpInfo($org_id, $page = null, $per_page = null, $operation_group = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
-    {
-        $request = $this->listTeamOperationLogRequest($org_id, $page, $per_page, $operation_group, $start, $end, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'object',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                'object',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listTeamOperationLogAsync
-     *
-     * List Team Operations
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $operation_group Filter by a specific operation group. By default, all operations are returned. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listTeamOperationLogAsync($org_id, $page = null, $per_page = null, $operation_group = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
-    {
-        return $this->listTeamOperationLogAsyncWithHttpInfo($org_id, $page, $per_page, $operation_group, $start, $end, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listTeamOperationLogAsyncWithHttpInfo
-     *
-     * List Team Operations
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $operation_group Filter by a specific operation group. By default, all operations are returned. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listTeamOperationLogAsyncWithHttpInfo($org_id, $page = null, $per_page = null, $operation_group = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
-    {
-        $returnType = 'object';
-        $request = $this->listTeamOperationLogRequest($org_id, $page, $per_page, $operation_group, $start, $end, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listTeamOperationLog'
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string|null $operation_group Filter by a specific operation group. By default, all operations are returned. (optional)
-     * @param  \DateTime|null $start Start date in ISO format. (optional)
-     * @param  \DateTime|null $end End date in ISO format. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTeamOperationLog'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function listTeamOperationLogRequest($org_id, $page = null, $per_page = null, $operation_group = null, $start = null, $end = null, string $contentType = self::contentTypes['listTeamOperationLog'][0])
-    {
-
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listTeamOperationLog'
-            );
-        }
-        if ($org_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listTeamOperationLog, must be bigger than or equal to 1.');
-        }
-        
-        if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listTeamOperationLog, must be bigger than or equal to 1.');
-        }
-        
-        if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listTeamOperationLog, must be bigger than or equal to 1.');
-        }
-        
-
-
-
-
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/admin-logs/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $page,
-            'page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $per_page,
-            'per_page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $operation_group,
-            'operation_group', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $start,
-            'start', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $end,
-            'end', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-
-        // path params
-        if ($org_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'org_id' . '}',
-                ObjectSerializer::toPathValue($org_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation listUserLogins
-     *
-     * List User Logins
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return object
-     */
-    public function listUserLogins($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
-    {
-        list($response) = $this->listUserLoginsWithHttpInfo($org_id, $user_id, $page, $per_page, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation listUserLoginsWithHttpInfo
-     *
-     * List User Logins
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
-     *
-     * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function listUserLoginsWithHttpInfo($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
-    {
-        $request = $this->listUserLoginsRequest($org_id, $user_id, $page, $per_page, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    return $this->handleResponseWithDataType(
-                        'object',
-                        $request,
-                        $response,
-                    );
-            }
-
-            
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return $this->handleResponseWithDataType(
-                'object',
-                $request,
-                $response,
-            );
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    throw $e;
-            }
-        
-
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation listUserLoginsAsync
-     *
-     * List User Logins
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listUserLoginsAsync($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
-    {
-        return $this->listUserLoginsAsyncWithHttpInfo($org_id, $user_id, $page, $per_page, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation listUserLoginsAsyncWithHttpInfo
-     *
-     * List User Logins
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function listUserLoginsAsyncWithHttpInfo($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
-    {
-        $returnType = 'object';
-        $request = $this->listUserLoginsRequest($org_id, $user_id, $page, $per_page, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'listUserLogins'
-     *
-     * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $user_id The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. (required)
-     * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
-     * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listUserLogins'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function listUserLoginsRequest($org_id, $user_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listUserLogins'][0])
-    {
-
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listUserLogins'
-            );
-        }
-        if ($org_id < 1) {
-            throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listUserLogins, must be bigger than or equal to 1.');
-        }
-        
-        // verify the required parameter 'user_id' is set
-        if ($user_id === null || (is_array($user_id) && count($user_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $user_id when calling listUserLogins'
-            );
-        }
-        if (!preg_match("/^[a-f0-9]{32}(@auth.local)$/", $user_id)) {
-            throw new \InvalidArgumentException("invalid value for \"user_id\" when calling ActivitiesLogsApi.listUserLogins, must conform to the pattern /^[a-f0-9]{32}(@auth.local)$/.");
-        }
-        
-        if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ActivitiesLogsApi.listUserLogins, must be bigger than or equal to 1.');
-        }
-        
-        if ($per_page !== null && $per_page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$per_page" when calling ActivitiesLogsApi.listUserLogins, must be bigger than or equal to 1.');
-        }
-        
-
-        $resourcePath = '/api/v2.1/org/{org_id}/admin/login-logs/{user_id}/';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $page,
@@ -2417,14 +2159,6 @@ class ActivitiesLogsApi
             $resourcePath = str_replace(
                 '{' . 'org_id' . '}',
                 ObjectSerializer::toPathValue($org_id),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($user_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'user_id' . '}',
-                ObjectSerializer::toPathValue($user_id),
                 $resourcePath
             );
         }
