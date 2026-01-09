@@ -8,6 +8,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**deleteUser()**](UsersApi.md#deleteUser) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Delete User |
 | [**disableTwoFactor()**](UsersApi.md#disableTwoFactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA |
 | [**enforceTwofactor()**](UsersApi.md#enforceTwofactor) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA |
+| [**getUser()**](UsersApi.md#getUser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Get User |
 | [**listTeamUsers()**](UsersApi.md#listTeamUsers) | **GET** /api/v2.1/org/{org_id}/admin/users/ | List Users (Team) |
 | [**resetUserPassword()**](UsersApi.md#resetUserPassword) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/set-password/ | Reset User Password |
 | [**updateUser()**](UsersApi.md#updateUser) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Update User |
@@ -129,7 +130,7 @@ disableTwoFactor($org_id, $user_id): object
 
 Disable 2FA
 
-If a user in your team has lost their phone or deleted the authenticator App by accident, they cannot log in to SeaTable anymore if 2FA is enabled for them. In this case, you as the team administrator can disable 2FA for them. Again, this is to be distinguished from the request [Enforce 2FA for A User in Team](/reference/enforcetwofactor-1) when you use `force_2fa = 0`, which only cancels the enforcement of 2FA but doesn't necessarily disable it for them.
+If a user in your team has lost their phone or deleted the authenticator App by accident, they cannot log in to SeaTable anymore if 2FA is enabled for them. In this case, you as the team administrator can disable 2FA for them. Again, this is to be distinguished from the request [Enforce 2FA for A User in Team](/reference/enforcetwofactor-1) when you use `force_2fa = false`, which only cancels the enforcement of 2FA but doesn't necessarily disable it for them.
 
 ### Example
 
@@ -180,7 +181,7 @@ enforceTwofactor($org_id, $user_id, $enforce_twofactor_request): object
 
 Enforce 2FA
 
-As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `1` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `0` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
+As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `true` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `false` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
 
 ### Example
 
@@ -213,6 +214,57 @@ try {
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 | **enforce_twofactor_request** | [**\SeaTable\Client\TeamAdmin\EnforceTwofactorRequest**](../Model/EnforceTwofactorRequest.md)|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `getUser()`
+
+```php
+getUser($org_id, $user_id): object
+```
+
+Get User
+
+Get a user's details.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+
+try {
+    $result = $apiInstance->getUser($org_id, $user_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UsersApi->getUser: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 
 ### Return type
 

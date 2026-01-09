@@ -222,7 +222,7 @@ AccountTokenAuth
 ## `getUser()`
 
 ```php
-getUser($user_id)
+getUser($user_id): object
 ```
 
 Get User
@@ -242,7 +242,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
 $user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
-    $apiInstance->getUser($user_id);
+    $result = $apiInstance->getUser($user_id);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling UsersApi->getUser: ', $e->getMessage(), PHP_EOL;
 }
@@ -256,7 +257,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

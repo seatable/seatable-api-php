@@ -141,7 +141,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client()
 );
-$external_link_token = fleischkaesebroetchen; // string
+$external_link_token = f84903f9aa454a2481f3; // string
 
 try {
     $apiInstance->exportBaseFromExternalLink($external_link_token);
@@ -493,6 +493,8 @@ updateFromFile($workspace_id, $file, $dtable_uuid, $table_name, $selected_column
 
 Update from xlsx or csv
 
+This API call allows you to update a SeaTable database table by uploading an Excel (xlsx) or CSV file. The uploaded file contains rows with data that should be either matched against existing rows in the table for updates or inserted as new rows if no match is found. Matching is performed based on the columns specified in the `selected_columns` parameter. For each row in the uploaded file, the system checks whether there are existing rows where the values in these selected columns match exactly. If a match is found, the existing row is updated with the new data from the file. If no match exists, the row is added as a new entry.  > 📘 Example of the `selected_columns` parameter > > - If one column is specified (e.g., `Name`), the update process finds rows where the value in that column matches the corresponding value in the file. Those rows will be updated; unmatched rows result in new rows being created. > - If multiple columns are specified (e.g., `Name,Age`), all these columns must match exactly for a row to be considered a match and updated. > - Rows not matching on all selected columns are treated as new and will be added to the table.
+
 ### Example
 
 ```php
@@ -509,7 +511,7 @@ $workspace_id = 127; // int | id of your workspace.
 $file = '/path/to/file.txt'; // \SplFileObject
 $dtable_uuid = 'dtable_uuid_example'; // string | The UUID of the base.
 $table_name = 'table_name_example'; // string | The name of the table.
-$selected_columns = 'selected_columns_example'; // string | Columns for matching chosen when updating. Use comma (,) to separate column names. Required.
+$selected_columns = 'selected_columns_example'; // string | A list of column names used to determine which rows in the table should be updated or added as new. Separate multiple column names with commas (,).
 
 try {
     $result = $apiInstance->updateFromFile($workspace_id, $file, $dtable_uuid, $table_name, $selected_columns);
@@ -524,10 +526,10 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
-| **file** | **\SplFileObject****\SplFileObject**|  | [optional] |
-| **dtable_uuid** | **string**| The UUID of the base. | [optional] |
-| **table_name** | **string**| The name of the table. | [optional] |
-| **selected_columns** | **string**| Columns for matching chosen when updating. Use comma (,) to separate column names. Required. | [optional] |
+| **file** | **\SplFileObject****\SplFileObject**|  | |
+| **dtable_uuid** | **string**| The UUID of the base. | |
+| **table_name** | **string**| The name of the table. | |
+| **selected_columns** | **string**| A list of column names used to determine which rows in the table should be updated or added as new. Separate multiple column names with commas (,). | |
 
 ### Return type
 

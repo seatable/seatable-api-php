@@ -10,11 +10,13 @@ rm -r ./lib/*
 rm -r ./test/*
 rm -r ./docs/*
 
+LOG_LEVEL="warn"
 TAG="v7.15.0"
 
 # generate sysadmin
 docker run --rm \
  --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
  -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/system_admin_account_operations.yaml \
  -g php \
@@ -28,6 +30,7 @@ mv ./README.md ./README_SysAdmin.md
 # teamadmin
 docker run --rm \
  --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
  -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/team_admin_account_operations.yaml \
  -g php \
@@ -41,6 +44,7 @@ mv ./README.md ./README_TeamAmin.md
 # user
 docker run --rm \
  --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
  -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/user_account_operations.yaml \
  -g php \
@@ -54,6 +58,7 @@ mv ./README.md ./README_User.md
 # base
 docker run --rm \
  --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
  -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/base_operations.yaml \
  -g php \
@@ -67,6 +72,7 @@ mv ./README.md ./README_Base.md
 # file
 docker run --rm \
  --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
  -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/file_operations.yaml \
  -g php \
@@ -77,9 +83,24 @@ mkdir ./docs/File
 mv ./docs/{Api,Model} ./docs/File
 mv ./README.md ./README_File.md
 
+# python-scheduler
+docker run --rm \
+ --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
+ -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
+ -i /local/openapi_input/python-scheduler.yaml \
+ -g php \
+ -o /local \
+ -c /local/generator/config/config_python-scheduler.json \
+ -t /local/generator/templates/php/
+mkdir ./docs/PythonScheduler
+mv ./docs/{Api,Model} ./docs/PythonScheduler
+mv ./README.md ./README_PythonScheduler.md
+
 # auth
 docker run --rm \
  --user $(id -u):$(id -g) \
+ --env JAVA_OPTS="-Dlog.level=${LOG_LEVEL}" \
  -v ${PWD}:/local openapitools/openapi-generator-cli:$TAG generate \
  -i /local/openapi_input/authentication.yaml \
  -g php \

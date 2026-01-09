@@ -154,7 +154,7 @@ AccountTokenAuth
 ## `updateTeamSettings()`
 
 ```php
-updateTeamSettings($enable_force_2fa, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name): object
+updateTeamSettings($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name): object
 ```
 
 Update Team Settings
@@ -174,12 +174,13 @@ $apiInstance = new SeaTable\Client\TeamAdmin\InfoSettingsApi(
     $config
 );
 $enable_force_2fa = True; // bool | if the 2-factor-authentication is forced (`true` or `false`).
+$enable_force_sso_login = True; // bool | Whether login via SSO is enforced for all team members (`true` or `false`).
 $enable_new_user_email = True; // bool | if newly added users will get a system email (`true` or `false`).
 $enable_external_user_access_invite_link = True; // bool | if external users can access bases via invite links (`true` or `false`).
 $enable_member_modify_name = True; // bool | if members are allowed to change their names (`true` or `false`).
 
 try {
-    $result = $apiInstance->updateTeamSettings($enable_force_2fa, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name);
+    $result = $apiInstance->updateTeamSettings($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling InfoSettingsApi->updateTeamSettings: ', $e->getMessage(), PHP_EOL;
@@ -191,6 +192,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **enable_force_2fa** | **bool**| if the 2-factor-authentication is forced (&#x60;true&#x60; or &#x60;false&#x60;). | [optional] |
+| **enable_force_sso_login** | **bool**| Whether login via SSO is enforced for all team members (&#x60;true&#x60; or &#x60;false&#x60;). | [optional] |
 | **enable_new_user_email** | **bool**| if newly added users will get a system email (&#x60;true&#x60; or &#x60;false&#x60;). | [optional] |
 | **enable_external_user_access_invite_link** | **bool**| if external users can access bases via invite links (&#x60;true&#x60; or &#x60;false&#x60;). | [optional] |
 | **enable_member_modify_name** | **bool**| if members are allowed to change their names (&#x60;true&#x60; or &#x60;false&#x60;). | [optional] |

@@ -1,4 +1,4 @@
-# # SendToastNotificationRequestDetial
+# # SendToastNotificationRequestDetail
 
 ## Properties
 

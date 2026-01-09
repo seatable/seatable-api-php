@@ -5,15 +5,17 @@
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActivitiesLogsApi* | [**listFileAccessLogs**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listfileaccesslogs) | **GET** /api/v2.1/org/{org_id}/admin/file-access-logs/ | List File Access Logs
+*ActivitiesLogsApi* | [**listGroupMemberAuditLogs**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listgroupmemberauditlogs) | **GET** /api/v2.1/org/{org_id}/admin/group-member-audit/ | List Group Member Audit Logs
 *ActivitiesLogsApi* | [**listTeamLogins**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listteamlogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/ | List Team Logins
 *ActivitiesLogsApi* | [**listTeamOperationLog**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listteamoperationlog) | **GET** /api/v2.1/org/{org_id}/admin/admin-logs/ | List Team Operations
 *ActivitiesLogsApi* | [**listUserLogins**](docs/TeamAdmin/Api/ActivitiesLogsApi.md#listuserlogins) | **GET** /api/v2.1/org/{org_id}/admin/login-logs/{user_id}/ | List User Logins
 *BasesApi* | [**clearTeamTrashBin**](docs/TeamAdmin/Api/BasesApi.md#clearteamtrashbin) | **DELETE** /api/v2.1/org/{org_id}/admin/trash-dtables/ | Clear Team Trash Bin
-*BasesApi* | [**deleteBase**](docs/TeamAdmin/Api/BasesApi.md#deletebase) | **DELETE** /api/v2.1/org/{org_id}/admin/dtables/{base_id}/ | Delete Base
+*BasesApi* | [**deleteBase**](docs/TeamAdmin/Api/BasesApi.md#deletebase) | **DELETE** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/ | Delete Base
+*BasesApi* | [**getBase**](docs/TeamAdmin/Api/BasesApi.md#getbase) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/ | Get Base
 *BasesApi* | [**listBaseSharings**](docs/TeamAdmin/Api/BasesApi.md#listbasesharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/ | List Base Sharings
 *BasesApi* | [**listBases**](docs/TeamAdmin/Api/BasesApi.md#listbases) | **GET** /api/v2.1/org/{org_id}/admin/dtables/ | List Bases (Team)
 *BasesApi* | [**listTrashBases**](docs/TeamAdmin/Api/BasesApi.md#listtrashbases) | **GET** /api/v2.1/org/{org_id}/admin/trash-dtables/ | List Trash Bases
-*BasesApi* | [**restoreBaseFromTrash**](docs/TeamAdmin/Api/BasesApi.md#restorebasefromtrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_id}/ | Restore Base from Trash
+*BasesApi* | [**restoreBaseFromTrash**](docs/TeamAdmin/Api/BasesApi.md#restorebasefromtrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_uuid}/ | Restore Base from Trash
 *BasesApi* | [**searchBase**](docs/TeamAdmin/Api/BasesApi.md#searchbase) | **GET** /api/v2.1/org/{org_id}/admin/search-dtables/ | Search Base
 *CustomizingApi* | [**deleteTeamLogo**](docs/TeamAdmin/Api/CustomizingApi.md#deleteteamlogo) | **DELETE** /api/v2.1/org/{org_id}/admin/org-logo/ | Delete Team Logo
 *CustomizingApi* | [**getTeamLogo**](docs/TeamAdmin/Api/CustomizingApi.md#getteamlogo) | **GET** /api/v2.1/org/{org_id}/admin/org-logo/ | Get Team Logo
@@ -33,6 +35,7 @@ Class | Method | HTTP request | Description
 *InfoSettingsApi* | [**getTeamSettings**](docs/TeamAdmin/Api/InfoSettingsApi.md#getteamsettings) | **GET** /api/v2.1/org/admin/settings/ | Get Team Settings
 *InfoSettingsApi* | [**updateTeam**](docs/TeamAdmin/Api/InfoSettingsApi.md#updateteam) | **PUT** /api/v2.1/org/admin/info/ | Update Team
 *InfoSettingsApi* | [**updateTeamSettings**](docs/TeamAdmin/Api/InfoSettingsApi.md#updateteamsettings) | **PUT** /api/v2.1/org/admin/settings/ | Update Team Settings
+*SAMLApi* | [**deleteSamlConfig**](docs/TeamAdmin/Api/SAMLApi.md#deletesamlconfig) | **DELETE** /api/v2.1/org/{org_id}/admin/saml-config/ | Delete SAML Config
 *SAMLApi* | [**getSamlConfig**](docs/TeamAdmin/Api/SAMLApi.md#getsamlconfig) | **GET** /api/v2.1/org/{org_id}/admin/saml-config/ | Get SAML Config
 *SAMLApi* | [**updateSamlConfig**](docs/TeamAdmin/Api/SAMLApi.md#updatesamlconfig) | **PUT** /api/v2.1/org/{org_id}/admin/saml-config/ | Update SAML Config
 *SAMLApi* | [**verifySamlDomain**](docs/TeamAdmin/Api/SAMLApi.md#verifysamldomain) | **PUT** /api/v2.1/org/{org_id}/admin/verify-domain/ | Verify SAML domain
@@ -47,6 +50,7 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**deleteUser**](docs/TeamAdmin/Api/UsersApi.md#deleteuser) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Delete User
 *UsersApi* | [**disableTwoFactor**](docs/TeamAdmin/Api/UsersApi.md#disabletwofactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA
 *UsersApi* | [**enforceTwofactor**](docs/TeamAdmin/Api/UsersApi.md#enforcetwofactor) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA
+*UsersApi* | [**getUser**](docs/TeamAdmin/Api/UsersApi.md#getuser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Get User
 *UsersApi* | [**listTeamUsers**](docs/TeamAdmin/Api/UsersApi.md#listteamusers) | **GET** /api/v2.1/org/{org_id}/admin/users/ | List Users (Team)
 *UsersApi* | [**resetUserPassword**](docs/TeamAdmin/Api/UsersApi.md#resetuserpassword) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/set-password/ | Reset User Password
 *UsersApi* | [**updateUser**](docs/TeamAdmin/Api/UsersApi.md#updateuser) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Update User
@@ -56,5 +60,5 @@ Class | Method | HTTP request | Description
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `5.3`
+- API version: `6.0`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

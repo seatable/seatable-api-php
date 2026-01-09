@@ -4,5 +4,5 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**is_admin** | **string** |  |
+**is_admin** | **bool** |  |
 

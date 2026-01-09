@@ -4,9 +4,59 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**deleteSamlConfig()**](SAMLApi.md#deleteSamlConfig) | **DELETE** /api/v2.1/org/{org_id}/admin/saml-config/ | Delete SAML Config |
 | [**getSamlConfig()**](SAMLApi.md#getSamlConfig) | **GET** /api/v2.1/org/{org_id}/admin/saml-config/ | Get SAML Config |
 | [**updateSamlConfig()**](SAMLApi.md#updateSamlConfig) | **PUT** /api/v2.1/org/{org_id}/admin/saml-config/ | Update SAML Config |
 | [**verifySamlDomain()**](SAMLApi.md#verifySamlDomain) | **PUT** /api/v2.1/org/{org_id}/admin/verify-domain/ | Verify SAML domain |
+
+
+## `deleteSamlConfig()`
+
+```php
+deleteSamlConfig($org_id): object
+```
+
+Delete SAML Config
+
+Delete the team's SAML (Single Sign-On) configuration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\SAMLApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+
+try {
+    $result = $apiInstance->deleteSamlConfig($org_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SAMLApi->deleteSamlConfig: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
 
 
 ## `getSamlConfig()`

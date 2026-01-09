@@ -425,7 +425,7 @@ AccountTokenAuth
 ## `syncCommonDataset()`
 
 ```php
-syncCommonDataset($dataset_id, $dst_dtable_uuid, $is_sync, $dst_table_id, $dst_view_id)
+syncCommonDataset($dataset_id, $dst_dtable_uuid, $is_sync, $dst_table_id, $dst_view_id): object
 ```
 
 Sync Common Dataset
@@ -451,7 +451,8 @@ $dst_table_id = 'dst_table_id_example'; // string
 $dst_view_id = 'dst_view_id_example'; // string
 
 try {
-    $apiInstance->syncCommonDataset($dataset_id, $dst_dtable_uuid, $is_sync, $dst_table_id, $dst_view_id);
+    $result = $apiInstance->syncCommonDataset($dataset_id, $dst_dtable_uuid, $is_sync, $dst_table_id, $dst_view_id);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling CommonDatasetApi->syncCommonDataset: ', $e->getMessage(), PHP_EOL;
 }
@@ -469,7 +470,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

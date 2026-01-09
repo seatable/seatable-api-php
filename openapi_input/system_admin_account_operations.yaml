@@ -3,7 +3,7 @@ info:
   title: "Account Operations: System admin"
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "5.3"
+  version: "6.0"
 servers:
   - url: "https://{server}"
     variables:
@@ -19,6 +19,42 @@ x-readme:
 # why sometimes base_uuid, sometimes base_id?
 # the auth.local has many different descriptions: owner, user_id, username or email. Keeping to the same description would be great.
 # is there a possibility to get "internal-links"?
+
+tags:
+  - name: Users
+    description: Manage users
+  - name: Bases
+    description: Manage bases
+  - name: Groups
+    description: Manage groups
+  - name: Teams
+    description: Manage teams/organizations
+  - name: Export
+    description: Export bases
+  - name: Common Dataset
+    description: Manage common datasets
+  - name: Departments
+    description: Manage departments
+  - name: Sharing Links
+    description: Manage sharing links
+  - name: Forms
+    description: Manage forms
+  - name: Automations
+    description: Manage automations
+  - name: Notifications
+    description: Manage notifications
+  - name: Logs
+    description: Retrieve logs
+  - name: Plugins
+    description: Manage plugins
+  - name: Statistics
+    description: Retrieve statistics
+  - name: Maintenance
+    description: Execute maintenance operations
+  - name: System Notifications
+    description: Manage notifications
+  - name: System Info & Customizing
+    description: Retrieve system info and customize SeaTable
 
 components:
   securitySchemes:
@@ -709,10 +745,29 @@ paths:
       parameters:
         - $ref: "#/components/parameters/user_id"
       responses:
-        "403":
-          description: Successful response
+        "200":
+          description: OK
           content:
-            application/json: {}
+            application/json:
+              schema:
+                type: object
+              example:
+                org_id: 1,
+                org_name: "Team 1"
+                email: "6196ab3dacef4e539ae8da4844b58a1f@auth.local"
+                name: "John Doe"
+                contact_email: "john.doe@example.org"
+                unit: ""
+                login_id: ""
+                id_in_org: ""
+                is_staff: false
+                is_active: false
+                phone: ""
+                create_time: "2025-09-29T12:56:15+02:00"
+                role: "default"
+                avatar_url: "https://cloud.seatable.io/media/avatars/a/a/f01c6071928d63fd2837312e64d915/resized/256/70017f2bc5e0c9eeda31e8e401e2cbef.png"
+                has_default_device: false
+                is_force_2fa: true
     put:
       tags:
         - Users
@@ -3194,10 +3249,15 @@ paths:
       security:
         - AccountTokenAuth: []
       responses:
-        "403":
+        "200":
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                type: object
+              example:
+                # FIXME: Should actually be registration_logs...
+                invitation_logs: []
   /api/v2.1/admin/abuse-reports/:
     get:
       tags:
@@ -3339,6 +3399,38 @@ paths:
                     type: integer
                     description: The total number of logs available.
                     example: 15
+  /api/v2.1/admin/group-member-audit/:
+    get:
+      tags:
+        - Logs
+      summary: List Group Member Audit Logs
+      operationId: listGroupMemberAuditLogs
+      description: Retrieves audit logs for changes to group members (either `group_member_add` or `group_member_delete`).
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                group_member_log_list:
+                  - user_email: 493524d94e7e467da506e30c24898555@auth.local
+                    user_name: 123
+                    user_contact_email: 123@qq.com
+                    group_id: 3
+                    group_name: g2
+                    operator_email: 8d597a4a971c43afa8926a2dede58231@auth.local
+                    operator_name: admin
+                    operator_contact_email: zwfxiaxue@163.com
+                    date: 2025-05-27T06:59:43+00:00
+                    operation: group_member_add
+                count: 1
   /api/v2.1/admin/file-access-logs/:
     get:
       tags:

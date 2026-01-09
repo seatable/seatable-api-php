@@ -213,7 +213,7 @@ $apiInstance = new SeaTable\Client\User\SharingLinksApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$external_link_token = fleischkaesebroetchen; // string
+$external_link_token = f84903f9aa454a2481f3; // string
 
 try {
     $result = $apiInstance->deleteExternalLink($workspace_id, $base_name, $external_link_token);

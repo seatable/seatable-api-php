@@ -1,0 +1,8 @@
+{
+  "apiPackage": "PythonScheduler",
+  "modelPackage": "PythonScheduler",
+  "customDocsDir": "docs/PythonScheduler/Api",
+  "customEndpointHeadline": "PythonScheduler",
+  "invokerPackage": "SeaTable\\Client",
+  "composerPackageName": "seatable/seatable-api-php"
+}
