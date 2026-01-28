@@ -1,6 +1,6 @@
 <?php
 /**
- * InfoSettingsApiTest
+ * CustomizingApiTest
  * PHP version 8.1
  *
  * @category Class
@@ -32,14 +32,14 @@ use \SeaTable\Client\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * InfoSettingsApiTest Class Doc Comment
+ * CustomizingApiTest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class InfoSettingsApiTest extends TestCase
+class CustomizingApiTest extends TestCase
 {
 
     /**
@@ -71,60 +71,36 @@ class InfoSettingsApiTest extends TestCase
     }
 
     /**
-     * Test case for deleteTeam
+     * Test case for deleteTeamLogo
      *
-     * Delete Team.
+     * Delete Team Logo.
      *
      */
-    public function testDeleteTeam()
+    public function testDeleteTeamLogo()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getTeamInfo
+     * Test case for getTeamLogo
      *
-     * Get Team Info.
+     * Get Team Logo.
      *
      */
-    public function testGetTeamInfo()
+    public function testGetTeamLogo()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getTeamSettings
+     * Test case for updateTeamLogo
      *
-     * Get Team Settings.
-     *
-     */
-    public function testGetTeamSettings()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateTeam
-     *
-     * Update Team.
+     * Update Team Logo.
      *
      */
-    public function testUpdateTeam()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateTeamSettings
-     *
-     * Update Team Settings.
-     *
-     */
-    public function testUpdateTeamSettings()
+    public function testUpdateTeamLogo()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

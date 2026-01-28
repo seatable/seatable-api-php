@@ -1,6 +1,6 @@
 <?php
 /**
- * InfoSettingsApiTest
+ * SAMLApiTest
  * PHP version 8.1
  *
  * @category Class
@@ -32,14 +32,14 @@ use \SeaTable\Client\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * InfoSettingsApiTest Class Doc Comment
+ * SAMLApiTest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class InfoSettingsApiTest extends TestCase
+class SAMLApiTest extends TestCase
 {
 
     /**
@@ -71,60 +71,48 @@ class InfoSettingsApiTest extends TestCase
     }
 
     /**
-     * Test case for deleteTeam
+     * Test case for deleteSamlConfig
      *
-     * Delete Team.
+     * Delete SAML Config.
      *
      */
-    public function testDeleteTeam()
+    public function testDeleteSamlConfig()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getTeamInfo
+     * Test case for getSamlConfig
      *
-     * Get Team Info.
+     * Get SAML Config.
      *
      */
-    public function testGetTeamInfo()
+    public function testGetSamlConfig()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getTeamSettings
+     * Test case for updateSamlConfig
      *
-     * Get Team Settings.
+     * Update SAML Config.
      *
      */
-    public function testGetTeamSettings()
+    public function testUpdateSamlConfig()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for updateTeam
+     * Test case for verifySamlDomain
      *
-     * Update Team.
-     *
-     */
-    public function testUpdateTeam()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateTeamSettings
-     *
-     * Update Team Settings.
+     * Verify SAML domain.
      *
      */
-    public function testUpdateTeamSettings()
+    public function testVerifySamlDomain()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -10,6 +10,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**getLoginLogStatisticsByDay()**](StatisticsApi.md#getLoginLogStatisticsByDay) | **GET** /api/v2.1/org/{org_id}/admin/statistics/login-logs/by-day/ | Login Logs (by Day) |
 | [**getPythonRunStatisticsByBase()**](StatisticsApi.md#getPythonRunStatisticsByBase) | **GET** /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-base/ | Python Runs (by Base) |
 | [**getPythonRunStatisticsByDay()**](StatisticsApi.md#getPythonRunStatisticsByDay) | **GET** /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-day/ | Python Runs (by Day) |
+| [**getUserOrBaseAIStatistics()**](StatisticsApi.md#getUserOrBaseAIStatistics) | **GET** /api/v2.1/org/{org_id}/admin/statistics/ai/ | Get AI statistics by user/base |
 
 
 ## `getAdminLogStatisticsByDay()`
@@ -344,6 +345,63 @@ try {
 | **dtable_uuid** | **string**| The unique identifier of a base. | [optional] |
 | **start** | **\DateTime**| Start date in ISO format. | [optional] |
 | **end** | **\DateTime**| End date in ISO format. | [optional] |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `getUserOrBaseAIStatistics()`
+
+```php
+getUserOrBaseAIStatistics($group_by, $date, $org_id, $page, $per_page): object
+```
+
+Get AI statistics by user/base
+
+Get AI usage statistics monthly by user/base.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\StatisticsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$group_by = owner; // string | Query by owner or Base
+$date = 2025-01-01; // string | A date string in YYYY-MM-DD format
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+
+try {
+    $result = $apiInstance->getUserOrBaseAIStatistics($group_by, $date, $org_id, $page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StatisticsApi->getUserOrBaseAIStatistics: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **group_by** | **string**| Query by owner or Base | |
+| **date** | **string**| A date string in YYYY-MM-DD format | |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 

@@ -179,7 +179,7 @@ AccountTokenAuth
 ## `listPythonRuns()`
 
 ```php
-listPythonRuns($dtable_uuid, $start, $end, $page, $per_page): object
+listPythonRuns($org_id, $base_uuid, $start, $end, $page, $per_page): object
 ```
 
 List Python Runs
@@ -198,14 +198,15 @@ $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$dtable_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base.
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base.
 $start = 2025-11-01T06:00:00+01:00; // \DateTime | Start date in ISO format.
 $end = 2025-11-30T18:00:00+01:00; // \DateTime | End date in ISO format.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $result = $apiInstance->listPythonRuns($dtable_uuid, $start, $end, $page, $per_page);
+    $result = $apiInstance->listPythonRuns($org_id, $base_uuid, $start, $end, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listPythonRuns: ', $e->getMessage(), PHP_EOL;
@@ -216,7 +217,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **dtable_uuid** | **string**| The unique identifier of a base. | [optional] |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **base_uuid** | **string**| The unique identifier of a base. | [optional] |
 | **start** | **\DateTime**| Start date in ISO format. | [optional] |
 | **end** | **\DateTime**| End date in ISO format. | [optional] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
@@ -236,7 +238,7 @@ AccountTokenAuth
 ## `listTeamLogins()`
 
 ```php
-listTeamLogins($org_id, $page, $per_page, $login_status, $start, $end): object
+listTeamLogins($org_id, $page, $per_page, $status, $start, $end): object
 ```
 
 List Team Logins
@@ -258,12 +260,12 @@ $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
-$login_status = success; // string | Set this to `success` to only return successful logins. By default, all logins are returned.
+$status = success; // string | Set this to `success` to only return successful logins. By default, all logins are returned.
 $start = 2025-11-01T06:00:00+01:00; // \DateTime | Start date in ISO format.
 $end = 2025-11-30T18:00:00+01:00; // \DateTime | End date in ISO format.
 
 try {
-    $result = $apiInstance->listTeamLogins($org_id, $page, $per_page, $login_status, $start, $end);
+    $result = $apiInstance->listTeamLogins($org_id, $page, $per_page, $status, $start, $end);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listTeamLogins: ', $e->getMessage(), PHP_EOL;
@@ -277,7 +279,7 @@ try {
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
-| **login_status** | **string**| Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. | [optional] |
+| **status** | **string**| Set this to &#x60;success&#x60; to only return successful logins. By default, all logins are returned. | [optional] |
 | **start** | **\DateTime**| Start date in ISO format. | [optional] |
 | **end** | **\DateTime**| End date in ISO format. | [optional] |
 
