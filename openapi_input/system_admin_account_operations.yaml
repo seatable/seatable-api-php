@@ -3,7 +3,7 @@ info:
   title: "Account Operations: System admin"
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
@@ -236,6 +236,23 @@ components:
         type: boolean
       example: "false"
       description: Set this to `true` to export the base without assets. Default is `false`.
+    group_by:
+      name: group_by
+      in: query
+      schema:
+        type: string
+        enum: [owner, org_id]
+      required: true
+      description: Query by owner or organization
+      example: "owner"
+    date_YYYY_MM_DD:
+      name: date
+      in: query
+      schema:
+        type: string
+      required: true
+      description: A date string in YYYY-MM-DD format
+      example: "2025-01-01"
 
     #=======================Path parameters=======================#
     base_uuid:
@@ -338,7 +355,6 @@ components:
       in: path
       schema:
         type: string
-        pattern: ^[a-f0-9]{20}$
       required: true
       example: "1f0447eab4df4343ab6d"
     form_token:
@@ -468,6 +484,9 @@ components:
     asset_quota_mb:
       type: string
       description: The asset quota in MB.
+    monthly_automation_limit_per_user:
+      type: integer
+      description: Monthly limit on the number of automation rules per user.
     file:
       type: string
       format: binary
@@ -808,6 +827,8 @@ paths:
                   $ref: "#/components/schemas/quota_total"
                 asset_quota_mb:
                   $ref: "#/components/schemas/asset_quota_mb"
+                monthly_automation_limit_per_user:
+                  $ref: "#/components/schemas/monthly_automation_limit_per_user"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -834,6 +855,7 @@ paths:
                 create_time: "2020-11-18T12:30:31+00:00"
                 role: default
                 update_status_tip: ""
+                monthly_automation_limit_per_user: 1000
     delete:
       tags:
         - Users
@@ -1969,6 +1991,8 @@ paths:
                   $ref: "#/components/schemas/max_user_number"
                 asset_quota_mb:
                   $ref: "#/components/schemas/asset_quota_mb"
+                monthly_automation_limit_per_user:
+                  $ref: "#/components/schemas/monthly_automation_limit_per_user"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1995,6 +2019,7 @@ paths:
                 max_user_number: 3
                 rows_count: 7185
                 row_limit: -1
+                monthly_automation_limit_per_user: 1000
     get:
       tags:
         - Teams
@@ -3729,8 +3754,7 @@ paths:
       operationId: addPlugin
       description: >-
         Add a plugin with a .zip file. This file could be retrieved from the
-        internet, for example, from the [SeaTable Plugins
-        Market](https://cloud.seatable.io/dtable/view-external-links/custom/plugins/).
+        internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive).
       requestBody:
         content:
           multipart/form-data:
@@ -4096,6 +4120,51 @@ paths:
                     latest_visit_at: "2022-07-02T14:09:37+00:00"
                     org_name: SeaTable GmbH
                 count: 1
+  /api/v2.1/admin/statistics/ai/:
+    get:
+      tags:
+        - Statistics
+      summary: Get AI statistics by owner/team
+      operationId: getOwnerOrTeamAIStatistics
+      description: Get AI usage statistics monthly by owner/team.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/group_by"
+        - $ref: "#/components/parameters/date_YYYY_MM_DD"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                group_by_owner:
+                  summary: Query group by owner
+                  value:
+                    results:
+                      - org_id: 176
+                        org_name: SeaTable
+                        owner: 1@seafile_group
+                        group_name: group-11
+                        total_cost: 0.25
+                        is_department_v2_group: false
+                      - org_id: 176
+                        org_name: SeaTable
+                        owner: d15ebe61bd684b868344498c73bdeac4@auth.local
+                        nickname: test
+                    count: 2
+                group_by_team:
+                  summary: Query group by organization
+                  value:
+                    results:
+                      - org_id: 176
+                        org_name: SeaTable
+                        total_cost: 0.25
+                    count: 1
 
   # Maintenance
   /api/v2.1/admin/dtable/{base_uuid}/repair/:
