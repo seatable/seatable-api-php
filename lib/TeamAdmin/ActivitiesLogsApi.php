@@ -148,6 +148,7 @@ class ActivitiesLogsApi
      * List Automation Logs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -158,9 +159,9 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listAutomationLogs($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function listAutomationLogs($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
     {
-        list($response) = $this->listAutomationLogsWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType);
+        list($response) = $this->listAutomationLogsWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
         return $response;
     }
 
@@ -170,6 +171,7 @@ class ActivitiesLogsApi
      * List Automation Logs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -180,9 +182,9 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAutomationLogsWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function listAutomationLogsWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
     {
-        $request = $this->listAutomationLogsRequest($org_id, $start, $end, $page, $per_page, $contentType);
+        $request = $this->listAutomationLogsRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -259,6 +261,7 @@ class ActivitiesLogsApi
      * List Automation Logs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -268,9 +271,9 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAutomationLogsAsync($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function listAutomationLogsAsync($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
     {
-        return $this->listAutomationLogsAsyncWithHttpInfo($org_id, $start, $end, $page, $per_page, $contentType)
+        return $this->listAutomationLogsAsyncWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -284,6 +287,7 @@ class ActivitiesLogsApi
      * List Automation Logs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -293,10 +297,10 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAutomationLogsAsyncWithHttpInfo($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function listAutomationLogsAsyncWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
     {
         $returnType = 'object';
-        $request = $this->listAutomationLogsRequest($org_id, $start, $end, $page, $per_page, $contentType);
+        $request = $this->listAutomationLogsRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -338,6 +342,7 @@ class ActivitiesLogsApi
      * Create request for operation 'listAutomationLogs'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -347,7 +352,7 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAutomationLogsRequest($org_id, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
+    public function listAutomationLogsRequest($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listAutomationLogs'][0])
     {
 
         // verify the required parameter 'org_id' is set
@@ -358,6 +363,10 @@ class ActivitiesLogsApi
         }
         if ($org_id < 1) {
             throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listAutomationLogs, must be bigger than or equal to 1.');
+        }
+        
+        if ($dtable_uuid !== null && !preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $dtable_uuid)) {
+            throw new \InvalidArgumentException("invalid value for \"dtable_uuid\" when calling ActivitiesLogsApi.listAutomationLogs, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
         }
         
 
@@ -378,6 +387,15 @@ class ActivitiesLogsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $dtable_uuid,
+            'dtable_uuid', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $start,
@@ -1111,7 +1129,7 @@ class ActivitiesLogsApi
      * List Python Runs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string|null $base_uuid The unique identifier of a base. (optional)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -1122,9 +1140,9 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function listPythonRuns($org_id, $base_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
+    public function listPythonRuns($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
     {
-        list($response) = $this->listPythonRunsWithHttpInfo($org_id, $base_uuid, $start, $end, $page, $per_page, $contentType);
+        list($response) = $this->listPythonRunsWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
         return $response;
     }
 
@@ -1134,7 +1152,7 @@ class ActivitiesLogsApi
      * List Python Runs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string|null $base_uuid The unique identifier of a base. (optional)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -1145,9 +1163,9 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listPythonRunsWithHttpInfo($org_id, $base_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
+    public function listPythonRunsWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
     {
-        $request = $this->listPythonRunsRequest($org_id, $base_uuid, $start, $end, $page, $per_page, $contentType);
+        $request = $this->listPythonRunsRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1224,7 +1242,7 @@ class ActivitiesLogsApi
      * List Python Runs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string|null $base_uuid The unique identifier of a base. (optional)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -1234,9 +1252,9 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listPythonRunsAsync($org_id, $base_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
+    public function listPythonRunsAsync($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
     {
-        return $this->listPythonRunsAsyncWithHttpInfo($org_id, $base_uuid, $start, $end, $page, $per_page, $contentType)
+        return $this->listPythonRunsAsyncWithHttpInfo($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1250,7 +1268,7 @@ class ActivitiesLogsApi
      * List Python Runs
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string|null $base_uuid The unique identifier of a base. (optional)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -1260,10 +1278,10 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listPythonRunsAsyncWithHttpInfo($org_id, $base_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
+    public function listPythonRunsAsyncWithHttpInfo($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
     {
         $returnType = 'object';
-        $request = $this->listPythonRunsRequest($org_id, $base_uuid, $start, $end, $page, $per_page, $contentType);
+        $request = $this->listPythonRunsRequest($org_id, $dtable_uuid, $start, $end, $page, $per_page, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1305,7 +1323,7 @@ class ActivitiesLogsApi
      * Create request for operation 'listPythonRuns'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string|null $base_uuid The unique identifier of a base. (optional)
+     * @param  string|null $dtable_uuid The unique identifier of a base. (optional)
      * @param  \DateTime|null $start Start date in ISO format. (optional)
      * @param  \DateTime|null $end End date in ISO format. (optional)
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
@@ -1315,7 +1333,7 @@ class ActivitiesLogsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listPythonRunsRequest($org_id, $base_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
+    public function listPythonRunsRequest($org_id, $dtable_uuid = null, $start = null, $end = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listPythonRuns'][0])
     {
 
         // verify the required parameter 'org_id' is set
@@ -1328,8 +1346,8 @@ class ActivitiesLogsApi
             throw new \InvalidArgumentException('invalid value for "$org_id" when calling ActivitiesLogsApi.listPythonRuns, must be bigger than or equal to 1.');
         }
         
-        if ($base_uuid !== null && !preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $base_uuid)) {
-            throw new \InvalidArgumentException("invalid value for \"base_uuid\" when calling ActivitiesLogsApi.listPythonRuns, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
+        if ($dtable_uuid !== null && !preg_match("/^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/", $dtable_uuid)) {
+            throw new \InvalidArgumentException("invalid value for \"dtable_uuid\" when calling ActivitiesLogsApi.listPythonRuns, must conform to the pattern /^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$/.");
         }
         
 
@@ -1352,8 +1370,8 @@ class ActivitiesLogsApi
 
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $base_uuid,
-            'base_uuid', // param base name
+            $dtable_uuid,
+            'dtable_uuid', // param base name
             'string', // openApiType
             'form', // style
             true, // explode

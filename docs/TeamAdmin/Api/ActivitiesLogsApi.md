@@ -16,7 +16,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `listAutomationLogs()`
 
 ```php
-listAutomationLogs($org_id, $start, $end, $page, $per_page): object
+listAutomationLogs($org_id, $dtable_uuid, $start, $end, $page, $per_page): object
 ```
 
 List Automation Logs
@@ -36,13 +36,14 @@ $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$dtable_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base.
 $start = 2025-11-01T06:00:00+01:00; // \DateTime | Start date in ISO format.
 $end = 2025-11-30T18:00:00+01:00; // \DateTime | End date in ISO format.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $result = $apiInstance->listAutomationLogs($org_id, $start, $end, $page, $per_page);
+    $result = $apiInstance->listAutomationLogs($org_id, $dtable_uuid, $start, $end, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listAutomationLogs: ', $e->getMessage(), PHP_EOL;
@@ -54,6 +55,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **dtable_uuid** | **string**| The unique identifier of a base. | [optional] |
 | **start** | **\DateTime**| Start date in ISO format. | [optional] |
 | **end** | **\DateTime**| End date in ISO format. | [optional] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
@@ -179,7 +181,7 @@ AccountTokenAuth
 ## `listPythonRuns()`
 
 ```php
-listPythonRuns($org_id, $base_uuid, $start, $end, $page, $per_page): object
+listPythonRuns($org_id, $dtable_uuid, $start, $end, $page, $per_page): object
 ```
 
 List Python Runs
@@ -199,14 +201,14 @@ $apiInstance = new SeaTable\Client\TeamAdmin\ActivitiesLogsApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base.
+$dtable_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base.
 $start = 2025-11-01T06:00:00+01:00; // \DateTime | Start date in ISO format.
 $end = 2025-11-30T18:00:00+01:00; // \DateTime | End date in ISO format.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
 try {
-    $result = $apiInstance->listPythonRuns($org_id, $base_uuid, $start, $end, $page, $per_page);
+    $result = $apiInstance->listPythonRuns($org_id, $dtable_uuid, $start, $end, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ActivitiesLogsApi->listPythonRuns: ', $e->getMessage(), PHP_EOL;
@@ -218,7 +220,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **base_uuid** | **string**| The unique identifier of a base. | [optional] |
+| **dtable_uuid** | **string**| The unique identifier of a base. | [optional] |
 | **start** | **\DateTime**| Start date in ISO format. | [optional] |
 | **end** | **\DateTime**| End date in ISO format. | [optional] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |

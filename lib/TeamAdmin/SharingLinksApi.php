@@ -354,10 +354,7 @@ class SharingLinksApi
                 'Missing the required parameter $external_link_token when calling deleteExternalLink'
             );
         }
-        if (!preg_match("/^[0-9a-f]{20}$/", $external_link_token)) {
-            throw new \InvalidArgumentException("invalid value for \"external_link_token\" when calling SharingLinksApi.deleteExternalLink, must conform to the pattern /^[0-9a-f]{20}$/.");
-        }
-        
+
 
         $resourcePath = '/api/v2.1/org/{org_id}/admin/external-links/{external_link_token}/';
         $formParams = [];
@@ -950,10 +947,7 @@ class SharingLinksApi
                 'Missing the required parameter $view_external_link_token when calling deleteViewExternalLink'
             );
         }
-        if (!preg_match("/^[0-9a-f]{20}$/", $view_external_link_token)) {
-            throw new \InvalidArgumentException("invalid value for \"view_external_link_token\" when calling SharingLinksApi.deleteViewExternalLink, must conform to the pattern /^[0-9a-f]{20}$/.");
-        }
-        
+
 
         $resourcePath = '/api/v2.1/org/{org_id}/admin/view-external-links/{view_external_link_token}/';
         $formParams = [];
