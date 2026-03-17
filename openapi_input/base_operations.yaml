@@ -118,7 +118,7 @@ components:
       required: false
       description: |
         The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly.
-        **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+        **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
       example: "Default View"
     order_by:
       name: order_by
@@ -213,7 +213,7 @@ components:
       in: path
       schema:
         type: string
-        pattern: ^[A-Za-z0-9]{22}$
+        pattern: ^[A-Za-z0-9\-\_]{22}$
       required: true
       description: The id of the row.
       example: Qtf7xPmoRaiFyQPO1aENTjb
@@ -257,7 +257,7 @@ components:
   schemas:
     row_id:
       type: string
-      pattern: '^[a-zA-Z0-9\-\_]{22}$'
+      pattern: ^[A-Za-z0-9\-\_]{22}$
       description: The id of the row. The id of a row is unique inside a base and is often used to identify one specific row.
       example: "Qtf7xPmoRaiFyQPO1aENTjb"
     base:
@@ -737,7 +737,7 @@ components:
       type: string
       description: |
         The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly.
-        **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+        **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
       example: "Default View"
 
     view_name_only:
@@ -1055,7 +1055,7 @@ components:
       properties:
         column_key:
           $ref: "#/components/schemas/column_key"
-        email_filter_predicate:
+        filter_predicate:
           $ref: "#/components/schemas/email_filter_predicate"
         filter_term:
           $ref: "#/components/schemas/filter_term"
@@ -1241,7 +1241,6 @@ components:
               - $ref: "#/components/schemas/filters_automatic"
               - $ref: "#/components/schemas/filters_percentage"
               - $ref: "#/components/schemas/filters_date-time"
-              - $ref: "#/components/schemas/filters_url"
               - $ref: "#/components/schemas/filters_geolocation"
         filter_conjunction:
           $ref: "#/components/schemas/filter_conjunction"
@@ -1652,7 +1651,7 @@ components:
       properties:
         geo_format:
           type: string
-          enum: ["lng_lat", "county_region"]
+          enum: ["lng_lat", "country_region"]
 
     geolocation_column:
       title: Geolocation
@@ -1663,7 +1662,7 @@ components:
           $ref: "#/components/schemas/column_name"
         column_type:
           type: string
-          enum: ["checkbox"]
+          enum: ["geolocation"]
         anchor_column:
           $ref: "#/components/schemas/anchor_column"
         column_data:
@@ -2037,24 +2036,43 @@ components:
         - $ref: "#/components/schemas/table_name_object"
         - $ref: "#/components/schemas/autonumber_column"
     autonumber_column_format:
-      description: Specify the auto number column.
+      description: >-
+        Specify the auto number column. The `format` field defines the number
+        pattern (e.g. "0000" for 4 digits). Use `prefix_type` to add a prefix:
+        "string" for a custom text prefix, or "date" for a date-based prefix.
       type: object
       properties:
         format:
           type: string
-          example: "ID-0000"
+          description: The number format pattern.
+          example: "0000"
+        digits:
+          type: integer
+          description: Number of digits (must match the zeros in `format`).
+          example: 4
+        prefix_type:
+          type: string
+          description: Type of prefix — "string" for a custom prefix, "date" for a date-based prefix (YYYYMMDD).
+          enum: ["string", "date"]
+          example: "string"
+        prefix:
+          type: string
+          description: The prefix value (only used when `prefix_type` is "string").
+          example: "ID-"
       required:
         - format
+        - digits
 
     button_column:
       title: Button column
+      type: object
       description: Add a button column.
       properties:
         column_name:
           $ref: "#/components/schemas/column_name"
         column_type:
           type: string
-          enum: ["file"]
+          enum: ["button"]
         anchor_column:
           $ref: "#/components/schemas/anchor_column"
         column_data:
@@ -2417,7 +2435,14 @@ paths:
                         can_copy: false
                         can_export: false
                         can_print: false
-  # question: internal server error??
+        "403":
+          description: Forbidden — missing or invalid base token
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error_message: invalid token
   /api-gateway/api/v2/dtables/{base_uuid}/related-users/:
     get:
       tags:
@@ -2506,6 +2531,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/sql_query_response"
+        "400":
+          description: Bad Request — invalid SQL syntax or non-existing table.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_message:
+                    type: string
+                    example: "no such table: nonexistent_table"
   /api-gateway/api/v2/dtables/{base_uuid}/rows/:
     get:
       tags:
@@ -2563,7 +2598,6 @@ paths:
                     _mtime: "2021-03-10T16:11:11.176+00:00"
                     Name: Matcha
                     link: []
-    # question: how to add multiple rows????
     post:
       tags:
         - Rows
@@ -2682,6 +2716,22 @@ paths:
                 Date: "2020-08-01"
                 Content: "111"
                 link: []
+        "403":
+          description: Forbidden — missing or invalid base token
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error_message: invalid token
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error_message: row _id not exits
 
   /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/:
     put:
@@ -2744,7 +2794,6 @@ paths:
 
   # Links
   /api-gateway/api/v2/dtables/{base_uuid}/query-links/:
-    # getestet: ok.
     post:
       tags:
         - Links
@@ -2792,7 +2841,6 @@ paths:
                     display_value: Orson
 
   /api-gateway/api/v2/dtables/{base_uuid}/links/:
-    # getestet: ok. (big data???) -> Eingabe ???
     post:
       tags:
         - Links
@@ -2826,7 +2874,6 @@ paths:
                 type: object
               example:
                 success: true
-    # getestet: ok
     put:
       tags:
         - Links
@@ -2878,7 +2925,6 @@ paths:
                 deleted_links_count: 1
 
   /api-gateway/api/v2/dtables/{base_uuid}/auto-links/:
-    # getestet: ok.
     post:
       tags:
         - Links
@@ -2917,7 +2963,6 @@ paths:
                 task_id: 19b3c803-051e-4c16-bf4d-682d24f7981e
 
   /api-gateway/api/v2/dtables/{base_uuid}/auto-link-task/:
-    # getestet: ok.
     get:
       tags:
         - Links
@@ -4182,7 +4227,7 @@ paths:
                 seen:
                   type: boolean
                   description: true or false for read or unread. Otherwise invalid.
-                  example: "true"
+                  example: true
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4231,7 +4276,7 @@ paths:
                 seen:
                   type: boolean
                   description: '`true` to mark as "seen" and `false` as "unseen".'
-                  example: "false"
+                  example: false
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4415,7 +4460,6 @@ paths:
                 total_count: 3
 
   # Snapshots
-  # tested create: ok
   /api-gateway/api/v2/dtables/{base_uuid}/snapshot/:
     post:
       tags: [Snapshots]

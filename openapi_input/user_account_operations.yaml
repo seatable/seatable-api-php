@@ -139,6 +139,7 @@ components:
       example: Example
     page:
       name: page
+      description: Page number of results to return. Default is 1.
       in: query
       schema:
         type: integer
@@ -146,6 +147,7 @@ components:
       example: 1
     per_page:
       name: per_page
+      description: Number of results per page.
       in: query
       schema:
         type: integer
@@ -153,6 +155,7 @@ components:
       example: 2
     tz:
       name: to_tz
+      description: Timezone offset for date/time conversion.
       in: query
       schema:
         type: string
@@ -166,15 +169,17 @@ components:
       description: >-
         `true` or `false`, optional, `true` by default. When `false`, only
         the ID, name and type of each workspace is listed.
-      example: "false"
+      example: false
     parent_dir:
       name: parent_dir
+      description: The parent directory path.
       in: query
       schema:
         type: string
       example: /
     path:
       name: path
+      description: The file path relative to the asset directory.
       in: query
       schema:
         type: string
@@ -192,6 +197,7 @@ components:
       example: "3"
     account_name:
       name: account_name
+      description: The name of the third-party email account.
       in: query
       schema:
         type: string
@@ -234,6 +240,7 @@ components:
       description: "Search string. Substrings are allowed and capitalization does not matter."
     query_type:
       name: query_type
+      description: Filter the search by type. Use `base` to search only bases or `app` to search only apps.
       in: query
       schema:
         type: string
@@ -243,7 +250,7 @@ components:
       in: query
       schema:
         type: boolean
-      example: "false"
+      example: false
       description: Set this to `true` to export the base without assets. Default is `false`.
 
     #=======================Path parameters=======================#
@@ -2308,6 +2315,22 @@ paths:
                 enable_subscription: false
                 dtable_updates_email_interval: 0
                 dtable_collaborate_email_interval: 0
+        "401":
+          description: Unauthorized — invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                detail: Invalid token
+        "403":
+          description: Forbidden — no token provided
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                detail: Authentication credentials were not provided.
   /api/v2.1/user/contact-email/:
     put:
       tags:
@@ -3338,7 +3361,13 @@ paths:
       tags: [Groups & Workspaces]
       summary: Delete Group
       operationId: deleteGroup
-      description: Delete a group with its ID.
+      description: >-
+        Delete a group with its ID.
+
+
+        > 🚧 Group must be empty
+        >
+        > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `"Cannot delete group with bases"`.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -4555,6 +4584,16 @@ paths:
       summary: Delete User Share
       operationId: deleteUserShare
       description: Stop sharing a base to a user.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  $ref: "#/components/schemas/user_account_email"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -5489,7 +5528,7 @@ paths:
                 username: 876543216569491ba42905bf1647fd3f@auth.local
                 permission: rw
                 token: 65432148a9074901923d
-                link: https://cloud.seatable.io/dtable/links/65432148a9074901923d
+                link: https://cloud.seatable.io/dtable/links/65432148a9074901923d/
                 dtable: Example
                 dtable_id: 562
                 workspace_id: 2
@@ -7831,7 +7870,7 @@ paths:
                       {
                         "username": "145504ae043c438cbb55f2afb084d586@auth.local",
                         "token": "a3ec5042d7ae47f18c2e",
-                        "link": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e",
+                        "link": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e/",
                         "app_name": "Dgdfh",
                         "app_id": 72,
                         "expire_date": "",
@@ -7879,7 +7918,7 @@ paths:
                           "settings": { "pages": ["..."] },
                         },
                       "created_at": "2023-04-02T21:23:21+00:00",
-                      "external_app_url": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e",
+                      "external_app_url": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e/",
                       "visit_times": 3,
                       "creator": "Hulk",
                       "can_anonymous_access": false,

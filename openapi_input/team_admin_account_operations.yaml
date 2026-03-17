@@ -84,7 +84,7 @@ components:
       in: query
       schema:
         type: boolean
-      example: "false"
+      example: false
       description: Set this to `true` to export the base without assets. Default is `false`.
     login_status:
       name: status
@@ -269,7 +269,7 @@ components:
       description: >-
         If a workspace should be automatically created for the user.
         Optional. `false` by default.
-      example: "true"
+      example: true
     team_admin_id_in_org:
       type: string
       description: >-
@@ -295,13 +295,13 @@ components:
       description: >-
         Whether you'd like to move your group to the bottom of the
         list (`true`). `false` by default.
-      example: "true"
+      example: true
     enable_force_2fa:
       type: boolean
       description: >-
         if the 2-factor-authentication is forced (`true` or
         `false`).
-      example: "true"
+      example: true
     enable_force_sso_login:
       type: boolean
       description: Whether login via SSO is enforced for all team members (`true` or `false`).
@@ -311,19 +311,19 @@ components:
       description: >-
         if newly added users will get a system email (`true` or
         `false`).
-      example: "true"
+      example: true
     enable_external_user_access_invite_link:
       type: boolean
       description: >-
         if external users can access bases via invite links (`true`
         or `false`).
-      example: "false"
+      example: false
     enable_member_modify_name:
       type: boolean
       description: >-
         if members are allowed to change their names (`true` or
         `false`).
-      example: "false"
+      example: false
     upload_file:
       type: object
       properties:
@@ -1106,7 +1106,13 @@ paths:
         - Groups
       summary: Delete Group
       operationId: deleteGroup
-      description: Delete a group with its ID.
+      description: >-
+        Delete a group with its ID.
+
+
+        > 🚧 Group must be empty
+        >
+        > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `"Cannot delete group with bases"`.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1501,6 +1507,7 @@ paths:
                     shared_name: User share
                     from_user_name: org-1-admin
                     to_user_name: org-1-user-1
+                    avatar_url: https://cloud.seatable.io/media/avatars/default.png
                 view_group_shares:
                   - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
                     id: 1
@@ -1674,7 +1681,7 @@ paths:
                   - dtable_name: All types
                     username: 876543216569491ba42905bf1647fd3f@auth.local
                     token: >-
-                      https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e
+                      https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e/
                     ctime: "2021-12-15T13:11:54.083636"
                     password: null
                     expire_date: null
@@ -1685,7 +1692,7 @@ paths:
                   - dtable_name: All types
                     username: 876543216569491ba42905bf1647fd3f@auth.local
                     token: >-
-                      https://cloud.seatable.io/dtable/links/b7ea0a4269234565998e
+                      https://cloud.seatable.io/dtable/links/b7ea0a4269234565998e/
                     ctime: "2021-12-15T13:11:55.058965"
                     password: null
                     expire_date: null
@@ -1729,7 +1736,7 @@ paths:
                 username: 876543216569491ba42905bf1647fd3f@auth.local
                 permission: rw
                 token: 9167cdbd67574226a72e
-                link: https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e
+                link: https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e/
                 dtable: All types
                 dtable_id: 2
                 workspace_id: 2
@@ -2212,6 +2219,7 @@ paths:
                 logs:
                   - id: 43543
                     rule_id: 454
+                    rule_name: Send Email
                     trigger_time: "2025-11-28T14:05:52+01:00"
                     run_condition: per_update
                     success: true
@@ -2221,6 +2229,7 @@ paths:
                     warnings: null
                   - id: 43544
                     rule_id: 454
+                    rule_name: Send Email
                     trigger_time: "2025-11-28T14:05:55+01:00"
                     run_condition: per_update
                     success: true

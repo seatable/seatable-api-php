@@ -113,7 +113,7 @@ components:
       in: query
       schema:
         type: boolean
-      example: "true"
+      example: true
     starting_time:
       name: start
       in: query
@@ -153,7 +153,7 @@ components:
         users who are not in any teams (`true`) or by teams (`false`).  The
         usage of `true` here is seldom meaningful for cloud.seatable.io as
         all the users in the SeaTable Cloud are team users.
-      example: "false"
+      example: false
     month:
       name: month
       in: query
@@ -234,7 +234,7 @@ components:
       in: query
       schema:
         type: boolean
-      example: "false"
+      example: false
       description: Set this to `true` to export the base without assets. Default is `false`.
     group_by:
       name: group_by
@@ -509,7 +509,7 @@ components:
       description: >-
         If a workspace should be automatically created for the user.
         Optional. `false` by default.
-      example: "true"
+      example: true
     max_user_number:
       type: string
       description: The maximum user number.
@@ -529,7 +529,7 @@ components:
       description: >-
         Required. Use `true` or `false` to mark the status of the
         report.
-      example: "true"
+      example: true
     plugin:
       type: string
       description: Path and file name to the plugin file.
@@ -641,7 +641,7 @@ components:
         Leave this param as its default (`false`) to upload your
         favicon, and use this param as `true` to upload a favicon
         with a notification sign.
-      example: "true"
+      example: true
     login_bg_image:
       type: string
       description: The path and filename of the background image.
@@ -709,6 +709,14 @@ paths:
                     storage_usage: 1721496
                     rows_count: 142
                 total_count: 2000
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                detail: You do not have permission to perform this action.
     post:
       tags:
         - Users
@@ -1181,8 +1189,7 @@ paths:
         - Users
       summary: Search User by Org-ID
       operationId: searchUserByOrgId
-      description: >-
-        Hier muss noch eine Beschreibung ergänzt werden
+      description: Search for a user by their organization ID.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1715,7 +1722,7 @@ paths:
               schema:
                 type: object
               example:
-                - success: "?"
+                - success: true
   /api/v2.1/admin/groups/{group_id}/:
     put:
       tags: [Groups]
@@ -1729,8 +1736,6 @@ paths:
               properties:
                 new_owner:
                   $ref: "#/components/schemas/username"
-                #quota:
-                #  $ref: "#/components/schemas/group_quota"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1755,7 +1760,13 @@ paths:
       tags: [Groups]
       summary: Delete Group
       operationId: deleteGroup
-      description: Delete a group with its ID.
+      description: >-
+        Delete a group with its ID.
+
+
+        > 🚧 Group must be empty
+        >
+        > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `"Cannot delete group with bases"`.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1963,7 +1974,7 @@ paths:
           example: "2"
       responses:
         "200":
-          description: ok
+          description: OK
   /api/v2.1/admin/organizations/{org_id}/:
     put:
       tags:
@@ -2444,7 +2455,7 @@ paths:
         - AccountTokenAuth: []
       responses:
         "200":
-          description: "ok"
+          description: OK
           content:
             application/json:
               schema:
@@ -2473,7 +2484,7 @@ paths:
         - $ref: "#/components/parameters/sync_id"
       responses:
         "200":
-          description: "ok"
+          description: OK
           content:
             application/json:
               schema:
@@ -3539,9 +3550,9 @@ paths:
                   - repo_id: 696b27df-173e-4628-8ac2-10347c58a428
                     file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com.txt
                     has_deleted: true
-                    has_ignored": false,
+                    has_ignored: false
                     virus_id: 1
-                    group_id: 1,
+                    group_id: 1
                     group_name: group-11
                     org_id: 1
                     org_name: org-1
@@ -3551,7 +3562,7 @@ paths:
                     file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com (1).txt
                     has_deleted: false
                     has_ignored: false
-                    virus_id: 2,
+                    virus_id: 2
                     username: ac8961c4118f4400ad71bada398675b7@auth.local
                     nickname: test@demo.com
                     org_id: 1
@@ -3754,7 +3765,7 @@ paths:
       operationId: addPlugin
       description: >-
         Add a plugin with a .zip file. This file could be retrieved from the
-        internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive).
+        internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive/).
       requestBody:
         content:
           multipart/form-data:
