@@ -113,13 +113,4 @@ class UpdateViewFiltersInnerTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "email_filter_predicate"
-     */
-    public function testPropertyEmailFilterPredicate()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
 }

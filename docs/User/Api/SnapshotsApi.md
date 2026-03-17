@@ -136,8 +136,8 @@ $apiInstance = new SeaTable\Client\User\SnapshotsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$page = 1; // int
-$per_page = 2; // int
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
 
 try {
     $result = $apiInstance->listSnapshots($workspace_id, $base_name, $page, $per_page);
@@ -153,8 +153,8 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
 
 ### Return type
 

@@ -251,7 +251,7 @@ class ButtonColumnWithTableName implements ModelInterface, ArrayAccess, \JsonSer
         return self::$openAPIModelName;
     }
 
-    public const COLUMN_TYPE_FILE = 'file';
+    public const COLUMN_TYPE_BUTTON = 'button';
 
     /**
      * Gets allowable values of the enum
@@ -261,7 +261,7 @@ class ButtonColumnWithTableName implements ModelInterface, ArrayAccess, \JsonSer
     public function getColumnTypeAllowableValues()
     {
         return [
-            self::COLUMN_TYPE_FILE,
+            self::COLUMN_TYPE_BUTTON,
         ];
     }
 

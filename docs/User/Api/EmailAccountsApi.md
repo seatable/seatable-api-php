@@ -137,7 +137,7 @@ $apiInstance = new SeaTable\Client\User\EmailAccountsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$account_name = Email Server2; // string
+$account_name = Email Server2; // string | The name of the third-party email account.
 
 try {
     $apiInstance->getEmailAccount($base_uuid, $account_name);
@@ -151,7 +151,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **account_name** | **string**|  | [optional] |
+| **account_name** | **string**| The name of the third-party email account. | [optional] |
 
 ### Return type
 

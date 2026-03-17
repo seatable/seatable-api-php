@@ -2676,7 +2676,7 @@ class UsersApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object|object
      */
     public function listUsers($page = null, $per_page = null, string $contentType = self::contentTypes['listUsers'][0])
     {
@@ -2695,7 +2695,7 @@ class UsersApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
     public function listUsersWithHttpInfo($page = null, $per_page = null, string $contentType = self::contentTypes['listUsers'][0])
     {
@@ -2731,6 +2731,12 @@ class UsersApi
                         $request,
                         $response,
                     );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -2756,6 +2762,14 @@ class UsersApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',

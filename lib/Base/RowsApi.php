@@ -734,7 +734,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object|object|object
      */
     public function getRow($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
@@ -755,7 +755,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
     public function getRowWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
@@ -791,6 +791,18 @@ class RowsApi
                         $request,
                         $response,
                     );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -816,6 +828,22 @@ class RowsApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',
@@ -940,8 +968,8 @@ class RowsApi
                 'Missing the required parameter $row_id when calling getRow'
             );
         }
-        if (!preg_match("/^[A-Za-z0-9]{22}$/", $row_id)) {
-            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling RowsApi.getRow, must conform to the pattern /^[A-Za-z0-9]{22}$/.");
+        if (!preg_match("/^[A-Za-z0-9\\-\\_]{22}$/", $row_id)) {
+            throw new \InvalidArgumentException("invalid value for \"row_id\" when calling RowsApi.getRow, must conform to the pattern /^[A-Za-z0-9\\-\\_]{22}$/.");
         }
         
         // verify the required parameter 'table_name' is set
@@ -1062,7 +1090,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
@@ -1085,7 +1113,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
@@ -1175,7 +1203,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
@@ -1201,7 +1229,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
@@ -1256,7 +1284,7 @@ class RowsApi
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
-     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. (optional)
+     * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
      * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
@@ -1716,7 +1744,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Base\SqlQueryResponse
+     * @return \SeaTable\Client\Base\SqlQueryResponse|\SeaTable\Client\Base\QuerySQL400Response
      */
     public function querySQL($base_uuid, $sql_query = null, string $contentType = self::contentTypes['querySQL'][0])
     {
@@ -1735,7 +1763,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Base\SqlQueryResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\SqlQueryResponse|\SeaTable\Client\Base\QuerySQL400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function querySQLWithHttpInfo($base_uuid, $sql_query = null, string $contentType = self::contentTypes['querySQL'][0])
     {
@@ -1771,6 +1799,12 @@ class RowsApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\Base\QuerySQL400Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -1799,6 +1833,14 @@ class RowsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SeaTable\Client\Base\SqlQueryResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SeaTable\Client\Base\QuerySQL400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

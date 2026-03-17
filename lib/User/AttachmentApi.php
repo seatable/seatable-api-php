@@ -149,7 +149,7 @@ class AttachmentApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string|null $path path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkIfAssetExists'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -169,7 +169,7 @@ class AttachmentApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkIfAssetExists'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -256,7 +256,7 @@ class AttachmentApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkIfAssetExists'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -279,7 +279,7 @@ class AttachmentApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkIfAssetExists'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -331,7 +331,7 @@ class AttachmentApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['checkIfAssetExists'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -458,7 +458,7 @@ class AttachmentApi
      * Delete Base Asset
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $path path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseAsset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -477,7 +477,7 @@ class AttachmentApi
      * Delete Base Asset
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseAsset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -563,7 +563,7 @@ class AttachmentApi
      * Delete Base Asset
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseAsset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -585,7 +585,7 @@ class AttachmentApi
      * Delete Base Asset
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseAsset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -636,7 +636,7 @@ class AttachmentApi
      * Create request for operation 'deleteBaseAsset'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $path (optional)
+     * @param  string|null $path The file path relative to the asset directory. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseAsset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1319,7 +1319,7 @@ class AttachmentApi
      * List Base Asset Directories And Files
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $parent_dir parent_dir (optional)
+     * @param  string|null $parent_dir The parent directory path. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseAssets'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1338,7 +1338,7 @@ class AttachmentApi
      * List Base Asset Directories And Files
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $parent_dir (optional)
+     * @param  string|null $parent_dir The parent directory path. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseAssets'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1424,7 +1424,7 @@ class AttachmentApi
      * List Base Asset Directories And Files
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $parent_dir (optional)
+     * @param  string|null $parent_dir The parent directory path. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseAssets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1446,7 +1446,7 @@ class AttachmentApi
      * List Base Asset Directories And Files
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $parent_dir (optional)
+     * @param  string|null $parent_dir The parent directory path. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseAssets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1497,7 +1497,7 @@ class AttachmentApi
      * Create request for operation 'listBaseAssets'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $parent_dir (optional)
+     * @param  string|null $parent_dir The parent directory path. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBaseAssets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

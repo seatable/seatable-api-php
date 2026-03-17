@@ -1,6 +1,6 @@
 <?php
 /**
- * FiltersEmailTest
+ * DeleteBaseAsset404ResponseTest
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * File Operations
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FiltersEmailTest Class Doc Comment
+ * DeleteBaseAsset404ResponseTest Class Doc Comment
  *
  * @category    Class
- * @description FiltersEmail
+ * @description DeleteBaseAsset404Response
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class FiltersEmailTest extends TestCase
+class DeleteBaseAsset404ResponseTest extends TestCase
 {
 
     /**
@@ -70,36 +70,18 @@ class FiltersEmailTest extends TestCase
     }
 
     /**
-     * Test "FiltersEmail"
+     * Test "DeleteBaseAsset404Response"
      */
-    public function testFiltersEmail()
+    public function testDeleteBaseAsset404Response()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "column_key"
+     * Test attribute "error_msg"
      */
-    public function testPropertyColumnKey()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "filter_predicate"
-     */
-    public function testPropertyFilterPredicate()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "filter_term"
-     */
-    public function testPropertyFilterTerm()
+    public function testPropertyErrorMsg()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -620,7 +620,7 @@ searchUserByOrgId($query, $org_id, $limit)
 
 Search User by Org-ID
 
-Hier muss noch eine Beschreibung ergänzt werden
+Search for a user by their organization ID.
 
 ### Example
 

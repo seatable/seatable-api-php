@@ -726,7 +726,7 @@ class BaseTokenApi
      *
      * Get Base-Token with External-Link
      *
-     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. (required)
+     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithExternLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -744,7 +744,7 @@ class BaseTokenApi
      *
      * Get Base-Token with External-Link
      *
-     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. (required)
+     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithExternLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -829,7 +829,7 @@ class BaseTokenApi
      *
      * Get Base-Token with External-Link
      *
-     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. (required)
+     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithExternLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -850,7 +850,7 @@ class BaseTokenApi
      *
      * Get Base-Token with External-Link
      *
-     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. (required)
+     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithExternLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -900,7 +900,7 @@ class BaseTokenApi
     /**
      * Create request for operation 'getBaseTokenWithExternLink'
      *
-     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. (required)
+     * @param  string $external_link_token The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseTokenWithExternLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

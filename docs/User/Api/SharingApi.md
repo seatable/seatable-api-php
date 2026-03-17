@@ -477,7 +477,7 @@ AccountTokenAuth
 ## `deleteUserShare()`
 
 ```php
-deleteUserShare($workspace_id, $base_name): object
+deleteUserShare($workspace_id, $base_name, $email): object
 ```
 
 Delete User Share
@@ -498,9 +498,10 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
+$email = 'email_example'; // string | The user ID ending with @auth.local
 
 try {
-    $result = $apiInstance->deleteUserShare($workspace_id, $base_name);
+    $result = $apiInstance->deleteUserShare($workspace_id, $base_name, $email);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SharingApi->deleteUserShare: ', $e->getMessage(), PHP_EOL;
@@ -513,6 +514,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
+| **email** | **string**| The user ID ending with @auth.local | |
 
 ### Return type
 

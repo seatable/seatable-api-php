@@ -125,7 +125,7 @@ deleteApiToken($workspace_id, $base_name, $app_name): object
 
 Delete API-Token
 
-Delete one specific API token from a base. The token is identified by his *app_name*.
+Delete one specific API token from a base. The token is identified by its *app_name*.
 
 ### Example
 

@@ -31,9 +31,9 @@ $apiInstance = new SeaTable\Client\User\ActivitiesLogsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int
-$per_page = 2; // int
-$to_tz = +08:00; // string
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
+$to_tz = +08:00; // string | Timezone offset for date/time conversion.
 
 try {
     $result = $apiInstance->getBaseActivities($page, $per_page, $to_tz);
@@ -47,9 +47,9 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
-| **to_tz** | **string**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
+| **to_tz** | **string**| Timezone offset for date/time conversion. | [optional] |
 
 ### Return type
 
@@ -86,8 +86,8 @@ $apiInstance = new SeaTable\Client\User\ActivitiesLogsApi(
 );
 $dtable_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $op_date = 2023-05-25T10:06:39+08:00; // string
-$page = 1; // int
-$per_page = 2; // int
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
 
 try {
     $result = $apiInstance->getBaseActivityDetails($dtable_uuid, $op_date, $page, $per_page);
@@ -103,8 +103,8 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **dtable_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **op_date** | **string**|  | |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
 
 ### Return type
 
@@ -140,8 +140,8 @@ $apiInstance = new SeaTable\Client\User\ActivitiesLogsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$page = 1; // int
-$per_page = 2; // int
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
 
 try {
     $result = $apiInstance->getBigDataOperationLogs($base_uuid, $page, $per_page);
@@ -156,8 +156,8 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
 
 ### Return type
 

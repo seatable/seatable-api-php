@@ -251,7 +251,7 @@ class GeolocationColumnWithTableName implements ModelInterface, ArrayAccess, \Js
         return self::$openAPIModelName;
     }
 
-    public const COLUMN_TYPE_CHECKBOX = 'checkbox';
+    public const COLUMN_TYPE_GEOLOCATION = 'geolocation';
 
     /**
      * Gets allowable values of the enum
@@ -261,7 +261,7 @@ class GeolocationColumnWithTableName implements ModelInterface, ArrayAccess, \Js
     public function getColumnTypeAllowableValues()
     {
         return [
-            self::COLUMN_TYPE_CHECKBOX,
+            self::COLUMN_TYPE_GEOLOCATION,
         ];
     }
 

@@ -246,7 +246,7 @@ class GeolocationColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const COLUMN_TYPE_CHECKBOX = 'checkbox';
+    public const COLUMN_TYPE_GEOLOCATION = 'geolocation';
 
     /**
      * Gets allowable values of the enum
@@ -256,7 +256,7 @@ class GeolocationColumn implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function getColumnTypeAllowableValues()
     {
         return [
-            self::COLUMN_TYPE_CHECKBOX,
+            self::COLUMN_TYPE_GEOLOCATION,
         ];
     }
 

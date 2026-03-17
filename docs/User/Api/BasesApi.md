@@ -593,8 +593,8 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int
-$per_page = 2; // int
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
 
 try {
     $result = $apiInstance->listTrashedBases($page, $per_page);
@@ -608,8 +608,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
 
 ### Return type
 
@@ -802,7 +802,7 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     $config
 );
 $query_str = test; // string | Search string. Substrings are allowed and capitalization does not matter.
-$query_type = 'query_type_example'; // string
+$query_type = 'query_type_example'; // string | Filter the search by type. Use `base` to search only bases or `app` to search only apps.
 
 try {
     $result = $apiInstance->searchBaseOrApps($query_str, $query_type);
@@ -817,7 +817,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **query_str** | **string**| Search string. Substrings are allowed and capitalization does not matter. | [optional] |
-| **query_type** | **string**|  | [optional] |
+| **query_type** | **string**| Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. | [optional] |
 
 ### Return type
 

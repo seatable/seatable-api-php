@@ -37,7 +37,7 @@ $apiInstance = new SeaTable\Client\User\AttachmentApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$path = /files/2021-01/abc.jpg; // string
+$path = /files/2021-01/abc.jpg; // string | The file path relative to the asset directory.
 
 try {
     $result = $apiInstance->checkIfAssetExists($workspace_id, $base_name, $path);
@@ -53,7 +53,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **path** | **string**|  | [optional] |
+| **path** | **string**| The file path relative to the asset directory. | [optional] |
 
 ### Return type
 
@@ -89,7 +89,7 @@ $apiInstance = new SeaTable\Client\User\AttachmentApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$path = /files/2021-01/abc.jpg; // string
+$path = /files/2021-01/abc.jpg; // string | The file path relative to the asset directory.
 
 try {
     $result = $apiInstance->deleteBaseAsset($base_uuid, $path);
@@ -104,7 +104,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **path** | **string**|  | [optional] |
+| **path** | **string**| The file path relative to the asset directory. | [optional] |
 
 ### Return type
 
@@ -240,7 +240,7 @@ $apiInstance = new SeaTable\Client\User\AttachmentApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$parent_dir = /; // string
+$parent_dir = /; // string | The parent directory path.
 
 try {
     $result = $apiInstance->listBaseAssets($base_uuid, $parent_dir);
@@ -255,7 +255,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **parent_dir** | **string**|  | [optional] |
+| **parent_dir** | **string**| The parent directory path. | [optional] |
 
 ### Return type
 

@@ -287,8 +287,8 @@ class DeleteRow implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['row_id'] === null) {
             $invalidProperties[] = "'row_id' can't be null";
         }
-        if (!preg_match("/^[a-zA-Z0-9\\-\\_]{22}$/", $this->container['row_id'])) {
-            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[a-zA-Z0-9\\-\\_]{22}$/.";
+        if (!preg_match("/^[A-Za-z0-9\\-\\_]{22}$/", $this->container['row_id'])) {
+            $invalidProperties[] = "invalid value for 'row_id', must be conform to the pattern /^[A-Za-z0-9\\-\\_]{22}$/.";
         }
 
         return $invalidProperties;
@@ -356,8 +356,8 @@ class DeleteRow implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable row_id cannot be null');
         }
 
-        if ((!preg_match("/^[a-zA-Z0-9\\-\\_]{22}$/", ObjectSerializer::toString($row_id)))) {
-            throw new \InvalidArgumentException("invalid value for \$row_id when calling DeleteRow., must conform to the pattern /^[a-zA-Z0-9\\-\\_]{22}$/.");
+        if ((!preg_match("/^[A-Za-z0-9\\-\\_]{22}$/", ObjectSerializer::toString($row_id)))) {
+            throw new \InvalidArgumentException("invalid value for \$row_id when calling DeleteRow., must conform to the pattern /^[A-Za-z0-9\\-\\_]{22}$/.");
         }
 
         $this->container['row_id'] = $row_id;

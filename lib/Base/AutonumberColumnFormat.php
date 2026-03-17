@@ -34,7 +34,7 @@ use \SeaTable\Client\ObjectSerializer;
  * AutonumberColumnFormat Class Doc Comment
  *
  * @category Class
- * @description Specify the auto number column.
+ * @description Specify the auto number column. The &#x60;format&#x60; field defines the number pattern (e.g. \&quot;0000\&quot; for 4 digits). Use &#x60;prefix_type&#x60; to add a prefix: \&quot;string\&quot; for a custom text prefix, or \&quot;date\&quot; for a date-based prefix.
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -57,7 +57,10 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'format' => 'string'
+        'format' => 'string',
+        'digits' => 'int',
+        'prefix_type' => 'string',
+        'prefix' => 'string'
     ];
 
     /**
@@ -68,7 +71,10 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'format' => null
+        'format' => null,
+        'digits' => null,
+        'prefix_type' => null,
+        'prefix' => null
     ];
 
     /**
@@ -77,7 +83,10 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'format' => false
+        'format' => false,
+        'digits' => false,
+        'prefix_type' => false,
+        'prefix' => false
     ];
 
     /**
@@ -166,7 +175,10 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'format' => 'format'
+        'format' => 'format',
+        'digits' => 'digits',
+        'prefix_type' => 'prefix_type',
+        'prefix' => 'prefix'
     ];
 
     /**
@@ -175,7 +187,10 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'format' => 'setFormat'
+        'format' => 'setFormat',
+        'digits' => 'setDigits',
+        'prefix_type' => 'setPrefixType',
+        'prefix' => 'setPrefix'
     ];
 
     /**
@@ -184,7 +199,10 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'format' => 'getFormat'
+        'format' => 'getFormat',
+        'digits' => 'getDigits',
+        'prefix_type' => 'getPrefixType',
+        'prefix' => 'getPrefix'
     ];
 
     /**
@@ -228,6 +246,21 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const PREFIX_TYPE_STRING = 'string';
+    public const PREFIX_TYPE_DATE = 'date';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPrefixTypeAllowableValues()
+    {
+        return [
+            self::PREFIX_TYPE_STRING,
+            self::PREFIX_TYPE_DATE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -245,6 +278,9 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(?array $data = null)
     {
         $this->setIfExists('format', $data ?? [], null);
+        $this->setIfExists('digits', $data ?? [], null);
+        $this->setIfExists('prefix_type', $data ?? [], null);
+        $this->setIfExists('prefix', $data ?? [], null);
     }
 
     /**
@@ -277,6 +313,18 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
         if ($this->container['format'] === null) {
             $invalidProperties[] = "'format' can't be null";
         }
+        if ($this->container['digits'] === null) {
+            $invalidProperties[] = "'digits' can't be null";
+        }
+        $allowedValues = $this->getPrefixTypeAllowableValues();
+        if (!is_null($this->container['prefix_type']) && !in_array($this->container['prefix_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'prefix_type', must be one of '%s'",
+                $this->container['prefix_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -305,7 +353,7 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets format
      *
-     * @param string $format format
+     * @param string $format The number format pattern.
      *
      * @return self
      */
@@ -315,6 +363,97 @@ class AutonumberColumnFormat implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable format cannot be null');
         }
         $this->container['format'] = $format;
+
+        return $this;
+    }
+
+    /**
+     * Gets digits
+     *
+     * @return int
+     */
+    public function getDigits()
+    {
+        return $this->container['digits'];
+    }
+
+    /**
+     * Sets digits
+     *
+     * @param int $digits Number of digits (must match the zeros in `format`).
+     *
+     * @return self
+     */
+    public function setDigits($digits)
+    {
+        if (is_null($digits)) {
+            throw new \InvalidArgumentException('non-nullable digits cannot be null');
+        }
+        $this->container['digits'] = $digits;
+
+        return $this;
+    }
+
+    /**
+     * Gets prefix_type
+     *
+     * @return string|null
+     */
+    public function getPrefixType()
+    {
+        return $this->container['prefix_type'];
+    }
+
+    /**
+     * Sets prefix_type
+     *
+     * @param string|null $prefix_type Type of prefix — \"string\" for a custom prefix, \"date\" for a date-based prefix (YYYYMMDD).
+     *
+     * @return self
+     */
+    public function setPrefixType($prefix_type)
+    {
+        if (is_null($prefix_type)) {
+            throw new \InvalidArgumentException('non-nullable prefix_type cannot be null');
+        }
+        $allowedValues = $this->getPrefixTypeAllowableValues();
+        if (!in_array($prefix_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'prefix_type', must be one of '%s'",
+                    $prefix_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['prefix_type'] = $prefix_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets prefix
+     *
+     * @return string|null
+     */
+    public function getPrefix()
+    {
+        return $this->container['prefix'];
+    }
+
+    /**
+     * Sets prefix
+     *
+     * @param string|null $prefix The prefix value (only used when `prefix_type` is \"string\").
+     *
+     * @return self
+     */
+    public function setPrefix($prefix)
+    {
+        if (is_null($prefix)) {
+            throw new \InvalidArgumentException('non-nullable prefix cannot be null');
+        }
+        $this->container['prefix'] = $prefix;
 
         return $this;
     }

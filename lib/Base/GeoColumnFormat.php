@@ -229,7 +229,7 @@ class GeoColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     public const GEO_FORMAT_LNG_LAT = 'lng_lat';
-    public const GEO_FORMAT_COUNTY_REGION = 'county_region';
+    public const GEO_FORMAT_COUNTRY_REGION = 'country_region';
 
     /**
      * Gets allowable values of the enum
@@ -240,7 +240,7 @@ class GeoColumnFormat implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         return [
             self::GEO_FORMAT_LNG_LAT,
-            self::GEO_FORMAT_COUNTY_REGION,
+            self::GEO_FORMAT_COUNTRY_REGION,
         ];
     }
 

@@ -129,7 +129,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client()
 );
-$external_link_token = c41cef71f5094827a786; // string | The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*.
+$external_link_token = c41cef71f5094827a786; // string | The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*.
 
 try {
     $result = $apiInstance->getBaseTokenWithExternLink($external_link_token);
@@ -143,7 +143,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **external_link_token** | **string**| The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. | |
+| **external_link_token** | **string**| The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*. | |
 
 ### Return type
 

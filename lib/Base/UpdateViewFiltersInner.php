@@ -59,8 +59,7 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         'column_key' => 'string',
         'filter_predicate' => '\SeaTable\Client\Base\EmailFilterPredicate',
         'filter_term' => 'string',
-        'filter_term_modifier' => '\SeaTable\Client\Base\DateFilterTermModifier',
-        'email_filter_predicate' => '\SeaTable\Client\Base\EmailFilterPredicate'
+        'filter_term_modifier' => '\SeaTable\Client\Base\DateFilterTermModifier'
     ];
 
     /**
@@ -74,8 +73,7 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         'column_key' => null,
         'filter_predicate' => null,
         'filter_term' => null,
-        'filter_term_modifier' => null,
-        'email_filter_predicate' => null
+        'filter_term_modifier' => null
     ];
 
     /**
@@ -87,8 +85,7 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         'column_key' => false,
         'filter_predicate' => false,
         'filter_term' => false,
-        'filter_term_modifier' => false,
-        'email_filter_predicate' => false
+        'filter_term_modifier' => false
     ];
 
     /**
@@ -180,8 +177,7 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         'column_key' => 'column_key',
         'filter_predicate' => 'filter_predicate',
         'filter_term' => 'filter_term',
-        'filter_term_modifier' => 'filter_term_modifier',
-        'email_filter_predicate' => 'email_filter_predicate'
+        'filter_term_modifier' => 'filter_term_modifier'
     ];
 
     /**
@@ -193,8 +189,7 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         'column_key' => 'setColumnKey',
         'filter_predicate' => 'setFilterPredicate',
         'filter_term' => 'setFilterTerm',
-        'filter_term_modifier' => 'setFilterTermModifier',
-        'email_filter_predicate' => 'setEmailFilterPredicate'
+        'filter_term_modifier' => 'setFilterTermModifier'
     ];
 
     /**
@@ -206,8 +201,7 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         'column_key' => 'getColumnKey',
         'filter_predicate' => 'getFilterPredicate',
         'filter_term' => 'getFilterTerm',
-        'filter_term_modifier' => 'getFilterTermModifier',
-        'email_filter_predicate' => 'getEmailFilterPredicate'
+        'filter_term_modifier' => 'getFilterTermModifier'
     ];
 
     /**
@@ -271,7 +265,6 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('filter_predicate', $data ?? [], null);
         $this->setIfExists('filter_term', $data ?? [], null);
         $this->setIfExists('filter_term_modifier', $data ?? [], null);
-        $this->setIfExists('email_filter_predicate', $data ?? [], null);
     }
 
     /**
@@ -420,33 +413,6 @@ class UpdateViewFiltersInner implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable filter_term_modifier cannot be null');
         }
         $this->container['filter_term_modifier'] = $filter_term_modifier;
-
-        return $this;
-    }
-
-    /**
-     * Gets email_filter_predicate
-     *
-     * @return \SeaTable\Client\Base\EmailFilterPredicate|null
-     */
-    public function getEmailFilterPredicate()
-    {
-        return $this->container['email_filter_predicate'];
-    }
-
-    /**
-     * Sets email_filter_predicate
-     *
-     * @param \SeaTable\Client\Base\EmailFilterPredicate|null $email_filter_predicate email_filter_predicate
-     *
-     * @return self
-     */
-    public function setEmailFilterPredicate($email_filter_predicate)
-    {
-        if (is_null($email_filter_predicate)) {
-            throw new \InvalidArgumentException('non-nullable email_filter_predicate cannot be null');
-        }
-        $this->container['email_filter_predicate'] = $email_filter_predicate;
 
         return $this;
     }

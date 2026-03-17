@@ -143,7 +143,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object|\SeaTable\Client\File\DeleteBaseAsset404Response
      */
     public function deleteBaseAsset($path, string $contentType = self::contentTypes['deleteBaseAsset'][0])
     {
@@ -161,7 +161,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\SeaTable\Client\File\DeleteBaseAsset404Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteBaseAssetWithHttpInfo($path, string $contentType = self::contentTypes['deleteBaseAsset'][0])
     {
@@ -197,6 +197,12 @@ class FilesImagesApi
                         $request,
                         $response,
                     );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\File\DeleteBaseAsset404Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -225,6 +231,14 @@ class FilesImagesApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SeaTable\Client\File\DeleteBaseAsset404Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -419,7 +433,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object|\SeaTable\Client\File\GetFileDownloadLink400Response
      */
     public function getFileDownloadLink($path, string $contentType = self::contentTypes['getFileDownloadLink'][0])
     {
@@ -437,7 +451,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\SeaTable\Client\File\GetFileDownloadLink400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getFileDownloadLinkWithHttpInfo($path, string $contentType = self::contentTypes['getFileDownloadLink'][0])
     {
@@ -473,6 +487,12 @@ class FilesImagesApi
                         $request,
                         $response,
                     );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\File\GetFileDownloadLink400Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -501,6 +521,14 @@ class FilesImagesApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SeaTable\Client\File\GetFileDownloadLink400Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -730,8 +730,8 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int|null $page page (optional)
-     * @param  int|null $per_page per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapshots'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -751,8 +751,8 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapshots'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -839,8 +839,8 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapshots'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -863,8 +863,8 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapshots'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -916,8 +916,8 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listSnapshots'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

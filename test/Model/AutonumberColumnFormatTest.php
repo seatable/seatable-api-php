@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * AutonumberColumnFormatTest Class Doc Comment
  *
  * @category    Class
- * @description Specify the auto number column.
+ * @description Specify the auto number column. The &#x60;format&#x60; field defines the number pattern (e.g. \&quot;0000\&quot; for 4 digits). Use &#x60;prefix_type&#x60; to add a prefix: \&quot;string\&quot; for a custom text prefix, or \&quot;date\&quot; for a date-based prefix.
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -82,6 +82,33 @@ class AutonumberColumnFormatTest extends TestCase
      * Test attribute "format"
      */
     public function testPropertyFormat()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "digits"
+     */
+    public function testPropertyDigits()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "prefix_type"
+     */
+    public function testPropertyPrefixType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "prefix"
+     */
+    public function testPropertyPrefix()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

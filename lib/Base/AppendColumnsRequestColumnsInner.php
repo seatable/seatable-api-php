@@ -245,7 +245,7 @@ class AppendColumnsRequestColumnsInner implements ModelInterface, ArrayAccess, \
         return self::$openAPIModelName;
     }
 
-    public const COLUMN_TYPE_FILE = 'file';
+    public const COLUMN_TYPE_BUTTON = 'button';
 
     /**
      * Gets allowable values of the enum
@@ -255,7 +255,7 @@ class AppendColumnsRequestColumnsInner implements ModelInterface, ArrayAccess, \
     public function getColumnTypeAllowableValues()
     {
         return [
-            self::COLUMN_TYPE_FILE,
+            self::COLUMN_TYPE_BUTTON,
         ];
     }
 

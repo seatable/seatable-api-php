@@ -343,7 +343,7 @@ class UpdateView implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets name
      *
-     * @param string|null $name The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+     * @param string|null $name The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
      *
      * @return self
      */

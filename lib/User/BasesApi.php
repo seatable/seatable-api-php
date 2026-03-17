@@ -3231,8 +3231,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int|null $page page (optional)
-     * @param  int|null $per_page per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3250,8 +3250,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3336,8 +3336,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3358,8 +3358,8 @@ class BasesApi
      *
      * List Trashed Bases
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3409,8 +3409,8 @@ class BasesApi
     /**
      * Create request for operation 'listTrashedBases'
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4402,7 +4402,7 @@ class BasesApi
      * Search base or apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string|null $query_type query_type (optional)
+     * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4421,7 +4421,7 @@ class BasesApi
      * Search base or apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string|null $query_type (optional)
+     * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -4507,7 +4507,7 @@ class BasesApi
      * Search base or apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string|null $query_type (optional)
+     * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4529,7 +4529,7 @@ class BasesApi
      * Search base or apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string|null $query_type (optional)
+     * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -4580,7 +4580,7 @@ class BasesApi
      * Create request for operation 'searchBaseOrApps'
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
-     * @param  string|null $query_type (optional)
+     * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchBaseOrApps'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

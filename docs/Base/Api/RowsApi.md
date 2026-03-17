@@ -195,7 +195,7 @@ $apiInstance = new SeaTable\Client\Base\RowsApi(
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 $table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
-$view_name = Default View; // string | The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+$view_name = Default View; // string | The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
 $start = 0; // int | Starting position (number) of the returned rows. 0 by default.
 $limit = 100; // int | Number of rows that should be returned. 1000 by default.
 $convert_keys = true; // bool | Determines if the columns are returned as their keys (false by default) or their names (true).
@@ -214,7 +214,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 | **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
-| **view_name** | **string**| The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you an use &#x60;view_id: 0000&#x60;. | [optional] |
+| **view_name** | **string**| The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. | [optional] |
 | **start** | **int**| Starting position (number) of the returned rows. 0 by default. | [optional] |
 | **limit** | **int**| Number of rows that should be returned. 1000 by default. | [optional] |
 | **convert_keys** | **bool**| Determines if the columns are returned as their keys (false by default) or their names (true). | [optional] |

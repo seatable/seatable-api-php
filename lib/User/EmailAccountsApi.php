@@ -728,7 +728,7 @@ class EmailAccountsApi
      * Get Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $account_name account_name (optional)
+     * @param  string|null $account_name The name of the third-party email account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEmailAccount'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -746,7 +746,7 @@ class EmailAccountsApi
      * Get Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $account_name (optional)
+     * @param  string|null $account_name The name of the third-party email account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEmailAccount'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -804,7 +804,7 @@ class EmailAccountsApi
      * Get Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $account_name (optional)
+     * @param  string|null $account_name The name of the third-party email account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEmailAccount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -826,7 +826,7 @@ class EmailAccountsApi
      * Get Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $account_name (optional)
+     * @param  string|null $account_name The name of the third-party email account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEmailAccount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -864,7 +864,7 @@ class EmailAccountsApi
      * Create request for operation 'getEmailAccount'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string|null $account_name (optional)
+     * @param  string|null $account_name The name of the third-party email account. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEmailAccount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

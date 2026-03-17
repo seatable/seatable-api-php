@@ -135,9 +135,9 @@ class ActivitiesLogsApi
      *
      * Get Base Activities
      *
-     * @param  int|null $page page (optional)
-     * @param  int|null $per_page per_page (optional)
-     * @param  string|null $to_tz to_tz (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
+     * @param  string|null $to_tz Timezone offset for date/time conversion. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivities'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -155,9 +155,9 @@ class ActivitiesLogsApi
      *
      * Get Base Activities
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
-     * @param  string|null $to_tz (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
+     * @param  string|null $to_tz Timezone offset for date/time conversion. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivities'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -242,9 +242,9 @@ class ActivitiesLogsApi
      *
      * Get Base Activities
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
-     * @param  string|null $to_tz (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
+     * @param  string|null $to_tz Timezone offset for date/time conversion. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -265,9 +265,9 @@ class ActivitiesLogsApi
      *
      * Get Base Activities
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
-     * @param  string|null $to_tz (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
+     * @param  string|null $to_tz Timezone offset for date/time conversion. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -317,9 +317,9 @@ class ActivitiesLogsApi
     /**
      * Create request for operation 'getBaseActivities'
      *
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
-     * @param  string|null $to_tz (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
+     * @param  string|null $to_tz Timezone offset for date/time conversion. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivities'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -443,8 +443,8 @@ class ActivitiesLogsApi
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $op_date op_date (required)
-     * @param  int|null $page page (optional)
-     * @param  int|null $per_page per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -464,8 +464,8 @@ class ActivitiesLogsApi
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $op_date (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -552,8 +552,8 @@ class ActivitiesLogsApi
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $op_date (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -576,8 +576,8 @@ class ActivitiesLogsApi
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $op_date (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -629,8 +629,8 @@ class ActivitiesLogsApi
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $op_date (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -778,8 +778,8 @@ class ActivitiesLogsApi
      * Get Big Data Operation Logs
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int|null $page page (optional)
-     * @param  int|null $per_page per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBigDataOperationLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -798,8 +798,8 @@ class ActivitiesLogsApi
      * Get Big Data Operation Logs
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBigDataOperationLogs'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -885,8 +885,8 @@ class ActivitiesLogsApi
      * Get Big Data Operation Logs
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBigDataOperationLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -908,8 +908,8 @@ class ActivitiesLogsApi
      * Get Big Data Operation Logs
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBigDataOperationLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -960,8 +960,8 @@ class ActivitiesLogsApi
      * Create request for operation 'getBigDataOperationLogs'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  int|null $page (optional)
-     * @param  int|null $per_page (optional)
+     * @param  int|null $page Page number of results to return. Default is 1. (optional)
+     * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBigDataOperationLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

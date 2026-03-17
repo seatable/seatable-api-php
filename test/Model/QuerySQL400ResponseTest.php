@@ -1,6 +1,6 @@
 <?php
 /**
- * FiltersEmailTest
+ * QuerySQL400ResponseTest
  *
  * PHP version 8.1
  *
@@ -30,15 +30,15 @@ namespace SeaTable\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * FiltersEmailTest Class Doc Comment
+ * QuerySQL400ResponseTest Class Doc Comment
  *
  * @category    Class
- * @description FiltersEmail
+ * @description QuerySQL400Response
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class FiltersEmailTest extends TestCase
+class QuerySQL400ResponseTest extends TestCase
 {
 
     /**
@@ -70,36 +70,18 @@ class FiltersEmailTest extends TestCase
     }
 
     /**
-     * Test "FiltersEmail"
+     * Test "QuerySQL400Response"
      */
-    public function testFiltersEmail()
+    public function testQuerySQL400Response()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "column_key"
+     * Test attribute "error_message"
      */
-    public function testPropertyColumnKey()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "filter_predicate"
-     */
-    public function testPropertyFilterPredicate()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "filter_term"
-     */
-    public function testPropertyFilterTerm()
+    public function testPropertyErrorMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

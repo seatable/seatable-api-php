@@ -57,7 +57,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'column_key' => 'string',
-        'email_filter_predicate' => '\SeaTable\Client\Base\EmailFilterPredicate',
+        'filter_predicate' => '\SeaTable\Client\Base\EmailFilterPredicate',
         'filter_term' => 'string'
     ];
 
@@ -70,7 +70,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'column_key' => null,
-        'email_filter_predicate' => null,
+        'filter_predicate' => null,
         'filter_term' => null
     ];
 
@@ -81,7 +81,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'column_key' => false,
-        'email_filter_predicate' => false,
+        'filter_predicate' => false,
         'filter_term' => false
     ];
 
@@ -172,7 +172,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'column_key' => 'column_key',
-        'email_filter_predicate' => 'email_filter_predicate',
+        'filter_predicate' => 'filter_predicate',
         'filter_term' => 'filter_term'
     ];
 
@@ -183,7 +183,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'column_key' => 'setColumnKey',
-        'email_filter_predicate' => 'setEmailFilterPredicate',
+        'filter_predicate' => 'setFilterPredicate',
         'filter_term' => 'setFilterTerm'
     ];
 
@@ -194,7 +194,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'column_key' => 'getColumnKey',
-        'email_filter_predicate' => 'getEmailFilterPredicate',
+        'filter_predicate' => 'getFilterPredicate',
         'filter_term' => 'getFilterTerm'
     ];
 
@@ -256,7 +256,7 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('column_key', $data ?? [], null);
-        $this->setIfExists('email_filter_predicate', $data ?? [], null);
+        $this->setIfExists('filter_predicate', $data ?? [], null);
         $this->setIfExists('filter_term', $data ?? [], null);
     }
 
@@ -330,28 +330,28 @@ class FiltersEmail implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets email_filter_predicate
+     * Gets filter_predicate
      *
      * @return \SeaTable\Client\Base\EmailFilterPredicate|null
      */
-    public function getEmailFilterPredicate()
+    public function getFilterPredicate()
     {
-        return $this->container['email_filter_predicate'];
+        return $this->container['filter_predicate'];
     }
 
     /**
-     * Sets email_filter_predicate
+     * Sets filter_predicate
      *
-     * @param \SeaTable\Client\Base\EmailFilterPredicate|null $email_filter_predicate email_filter_predicate
+     * @param \SeaTable\Client\Base\EmailFilterPredicate|null $filter_predicate filter_predicate
      *
      * @return self
      */
-    public function setEmailFilterPredicate($email_filter_predicate)
+    public function setFilterPredicate($filter_predicate)
     {
-        if (is_null($email_filter_predicate)) {
-            throw new \InvalidArgumentException('non-nullable email_filter_predicate cannot be null');
+        if (is_null($filter_predicate)) {
+            throw new \InvalidArgumentException('non-nullable filter_predicate cannot be null');
         }
-        $this->container['email_filter_predicate'] = $email_filter_predicate;
+        $this->container['filter_predicate'] = $filter_predicate;
 
         return $this;
     }

@@ -131,7 +131,7 @@ deleteGroup($org_id, $group_id): object
 
 Delete Group
 
-Delete a group with its ID.
+Delete a group with its ID.  > 🚧 Group must be empty > > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `\"Cannot delete group with bases\"`.
 
 ### Example
 

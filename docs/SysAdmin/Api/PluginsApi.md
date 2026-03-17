@@ -19,7 +19,7 @@ addPlugin($plugin): object
 
 Add Plugin
 
-Add a plugin with a .zip file. This file could be retrieved from the internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive).
+Add a plugin with a .zip file. This file could be retrieved from the internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive/).
 
 ### Example
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * ButtonColumn
+ * DeleteBaseAsset404Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * File Operations
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,22 +25,21 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\Base;
+namespace SeaTable\Client\File;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ButtonColumn Class Doc Comment
+ * DeleteBaseAsset404Response Class Doc Comment
  *
  * @category Class
- * @description Add a button column.
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
+class DeleteBaseAsset404Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'button_column';
+    protected static $openAPIModelName = 'DeleteBaseAsset_404_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +56,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'column_name' => 'string',
-        'column_type' => 'string',
-        'anchor_column' => 'string',
-        'column_data' => '\SeaTable\Client\Base\ButtonColumnFormat'
+        'error_msg' => 'string'
     ];
 
     /**
@@ -71,10 +67,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'column_name' => null,
-        'column_type' => null,
-        'anchor_column' => null,
-        'column_data' => null
+        'error_msg' => null
     ];
 
     /**
@@ -83,10 +76,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'column_name' => false,
-        'column_type' => false,
-        'anchor_column' => false,
-        'column_data' => false
+        'error_msg' => false
     ];
 
     /**
@@ -175,10 +165,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'column_name' => 'column_name',
-        'column_type' => 'column_type',
-        'anchor_column' => 'anchor_column',
-        'column_data' => 'column_data'
+        'error_msg' => 'error_msg'
     ];
 
     /**
@@ -187,10 +174,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'column_name' => 'setColumnName',
-        'column_type' => 'setColumnType',
-        'anchor_column' => 'setAnchorColumn',
-        'column_data' => 'setColumnData'
+        'error_msg' => 'setErrorMsg'
     ];
 
     /**
@@ -199,10 +183,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'column_name' => 'getColumnName',
-        'column_type' => 'getColumnType',
-        'anchor_column' => 'getAnchorColumn',
-        'column_data' => 'getColumnData'
+        'error_msg' => 'getErrorMsg'
     ];
 
     /**
@@ -246,19 +227,6 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const COLUMN_TYPE_BUTTON = 'button';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getColumnTypeAllowableValues()
-    {
-        return [
-            self::COLUMN_TYPE_BUTTON,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -275,10 +243,7 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('column_name', $data ?? [], null);
-        $this->setIfExists('column_type', $data ?? [], null);
-        $this->setIfExists('anchor_column', $data ?? [], null);
-        $this->setIfExists('column_data', $data ?? [], null);
+        $this->setIfExists('error_msg', $data ?? [], null);
     }
 
     /**
@@ -308,28 +273,6 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['column_name'] === null) {
-            $invalidProperties[] = "'column_name' can't be null";
-        }
-        if (!preg_match("/^[^.}{`]*$/", $this->container['column_name'])) {
-            $invalidProperties[] = "invalid value for 'column_name', must be conform to the pattern /^[^.}{`]*$/.";
-        }
-
-        if ($this->container['column_type'] === null) {
-            $invalidProperties[] = "'column_type' can't be null";
-        }
-        $allowedValues = $this->getColumnTypeAllowableValues();
-        if (!is_null($this->container['column_type']) && !in_array($this->container['column_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'column_type', must be one of '%s'",
-                $this->container['column_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['column_data'] === null) {
-            $invalidProperties[] = "'column_data' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -346,124 +289,28 @@ class ButtonColumn implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets column_name
-     *
-     * @return string
-     */
-    public function getColumnName()
-    {
-        return $this->container['column_name'];
-    }
-
-    /**
-     * Sets column_name
-     *
-     * @param string $column_name The name of the column.
-     *
-     * @return self
-     */
-    public function setColumnName($column_name)
-    {
-        if (is_null($column_name)) {
-            throw new \InvalidArgumentException('non-nullable column_name cannot be null');
-        }
-
-        if ((!preg_match("/^[^.}{`]*$/", ObjectSerializer::toString($column_name)))) {
-            throw new \InvalidArgumentException("invalid value for \$column_name when calling ButtonColumn., must conform to the pattern /^[^.}{`]*$/.");
-        }
-
-        $this->container['column_name'] = $column_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets column_type
-     *
-     * @return string
-     */
-    public function getColumnType()
-    {
-        return $this->container['column_type'];
-    }
-
-    /**
-     * Sets column_type
-     *
-     * @param string $column_type column_type
-     *
-     * @return self
-     */
-    public function setColumnType($column_type)
-    {
-        if (is_null($column_type)) {
-            throw new \InvalidArgumentException('non-nullable column_type cannot be null');
-        }
-        $allowedValues = $this->getColumnTypeAllowableValues();
-        if (!in_array($column_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'column_type', must be one of '%s'",
-                    $column_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['column_type'] = $column_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets anchor_column
+     * Gets error_msg
      *
      * @return string|null
      */
-    public function getAnchorColumn()
+    public function getErrorMsg()
     {
-        return $this->container['anchor_column'];
+        return $this->container['error_msg'];
     }
 
     /**
-     * Sets anchor_column
+     * Sets error_msg
      *
-     * @param string|null $anchor_column Give the name or the key of a column after you would like to add this new column. If you leave this empty, the new column will be created at the end.
+     * @param string|null $error_msg error_msg
      *
      * @return self
      */
-    public function setAnchorColumn($anchor_column)
+    public function setErrorMsg($error_msg)
     {
-        if (is_null($anchor_column)) {
-            throw new \InvalidArgumentException('non-nullable anchor_column cannot be null');
+        if (is_null($error_msg)) {
+            throw new \InvalidArgumentException('non-nullable error_msg cannot be null');
         }
-        $this->container['anchor_column'] = $anchor_column;
-
-        return $this;
-    }
-
-    /**
-     * Gets column_data
-     *
-     * @return \SeaTable\Client\Base\ButtonColumnFormat
-     */
-    public function getColumnData()
-    {
-        return $this->container['column_data'];
-    }
-
-    /**
-     * Sets column_data
-     *
-     * @param \SeaTable\Client\Base\ButtonColumnFormat $column_data column_data
-     *
-     * @return self
-     */
-    public function setColumnData($column_data)
-    {
-        if (is_null($column_data)) {
-            throw new \InvalidArgumentException('non-nullable column_data cannot be null');
-        }
-        $this->container['column_data'] = $column_data;
+        $this->container['error_msg'] = $error_msg;
 
         return $this;
     }

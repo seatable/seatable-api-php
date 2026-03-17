@@ -98,7 +98,7 @@ class SharingApi
             'application/json',
         ],
         'deleteUserShare' => [
-            'application/json',
+            'application/x-www-form-urlencoded',
         ],
         'deleteUserViewShare' => [
             'application/json',
@@ -2820,15 +2820,16 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
+     * @param  string $email The user ID ending with @auth.local (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
      */
-    public function deleteUserShare($workspace_id, $base_name, string $contentType = self::contentTypes['deleteUserShare'][0])
+    public function deleteUserShare($workspace_id, $base_name, $email, string $contentType = self::contentTypes['deleteUserShare'][0])
     {
-        list($response) = $this->deleteUserShareWithHttpInfo($workspace_id, $base_name, $contentType);
+        list($response) = $this->deleteUserShareWithHttpInfo($workspace_id, $base_name, $email, $contentType);
         return $response;
     }
 
@@ -2839,15 +2840,16 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
+     * @param  string $email The user ID ending with @auth.local (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteUserShareWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['deleteUserShare'][0])
+    public function deleteUserShareWithHttpInfo($workspace_id, $base_name, $email, string $contentType = self::contentTypes['deleteUserShare'][0])
     {
-        $request = $this->deleteUserShareRequest($workspace_id, $base_name, $contentType);
+        $request = $this->deleteUserShareRequest($workspace_id, $base_name, $email, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2925,14 +2927,15 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
+     * @param  string $email The user ID ending with @auth.local (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteUserShareAsync($workspace_id, $base_name, string $contentType = self::contentTypes['deleteUserShare'][0])
+    public function deleteUserShareAsync($workspace_id, $base_name, $email, string $contentType = self::contentTypes['deleteUserShare'][0])
     {
-        return $this->deleteUserShareAsyncWithHttpInfo($workspace_id, $base_name, $contentType)
+        return $this->deleteUserShareAsyncWithHttpInfo($workspace_id, $base_name, $email, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2947,15 +2950,16 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
+     * @param  string $email The user ID ending with @auth.local (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteUserShareAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['deleteUserShare'][0])
+    public function deleteUserShareAsyncWithHttpInfo($workspace_id, $base_name, $email, string $contentType = self::contentTypes['deleteUserShare'][0])
     {
         $returnType = 'object';
-        $request = $this->deleteUserShareRequest($workspace_id, $base_name, $contentType);
+        $request = $this->deleteUserShareRequest($workspace_id, $base_name, $email, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2998,12 +3002,13 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
+     * @param  string $email The user ID ending with @auth.local (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function deleteUserShareRequest($workspace_id, $base_name, string $contentType = self::contentTypes['deleteUserShare'][0])
+    public function deleteUserShareRequest($workspace_id, $base_name, $email, string $contentType = self::contentTypes['deleteUserShare'][0])
     {
 
         // verify the required parameter 'workspace_id' is set
@@ -3020,6 +3025,13 @@ class SharingApi
         if ($base_name === null || (is_array($base_name) && count($base_name) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $base_name when calling deleteUserShare'
+            );
+        }
+
+        // verify the required parameter 'email' is set
+        if ($email === null || (is_array($email) && count($email) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $email when calling deleteUserShare'
             );
         }
 
@@ -3050,6 +3062,15 @@ class SharingApi
             );
         }
 
+        // form params
+        $formDataProcessor = new FormDataProcessor();
+
+        $formData = $formDataProcessor->prepare([
+            'email' => $email,
+        ]);
+
+        $formParams = $formDataProcessor->flatten($formData);
+        $multipart = $formDataProcessor->has_file;
 
         $headers = $this->headerSelector->selectHeaders(
             ['application/json', ],
