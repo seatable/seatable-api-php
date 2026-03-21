@@ -39,7 +39,7 @@ docker run --rm \
  -t /local/generator/templates/php/
 mkdir ./docs/TeamAdmin
 mv ./docs/{Api,Model} ./docs/TeamAdmin
-mv ./README.md ./README_TeamAmin.md
+mv ./README.md ./README_TeamAdmin.md
 
 # user
 docker run --rm \
