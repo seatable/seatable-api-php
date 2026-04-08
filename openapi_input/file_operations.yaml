@@ -138,9 +138,20 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  upload_link:
+                    type: string
+                  workspace_id:
+                    type: integer
+                  parent_path:
+                    type: string
+                  img_relative_path:
+                    type: string
+                  file_relative_path:
+                    type: string
               example:
                 upload_link: >-
-                  https://cloud.seafile.com/seafhttp/upload-api/83e701c8-84ba-498c-91b1-ddb3789edb7e
+                  https://cloud.seatable.io/seafhttp/upload-api/83e701c8-84ba-498c-91b1-ddb3789edb7e
                 workspace_id: 42
                 parent_path: /asset/a275d870-fd55-48e4-8c4a-5fd6f2549765
                 img_relative_path: images/2021-08
@@ -267,7 +278,7 @@ paths:
       tags:
         - Files & Images
       summary: Delete a Base Asset
-      operationId: DeleteBaseAsset
+      operationId: deleteBaseAsset
       description: |
         Delete a base's attachment.
 
@@ -301,6 +312,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get Files from Folder
       operationId: getCustomFiles
+      description: List files and subdirectories in a custom folder of a base.
       security:
         - ApiTokenAuth: []
       parameters:
@@ -324,6 +336,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get File Metadata
       operationId: getCustomFileMetadata
+      description: Get metadata (name, size, last update) of a file in a custom folder.
       security:
         - ApiTokenAuth: []
       parameters:
@@ -346,7 +359,7 @@ paths:
     delete:
       tags: [Files & Images (Custom Folder)]
       summary: Delete a Base Asset in Custom Folder
-      operationId: DeleteBaseCustomFolderAsset
+      operationId: deleteBaseCustomFolderAsset
       description: |
         Delete a base's attachment in custom folder.
 
@@ -368,6 +381,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get Upload Link
       operationId: getCustomUploadLink
+      description: Get a temporary upload link for uploading files to a custom folder.
       security:
         - ApiTokenAuth: []
       parameters:
@@ -390,6 +404,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get Download Link
       operationId: getCustomDownloadLink
+      description: Get a temporary download link for a file in a custom folder.
       security:
         - ApiTokenAuth: []
       parameters:

@@ -170,6 +170,7 @@ components:
       example: 5c264e76-0e5a-448a-9f34-580b551364ca
     external_link_token:
       name: external_link_token
+      description: The token of the external link.
       in: path
       schema:
         type: string
@@ -177,6 +178,7 @@ components:
       example: "d6d006b319ca4d2aa060"
     view_external_link_token:
       name: view_external_link_token
+      description: The token of the view external link.
       in: path
       schema:
         type: string
@@ -184,12 +186,13 @@ components:
       example: "d6d006b319ca4d2aa060"
     invite_link_token:
       name: invite_link_token
+      description: The token of the invite link.
       in: path
       schema:
         type: string
         pattern: "^[0-9a-f]{20}$"
       required: true
-      example: "0366b8995d7f47d8eu3t"
+      example: "0366b8995d7f47d8ae3c"
     group_id:
       name: group_id
       in: path
@@ -241,11 +244,11 @@ components:
         The `user_id` of the owner of the group. Optional. If left
         blank, the newly added group will not be visible to anyone
         but still operatable.
-      example: "123abc456def789ghi123jkl456mno789@auth.local"
+      example: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
     team_admin_user_id:
       type: string
       description: The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
-      example: "123abc456def789ghi123jkl456mno789@auth.local"
+      example: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
     team_admin_email:
       type: string
       description: User's contact email to login.
@@ -279,7 +282,7 @@ components:
     team_admin_quota_total:
       type: integer
       description: Update their total quota in MB.
-      example: "3"
+      example: 3
     team_admin_group_id:
       type: string
       description: The ID of the group you'd like to move.
@@ -433,6 +436,27 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  is_active:
+                    type: boolean
+                  ctime:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  contact_email:
+                    type: string
+                  last_login:
+                    type: string
+                  self_usage:
+                    type: integer
+                  quota:
+                    type: integer
+                  workspace_id:
+                    type: integer
               example:
                 id: 125
                 is_active: true
@@ -464,6 +488,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  quota_usage:
+                    type: integer
+                  quota_total:
+                    type: integer
+                  avatar_url:
+                    type: string
+                  id_in_org:
+                    type: string
+                  has_default_device:
+                    type: boolean
+                  is_force_2fa:
+                    type: boolean
+                  is_active:
+                    type: boolean
+                  is_org_admin:
+                    type: boolean
               example:
                 email: "6196ab3dacef4e539ae8da4844b58a1f@auth.local"
                 name: "John Doe"
@@ -514,6 +561,31 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  quota_usage:
+                    type: integer
+                  quota_total:
+                    type: integer
+                  is_active:
+                    type: boolean
+                  id:
+                    type: integer
+                  ctime:
+                    type: string
+                  id_in_org:
+                    type: string
+                  last_login:
+                    type: string
+                  self_usage:
+                    type: integer
+                  quota:
+                    type: integer
               example:
                 email: 23456789d1754bb4afa2c2cb7369d244@auth.local
                 name: Stefan
@@ -590,7 +662,7 @@ paths:
 
 
         This request is to be distinguished from the next request, because
-        cancelling the enforcement doesn't necesssarily [Disable 2FA for A User
+        cancelling the enforcement doesn't necessarily [Disable 2FA for A User
         in Team](/reference/disabletwofactor-1), which serves a different purpose.
       requestBody:
         content:
@@ -680,14 +752,14 @@ paths:
                     updated_at: "2021-03-02T10:29:03+00:00"
                     color: null
                     text_color: null
-                    icon: null,
-                    is_encrypted: false,
-                    in_storage: true,
-                    org_id: 1,
-                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local,
-                    group_id: -1,
-                    owner: Jasmin Tee,
-                    owner_deleted: false,
+                    icon: null
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: 1
+                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local
+                    group_id: -1
+                    owner: Jasmin Tee
+                    owner_deleted: false
                     rows_count: 2
                   - id: 159
                     workspace_id: 304
@@ -697,14 +769,14 @@ paths:
                     updated_at: "2021-03-02T10:29:03+00:00"
                     color: null
                     text_color: null
-                    icon: null,
-                    is_encrypted: false,
-                    in_storage: true,
-                    org_id: 1,
-                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local,
-                    group_id: -1,
-                    owner: TeamAdmin,
-                    owner_deleted: false,
+                    icon: null
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: 1
+                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local
+                    group_id: -1
+                    owner: TeamAdmin
+                    owner_deleted: false
                     rows_count: 20
                 count: 16
   /api/v2.1/org/{org_id}/admin/users/{user_id}/dtables/:
@@ -785,6 +857,41 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  color:
+                    type: string
+                  text_color:
+                    type: string
+                  icon:
+                    type: string
+                  is_encrypted:
+                    type: boolean
+                  in_storage:
+                    type: boolean
+                  org_id:
+                    type: integer
+                  owner:
+                    type: string
+                  email:
+                    type: string
+                  group_id:
+                    type: integer
+                  owner_deleted:
+                    type: boolean
+                  rows_count:
+                    type: integer
               example:
                 id: 158
                 workspace_id: 304
@@ -794,14 +901,14 @@ paths:
                 updated_at: "2021-03-02T10:29:03+00:00"
                 color: null
                 text_color: null
-                icon: null,
-                is_encrypted: false,
-                in_storage: true,
-                org_id: 1,
+                icon: null
+                is_encrypted: false
+                in_storage: true
+                org_id: 1
                 owner: JiweRan
-                email: c882391bfa0144c4af64e4e0cde50b6c@auth.local,
-                group_id: -1,
-                owner_deleted: false,
+                email: c882391bfa0144c4af64e4e0cde50b6c@auth.local
+                group_id: -1
+                owner_deleted: false
                 rows_count: 2
     delete:
       tags:
@@ -970,6 +1077,15 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  groups:
+                    type: array
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+                  page_next:
+                    type: boolean
               example:
                 groups:
                   - id: 51
@@ -1018,6 +1134,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  group_name:
+                    type: string
+                  ctime:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
               example:
                 id: 3
                 group_name: Test group
@@ -1044,6 +1173,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  group_name:
+                    type: string
+                  ctime:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
               example:
                 id: 1
                 group_name: Test Group
@@ -1068,7 +1210,7 @@ paths:
         "User xxx is already group owner".
 
         *   `new_group_name` is the new name of your group. If you don't want to
-        change the name, remove shi parameter because if you enter the current
+        change the name, remove this parameter because if you enter the current
         group name here you'll get an error "There is already a group with that
         name".
       requestBody:
@@ -1093,11 +1235,26 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  group_name:
+                    type: string
+                  ctime:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
+                  size:
+                    type: integer
               example:
                 id: 1
                 group_name: Group New
                 ctime: "2020-11-19T08:14:52+00:00"
-                creator_email: 123abc456def789ghi123jkl456mno789@auth.local
+                creator_email: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                 creator_name: Michael Jackson
                 creator_contact_email: michael@example.com
                 size: 98842
@@ -1220,6 +1377,13 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  group_id:
+                    type: integer
+                  group_name:
+                    type: string
+                  members:
+                    type: array
               example:
                 group_id: 1
                 group_name: Sample Group
@@ -1313,6 +1477,8 @@ paths:
             application/json:
               schema:
                 type: object
+              example:
+                success: true
     delete:
       tags:
         - Groups
@@ -1355,6 +1521,8 @@ paths:
             application/json:
               schema:
                 type: object
+              example:
+                share_list: []
   /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/api-tokens/:
     get:
       tags:
@@ -1480,6 +1648,15 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  dtable_user_shares:
+                    type: array
+                  dtable_group_shares:
+                    type: array
+                  view_user_shares:
+                    type: array
+                  view_group_shares:
+                    type: array
               example:
                 dtable_user_shares:
                   - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
@@ -1732,6 +1909,25 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  username:
+                    type: string
+                  permission:
+                    type: string
+                  token:
+                    type: string
+                  link:
+                    type: string
+                  dtable:
+                    type: string
+                  dtable_id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  expire_date:
+                    type: string
+                  ctime:
+                    type: string
               example:
                 username: 876543216569491ba42905bf1647fd3f@auth.local
                 permission: rw
@@ -1766,23 +1962,6 @@ paths:
               example:
                 success: true
 
-  # Base Export (asynchron, deshalb bieten wir das nicht mehr an.)
-  #/api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/export-dtable/:
-  #  get:
-  #    tags: [Export]
-  #    summary: Export base
-  #    description: |
-  #      Use this request to export a base as Team Admin.
-  #    security:
-  #      - AccountTokenAuth: []
-  #    parameters:
-  #      - $ref: "#/components/parameters/org_id"
-  #      - $ref: "#/components/parameters/base_uuid"
-  #      - $ref: "#/components/parameters/ignore_asset"
-  #    responses:
-  #      "200":
-  #        description: OK
-
   # Info & Settings
   /api/v2.1/org/admin/info/:
     get:
@@ -1802,6 +1981,37 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  storage_quota:
+                    type: integer
+                  storage_usage:
+                    type: integer
+                  member_quota:
+                    type: integer
+                  member_usage:
+                    type: integer
+                  active_members:
+                    type: integer
+                  row_usage:
+                    type: integer
+                  row_total:
+                    type: integer
+                  role:
+                    type: string
+                  big_data_row_limit:
+                    type: integer
+                  big_data_total_rows:
+                    type: integer
+                  big_data_total_storage:
+                    type: integer
+                  scripts_running_total:
+                    type: integer
+                  scripts_running_count:
+                    type: integer
               example:
                 org_id: 1
                 org_name: SeaTable GmbH
@@ -1879,6 +2089,13 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  enable_force_2fa:
+                    type: boolean
+                  enable_new_user_email:
+                    type: boolean
+                  enable_external_user_access_invite_link:
+                    type: boolean
               example:
                 enable_force_2fa: false
                 enable_new_user_email: true
@@ -1914,6 +2131,13 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  enable_force_2fa:
+                    type: boolean
+                  enable_new_user_email:
+                    type: boolean
+                  enable_external_user_access_invite_link:
+                    type: boolean
               example:
                 enable_force_2fa: true
                 enable_new_user_email: true
@@ -2031,12 +2255,12 @@ paths:
                 group_member_log_list:
                   - user_email: 70e6e6be77dc4afeb1d6786f1e3d14e2@auth.local
                     user_name: org_user
-                    user_contact_email: org_user@qq.com
+                    user_contact_email: org_user@example.com
                     group_id: 2
                     group_name: org-t1
                     operator_email: ecd40dcfcdd041a98d51bdde2a05612e@auth.local
                     operator_name: org_admin
-                    operator_contact_email: org_admin@qq.com
+                    operator_contact_email: org_admin@example.com
                     date: 2025-05-27T06:57:03+00:00
                     operation: group_member_add
                 count: 1
@@ -2167,12 +2391,12 @@ paths:
                       "device": "",
                       "user": "af57b7dda06b4928b255339d92294853@auth.local",
                       "name": "org_admin1",
-                      "contact_email": "org_admin1@qq.com",
+                      "contact_email": "org_admin1@example.com",
                       "ip": "172.18.0.1",
                       "org_id": 1,
                       "dtable_uuid": "8e7ad4a8-73dc-4be4-abae-057fd5203a0e",
                       "file_path": "custom/aaa (1) (1).md",
-                      "dtable_name": "1\u5bfc\u5165\u534f\u4f5c\u4eba",
+                      "dtable_name": "Example Base",
                       "file_or_dir_name": "aaa (1) (1).md"
                     },
                     {
@@ -2181,12 +2405,12 @@ paths:
                       "device": "",
                       "user": "af57b7dda06b4928b255339d92294853@auth.local",
                       "name": "org_admin1",
-                      "contact_email": "org_admin1@qq.com",
+                      "contact_email": "org_admin1@example.com",
                       "ip": "172.18.0.1",
                       "org_id": 1,
                       "dtable_uuid": "8e7ad4a8-73dc-4be4-abae-057fd5203a0e",
                       "file_path": "/custom/aaa (1) (1).md",
-                      "dtable_name": "1\u5bfc\u5165\u534f\u4f5c\u4eba",
+                      "dtable_name": "Example Base",
                       "file_or_dir_name": "aaa (1) (1).md"
                     }
                   ],
@@ -2265,10 +2489,10 @@ paths:
                 runs:
                   - dtable_uuid: 306acc83-5305-45b4-b34b-528f6f51d7b8
                     finished_at: "2026-01-06T11:57:11+01:00"
-                    id: 3,
+                    id: 3
                     operate_from: manualy
                     owner: 2a609b47d6254449a7f042a42ef02d09@auth.local
-                    return_code: 0,
+                    return_code: 0
                     script_name: DDx0.py
                     started_at: "2026-01-06T11:57:10+01:00"
                     success: true
@@ -2509,7 +2733,7 @@ paths:
     get:
       tags:
         - Statistics
-      summary: Get AI statistics by user/base
+      summary: Get AI Statistics by User/Base
       operationId: getUserOrBaseAIStatistics
       description: Get AI usage statistics monthly by user/base.
       security:
