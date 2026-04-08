@@ -433,7 +433,7 @@ class EmailAccountsApi
      * Delete Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id _3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteEmailAccount'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -452,7 +452,7 @@ class EmailAccountsApi
      * Delete Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteEmailAccount'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -538,7 +538,7 @@ class EmailAccountsApi
      * Delete Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteEmailAccount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -560,7 +560,7 @@ class EmailAccountsApi
      * Delete Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteEmailAccount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -611,7 +611,7 @@ class EmailAccountsApi
      * Create request for operation 'deleteEmailAccount'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteEmailAccount'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -733,11 +733,12 @@ class EmailAccountsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function getEmailAccount($base_uuid, $account_name = null, string $contentType = self::contentTypes['getEmailAccount'][0])
     {
-        $this->getEmailAccountWithHttpInfo($base_uuid, $account_name, $contentType);
+        list($response) = $this->getEmailAccountWithHttpInfo($base_uuid, $account_name, $contentType);
+        return $response;
     }
 
     /**
@@ -751,7 +752,7 @@ class EmailAccountsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function getEmailAccountWithHttpInfo($base_uuid, $account_name = null, string $contentType = self::contentTypes['getEmailAccount'][0])
     {
@@ -780,10 +781,38 @@ class EmailAccountsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 400:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',
@@ -834,14 +863,27 @@ class EmailAccountsApi
      */
     public function getEmailAccountAsyncWithHttpInfo($base_uuid, $account_name = null, string $contentType = self::contentTypes['getEmailAccount'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->getEmailAccountRequest($base_uuid, $account_name, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1518,7 +1560,7 @@ class EmailAccountsApi
      * Update Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id _3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  \SeaTable\Client\User\AddEmailAccountRequest|null $add_email_account_request add_email_account_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateEmailAccount'] to see the possible values for this operation
      *
@@ -1538,7 +1580,7 @@ class EmailAccountsApi
      * Update Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  \SeaTable\Client\User\AddEmailAccountRequest|null $add_email_account_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateEmailAccount'] to see the possible values for this operation
      *
@@ -1625,7 +1667,7 @@ class EmailAccountsApi
      * Update Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  \SeaTable\Client\User\AddEmailAccountRequest|null $add_email_account_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateEmailAccount'] to see the possible values for this operation
      *
@@ -1648,7 +1690,7 @@ class EmailAccountsApi
      * Update Email Account
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  \SeaTable\Client\User\AddEmailAccountRequest|null $add_email_account_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateEmailAccount'] to see the possible values for this operation
      *
@@ -1700,7 +1742,7 @@ class EmailAccountsApi
      * Create request for operation 'updateEmailAccount'
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $_3rd_party_account_id (required)
+     * @param  string $_3rd_party_account_id The ID of the third-party account. (required)
      * @param  \SeaTable\Client\User\AddEmailAccountRequest|null $add_email_account_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateEmailAccount'] to see the possible values for this operation
      *

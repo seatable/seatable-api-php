@@ -156,7 +156,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\Base\AppendRows200Response
      */
     public function appendRows($base_uuid, $append_rows = null, string $contentType = self::contentTypes['appendRows'][0])
     {
@@ -175,7 +175,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\AppendRows200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function appendRowsWithHttpInfo($base_uuid, $append_rows = null, string $contentType = self::contentTypes['appendRows'][0])
     {
@@ -207,7 +207,7 @@ class RowsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\Base\AppendRows200Response',
                         $request,
                         $response,
                     );
@@ -229,7 +229,7 @@ class RowsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\Base\AppendRows200Response',
                 $request,
                 $response,
             );
@@ -238,7 +238,7 @@ class RowsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\Base\AppendRows200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -286,7 +286,7 @@ class RowsApi
      */
     public function appendRowsAsyncWithHttpInfo($base_uuid, $append_rows = null, string $contentType = self::contentTypes['appendRows'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\Base\AppendRows200Response';
         $request = $this->appendRowsRequest($base_uuid, $append_rows, $contentType);
 
         return $this->client
@@ -734,7 +734,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object|object|object
+     * @return \SeaTable\Client\Base\GetRow200Response|object|object
      */
     public function getRow($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
@@ -755,7 +755,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\GetRow200Response|object|object, HTTP status code, HTTP response headers (array of strings)
      */
     public function getRowWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
@@ -787,7 +787,7 @@ class RowsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\Base\GetRow200Response',
                         $request,
                         $response,
                     );
@@ -821,7 +821,7 @@ class RowsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\Base\GetRow200Response',
                 $request,
                 $response,
             );
@@ -830,7 +830,7 @@ class RowsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\Base\GetRow200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -898,7 +898,7 @@ class RowsApi
      */
     public function getRowAsyncWithHttpInfo($base_uuid, $row_id, $table_name, $convert_keys = null, string $contentType = self::contentTypes['getRow'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\Base\GetRow200Response';
         $request = $this->getRowRequest($base_uuid, $row_id, $table_name, $convert_keys, $contentType);
 
         return $this->client

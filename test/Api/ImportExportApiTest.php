@@ -181,7 +181,7 @@ class ImportExportApiTest extends TestCase
     /**
      * Test case for updateFromFile
      *
-     * Update from xlsx or csv.
+     * Update from XLSX or CSV.
      *
      */
     public function testUpdateFromFile()

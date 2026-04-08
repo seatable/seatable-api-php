@@ -1051,7 +1051,7 @@ class StatisticsApi
     /**
      * Operation getOwnerOrTeamAIStatistics
      *
-     * Get AI statistics by owner/team
+     * Get AI Statistics by Owner/Team
      *
      * @param  string $group_by Query by owner or organization (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -1072,7 +1072,7 @@ class StatisticsApi
     /**
      * Operation getOwnerOrTeamAIStatisticsWithHttpInfo
      *
-     * Get AI statistics by owner/team
+     * Get AI Statistics by Owner/Team
      *
      * @param  string $group_by Query by owner or organization (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -1160,7 +1160,7 @@ class StatisticsApi
     /**
      * Operation getOwnerOrTeamAIStatisticsAsync
      *
-     * Get AI statistics by owner/team
+     * Get AI Statistics by Owner/Team
      *
      * @param  string $group_by Query by owner or organization (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -1184,7 +1184,7 @@ class StatisticsApi
     /**
      * Operation getOwnerOrTeamAIStatisticsAsyncWithHttpInfo
      *
-     * Get AI statistics by owner/team
+     * Get AI Statistics by Owner/Team
      *
      * @param  string $group_by Query by owner or organization (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -1699,7 +1699,7 @@ class StatisticsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response
      */
     public function listActiveUsersByDay($date = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listActiveUsersByDay'][0])
     {
@@ -1719,7 +1719,7 @@ class StatisticsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function listActiveUsersByDayWithHttpInfo($date = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listActiveUsersByDay'][0])
     {
@@ -1751,7 +1751,7 @@ class StatisticsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response',
                         $request,
                         $response,
                     );
@@ -1773,7 +1773,7 @@ class StatisticsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response',
                 $request,
                 $response,
             );
@@ -1782,7 +1782,7 @@ class StatisticsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1832,7 +1832,7 @@ class StatisticsApi
      */
     public function listActiveUsersByDayAsyncWithHttpInfo($date = null, $page = null, $per_page = null, string $contentType = self::contentTypes['listActiveUsersByDay'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response';
         $request = $this->listActiveUsersByDayRequest($date, $page, $per_page, $contentType);
 
         return $this->client

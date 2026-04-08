@@ -170,7 +170,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\AddTeam200Response
      */
     public function addTeam($add_team_request = null, string $contentType = self::contentTypes['addTeam'][0])
     {
@@ -188,7 +188,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\AddTeam200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function addTeamWithHttpInfo($add_team_request = null, string $contentType = self::contentTypes['addTeam'][0])
     {
@@ -220,7 +220,7 @@ class TeamsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\AddTeam200Response',
                         $request,
                         $response,
                     );
@@ -242,7 +242,7 @@ class TeamsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\AddTeam200Response',
                 $request,
                 $response,
             );
@@ -251,7 +251,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\AddTeam200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -297,7 +297,7 @@ class TeamsApi
      */
     public function addTeamAsyncWithHttpInfo($add_team_request = null, string $contentType = self::contentTypes['addTeam'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\AddTeam200Response';
         $request = $this->addTeamRequest($add_team_request, $contentType);
 
         return $this->client
@@ -439,7 +439,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\AddTeamUser200Response
      */
     public function addTeamUser($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
@@ -461,7 +461,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\AddTeamUser200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function addTeamUserWithHttpInfo($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
@@ -493,7 +493,7 @@ class TeamsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\AddTeamUser200Response',
                         $request,
                         $response,
                     );
@@ -515,7 +515,7 @@ class TeamsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\AddTeamUser200Response',
                 $request,
                 $response,
             );
@@ -524,7 +524,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\AddTeamUser200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -578,7 +578,7 @@ class TeamsApi
      */
     public function addTeamUserAsyncWithHttpInfo($org_id, $email, $password, $name = null, $with_workspace = null, string $contentType = self::contentTypes['addTeamUser'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\AddTeamUser200Response';
         $request = $this->addTeamUserRequest($org_id, $email, $password, $name, $with_workspace, $contentType);
 
         return $this->client
@@ -1030,7 +1030,7 @@ class TeamsApi
      * Delete Group
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1049,7 +1049,7 @@ class TeamsApi
      * Delete Group
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1135,7 +1135,7 @@ class TeamsApi
      * Delete Group
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1157,7 +1157,7 @@ class TeamsApi
      * Delete Group
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1208,7 +1208,7 @@ class TeamsApi
      * Create request for operation 'deleteTeamGroup'
      *
      * @param  int $org_id The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteTeamGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1625,16 +1625,17 @@ class TeamsApi
      *
      * Get Organization Names
      *
-     * @param  string[]|null $org_ids org_ids (optional)
+     * @param  string[]|null $org_ids Comma-separated list of organization IDs to look up. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrganizationNames'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return void
+     * @return object
      */
     public function getOrganizationNames($org_ids = null, string $contentType = self::contentTypes['getOrganizationNames'][0])
     {
-        $this->getOrganizationNamesWithHttpInfo($org_ids, $contentType);
+        list($response) = $this->getOrganizationNamesWithHttpInfo($org_ids, $contentType);
+        return $response;
     }
 
     /**
@@ -1642,12 +1643,12 @@ class TeamsApi
      *
      * Get Organization Names
      *
-     * @param  string[]|null $org_ids (optional)
+     * @param  string[]|null $org_ids Comma-separated list of organization IDs to look up. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrganizationNames'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
     public function getOrganizationNamesWithHttpInfo($org_ids = null, string $contentType = self::contentTypes['getOrganizationNames'][0])
     {
@@ -1676,9 +1677,45 @@ class TeamsApi
             $statusCode = $response->getStatusCode();
 
 
-            return [null, $statusCode, $response->getHeaders()];
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        'object',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                'object',
+                $request,
+                $response,
+            );
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -1691,7 +1728,7 @@ class TeamsApi
      *
      * Get Organization Names
      *
-     * @param  string[]|null $org_ids (optional)
+     * @param  string[]|null $org_ids Comma-separated list of organization IDs to look up. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrganizationNames'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1712,7 +1749,7 @@ class TeamsApi
      *
      * Get Organization Names
      *
-     * @param  string[]|null $org_ids (optional)
+     * @param  string[]|null $org_ids Comma-separated list of organization IDs to look up. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrganizationNames'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1720,14 +1757,27 @@ class TeamsApi
      */
     public function getOrganizationNamesAsyncWithHttpInfo($org_ids = null, string $contentType = self::contentTypes['getOrganizationNames'][0])
     {
-        $returnType = '';
+        $returnType = 'object';
         $request = $this->getOrganizationNamesRequest($org_ids, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1749,7 +1799,7 @@ class TeamsApi
     /**
      * Create request for operation 'getOrganizationNames'
      *
-     * @param  string[]|null $org_ids (optional)
+     * @param  string[]|null $org_ids Comma-separated list of organization IDs to look up. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrganizationNames'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1781,7 +1831,7 @@ class TeamsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['application/json', ],
             $contentType,
             $multipart
         );
@@ -3011,7 +3061,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\SearchTeam200Response
      */
     public function searchTeam($org_id, string $contentType = self::contentTypes['searchTeam'][0])
     {
@@ -3029,7 +3079,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\SearchTeam200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function searchTeamWithHttpInfo($org_id, string $contentType = self::contentTypes['searchTeam'][0])
     {
@@ -3061,7 +3111,7 @@ class TeamsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\SearchTeam200Response',
                         $request,
                         $response,
                     );
@@ -3083,7 +3133,7 @@ class TeamsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\SearchTeam200Response',
                 $request,
                 $response,
             );
@@ -3092,7 +3142,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\SearchTeam200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3138,7 +3188,7 @@ class TeamsApi
      */
     public function searchTeamAsyncWithHttpInfo($org_id, string $contentType = self::contentTypes['searchTeam'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\SearchTeam200Response';
         $request = $this->searchTeamRequest($org_id, $contentType);
 
         return $this->client
@@ -3287,7 +3337,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\UpdateTeam200Response
      */
     public function updateTeam($org_id, $update_team_request = null, string $contentType = self::contentTypes['updateTeam'][0])
     {
@@ -3306,7 +3356,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\UpdateTeam200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateTeamWithHttpInfo($org_id, $update_team_request = null, string $contentType = self::contentTypes['updateTeam'][0])
     {
@@ -3338,7 +3388,7 @@ class TeamsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\UpdateTeam200Response',
                         $request,
                         $response,
                     );
@@ -3360,7 +3410,7 @@ class TeamsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\UpdateTeam200Response',
                 $request,
                 $response,
             );
@@ -3369,7 +3419,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\UpdateTeam200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3417,7 +3467,7 @@ class TeamsApi
      */
     public function updateTeamAsyncWithHttpInfo($org_id, $update_team_request = null, string $contentType = self::contentTypes['updateTeam'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\UpdateTeam200Response';
         $request = $this->updateTeamRequest($org_id, $update_team_request, $contentType);
 
         return $this->client
@@ -3576,7 +3626,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\AddTeamUser200Response
      */
     public function updateTeamUser($org_id, $user_id, $update_team_user_request = null, string $contentType = self::contentTypes['updateTeamUser'][0])
     {
@@ -3596,7 +3646,7 @@ class TeamsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\AddTeamUser200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateTeamUserWithHttpInfo($org_id, $user_id, $update_team_user_request = null, string $contentType = self::contentTypes['updateTeamUser'][0])
     {
@@ -3628,7 +3678,7 @@ class TeamsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\AddTeamUser200Response',
                         $request,
                         $response,
                     );
@@ -3650,7 +3700,7 @@ class TeamsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\AddTeamUser200Response',
                 $request,
                 $response,
             );
@@ -3659,7 +3709,7 @@ class TeamsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\AddTeamUser200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3709,7 +3759,7 @@ class TeamsApi
      */
     public function updateTeamUserAsyncWithHttpInfo($org_id, $user_id, $update_team_user_request = null, string $contentType = self::contentTypes['updateTeamUser'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\AddTeamUser200Response';
         $request = $this->updateTeamUserRequest($org_id, $user_id, $update_team_user_request, $contentType);
 
         return $this->client

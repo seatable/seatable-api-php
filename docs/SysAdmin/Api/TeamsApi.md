@@ -22,7 +22,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addTeam()`
 
 ```php
-addTeam($add_team_request): object
+addTeam($add_team_request): \SeaTable\Client\SysAdmin\AddTeam200Response
 ```
 
 Add Team
@@ -59,7 +59,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddTeam200Response**](../Model/AddTeam200Response.md)
 
 ### Authorization
 
@@ -71,7 +71,7 @@ AccountTokenAuth
 ## `addTeamUser()`
 
 ```php
-addTeamUser($org_id, $email, $password, $name, $with_workspace): object
+addTeamUser($org_id, $email, $password, $name, $with_workspace): \SeaTable\Client\SysAdmin\AddTeamUser200Response
 ```
 
 Add Team User
@@ -116,7 +116,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddTeamUser200Response**](../Model/AddTeamUser200Response.md)
 
 ### Authorization
 
@@ -197,7 +197,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     $config
 );
 $org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$group_id = 48; // int
+$group_id = 48; // int | The ID of the group.
 
 try {
     $result = $apiInstance->deleteTeamGroup($org_id, $group_id);
@@ -212,7 +212,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
@@ -248,7 +248,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     $config
 );
 $org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->deleteTeamUser($org_id, $user_id);
@@ -279,10 +279,12 @@ AccountTokenAuth
 ## `getOrganizationNames()`
 
 ```php
-getOrganizationNames($org_ids)
+getOrganizationNames($org_ids): object
 ```
 
 Get Organization Names
+
+Retrieve the names of one or more organizations by their IDs.
 
 ### Example
 
@@ -296,10 +298,11 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_ids = 2; // string[]
+$org_ids = 2; // string[] | Comma-separated list of organization IDs to look up.
 
 try {
-    $apiInstance->getOrganizationNames($org_ids);
+    $result = $apiInstance->getOrganizationNames($org_ids);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TeamsApi->getOrganizationNames: ', $e->getMessage(), PHP_EOL;
 }
@@ -309,11 +312,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_ids** | [**string[]**](../Model/string.md)|  | [optional] |
+| **org_ids** | [**string[]**](../Model/string.md)| Comma-separated list of organization IDs to look up. | [optional] |
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -529,7 +532,7 @@ AccountTokenAuth
 ## `searchTeam()`
 
 ```php
-searchTeam($org_id): object
+searchTeam($org_id): \SeaTable\Client\SysAdmin\SearchTeam200Response
 ```
 
 Search Team
@@ -566,7 +569,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\SearchTeam200Response**](../Model/SearchTeam200Response.md)
 
 ### Authorization
 
@@ -578,7 +581,7 @@ AccountTokenAuth
 ## `updateTeam()`
 
 ```php
-updateTeam($org_id, $update_team_request): object
+updateTeam($org_id, $update_team_request): \SeaTable\Client\SysAdmin\UpdateTeam200Response
 ```
 
 Update Team
@@ -617,7 +620,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\UpdateTeam200Response**](../Model/UpdateTeam200Response.md)
 
 ### Authorization
 
@@ -629,7 +632,7 @@ AccountTokenAuth
 ## `updateTeamUser()`
 
 ```php
-updateTeamUser($org_id, $user_id, $update_team_user_request): object
+updateTeamUser($org_id, $user_id, $update_team_user_request): \SeaTable\Client\SysAdmin\AddTeamUser200Response
 ```
 
 Update Team User
@@ -649,7 +652,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\TeamsApi(
     $config
 );
 $org_id = 1; // int | The id of your team/organization. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $update_team_user_request = new \SeaTable\Client\SysAdmin\UpdateTeamUserRequest(); // \SeaTable\Client\SysAdmin\UpdateTeamUserRequest
 
 try {
@@ -670,7 +673,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddTeamUser200Response**](../Model/AddTeamUser200Response.md)
 
 ### Authorization
 

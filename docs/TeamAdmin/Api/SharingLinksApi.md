@@ -37,7 +37,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$external_link_token = d6d006b319ca4d2aa060; // string
+$external_link_token = d6d006b319ca4d2aa060; // string | The token of the external link.
 
 try {
     $result = $apiInstance->deleteExternalLink($org_id, $external_link_token);
@@ -52,7 +52,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **external_link_token** | **string**|  | |
+| **external_link_token** | **string**| The token of the external link. | |
 
 ### Return type
 
@@ -88,7 +88,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$invite_link_token = 0366b8995d7f47d8eu3t; // string
+$invite_link_token = 0366b8995d7f47d8ae3c; // string | The token of the invite link.
 
 try {
     $result = $apiInstance->deleteInviteLink($org_id, $invite_link_token);
@@ -103,7 +103,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **invite_link_token** | **string**|  | |
+| **invite_link_token** | **string**| The token of the invite link. | |
 
 ### Return type
 
@@ -139,7 +139,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$view_external_link_token = d6d006b319ca4d2aa060; // string
+$view_external_link_token = d6d006b319ca4d2aa060; // string | The token of the view external link.
 
 try {
     $result = $apiInstance->deleteViewExternalLink($org_id, $view_external_link_token);
@@ -154,7 +154,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **view_external_link_token** | **string**|  | |
+| **view_external_link_token** | **string**| The token of the view external link. | |
 
 ### Return type
 
@@ -272,7 +272,7 @@ AccountTokenAuth
 ## `listShares()`
 
 ```php
-listShares($org_id): object
+listShares($org_id): \SeaTable\Client\TeamAdmin\ListShares200Response
 ```
 
 List Shares
@@ -309,7 +309,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\ListShares200Response**](../Model/ListShares200Response.md)
 
 ### Authorization
 
@@ -370,7 +370,7 @@ AccountTokenAuth
 ## `updateInviteLink()`
 
 ```php
-updateInviteLink($org_id, $invite_link_token, $update_invite_link_request): object
+updateInviteLink($org_id, $invite_link_token, $update_invite_link_request): \SeaTable\Client\TeamAdmin\UpdateInviteLink200Response
 ```
 
 Update Invite Link
@@ -390,7 +390,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$invite_link_token = 0366b8995d7f47d8eu3t; // string
+$invite_link_token = 0366b8995d7f47d8ae3c; // string | The token of the invite link.
 $update_invite_link_request = new \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest(); // \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest
 
 try {
@@ -406,12 +406,12 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **invite_link_token** | **string**|  | |
+| **invite_link_token** | **string**| The token of the invite link. | |
 | **update_invite_link_request** | [**\SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest**](../Model/UpdateInviteLinkRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\UpdateInviteLink200Response**](../Model/UpdateInviteLink200Response.md)
 
 ### Authorization
 

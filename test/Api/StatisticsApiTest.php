@@ -109,7 +109,7 @@ class StatisticsApiTest extends TestCase
     /**
      * Test case for getOwnerOrTeamAIStatistics
      *
-     * Get AI statistics by owner/team.
+     * Get AI Statistics by Owner/Team.
      *
      */
     public function testGetOwnerOrTeamAIStatistics()

@@ -442,7 +442,7 @@ class ActivitiesLogsApi
      * Get Base Activity Details
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $op_date op_date (required)
+     * @param  string $op_date Filter by operation date. (required)
      * @param  int|null $page Page number of results to return. Default is 1. (optional)
      * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
@@ -463,7 +463,7 @@ class ActivitiesLogsApi
      * Get Base Activity Details
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $op_date (required)
+     * @param  string $op_date Filter by operation date. (required)
      * @param  int|null $page Page number of results to return. Default is 1. (optional)
      * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
@@ -551,7 +551,7 @@ class ActivitiesLogsApi
      * Get Base Activity Details
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $op_date (required)
+     * @param  string $op_date Filter by operation date. (required)
      * @param  int|null $page Page number of results to return. Default is 1. (optional)
      * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
@@ -575,7 +575,7 @@ class ActivitiesLogsApi
      * Get Base Activity Details
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $op_date (required)
+     * @param  string $op_date Filter by operation date. (required)
      * @param  int|null $page Page number of results to return. Default is 1. (optional)
      * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation
@@ -628,7 +628,7 @@ class ActivitiesLogsApi
      * Create request for operation 'getBaseActivityDetails'
      *
      * @param  string $dtable_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
-     * @param  string $op_date (required)
+     * @param  string $op_date Filter by operation date. (required)
      * @param  int|null $page Page number of results to return. Default is 1. (optional)
      * @param  int|null $per_page Number of results per page. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBaseActivityDetails'] to see the possible values for this operation

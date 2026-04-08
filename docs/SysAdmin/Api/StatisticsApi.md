@@ -7,7 +7,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**getActiveUsersPerDay()**](StatisticsApi.md#getActiveUsersPerDay) | **GET** /api/v2.1/admin/statistics/active-users/ | Get Active Users (per Day) |
 | [**getAutomationRules()**](StatisticsApi.md#getAutomationRules) | **GET** /api/v2.1/admin/statistics/auto-rules/ | Get Automation Rules |
 | [**getExternalApps()**](StatisticsApi.md#getExternalApps) | **GET** /api/v2.1/admin/statistics/external-apps/ | Get External Apps |
-| [**getOwnerOrTeamAIStatistics()**](StatisticsApi.md#getOwnerOrTeamAIStatistics) | **GET** /api/v2.1/admin/statistics/ai/ | Get AI statistics by owner/team |
+| [**getOwnerOrTeamAIStatistics()**](StatisticsApi.md#getOwnerOrTeamAIStatistics) | **GET** /api/v2.1/admin/statistics/ai/ | Get AI Statistics by Owner/Team |
 | [**getScriptRunningCountByUser()**](StatisticsApi.md#getScriptRunningCountByUser) | **GET** /api/v2.1/admin/statistics/scripts-running/ | Get Script Running Count by User |
 | [**listActiveUsersByDay()**](StatisticsApi.md#listActiveUsersByDay) | **GET** /api/v2.1/admin/daily-active-users/ | List Active Users (one Day) |
 | [**listScriptTasks()**](StatisticsApi.md#listScriptTasks) | **GET** /api/v2.1/admin/scripts-tasks/ | List Scripts Tasks |
@@ -176,7 +176,7 @@ AccountTokenAuth
 getOwnerOrTeamAIStatistics($group_by, $date, $page, $per_page): object
 ```
 
-Get AI statistics by owner/team
+Get AI Statistics by Owner/Team
 
 Get AI usage statistics monthly by owner/team.
 
@@ -248,7 +248,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\StatisticsApi(
     $config
 );
 $is_user = false; // bool | Whether you'd like to list automation rules triggered by single users who are not in any teams (`true`) or by teams (`false`).  The usage of `true` here is seldom meaningful for cloud.seatable.io as all the users in the SeaTable Cloud are team users.
-$owner = 123abc456def789ghi123jkl456mno789@auth.local; // string | The ID of the user you are querying. Optional. If you don't define a user, all the users are queried.
+$owner = 12abc456def789abc123def456abc789@auth.local; // string | The ID of the user you are querying. Optional. If you don't define a user, all the users are queried.
 $month = 202109; // string | For which month you'd like to list the statistics in the format of YYYYMM. Statistics of automation rules before 202109 are not correctly summarized.
 
 try {
@@ -281,7 +281,7 @@ AccountTokenAuth
 ## `listActiveUsersByDay()`
 
 ```php
-listActiveUsersByDay($date, $page, $per_page): object
+listActiveUsersByDay($date, $page, $per_page): \SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response
 ```
 
 List Active Users (one Day)
@@ -322,7 +322,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\ListActiveUsersByDay200Response**](../Model/ListActiveUsersByDay200Response.md)
 
 ### Authorization
 

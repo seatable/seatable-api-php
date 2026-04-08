@@ -60,7 +60,7 @@ AccountTokenAuth
 ## `getTeamInfo()`
 
 ```php
-getTeamInfo(): object
+getTeamInfo(): \SeaTable\Client\TeamAdmin\GetTeamInfo200Response
 ```
 
 Get Team Info
@@ -94,7 +94,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetTeamInfo200Response**](../Model/GetTeamInfo200Response.md)
 
 ### Authorization
 
@@ -106,7 +106,7 @@ AccountTokenAuth
 ## `getTeamSettings()`
 
 ```php
-getTeamSettings(): object
+getTeamSettings(): \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
 ```
 
 Get Team Settings
@@ -140,7 +140,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetTeamSettings200Response**](../Model/GetTeamSettings200Response.md)
 
 ### Authorization
 
@@ -201,7 +201,7 @@ AccountTokenAuth
 ## `updateTeamSettings()`
 
 ```php
-updateTeamSettings($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name): object
+updateTeamSettings($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name): \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
 ```
 
 Update Team Settings
@@ -246,7 +246,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetTeamSettings200Response**](../Model/GetTeamSettings200Response.md)
 
 ### Authorization
 

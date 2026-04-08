@@ -48,7 +48,7 @@ class SendToastNotificationRequest implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SendToastNotification_request';
+    protected static $openAPIModelName = 'sendToastNotification_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

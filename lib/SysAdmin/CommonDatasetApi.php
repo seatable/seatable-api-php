@@ -1242,7 +1242,7 @@ class CommonDatasetApi
     /**
      * Operation listInvalidSyncs
      *
-     * List invalid Syncs
+     * List Invalid Syncs
      *
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -1261,7 +1261,7 @@ class CommonDatasetApi
     /**
      * Operation listInvalidSyncsWithHttpInfo
      *
-     * List invalid Syncs
+     * List Invalid Syncs
      *
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -1347,7 +1347,7 @@ class CommonDatasetApi
     /**
      * Operation listInvalidSyncsAsync
      *
-     * List invalid Syncs
+     * List Invalid Syncs
      *
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)
@@ -1369,7 +1369,7 @@ class CommonDatasetApi
     /**
      * Operation listInvalidSyncsAsyncWithHttpInfo
      *
-     * List invalid Syncs
+     * List Invalid Syncs
      *
      * @param  int|null $page The page number you want to start showing the entries. If no value is provided, 1 will be used. (optional)
      * @param  int|null $per_page The number of results that should be returned. If no value is provided, 25 results will be returned. (optional)

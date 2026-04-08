@@ -10,6 +10,7 @@ docs/Model/ApiToken.md
 docs/Model/ApiTokenList.md
 docs/Model/ApiTokenTemporary.md
 docs/Model/AuthenticationPermission.md
+docs/Model/GetBaseTokenWithApiToken200Response.md
 lib/ApiException.php
 lib/Auth/APITokenApi.php
 lib/Auth/AccessToken.php
@@ -20,6 +21,7 @@ lib/Auth/ApiTokenList.php
 lib/Auth/ApiTokenTemporary.php
 lib/Auth/AuthenticationPermission.php
 lib/Auth/BaseTokenApi.php
+lib/Auth/GetBaseTokenWithApiToken200Response.php
 lib/Auth/ModelInterface.php
 lib/Configuration.php
 lib/FormDataProcessor.php

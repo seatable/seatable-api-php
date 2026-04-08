@@ -6,9 +6,9 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | ------------- | ------------- | ------------- |
 | [**getStatisticsGroupedByBase()**](StatisticsApi.md#getStatisticsGroupedByBase) | **GET** /admin/statistics/by-base/ | Grouped by Base |
 | [**getStatisticsGroupedByDay()**](StatisticsApi.md#getStatisticsGroupedByDay) | **GET** /admin/statistics/by-day/ | Grouped by Day |
-| [**scriptRunsPerBase()**](StatisticsApi.md#scriptRunsPerBase) | **GET** /admin/statistics/scripts-running/by-base/ | Script runs per base |
-| [**scriptRunsPerTeam()**](StatisticsApi.md#scriptRunsPerTeam) | **GET** /admin/statistics/scripts-running/by-org/ | Script runs per team |
-| [**scriptRunsPerUser()**](StatisticsApi.md#scriptRunsPerUser) | **GET** /admin/statistics/scripts-running/by-user/ | Script runs per user |
+| [**scriptRunsPerBase()**](StatisticsApi.md#scriptRunsPerBase) | **GET** /admin/statistics/scripts-running/by-base/ | Script Runs per Base |
+| [**scriptRunsPerTeam()**](StatisticsApi.md#scriptRunsPerTeam) | **GET** /admin/statistics/scripts-running/by-org/ | Script Runs per Team |
+| [**scriptRunsPerUser()**](StatisticsApi.md#scriptRunsPerUser) | **GET** /admin/statistics/scripts-running/by-user/ | Script Runs per User |
 
 
 ## `getStatisticsGroupedByBase()`
@@ -130,10 +130,10 @@ PythonSchedulerAuth
 ## `scriptRunsPerBase()`
 
 ```php
-scriptRunsPerBase($month, $order_by, $direction, $page, $per_page): object
+scriptRunsPerBase($month, $order_by, $direction, $page, $per_page): \SeaTable\Client\PythonScheduler\ScriptRunsPerUser200Response
 ```
 
-Script runs per base
+Script Runs per Base
 
 > 📘 Requires Self-Hosted Installation > > This endpoint requires a Python-Scheduler-Token, which can only be retrieved by the system administrator. > Therefore this endpoint cannot be used with SeaTable Cloud.
 
@@ -149,7 +149,7 @@ $apiInstance = new SeaTable\Client\PythonScheduler\StatisticsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$month = 2023-06; // string | For which month you'd like to list the statistics in the format of YYYY-MM. If you leave this value empty,
+$month = 202306; // string | For which month you'd like to list the statistics in the format of YYYYMM. If you leave this value empty, the current month is used.
 $order_by = total_run_count; // string | Select the parameter to order the results.
 $direction = desc; // string | The direction of the sort, ascending `asc` or descending `desc`. asc by default. Direction requires that `order_by` is set.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
@@ -167,7 +167,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYY-MM. If you leave this value empty, | [optional] |
+| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYYMM. If you leave this value empty, the current month is used. | [optional] |
 | **order_by** | **string**| Select the parameter to order the results. | [optional] [default to &#39;&#39;] |
 | **direction** | **string**| The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Direction requires that &#x60;order_by&#x60; is set. | [optional] [default to &#39;&#39;] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
@@ -175,7 +175,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\PythonScheduler\ScriptRunsPerUser200Response**](../Model/ScriptRunsPerUser200Response.md)
 
 ### Authorization
 
@@ -187,10 +187,10 @@ PythonSchedulerAuth
 ## `scriptRunsPerTeam()`
 
 ```php
-scriptRunsPerTeam($month, $order_by, $direction, $page, $per_page): object
+scriptRunsPerTeam($month, $order_by, $direction, $page, $per_page): \SeaTable\Client\PythonScheduler\ScriptRunsPerUser200Response
 ```
 
-Script runs per team
+Script Runs per Team
 
 > 📘 Requires Self-Hosted Installation > > This endpoint requires a Python-Scheduler-Token, which can only be retrieved by the system administrator. > Therefore this endpoint cannot be used with SeaTable Cloud.
 
@@ -206,7 +206,7 @@ $apiInstance = new SeaTable\Client\PythonScheduler\StatisticsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$month = 2023-06; // string | For which month you'd like to list the statistics in the format of YYYY-MM. If you leave this value empty,
+$month = 202306; // string | For which month you'd like to list the statistics in the format of YYYYMM. If you leave this value empty, the current month is used.
 $order_by = total_run_count; // string | Select the parameter to order the results.
 $direction = desc; // string | The direction of the sort, ascending `asc` or descending `desc`. asc by default. Direction requires that `order_by` is set.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
@@ -224,7 +224,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYY-MM. If you leave this value empty, | [optional] |
+| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYYMM. If you leave this value empty, the current month is used. | [optional] |
 | **order_by** | **string**| Select the parameter to order the results. | [optional] [default to &#39;&#39;] |
 | **direction** | **string**| The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Direction requires that &#x60;order_by&#x60; is set. | [optional] [default to &#39;&#39;] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
@@ -232,7 +232,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\PythonScheduler\ScriptRunsPerUser200Response**](../Model/ScriptRunsPerUser200Response.md)
 
 ### Authorization
 
@@ -244,10 +244,10 @@ PythonSchedulerAuth
 ## `scriptRunsPerUser()`
 
 ```php
-scriptRunsPerUser($month, $order_by, $direction, $page, $per_page): object
+scriptRunsPerUser($month, $order_by, $direction, $page, $per_page): \SeaTable\Client\PythonScheduler\ScriptRunsPerUser200Response
 ```
 
-Script runs per user
+Script Runs per User
 
 > 📘 Requires Self-Hosted Installation > > This endpoint requires a Python-Scheduler-Token, which can only be retrieved by the system administrator. > Therefore this endpoint cannot be used with SeaTable Cloud.
 
@@ -263,7 +263,7 @@ $apiInstance = new SeaTable\Client\PythonScheduler\StatisticsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$month = 2023-06; // string | For which month you'd like to list the statistics in the format of YYYY-MM. If you leave this value empty,
+$month = 202306; // string | For which month you'd like to list the statistics in the format of YYYYMM. If you leave this value empty, the current month is used.
 $order_by = total_run_count; // string | Select the parameter to order the results.
 $direction = desc; // string | The direction of the sort, ascending `asc` or descending `desc`. asc by default. Direction requires that `order_by` is set.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
@@ -281,7 +281,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYY-MM. If you leave this value empty, | [optional] |
+| **month** | **string**| For which month you&#39;d like to list the statistics in the format of YYYYMM. If you leave this value empty, the current month is used. | [optional] |
 | **order_by** | **string**| Select the parameter to order the results. | [optional] [default to &#39;&#39;] |
 | **direction** | **string**| The direction of the sort, ascending &#x60;asc&#x60; or descending &#x60;desc&#x60;. asc by default. Direction requires that &#x60;order_by&#x60; is set. | [optional] [default to &#39;&#39;] |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
@@ -289,7 +289,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\PythonScheduler\ScriptRunsPerUser200Response**](../Model/ScriptRunsPerUser200Response.md)
 
 ### Authorization
 

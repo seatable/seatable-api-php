@@ -301,6 +301,12 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $invalidProperties = [];
 
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -319,7 +325,7 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets email
      *
-     * @return string|null
+     * @return string
      */
     public function getEmail()
     {
@@ -329,7 +335,7 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets email
      *
-     * @param string|null $email Login email of the user.
+     * @param string $email Login email of the user.
      *
      * @return self
      */
@@ -346,7 +352,7 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets password
      *
-     * @return string|null
+     * @return string
      */
     public function getPassword()
     {
@@ -356,7 +362,7 @@ class AddNewUserRequest implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets password
      *
-     * @param string|null $password Login password of the user.
+     * @param string $password Login password of the user.
      *
      * @return self
      */

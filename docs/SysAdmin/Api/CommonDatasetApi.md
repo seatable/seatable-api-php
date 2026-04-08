@@ -8,7 +8,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**deleteInvalidSyncs()**](CommonDatasetApi.md#deleteInvalidSyncs) | **DELETE** /api/v2.1/admin/common-dataset/invalid-syncs/ | Delete Invalid Syncs |
 | [**listCommonDataset()**](CommonDatasetApi.md#listCommonDataset) | **GET** /api/v2.1/admin/common-datasets/ | List Common Dataset |
 | [**listCommonDatasetSyncs()**](CommonDatasetApi.md#listCommonDatasetSyncs) | **GET** /api/v2.1/admin/common-dataset/periodical-syncs/ | List Common Dataset Syncs |
-| [**listInvalidSyncs()**](CommonDatasetApi.md#listInvalidSyncs) | **GET** /api/v2.1/admin/common-dataset/invalid-syncs/ | List invalid Syncs |
+| [**listInvalidSyncs()**](CommonDatasetApi.md#listInvalidSyncs) | **GET** /api/v2.1/admin/common-dataset/invalid-syncs/ | List Invalid Syncs |
 
 
 ## `deleteInvalidSync()`
@@ -214,7 +214,7 @@ AccountTokenAuth
 listInvalidSyncs($page, $per_page): object
 ```
 
-List invalid Syncs
+List Invalid Syncs
 
 In some cases, a common dataset synchronization configuration becomes invalid. Such cases happen when, for example, the source or destination tables are deleted. Use this request to list off all the invalid common dataset synchronization configurations in the system.
 

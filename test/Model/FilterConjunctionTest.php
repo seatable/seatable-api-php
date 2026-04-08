@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * FilterConjunctionTest Class Doc Comment
  *
  * @category    Class
- * @description If your view has multiple filters you have to decide how the filters are should hang together.
+ * @description If your view has multiple filters you have to decide how the filters should hang together.
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech

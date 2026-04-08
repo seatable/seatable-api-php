@@ -306,16 +306,16 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
             $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^([A-Za-z0-9]){6}$/.";
         }
 
-        if (!is_null($this->container['color']) && !preg_match("/#([A-Za-z0-9]){6}/", $this->container['color'])) {
-            $invalidProperties[] = "invalid value for 'color', must be conform to the pattern /#([A-Za-z0-9]){6}/.";
+        if (!is_null($this->container['color']) && !preg_match("/^#[A-Fa-f0-9]{6}$/", $this->container['color'])) {
+            $invalidProperties[] = "invalid value for 'color', must be conform to the pattern /^#[A-Fa-f0-9]{6}$/.";
         }
 
-        if (!is_null($this->container['text_color']) && !preg_match("/#([A-Za-z0-9]){6}/", $this->container['text_color'])) {
-            $invalidProperties[] = "invalid value for 'text_color', must be conform to the pattern /#([A-Za-z0-9]){6}/.";
+        if (!is_null($this->container['text_color']) && !preg_match("/^#[A-Fa-f0-9]{6}$/", $this->container['text_color'])) {
+            $invalidProperties[] = "invalid value for 'text_color', must be conform to the pattern /^#[A-Fa-f0-9]{6}$/.";
         }
 
-        if (!is_null($this->container['border_color']) && !preg_match("/#([A-Za-z0-9]){6}/", $this->container['border_color'])) {
-            $invalidProperties[] = "invalid value for 'border_color', must be conform to the pattern /#([A-Za-z0-9]){6}/.";
+        if (!is_null($this->container['border_color']) && !preg_match("/^#[A-Fa-f0-9]{6}$/", $this->container['border_color'])) {
+            $invalidProperties[] = "invalid value for 'border_color', must be conform to the pattern /^#[A-Fa-f0-9]{6}$/.";
         }
 
         return $invalidProperties;
@@ -405,7 +405,7 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets color
      *
-     * @param string|null $color select your code-code for the background.
+     * @param string|null $color select your color-code for the background.
      *
      * @return self
      */
@@ -415,8 +415,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable color cannot be null');
         }
 
-        if ((!preg_match("/#([A-Za-z0-9]){6}/", ObjectSerializer::toString($color)))) {
-            throw new \InvalidArgumentException("invalid value for \$color when calling SelectColumnFormatOptionsInner., must conform to the pattern /#([A-Za-z0-9]){6}/.");
+        if ((!preg_match("/^#[A-Fa-f0-9]{6}$/", ObjectSerializer::toString($color)))) {
+            throw new \InvalidArgumentException("invalid value for \$color when calling SelectColumnFormatOptionsInner., must conform to the pattern /^#[A-Fa-f0-9]{6}$/.");
         }
 
         $this->container['color'] = $color;
@@ -447,8 +447,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable text_color cannot be null');
         }
 
-        if ((!preg_match("/#([A-Za-z0-9]){6}/", ObjectSerializer::toString($text_color)))) {
-            throw new \InvalidArgumentException("invalid value for \$text_color when calling SelectColumnFormatOptionsInner., must conform to the pattern /#([A-Za-z0-9]){6}/.");
+        if ((!preg_match("/^#[A-Fa-f0-9]{6}$/", ObjectSerializer::toString($text_color)))) {
+            throw new \InvalidArgumentException("invalid value for \$text_color when calling SelectColumnFormatOptionsInner., must conform to the pattern /^#[A-Fa-f0-9]{6}$/.");
         }
 
         $this->container['text_color'] = $text_color;
@@ -479,8 +479,8 @@ class SelectColumnFormatOptionsInner implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable border_color cannot be null');
         }
 
-        if ((!preg_match("/#([A-Za-z0-9]){6}/", ObjectSerializer::toString($border_color)))) {
-            throw new \InvalidArgumentException("invalid value for \$border_color when calling SelectColumnFormatOptionsInner., must conform to the pattern /#([A-Za-z0-9]){6}/.");
+        if ((!preg_match("/^#[A-Fa-f0-9]{6}$/", ObjectSerializer::toString($border_color)))) {
+            throw new \InvalidArgumentException("invalid value for \$border_color when calling SelectColumnFormatOptionsInner., must conform to the pattern /^#[A-Fa-f0-9]{6}$/.");
         }
 
         $this->container['border_color'] = $border_color;

@@ -273,6 +273,9 @@ class EnforceTwoFactorRequest implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
+        if ($this->container['force_2fa'] === null) {
+            $invalidProperties[] = "'force_2fa' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -291,7 +294,7 @@ class EnforceTwoFactorRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets force_2fa
      *
-     * @return bool|null
+     * @return bool
      */
     public function getForce2fa()
     {
@@ -301,7 +304,7 @@ class EnforceTwoFactorRequest implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets force_2fa
      *
-     * @param bool|null $force_2fa Enforce Two Factor for all accounts
+     * @param bool $force_2fa Enforce Two Factor for all accounts
      *
      * @return self
      */

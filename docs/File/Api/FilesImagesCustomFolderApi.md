@@ -68,6 +68,8 @@ getCustomDownloadLink($path): object
 
 Get Download Link
 
+Get a temporary download link for a file in a custom folder.
+
 ### Example
 
 ```php
@@ -114,6 +116,8 @@ getCustomFileMetadata($path, $name): object
 ```
 
 Get File Metadata
+
+Get metadata (name, size, last update) of a file in a custom folder.
 
 ### Example
 
@@ -164,6 +168,8 @@ getCustomFiles($path): object
 
 Get Files from Folder
 
+List files and subdirectories in a custom folder of a base.
+
 ### Example
 
 ```php
@@ -210,6 +216,8 @@ getCustomUploadLink($path): object
 ```
 
 Get Upload Link
+
+Get a temporary upload link for uploading files to a custom folder.
 
 ### Example
 

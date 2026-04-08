@@ -720,7 +720,7 @@ class TablesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\Base\DuplicateTable200Response
      */
     public function duplicateTable($base_uuid, $duplicate_table = null, string $contentType = self::contentTypes['duplicateTable'][0])
     {
@@ -739,7 +739,7 @@ class TablesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\DuplicateTable200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function duplicateTableWithHttpInfo($base_uuid, $duplicate_table = null, string $contentType = self::contentTypes['duplicateTable'][0])
     {
@@ -771,7 +771,7 @@ class TablesApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\Base\DuplicateTable200Response',
                         $request,
                         $response,
                     );
@@ -793,7 +793,7 @@ class TablesApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\Base\DuplicateTable200Response',
                 $request,
                 $response,
             );
@@ -802,7 +802,7 @@ class TablesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\Base\DuplicateTable200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -850,7 +850,7 @@ class TablesApi
      */
     public function duplicateTableAsyncWithHttpInfo($base_uuid, $duplicate_table = null, string $contentType = self::contentTypes['duplicateTable'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\Base\DuplicateTable200Response';
         $request = $this->duplicateTableRequest($base_uuid, $duplicate_table, $contentType);
 
         return $this->client

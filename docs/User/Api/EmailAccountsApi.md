@@ -86,7 +86,7 @@ $apiInstance = new SeaTable\Client\User\EmailAccountsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$_3rd_party_account_id = 5; // string
+$_3rd_party_account_id = 5; // string | The ID of the third-party account.
 
 try {
     $result = $apiInstance->deleteEmailAccount($base_uuid, $_3rd_party_account_id);
@@ -101,7 +101,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **_3rd_party_account_id** | **string**|  | |
+| **_3rd_party_account_id** | **string**| The ID of the third-party account. | |
 
 ### Return type
 
@@ -117,7 +117,7 @@ AccountTokenAuth
 ## `getEmailAccount()`
 
 ```php
-getEmailAccount($base_uuid, $account_name)
+getEmailAccount($base_uuid, $account_name): object
 ```
 
 Get Email Account
@@ -140,7 +140,8 @@ $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identi
 $account_name = Email Server2; // string | The name of the third-party email account.
 
 try {
-    $apiInstance->getEmailAccount($base_uuid, $account_name);
+    $result = $apiInstance->getEmailAccount($base_uuid, $account_name);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EmailAccountsApi->getEmailAccount: ', $e->getMessage(), PHP_EOL;
 }
@@ -155,7 +156,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -285,7 +286,7 @@ $apiInstance = new SeaTable\Client\User\EmailAccountsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$_3rd_party_account_id = 5; // string
+$_3rd_party_account_id = 5; // string | The ID of the third-party account.
 $add_email_account_request = new \SeaTable\Client\User\AddEmailAccountRequest(); // \SeaTable\Client\User\AddEmailAccountRequest
 
 try {
@@ -301,7 +302,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **_3rd_party_account_id** | **string**|  | |
+| **_3rd_party_account_id** | **string**| The ID of the third-party account. | |
 | **add_email_account_request** | [**\SeaTable\Client\User\AddEmailAccountRequest**](../Model/AddEmailAccountRequest.md)|  | [optional] |
 
 ### Return type

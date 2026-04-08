@@ -20,7 +20,7 @@ deleteComment($base_uuid, $comment_id): object
 
 Delete Comment
 
-Delete a certain comment by its ID.
+Delete a certain comment by its ID.  > 🚧 Creating comments via the API Gateway is not yet supported. This will be fixed in SeaTable 6.2. Until then, comments can only be created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
 
 ### Example
 
@@ -66,12 +66,12 @@ BaseTokenAuth
 ## `getComment()`
 
 ```php
-getComment($base_uuid, $comment_id): object
+getComment($base_uuid, $comment_id): \SeaTable\Client\Base\GetComment200Response
 ```
 
 Get Comment
 
-Get the details of a certain comment with its ID.
+Get the details of a certain comment with its ID.  > 🚧 Creating comments via the API Gateway is not yet supported. This will be fixed in SeaTable 6.2. Until then, comments can only be created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
 
 ### Example
 
@@ -105,7 +105,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\GetComment200Response**](../Model/GetComment200Response.md)
 
 ### Authorization
 
@@ -237,7 +237,7 @@ $apiInstance = new SeaTable\Client\Base\RowCommentsApi(
     $config
 );
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$days = 7; // int
+$days = 7; // int | Number of days to look back for comments.
 
 try {
     $result = $apiInstance->listCommentsWithinDays($base_uuid, $days);
@@ -252,7 +252,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **days** | **int**|  | [optional] |
+| **days** | **int**| Number of days to look back for comments. | [optional] |
 
 ### Return type
 

@@ -48,7 +48,7 @@ class DeleteBaseAsset404Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DeleteBaseAsset_404_response';
+    protected static $openAPIModelName = 'deleteBaseAsset_404_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

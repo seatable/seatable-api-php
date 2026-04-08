@@ -34,7 +34,7 @@ use \SeaTable\Client\ObjectSerializer;
  * AccountToken Class Doc Comment
  *
  * @category Class
- * @description account-token ...
+ * @description The account token used for authenticating API requests.
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

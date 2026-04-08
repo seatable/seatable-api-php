@@ -169,7 +169,7 @@ AccountTokenAuth
 ## `getBaseAttachmentUploadLink()`
 
 ```php
-getBaseAttachmentUploadLink($workspace_id, $base_name): object
+getBaseAttachmentUploadLink($workspace_id, $base_name): \SeaTable\Client\User\GetBaseAttachmentUploadLink200Response
 ```
 
 Get Base Attachment Upload Link
@@ -208,7 +208,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\GetBaseAttachmentUploadLink200Response**](../Model/GetBaseAttachmentUploadLink200Response.md)
 
 ### Authorization
 

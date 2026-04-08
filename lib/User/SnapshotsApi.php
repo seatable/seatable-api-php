@@ -1061,7 +1061,7 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $commit_id commit_id (required)
+     * @param  string $commit_id The commit ID for a base snapshot. (required)
      * @param  string|null $snapshot_name The name of the restored base. Optional. If left blank, a default name will be given. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreSnapshot'] to see the possible values for this operation
      *
@@ -1082,7 +1082,7 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $commit_id (required)
+     * @param  string $commit_id The commit ID for a base snapshot. (required)
      * @param  string|null $snapshot_name The name of the restored base. Optional. If left blank, a default name will be given. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreSnapshot'] to see the possible values for this operation
      *
@@ -1170,7 +1170,7 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $commit_id (required)
+     * @param  string $commit_id The commit ID for a base snapshot. (required)
      * @param  string|null $snapshot_name The name of the restored base. Optional. If left blank, a default name will be given. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreSnapshot'] to see the possible values for this operation
      *
@@ -1194,7 +1194,7 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $commit_id (required)
+     * @param  string $commit_id The commit ID for a base snapshot. (required)
      * @param  string|null $snapshot_name The name of the restored base. Optional. If left blank, a default name will be given. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreSnapshot'] to see the possible values for this operation
      *
@@ -1247,7 +1247,7 @@ class SnapshotsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $commit_id (required)
+     * @param  string $commit_id The commit ID for a base snapshot. (required)
      * @param  string|null $snapshot_name The name of the restored base. Optional. If left blank, a default name will be given. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreSnapshot'] to see the possible values for this operation
      *

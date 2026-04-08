@@ -115,7 +115,7 @@ BaseTokenAuth
 ## `duplicateTable()`
 
 ```php
-duplicateTable($base_uuid, $duplicate_table): object
+duplicateTable($base_uuid, $duplicate_table): \SeaTable\Client\Base\DuplicateTable200Response
 ```
 
 Duplicate Table
@@ -154,7 +154,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\DuplicateTable200Response**](../Model/DuplicateTable200Response.md)
 
 ### Authorization
 
@@ -171,7 +171,7 @@ renameTable($base_uuid, $rename_table): object
 
 Rename Table
 
-Rename a table by providing it's original `table_name` and the desired `new_table_name`.
+Rename a table by providing its original `table_name` and the desired `new_table_name`.
 
 ### Example
 

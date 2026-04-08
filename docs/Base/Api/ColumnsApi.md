@@ -176,7 +176,7 @@ deleteSelectOption($base_uuid, $delete_select_options): object
 
 Delete Single/Multiple Select Options
 
-Use this request to remove single select or multiple select options that you don't need any more. Thes deleted options will be removed from the entries containing them.  In the request body:  `table_name` is the name of the table;  `column` is the name or the `key` of the single/multiple select column;  `option_names` is a list of options you'd like to delete.
+Use this request to remove single select or multiple select options that you don't need any more. These deleted options will be removed from the entries containing them.  In the request body:  `table_name` is the name of the table;  `column` is the name or the `key` of the single/multiple select column;  `option_names` is a list of options you'd like to delete.
 
 ### Example
 
@@ -222,7 +222,7 @@ BaseTokenAuth
 ## `insertColumn()`
 
 ```php
-insertColumn($base_uuid, $insert_column_request): object
+insertColumn($base_uuid, $insert_column_request): \SeaTable\Client\Base\UpdateColumn200Response
 ```
 
 Insert Column
@@ -261,7 +261,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\UpdateColumn200Response**](../Model/UpdateColumn200Response.md)
 
 ### Authorization
 
@@ -326,12 +326,12 @@ BaseTokenAuth
 ## `updateColumn()`
 
 ```php
-updateColumn($base_uuid, $update_column): object
+updateColumn($base_uuid, $update_column): \SeaTable\Client\Base\UpdateColumn200Response
 ```
 
 Update Column
 
-Allows various changes of the column: name, column_type, freeze/unfreeze, resize, etc... `op_type` is required. The following options are available: - rename_column - modify_column_type - resize_column - move_column - freeze_column (eventuell weglassen) `column` is the name or `key` of the target column. `new_column_type` is the new type of the target column. For a list of column type params refer to the SeaTable API Parameter. For further information on column types, check the page [Models](https://api.seatable.com/reference/models).
+Allows various changes of the column: name, column_type, freeze/unfreeze, resize, etc... `op_type` is required. The following options are available: - rename_column - modify_column_type - resize_column - move_column - freeze_column `column` is the name or `key` of the target column. `new_column_type` is the new type of the target column. For a list of column type params refer to the SeaTable API Parameter. For further information on column types, check the page [Models](https://api.seatable.com/reference/models).
 
 ### Example
 
@@ -365,7 +365,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\UpdateColumn200Response**](../Model/UpdateColumn200Response.md)
 
 ### Authorization
 

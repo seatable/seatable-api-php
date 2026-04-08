@@ -121,7 +121,7 @@ class CommonDatasetApiTest extends TestCase
     /**
      * Test case for listInvalidSyncs
      *
-     * List invalid Syncs.
+     * List Invalid Syncs.
      *
      */
     public function testListInvalidSyncs()

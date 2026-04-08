@@ -14,7 +14,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addNotificationRule()`
 
 ```php
-addNotificationRule($workspace_id, $base_name, $add_notification_rule_request): object
+addNotificationRule($workspace_id, $base_name, $add_notification_rule_request): \SeaTable\Client\User\AddNotificationRule200Response
 ```
 
 Add Notification Rule
@@ -55,7 +55,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\AddNotificationRule200Response**](../Model/AddNotificationRule200Response.md)
 
 ### Authorization
 
@@ -88,7 +88,7 @@ $apiInstance = new SeaTable\Client\User\NotificationsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$notification_rule_id = 1; // string
+$notification_rule_id = 1; // string | The ID of the notification rule.
 
 try {
     $result = $apiInstance->deleteNotificationRule($workspace_id, $base_name, $notification_rule_id);
@@ -104,7 +104,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **notification_rule_id** | **string**|  | |
+| **notification_rule_id** | **string**| The ID of the notification rule. | |
 
 ### Return type
 
@@ -217,7 +217,7 @@ AccountTokenAuth
 ## `updateNotificationRule()`
 
 ```php
-updateNotificationRule($workspace_id, $base_name, $notification_rule_id, $update_notification_rule_request): object
+updateNotificationRule($workspace_id, $base_name, $notification_rule_id, $update_notification_rule_request): \SeaTable\Client\User\AddNotificationRule200Response
 ```
 
 Update Notification Rule
@@ -238,7 +238,7 @@ $apiInstance = new SeaTable\Client\User\NotificationsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$notification_rule_id = 1; // string
+$notification_rule_id = 1; // string | The ID of the notification rule.
 $update_notification_rule_request = new \SeaTable\Client\User\UpdateNotificationRuleRequest(); // \SeaTable\Client\User\UpdateNotificationRuleRequest
 
 try {
@@ -255,12 +255,12 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **notification_rule_id** | **string**|  | |
+| **notification_rule_id** | **string**| The ID of the notification rule. | |
 | **update_notification_rule_request** | [**\SeaTable\Client\User\UpdateNotificationRuleRequest**](../Model/UpdateNotificationRuleRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\AddNotificationRule200Response**](../Model/AddNotificationRule200Response.md)
 
 ### Authorization
 

@@ -13,7 +13,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `createAutomationRule()`
 
 ```php
-createAutomationRule($workspace_id, $base_name, $create_automation_rule_request): object
+createAutomationRule($workspace_id, $base_name, $create_automation_rule_request): \SeaTable\Client\User\CreateAutomationRule200Response
 ```
 
 Create Automation Rule
@@ -54,7 +54,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateAutomationRule200Response**](../Model/CreateAutomationRule200Response.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ $apiInstance = new SeaTable\Client\User\AutomationsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$automation_rule_id = 20; // int
+$automation_rule_id = 20; // int | The ID of the automation rule.
 
 try {
     $result = $apiInstance->deleteAutomationRule($workspace_id, $base_name, $automation_rule_id);
@@ -103,7 +103,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **automation_rule_id** | **int**|  | |
+| **automation_rule_id** | **int**| The ID of the automation rule. | |
 
 ### Return type
 
@@ -170,7 +170,7 @@ AccountTokenAuth
 ## `updateAutomationRule()`
 
 ```php
-updateAutomationRule($workspace_id, $base_name, $automation_rule_id, $create_automation_rule_request): object
+updateAutomationRule($workspace_id, $base_name, $automation_rule_id, $create_automation_rule_request): \SeaTable\Client\User\CreateAutomationRule200Response
 ```
 
 Update Automation Rule
@@ -191,7 +191,7 @@ $apiInstance = new SeaTable\Client\User\AutomationsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$automation_rule_id = 20; // int
+$automation_rule_id = 20; // int | The ID of the automation rule.
 $create_automation_rule_request = new \SeaTable\Client\User\CreateAutomationRuleRequest(); // \SeaTable\Client\User\CreateAutomationRuleRequest
 
 try {
@@ -208,12 +208,12 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **automation_rule_id** | **int**|  | |
+| **automation_rule_id** | **int**| The ID of the automation rule. | |
 | **create_automation_rule_request** | [**\SeaTable\Client\User\CreateAutomationRuleRequest**](../Model/CreateAutomationRuleRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateAutomationRule200Response**](../Model/CreateAutomationRule200Response.md)
 
 ### Authorization
 

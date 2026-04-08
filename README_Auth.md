@@ -12,7 +12,6 @@ Class | Method | HTTP request | Description
 *AccountTokenApi* | [**getAccountTokenfromUsername**](docs/Auth/Api/AccountTokenApi.md#getaccounttokenfromusername) | **POST** /api2/auth-token/ | Get Account-Token with Username and Password
 *BaseTokenApi* | [**getBaseTokenWithAccountToken**](docs/Auth/Api/BaseTokenApi.md#getbasetokenwithaccounttoken) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/access-token/ | Get Base-Token with Account-Token
 *BaseTokenApi* | [**getBaseTokenWithApiToken**](docs/Auth/Api/BaseTokenApi.md#getbasetokenwithapitoken) | **GET** /api/v2.1/dtable/app-access-token/ | Get Base-Token with API-Token
-*BaseTokenApi* | [**getBaseTokenWithExternLink**](docs/Auth/Api/BaseTokenApi.md#getbasetokenwithexternlink) | **GET** /api/v2.1/external-link-tokens/{external_link_token}/access-token/ | Get Base-Token with External-Link
 
 
 ## About this package

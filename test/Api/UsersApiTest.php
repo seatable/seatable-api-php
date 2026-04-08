@@ -133,7 +133,7 @@ class UsersApiTest extends TestCase
     /**
      * Test case for importUsers
      *
-     * Import users.
+     * Import Users.
      *
      */
     public function testImportUsers()

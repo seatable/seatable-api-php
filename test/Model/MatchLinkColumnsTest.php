@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * MatchLinkColumnsTest Class Doc Comment
  *
  * @category    Class
- * @description update multiple rows
+ * @description Match and link rows from two tables based on matching column values.
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech

@@ -73,7 +73,7 @@ class SystemInfoCustomizingApiTest extends TestCase
     /**
      * Test case for getSystemInformation
      *
-     * Get system information.
+     * Get System Information.
      *
      */
     public function testGetSystemInformation()

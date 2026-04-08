@@ -23,10 +23,12 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addGroupMember()`
 
 ```php
-addGroupMember($group_id, $add_group_member_request): object
+addGroupMember($group_id, $add_group_member_request): \SeaTable\Client\User\AddGroupMember201Response
 ```
 
 Add Group Member
+
+Add a user to a group as a member.
 
 ### Example
 
@@ -40,7 +42,7 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 $add_group_member_request = new \SeaTable\Client\User\AddGroupMemberRequest(); // \SeaTable\Client\User\AddGroupMemberRequest
 
 try {
@@ -55,12 +57,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 | **add_group_member_request** | [**\SeaTable\Client\User\AddGroupMemberRequest**](../Model/AddGroupMemberRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\AddGroupMember201Response**](../Model/AddGroupMember201Response.md)
 
 ### Authorization
 
@@ -183,6 +185,8 @@ createGroup($create_group_request): object
 
 Create Group
 
+Create a new group. The user who creates the group becomes its owner.
+
 ### Example
 
 ```php
@@ -244,7 +248,7 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 
 try {
     $result = $apiInstance->deleteGroup($group_id);
@@ -258,7 +262,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
@@ -279,6 +283,8 @@ getGroup($group_id): object
 
 Get Group
 
+Get the details of a specific group including its name, owner, and admins.
+
 ### Example
 
 ```php
@@ -291,7 +297,7 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 
 try {
     $result = $apiInstance->getGroup($group_id);
@@ -305,7 +311,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
@@ -321,10 +327,12 @@ AccountTokenAuth
 ## `getGroupMembers()`
 
 ```php
-getGroupMembers($group_id): object
+getGroupMembers($group_id): \SeaTable\Client\User\GetGroupMembers200ResponseInner[]
 ```
 
 Get Group Members
+
+List all members of a group along with their roles.
 
 ### Example
 
@@ -338,7 +346,7 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 
 try {
     $result = $apiInstance->getGroupMembers($group_id);
@@ -352,11 +360,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\GetGroupMembers200ResponseInner[]**](../Model/GetGroupMembers200ResponseInner.md)
 
 ### Authorization
 
@@ -482,8 +490,8 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
-$group_member = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$group_id = 1; // int | The ID of the group.
+$group_member = 12345678d3784c128d7a6da0fb48ee83@auth.local; // string | The unique user ID of the group member.
 
 try {
     $result = $apiInstance->removeGroupMember($group_id, $group_member);
@@ -497,8 +505,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
-| **group_member** | **string**|  | |
+| **group_id** | **int**| The ID of the group. | |
+| **group_member** | **string**| The unique user ID of the group member. | |
 
 ### Return type
 
@@ -514,7 +522,7 @@ AccountTokenAuth
 ## `searchGroup()`
 
 ```php
-searchGroup($q): object
+searchGroup($q): \SeaTable\Client\User\SearchGroup200ResponseInner[]
 ```
 
 Search Group
@@ -533,7 +541,7 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$q = Micha; // string
+$q = Micha; // string | Search query string. Matches against group name.
 
 try {
     $result = $apiInstance->searchGroup($q);
@@ -547,11 +555,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **q** | **string**|  | [optional] |
+| **q** | **string**| Search query string. Matches against group name. | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\SearchGroup200ResponseInner[]**](../Model/SearchGroup200ResponseInner.md)
 
 ### Authorization
 
@@ -568,7 +576,7 @@ searchGroupMembers($group_id, $q): object
 
 Search Group Members
 
-As a group's administrator, you can use this API call to search for members in this group.  Just give a search keyword in the `q` param. Attention: Although a fussy search is allowed, unlike the web interface, the search via API is still case sensitive! A successful search will return each member's details that fit to your search criteria. See example.
+As a group's administrator, you can use this API call to search for members in this group.  Just give a search keyword in the `q` param. Attention: Although a fuzzy search is allowed, unlike the web interface, the search via API is still case sensitive! A successful search will return each member's details that fit to your search criteria. See example.
 
 ### Example
 
@@ -582,8 +590,8 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
-$q = Micha; // string
+$group_id = 1; // int | The ID of the group.
+$q = Micha; // string | Search query string. Matches against member name or email.
 
 try {
     $result = $apiInstance->searchGroupMembers($group_id, $q);
@@ -597,8 +605,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
-| **q** | **string**|  | [optional] |
+| **group_id** | **int**| The ID of the group. | |
+| **q** | **string**| Search query string. Matches against member name or email. | [optional] |
 
 ### Return type
 
@@ -614,12 +622,12 @@ AccountTokenAuth
 ## `updateGroup()`
 
 ```php
-updateGroup($group_id, $update_group_request): object
+updateGroup($group_id, $update_group_request): \SeaTable\Client\User\UpdateGroup200Response
 ```
 
 Update Group
 
-Use this request to rename, and/or change owner of a group. In the request body, both parameters are optional. Only use the ones that you need to update: *   `owner` is the new owner of the group, include the user's ID here. If you don't want to change the owner, remove this parameter because if you enter the current owner's ID here, you'll get an error \"User xxx is already group owner\". *   `name` is the new name of your group. If you don't want to change the name, remove shi parameter because if you enter the current group name here you'll get an error \"There is already a group with that name\".
+Use this request to rename, and/or change owner of a group. In the request body, both parameters are optional. Only use the ones that you need to update: *   `owner` is the new owner of the group, include the user's ID here. If you don't want to change the owner, remove this parameter because if you enter the current owner's ID here, you'll get an error \"User xxx is already group owner\". *   `name` is the new name of your group. If you don't want to change the name, remove this parameter because if you enter the current group name here you'll get an error \"There is already a group with that name\".
 
 ### Example
 
@@ -633,7 +641,7 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 $update_group_request = new \SeaTable\Client\User\UpdateGroupRequest(); // \SeaTable\Client\User\UpdateGroupRequest
 
 try {
@@ -648,12 +656,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 | **update_group_request** | [**\SeaTable\Client\User\UpdateGroupRequest**](../Model/UpdateGroupRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\UpdateGroup200Response**](../Model/UpdateGroup200Response.md)
 
 ### Authorization
 
@@ -670,6 +678,8 @@ updateGroupRole($group_id, $group_member, $update_group_role_request): object
 
 Update Group Role
 
+Update the role of a group member, for example to promote or demote an admin.
+
 ### Example
 
 ```php
@@ -682,8 +692,8 @@ $apiInstance = new SeaTable\Client\User\GroupsWorkspacesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
-$group_member = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$group_id = 1; // int | The ID of the group.
+$group_member = 12345678d3784c128d7a6da0fb48ee83@auth.local; // string | The unique user ID of the group member.
 $update_group_role_request = new \SeaTable\Client\User\UpdateGroupRoleRequest(); // \SeaTable\Client\User\UpdateGroupRoleRequest
 
 try {
@@ -698,8 +708,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
-| **group_member** | **string**|  | |
+| **group_id** | **int**| The ID of the group. | |
+| **group_member** | **string**| The unique user ID of the group member. | |
 | **update_group_role_request** | [**\SeaTable\Client\User\UpdateGroupRoleRequest**](../Model/UpdateGroupRoleRequest.md)|  | [optional] |
 
 ### Return type

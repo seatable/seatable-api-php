@@ -138,7 +138,7 @@ class FormsApi
      *
      * Delete Data Collection Forms
      *
-     * @param  string $collection_table_token collection_table_token (required)
+     * @param  string $collection_table_token The token of the collection table. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDataCollectionForms'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -156,7 +156,7 @@ class FormsApi
      *
      * Delete Data Collection Forms
      *
-     * @param  string $collection_table_token (required)
+     * @param  string $collection_table_token The token of the collection table. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDataCollectionForms'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -241,7 +241,7 @@ class FormsApi
      *
      * Delete Data Collection Forms
      *
-     * @param  string $collection_table_token (required)
+     * @param  string $collection_table_token The token of the collection table. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDataCollectionForms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -262,7 +262,7 @@ class FormsApi
      *
      * Delete Data Collection Forms
      *
-     * @param  string $collection_table_token (required)
+     * @param  string $collection_table_token The token of the collection table. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDataCollectionForms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -312,7 +312,7 @@ class FormsApi
     /**
      * Create request for operation 'deleteDataCollectionForms'
      *
-     * @param  string $collection_table_token (required)
+     * @param  string $collection_table_token The token of the collection table. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteDataCollectionForms'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -413,7 +413,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -431,7 +431,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -516,7 +516,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -537,7 +537,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -587,7 +587,7 @@ class FormsApi
     /**
      * Create request for operation 'deleteForm'
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

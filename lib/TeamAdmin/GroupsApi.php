@@ -166,7 +166,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\AddGroup200Response
      */
     public function addGroup($org_id, $group_name = null, $group_owner = null, string $contentType = self::contentTypes['addGroup'][0])
     {
@@ -186,7 +186,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\AddGroup200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function addGroupWithHttpInfo($org_id, $group_name = null, $group_owner = null, string $contentType = self::contentTypes['addGroup'][0])
     {
@@ -218,7 +218,7 @@ class GroupsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\AddGroup200Response',
                         $request,
                         $response,
                     );
@@ -240,7 +240,7 @@ class GroupsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\AddGroup200Response',
                 $request,
                 $response,
             );
@@ -249,7 +249,7 @@ class GroupsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\AddGroup200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -299,7 +299,7 @@ class GroupsApi
      */
     public function addGroupAsyncWithHttpInfo($org_id, $group_name = null, $group_owner = null, string $contentType = self::contentTypes['addGroup'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\AddGroup200Response';
         $request = $this->addGroupRequest($org_id, $group_name, $group_owner, $contentType);
 
         return $this->client
@@ -1075,7 +1075,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\AddGroup200Response
      */
     public function getGroup($org_id, $group_id, string $contentType = self::contentTypes['getGroup'][0])
     {
@@ -1094,7 +1094,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\AddGroup200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getGroupWithHttpInfo($org_id, $group_id, string $contentType = self::contentTypes['getGroup'][0])
     {
@@ -1126,7 +1126,7 @@ class GroupsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\AddGroup200Response',
                         $request,
                         $response,
                     );
@@ -1148,7 +1148,7 @@ class GroupsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\AddGroup200Response',
                 $request,
                 $response,
             );
@@ -1157,7 +1157,7 @@ class GroupsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\AddGroup200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1205,7 +1205,7 @@ class GroupsApi
      */
     public function getGroupAsyncWithHttpInfo($org_id, $group_id, string $contentType = self::contentTypes['getGroup'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\AddGroup200Response';
         $request = $this->getGroupRequest($org_id, $group_id, $contentType);
 
         return $this->client
@@ -1671,7 +1671,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\ListGroupMembers200Response
      */
     public function listGroupMembers($org_id, $group_id, string $contentType = self::contentTypes['listGroupMembers'][0])
     {
@@ -1690,7 +1690,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\ListGroupMembers200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function listGroupMembersWithHttpInfo($org_id, $group_id, string $contentType = self::contentTypes['listGroupMembers'][0])
     {
@@ -1722,7 +1722,7 @@ class GroupsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\ListGroupMembers200Response',
                         $request,
                         $response,
                     );
@@ -1744,7 +1744,7 @@ class GroupsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\ListGroupMembers200Response',
                 $request,
                 $response,
             );
@@ -1753,7 +1753,7 @@ class GroupsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\ListGroupMembers200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1801,7 +1801,7 @@ class GroupsApi
      */
     public function listGroupMembersAsyncWithHttpInfo($org_id, $group_id, string $contentType = self::contentTypes['listGroupMembers'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\ListGroupMembers200Response';
         $request = $this->listGroupMembersRequest($org_id, $group_id, $contentType);
 
         return $this->client
@@ -1970,7 +1970,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\ListGroups200Response
      */
     public function listGroups($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroups'][0])
     {
@@ -1990,7 +1990,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\ListGroups200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function listGroupsWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroups'][0])
     {
@@ -2022,7 +2022,7 @@ class GroupsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\ListGroups200Response',
                         $request,
                         $response,
                     );
@@ -2044,7 +2044,7 @@ class GroupsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\ListGroups200Response',
                 $request,
                 $response,
             );
@@ -2053,7 +2053,7 @@ class GroupsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\ListGroups200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2103,7 +2103,7 @@ class GroupsApi
      */
     public function listGroupsAsyncWithHttpInfo($org_id, $page = null, $per_page = null, string $contentType = self::contentTypes['listGroups'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\ListGroups200Response';
         $request = $this->listGroupsRequest($org_id, $page, $per_page, $contentType);
 
         return $this->client
@@ -2884,7 +2884,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\UpdateGroup200Response
      */
     public function updateGroup($org_id, $group_id, $update_group_request = null, string $contentType = self::contentTypes['updateGroup'][0])
     {
@@ -2904,7 +2904,7 @@ class GroupsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\UpdateGroup200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateGroupWithHttpInfo($org_id, $group_id, $update_group_request = null, string $contentType = self::contentTypes['updateGroup'][0])
     {
@@ -2936,7 +2936,7 @@ class GroupsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\UpdateGroup200Response',
                         $request,
                         $response,
                     );
@@ -2958,7 +2958,7 @@ class GroupsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\UpdateGroup200Response',
                 $request,
                 $response,
             );
@@ -2967,7 +2967,7 @@ class GroupsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\UpdateGroup200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3017,7 +3017,7 @@ class GroupsApi
      */
     public function updateGroupAsyncWithHttpInfo($org_id, $group_id, $update_group_request = null, string $contentType = self::contentTypes['updateGroup'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\UpdateGroup200Response';
         $request = $this->updateGroupRequest($org_id, $group_id, $update_group_request, $contentType);
 
         return $this->client

@@ -400,7 +400,7 @@ class SystemNotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $sys_notification_id sys_notification_id (required)
+     * @param  int $sys_notification_id The ID of the system notification. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotification'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -418,7 +418,7 @@ class SystemNotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $sys_notification_id (required)
+     * @param  int $sys_notification_id The ID of the system notification. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotification'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -503,7 +503,7 @@ class SystemNotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $sys_notification_id (required)
+     * @param  int $sys_notification_id The ID of the system notification. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotification'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -524,7 +524,7 @@ class SystemNotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $sys_notification_id (required)
+     * @param  int $sys_notification_id The ID of the system notification. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotification'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -574,7 +574,7 @@ class SystemNotificationsApi
     /**
      * Create request for operation 'deleteNotification'
      *
-     * @param  int $sys_notification_id (required)
+     * @param  int $sys_notification_id The ID of the system notification. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotification'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

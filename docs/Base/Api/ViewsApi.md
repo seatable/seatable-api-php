@@ -14,7 +14,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `createView()`
 
 ```php
-createView($base_uuid, $table_name, $new_view): object
+createView($base_uuid, $table_name, $new_view): \SeaTable\Client\Base\CreateView200Response
 ```
 
 Create View
@@ -55,7 +55,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\CreateView200Response**](../Model/CreateView200Response.md)
 
 ### Authorization
 
@@ -120,7 +120,7 @@ BaseTokenAuth
 ## `getView()`
 
 ```php
-getView($base_uuid, $view_name, $table_name): object
+getView($base_uuid, $view_name, $table_name): \SeaTable\Client\Base\CreateView200Response
 ```
 
 Get View
@@ -161,7 +161,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\CreateView200Response**](../Model/CreateView200Response.md)
 
 ### Authorization
 
@@ -224,7 +224,7 @@ BaseTokenAuth
 ## `updateView()`
 
 ```php
-updateView($base_uuid, $view_name, $table_name, $update_view): object
+updateView($base_uuid, $view_name, $table_name, $update_view): \SeaTable\Client\Base\CreateView200Response
 ```
 
 Update View
@@ -267,7 +267,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\CreateView200Response**](../Model/CreateView200Response.md)
 
 ### Authorization
 

@@ -354,7 +354,7 @@ class ListRowLinksRowsInner implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets offset
      *
-     * @param int|null $offset Offset is the beginning number of your query. If your record is linked to multiple records, use e.g. 0 to start quering from the 1st element or e.g. 5 to start querying from the 6th element, etc. Attention: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime). Default is 0.
+     * @param int|null $offset Offset is the beginning number of your query. If your record is linked to multiple records, use e.g. 0 to start querying from the 1st element or e.g. 5 to start querying from the 6th element, etc. Attention: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime). Default is 0.
      *
      * @return self
      */

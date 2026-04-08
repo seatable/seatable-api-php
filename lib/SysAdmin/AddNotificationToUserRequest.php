@@ -280,6 +280,12 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
+        if ($this->container['msg'] === null) {
+            $invalidProperties[] = "'msg' can't be null";
+        }
+        if ($this->container['username'] === null) {
+            $invalidProperties[] = "'username' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -298,7 +304,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets msg
      *
-     * @return string|null
+     * @return string
      */
     public function getMsg()
     {
@@ -308,7 +314,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets msg
      *
-     * @param string|null $msg msg
+     * @param string $msg msg
      *
      * @return self
      */
@@ -325,7 +331,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets username
      *
-     * @return string|null
+     * @return string
      */
     public function getUsername()
     {
@@ -335,7 +341,7 @@ class AddNotificationToUserRequest implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets username
      *
-     * @param string|null $username username
+     * @param string $username username
      *
      * @return self
      */

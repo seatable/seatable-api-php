@@ -10,7 +10,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**getLoginLogStatisticsByDay()**](StatisticsApi.md#getLoginLogStatisticsByDay) | **GET** /api/v2.1/org/{org_id}/admin/statistics/login-logs/by-day/ | Login Logs (by Day) |
 | [**getPythonRunStatisticsByBase()**](StatisticsApi.md#getPythonRunStatisticsByBase) | **GET** /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-base/ | Python Runs (by Base) |
 | [**getPythonRunStatisticsByDay()**](StatisticsApi.md#getPythonRunStatisticsByDay) | **GET** /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-day/ | Python Runs (by Day) |
-| [**getUserOrBaseAIStatistics()**](StatisticsApi.md#getUserOrBaseAIStatistics) | **GET** /api/v2.1/org/{org_id}/admin/statistics/ai/ | Get AI statistics by user/base |
+| [**getUserOrBaseAIStatistics()**](StatisticsApi.md#getUserOrBaseAIStatistics) | **GET** /api/v2.1/org/{org_id}/admin/statistics/ai/ | Get AI Statistics by User/Base |
 
 
 ## `getAdminLogStatisticsByDay()`
@@ -365,7 +365,7 @@ AccountTokenAuth
 getUserOrBaseAIStatistics($group_by, $date, $org_id, $page, $per_page): object
 ```
 
-Get AI statistics by user/base
+Get AI Statistics by User/Base
 
 Get AI usage statistics monthly by user/base.
 

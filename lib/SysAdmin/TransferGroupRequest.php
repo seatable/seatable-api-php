@@ -273,6 +273,9 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['new_owner'] === null) {
+            $invalidProperties[] = "'new_owner' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -291,7 +294,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets new_owner
      *
-     * @return string|null
+     * @return string
      */
     public function getNewOwner()
     {
@@ -301,7 +304,7 @@ class TransferGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets new_owner
      *
-     * @param string|null $new_owner new_owner
+     * @param string $new_owner new_owner
      *
      * @return self
      */

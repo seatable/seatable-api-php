@@ -80,7 +80,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SystemNotificationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$sys_notification_id = 1; // int
+$sys_notification_id = 1; // int | The ID of the system notification.
 
 try {
     $result = $apiInstance->deleteNotification($sys_notification_id);
@@ -94,7 +94,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **sys_notification_id** | **int**|  | |
+| **sys_notification_id** | **int**| The ID of the system notification. | |
 
 ### Return type
 

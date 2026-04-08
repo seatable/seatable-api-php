@@ -1292,7 +1292,7 @@ class NotificationsApi
     /**
      * Operation sendToastNotification
      *
-     * Send toast notification
+     * Send Toast Notification
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\SendToastNotificationRequest|null $send_toast_notification_request send_toast_notification_request (optional)
@@ -1311,7 +1311,7 @@ class NotificationsApi
     /**
      * Operation sendToastNotificationWithHttpInfo
      *
-     * Send toast notification
+     * Send Toast Notification
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\SendToastNotificationRequest|null $send_toast_notification_request (optional)
@@ -1397,7 +1397,7 @@ class NotificationsApi
     /**
      * Operation sendToastNotificationAsync
      *
-     * Send toast notification
+     * Send Toast Notification
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\SendToastNotificationRequest|null $send_toast_notification_request (optional)
@@ -1419,7 +1419,7 @@ class NotificationsApi
     /**
      * Operation sendToastNotificationAsyncWithHttpInfo
      *
-     * Send toast notification
+     * Send Toast Notification
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  \SeaTable\Client\Base\SendToastNotificationRequest|null $send_toast_notification_request (optional)

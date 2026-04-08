@@ -73,7 +73,7 @@ class ExportApiTest extends TestCase
     /**
      * Test case for exportBase
      *
-     * Export base.
+     * Export Base.
      *
      */
     public function testExportBase()

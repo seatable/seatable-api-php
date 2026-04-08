@@ -2227,7 +2227,7 @@ class StatisticsApi
     /**
      * Operation getUserOrBaseAIStatistics
      *
-     * Get AI statistics by user/base
+     * Get AI Statistics by User/Base
      *
      * @param  string $group_by Query by owner or Base (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -2249,7 +2249,7 @@ class StatisticsApi
     /**
      * Operation getUserOrBaseAIStatisticsWithHttpInfo
      *
-     * Get AI statistics by user/base
+     * Get AI Statistics by User/Base
      *
      * @param  string $group_by Query by owner or Base (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -2338,7 +2338,7 @@ class StatisticsApi
     /**
      * Operation getUserOrBaseAIStatisticsAsync
      *
-     * Get AI statistics by user/base
+     * Get AI Statistics by User/Base
      *
      * @param  string $group_by Query by owner or Base (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)
@@ -2363,7 +2363,7 @@ class StatisticsApi
     /**
      * Operation getUserOrBaseAIStatisticsAsyncWithHttpInfo
      *
-     * Get AI statistics by user/base
+     * Get AI Statistics by User/Base
      *
      * @param  string $group_by Query by owner or Base (required)
      * @param  string $date A date string in YYYY-MM-DD format (required)

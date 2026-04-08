@@ -145,7 +145,7 @@ class AutomationsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateAutomationRule200Response
      */
     public function createAutomationRule($workspace_id, $base_name, $create_automation_rule_request = null, string $contentType = self::contentTypes['createAutomationRule'][0])
     {
@@ -165,7 +165,7 @@ class AutomationsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateAutomationRule200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createAutomationRuleWithHttpInfo($workspace_id, $base_name, $create_automation_rule_request = null, string $contentType = self::contentTypes['createAutomationRule'][0])
     {
@@ -197,7 +197,7 @@ class AutomationsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateAutomationRule200Response',
                         $request,
                         $response,
                     );
@@ -219,7 +219,7 @@ class AutomationsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateAutomationRule200Response',
                 $request,
                 $response,
             );
@@ -228,7 +228,7 @@ class AutomationsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateAutomationRule200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -278,7 +278,7 @@ class AutomationsApi
      */
     public function createAutomationRuleAsyncWithHttpInfo($workspace_id, $base_name, $create_automation_rule_request = null, string $contentType = self::contentTypes['createAutomationRule'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateAutomationRule200Response';
         $request = $this->createAutomationRuleRequest($workspace_id, $base_name, $create_automation_rule_request, $contentType);
 
         return $this->client
@@ -448,7 +448,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAutomationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -468,7 +468,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAutomationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -555,7 +555,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAutomationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -578,7 +578,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAutomationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -630,7 +630,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAutomationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1061,13 +1061,13 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  \SeaTable\Client\User\CreateAutomationRuleRequest|null $create_automation_rule_request create_automation_rule_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAutomationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateAutomationRule200Response
      */
     public function updateAutomationRule($workspace_id, $base_name, $automation_rule_id, $create_automation_rule_request = null, string $contentType = self::contentTypes['updateAutomationRule'][0])
     {
@@ -1082,13 +1082,13 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  \SeaTable\Client\User\CreateAutomationRuleRequest|null $create_automation_rule_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAutomationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateAutomationRule200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateAutomationRuleWithHttpInfo($workspace_id, $base_name, $automation_rule_id, $create_automation_rule_request = null, string $contentType = self::contentTypes['updateAutomationRule'][0])
     {
@@ -1120,7 +1120,7 @@ class AutomationsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateAutomationRule200Response',
                         $request,
                         $response,
                     );
@@ -1142,7 +1142,7 @@ class AutomationsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateAutomationRule200Response',
                 $request,
                 $response,
             );
@@ -1151,7 +1151,7 @@ class AutomationsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateAutomationRule200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1170,7 +1170,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  \SeaTable\Client\User\CreateAutomationRuleRequest|null $create_automation_rule_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAutomationRule'] to see the possible values for this operation
      *
@@ -1194,7 +1194,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  \SeaTable\Client\User\CreateAutomationRuleRequest|null $create_automation_rule_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAutomationRule'] to see the possible values for this operation
      *
@@ -1203,7 +1203,7 @@ class AutomationsApi
      */
     public function updateAutomationRuleAsyncWithHttpInfo($workspace_id, $base_name, $automation_rule_id, $create_automation_rule_request = null, string $contentType = self::contentTypes['updateAutomationRule'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateAutomationRule200Response';
         $request = $this->updateAutomationRuleRequest($workspace_id, $base_name, $automation_rule_id, $create_automation_rule_request, $contentType);
 
         return $this->client
@@ -1247,7 +1247,7 @@ class AutomationsApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $automation_rule_id (required)
+     * @param  int $automation_rule_id The ID of the automation rule. (required)
      * @param  \SeaTable\Client\User\CreateAutomationRuleRequest|null $create_automation_rule_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAutomationRule'] to see the possible values for this operation
      *

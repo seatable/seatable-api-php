@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
  * InsertRowTest Class Doc Comment
  *
  * @category    Class
- * @description Insert a row below or above another row your specified by his row-ID.
+ * @description Insert a row below or above another row you specified by its row ID.
  * @package     SeaTable\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech

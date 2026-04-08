@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**msg** | **string** |  | [optional]
-**username** | **string** |  | [optional]
+**msg** | **string** |  |
+**username** | **string** |  |
 

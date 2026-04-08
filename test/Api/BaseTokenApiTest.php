@@ -93,16 +93,4 @@ class BaseTokenApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test case for getBaseTokenWithExternLink
-     *
-     * Get Base-Token with External-Link.
-     *
-     */
-    public function testGetBaseTokenWithExternLink()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
 }

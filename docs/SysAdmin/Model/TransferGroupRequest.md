@@ -4,5 +4,5 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**new_owner** | **string** |  | [optional]
+**new_owner** | **string** |  |
 

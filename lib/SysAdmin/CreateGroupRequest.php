@@ -280,6 +280,12 @@ class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
+        if ($this->container['group_name'] === null) {
+            $invalidProperties[] = "'group_name' can't be null";
+        }
+        if ($this->container['group_owner'] === null) {
+            $invalidProperties[] = "'group_owner' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -298,7 +304,7 @@ class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets group_name
      *
-     * @return string|null
+     * @return string
      */
     public function getGroupName()
     {
@@ -308,7 +314,7 @@ class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets group_name
      *
-     * @param string|null $group_name The name of the new department.
+     * @param string $group_name The name of the new department.
      *
      * @return self
      */
@@ -325,7 +331,7 @@ class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets group_owner
      *
-     * @return string|null
+     * @return string
      */
     public function getGroupOwner()
     {
@@ -335,7 +341,7 @@ class CreateGroupRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets group_owner
      *
-     * @param string|null $group_owner group_owner
+     * @param string $group_owner group_owner
      *
      * @return self
      */

@@ -390,7 +390,7 @@ class NotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $notification_rule_id notification_rule_id (required)
+     * @param  int $notification_rule_id The ID of the notification rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotificationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -408,7 +408,7 @@ class NotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $notification_rule_id (required)
+     * @param  int $notification_rule_id The ID of the notification rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotificationRule'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -493,7 +493,7 @@ class NotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $notification_rule_id (required)
+     * @param  int $notification_rule_id The ID of the notification rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotificationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -514,7 +514,7 @@ class NotificationsApi
      *
      * Delete Notification
      *
-     * @param  int $notification_rule_id (required)
+     * @param  int $notification_rule_id The ID of the notification rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotificationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -564,7 +564,7 @@ class NotificationsApi
     /**
      * Create request for operation 'deleteNotificationRule'
      *
-     * @param  int $notification_rule_id (required)
+     * @param  int $notification_rule_id The ID of the notification rule. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteNotificationRule'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

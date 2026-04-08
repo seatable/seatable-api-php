@@ -159,7 +159,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateBaseExternalLink200Response
      */
     public function createBaseExternalLink($workspace_id, $base_name, $password = null, $expire_days = null, $token = null, string $contentType = self::contentTypes['createBaseExternalLink'][0])
     {
@@ -181,7 +181,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateBaseExternalLink200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createBaseExternalLinkWithHttpInfo($workspace_id, $base_name, $password = null, $expire_days = null, $token = null, string $contentType = self::contentTypes['createBaseExternalLink'][0])
     {
@@ -213,7 +213,7 @@ class SharingLinksApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateBaseExternalLink200Response',
                         $request,
                         $response,
                     );
@@ -235,7 +235,7 @@ class SharingLinksApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateBaseExternalLink200Response',
                 $request,
                 $response,
             );
@@ -244,7 +244,7 @@ class SharingLinksApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateBaseExternalLink200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -298,7 +298,7 @@ class SharingLinksApi
      */
     public function createBaseExternalLinkAsyncWithHttpInfo($workspace_id, $base_name, $password = null, $expire_days = null, $token = null, string $contentType = self::contentTypes['createBaseExternalLink'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateBaseExternalLink200Response';
         $request = $this->createBaseExternalLinkRequest($workspace_id, $base_name, $password, $expire_days, $token, $contentType);
 
         return $this->client
@@ -484,7 +484,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateInviteLink200Response
      */
     public function createInviteLink($table_name = null, $workspace_id = null, $permission = null, $password = null, $expire_days = null, string $contentType = self::contentTypes['createInviteLink'][0])
     {
@@ -506,7 +506,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateInviteLink200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createInviteLinkWithHttpInfo($table_name = null, $workspace_id = null, $permission = null, $password = null, $expire_days = null, string $contentType = self::contentTypes['createInviteLink'][0])
     {
@@ -538,7 +538,7 @@ class SharingLinksApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateInviteLink200Response',
                         $request,
                         $response,
                     );
@@ -560,7 +560,7 @@ class SharingLinksApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateInviteLink200Response',
                 $request,
                 $response,
             );
@@ -569,7 +569,7 @@ class SharingLinksApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateInviteLink200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -623,7 +623,7 @@ class SharingLinksApi
      */
     public function createInviteLinkAsyncWithHttpInfo($table_name = null, $workspace_id = null, $permission = null, $password = null, $expire_days = null, string $contentType = self::contentTypes['createInviteLink'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateInviteLink200Response';
         $request = $this->createInviteLinkRequest($table_name, $workspace_id, $permission, $password, $expire_days, $contentType);
 
         return $this->client
@@ -782,7 +782,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateViewExternalLink200Response
      */
     public function createViewExternalLink($workspace_id, $base_name, $table_id = null, $view_id = null, $token = null, $password = null, $expire_days = null, string $contentType = self::contentTypes['createViewExternalLink'][0])
     {
@@ -806,7 +806,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateViewExternalLink200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createViewExternalLinkWithHttpInfo($workspace_id, $base_name, $table_id = null, $view_id = null, $token = null, $password = null, $expire_days = null, string $contentType = self::contentTypes['createViewExternalLink'][0])
     {
@@ -838,7 +838,7 @@ class SharingLinksApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateViewExternalLink200Response',
                         $request,
                         $response,
                     );
@@ -860,7 +860,7 @@ class SharingLinksApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateViewExternalLink200Response',
                 $request,
                 $response,
             );
@@ -869,7 +869,7 @@ class SharingLinksApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateViewExternalLink200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -927,7 +927,7 @@ class SharingLinksApi
      */
     public function createViewExternalLinkAsyncWithHttpInfo($workspace_id, $base_name, $table_id = null, $view_id = null, $token = null, $password = null, $expire_days = null, string $contentType = self::contentTypes['createViewExternalLink'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateViewExternalLink200Response';
         $request = $this->createViewExternalLinkRequest($workspace_id, $base_name, $table_id, $view_id, $token, $password, $expire_days, $contentType);
 
         return $this->client
@@ -1112,7 +1112,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $external_link_token external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1132,7 +1132,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1219,7 +1219,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1242,7 +1242,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1294,7 +1294,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1425,7 +1425,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  string $invite_link_token invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1443,7 +1443,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1528,7 +1528,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1549,7 +1549,7 @@ class SharingLinksApi
      *
      * Delete Invite Link
      *
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1599,7 +1599,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'deleteInviteLink'
      *
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1702,7 +1702,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $view_external_link_token view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1722,7 +1722,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1809,7 +1809,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1832,7 +1832,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1884,7 +1884,7 @@ class SharingLinksApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

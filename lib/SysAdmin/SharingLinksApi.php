@@ -141,7 +141,7 @@ class SharingLinksApi
      *
      * Delete Base External Link
      *
-     * @param  string $external_link_token external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -159,7 +159,7 @@ class SharingLinksApi
      *
      * Delete Base External Link
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -244,7 +244,7 @@ class SharingLinksApi
      *
      * Delete Base External Link
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -265,7 +265,7 @@ class SharingLinksApi
      *
      * Delete Base External Link
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -315,7 +315,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'deleteBaseExternalLink'
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBaseExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -413,7 +413,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  string $view_external_link_token view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -431,7 +431,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -516,7 +516,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -537,7 +537,7 @@ class SharingLinksApi
      *
      * Delete View External Link
      *
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -587,7 +587,7 @@ class SharingLinksApi
     /**
      * Create request for operation 'deleteViewExternalLink'
      *
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

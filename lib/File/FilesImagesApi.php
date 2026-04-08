@@ -722,7 +722,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\File\GetUploadLink200Response
      */
     public function getUploadLink(string $contentType = self::contentTypes['getUploadLink'][0])
     {
@@ -739,7 +739,7 @@ class FilesImagesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\File\GetUploadLink200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getUploadLinkWithHttpInfo(string $contentType = self::contentTypes['getUploadLink'][0])
     {
@@ -771,7 +771,7 @@ class FilesImagesApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\File\GetUploadLink200Response',
                         $request,
                         $response,
                     );
@@ -793,7 +793,7 @@ class FilesImagesApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\File\GetUploadLink200Response',
                 $request,
                 $response,
             );
@@ -802,7 +802,7 @@ class FilesImagesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\File\GetUploadLink200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -846,7 +846,7 @@ class FilesImagesApi
      */
     public function getUploadLinkAsyncWithHttpInfo(string $contentType = self::contentTypes['getUploadLink'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\File\GetUploadLink200Response';
         $request = $this->getUploadLinkRequest($contentType);
 
         return $this->client

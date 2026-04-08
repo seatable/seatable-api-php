@@ -436,7 +436,7 @@ class CommonDatasetApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\GetCommonDataset200Response
      */
     public function getCommonDataset($dataset_id, string $contentType = self::contentTypes['getCommonDataset'][0])
     {
@@ -454,7 +454,7 @@ class CommonDatasetApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\GetCommonDataset200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCommonDatasetWithHttpInfo($dataset_id, string $contentType = self::contentTypes['getCommonDataset'][0])
     {
@@ -486,7 +486,7 @@ class CommonDatasetApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\GetCommonDataset200Response',
                         $request,
                         $response,
                     );
@@ -508,7 +508,7 @@ class CommonDatasetApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\GetCommonDataset200Response',
                 $request,
                 $response,
             );
@@ -517,7 +517,7 @@ class CommonDatasetApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\GetCommonDataset200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -563,7 +563,7 @@ class CommonDatasetApi
      */
     public function getCommonDatasetAsyncWithHttpInfo($dataset_id, string $contentType = self::contentTypes['getCommonDataset'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\GetCommonDataset200Response';
         $request = $this->getCommonDatasetRequest($dataset_id, $contentType);
 
         return $this->client
@@ -982,7 +982,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1001,7 +1001,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1087,7 +1087,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1109,7 +1109,7 @@ class CommonDatasetApi
      * Import Common Dataset
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1160,7 +1160,7 @@ class CommonDatasetApi
      * Create request for operation 'importCommonDataset'
      *
      * @param  int $dataset_id The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. (required)
-     * @param  string|null $dst_dtable_uuid The name of the base. (optional)
+     * @param  string|null $dst_dtable_uuid The UUID of the base. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importCommonDataset'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1848,7 +1848,7 @@ class CommonDatasetApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\PublishCommonDataset200Response
      */
     public function publishCommonDataset($dataset_name = null, $workspace_id = null, $dtable_name = null, $table_name = null, $view_name = null, string $contentType = self::contentTypes['publishCommonDataset'][0])
     {
@@ -1870,7 +1870,7 @@ class CommonDatasetApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\PublishCommonDataset200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function publishCommonDatasetWithHttpInfo($dataset_name = null, $workspace_id = null, $dtable_name = null, $table_name = null, $view_name = null, string $contentType = self::contentTypes['publishCommonDataset'][0])
     {
@@ -1902,7 +1902,7 @@ class CommonDatasetApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\PublishCommonDataset200Response',
                         $request,
                         $response,
                     );
@@ -1924,7 +1924,7 @@ class CommonDatasetApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\PublishCommonDataset200Response',
                 $request,
                 $response,
             );
@@ -1933,7 +1933,7 @@ class CommonDatasetApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\PublishCommonDataset200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1987,7 +1987,7 @@ class CommonDatasetApi
      */
     public function publishCommonDatasetAsyncWithHttpInfo($dataset_name = null, $workspace_id = null, $dtable_name = null, $table_name = null, $view_name = null, string $contentType = self::contentTypes['publishCommonDataset'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\PublishCommonDataset200Response';
         $request = $this->publishCommonDatasetRequest($dataset_name, $workspace_id, $dtable_name, $table_name, $view_name, $contentType);
 
         return $this->client

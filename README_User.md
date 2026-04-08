@@ -38,7 +38,7 @@ Class | Method | HTTP request | Description
 *BasesApi* | [**moveBaseIntoFolder**](docs/User/Api/BasesApi.md#movebaseintofolder) | **POST** /api/v2.1/workspace/{workspace_id}/folder-item-moving/ | Move Base into Folder
 *BasesApi* | [**restoreGroupTrashedBase**](docs/User/Api/BasesApi.md#restoregrouptrashedbase) | **PUT** /api/v2.1/groups/{group_id}/trash-dtables/{base_uuid}/ | Restore Group Trashed Base
 *BasesApi* | [**restoreTrashedBase**](docs/User/Api/BasesApi.md#restoretrashedbase) | **PUT** /api/v2.1/trash-dtables/{trashed_base_id}/ | Restore Trashed Base
-*BasesApi* | [**searchBaseOrApps**](docs/User/Api/BasesApi.md#searchbaseorapps) | **GET** /api/v2.1/dtable/items-search/ | Search base or apps
+*BasesApi* | [**searchBaseOrApps**](docs/User/Api/BasesApi.md#searchbaseorapps) | **GET** /api/v2.1/dtable/items-search/ | Search Base or Apps
 *BasesApi* | [**unfavoriteBase**](docs/User/Api/BasesApi.md#unfavoritebase) | **DELETE** /api/v2.1/starred-dtables/ | Unfavorite Base
 *BasesApi* | [**updateBase**](docs/User/Api/BasesApi.md#updatebase) | **PUT** /api/v2.1/workspace/{workspace_id}/dtable/ | Update Base
 *BasesApi* | [**updateFolder**](docs/User/Api/BasesApi.md#updatefolder) | **PUT** /api/v2.1/workspace/{workspace_id}/folders/{folder_id}/ | Update Folder
@@ -90,7 +90,7 @@ Class | Method | HTTP request | Description
 *ImportExportApi* | [**importBasefromDTableFile**](docs/User/Api/ImportExportApi.md#importbasefromdtablefile) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file
 *ImportExportApi* | [**importBasefromFile**](docs/User/Api/ImportExportApi.md#importbasefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-base/ | Import Base from xlsx or csv
 *ImportExportApi* | [**importTableFromFile**](docs/User/Api/ImportExportApi.md#importtablefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-table/ | Import Table from xlsx or csv
-*ImportExportApi* | [**updateFromFile**](docs/User/Api/ImportExportApi.md#updatefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from xlsx or csv
+*ImportExportApi* | [**updateFromFile**](docs/User/Api/ImportExportApi.md#updatefromfile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from XLSX or CSV
 *MaintenanceApi* | [**repairBase**](docs/User/Api/MaintenanceApi.md#repairbase) | **PUT** /api/v2.1/dtable/{base_uuid}/repair/ | Repair Base
 *NotificationsApi* | [**addNotificationRule**](docs/User/Api/NotificationsApi.md#addnotificationrule) | **POST** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/ | Add Notification Rule
 *NotificationsApi* | [**deleteNotificationRule**](docs/User/Api/NotificationsApi.md#deletenotificationrule) | **DELETE** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/{notification_rule_id}/ | Delete Notification Rule

@@ -60,7 +60,7 @@ Class | Method | HTTP request | Description
 *StatisticsApi* | [**getLoginLogStatisticsByDay**](docs/TeamAdmin/Api/StatisticsApi.md#getloginlogstatisticsbyday) | **GET** /api/v2.1/org/{org_id}/admin/statistics/login-logs/by-day/ | Login Logs (by Day)
 *StatisticsApi* | [**getPythonRunStatisticsByBase**](docs/TeamAdmin/Api/StatisticsApi.md#getpythonrunstatisticsbybase) | **GET** /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-base/ | Python Runs (by Base)
 *StatisticsApi* | [**getPythonRunStatisticsByDay**](docs/TeamAdmin/Api/StatisticsApi.md#getpythonrunstatisticsbyday) | **GET** /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-day/ | Python Runs (by Day)
-*StatisticsApi* | [**getUserOrBaseAIStatistics**](docs/TeamAdmin/Api/StatisticsApi.md#getuserorbaseaistatistics) | **GET** /api/v2.1/org/{org_id}/admin/statistics/ai/ | Get AI statistics by user/base
+*StatisticsApi* | [**getUserOrBaseAIStatistics**](docs/TeamAdmin/Api/StatisticsApi.md#getuserorbaseaistatistics) | **GET** /api/v2.1/org/{org_id}/admin/statistics/ai/ | Get AI Statistics by User/Base
 *UsersApi* | [**addUser**](docs/TeamAdmin/Api/UsersApi.md#adduser) | **POST** /api/v2.1/org/{org_id}/admin/users/ | Add User
 *UsersApi* | [**deleteUser**](docs/TeamAdmin/Api/UsersApi.md#deleteuser) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Delete User
 *UsersApi* | [**disableTwoFactor**](docs/TeamAdmin/Api/UsersApi.md#disabletwofactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA

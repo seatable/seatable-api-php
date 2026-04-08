@@ -403,7 +403,7 @@ class GroupsApi
      *
      * Delete Group
      *
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -421,7 +421,7 @@ class GroupsApi
      *
      * Delete Group
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -506,7 +506,7 @@ class GroupsApi
      *
      * Delete Group
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -527,7 +527,7 @@ class GroupsApi
      *
      * Delete Group
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -577,7 +577,7 @@ class GroupsApi
     /**
      * Create request for operation 'deleteGroup'
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroup'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -981,13 +981,13 @@ class GroupsApi
      *
      * Transfer Group
      *
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest|null $transfer_group_request transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\SysAdmin\TransferGroup200Response
      */
     public function transferGroup($group_id, $transfer_group_request = null, string $contentType = self::contentTypes['transferGroup'][0])
     {
@@ -1000,13 +1000,13 @@ class GroupsApi
      *
      * Transfer Group
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest|null $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\SysAdmin\TransferGroup200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function transferGroupWithHttpInfo($group_id, $transfer_group_request = null, string $contentType = self::contentTypes['transferGroup'][0])
     {
@@ -1038,7 +1038,7 @@ class GroupsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\SysAdmin\TransferGroup200Response',
                         $request,
                         $response,
                     );
@@ -1060,7 +1060,7 @@ class GroupsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\SysAdmin\TransferGroup200Response',
                 $request,
                 $response,
             );
@@ -1069,7 +1069,7 @@ class GroupsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\SysAdmin\TransferGroup200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1086,7 +1086,7 @@ class GroupsApi
      *
      * Transfer Group
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest|null $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
@@ -1108,7 +1108,7 @@ class GroupsApi
      *
      * Transfer Group
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest|null $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *
@@ -1117,7 +1117,7 @@ class GroupsApi
      */
     public function transferGroupAsyncWithHttpInfo($group_id, $transfer_group_request = null, string $contentType = self::contentTypes['transferGroup'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\SysAdmin\TransferGroup200Response';
         $request = $this->transferGroupRequest($group_id, $transfer_group_request, $contentType);
 
         return $this->client
@@ -1159,7 +1159,7 @@ class GroupsApi
     /**
      * Create request for operation 'transferGroup'
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  \SeaTable\Client\SysAdmin\TransferGroupRequest|null $transfer_group_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['transferGroup'] to see the possible values for this operation
      *

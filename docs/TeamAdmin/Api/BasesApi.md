@@ -174,7 +174,7 @@ AccountTokenAuth
 ## `getBase()`
 
 ```php
-getBase($org_id, $base_uuid): object
+getBase($org_id, $base_uuid): \SeaTable\Client\TeamAdmin\GetBase200Response
 ```
 
 Get Base
@@ -213,7 +213,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetBase200Response**](../Model/GetBase200Response.md)
 
 ### Authorization
 

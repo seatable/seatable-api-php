@@ -20,7 +20,7 @@ autoLinkTask($base_uuid, $body): object
 
 Auto Link task
 
-Query the status of auto add links task.There are 3 different status: - success - failed - running
+Query the status of auto add links task. There are 3 different status: - success - failed - running
 
 ### Example
 
@@ -71,7 +71,7 @@ autoLinks($base_uuid, $match_link_columns): object
 
 Auto Links
 
-Automatically create link relationships.  The caller needs to create a link column before calling the API,  supporting both archived and unarchived data. It will return a task ID, by quering which you can get the status of the link creation in the backend wihtin 5 minutes. The matched data in the link column in the 2 tables must have the similar  data structure (not same column type). For example, the text column can match email, auto-number or url type column, and so on. Currently, there are a few restrictions: - Formula and link-formula columns are not supported as matching columns - Single-select columns cannot be matched with text columns.
+Automatically create link relationships.  The caller needs to create a link column before calling the API,  supporting both archived and unarchived data. It will return a task ID, by querying which you can get the status of the link creation in the backend within 5 minutes. The matched data in the link column in the 2 tables must have the similar  data structure (not same column type). For example, the text column can match email, auto-number or url type column, and so on. Currently, there are a few restrictions: - Formula and link-formula columns are not supported as matching columns - Single-select columns cannot be matched with text columns.
 
 ### Example
 
@@ -173,7 +173,7 @@ deleteRowLink($base_uuid, $row_link_create_update_delete): object
 
 Delete Row Link(s)
 
-Deletes one or multiple links between two rows. Only the links between the row_ids mentioned in the mapping, will be removed. Other links will stay and not touched.
+Deletes one or multiple links between two rows. Only the links between the row_ids mentioned in the mapping, will be removed. Other links will stay and not be touched.
 
 ### Example
 
@@ -275,7 +275,7 @@ updateRowLink($base_uuid, $row_link_create_update_delete): object
 
 Update Row Link(s)
 
-Updates the link(s) between one column and many others (1:n relation). Existings links will be removed and replaced with this new mapping.
+Updates the link(s) between one column and many others (1:n relation). Existing links will be removed and replaced with this new mapping.
 
 ### Example
 

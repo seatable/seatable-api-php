@@ -111,7 +111,7 @@ ApiTokenAuth
 ## `getUploadLink()`
 
 ```php
-getUploadLink(): object
+getUploadLink(): \SeaTable\Client\File\GetUploadLink200Response
 ```
 
 Get Upload Link
@@ -145,7 +145,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\File\GetUploadLink200Response**](../Model/GetUploadLink200Response.md)
 
 ### Authorization
 

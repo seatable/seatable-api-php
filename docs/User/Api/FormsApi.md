@@ -88,7 +88,7 @@ $apiInstance = new SeaTable\Client\User\FormsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string | The token of the form.
 
 try {
     $result = $apiInstance->deleteForm($form_token);
@@ -102,7 +102,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **form_token** | **string**|  | |
+| **form_token** | **string**| The token of the form. | |
 
 ### Return type
 
@@ -137,7 +137,7 @@ $apiInstance = new SeaTable\Client\User\FormsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string | The token of the form.
 
 try {
     $result = $apiInstance->duplicateForm($form_token);
@@ -151,7 +151,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **form_token** | **string**|  | |
+| **form_token** | **string**| The token of the form. | |
 
 ### Return type
 
@@ -283,7 +283,7 @@ $apiInstance = new SeaTable\Client\User\FormsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string | The token of the form.
 $form_config = 'form_config_example'; // string | Define the form's name (required) and other details (optional). For a full list of available options, refer to the instruction above.
 
 try {
@@ -298,7 +298,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **form_token** | **string**|  | |
+| **form_token** | **string**| The token of the form. | |
 | **form_config** | **string**| Define the form&#39;s name (required) and other details (optional). For a full list of available options, refer to the instruction above. | [optional] |
 
 ### Return type
@@ -334,7 +334,7 @@ $apiInstance = new SeaTable\Client\User\FormsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string | The token of the form.
 $form_logo = '/path/to/file.txt'; // \SplFileObject | Path and file name to your logo image.
 
 try {
@@ -349,7 +349,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **form_token** | **string**|  | |
+| **form_token** | **string**| The token of the form. | |
 | **form_logo** | **\SplFileObject****\SplFileObject**| Path and file name to your logo image. | [optional] |
 
 ### Return type

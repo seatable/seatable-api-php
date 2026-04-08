@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **string** | Login email of the user. | [optional]
-**password** | **string** | Login password of the user. | [optional]
+**email** | **string** | Login email of the user. |
+**password** | **string** | Login password of the user. |
 **name** | **string** | Full name of the user. | [optional]
 **is_staff** | **bool** | &#x60;true&#x60; or &#x60;false&#x60; if the user will be an (system) admin. &#x60;false&#x60; by default. | [optional] [default to false]
 **is_active** | **bool** | &#x60;true&#x60; or &#x60;false&#x60; if the user could log in. &#x60;true&#x60; by default. | [optional] [default to true]

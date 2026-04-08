@@ -429,7 +429,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -447,7 +447,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -532,7 +532,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -553,7 +553,7 @@ class FormsApi
      *
      * Delete Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -603,7 +603,7 @@ class FormsApi
     /**
      * Create request for operation 'deleteForm'
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -704,7 +704,7 @@ class FormsApi
      *
      * Duplicate Form
      *
-     * @param  string $form_token form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateForm'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -722,7 +722,7 @@ class FormsApi
      *
      * Duplicate Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateForm'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -807,7 +807,7 @@ class FormsApi
      *
      * Duplicate Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -828,7 +828,7 @@ class FormsApi
      *
      * Duplicate Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -878,7 +878,7 @@ class FormsApi
     /**
      * Create request for operation 'duplicateForm'
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['duplicateForm'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1528,7 +1528,7 @@ class FormsApi
      *
      * Update Form
      *
-     * @param  string $form_token form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string|null $form_config Define the form&#39;s name (required) and other details (optional). For a full list of available options, refer to the instruction above. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateForm'] to see the possible values for this operation
      *
@@ -1547,7 +1547,7 @@ class FormsApi
      *
      * Update Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string|null $form_config Define the form&#39;s name (required) and other details (optional). For a full list of available options, refer to the instruction above. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateForm'] to see the possible values for this operation
      *
@@ -1633,7 +1633,7 @@ class FormsApi
      *
      * Update Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string|null $form_config Define the form&#39;s name (required) and other details (optional). For a full list of available options, refer to the instruction above. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateForm'] to see the possible values for this operation
      *
@@ -1655,7 +1655,7 @@ class FormsApi
      *
      * Update Form
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string|null $form_config Define the form&#39;s name (required) and other details (optional). For a full list of available options, refer to the instruction above. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateForm'] to see the possible values for this operation
      *
@@ -1706,7 +1706,7 @@ class FormsApi
     /**
      * Create request for operation 'updateForm'
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  string|null $form_config Define the form&#39;s name (required) and other details (optional). For a full list of available options, refer to the instruction above. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateForm'] to see the possible values for this operation
      *
@@ -1819,7 +1819,7 @@ class FormsApi
      *
      * Upload Form Logo
      *
-     * @param  string $form_token form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  \SplFileObject|null $form_logo Path and file name to your logo image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadFormLogo'] to see the possible values for this operation
      *
@@ -1838,7 +1838,7 @@ class FormsApi
      *
      * Upload Form Logo
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  \SplFileObject|null $form_logo Path and file name to your logo image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadFormLogo'] to see the possible values for this operation
      *
@@ -1924,7 +1924,7 @@ class FormsApi
      *
      * Upload Form Logo
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  \SplFileObject|null $form_logo Path and file name to your logo image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadFormLogo'] to see the possible values for this operation
      *
@@ -1946,7 +1946,7 @@ class FormsApi
      *
      * Upload Form Logo
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  \SplFileObject|null $form_logo Path and file name to your logo image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadFormLogo'] to see the possible values for this operation
      *
@@ -1997,7 +1997,7 @@ class FormsApi
     /**
      * Create request for operation 'uploadFormLogo'
      *
-     * @param  string $form_token (required)
+     * @param  string $form_token The token of the form. (required)
      * @param  \SplFileObject|null $form_logo Path and file name to your logo image. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadFormLogo'] to see the possible values for this operation
      *

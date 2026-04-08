@@ -34,7 +34,7 @@ use \SeaTable\Client\ObjectSerializer;
  * ApiTokenList Class Doc Comment
  *
  * @category Class
- * @description ...
+ * @description List of API tokens for a base.
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

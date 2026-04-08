@@ -423,7 +423,7 @@ class UserApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object|object|object
+     * @return \SeaTable\Client\User\GetAccountInfo200Response|object|object
      */
     public function getAccountInfo(string $contentType = self::contentTypes['getAccountInfo'][0])
     {
@@ -440,7 +440,7 @@ class UserApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\GetAccountInfo200Response|object|object, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAccountInfoWithHttpInfo(string $contentType = self::contentTypes['getAccountInfo'][0])
     {
@@ -472,7 +472,7 @@ class UserApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\GetAccountInfo200Response',
                         $request,
                         $response,
                     );
@@ -506,7 +506,7 @@ class UserApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\GetAccountInfo200Response',
                 $request,
                 $response,
             );
@@ -515,7 +515,7 @@ class UserApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\GetAccountInfo200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -575,7 +575,7 @@ class UserApi
      */
     public function getAccountInfoAsyncWithHttpInfo(string $contentType = self::contentTypes['getAccountInfo'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\GetAccountInfo200Response';
         $request = $this->getAccountInfoRequest($contentType);
 
         return $this->client
@@ -699,12 +699,12 @@ class UserApi
      *
      * Get Public User Info
      *
-     * @param  string $user_id user_id (required)
+     * @param  string $user_id The unique user ID in the format &#x60;xxx@auth.local&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPublicUserInfo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\GetPublicUserInfo200Response
      */
     public function getPublicUserInfo($user_id, string $contentType = self::contentTypes['getPublicUserInfo'][0])
     {
@@ -717,12 +717,12 @@ class UserApi
      *
      * Get Public User Info
      *
-     * @param  string $user_id (required)
+     * @param  string $user_id The unique user ID in the format &#x60;xxx@auth.local&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPublicUserInfo'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\GetPublicUserInfo200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPublicUserInfoWithHttpInfo($user_id, string $contentType = self::contentTypes['getPublicUserInfo'][0])
     {
@@ -754,7 +754,7 @@ class UserApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\GetPublicUserInfo200Response',
                         $request,
                         $response,
                     );
@@ -776,7 +776,7 @@ class UserApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\GetPublicUserInfo200Response',
                 $request,
                 $response,
             );
@@ -785,7 +785,7 @@ class UserApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\GetPublicUserInfo200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -802,7 +802,7 @@ class UserApi
      *
      * Get Public User Info
      *
-     * @param  string $user_id (required)
+     * @param  string $user_id The unique user ID in the format &#x60;xxx@auth.local&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPublicUserInfo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -823,7 +823,7 @@ class UserApi
      *
      * Get Public User Info
      *
-     * @param  string $user_id (required)
+     * @param  string $user_id The unique user ID in the format &#x60;xxx@auth.local&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPublicUserInfo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -831,7 +831,7 @@ class UserApi
      */
     public function getPublicUserInfoAsyncWithHttpInfo($user_id, string $contentType = self::contentTypes['getPublicUserInfo'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\GetPublicUserInfo200Response';
         $request = $this->getPublicUserInfoRequest($user_id, $contentType);
 
         return $this->client
@@ -873,7 +873,7 @@ class UserApi
     /**
      * Create request for operation 'getPublicUserInfo'
      *
-     * @param  string $user_id (required)
+     * @param  string $user_id The unique user ID in the format &#x60;xxx@auth.local&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPublicUserInfo'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1239,7 +1239,7 @@ class UserApi
      *
      * Search User
      *
-     * @param  string|null $q q (optional)
+     * @param  string|null $q Search query string. Matches against email, name, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1257,7 +1257,7 @@ class UserApi
      *
      * Search User
      *
-     * @param  string|null $q (optional)
+     * @param  string|null $q Search query string. Matches against email, name, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1342,7 +1342,7 @@ class UserApi
      *
      * Search User
      *
-     * @param  string|null $q (optional)
+     * @param  string|null $q Search query string. Matches against email, name, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1363,7 +1363,7 @@ class UserApi
      *
      * Search User
      *
-     * @param  string|null $q (optional)
+     * @param  string|null $q Search query string. Matches against email, name, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1413,7 +1413,7 @@ class UserApi
     /**
      * Create request for operation 'searchUser'
      *
-     * @param  string|null $q (optional)
+     * @param  string|null $q Search query string. Matches against email, name, or contact email. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchUser'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

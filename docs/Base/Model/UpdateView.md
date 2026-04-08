@@ -10,5 +10,5 @@ Name | Type | Description | Notes
 **filter_conjunction** | [**\SeaTable\Client\Base\FilterConjunction**](FilterConjunction.md) |  | [optional]
 **sorts** | [**\SeaTable\Client\Base\SortsInner[]**](SortsInner.md) | sorting of your view | [optional]
 **groupbys** | [**\SeaTable\Client\Base\SortsInner[]**](SortsInner.md) | grouping of your view | [optional]
-**hidden_columns** | **string[]** | IDs of the rows that should be hidden | [optional]
+**hidden_columns** | **string[]** | IDs of the columns that should be hidden | [optional]
 

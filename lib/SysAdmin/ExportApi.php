@@ -127,7 +127,7 @@ class ExportApi
     /**
      * Operation exportBase
      *
-     * Export base
+     * Export Base
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -145,7 +145,7 @@ class ExportApi
     /**
      * Operation exportBaseWithHttpInfo
      *
-     * Export base
+     * Export Base
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -195,7 +195,7 @@ class ExportApi
     /**
      * Operation exportBaseAsync
      *
-     * Export base
+     * Export Base
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -217,7 +217,7 @@ class ExportApi
     /**
      * Operation exportBaseAsyncWithHttpInfo
      *
-     * Export base
+     * Export Base
      *
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -308,7 +308,7 @@ class ExportApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            [],
+            ['application/json', ],
             $contentType,
             $multipart
         );

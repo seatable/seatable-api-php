@@ -342,7 +342,7 @@ class DeleteRows implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets row_ids
      *
-     * @param string[] $row_ids Defines the rows which should be updated.
+     * @param string[] $row_ids Defines the rows which should be deleted.
      *
      * @return self
      */

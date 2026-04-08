@@ -505,7 +505,7 @@ class UpdateView implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets hidden_columns
      *
-     * @param string[]|null $hidden_columns IDs of the rows that should be hidden
+     * @param string[]|null $hidden_columns IDs of the columns that should be hidden
      *
      * @return self
      */

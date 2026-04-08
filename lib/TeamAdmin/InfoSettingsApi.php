@@ -397,7 +397,7 @@ class InfoSettingsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\GetTeamInfo200Response
      */
     public function getTeamInfo(string $contentType = self::contentTypes['getTeamInfo'][0])
     {
@@ -414,7 +414,7 @@ class InfoSettingsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\GetTeamInfo200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getTeamInfoWithHttpInfo(string $contentType = self::contentTypes['getTeamInfo'][0])
     {
@@ -446,7 +446,7 @@ class InfoSettingsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetTeamInfo200Response',
                         $request,
                         $response,
                     );
@@ -468,7 +468,7 @@ class InfoSettingsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\GetTeamInfo200Response',
                 $request,
                 $response,
             );
@@ -477,7 +477,7 @@ class InfoSettingsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetTeamInfo200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -521,7 +521,7 @@ class InfoSettingsApi
      */
     public function getTeamInfoAsyncWithHttpInfo(string $contentType = self::contentTypes['getTeamInfo'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\GetTeamInfo200Response';
         $request = $this->getTeamInfoRequest($contentType);
 
         return $this->client
@@ -649,7 +649,7 @@ class InfoSettingsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
      */
     public function getTeamSettings(string $contentType = self::contentTypes['getTeamSettings'][0])
     {
@@ -666,7 +666,7 @@ class InfoSettingsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\GetTeamSettings200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getTeamSettingsWithHttpInfo(string $contentType = self::contentTypes['getTeamSettings'][0])
     {
@@ -698,7 +698,7 @@ class InfoSettingsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response',
                         $request,
                         $response,
                     );
@@ -720,7 +720,7 @@ class InfoSettingsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response',
                 $request,
                 $response,
             );
@@ -729,7 +729,7 @@ class InfoSettingsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -773,7 +773,7 @@ class InfoSettingsApi
      */
     public function getTeamSettingsAsyncWithHttpInfo(string $contentType = self::contentTypes['getTeamSettings'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response';
         $request = $this->getTeamSettingsRequest($contentType);
 
         return $this->client
@@ -1174,7 +1174,7 @@ class InfoSettingsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
      */
     public function updateTeamSettings($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
@@ -1196,7 +1196,7 @@ class InfoSettingsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\GetTeamSettings200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateTeamSettingsWithHttpInfo($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
@@ -1228,7 +1228,7 @@ class InfoSettingsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response',
                         $request,
                         $response,
                     );
@@ -1250,7 +1250,7 @@ class InfoSettingsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response',
                 $request,
                 $response,
             );
@@ -1259,7 +1259,7 @@ class InfoSettingsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1313,7 +1313,7 @@ class InfoSettingsApi
      */
     public function updateTeamSettingsAsyncWithHttpInfo($enable_force_2fa = null, $enable_force_sso_login = null, $enable_new_user_email = null, $enable_external_user_access_invite_link = null, $enable_member_modify_name = null, string $contentType = self::contentTypes['updateTeamSettings'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\GetTeamSettings200Response';
         $request = $this->updateTeamSettingsRequest($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name, $contentType);
 
         return $this->client

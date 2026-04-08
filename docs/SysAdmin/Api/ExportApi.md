@@ -4,7 +4,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**exportBase()**](ExportApi.md#exportBase) | **GET** /api/v2.1/admin/dtables/{base_uuid}/synchronous-export/export-dtable/ | Export base |
+| [**exportBase()**](ExportApi.md#exportBase) | **GET** /api/v2.1/admin/dtables/{base_uuid}/synchronous-export/export-dtable/ | Export Base |
 
 
 ## `exportBase()`
@@ -13,7 +13,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 exportBase($base_uuid, $ignore_asset)
 ```
 
-Export base
+Export Base
 
 Use this request to export a base as System Admin.
 

@@ -1059,7 +1059,7 @@ class BasesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\GetBase200Response
      */
     public function getBase($org_id, $base_uuid, string $contentType = self::contentTypes['getBase'][0])
     {
@@ -1078,7 +1078,7 @@ class BasesApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\GetBase200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getBaseWithHttpInfo($org_id, $base_uuid, string $contentType = self::contentTypes['getBase'][0])
     {
@@ -1110,7 +1110,7 @@ class BasesApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetBase200Response',
                         $request,
                         $response,
                     );
@@ -1132,7 +1132,7 @@ class BasesApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\GetBase200Response',
                 $request,
                 $response,
             );
@@ -1141,7 +1141,7 @@ class BasesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\GetBase200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1189,7 +1189,7 @@ class BasesApi
      */
     public function getBaseAsyncWithHttpInfo($org_id, $base_uuid, string $contentType = self::contentTypes['getBase'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\GetBase200Response';
         $request = $this->getBaseRequest($org_id, $base_uuid, $contentType);
 
         return $this->client

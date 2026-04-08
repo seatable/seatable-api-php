@@ -85,7 +85,7 @@ $apiInstance = new SeaTable\Client\User\ActivitiesLogsApi(
     $config
 );
 $dtable_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
-$op_date = 2023-05-25T10:06:39+08:00; // string
+$op_date = 2023-05-25T10:06:39+08:00; // string | Filter by operation date.
 $page = 1; // int | Page number of results to return. Default is 1.
 $per_page = 2; // int | Number of results per page.
 
@@ -102,7 +102,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **dtable_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
-| **op_date** | **string**|  | |
+| **op_date** | **string**| Filter by operation date. | |
 | **page** | **int**| Page number of results to return. Default is 1. | [optional] |
 | **per_page** | **int**| Number of results per page. | [optional] |
 

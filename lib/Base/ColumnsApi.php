@@ -1311,7 +1311,7 @@ class ColumnsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\Base\UpdateColumn200Response
      */
     public function insertColumn($base_uuid, $insert_column_request = null, string $contentType = self::contentTypes['insertColumn'][0])
     {
@@ -1330,7 +1330,7 @@ class ColumnsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\UpdateColumn200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function insertColumnWithHttpInfo($base_uuid, $insert_column_request = null, string $contentType = self::contentTypes['insertColumn'][0])
     {
@@ -1362,7 +1362,7 @@ class ColumnsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\Base\UpdateColumn200Response',
                         $request,
                         $response,
                     );
@@ -1384,7 +1384,7 @@ class ColumnsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\Base\UpdateColumn200Response',
                 $request,
                 $response,
             );
@@ -1393,7 +1393,7 @@ class ColumnsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\Base\UpdateColumn200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1441,7 +1441,7 @@ class ColumnsApi
      */
     public function insertColumnAsyncWithHttpInfo($base_uuid, $insert_column_request = null, string $contentType = self::contentTypes['insertColumn'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\Base\UpdateColumn200Response';
         $request = $this->insertColumnRequest($base_uuid, $insert_column_request, $contentType);
 
         return $this->client
@@ -1910,7 +1910,7 @@ class ColumnsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\Base\UpdateColumn200Response
      */
     public function updateColumn($base_uuid, $update_column = null, string $contentType = self::contentTypes['updateColumn'][0])
     {
@@ -1929,7 +1929,7 @@ class ColumnsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\UpdateColumn200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateColumnWithHttpInfo($base_uuid, $update_column = null, string $contentType = self::contentTypes['updateColumn'][0])
     {
@@ -1961,7 +1961,7 @@ class ColumnsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\Base\UpdateColumn200Response',
                         $request,
                         $response,
                     );
@@ -1983,7 +1983,7 @@ class ColumnsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\Base\UpdateColumn200Response',
                 $request,
                 $response,
             );
@@ -1992,7 +1992,7 @@ class ColumnsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\Base\UpdateColumn200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2040,7 +2040,7 @@ class ColumnsApi
      */
     public function updateColumnAsyncWithHttpInfo($base_uuid, $update_column = null, string $contentType = self::contentTypes['updateColumn'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\Base\UpdateColumn200Response';
         $request = $this->updateColumnRequest($base_uuid, $update_column, $contentType);
 
         return $this->client

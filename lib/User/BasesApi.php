@@ -1615,7 +1615,7 @@ class BasesApi
      * Delete Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1634,7 +1634,7 @@ class BasesApi
      * Delete Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFolder'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1720,7 +1720,7 @@ class BasesApi
      * Delete Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1742,7 +1742,7 @@ class BasesApi
      * Delete Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1793,7 +1793,7 @@ class BasesApi
      * Create request for operation 'deleteFolder'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteFolder'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2956,7 +2956,7 @@ class BasesApi
      *
      * List Group Trashed Bases
      *
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupTrashedBases'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2974,7 +2974,7 @@ class BasesApi
      *
      * List Group Trashed Bases
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupTrashedBases'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3059,7 +3059,7 @@ class BasesApi
      *
      * List Group Trashed Bases
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3080,7 +3080,7 @@ class BasesApi
      *
      * List Group Trashed Bases
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3130,7 +3130,7 @@ class BasesApi
     /**
      * Create request for operation 'listGroupTrashedBases'
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGroupTrashedBases'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3831,7 +3831,7 @@ class BasesApi
      *
      * Restore Group Trashed Base
      *
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreGroupTrashedBase'] to see the possible values for this operation
      *
@@ -3850,7 +3850,7 @@ class BasesApi
      *
      * Restore Group Trashed Base
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreGroupTrashedBase'] to see the possible values for this operation
      *
@@ -3936,7 +3936,7 @@ class BasesApi
      *
      * Restore Group Trashed Base
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreGroupTrashedBase'] to see the possible values for this operation
      *
@@ -3958,7 +3958,7 @@ class BasesApi
      *
      * Restore Group Trashed Base
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreGroupTrashedBase'] to see the possible values for this operation
      *
@@ -4009,7 +4009,7 @@ class BasesApi
     /**
      * Create request for operation 'restoreGroupTrashedBase'
      *
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $base_uuid The unique identifier of a base. Sometimes also called dtable_uuid. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['restoreGroupTrashedBase'] to see the possible values for this operation
      *
@@ -4399,7 +4399,7 @@ class BasesApi
     /**
      * Operation searchBaseOrApps
      *
-     * Search base or apps
+     * Search Base or Apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
      * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
@@ -4418,7 +4418,7 @@ class BasesApi
     /**
      * Operation searchBaseOrAppsWithHttpInfo
      *
-     * Search base or apps
+     * Search Base or Apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
      * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
@@ -4504,7 +4504,7 @@ class BasesApi
     /**
      * Operation searchBaseOrAppsAsync
      *
-     * Search base or apps
+     * Search Base or Apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
      * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
@@ -4526,7 +4526,7 @@ class BasesApi
     /**
      * Operation searchBaseOrAppsAsyncWithHttpInfo
      *
-     * Search base or apps
+     * Search Base or Apps
      *
      * @param  string|null $query_str Search string. Substrings are allowed and capitalization does not matter. (optional)
      * @param  string|null $query_type Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. (optional)
@@ -5272,7 +5272,7 @@ class BasesApi
      * Update Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
@@ -5292,7 +5292,7 @@ class BasesApi
      * Update Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
@@ -5379,7 +5379,7 @@ class BasesApi
      * Update Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
@@ -5402,7 +5402,7 @@ class BasesApi
      * Update Folder
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *
@@ -5454,7 +5454,7 @@ class BasesApi
      * Create request for operation 'updateFolder'
      *
      * @param  int $workspace_id id of your workspace. (required)
-     * @param  string $folder_id (required)
+     * @param  string $folder_id The ID of the folder. (required)
      * @param  string|null $name Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateFolder'] to see the possible values for this operation
      *

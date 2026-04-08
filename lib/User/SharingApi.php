@@ -526,7 +526,7 @@ class SharingApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateGroupViewShare200Response
      */
     public function createGroupViewShare($workspace_id, $base_name, $table_id = null, $view_id = null, $permission = null, $to_group_id = null, string $contentType = self::contentTypes['createGroupViewShare'][0])
     {
@@ -549,7 +549,7 @@ class SharingApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateGroupViewShare200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createGroupViewShareWithHttpInfo($workspace_id, $base_name, $table_id = null, $view_id = null, $permission = null, $to_group_id = null, string $contentType = self::contentTypes['createGroupViewShare'][0])
     {
@@ -581,7 +581,7 @@ class SharingApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateGroupViewShare200Response',
                         $request,
                         $response,
                     );
@@ -603,7 +603,7 @@ class SharingApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateGroupViewShare200Response',
                 $request,
                 $response,
             );
@@ -612,7 +612,7 @@ class SharingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateGroupViewShare200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -668,7 +668,7 @@ class SharingApi
      */
     public function createGroupViewShareAsyncWithHttpInfo($workspace_id, $base_name, $table_id = null, $view_id = null, $permission = null, $to_group_id = null, string $contentType = self::contentTypes['createGroupViewShare'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateGroupViewShare200Response';
         $request = $this->createGroupViewShareRequest($workspace_id, $base_name, $table_id, $view_id, $permission, $to_group_id, $contentType);
 
         return $this->client
@@ -1175,7 +1175,7 @@ class SharingApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateUserViewShare200Response
      */
     public function createUserViewShare($workspace_id, $base_name, $permission = null, $to_user = null, $table_id = null, $view_id = null, string $contentType = self::contentTypes['createUserViewShare'][0])
     {
@@ -1198,7 +1198,7 @@ class SharingApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateUserViewShare200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createUserViewShareWithHttpInfo($workspace_id, $base_name, $permission = null, $to_user = null, $table_id = null, $view_id = null, string $contentType = self::contentTypes['createUserViewShare'][0])
     {
@@ -1230,7 +1230,7 @@ class SharingApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateUserViewShare200Response',
                         $request,
                         $response,
                     );
@@ -1252,7 +1252,7 @@ class SharingApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateUserViewShare200Response',
                 $request,
                 $response,
             );
@@ -1261,7 +1261,7 @@ class SharingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateUserViewShare200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1317,7 +1317,7 @@ class SharingApi
      */
     public function createUserViewShareAsyncWithHttpInfo($workspace_id, $base_name, $permission = null, $to_user = null, $table_id = null, $view_id = null, string $contentType = self::contentTypes['createUserViewShare'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateUserViewShare200Response';
         $request = $this->createUserViewShareRequest($workspace_id, $base_name, $permission, $to_user, $table_id, $view_id, $contentType);
 
         return $this->client
@@ -1841,7 +1841,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1861,7 +1861,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1948,7 +1948,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1971,7 +1971,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2023,7 +2023,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2159,7 +2159,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2179,7 +2179,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2266,7 +2266,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupViewShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2289,7 +2289,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupViewShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2341,7 +2341,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGroupViewShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3136,7 +3136,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3156,7 +3156,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3243,7 +3243,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserViewShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3266,7 +3266,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserViewShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3318,7 +3318,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteUserViewShare'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3452,7 +3452,7 @@ class SharingApi
      *
      * Leave Shared View
      *
-     * @param  int $user_view_share_id user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['leaveSharedView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3470,7 +3470,7 @@ class SharingApi
      *
      * Leave Shared View
      *
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['leaveSharedView'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3555,7 +3555,7 @@ class SharingApi
      *
      * Leave Shared View
      *
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['leaveSharedView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3576,7 +3576,7 @@ class SharingApi
      *
      * Leave Shared View
      *
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['leaveSharedView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3626,7 +3626,7 @@ class SharingApi
     /**
      * Create request for operation 'leaveSharedView'
      *
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['leaveSharedView'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -6212,7 +6212,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupShare'] to see the possible values for this operation
      *
@@ -6233,7 +6233,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupShare'] to see the possible values for this operation
      *
@@ -6321,7 +6321,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupShare'] to see the possible values for this operation
      *
@@ -6345,7 +6345,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupShare'] to see the possible values for this operation
      *
@@ -6398,7 +6398,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_id (required)
+     * @param  int $group_id The ID of the group. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupShare'] to see the possible values for this operation
      *
@@ -6546,13 +6546,13 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateGroupViewShare200Response
      */
     public function updateGroupViewShare($workspace_id, $base_name, $group_view_share_id, $permission = null, string $contentType = self::contentTypes['updateGroupViewShare'][0])
     {
@@ -6567,13 +6567,13 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateGroupViewShare200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateGroupViewShareWithHttpInfo($workspace_id, $base_name, $group_view_share_id, $permission = null, string $contentType = self::contentTypes['updateGroupViewShare'][0])
     {
@@ -6605,7 +6605,7 @@ class SharingApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateGroupViewShare200Response',
                         $request,
                         $response,
                     );
@@ -6627,7 +6627,7 @@ class SharingApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateGroupViewShare200Response',
                 $request,
                 $response,
             );
@@ -6636,7 +6636,7 @@ class SharingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateGroupViewShare200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -6655,7 +6655,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupViewShare'] to see the possible values for this operation
      *
@@ -6679,7 +6679,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupViewShare'] to see the possible values for this operation
      *
@@ -6688,7 +6688,7 @@ class SharingApi
      */
     public function updateGroupViewShareAsyncWithHttpInfo($workspace_id, $base_name, $group_view_share_id, $permission = null, string $contentType = self::contentTypes['updateGroupViewShare'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateGroupViewShare200Response';
         $request = $this->updateGroupViewShareRequest($workspace_id, $base_name, $group_view_share_id, $permission, $contentType);
 
         return $this->client
@@ -6732,7 +6732,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $group_view_share_id (required)
+     * @param  int $group_view_share_id The ID of the group view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGroupViewShare'] to see the possible values for this operation
      *
@@ -7196,13 +7196,13 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUserViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\CreateUserViewShare200Response
      */
     public function updateUserViewShare($workspace_id, $base_name, $user_view_share_id, $permission = null, string $contentType = self::contentTypes['updateUserViewShare'][0])
     {
@@ -7217,13 +7217,13 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUserViewShare'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\CreateUserViewShare200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateUserViewShareWithHttpInfo($workspace_id, $base_name, $user_view_share_id, $permission = null, string $contentType = self::contentTypes['updateUserViewShare'][0])
     {
@@ -7255,7 +7255,7 @@ class SharingApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\CreateUserViewShare200Response',
                         $request,
                         $response,
                     );
@@ -7277,7 +7277,7 @@ class SharingApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\CreateUserViewShare200Response',
                 $request,
                 $response,
             );
@@ -7286,7 +7286,7 @@ class SharingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\CreateUserViewShare200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -7305,7 +7305,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUserViewShare'] to see the possible values for this operation
      *
@@ -7329,7 +7329,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUserViewShare'] to see the possible values for this operation
      *
@@ -7338,7 +7338,7 @@ class SharingApi
      */
     public function updateUserViewShareAsyncWithHttpInfo($workspace_id, $base_name, $user_view_share_id, $permission = null, string $contentType = self::contentTypes['updateUserViewShare'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\CreateUserViewShare200Response';
         $request = $this->updateUserViewShareRequest($workspace_id, $base_name, $user_view_share_id, $permission, $contentType);
 
         return $this->client
@@ -7382,7 +7382,7 @@ class SharingApi
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $base_name name of your base. (required)
-     * @param  int $user_view_share_id (required)
+     * @param  int $user_view_share_id The ID of the user view share. (required)
      * @param  string|null $permission &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateUserViewShare'] to see the possible values for this operation
      *

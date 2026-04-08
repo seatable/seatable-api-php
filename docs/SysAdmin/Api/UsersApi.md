@@ -9,7 +9,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**disableTwoFactor()**](UsersApi.md#disableTwoFactor) | **DELETE** /api2/two-factor-auth/{user_id}/ | Disable 2FA |
 | [**enforceTwoFactor()**](UsersApi.md#enforceTwoFactor) | **PUT** /api/v2.1/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA |
 | [**getUser()**](UsersApi.md#getUser) | **GET** /api/v2.1/admin/users/{user_id}/ | Get User |
-| [**importUsers()**](UsersApi.md#importUsers) | **POST** /api/v2.1/admin/import-users/ | Import users |
+| [**importUsers()**](UsersApi.md#importUsers) | **POST** /api/v2.1/admin/import-users/ | Import Users |
 | [**listAdminUsers()**](UsersApi.md#listAdminUsers) | **GET** /api/v2.1/admin/admin-users/ | List Admin Users |
 | [**listBasesSharedToUser()**](UsersApi.md#listBasesSharedToUser) | **GET** /api/v2.1/admin/users/{user_id}/shared-dtables/ | List Bases Shared to User |
 | [**listUserStorageObjects()**](UsersApi.md#listUserStorageObjects) | **GET** /api/v2.1/admin/users/{user_id}/storage/ | List User&#39;s Storage Objects |
@@ -24,7 +24,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addNewUser()`
 
 ```php
-addNewUser($add_new_user_request): object
+addNewUser($add_new_user_request): \SeaTable\Client\SysAdmin\AddNewUser200Response
 ```
 
 Add New User
@@ -61,7 +61,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddNewUser200Response**](../Model/AddNewUser200Response.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->deleteUser($user_id);
@@ -141,7 +141,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->disableTwoFactor($user_id);
@@ -190,7 +190,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $enforce_two_factor_request = new \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest(); // \SeaTable\Client\SysAdmin\EnforceTwoFactorRequest
 
 try {
@@ -222,10 +222,12 @@ AccountTokenAuth
 ## `getUser()`
 
 ```php
-getUser($user_id): object
+getUser($user_id): \SeaTable\Client\SysAdmin\GetUser200Response
 ```
 
 Get User
+
+Get the details of a specific user by their user ID.
 
 ### Example
 
@@ -239,7 +241,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->getUser($user_id);
@@ -257,7 +259,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\GetUser200Response**](../Model/GetUser200Response.md)
 
 ### Authorization
 
@@ -272,7 +274,7 @@ AccountTokenAuth
 importUsers($file): object
 ```
 
-Import users
+Import Users
 
 As system administrator, you can batch import users with an Excel file, which lists the users'  - `email` as their contact email address, which is also used to login as their username; - `password` as their initial login password; - Optionally, also define their display name, role, and quota.       An example user list Excel file looks like this:  <img src=\"https://seatable.com/openapi/excel.png\">
 
@@ -302,7 +304,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **file** | **\SplFileObject****\SplFileObject**|  | [optional] |
+| **file** | **\SplFileObject****\SplFileObject**|  | |
 
 ### Return type
 
@@ -383,7 +385,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -436,8 +438,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
-$parent_dir = /asset/; // string
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$parent_dir = /asset/; // string | The parent directory path.
 
 try {
     $result = $apiInstance->listUserStorageObjects($user_id, $parent_dir);
@@ -452,7 +454,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **user_id** | **string**| The unique user id in the form ...@auth.local. This is not the email address of the user. | |
-| **parent_dir** | **string**|  | [optional] |
+| **parent_dir** | **string**| The parent directory path. | [optional] |
 
 ### Return type
 
@@ -472,6 +474,8 @@ listUsers($page, $per_page): object
 ```
 
 List Users
+
+List all users in the system with pagination support.
 
 ### Example
 
@@ -536,7 +540,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 
 try {
     $result = $apiInstance->resetUserPassword($user_id);
@@ -634,8 +638,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$query = 'query_example'; // string
-$org_id = 1; // int
+$query = 'query_example'; // string | Search query string.
+$org_id = 1; // int | Filter by team ID.
 $limit = 10; // int | Limit of search User
 
 try {
@@ -649,8 +653,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **query** | **string**|  | [optional] |
-| **org_id** | **int**|  | [optional] |
+| **query** | **string**| Search query string. | [optional] |
+| **org_id** | **int**| Filter by team ID. | [optional] |
 | **limit** | **int**| Limit of search User | [optional] |
 
 ### Return type
@@ -716,7 +720,7 @@ AccountTokenAuth
 ## `updateUser()`
 
 ```php
-updateUser($user_id, $update_user_request): object
+updateUser($user_id, $update_user_request): \SeaTable\Client\SysAdmin\UpdateUser200Response
 ```
 
 Update User
@@ -735,7 +739,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\UsersApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $update_user_request = new \SeaTable\Client\SysAdmin\UpdateUserRequest(); // \SeaTable\Client\SysAdmin\UpdateUserRequest
 
 try {
@@ -755,7 +759,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\UpdateUser200Response**](../Model/UpdateUser200Response.md)
 
 ### Authorization
 

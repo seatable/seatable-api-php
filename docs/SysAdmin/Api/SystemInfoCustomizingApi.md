@@ -4,7 +4,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getSystemInformation()**](SystemInfoCustomizingApi.md#getSystemInformation) | **GET** /api/v2.1/admin/sysinfo/ | Get system information |
+| [**getSystemInformation()**](SystemInfoCustomizingApi.md#getSystemInformation) | **GET** /api/v2.1/admin/sysinfo/ | Get System Information |
 | [**updateFavicon()**](SystemInfoCustomizingApi.md#updateFavicon) | **POST** /api/v2.1/admin/favicon/ | Update Favicon |
 | [**updateGeneralSettings()**](SystemInfoCustomizingApi.md#updateGeneralSettings) | **PUT** /api/v2.1/admin/web-settings/ | Update General Settings |
 | [**updateLoginBackgroundImage()**](SystemInfoCustomizingApi.md#updateLoginBackgroundImage) | **POST** /api/v2.1/admin/login-background-image/ | Update Login Background Image |
@@ -14,10 +14,10 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `getSystemInformation()`
 
 ```php
-getSystemInformation(): object
+getSystemInformation(): \SeaTable\Client\SysAdmin\GetSystemInformation200Response
 ```
 
-Get system information
+Get System Information
 
 Get the general system information with this request as system administrator.
 
@@ -48,7 +48,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\GetSystemInformation200Response**](../Model/GetSystemInformation200Response.md)
 
 ### Authorization
 
@@ -94,7 +94,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **favicon** | **\SplFileObject****\SplFileObject**| The path and filename of the image file of your favicon. | [optional] |
+| **favicon** | **\SplFileObject****\SplFileObject**| The path and filename of the image file of your favicon. | |
 | **with_notify** | **bool**| Leave this param as its default (&#x60;false&#x60;) to upload your favicon, and use this param as &#x60;true&#x60; to upload a favicon with a notification sign. | [optional] |
 
 ### Return type
@@ -111,7 +111,7 @@ AccountTokenAuth
 ## `updateGeneralSettings()`
 
 ```php
-updateGeneralSettings($update_general_settings_request): object
+updateGeneralSettings($update_general_settings_request): \SeaTable\Client\SysAdmin\UpdateGeneralSettings200Response
 ```
 
 Update General Settings
@@ -148,7 +148,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\UpdateGeneralSettings200Response**](../Model/UpdateGeneralSettings200Response.md)
 
 ### Authorization
 
@@ -193,7 +193,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **login_bg_image** | **\SplFileObject****\SplFileObject**| The path and filename of the background image. | [optional] |
+| **login_bg_image** | **\SplFileObject****\SplFileObject**| The path and filename of the background image. | |
 
 ### Return type
 
@@ -242,7 +242,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **logo** | **\SplFileObject****\SplFileObject**| The path and filename of the image file of your logo. | [optional] |
+| **logo** | **\SplFileObject****\SplFileObject**| The path and filename of the image file of your logo. | |
 
 ### Return type
 

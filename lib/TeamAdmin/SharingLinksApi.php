@@ -151,7 +151,7 @@ class SharingLinksApi
      * Delete External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $external_link_token external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -170,7 +170,7 @@ class SharingLinksApi
      * Delete External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -256,7 +256,7 @@ class SharingLinksApi
      * Delete External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -278,7 +278,7 @@ class SharingLinksApi
      * Delete External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -329,7 +329,7 @@ class SharingLinksApi
      * Create request for operation 'deleteExternalLink'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -446,7 +446,7 @@ class SharingLinksApi
      * Delete Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -465,7 +465,7 @@ class SharingLinksApi
      * Delete Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -551,7 +551,7 @@ class SharingLinksApi
      * Delete Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -573,7 +573,7 @@ class SharingLinksApi
      * Delete Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -624,7 +624,7 @@ class SharingLinksApi
      * Create request for operation 'deleteInviteLink'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteInviteLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -744,7 +744,7 @@ class SharingLinksApi
      * Delete View External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $view_external_link_token view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -763,7 +763,7 @@ class SharingLinksApi
      * Delete View External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -849,7 +849,7 @@ class SharingLinksApi
      * Delete View External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -871,7 +871,7 @@ class SharingLinksApi
      * Delete View External Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -922,7 +922,7 @@ class SharingLinksApi
      * Create request for operation 'deleteViewExternalLink'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $view_external_link_token (required)
+     * @param  string $view_external_link_token The token of the view external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteViewExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1629,7 +1629,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\ListShares200Response
      */
     public function listShares($org_id, string $contentType = self::contentTypes['listShares'][0])
     {
@@ -1647,7 +1647,7 @@ class SharingLinksApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\ListShares200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function listSharesWithHttpInfo($org_id, string $contentType = self::contentTypes['listShares'][0])
     {
@@ -1679,7 +1679,7 @@ class SharingLinksApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\ListShares200Response',
                         $request,
                         $response,
                     );
@@ -1701,7 +1701,7 @@ class SharingLinksApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\ListShares200Response',
                 $request,
                 $response,
             );
@@ -1710,7 +1710,7 @@ class SharingLinksApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\ListShares200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1756,7 +1756,7 @@ class SharingLinksApi
      */
     public function listSharesAsyncWithHttpInfo($org_id, string $contentType = self::contentTypes['listShares'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\ListShares200Response';
         $request = $this->listSharesRequest($org_id, $contentType);
 
         return $this->client
@@ -2175,13 +2175,13 @@ class SharingLinksApi
      * Update Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest|null $update_invite_link_request update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\TeamAdmin\UpdateInviteLink200Response
      */
     public function updateInviteLink($org_id, $invite_link_token, $update_invite_link_request = null, string $contentType = self::contentTypes['updateInviteLink'][0])
     {
@@ -2195,13 +2195,13 @@ class SharingLinksApi
      * Update Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest|null $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\TeamAdmin\UpdateInviteLink200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateInviteLinkWithHttpInfo($org_id, $invite_link_token, $update_invite_link_request = null, string $contentType = self::contentTypes['updateInviteLink'][0])
     {
@@ -2233,7 +2233,7 @@ class SharingLinksApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\UpdateInviteLink200Response',
                         $request,
                         $response,
                     );
@@ -2255,7 +2255,7 @@ class SharingLinksApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\TeamAdmin\UpdateInviteLink200Response',
                 $request,
                 $response,
             );
@@ -2264,7 +2264,7 @@ class SharingLinksApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\TeamAdmin\UpdateInviteLink200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2282,7 +2282,7 @@ class SharingLinksApi
      * Update Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest|null $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
      *
@@ -2305,7 +2305,7 @@ class SharingLinksApi
      * Update Invite Link
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest|null $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
      *
@@ -2314,7 +2314,7 @@ class SharingLinksApi
      */
     public function updateInviteLinkAsyncWithHttpInfo($org_id, $invite_link_token, $update_invite_link_request = null, string $contentType = self::contentTypes['updateInviteLink'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\TeamAdmin\UpdateInviteLink200Response';
         $request = $this->updateInviteLinkRequest($org_id, $invite_link_token, $update_invite_link_request, $contentType);
 
         return $this->client
@@ -2357,7 +2357,7 @@ class SharingLinksApi
      * Create request for operation 'updateInviteLink'
      *
      * @param  int $org_id The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. (required)
-     * @param  string $invite_link_token (required)
+     * @param  string $invite_link_token The token of the invite link. (required)
      * @param  \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest|null $update_invite_link_request (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateInviteLink'] to see the possible values for this operation
      *

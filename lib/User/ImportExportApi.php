@@ -461,7 +461,7 @@ class ImportExportApi
      *
      * Export Base
      *
-     * @param  string $dtable_name dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string|null $password The password of your Base. (optional)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -481,7 +481,7 @@ class ImportExportApi
      *
      * Export Base
      *
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string|null $password The password of your Base. (optional)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -533,7 +533,7 @@ class ImportExportApi
      *
      * Export Base
      *
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string|null $password The password of your Base. (optional)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -557,7 +557,7 @@ class ImportExportApi
      *
      * Export Base
      *
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string|null $password The password of your Base. (optional)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -597,7 +597,7 @@ class ImportExportApi
     /**
      * Create request for operation 'exportBase'
      *
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string|null $password The password of your Base. (optional)
      * @param  bool|null $ignore_asset Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. (optional)
@@ -737,7 +737,7 @@ class ImportExportApi
      *
      * Export Base from External Link
      *
-     * @param  string $external_link_token external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -754,7 +754,7 @@ class ImportExportApi
      *
      * Export Base from External Link
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
@@ -803,7 +803,7 @@ class ImportExportApi
      *
      * Export Base from External Link
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -824,7 +824,7 @@ class ImportExportApi
      *
      * Export Base from External Link
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -861,7 +861,7 @@ class ImportExportApi
     /**
      * Create request for operation 'exportBaseFromExternalLink'
      *
-     * @param  string $external_link_token (required)
+     * @param  string $external_link_token The token of the external link. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportBaseFromExternalLink'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1250,7 +1250,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTable'] to see the possible values for this operation
      *
@@ -1270,7 +1270,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTable'] to see the possible values for this operation
      *
@@ -1322,7 +1322,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTable'] to see the possible values for this operation
      *
@@ -1346,7 +1346,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTable'] to see the possible values for this operation
      *
@@ -1386,7 +1386,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  int $workspace_id id of your workspace. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['exportTable'] to see the possible values for this operation
      *
@@ -1541,7 +1541,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  string $view_id id of view, string (required)
      * @param  string $view_name name of view, required, string (required)
      * @param  int $workspace_id id of your workspace. (required)
@@ -1563,7 +1563,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  string $view_id id of view, string (required)
      * @param  string $view_name name of view, required, string (required)
      * @param  int $workspace_id id of your workspace. (required)
@@ -1617,7 +1617,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  string $view_id id of view, string (required)
      * @param  string $view_name name of view, required, string (required)
      * @param  int $workspace_id id of your workspace. (required)
@@ -1643,7 +1643,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  string $view_id id of view, string (required)
      * @param  string $view_name name of view, required, string (required)
      * @param  int $workspace_id id of your workspace. (required)
@@ -1685,7 +1685,7 @@ class ImportExportApi
      *
      * @param  string $table_id The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. (required)
      * @param  string $table_name The name of the table. (required)
-     * @param  string $dtable_name (required)
+     * @param  string $dtable_name The name of the base to search for. (required)
      * @param  string $view_id id of view, string (required)
      * @param  string $view_name name of view, required, string (required)
      * @param  int $workspace_id id of your workspace. (required)
@@ -2760,7 +2760,7 @@ class ImportExportApi
     /**
      * Operation updateFromFile
      *
-     * Update from xlsx or csv
+     * Update from XLSX or CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $file file (required)
@@ -2782,7 +2782,7 @@ class ImportExportApi
     /**
      * Operation updateFromFileWithHttpInfo
      *
-     * Update from xlsx or csv
+     * Update from XLSX or CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $file (required)
@@ -2871,7 +2871,7 @@ class ImportExportApi
     /**
      * Operation updateFromFileAsync
      *
-     * Update from xlsx or csv
+     * Update from XLSX or CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $file (required)
@@ -2896,7 +2896,7 @@ class ImportExportApi
     /**
      * Operation updateFromFileAsyncWithHttpInfo
      *
-     * Update from xlsx or csv
+     * Update from XLSX or CSV
      *
      * @param  int $workspace_id id of your workspace. (required)
      * @param  \SplFileObject $file (required)

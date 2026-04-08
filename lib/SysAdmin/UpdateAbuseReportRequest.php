@@ -273,6 +273,9 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
+        if ($this->container['handled'] === null) {
+            $invalidProperties[] = "'handled' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -291,7 +294,7 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets handled
      *
-     * @return bool|null
+     * @return bool
      */
     public function getHandled()
     {
@@ -301,7 +304,7 @@ class UpdateAbuseReportRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets handled
      *
-     * @param bool|null $handled Required. Use `true` or `false` to mark the status of the report.
+     * @param bool $handled Required. Use `true` or `false` to mark the status of the report.
      *
      * @return self
      */

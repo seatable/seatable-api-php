@@ -68,7 +68,7 @@ AccountTokenAuth
 ## `getCommonDataset()`
 
 ```php
-getCommonDataset($dataset_id): object
+getCommonDataset($dataset_id): \SeaTable\Client\User\GetCommonDataset200Response
 ```
 
 Get Common Dataset
@@ -105,7 +105,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\GetCommonDataset200Response**](../Model/GetCommonDataset200Response.md)
 
 ### Authorization
 
@@ -186,7 +186,7 @@ $apiInstance = new SeaTable\Client\User\CommonDatasetApi(
     $config
 );
 $dataset_id = 5; // int | The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned `id` is what you need here.
-$dst_dtable_uuid = 'dst_dtable_uuid_example'; // string | The name of the base.
+$dst_dtable_uuid = 'dst_dtable_uuid_example'; // string | The UUID of the base.
 
 try {
     $result = $apiInstance->importCommonDataset($dataset_id, $dst_dtable_uuid);
@@ -201,7 +201,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **dataset_id** | **int**| The ID of the common dataset. When you e.g. publish a common dataset from a view, the returned &#x60;id&#x60; is what you need here. | |
-| **dst_dtable_uuid** | **string**| The name of the base. | [optional] |
+| **dst_dtable_uuid** | **string**| The UUID of the base. | [optional] |
 
 ### Return type
 
@@ -317,7 +317,7 @@ AccountTokenAuth
 ## `publishCommonDataset()`
 
 ```php
-publishCommonDataset($dataset_name, $workspace_id, $dtable_name, $table_name, $view_name): object
+publishCommonDataset($dataset_name, $workspace_id, $dtable_name, $table_name, $view_name): \SeaTable\Client\User\PublishCommonDataset200Response
 ```
 
 Publish Common Dataset
@@ -362,7 +362,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\PublishCommonDataset200Response**](../Model/PublishCommonDataset200Response.md)
 
 ### Authorization
 

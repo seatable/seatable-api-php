@@ -1028,7 +1028,7 @@ class AttachmentApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\User\GetBaseAttachmentUploadLink200Response
      */
     public function getBaseAttachmentUploadLink($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseAttachmentUploadLink'][0])
     {
@@ -1047,7 +1047,7 @@ class AttachmentApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\User\GetBaseAttachmentUploadLink200Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getBaseAttachmentUploadLinkWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseAttachmentUploadLink'][0])
     {
@@ -1079,7 +1079,7 @@ class AttachmentApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\User\GetBaseAttachmentUploadLink200Response',
                         $request,
                         $response,
                     );
@@ -1101,7 +1101,7 @@ class AttachmentApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\User\GetBaseAttachmentUploadLink200Response',
                 $request,
                 $response,
             );
@@ -1110,7 +1110,7 @@ class AttachmentApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\User\GetBaseAttachmentUploadLink200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1158,7 +1158,7 @@ class AttachmentApi
      */
     public function getBaseAttachmentUploadLinkAsyncWithHttpInfo($workspace_id, $base_name, string $contentType = self::contentTypes['getBaseAttachmentUploadLink'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\User\GetBaseAttachmentUploadLink200Response';
         $request = $this->getBaseAttachmentUploadLinkRequest($workspace_id, $base_name, $contentType);
 
         return $this->client
