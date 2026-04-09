@@ -7,7 +7,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR" || exit
 
 rm -r ./lib/*
-rm -r ./test/*
 rm -r ./docs/*
 
 LOG_LEVEL="warn"
