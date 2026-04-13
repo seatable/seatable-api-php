@@ -67,8 +67,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'row_total' => 'int',
         'role' => 'string',
         'big_data_row_limit' => 'int',
+        'big_data_storage_quota' => 'int',
         'big_data_total_rows' => 'int',
         'big_data_total_storage' => 'int',
+        'api_calls_count' => 'int',
+        'api_calls_limit' => 'int',
+        'automation_count' => 'int',
+        'automation_limit' => 'int',
         'scripts_running_total' => 'int',
         'scripts_running_count' => 'int'
     ];
@@ -92,8 +97,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'row_total' => null,
         'role' => null,
         'big_data_row_limit' => null,
+        'big_data_storage_quota' => null,
         'big_data_total_rows' => null,
         'big_data_total_storage' => null,
+        'api_calls_count' => null,
+        'api_calls_limit' => null,
+        'automation_count' => null,
+        'automation_limit' => null,
         'scripts_running_total' => null,
         'scripts_running_count' => null
     ];
@@ -115,8 +125,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'row_total' => false,
         'role' => false,
         'big_data_row_limit' => false,
+        'big_data_storage_quota' => false,
         'big_data_total_rows' => false,
         'big_data_total_storage' => false,
+        'api_calls_count' => false,
+        'api_calls_limit' => false,
+        'automation_count' => false,
+        'automation_limit' => false,
         'scripts_running_total' => false,
         'scripts_running_count' => false
     ];
@@ -218,8 +233,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'row_total' => 'row_total',
         'role' => 'role',
         'big_data_row_limit' => 'big_data_row_limit',
+        'big_data_storage_quota' => 'big_data_storage_quota',
         'big_data_total_rows' => 'big_data_total_rows',
         'big_data_total_storage' => 'big_data_total_storage',
+        'api_calls_count' => 'api_calls_count',
+        'api_calls_limit' => 'api_calls_limit',
+        'automation_count' => 'automation_count',
+        'automation_limit' => 'automation_limit',
         'scripts_running_total' => 'scripts_running_total',
         'scripts_running_count' => 'scripts_running_count'
     ];
@@ -241,8 +261,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'row_total' => 'setRowTotal',
         'role' => 'setRole',
         'big_data_row_limit' => 'setBigDataRowLimit',
+        'big_data_storage_quota' => 'setBigDataStorageQuota',
         'big_data_total_rows' => 'setBigDataTotalRows',
         'big_data_total_storage' => 'setBigDataTotalStorage',
+        'api_calls_count' => 'setApiCallsCount',
+        'api_calls_limit' => 'setApiCallsLimit',
+        'automation_count' => 'setAutomationCount',
+        'automation_limit' => 'setAutomationLimit',
         'scripts_running_total' => 'setScriptsRunningTotal',
         'scripts_running_count' => 'setScriptsRunningCount'
     ];
@@ -264,8 +289,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'row_total' => 'getRowTotal',
         'role' => 'getRole',
         'big_data_row_limit' => 'getBigDataRowLimit',
+        'big_data_storage_quota' => 'getBigDataStorageQuota',
         'big_data_total_rows' => 'getBigDataTotalRows',
         'big_data_total_storage' => 'getBigDataTotalStorage',
+        'api_calls_count' => 'getApiCallsCount',
+        'api_calls_limit' => 'getApiCallsLimit',
+        'automation_count' => 'getAutomationCount',
+        'automation_limit' => 'getAutomationLimit',
         'scripts_running_total' => 'getScriptsRunningTotal',
         'scripts_running_count' => 'getScriptsRunningCount'
     ];
@@ -338,8 +368,13 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('row_total', $data ?? [], null);
         $this->setIfExists('role', $data ?? [], null);
         $this->setIfExists('big_data_row_limit', $data ?? [], null);
+        $this->setIfExists('big_data_storage_quota', $data ?? [], null);
         $this->setIfExists('big_data_total_rows', $data ?? [], null);
         $this->setIfExists('big_data_total_storage', $data ?? [], null);
+        $this->setIfExists('api_calls_count', $data ?? [], null);
+        $this->setIfExists('api_calls_limit', $data ?? [], null);
+        $this->setIfExists('automation_count', $data ?? [], null);
+        $this->setIfExists('automation_limit', $data ?? [], null);
         $this->setIfExists('scripts_running_total', $data ?? [], null);
         $this->setIfExists('scripts_running_count', $data ?? [], null);
     }
@@ -684,6 +719,33 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
+     * Gets big_data_storage_quota
+     *
+     * @return int|null
+     */
+    public function getBigDataStorageQuota()
+    {
+        return $this->container['big_data_storage_quota'];
+    }
+
+    /**
+     * Sets big_data_storage_quota
+     *
+     * @param int|null $big_data_storage_quota big_data_storage_quota
+     *
+     * @return self
+     */
+    public function setBigDataStorageQuota($big_data_storage_quota)
+    {
+        if (is_null($big_data_storage_quota)) {
+            throw new \InvalidArgumentException('non-nullable big_data_storage_quota cannot be null');
+        }
+        $this->container['big_data_storage_quota'] = $big_data_storage_quota;
+
+        return $this;
+    }
+
+    /**
      * Gets big_data_total_rows
      *
      * @return int|null
@@ -733,6 +795,114 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable big_data_total_storage cannot be null');
         }
         $this->container['big_data_total_storage'] = $big_data_total_storage;
+
+        return $this;
+    }
+
+    /**
+     * Gets api_calls_count
+     *
+     * @return int|null
+     */
+    public function getApiCallsCount()
+    {
+        return $this->container['api_calls_count'];
+    }
+
+    /**
+     * Sets api_calls_count
+     *
+     * @param int|null $api_calls_count api_calls_count
+     *
+     * @return self
+     */
+    public function setApiCallsCount($api_calls_count)
+    {
+        if (is_null($api_calls_count)) {
+            throw new \InvalidArgumentException('non-nullable api_calls_count cannot be null');
+        }
+        $this->container['api_calls_count'] = $api_calls_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets api_calls_limit
+     *
+     * @return int|null
+     */
+    public function getApiCallsLimit()
+    {
+        return $this->container['api_calls_limit'];
+    }
+
+    /**
+     * Sets api_calls_limit
+     *
+     * @param int|null $api_calls_limit api_calls_limit
+     *
+     * @return self
+     */
+    public function setApiCallsLimit($api_calls_limit)
+    {
+        if (is_null($api_calls_limit)) {
+            throw new \InvalidArgumentException('non-nullable api_calls_limit cannot be null');
+        }
+        $this->container['api_calls_limit'] = $api_calls_limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets automation_count
+     *
+     * @return int|null
+     */
+    public function getAutomationCount()
+    {
+        return $this->container['automation_count'];
+    }
+
+    /**
+     * Sets automation_count
+     *
+     * @param int|null $automation_count automation_count
+     *
+     * @return self
+     */
+    public function setAutomationCount($automation_count)
+    {
+        if (is_null($automation_count)) {
+            throw new \InvalidArgumentException('non-nullable automation_count cannot be null');
+        }
+        $this->container['automation_count'] = $automation_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets automation_limit
+     *
+     * @return int|null
+     */
+    public function getAutomationLimit()
+    {
+        return $this->container['automation_limit'];
+    }
+
+    /**
+     * Sets automation_limit
+     *
+     * @param int|null $automation_limit automation_limit
+     *
+     * @return self
+     */
+    public function setAutomationLimit($automation_limit)
+    {
+        if (is_null($automation_limit)) {
+            throw new \InvalidArgumentException('non-nullable automation_limit cannot be null');
+        }
+        $this->container['automation_limit'] = $automation_limit;
 
         return $this;
     }

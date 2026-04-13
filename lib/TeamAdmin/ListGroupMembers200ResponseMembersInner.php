@@ -1,6 +1,6 @@
 <?php
 /**
- * ListGroups200Response
+ * ListGroupMembers200ResponseMembersInner
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListGroups200Response Class Doc Comment
+ * ListGroupMembers200ResponseMembersInner Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListGroupMembers200ResponseMembersInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listGroups_200_response';
+    protected static $openAPIModelName = 'listGroupMembers_200_response_members_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,10 +56,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'groups' => '\SeaTable\Client\TeamAdmin\ListGroups200ResponseGroupsInner[]',
-        'page' => 'int',
-        'per_page' => 'int',
-        'page_next' => 'bool'
+        'name' => 'string',
+        'email' => 'string',
+        'contact_email' => 'string',
+        'avatar_url' => 'string',
+        'is_admin' => 'bool',
+        'role' => 'string'
     ];
 
     /**
@@ -70,10 +72,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'groups' => null,
-        'page' => null,
-        'per_page' => null,
-        'page_next' => null
+        'name' => null,
+        'email' => null,
+        'contact_email' => null,
+        'avatar_url' => null,
+        'is_admin' => null,
+        'role' => null
     ];
 
     /**
@@ -82,10 +86,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'groups' => false,
-        'page' => false,
-        'per_page' => false,
-        'page_next' => false
+        'name' => false,
+        'email' => false,
+        'contact_email' => false,
+        'avatar_url' => false,
+        'is_admin' => false,
+        'role' => false
     ];
 
     /**
@@ -174,10 +180,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'groups' => 'groups',
-        'page' => 'page',
-        'per_page' => 'per_page',
-        'page_next' => 'page_next'
+        'name' => 'name',
+        'email' => 'email',
+        'contact_email' => 'contact_email',
+        'avatar_url' => 'avatar_url',
+        'is_admin' => 'is_admin',
+        'role' => 'role'
     ];
 
     /**
@@ -186,10 +194,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'groups' => 'setGroups',
-        'page' => 'setPage',
-        'per_page' => 'setPerPage',
-        'page_next' => 'setPageNext'
+        'name' => 'setName',
+        'email' => 'setEmail',
+        'contact_email' => 'setContactEmail',
+        'avatar_url' => 'setAvatarUrl',
+        'is_admin' => 'setIsAdmin',
+        'role' => 'setRole'
     ];
 
     /**
@@ -198,10 +208,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'groups' => 'getGroups',
-        'page' => 'getPage',
-        'per_page' => 'getPerPage',
-        'page_next' => 'getPageNext'
+        'name' => 'getName',
+        'email' => 'getEmail',
+        'contact_email' => 'getContactEmail',
+        'avatar_url' => 'getAvatarUrl',
+        'is_admin' => 'getIsAdmin',
+        'role' => 'getRole'
     ];
 
     /**
@@ -261,10 +273,12 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('groups', $data ?? [], null);
-        $this->setIfExists('page', $data ?? [], null);
-        $this->setIfExists('per_page', $data ?? [], null);
-        $this->setIfExists('page_next', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('contact_email', $data ?? [], null);
+        $this->setIfExists('avatar_url', $data ?? [], null);
+        $this->setIfExists('is_admin', $data ?? [], null);
+        $this->setIfExists('role', $data ?? [], null);
     }
 
     /**
@@ -310,109 +324,163 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets groups
+     * Gets name
      *
-     * @return \SeaTable\Client\TeamAdmin\ListGroups200ResponseGroupsInner[]|null
+     * @return string|null
      */
-    public function getGroups()
+    public function getName()
     {
-        return $this->container['groups'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets groups
+     * Sets name
      *
-     * @param \SeaTable\Client\TeamAdmin\ListGroups200ResponseGroupsInner[]|null $groups groups
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setGroups($groups)
+    public function setName($name)
     {
-        if (is_null($groups)) {
-            throw new \InvalidArgumentException('non-nullable groups cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['groups'] = $groups;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets page
+     * Gets email
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getPage()
+    public function getEmail()
     {
-        return $this->container['page'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets page
+     * Sets email
      *
-     * @param int|null $page page
+     * @param string|null $email email
      *
      * @return self
      */
-    public function setPage($page)
+    public function setEmail($email)
     {
-        if (is_null($page)) {
-            throw new \InvalidArgumentException('non-nullable page cannot be null');
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['page'] = $page;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets per_page
+     * Gets contact_email
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getPerPage()
+    public function getContactEmail()
     {
-        return $this->container['per_page'];
+        return $this->container['contact_email'];
     }
 
     /**
-     * Sets per_page
+     * Sets contact_email
      *
-     * @param int|null $per_page per_page
+     * @param string|null $contact_email contact_email
      *
      * @return self
      */
-    public function setPerPage($per_page)
+    public function setContactEmail($contact_email)
     {
-        if (is_null($per_page)) {
-            throw new \InvalidArgumentException('non-nullable per_page cannot be null');
+        if (is_null($contact_email)) {
+            throw new \InvalidArgumentException('non-nullable contact_email cannot be null');
         }
-        $this->container['per_page'] = $per_page;
+        $this->container['contact_email'] = $contact_email;
 
         return $this;
     }
 
     /**
-     * Gets page_next
+     * Gets avatar_url
+     *
+     * @return string|null
+     */
+    public function getAvatarUrl()
+    {
+        return $this->container['avatar_url'];
+    }
+
+    /**
+     * Sets avatar_url
+     *
+     * @param string|null $avatar_url avatar_url
+     *
+     * @return self
+     */
+    public function setAvatarUrl($avatar_url)
+    {
+        if (is_null($avatar_url)) {
+            throw new \InvalidArgumentException('non-nullable avatar_url cannot be null');
+        }
+        $this->container['avatar_url'] = $avatar_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_admin
      *
      * @return bool|null
      */
-    public function getPageNext()
+    public function getIsAdmin()
     {
-        return $this->container['page_next'];
+        return $this->container['is_admin'];
     }
 
     /**
-     * Sets page_next
+     * Sets is_admin
      *
-     * @param bool|null $page_next page_next
+     * @param bool|null $is_admin is_admin
      *
      * @return self
      */
-    public function setPageNext($page_next)
+    public function setIsAdmin($is_admin)
     {
-        if (is_null($page_next)) {
-            throw new \InvalidArgumentException('non-nullable page_next cannot be null');
+        if (is_null($is_admin)) {
+            throw new \InvalidArgumentException('non-nullable is_admin cannot be null');
         }
-        $this->container['page_next'] = $page_next;
+        $this->container['is_admin'] = $is_admin;
+
+        return $this;
+    }
+
+    /**
+     * Gets role
+     *
+     * @return string|null
+     */
+    public function getRole()
+    {
+        return $this->container['role'];
+    }
+
+    /**
+     * Sets role
+     *
+     * @param string|null $role role
+     *
+     * @return self
+     */
+    public function setRole($role)
+    {
+        if (is_null($role)) {
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        }
+        $this->container['role'] = $role;
 
         return $this;
     }

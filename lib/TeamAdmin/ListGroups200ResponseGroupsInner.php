@@ -1,6 +1,6 @@
 <?php
 /**
- * ListGroups200Response
+ * ListGroups200ResponseGroupsInner
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListGroups200Response Class Doc Comment
+ * ListGroups200ResponseGroupsInner Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListGroups200ResponseGroupsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listGroups_200_response';
+    protected static $openAPIModelName = 'listGroups_200_response_groups_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,10 +56,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'groups' => '\SeaTable\Client\TeamAdmin\ListGroups200ResponseGroupsInner[]',
-        'page' => 'int',
-        'per_page' => 'int',
-        'page_next' => 'bool'
+        'id' => 'int',
+        'group_name' => 'string',
+        'ctime' => 'string',
+        'creator_name' => 'string',
+        'creator_email' => 'string',
+        'creator_contact_email' => 'string',
+        'size' => 'int'
     ];
 
     /**
@@ -70,10 +73,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'groups' => null,
-        'page' => null,
-        'per_page' => null,
-        'page_next' => null
+        'id' => null,
+        'group_name' => null,
+        'ctime' => null,
+        'creator_name' => null,
+        'creator_email' => null,
+        'creator_contact_email' => null,
+        'size' => null
     ];
 
     /**
@@ -82,10 +88,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'groups' => false,
-        'page' => false,
-        'per_page' => false,
-        'page_next' => false
+        'id' => false,
+        'group_name' => false,
+        'ctime' => false,
+        'creator_name' => false,
+        'creator_email' => false,
+        'creator_contact_email' => false,
+        'size' => false
     ];
 
     /**
@@ -174,10 +183,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'groups' => 'groups',
-        'page' => 'page',
-        'per_page' => 'per_page',
-        'page_next' => 'page_next'
+        'id' => 'id',
+        'group_name' => 'group_name',
+        'ctime' => 'ctime',
+        'creator_name' => 'creator_name',
+        'creator_email' => 'creator_email',
+        'creator_contact_email' => 'creator_contact_email',
+        'size' => 'size'
     ];
 
     /**
@@ -186,10 +198,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
-        'groups' => 'setGroups',
-        'page' => 'setPage',
-        'per_page' => 'setPerPage',
-        'page_next' => 'setPageNext'
+        'id' => 'setId',
+        'group_name' => 'setGroupName',
+        'ctime' => 'setCtime',
+        'creator_name' => 'setCreatorName',
+        'creator_email' => 'setCreatorEmail',
+        'creator_contact_email' => 'setCreatorContactEmail',
+        'size' => 'setSize'
     ];
 
     /**
@@ -198,10 +213,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
-        'groups' => 'getGroups',
-        'page' => 'getPage',
-        'per_page' => 'getPerPage',
-        'page_next' => 'getPageNext'
+        'id' => 'getId',
+        'group_name' => 'getGroupName',
+        'ctime' => 'getCtime',
+        'creator_name' => 'getCreatorName',
+        'creator_email' => 'getCreatorEmail',
+        'creator_contact_email' => 'getCreatorContactEmail',
+        'size' => 'getSize'
     ];
 
     /**
@@ -261,10 +279,13 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('groups', $data ?? [], null);
-        $this->setIfExists('page', $data ?? [], null);
-        $this->setIfExists('per_page', $data ?? [], null);
-        $this->setIfExists('page_next', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('group_name', $data ?? [], null);
+        $this->setIfExists('ctime', $data ?? [], null);
+        $this->setIfExists('creator_name', $data ?? [], null);
+        $this->setIfExists('creator_email', $data ?? [], null);
+        $this->setIfExists('creator_contact_email', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
     }
 
     /**
@@ -310,109 +331,190 @@ class ListGroups200Response implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets groups
-     *
-     * @return \SeaTable\Client\TeamAdmin\ListGroups200ResponseGroupsInner[]|null
-     */
-    public function getGroups()
-    {
-        return $this->container['groups'];
-    }
-
-    /**
-     * Sets groups
-     *
-     * @param \SeaTable\Client\TeamAdmin\ListGroups200ResponseGroupsInner[]|null $groups groups
-     *
-     * @return self
-     */
-    public function setGroups($groups)
-    {
-        if (is_null($groups)) {
-            throw new \InvalidArgumentException('non-nullable groups cannot be null');
-        }
-        $this->container['groups'] = $groups;
-
-        return $this;
-    }
-
-    /**
-     * Gets page
+     * Gets id
      *
      * @return int|null
      */
-    public function getPage()
+    public function getId()
     {
-        return $this->container['page'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets page
+     * Sets id
      *
-     * @param int|null $page page
+     * @param int|null $id id
      *
      * @return self
      */
-    public function setPage($page)
+    public function setId($id)
     {
-        if (is_null($page)) {
-            throw new \InvalidArgumentException('non-nullable page cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['page'] = $page;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets per_page
+     * Gets group_name
+     *
+     * @return string|null
+     */
+    public function getGroupName()
+    {
+        return $this->container['group_name'];
+    }
+
+    /**
+     * Sets group_name
+     *
+     * @param string|null $group_name group_name
+     *
+     * @return self
+     */
+    public function setGroupName($group_name)
+    {
+        if (is_null($group_name)) {
+            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
+        }
+        $this->container['group_name'] = $group_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets ctime
+     *
+     * @return string|null
+     */
+    public function getCtime()
+    {
+        return $this->container['ctime'];
+    }
+
+    /**
+     * Sets ctime
+     *
+     * @param string|null $ctime ctime
+     *
+     * @return self
+     */
+    public function setCtime($ctime)
+    {
+        if (is_null($ctime)) {
+            throw new \InvalidArgumentException('non-nullable ctime cannot be null');
+        }
+        $this->container['ctime'] = $ctime;
+
+        return $this;
+    }
+
+    /**
+     * Gets creator_name
+     *
+     * @return string|null
+     */
+    public function getCreatorName()
+    {
+        return $this->container['creator_name'];
+    }
+
+    /**
+     * Sets creator_name
+     *
+     * @param string|null $creator_name creator_name
+     *
+     * @return self
+     */
+    public function setCreatorName($creator_name)
+    {
+        if (is_null($creator_name)) {
+            throw new \InvalidArgumentException('non-nullable creator_name cannot be null');
+        }
+        $this->container['creator_name'] = $creator_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets creator_email
+     *
+     * @return string|null
+     */
+    public function getCreatorEmail()
+    {
+        return $this->container['creator_email'];
+    }
+
+    /**
+     * Sets creator_email
+     *
+     * @param string|null $creator_email creator_email
+     *
+     * @return self
+     */
+    public function setCreatorEmail($creator_email)
+    {
+        if (is_null($creator_email)) {
+            throw new \InvalidArgumentException('non-nullable creator_email cannot be null');
+        }
+        $this->container['creator_email'] = $creator_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets creator_contact_email
+     *
+     * @return string|null
+     */
+    public function getCreatorContactEmail()
+    {
+        return $this->container['creator_contact_email'];
+    }
+
+    /**
+     * Sets creator_contact_email
+     *
+     * @param string|null $creator_contact_email creator_contact_email
+     *
+     * @return self
+     */
+    public function setCreatorContactEmail($creator_contact_email)
+    {
+        if (is_null($creator_contact_email)) {
+            throw new \InvalidArgumentException('non-nullable creator_contact_email cannot be null');
+        }
+        $this->container['creator_contact_email'] = $creator_contact_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
      *
      * @return int|null
      */
-    public function getPerPage()
+    public function getSize()
     {
-        return $this->container['per_page'];
+        return $this->container['size'];
     }
 
     /**
-     * Sets per_page
+     * Sets size
      *
-     * @param int|null $per_page per_page
+     * @param int|null $size size
      *
      * @return self
      */
-    public function setPerPage($per_page)
+    public function setSize($size)
     {
-        if (is_null($per_page)) {
-            throw new \InvalidArgumentException('non-nullable per_page cannot be null');
+        if (is_null($size)) {
+            throw new \InvalidArgumentException('non-nullable size cannot be null');
         }
-        $this->container['per_page'] = $per_page;
-
-        return $this;
-    }
-
-    /**
-     * Gets page_next
-     *
-     * @return bool|null
-     */
-    public function getPageNext()
-    {
-        return $this->container['page_next'];
-    }
-
-    /**
-     * Sets page_next
-     *
-     * @param bool|null $page_next page_next
-     *
-     * @return self
-     */
-    public function setPageNext($page_next)
-    {
-        if (is_null($page_next)) {
-            throw new \InvalidArgumentException('non-nullable page_next cannot be null');
-        }
-        $this->container['page_next'] = $page_next;
+        $this->container['size'] = $size;
 
         return $this;
     }

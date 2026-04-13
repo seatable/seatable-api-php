@@ -56,9 +56,10 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
+        'org_id' => 'int',
         'group_id' => 'int',
         'group_name' => 'string',
-        'members' => 'object[]'
+        'members' => '\SeaTable\Client\TeamAdmin\ListGroupMembers200ResponseMembersInner[]'
     ];
 
     /**
@@ -69,6 +70,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'org_id' => null,
         'group_id' => null,
         'group_name' => null,
         'members' => null
@@ -80,6 +82,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'org_id' => false,
         'group_id' => false,
         'group_name' => false,
         'members' => false
@@ -171,6 +174,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
+        'org_id' => 'org_id',
         'group_id' => 'group_id',
         'group_name' => 'group_name',
         'members' => 'members'
@@ -182,6 +186,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
+        'org_id' => 'setOrgId',
         'group_id' => 'setGroupId',
         'group_name' => 'setGroupName',
         'members' => 'setMembers'
@@ -193,6 +198,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
+        'org_id' => 'getOrgId',
         'group_id' => 'getGroupId',
         'group_name' => 'getGroupName',
         'members' => 'getMembers'
@@ -255,6 +261,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('group_id', $data ?? [], null);
         $this->setIfExists('group_name', $data ?? [], null);
         $this->setIfExists('members', $data ?? [], null);
@@ -301,6 +308,33 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets org_id
+     *
+     * @return int|null
+     */
+    public function getOrgId()
+    {
+        return $this->container['org_id'];
+    }
+
+    /**
+     * Sets org_id
+     *
+     * @param int|null $org_id org_id
+     *
+     * @return self
+     */
+    public function setOrgId($org_id)
+    {
+        if (is_null($org_id)) {
+            throw new \InvalidArgumentException('non-nullable org_id cannot be null');
+        }
+        $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
 
     /**
      * Gets group_id
@@ -359,7 +393,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets members
      *
-     * @return object[]|null
+     * @return \SeaTable\Client\TeamAdmin\ListGroupMembers200ResponseMembersInner[]|null
      */
     public function getMembers()
     {
@@ -369,7 +403,7 @@ class ListGroupMembers200Response implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets members
      *
-     * @param object[]|null $members members
+     * @param \SeaTable\Client\TeamAdmin\ListGroupMembers200ResponseMembersInner[]|null $members members
      *
      * @return self
      */

@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**org_id** | **int** |  | [optional]
 **group_id** | **int** |  | [optional]
 **group_name** | **string** |  | [optional]
-**members** | **object[]** |  | [optional]
+**members** | [**\SeaTable\Client\TeamAdmin\ListGroupMembers200ResponseMembersInner[]**](ListGroupMembers200ResponseMembersInner.md) |  | [optional]
 
