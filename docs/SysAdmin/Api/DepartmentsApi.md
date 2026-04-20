@@ -13,7 +13,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addDepartment()`
 
 ```php
-addDepartment($add_department_request): object
+addDepartment($add_department_request): \SeaTable\Client\SysAdmin\AddDepartment200Response
 ```
 
 Add Department
@@ -50,7 +50,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddDepartment200Response**](../Model/AddDepartment200Response.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\DepartmentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$department_id = 1; // int
+$department_id = 1; // int | The ID of the department.
 
 try {
     $result = $apiInstance->deleteDepartment($department_id);
@@ -95,7 +95,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **department_id** | **int**|  | |
+| **department_id** | **int**| The ID of the department. | |
 
 ### Return type
 
@@ -111,7 +111,7 @@ AccountTokenAuth
 ## `getDepartments()`
 
 ```php
-getDepartments($department_id, $return_ancestors): object
+getDepartments($department_id, $return_ancestors): \SeaTable\Client\SysAdmin\ListDepartments200Response
 ```
 
 Get Department
@@ -130,8 +130,8 @@ $apiInstance = new SeaTable\Client\SysAdmin\DepartmentsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$department_id = 1; // int
-$return_ancestors = true; // bool
+$department_id = 1; // int | The ID of the department.
+$return_ancestors = true; // bool | Whether to include ancestor groups in the response.
 
 try {
     $result = $apiInstance->getDepartments($department_id, $return_ancestors);
@@ -145,12 +145,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **department_id** | **int**|  | |
-| **return_ancestors** | **bool**|  | [optional] |
+| **department_id** | **int**| The ID of the department. | |
+| **return_ancestors** | **bool**| Whether to include ancestor groups in the response. | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\ListDepartments200Response**](../Model/ListDepartments200Response.md)
 
 ### Authorization
 
@@ -162,7 +162,7 @@ AccountTokenAuth
 ## `listDepartments()`
 
 ```php
-listDepartments($parent_department_id): object
+listDepartments($parent_department_id): \SeaTable\Client\SysAdmin\ListDepartments200Response
 ```
 
 List Departments
@@ -199,7 +199,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\ListDepartments200Response**](../Model/ListDepartments200Response.md)
 
 ### Authorization
 

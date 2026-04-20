@@ -18,6 +18,8 @@ createGroup($create_group_request): object
 
 Create Group
 
+Create a new group with a specified name and owner.
+
 ### Example
 
 ```php
@@ -65,7 +67,7 @@ deleteGroup($group_id): object
 
 Delete Group
 
-Delete a group with its ID.
+Delete a group with its ID.  > 🚧 Group must be empty > > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `\"Cannot delete group with bases\"`.
 
 ### Example
 
@@ -79,7 +81,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 48; // int
+$group_id = 48; // int | The ID of the group.
 
 try {
     $result = $apiInstance->deleteGroup($group_id);
@@ -93,7 +95,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
@@ -162,10 +164,12 @@ AccountTokenAuth
 ## `transferGroup()`
 
 ```php
-transferGroup($group_id, $transfer_group_request): object
+transferGroup($group_id, $transfer_group_request): \SeaTable\Client\SysAdmin\TransferGroup200Response
 ```
 
 Transfer Group
+
+Transfer the ownership of a group to a new owner.
 
 ### Example
 
@@ -179,7 +183,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\GroupsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 48; // int
+$group_id = 48; // int | The ID of the group.
 $transfer_group_request = new \SeaTable\Client\SysAdmin\TransferGroupRequest(); // \SeaTable\Client\SysAdmin\TransferGroupRequest
 
 try {
@@ -194,12 +198,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 | **transfer_group_request** | [**\SeaTable\Client\SysAdmin\TransferGroupRequest**](../Model/TransferGroupRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\TransferGroup200Response**](../Model/TransferGroup200Response.md)
 
 ### Authorization
 

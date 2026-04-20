@@ -33,7 +33,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$external_link_token = fleischkaesebroetchen; // string
+$external_link_token = fleischkaesebroetchen; // string | The token of the external link.
 
 try {
     $result = $apiInstance->deleteBaseExternalLink($external_link_token);
@@ -47,7 +47,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **external_link_token** | **string**|  | |
+| **external_link_token** | **string**| The token of the external link. | |
 
 ### Return type
 
@@ -82,7 +82,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$view_external_link_token = 1f0447eab4df4343ab6d; // string
+$view_external_link_token = 1f0447eab4df4343ab6d; // string | The token of the view external link.
 
 try {
     $result = $apiInstance->deleteViewExternalLink($view_external_link_token);
@@ -96,7 +96,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **view_external_link_token** | **string**|  | |
+| **view_external_link_token** | **string**| The token of the view external link. | |
 
 ### Return type
 
@@ -131,7 +131,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$base_id = base_id; // string | The id of the base. This is not the base_uuid.
+$base_id = 123; // string | The id of the base. This is not the base_uuid.
 
 try {
     $result = $apiInstance->listBaseExternalLinks($base_id);

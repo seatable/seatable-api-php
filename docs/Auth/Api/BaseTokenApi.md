@@ -6,7 +6,6 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | ------------- | ------------- | ------------- |
 | [**getBaseTokenWithAccountToken()**](BaseTokenApi.md#getBaseTokenWithAccountToken) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/access-token/ | Get Base-Token with Account-Token |
 | [**getBaseTokenWithApiToken()**](BaseTokenApi.md#getBaseTokenWithApiToken) | **GET** /api/v2.1/dtable/app-access-token/ | Get Base-Token with API-Token |
-| [**getBaseTokenWithExternLink()**](BaseTokenApi.md#getBaseTokenWithExternLink) | **GET** /api/v2.1/external-link-tokens/{external_link_token}/access-token/ | Get Base-Token with External-Link |
 
 
 ## `getBaseTokenWithAccountToken()`
@@ -31,7 +30,7 @@ $apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
     new GuzzleHttp\Client(),
     $config
 );
-$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
+$workspace_id = 127; // int | The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/find-workspace-id-group/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
 $base_name = My Projects; // string | The name of your base.
 $exp = '3d'; // string | Expiration time of the generated access token. Examples: 5h (= 5 hours) or 3d (= 3 days)
 
@@ -47,7 +46,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
+| **workspace_id** | **int**| The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/find-workspace-id-group/).  Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used. | |
 | **base_name** | **string**| The name of your base. | |
 | **exp** | **string**| Expiration time of the generated access token. Examples: 5h (&#x3D; 5 hours) or 3d (&#x3D; 3 days) | [optional] [default to &#39;3d&#39;] |
 
@@ -65,7 +64,7 @@ AccountTokenAuth
 ## `getBaseTokenWithApiToken()`
 
 ```php
-getBaseTokenWithApiToken($exp): object
+getBaseTokenWithApiToken($exp): \SeaTable\Client\Auth\GetBaseTokenWithApiToken200Response
 ```
 
 Get Base-Token with API-Token
@@ -102,55 +101,11 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Auth\GetBaseTokenWithApiToken200Response**](../Model/GetBaseTokenWithApiToken200Response.md)
 
 ### Authorization
 
 ApiTokenAuth
 
-
-
-
-## `getBaseTokenWithExternLink()`
-
-```php
-getBaseTokenWithExternLink($external_link_token): \SeaTable\Client\Auth\AccessToken
-```
-
-Get Base-Token with External-Link
-
-Generate a Base-Token from an external link to this base. Because external links always grant read-only permissions, the Base-Token generated from a external link will only grant read permissions to the base.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-$apiInstance = new SeaTable\Client\Auth\BaseTokenApi(
-    new GuzzleHttp\Client()
-);
-$external_link_token = c41cef71f5094827a786; // string | The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*.
-
-try {
-    $result = $apiInstance->getBaseTokenWithExternLink($external_link_token);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling BaseTokenApi->getBaseTokenWithExternLink: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **external_link_token** | **string**| The random string from the external link. Eg:  - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*. - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*. | |
-
-### Return type
-
-[**\SeaTable\Client\Auth\AccessToken**](../Model/AccessToken.md)
-
-### Authorization
-
-No authorization required
 
 

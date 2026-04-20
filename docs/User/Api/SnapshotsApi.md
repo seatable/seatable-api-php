@@ -69,7 +69,7 @@ listBigDataBackups($workspace_id, $base_name): object
 
 List Big Data Backups
 
-List all all available big data backups.
+List all available big data backups.
 
 ### Example
 
@@ -136,8 +136,8 @@ $apiInstance = new SeaTable\Client\User\SnapshotsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$page = 1; // int
-$per_page = 2; // int
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
 
 try {
     $result = $apiInstance->listSnapshots($workspace_id, $base_name, $page, $per_page);
@@ -153,8 +153,8 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
 
 ### Return type
 
@@ -191,7 +191,7 @@ $apiInstance = new SeaTable\Client\User\SnapshotsApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$commit_id = 7ee107a4eadb9561e8ce7699494939015f0d101b; // string
+$commit_id = 7ee107a4eadb9561e8ce7699494939015f0d101b; // string | The commit ID for a base snapshot.
 $snapshot_name = 'snapshot_name_example'; // string | The name of the restored base. Optional. If left blank, a default name will be given.
 
 try {
@@ -208,7 +208,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **commit_id** | **string**|  | |
+| **commit_id** | **string**| The commit ID for a base snapshot. | |
 | **snapshot_name** | **string**| The name of the restored base. Optional. If left blank, a default name will be given. | [optional] |
 
 ### Return type

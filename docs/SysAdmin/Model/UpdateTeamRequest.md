@@ -9,4 +9,5 @@ Name | Type | Description | Notes
 **row_limit** | **int** | User&#39;s total row limit in number. For example 10000. | [optional]
 **max_user_number** | **string** | The maximum user number. | [optional]
 **asset_quota_mb** | **string** | The asset quota in MB. | [optional]
+**monthly_automation_limit_per_user** | **int** | Monthly limit on the number of automation rules per user. | [optional]
 

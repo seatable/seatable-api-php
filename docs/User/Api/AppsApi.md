@@ -33,7 +33,7 @@ $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string
+$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string | The token of the universal app.
 $is_inactive = new \SeaTable\Client\User\IsInactive(); // \SeaTable\Client\User\IsInactive
 
 try {
@@ -47,7 +47,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **app_token** | **string**|  | |
+| **app_token** | **string**| The token of the universal app. | |
 | **is_inactive** | [**\SeaTable\Client\User\IsInactive**](../Model/IsInactive.md)|  | [optional] |
 
 ### Return type
@@ -69,7 +69,7 @@ importUsersToApp($app_token, $import_users_to_app_request)
 
 Import Users to App
 
-Hier muss noch eine Beschreibung ergänzt werden
+Imports multiple users to a universal app in a single batch operation.
 
 ### Example
 
@@ -83,7 +83,7 @@ $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string
+$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string | The token of the universal app.
 $import_users_to_app_request = new \SeaTable\Client\User\ImportUsersToAppRequest(); // \SeaTable\Client\User\ImportUsersToAppRequest
 
 try {
@@ -97,7 +97,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **app_token** | **string**|  | |
+| **app_token** | **string**| The token of the universal app. | |
 | **import_users_to_app_request** | [**\SeaTable\Client\User\ImportUsersToAppRequest**](../Model/ImportUsersToAppRequest.md)|  | [optional] |
 
 ### Return type
@@ -119,7 +119,7 @@ listAppInviteLinks($app_token)
 
 List App Invite Links
 
-Hier muss noch eine Beschreibung ergänzt werden
+Lists all invite links for a specific universal app.
 
 ### Example
 
@@ -133,7 +133,7 @@ $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string
+$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string | The token of the universal app.
 
 try {
     $apiInstance->listAppInviteLinks($app_token);
@@ -146,7 +146,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **app_token** | **string**|  | |
+| **app_token** | **string**| The token of the universal app. | |
 
 ### Return type
 
@@ -167,7 +167,7 @@ listApps(): object
 
 List Apps
 
-Hier muss noch eine Beschreibung ergänzt werden
+Lists all universal apps that you manage or have access to.
 
 ### Example
 
@@ -213,7 +213,7 @@ listUniversalAppUsers($app_token)
 
 List Universal App Users
 
-Hier muss noch eine Beschreibung ergänzt werden
+Lists all users of a specific universal app.
 
 ### Example
 
@@ -227,7 +227,7 @@ $apiInstance = new SeaTable\Client\User\AppsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string
+$app_token = 8254d58e-6a67-45ab-be37-87939d80e99f; // string | The token of the universal app.
 
 try {
     $apiInstance->listUniversalAppUsers($app_token);
@@ -240,7 +240,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **app_token** | **string**|  | |
+| **app_token** | **string**| The token of the universal app. | |
 
 ### Return type
 

@@ -3,7 +3,7 @@ info:
   title: Base Operations
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
@@ -118,7 +118,7 @@ components:
       required: false
       description: |
         The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly.
-        **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+        **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
       example: "Default View"
     order_by:
       name: order_by
@@ -172,10 +172,11 @@ components:
       schema:
         type: integer
       description: |
-        offset is the beginning number of your query. 0 by default. If your record is linked to multiple records, use e.g. 0 to start quering from the 1st element or e.g. 5 to start querying from the 6th element, etc. **Attention:** The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime).
+        offset is the beginning number of your query. 0 by default. If your record is linked to multiple records, use e.g. 0 to start querying from the 1st element or e.g. 5 to start querying from the 6th element, etc. **Attention:** The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime).
       example: 0
     days:
       name: days
+      description: Number of days to look back for comments.
       in: query
       schema:
         type: integer
@@ -213,10 +214,10 @@ components:
       in: path
       schema:
         type: string
-        pattern: ^[A-Za-z0-9]{22}$
+        pattern: ^[A-Za-z0-9\-\_]{22}$
       required: true
       description: The id of the row.
-      example: Qtf7xPmoRaiFyQPO1aENTjb
+      example: Qtf7xPmoRaiFyQPO1aENTj
     view_name_path:
       name: view_name
       in: path
@@ -257,9 +258,9 @@ components:
   schemas:
     row_id:
       type: string
-      pattern: '^[a-zA-Z0-9\-\_]{22}$'
+      pattern: ^[A-Za-z0-9\-\_]{22}$
       description: The id of the row. The id of a row is unique inside a base and is often used to identify one specific row.
-      example: "Qtf7xPmoRaiFyQPO1aENTjb"
+      example: "Qtf7xPmoRaiFyQPO1aENTj"
     base:
       type: object
       description: base (database) in SeaTable
@@ -458,7 +459,7 @@ components:
     insert_row:
       title: Insert a row (above or below another row)
       type: object
-      description: Insert a row below or above another row your specified by his row-ID.
+      description: Insert a row below or above another row you specified by its row ID.
       properties:
         table_name:
           $ref: "#/components/schemas/table_name"
@@ -567,7 +568,7 @@ components:
           $ref: "#/components/schemas/table_name"
         row_ids:
           type: array
-          description: "Defines the rows which should be updated."
+          description: "Defines the rows which should be deleted."
           items:
             $ref: "#/components/schemas/row_id"
       required:
@@ -645,7 +646,7 @@ components:
                 $ref: "#/components/schemas/row_id"
               offset:
                 type: integer
-                description: "Offset is the beginning number of your query. If your record is linked to multiple records, use e.g. 0 to start quering from the 1st element or e.g. 5 to start querying from the 6th element, etc. Attention: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime). Default is 0."
+                description: "Offset is the beginning number of your query. If your record is linked to multiple records, use e.g. 0 to start querying from the 1st element or e.g. 5 to start querying from the 6th element, etc. Attention: The returned list of linked rows is not ordered by its original order on the web interface, but rather by created time (ctime). Default is 0."
               limit:
                 type: integer
                 description: "Specify the maximum number of records to be returned. For example, use 20 to retrieve more than the default 10 records."
@@ -658,7 +659,7 @@ components:
 
     match_link_columns:
       type: object
-      description: update multiple rows
+      description: Match and link rows from two tables based on matching column values.
       properties:
         link_id:
           $ref: "#/components/schemas/link_id"
@@ -737,7 +738,7 @@ components:
       type: string
       description: |
         The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly.
-        **Example:** Instead of `view_name: Default View` you an use `view_id: 0000`.
+        **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
       example: "Default View"
 
     view_name_only:
@@ -889,7 +890,7 @@ components:
 
     date_filter_term:
       type: string
-      pattern: "^[0-9]{4}-((0[1-9])|(1[0-2]))?-(([0-2][0-9])|(3[01]))?$" # --> pattern für das Datum im Format 2012-03-30
+      pattern: "^[0-9]{4}-((0[1-9])|(1[0-2]))?-(([0-2][0-9])|(3[01]))?$"
 
     filter_term_modifier:
       type: string
@@ -913,7 +914,7 @@ components:
     filter_conjunction:
       type: string
       enum: ["And", "Or"]
-      description: "If your view has multiple filters you have to decide how the filters are should hang together."
+      description: "If your view has multiple filters you have to decide how the filters should hang together."
 
     sort_type:
       type: string
@@ -945,7 +946,7 @@ components:
       type: array
       items:
         type: string
-      description: "IDs of the rows that should be hidden"
+      description: "IDs of the columns that should be hidden"
 
     filters_text:
       title: Text
@@ -1055,7 +1056,7 @@ components:
       properties:
         column_key:
           $ref: "#/components/schemas/column_key"
-        email_filter_predicate:
+        filter_predicate:
           $ref: "#/components/schemas/email_filter_predicate"
         filter_term:
           $ref: "#/components/schemas/filter_term"
@@ -1241,7 +1242,6 @@ components:
               - $ref: "#/components/schemas/filters_automatic"
               - $ref: "#/components/schemas/filters_percentage"
               - $ref: "#/components/schemas/filters_date-time"
-              - $ref: "#/components/schemas/filters_url"
               - $ref: "#/components/schemas/filters_geolocation"
         filter_conjunction:
           $ref: "#/components/schemas/filter_conjunction"
@@ -1507,18 +1507,18 @@ components:
                 description: The name of your option.
               color:
                 type: string
-                description: select your code-code for the background.
-                pattern: "#([A-Za-z0-9]){6}"
+                description: select your color-code for the background.
+                pattern: "^#[A-Fa-f0-9]{6}$"
                 example: #F4667C
               textColor:
                 type: string
                 description: select your color-code for the text.
-                pattern: "#([A-Za-z0-9]){6}"
+                pattern: "^#[A-Fa-f0-9]{6}$"
                 example: #FFFFFF
               borderColor:
                 type: string
                 description: select your color-code for the text.
-                pattern: "#([A-Za-z0-9]){6}"
+                pattern: "^#[A-Fa-f0-9]{6}$"
                 example: #7BC0D6
 
     # multiple select (with column_data)
@@ -1652,7 +1652,7 @@ components:
       properties:
         geo_format:
           type: string
-          enum: ["lng_lat", "county_region"]
+          enum: ["lng_lat", "country_region"]
 
     geolocation_column:
       title: Geolocation
@@ -1663,7 +1663,7 @@ components:
           $ref: "#/components/schemas/column_name"
         column_type:
           type: string
-          enum: ["checkbox"]
+          enum: ["geolocation"]
         anchor_column:
           $ref: "#/components/schemas/anchor_column"
         column_data:
@@ -1829,7 +1829,7 @@ components:
           description: |
             The formula of this column.
           enum: ["count_links"]
-          example: lookup
+          example: count_links
         link_column:
           type: string
           description: Name of the link column.
@@ -1869,7 +1869,7 @@ components:
           description: |
             The formula of this column.
           enum: ["rollup"]
-          example: lookup
+          example: rollup
         link_column:
           type: string
           description: Name of the link column.
@@ -1894,7 +1894,7 @@ components:
           description: |
             The formula of this column.
           enum: ["findmin"]
-          example: lookup
+          example: findmin
         link_column:
           type: string
           description: Name of the link column.
@@ -1919,7 +1919,7 @@ components:
           description: |
             The formula of this column.
           enum: ["findmax"]
-          example: lookup
+          example: findmax
         link_column:
           type: string
           description: Name of the link column.
@@ -2037,24 +2037,43 @@ components:
         - $ref: "#/components/schemas/table_name_object"
         - $ref: "#/components/schemas/autonumber_column"
     autonumber_column_format:
-      description: Specify the auto number column.
+      description: >-
+        Specify the auto number column. The `format` field defines the number
+        pattern (e.g. "0000" for 4 digits). Use `prefix_type` to add a prefix:
+        "string" for a custom text prefix, or "date" for a date-based prefix.
       type: object
       properties:
         format:
           type: string
-          example: "ID-0000"
+          description: The number format pattern.
+          example: "0000"
+        digits:
+          type: integer
+          description: Number of digits (must match the zeros in `format`).
+          example: 4
+        prefix_type:
+          type: string
+          description: Type of prefix — "string" for a custom prefix, "date" for a date-based prefix (YYYYMMDD).
+          enum: ["string", "date"]
+          example: "string"
+        prefix:
+          type: string
+          description: The prefix value (only used when `prefix_type` is "string").
+          example: "ID-"
       required:
         - format
+        - digits
 
     button_column:
       title: Button column
+      type: object
       description: Add a button column.
       properties:
         column_name:
           $ref: "#/components/schemas/column_name"
         column_type:
           type: string
-          enum: ["file"]
+          enum: ["button"]
         anchor_column:
           $ref: "#/components/schemas/anchor_column"
         column_data:
@@ -2417,7 +2436,14 @@ paths:
                         can_copy: false
                         can_export: false
                         can_print: false
-  # question: internal server error??
+        "403":
+          description: Forbidden — missing or invalid base token
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error_message: invalid token
   /api-gateway/api/v2/dtables/{base_uuid}/related-users/:
     get:
       tags:
@@ -2438,11 +2464,11 @@ paths:
                 type: object
               example:
                 user_list:
-                  - email: 244b43hr6fy54bb4afa2c2cb7369d244@auth.local
+                  - email: 244b430060f54bb4afa2c2cb7369d244@auth.local
                     name: Ginger Ale
                     contact_email: gingerale@example.com
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
-                  - email: 8cb2a6da656876hgf42905bf1647fd3f@auth.local
+                  - email: 8cb2a6da65687600f42905bf1647fd3f@auth.local
                     name: Jasmin Tee
                     contact_email: jasmintee@example.com
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
@@ -2455,40 +2481,44 @@ paths:
       summary: Query SeaTable with SQL
       operationId: querySQL
       description: |
-        SeaTable offers a SQL like interface that supports `SELECT`, `INSERT`, `UPDATE` and `DELETE` statements. 
+        This is the **recommended endpoint** for reading and modifying data in SeaTable. It supports `SELECT`, `INSERT`, `UPDATE`, and `DELETE` — giving you full access to filter, sort, group, join, and aggregate data in a single request. It works seamlessly across both normal and big data storage and returns column metadata alongside the results.
 
-        If you are familiar with SQL, you will have no difficulties to use this endpoint because typical SQL-statements are supported.
-                
-        This endpoint is the **most powerful** one that SeaTable can offer and it does not differentiate between the two SeaTable backend (normal and big data). Also the metadata of the table is returned. 
+        SQL syntax is case insensitive and most common functions work as expected — including `now()`, `round()`, `upper()`, `trim()`, `abs()`, and many more. Some functions use SeaTable-specific names (e.g. `mid()` instead of `SUBSTR()`, `concatenate()` instead of `CONCAT()`). See the [function reference](https://developer.seatable.com/sql/functions/) for the complete list and a MySQL/MariaDB equivalents table.
 
-        > 📘 `INSERT` and big data
-        > 
-        > New rows (INSERT statement) are always added to the **big data backend**. An error message will be returned, if the big data backend is not activated for the target base.
+        **Example queries** for a table *Contacts* with columns *Name*, *Age*, *City*:
 
-        The complete [SQL Reference](https://developer.seatable.com/scripts/sql/functions/) can be found documentation in the developer manual. 
+        - `SELECT * FROM Contacts WHERE Age >= 18 ORDER BY Name LIMIT 100`
+        - `SELECT City, COUNT(*), AVG(Age) FROM Contacts GROUP BY City`
+        - `SELECT DISTINCT City FROM Contacts`
+        - `UPDATE Contacts SET City = 'Berlin' WHERE Name = 'Alice'`
+        - `DELETE FROM Contacts WHERE Age < 18`
+        - `SELECT * FROM Contacts WHERE Name = ? AND Age = ?` (parameterized query)
 
-        Here are some example requests for a fictitious table *Family* with the columns *name*, *age* and *birthday*:
+        For the complete SQL reference, see the [SeaTable Developer Manual](https://developer.seatable.com/sql/):
 
-        - `SELECT * FROM Family LIMIT 3`
-        - `SELECT name, age, birthday FROM Family`
-        - `SELECT name, age FROM Family ORDER BY name`
-        - `INSERT INTO Family (Name,Age) VALUES ('Name', 23)`
-        - `SELECT * FROM Family WHERE Name=? AND Age=?`
-
-        SELECT does not support column keys. You can only limit the output by column names.
+        - [SELECT](https://developer.seatable.com/sql/select/) — retrieve, filter, sort, group, and join rows
+        - [INSERT](https://developer.seatable.com/sql/insert/) — append rows (big data storage only)
+        - [UPDATE](https://developer.seatable.com/sql/update/) — modify rows
+        - [DELETE](https://developer.seatable.com/sql/delete/) — remove rows
+        - [Functions](https://developer.seatable.com/sql/functions/) — all supported functions and MySQL/MariaDB equivalents
+        - [Limitations](https://developer.seatable.com/sql/limitations/) — column writability, NULL handling, list types
 
         > 📘 Avoid SQL injection
-        > 
-        > If you use `?` in your SQL-statement, you have to provide values to replace the placeholders with parameters. This protects against SQL injections. 
-
-        > 🚧 Max and default return limit
         >
-        > - The request returns a maximum of 10 000 rows, even if you specify a higher limit in your SQL-statement. 
-        > - If you don't specify a limit, max 100 rows are returned.
+        > Use `?` placeholders in your SQL statement and pass the actual values via the `parameters` array. This protects against SQL injection. Example: `SELECT * FROM T WHERE Name = ? AND Age = ?` with `parameters: ["Alice", 30]`.
 
-        > 📘 Link Columns
+        > ❗ Limits
         >
-        > Link columns return a maximum of 50 records per row.
+        > - **Default:** 100 rows. **Maximum:** 10,000 rows. Use `LIMIT` and `OFFSET` to paginate.
+        > - **Link columns** return a maximum of 50 linked records per row.
+        > - **INSERT** only works with bases that have big data storage enabled.
+
+        > 🚧 Key restrictions
+        >
+        > - Functions and expressions are **not supported** in `UPDATE SET` or `INSERT VALUES` — only constant values are allowed.
+        > - `JOIN` keyword is not supported — use implicit joins: `SELECT ... FROM T1, T2 WHERE T1.col = T2.col`.
+        > - Subqueries and `UNION` are not supported.
+        > - `SELECT` uses column **names** by default. Set `convert_keys` to `false` to get column keys instead.
       requestBody:
         content:
           application/json:
@@ -2506,6 +2536,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/sql_query_response"
+        "400":
+          description: Bad Request — invalid SQL syntax or non-existing table.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_message:
+                    type: string
+                    example: "no such table: nonexistent_table"
   /api-gateway/api/v2/dtables/{base_uuid}/rows/:
     get:
       tags:
@@ -2515,7 +2555,7 @@ paths:
       description: |
         Returns a list of rows contained in a table (or in a view if provided).
 
-        The usage of a view in SeaTable could be much more convenient then the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).
+        The usage of a view in SeaTable could be much more convenient than the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).
 
         > 👍 Big Data support added 
         > 
@@ -2563,7 +2603,6 @@ paths:
                     _mtime: "2021-03-10T16:11:11.176+00:00"
                     Name: Matcha
                     link: []
-    # question: how to add multiple rows????
     post:
       tags:
         - Rows
@@ -2571,6 +2610,10 @@ paths:
       operationId: appendRows
       description: |-
         Append multiple rows to a table. Define the column:values pairs of each column in the [rows object](/reference/models).
+        
+        > 🚧 Column names only
+        >
+        > This endpoint always expects **column names** (e.g. `Name`) in the row object, not internal column keys (e.g. `0000`). The `convert_keys` parameter is not supported. Unknown keys are silently ignored without error.
       requestBody:
         content:
           application/json:
@@ -2588,6 +2631,15 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  inserted_row_count:
+                    type: integer
+                  row_ids:
+                    type: array
+                    items:
+                      type: object
+                  first_row:
+                    type: object
               example:
                 inserted_row_count: 3
                 row_ids:
@@ -2610,6 +2662,10 @@ paths:
         > 📘 Structure of the row object
         > 
         > The row object contains key:value pairs with the column name as key and the desired values. Check the page [Models](/reference/models) to get a better understanding of the row object.
+
+        > 🚧 Column names only
+        >
+        > This endpoint always expects **column names** (e.g. `Name`) in the row object, not internal column keys (e.g. `0000`). The `convert_keys` parameter is not supported. Unknown keys are silently ignored without error.
       requestBody:
         content:
           application/json:
@@ -2660,7 +2716,7 @@ paths:
         - Rows
       summary: Get Row
       operationId: getRow
-      description: Get the values of one row with all columns and values, according to the row id provided. Depending of `convert` the response will contain the column names or the column keys.
+      description: Get the values of one row with all columns and values, according to the row id provided. Depending on `convert_keys` the response will contain the column names or the column keys.
       security:
         - BaseTokenAuth: []
       parameters:
@@ -2675,13 +2731,44 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  _id:
+                    type: string
+                  _mtime:
+                    type: string
+                  Name:
+                    type: string
+                  Date:
+                    type: string
+                  Content:
+                    type: string
+                  link:
+                    type: array
+                    items:
+                      type: object
               example:
-                _id: Qtf7xPmoRaiFyQPO1aENTjb
+                _id: Qtf7xPmoRaiFyQPO1aENTj
                 _mtime: "2021-03-10T16:19:31.761+00:00"
                 Name: NewName
                 Date: "2020-08-01"
                 Content: "111"
                 link: []
+        "403":
+          description: Forbidden — missing or invalid base token
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error_message: invalid token
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error_message: row _id not exits
 
   /api-gateway/api/v2/dtables/{base_uuid}/lock-rows/:
     put:
@@ -2744,7 +2831,6 @@ paths:
 
   # Links
   /api-gateway/api/v2/dtables/{base_uuid}/query-links/:
-    # getestet: ok.
     post:
       tags:
         - Links
@@ -2787,12 +2873,11 @@ paths:
               schema:
                 type: object
               example:
-                Qtf7xPmoRaiFyQPO1aENTjb:
+                Qtf7xPmoRaiFyQPO1aENTj:
                   - row_id: G5rbgqudTKKfAm1-cjnjbQ
                     display_value: Orson
 
   /api-gateway/api/v2/dtables/{base_uuid}/links/:
-    # getestet: ok. (big data???) -> Eingabe ???
     post:
       tags:
         - Links
@@ -2826,14 +2911,13 @@ paths:
                 type: object
               example:
                 success: true
-    # getestet: ok
     put:
       tags:
         - Links
       summary: Update Row Link(s)
       operationId: updateRowLink
       description: |
-        Updates the link(s) between one column and many others (1:n relation). Existings links will be removed and replaced with this new mapping.
+        Updates the link(s) between one column and many others (1:n relation). Existing links will be removed and replaced with this new mapping.
       requestBody:
         content:
           application/json:
@@ -2857,7 +2941,7 @@ paths:
         - Links
       summary: Delete Row Link(s)
       operationId: deleteRowLink
-      description: Deletes one or multiple links between two rows. Only the links between the row_ids mentioned in the mapping, will be removed. Other links will stay and not touched.
+      description: Deletes one or multiple links between two rows. Only the links between the row_ids mentioned in the mapping, will be removed. Other links will stay and not be touched.
       requestBody:
         content:
           application/json:
@@ -2878,7 +2962,6 @@ paths:
                 deleted_links_count: 1
 
   /api-gateway/api/v2/dtables/{base_uuid}/auto-links/:
-    # getestet: ok.
     post:
       tags:
         - Links
@@ -2888,8 +2971,8 @@ paths:
         Automatically create link relationships. 
         The caller needs to create a link column before calling the API, 
         supporting both archived and unarchived data.
-        It will return a task ID, by quering which you can get the status of the
-        link creation in the backend wihtin 5 minutes.
+        It will return a task ID, by querying which you can get the status of the
+        link creation in the backend within 5 minutes.
         The matched data in the link column in the 2 tables must have the similar 
         data structure (not same column type). For example, the text column can match
         email, auto-number or url type column, and so on.
@@ -2917,14 +3000,13 @@ paths:
                 task_id: 19b3c803-051e-4c16-bf4d-682d24f7981e
 
   /api-gateway/api/v2/dtables/{base_uuid}/auto-link-task/:
-    # getestet: ok.
     get:
       tags:
         - Links
       summary: Auto Link task
       operationId: autoLinkTask
       description: |
-        Query the status of auto add links task.There are 3 different status:
+        Query the status of auto add links task. There are 3 different status:
         - success
         - failed
         - running
@@ -3014,7 +3096,7 @@ paths:
         - Tables
       summary: Rename Table
       operationId: renameTable
-      description: Rename a table by providing it's original `table_name` and the desired `new_table_name`.
+      description: Rename a table by providing its original `table_name` and the desired `new_table_name`.
       requestBody:
         content:
           application/json:
@@ -3085,6 +3167,25 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                  columns:
+                    type: array
+                    items:
+                      type: object
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                  id_row_map:
+                    type: object
+                  views:
+                    type: array
+                    items:
+                      type: object
               example:
                 _id: oW2Q
                 name: Appointments
@@ -3180,6 +3281,55 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  is_locked:
+                    type: boolean
+                  filter_conjunction:
+                    type: string
+                  filters:
+                    type: array
+                    items:
+                      type: object
+                  sorts:
+                    type: array
+                    items:
+                      type: object
+                  groupbys:
+                    type: array
+                    items:
+                      type: object
+                  group_rows:
+                    type: array
+                    items:
+                      type: object
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                  colorbys:
+                    type: object
+                  hidden_columns:
+                    type: array
+                    items:
+                      type: object
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                  formula_rows:
+                    type: object
+                  link_rows:
+                    type: object
+                  summaries:
+                    type: object
+                  colors:
+                    type: object
               example:
                 _id: PeJE
                 name: New view
@@ -3218,6 +3368,55 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  is_locked:
+                    type: boolean
+                  filter_conjunction:
+                    type: string
+                  filters:
+                    type: array
+                    items:
+                      type: object
+                  sorts:
+                    type: array
+                    items:
+                      type: object
+                  groupbys:
+                    type: array
+                    items:
+                      type: object
+                  group_rows:
+                    type: array
+                    items:
+                      type: object
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                  colorbys:
+                    type: object
+                  hidden_columns:
+                    type: array
+                    items:
+                      type: object
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                  formula_rows:
+                    type: object
+                  link_rows:
+                    type: object
+                  summaries:
+                    type: object
+                  colors:
+                    type: object
               example:
                 _id: r535
                 name: Default View
@@ -3275,6 +3474,55 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  _id:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  is_locked:
+                    type: boolean
+                  filter_conjunction:
+                    type: string
+                  filters:
+                    type: array
+                    items:
+                      type: object
+                  sorts:
+                    type: array
+                    items:
+                      type: object
+                  groupbys:
+                    type: array
+                    items:
+                      type: object
+                  group_rows:
+                    type: array
+                    items:
+                      type: object
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                  colorbys:
+                    type: object
+                  hidden_columns:
+                    type: array
+                    items:
+                      type: object
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                  formula_rows:
+                    type: object
+                  link_rows:
+                    type: object
+                  summaries:
+                    type: object
+                  colors:
+                    type: object
               example:
                 _id: r535
                 name: View1234567
@@ -3411,6 +3659,30 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  key:
+                    type: string
+                  type:
+                    type: string
+                  name:
+                    type: string
+                  editable:
+                    type: boolean
+                  width:
+                    type: integer
+                  resizable:
+                    type: boolean
+                  draggable:
+                    type: boolean
+                  data:
+                    type: object
+                    nullable: true
+                  permission_type:
+                    type: string
+                  permitted_users:
+                    type: array
+                    items:
+                      type: string
               example:
                 key: e48W
                 type: link-formula
@@ -3443,7 +3715,7 @@ paths:
         - modify_column_type
         - resize_column
         - move_column
-        - freeze_column (eventuell weglassen)
+        - freeze_column
 
         `column` is the name or `key` of the target column.
 
@@ -3466,6 +3738,30 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  key:
+                    type: string
+                  type:
+                    type: string
+                  name:
+                    type: string
+                  editable:
+                    type: boolean
+                  width:
+                    type: integer
+                  resizable:
+                    type: boolean
+                  draggable:
+                    type: boolean
+                  data:
+                    type: object
+                    nullable: true
+                  permission_type:
+                    type: string
+                  permitted_users:
+                    type: array
+                    items:
+                      type: string
               example:
                 key: cSDV
                 type: number
@@ -3701,7 +3997,7 @@ paths:
       operationId: deleteSelectOption
       description: >-
         Use this request to remove single select or multiple select options that
-        you don't need any more. Thes deleted options will be removed from the
+        you don't need any more. These deleted options will be removed from the
         entries containing them.
 
 
@@ -3862,7 +4158,7 @@ paths:
         - $ref: "#/components/parameters/base_uuid"
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -3875,7 +4171,7 @@ paths:
       tags: [Big Data]
       summary: Move Rows to Normal Backend
       operationId: moveRowsToNormalBackend
-      description: Moves the seleted rows into the big data backend.
+      description: Moves the selected rows from the big data backend to the normal backend.
       requestBody:
         content:
           application/json:
@@ -3900,6 +4196,13 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                task_id: cdb7fcc6-d2fa-4bf7-ae08-0d767c38690c
   /api-gateway/api/v2/dtables/{base_uuid}/db-operations/:
     get:
       tags: [Big Data]
@@ -3988,7 +4291,7 @@ paths:
                 type: object
               example:
                 - id: 1
-                  author: 28dhr6e7d1754bb4afa2c2cb7369d244@auth.local
+                  author: 28d006e7d1754bb4afa2c2cb7369d244@auth.local
                   comment: This is good!
                   dtable_uuid: 650d8a0d-7e27-46a8-8b18-6cc6374yf557
                   row_id: NAu2B3OcRG6UrWagL-9naA
@@ -3996,7 +4299,7 @@ paths:
                   updated_at: "2021-01-15T13:35:26.000Z"
                   resolved: 0
                 - id: 2
-                  author: 28dhr6e7d1754bb4afa2c2cb7369d244@auth.local
+                  author: 28d006e7d1754bb4afa2c2cb7369d244@auth.local
                   comment: Go online tomorrow?
                   dtable_uuid: 650d8a0d-7e27-46a8-8b18-6cc6374yf557
                   row_id: NAu2B3OcRG6UrWagL-9naA
@@ -4017,7 +4320,14 @@ paths:
         - Row Comments
       summary: Delete Comment
       operationId: deleteComment
-      description: Delete a certain comment by its ID.
+      deprecated: true
+      description: >-
+        Delete a certain comment by its ID.
+
+
+        > 🚧 Creating comments via the API Gateway is not yet supported.
+        This will be fixed in SeaTable 6.2. Until then, comments can only be
+        created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4037,7 +4347,14 @@ paths:
         - Row Comments
       summary: Get Comment
       operationId: getComment
-      description: Get the details of a certain comment with its ID.
+      deprecated: true
+      description: >-
+        Get the details of a certain comment with its ID.
+
+
+        > 🚧 Creating comments via the API Gateway is not yet supported.
+        This will be fixed in SeaTable 6.2. Until then, comments can only be
+        created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4050,9 +4367,26 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  author:
+                    type: string
+                  comment:
+                    type: string
+                  dtable_uuid:
+                    type: string
+                  row_id:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  resolved:
+                    type: integer
               example:
                 id: 1
-                author: 12345678d1757ey46fg3c2cb7369d244@auth.local
+                author: 12345678d17570046f03c2cb7369d244@auth.local
                 comment: Here is my email address
                 dtable_uuid: 12345678-7e27-46a8-8b18-6cc6374yf557
                 row_id: NAu2B3OcRG6UrWagL-9naA
@@ -4182,7 +4516,7 @@ paths:
                 seen:
                   type: boolean
                   description: true or false for read or unread. Otherwise invalid.
-                  example: "true"
+                  example: true
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4231,7 +4565,7 @@ paths:
                 seen:
                   type: boolean
                   description: '`true` to mark as "seen" and `false` as "unseen".'
-                  example: "false"
+                  example: false
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4251,8 +4585,8 @@ paths:
     post:
       tags:
         - Notifications
-      summary: Send toast notification
-      operationId: SendToastNotification
+      summary: Send Toast Notification
+      operationId: sendToastNotification
       description: Send a toast notification
       requestBody:
         content:
@@ -4415,7 +4749,6 @@ paths:
                 total_count: 3
 
   # Snapshots
-  # tested create: ok
   /api-gateway/api/v2/dtables/{base_uuid}/snapshot/:
     post:
       tags: [Snapshots]

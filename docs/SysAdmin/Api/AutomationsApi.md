@@ -32,7 +32,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\AutomationsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$automation_rule_id = 10; // int
+$automation_rule_id = 10; // int | The ID of the automation rule.
 
 try {
     $result = $apiInstance->deleteAutomation($automation_rule_id);
@@ -46,7 +46,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **automation_rule_id** | **int**|  | |
+| **automation_rule_id** | **int**| The ID of the automation rule. | |
 
 ### Return type
 

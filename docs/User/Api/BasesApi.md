@@ -19,7 +19,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**moveBaseIntoFolder()**](BasesApi.md#moveBaseIntoFolder) | **POST** /api/v2.1/workspace/{workspace_id}/folder-item-moving/ | Move Base into Folder |
 | [**restoreGroupTrashedBase()**](BasesApi.md#restoreGroupTrashedBase) | **PUT** /api/v2.1/groups/{group_id}/trash-dtables/{base_uuid}/ | Restore Group Trashed Base |
 | [**restoreTrashedBase()**](BasesApi.md#restoreTrashedBase) | **PUT** /api/v2.1/trash-dtables/{trashed_base_id}/ | Restore Trashed Base |
-| [**searchBaseOrApps()**](BasesApi.md#searchBaseOrApps) | **GET** /api/v2.1/dtable/items-search/ | Search base or apps |
+| [**searchBaseOrApps()**](BasesApi.md#searchBaseOrApps) | **GET** /api/v2.1/dtable/items-search/ | Search Base or Apps |
 | [**unfavoriteBase()**](BasesApi.md#unfavoriteBase) | **DELETE** /api/v2.1/starred-dtables/ | Unfavorite Base |
 | [**updateBase()**](BasesApi.md#updateBase) | **PUT** /api/v2.1/workspace/{workspace_id}/dtable/ | Update Base |
 | [**updateFolder()**](BasesApi.md#updateFolder) | **PUT** /api/v2.1/workspace/{workspace_id}/folders/{folder_id}/ | Update Folder |
@@ -304,7 +304,7 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$folder_id = 'folder_id_example'; // string
+$folder_id = 'folder_id_example'; // string | The ID of the folder.
 
 try {
     $result = $apiInstance->deleteFolder($workspace_id, $folder_id);
@@ -319,7 +319,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
-| **folder_id** | **string**|  | |
+| **folder_id** | **string**| The ID of the folder. | |
 
 ### Return type
 
@@ -544,7 +544,7 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 
 try {
     $result = $apiInstance->listGroupTrashedBases($group_id);
@@ -558,7 +558,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
@@ -593,8 +593,8 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$page = 1; // int
-$per_page = 2; // int
+$page = 1; // int | Page number of results to return. Default is 1.
+$per_page = 2; // int | Number of results per page.
 
 try {
     $result = $apiInstance->listTrashedBases($page, $per_page);
@@ -608,8 +608,8 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **page** | **int**|  | [optional] |
-| **per_page** | **int**|  | [optional] |
+| **page** | **int**| Page number of results to return. Default is 1. | [optional] |
+| **per_page** | **int**| Number of results per page. | [optional] |
 
 ### Return type
 
@@ -701,7 +701,7 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
 
 try {
@@ -716,7 +716,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 | **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
 
 ### Return type
@@ -785,7 +785,7 @@ AccountTokenAuth
 searchBaseOrApps($query_str, $query_type): object
 ```
 
-Search base or apps
+Search Base or Apps
 
 Search the base or apps of a user. Capitalization is irrelevant for the search and substrings are also allowed.
 
@@ -802,7 +802,7 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     $config
 );
 $query_str = test; // string | Search string. Substrings are allowed and capitalization does not matter.
-$query_type = 'query_type_example'; // string
+$query_type = 'query_type_example'; // string | Filter the search by type. Use `base` to search only bases or `app` to search only apps.
 
 try {
     $result = $apiInstance->searchBaseOrApps($query_str, $query_type);
@@ -817,7 +817,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **query_str** | **string**| Search string. Substrings are allowed and capitalization does not matter. | [optional] |
-| **query_type** | **string**|  | [optional] |
+| **query_type** | **string**| Filter the search by type. Use &#x60;base&#x60; to search only bases or &#x60;app&#x60; to search only apps. | [optional] |
 
 ### Return type
 
@@ -959,7 +959,7 @@ $apiInstance = new SeaTable\Client\User\BasesApi(
     $config
 );
 $workspace_id = 127; // int | id of your workspace.
-$folder_id = 'folder_id_example'; // string
+$folder_id = 'folder_id_example'; // string | The ID of the folder.
 $name = 'name_example'; // string | Name of your folder. If the name already exists in the workspace, the system will add a \\\"(1)\\\" to it.
 
 try {
@@ -975,7 +975,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
-| **folder_id** | **string**|  | |
+| **folder_id** | **string**| The ID of the folder. | |
 | **name** | **string**| Name of your folder. If the name already exists in the workspace, the system will add a \\\&quot;(1)\\\&quot; to it. | [optional] |
 
 ### Return type

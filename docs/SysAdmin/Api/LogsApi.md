@@ -374,6 +374,8 @@ listRegistrationLogs(): object
 
 List Registration Logs
 
+List all registration and invitation logs in the system.
+
 ### Example
 
 ```php
@@ -434,7 +436,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
 );
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
-$has_handled = 'has_handled_example'; // string
+$has_handled = 'has_handled_example'; // string | Filter by handling status. Use `true` for handled, `false` for unhandled, or `null` for all.
 
 try {
     $apiInstance->listVirusFiles($page, $per_page, $has_handled);
@@ -449,7 +451,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
-| **has_handled** | **string**|  | [optional] |
+| **has_handled** | **string**| Filter by handling status. Use &#x60;true&#x60; for handled, &#x60;false&#x60; for unhandled, or &#x60;null&#x60; for all. | [optional] |
 
 ### Return type
 
@@ -465,7 +467,7 @@ AccountTokenAuth
 ## `updateAbuseReport()`
 
 ```php
-updateAbuseReport($abuse_report_id, $update_abuse_report_request): object
+updateAbuseReport($abuse_report_id, $update_abuse_report_request): \SeaTable\Client\SysAdmin\UpdateAbuseReport200Response
 ```
 
 Update Abuse Report
@@ -484,7 +486,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\LogsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$abuse_report_id = 1; // int
+$abuse_report_id = 1; // int | The ID of the abuse report.
 $update_abuse_report_request = new \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest(); // \SeaTable\Client\SysAdmin\UpdateAbuseReportRequest
 
 try {
@@ -499,12 +501,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **abuse_report_id** | **int**|  | |
+| **abuse_report_id** | **int**| The ID of the abuse report. | |
 | **update_abuse_report_request** | [**\SeaTable\Client\SysAdmin\UpdateAbuseReportRequest**](../Model/UpdateAbuseReportRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\UpdateAbuseReport200Response**](../Model/UpdateAbuseReport200Response.md)
 
 ### Authorization
 

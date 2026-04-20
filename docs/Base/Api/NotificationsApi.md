@@ -8,7 +8,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**listBaseNotifications()**](NotificationsApi.md#listBaseNotifications) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | List Base Notifications |
 | [**markBaseNotificationAsSeen()**](NotificationsApi.md#markBaseNotificationAsSeen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/{notification_id}/ | Mark Notification Read/Unread |
 | [**markBaseNotificationsAsSeen()**](NotificationsApi.md#markBaseNotificationsAsSeen) | **PUT** /api-gateway/api/v2/dtables/{base_uuid}/notifications/ | Mark Base Notifications as seen |
-| [**sendToastNotification()**](NotificationsApi.md#sendToastNotification) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/ui-toasts/ | Send toast notification |
+| [**sendToastNotification()**](NotificationsApi.md#sendToastNotification) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/ui-toasts/ | Send Toast Notification |
 
 
 ## `deleteBaseNotifications()`
@@ -219,7 +219,7 @@ BaseTokenAuth
 sendToastNotification($base_uuid, $send_toast_notification_request): object
 ```
 
-Send toast notification
+Send Toast Notification
 
 Send a toast notification
 

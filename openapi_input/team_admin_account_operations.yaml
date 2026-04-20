@@ -3,7 +3,7 @@ info:
   title: Account Operations - Team admin
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
@@ -30,6 +30,8 @@ tags:
     description: Retrieve team info and update team settings
   - name: Activities & Logs
     description: Retrieve team activities and logs
+  - name: Statistics
+    description: Retrieve statistics about system activities
   - name: Customizing
     description: Customize team appearance
   - name: SAML
@@ -69,13 +71,73 @@ components:
         type: string
       description: Exact name or a part of the name of the base, case insensitive.
       example: "Example"
+    dtable_uuid:
+      name: dtable_uuid
+      in: query
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$'
+      description: The unique identifier of a base.
+      example: 5c264e76-0e5a-448a-9f34-580b551364ca
     ignore_asset:
       name: ignore_asset
       in: query
       schema:
         type: boolean
-      example: "false"
+      example: false
       description: Set this to `true` to export the base without assets. Default is `false`.
+    login_status:
+      name: status
+      in: query
+      schema:
+        type: string
+        enum: [success, failure]
+      example: success
+      description: Set this to `success` to only return successful logins. By default, all logins are returned.
+    start:
+      name: start
+      in: query
+      schema:
+        type: string
+        format: date-time
+      description: Start date in ISO format.
+      example: "2025-11-01T06:00:00+01:00"
+      required: false
+    end:
+      name: end
+      in: query
+      schema:
+        type: string
+        format: date-time
+      description: End date in ISO format.
+      example: "2025-11-30T18:00:00+01:00"
+      required: false
+    operation_group:
+      name: operation_group
+      in: query
+      schema:
+        type: string
+        enum: [user, group, base]
+      example: user
+      description: Filter by a specific operation group. By default, all operations are returned.
+      required: false
+    group_by:
+      name: group_by
+      in: query
+      schema:
+        type: string
+        enum: [owner, dtable_uuid]
+      required: true
+      description: Query by owner or Base
+      example: "owner"
+    date:
+      name: date
+      in: query
+      schema:
+        type: string
+      required: true
+      description: A date string in YYYY-MM-DD format
+      example: "2025-01-01"
 
     #=======================Path parameters=======================#
     org_id:
@@ -108,28 +170,29 @@ components:
       example: 5c264e76-0e5a-448a-9f34-580b551364ca
     external_link_token:
       name: external_link_token
+      description: The token of the external link.
       in: path
       schema:
         type: string
-        pattern: "^[0-9a-f]{20}$"
       required: true
       example: "d6d006b319ca4d2aa060"
     view_external_link_token:
       name: view_external_link_token
+      description: The token of the view external link.
       in: path
       schema:
         type: string
-        pattern: "^[0-9a-f]{20}$"
       required: true
       example: "d6d006b319ca4d2aa060"
     invite_link_token:
       name: invite_link_token
+      description: The token of the invite link.
       in: path
       schema:
         type: string
         pattern: "^[0-9a-f]{20}$"
       required: true
-      example: "0366b8995d7f47d8eu3t"
+      example: "0366b8995d7f47d8ae3c"
     group_id:
       name: group_id
       in: path
@@ -149,6 +212,14 @@ components:
         pattern: "^[a-f0-9]{32}(@auth.local)$"
       required: true
       example: 123456789f1e4c8d8e1c31415867317c@auth.local
+    app_name:
+      name: app_name
+      description: The name of your app. Every API-Token has a name to identify the purpose. The name of the app must be unique for every base.
+      in: path
+      schema:
+        type: string
+      required: true
+      example: "My App"
 
   schemas:
     team_admin_permission:
@@ -173,11 +244,11 @@ components:
         The `user_id` of the owner of the group. Optional. If left
         blank, the newly added group will not be visible to anyone
         but still operatable.
-      example: "123abc456def789ghi123jkl456mno789@auth.local"
+      example: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
     team_admin_user_id:
       type: string
       description: The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
-      example: "123abc456def789ghi123jkl456mno789@auth.local"
+      example: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
     team_admin_email:
       type: string
       description: User's contact email to login.
@@ -201,7 +272,7 @@ components:
       description: >-
         If a workspace should be automatically created for the user.
         Optional. `false` by default.
-      example: "true"
+      example: true
     team_admin_id_in_org:
       type: string
       description: >-
@@ -211,7 +282,7 @@ components:
     team_admin_quota_total:
       type: integer
       description: Update their total quota in MB.
-      example: "3"
+      example: 3
     team_admin_group_id:
       type: string
       description: The ID of the group you'd like to move.
@@ -227,13 +298,13 @@ components:
       description: >-
         Whether you'd like to move your group to the bottom of the
         list (`true`). `false` by default.
-      example: "true"
+      example: true
     enable_force_2fa:
       type: boolean
       description: >-
         if the 2-factor-authentication is forced (`true` or
         `false`).
-      example: "true"
+      example: true
     enable_force_sso_login:
       type: boolean
       description: Whether login via SSO is enforced for all team members (`true` or `false`).
@@ -243,19 +314,19 @@ components:
       description: >-
         if newly added users will get a system email (`true` or
         `false`).
-      example: "true"
+      example: true
     enable_external_user_access_invite_link:
       type: boolean
       description: >-
         if external users can access bases via invite links (`true`
         or `false`).
-      example: "false"
+      example: false
     enable_member_modify_name:
       type: boolean
       description: >-
         if members are allowed to change their names (`true` or
         `false`).
-      example: "false"
+      example: false
     upload_file:
       type: object
       properties:
@@ -365,6 +436,27 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  is_active:
+                    type: boolean
+                  ctime:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  contact_email:
+                    type: string
+                  last_login:
+                    type: string
+                  self_usage:
+                    type: integer
+                  quota:
+                    type: integer
+                  workspace_id:
+                    type: integer
               example:
                 id: 125
                 is_active: true
@@ -396,6 +488,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  quota_usage:
+                    type: integer
+                  quota_total:
+                    type: integer
+                  avatar_url:
+                    type: string
+                  id_in_org:
+                    type: string
+                  has_default_device:
+                    type: boolean
+                  is_force_2fa:
+                    type: boolean
+                  is_active:
+                    type: boolean
+                  is_org_admin:
+                    type: boolean
               example:
                 email: "6196ab3dacef4e539ae8da4844b58a1f@auth.local"
                 name: "John Doe"
@@ -406,6 +521,8 @@ paths:
                 id_in_org: ""
                 has_default_device: false
                 is_force_2fa: true
+                is_active: true
+                is_org_admin: false
     put:
       tags:
         - Users
@@ -444,6 +561,31 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  quota_usage:
+                    type: integer
+                  quota_total:
+                    type: integer
+                  is_active:
+                    type: boolean
+                  id:
+                    type: integer
+                  ctime:
+                    type: string
+                  id_in_org:
+                    type: string
+                  last_login:
+                    type: string
+                  self_usage:
+                    type: integer
+                  quota:
+                    type: integer
               example:
                 email: 23456789d1754bb4afa2c2cb7369d244@auth.local
                 name: Stefan
@@ -520,7 +662,7 @@ paths:
 
 
         This request is to be distinguished from the next request, because
-        cancelling the enforcement doesn't necesssarily [Disable 2FA for A User
+        cancelling the enforcement doesn't necessarily [Disable 2FA for A User
         in Team](/reference/disabletwofactor-1), which serves a different purpose.
       requestBody:
         content:
@@ -610,14 +752,14 @@ paths:
                     updated_at: "2021-03-02T10:29:03+00:00"
                     color: null
                     text_color: null
-                    icon: null,
-                    is_encrypted: false,
-                    in_storage: true,
-                    org_id: 1,
-                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local,
-                    group_id: -1,
-                    owner: Jasmin Tee,
-                    owner_deleted: false,
+                    icon: null
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: 1
+                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local
+                    group_id: -1
+                    owner: Jasmin Tee
+                    owner_deleted: false
                     rows_count: 2
                   - id: 159
                     workspace_id: 304
@@ -627,16 +769,74 @@ paths:
                     updated_at: "2021-03-02T10:29:03+00:00"
                     color: null
                     text_color: null
-                    icon: null,
-                    is_encrypted: false,
-                    in_storage: true,
-                    org_id: 1,
-                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local,
-                    group_id: -1,
-                    owner: TeamAdmin,
-                    owner_deleted: false,
+                    icon: null
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: 1
+                    email: c882391bfa0144c4af64e4e0cde50b6c@auth.local
+                    group_id: -1
+                    owner: TeamAdmin
+                    owner_deleted: false
                     rows_count: 20
                 count: 16
+  /api/v2.1/org/{org_id}/admin/users/{user_id}/dtables/:
+    get:
+      tags:
+        - Bases
+      summary: List User's Bases
+      operationId: listUsersBases
+      description: List all the bases of a certain user by the user's ID.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/user_id"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                dtable_list:
+                  - id: 6
+                    workspace_id: 2
+                    uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    name: CRM
+                    created_at: '2025-11-28T14:16:30+01:00'
+                    updated_at: '2025-11-28T14:17:04+01:00'
+                    color: "#E91E63"
+                    text_color: null
+                    icon: icon-user-interview
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: 2
+                    email: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    group_id: -1
+                    owner: org-1-admin
+                    owner_deleted: false
+                    rows_count: 7
+                  - id: 7
+                    workspace_id: 2
+                    uuid: e97bb668-da36-484c-8ac9-8aa9e0564f4c
+                    name: Finances
+                    created_at: '2025-11-28T14:18:31+01:00'
+                    updated_at: '2025-11-28T14:18:31+01:00'
+                    color: "#00C9C7"
+                    text_color: null
+                    icon: icon-dollar
+                    is_encrypted: false
+                    in_storage: true
+                    org_id: 2
+                    email: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    group_id: -1
+                    owner: org-1-admin
+                    owner_deleted: false
+                    rows_count: 0
+                count: 2
   /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/:
     get:
       tags:
@@ -657,6 +857,41 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  uuid:
+                    type: string
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  color:
+                    type: string
+                  text_color:
+                    type: string
+                  icon:
+                    type: string
+                  is_encrypted:
+                    type: boolean
+                  in_storage:
+                    type: boolean
+                  org_id:
+                    type: integer
+                  owner:
+                    type: string
+                  email:
+                    type: string
+                  group_id:
+                    type: integer
+                  owner_deleted:
+                    type: boolean
+                  rows_count:
+                    type: integer
               example:
                 id: 158
                 workspace_id: 304
@@ -666,14 +901,14 @@ paths:
                 updated_at: "2021-03-02T10:29:03+00:00"
                 color: null
                 text_color: null
-                icon: null,
-                is_encrypted: false,
-                in_storage: true,
-                org_id: 1,
+                icon: null
+                is_encrypted: false
+                in_storage: true
+                org_id: 1
                 owner: JiweRan
-                email: c882391bfa0144c4af64e4e0cde50b6c@auth.local,
-                group_id: -1,
-                owner_deleted: false,
+                email: c882391bfa0144c4af64e4e0cde50b6c@auth.local
+                group_id: -1
+                owner_deleted: false
                 rows_count: 2
     delete:
       tags:
@@ -842,6 +1077,32 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        group_name:
+                          type: string
+                        ctime:
+                          type: string
+                        creator_name:
+                          type: string
+                        creator_email:
+                          type: string
+                        creator_contact_email:
+                          type: string
+                        size:
+                          type: integer
+                  page:
+                    type: integer
+                  per_page:
+                    type: integer
+                  page_next:
+                    type: boolean
               example:
                 groups:
                   - id: 51
@@ -890,6 +1151,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  group_name:
+                    type: string
+                  ctime:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
               example:
                 id: 3
                 group_name: Test group
@@ -916,6 +1190,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  group_name:
+                    type: string
+                  ctime:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
               example:
                 id: 1
                 group_name: Test Group
@@ -940,7 +1227,7 @@ paths:
         "User xxx is already group owner".
 
         *   `new_group_name` is the new name of your group. If you don't want to
-        change the name, remove shi parameter because if you enter the current
+        change the name, remove this parameter because if you enter the current
         group name here you'll get an error "There is already a group with that
         name".
       requestBody:
@@ -965,11 +1252,26 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  group_name:
+                    type: string
+                  ctime:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
+                  size:
+                    type: integer
               example:
                 id: 1
                 group_name: Group New
                 ctime: "2020-11-19T08:14:52+00:00"
-                creator_email: 123abc456def789ghi123jkl456mno789@auth.local
+                creator_email: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                 creator_name: Michael Jackson
                 creator_contact_email: michael@example.com
                 size: 98842
@@ -978,7 +1280,13 @@ paths:
         - Groups
       summary: Delete Group
       operationId: deleteGroup
-      description: Delete a group with its ID.
+      description: >-
+        Delete a group with its ID.
+
+
+        > 🚧 Group must be empty
+        >
+        > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `"Cannot delete group with bases"`.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1086,23 +1394,44 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  group_id:
+                    type: integer
+                  group_name:
+                    type: string
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        contact_email:
+                          type: string
+                        avatar_url:
+                          type: string
+                        is_admin:
+                          type: boolean
+                        role:
+                          type: string
               example:
+                org_id: 1
                 group_id: 1
                 group_name: Sample Group
                 members:
-                  - group_id: 1
-                    name: Jasmin Tee
+                  - name: Jasmin Tee
                     email: 123456786569491ba42905bf1647fd3f@auth.local
                     contact_email: jasmin@example.com
-                    login_id: ""
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
                     is_admin: false
                     role: Member
-                  - group_id: 1
-                    name: Ginger Ale
+                  - name: Ginger Ale
                     email: 87654321d1754bb4afa2c2cb7369d244@auth.local
                     contact_email: ginger@example.com
-                    login_id: ""
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
                     is_admin: true
                     role: Owner
@@ -1179,6 +1508,8 @@ paths:
             application/json:
               schema:
                 type: object
+              example:
+                success: true
     delete:
       tags:
         - Groups
@@ -1221,8 +1552,190 @@ paths:
             application/json:
               schema:
                 type: object
+              example:
+                share_list: []
+  /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/api-tokens/:
+    get:
+      tags:
+        - Bases
+      summary: List API-Tokens
+      operationId: listApiTokens
+      description: List API tokens of a single base.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/base_uuid"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                api_tokens:
+                  - app_name: n8n
+                    api_token: c1a7a416280ab3f9b0b632edbb58a69a771783f0
+                    generated_by: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    creator: user1
+                    avatar_url: https://cloud.seatable.io/media/avatars/default.png
+                    generated_at: '2025-11-28T14:18:39+01:00'
+                    last_access: '2025-11-28T14:18:39+01:00'
+                    permission: rw
+  /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/api-tokens/{app_name}/:
+    delete:
+      tags:
+        - Bases
+      summary: Delete API-Token
+      operationId: deleteApiToken
+      description: Delete a specific API token from a base. The token is identified by its *app_name*.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/base_uuid"
+        - $ref: "#/components/parameters/app_name"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+  /api/v2.1/org/{org_id}/admin/api-tokens/:
+    get:
+      tags:
+        - Bases
+      summary: List API-Tokens of All Bases
+      operationId: listApiTokensOfAllBases
+      description: List API tokens of all bases inside the team/organization.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                api_tokens:
+                  - app_name: n8n
+                    api_token: c1a7a416280ab3f9b0b632edbb58a69a771783f0
+                    generated_by: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    creator: user1
+                    avatar_url: https://cloud.seatable.io/media/avatars/default.png
+                    generated_at: '2025-11-28T14:18:39+01:00'
+                    last_access: '2025-11-28T14:18:39+01:00'
+                    permission: rw
+                    dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    dtable_name: CRM
+                    dtable_icon: icon-user-interview
+                    dtable_color: "#E91E63"
+                  - app_name: API
+                    api_token: 89913c6509062bbd24efe42a509cf9c5bb843018
+                    generated_by: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    creator: user1
+                    avatar_url: https://cloud.seatable.io/media/avatars/default.png
+                    generated_at: '2025-11-28T14:18:54+01:00'
+                    last_access: '2025-11-28T14:18:54+01:00'
+                    permission: rw
+                    dtable_uuid: e97bb668-da36-484c-8ac9-8aa9e0564f4c
+                    dtable_name: Finances
+                    dtable_icon: icon-dollar
+                    dtable_color: "#00C9C7"
+                total_count: 2
 
   # Sharing Links
+  /api/v2.1/org/{org_id}/admin/shares/:
+    get:
+      tags:
+        - Sharing Links
+      summary: List Shares
+      operationId: listShares
+      description: |
+        List all shares inside the given team/organization.
+
+        This includes the following:
+          - Bases shared to individual users
+          - Bases shared to groups
+          - Views shared to individual users
+          - Views shared to groups
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dtable_user_shares:
+                    type: array
+                    items:
+                      type: object
+                  dtable_group_shares:
+                    type: array
+                    items:
+                      type: object
+                  view_user_shares:
+                    type: array
+                    items:
+                      type: object
+                  view_group_shares:
+                    type: array
+                    items:
+                      type: object
+              example:
+                dtable_user_shares:
+                  - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    email: 97f45993fc174280b939976c9b9256eb@auth.local
+                    name: org-1-user-1
+                    avatar_url: https://cloud.seatable.io/media/avatars/default.png
+                    contact_email: org-1-user-1@seatable.io
+                    permission: rw
+                    share_id: 1
+                dtable_group_shares:
+                  - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    group_id: 1
+                    group_name: Marketing
+                    permission: rw
+                    share_id: 1
+                view_user_shares:
+                  - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    id: 1
+                    dtable_name: CRM
+                    from_user: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    to_user: 97f45993fc174280b939976c9b9256eb@auth.local
+                    permission: r
+                    table_id: '0000'
+                    view_id: '0000'
+                    shared_name: User share
+                    from_user_name: org-1-admin
+                    to_user_name: org-1-user-1
+                    avatar_url: https://cloud.seatable.io/media/avatars/default.png
+                view_group_shares:
+                  - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    id: 1
+                    dtable_name: CRM
+                    from_user: e38487b4357e40c8b1359223ba87a1af@auth.local
+                    to_group_id: 1
+                    permission: r
+                    table_id: '0000'
+                    view_id: '0000'
+                    shared_name: Group share
+                    from_user_name: org-1-admin
+                    to_group_name: Marketing
   /api/v2.1/org/{org_id}/admin/external-links/:
     get:
       tags:
@@ -1384,7 +1897,7 @@ paths:
                   - dtable_name: All types
                     username: 876543216569491ba42905bf1647fd3f@auth.local
                     token: >-
-                      https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e
+                      https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e/
                     ctime: "2021-12-15T13:11:54.083636"
                     password: null
                     expire_date: null
@@ -1395,7 +1908,7 @@ paths:
                   - dtable_name: All types
                     username: 876543216569491ba42905bf1647fd3f@auth.local
                     token: >-
-                      https://cloud.seatable.io/dtable/links/b7ea0a4269234565998e
+                      https://cloud.seatable.io/dtable/links/b7ea0a4269234565998e/
                     ctime: "2021-12-15T13:11:55.058965"
                     password: null
                     expire_date: null
@@ -1435,11 +1948,30 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  username:
+                    type: string
+                  permission:
+                    type: string
+                  token:
+                    type: string
+                  link:
+                    type: string
+                  dtable:
+                    type: string
+                  dtable_id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  expire_date:
+                    type: string
+                  ctime:
+                    type: string
               example:
                 username: 876543216569491ba42905bf1647fd3f@auth.local
                 permission: rw
                 token: 9167cdbd67574226a72e
-                link: https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e
+                link: https://cloud.seatable.io/dtable/links/9167cdbd67574226a72e/
                 dtable: All types
                 dtable_id: 2
                 workspace_id: 2
@@ -1469,23 +2001,6 @@ paths:
               example:
                 success: true
 
-  # Base Export (asynchron, deshalb bieten wir das nicht mehr an.)
-  #/api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/export-dtable/:
-  #  get:
-  #    tags: [Export]
-  #    summary: Export base
-  #    description: |
-  #      Use this request to export a base as Team Admin.
-  #    security:
-  #      - AccountTokenAuth: []
-  #    parameters:
-  #      - $ref: "#/components/parameters/org_id"
-  #      - $ref: "#/components/parameters/base_uuid"
-  #      - $ref: "#/components/parameters/ignore_asset"
-  #    responses:
-  #      "200":
-  #        description: OK
-
   # Info & Settings
   /api/v2.1/org/admin/info/:
     get:
@@ -1505,6 +2020,47 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  storage_quota:
+                    type: integer
+                  storage_usage:
+                    type: integer
+                  member_quota:
+                    type: integer
+                  member_usage:
+                    type: integer
+                  active_members:
+                    type: integer
+                  row_usage:
+                    type: integer
+                  row_total:
+                    type: integer
+                  role:
+                    type: string
+                  big_data_row_limit:
+                    type: integer
+                  big_data_storage_quota:
+                    type: integer
+                  big_data_total_rows:
+                    type: integer
+                  big_data_total_storage:
+                    type: integer
+                  api_calls_count:
+                    type: integer
+                  api_calls_limit:
+                    type: integer
+                  automation_count:
+                    type: integer
+                  automation_limit:
+                    type: integer
+                  scripts_running_total:
+                    type: integer
+                  scripts_running_count:
+                    type: integer
               example:
                 org_id: 1
                 org_name: SeaTable GmbH
@@ -1582,6 +2138,13 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  enable_force_2fa:
+                    type: boolean
+                  enable_new_user_email:
+                    type: boolean
+                  enable_external_user_access_invite_link:
+                    type: boolean
               example:
                 enable_force_2fa: false
                 enable_new_user_email: true
@@ -1617,10 +2180,39 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  enable_force_2fa:
+                    type: boolean
+                  enable_new_user_email:
+                    type: boolean
+                  enable_external_user_access_invite_link:
+                    type: boolean
               example:
                 enable_force_2fa: true
                 enable_new_user_email: true
                 enable_external_user_access_invite_link: false
+  /api/v2.1/org/admin/:
+    delete:
+        tags:
+          - Info & Settings
+        summary: Delete Team
+        operationId: deleteTeam
+        description: >-
+          Delete a team (organization) with its ID. This will eliminate the team!
+
+          However, this won't delete the team users - but all its members will
+          become team-less users in the system.
+        security:
+          - AccountTokenAuth: []
+        responses:
+          "200":
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                example:
+                  success: true
 
   /api/v2.1/org/{org_id}/admin/admin-logs/:
     get:
@@ -1635,6 +2227,9 @@ paths:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/operation_group"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
       responses:
         "200":
           description: OK
@@ -1709,12 +2304,12 @@ paths:
                 group_member_log_list:
                   - user_email: 70e6e6be77dc4afeb1d6786f1e3d14e2@auth.local
                     user_name: org_user
-                    user_contact_email: org_user@qq.com
+                    user_contact_email: org_user@example.com
                     group_id: 2
                     group_name: org-t1
                     operator_email: ecd40dcfcdd041a98d51bdde2a05612e@auth.local
                     operator_name: org_admin
-                    operator_contact_email: org_admin@qq.com
+                    operator_contact_email: org_admin@example.com
                     date: 2025-05-27T06:57:03+00:00
                     operation: group_member_add
                 count: 1
@@ -1731,6 +2326,9 @@ paths:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/login_status"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
       responses:
         "200":
           description: OK
@@ -1842,12 +2440,12 @@ paths:
                       "device": "",
                       "user": "af57b7dda06b4928b255339d92294853@auth.local",
                       "name": "org_admin1",
-                      "contact_email": "org_admin1@qq.com",
+                      "contact_email": "org_admin1@example.com",
                       "ip": "172.18.0.1",
                       "org_id": 1,
                       "dtable_uuid": "8e7ad4a8-73dc-4be4-abae-057fd5203a0e",
                       "file_path": "custom/aaa (1) (1).md",
-                      "dtable_name": "1\u5bfc\u5165\u534f\u4f5c\u4eba",
+                      "dtable_name": "Example Base",
                       "file_or_dir_name": "aaa (1) (1).md"
                     },
                     {
@@ -1856,17 +2454,374 @@ paths:
                       "device": "",
                       "user": "af57b7dda06b4928b255339d92294853@auth.local",
                       "name": "org_admin1",
-                      "contact_email": "org_admin1@qq.com",
+                      "contact_email": "org_admin1@example.com",
                       "ip": "172.18.0.1",
                       "org_id": 1,
                       "dtable_uuid": "8e7ad4a8-73dc-4be4-abae-057fd5203a0e",
                       "file_path": "/custom/aaa (1) (1).md",
-                      "dtable_name": "1\u5bfc\u5165\u534f\u4f5c\u4eba",
+                      "dtable_name": "Example Base",
                       "file_or_dir_name": "aaa (1) (1).md"
                     }
                   ],
                   "count": 2
                 }
+  /api/v2.1/org/{org_id}/admin/automation-logs/:
+    get:
+      tags:
+        - Activities & Logs
+      summary: List Automation Logs
+      operationId: listAutomationLogs
+      description: Returns a list of automation logs inside a specific team.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/dtable_uuid"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                logs:
+                  - id: 43543
+                    rule_id: 454
+                    rule_name: Send Email
+                    trigger_time: "2025-11-28T14:05:52+01:00"
+                    run_condition: per_update
+                    success: true
+                    org_id: -1
+                    dtable_uuid: 8fc3fbc2-d8d2-4a23-965d-33cbf511d780
+                    owner: 314bd2ed8d9741b08852916907dc7dd5@auth.local
+                    warnings: null
+                  - id: 43544
+                    rule_id: 454
+                    rule_name: Send Email
+                    trigger_time: "2025-11-28T14:05:55+01:00"
+                    run_condition: per_update
+                    success: true
+                    org_id: -1
+                    dtable_uuid: 8fc3fbc2-d8d2-4a23-965d-33cbf511d780
+                    owner: 314bd2ed8d9741b08852916907dc7dd5@auth.local
+                    warnings: null
+                total_count: 2
+  /api/v2.1/org/{org_id}/admin/python-runs/:
+    get:
+      tags:
+        - Activities & Logs
+      summary: List Python Runs
+      operationId: listPythonRuns
+      description: Returns a list of python runs inside a specific team.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/dtable_uuid"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                runs:
+                  - dtable_uuid: 306acc83-5305-45b4-b34b-528f6f51d7b8
+                    finished_at: "2026-01-06T11:57:11+01:00"
+                    id: 3
+                    operate_from: manualy
+                    owner: 2a609b47d6254449a7f042a42ef02d09@auth.local
+                    return_code: 0
+                    script_name: DDx0.py
+                    started_at: "2026-01-06T11:57:10+01:00"
+                    success: true
+                    script_display_name: "Hello World"
+                  - dtable_uuid: 149cd597-dcbc-4e2a-8344-91651a1b4853
+                    finished_at: "2026-01-06T12:11:18+01:00"
+                    id: 4
+                    operate_from: manualy
+                    owner: 2a609b47d6254449a7f042a42ef02d09@auth.local
+                    return_code: 0
+                    script_name: O60m.py
+                    started_at: "2026-01-06T12:11:18+01:00"
+                    success: true
+                    script_display_name: "Base 2 Script"
+                total_count: 2
+
+  # Statistics
+  /api/v2.1/org/{org_id}/admin/statistics/admin-logs/by-day/:
+    get:
+      tags:
+        - Statistics
+      summary: Admin Logs (by Day)
+      operationId: getAdminLogStatisticsByDay
+      description: Returns statistics about admin logs grouped by day.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                results:
+                  - date: '2025-10-29'
+                    number_of_operations: 2
+                    base_operations: 1
+                    group_operations: 0
+                    user_operations: 1
+                  - date: '2025-10-30'
+                    number_of_operations: 5
+                    base_operations: 3
+                    group_operations: 1
+                    user_operations: 1
+                  - date: '2025-10-31'
+                    number_of_operations: 2
+                    base_operations: 0
+                    group_operations: 1
+                    user_operations: 1
+                total_count: 3
+  /api/v2.1/org/{org_id}/admin/statistics/automation-logs/by-day/:
+    get:
+      tags:
+        - Statistics
+      summary: Automation Logs (by Day)
+      operationId: getAutomationLogStatisticsByDay
+      description: Returns statistics about automation logs grouped by day.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/dtable_uuid"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                results:
+                  - trigger_date: '2025-11-27'
+                    number_of_executions: 10
+                    successful_executions: 9
+                    unsuccessful_executions: 1
+                  - trigger_date: '2025-11-28'
+                    number_of_executions: 2
+                    successful_executions: 2
+                    unsuccessful_executions: 0
+                total_count: 2
+  /api/v2.1/org/{org_id}/admin/statistics/automation-logs/by-base/:
+    get:
+      tags:
+        - Statistics
+      summary: Automation Logs (by Base)
+      operationId: getAutomationLogStatisticsByBase
+      description: Returns statistics about automation logs grouped by base.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                results:
+                  - dtable_uuid: 3c899a81-6a0c-4111-bb19-288ebf8442fd
+                    number_of_executions: 2
+                    successful_executions: 2
+                    unsuccessful_executions: 0
+                  - dtable_uuid: e97bb668-da36-484c-8ac9-8aa9e0564f4c
+                    number_of_executions: 5
+                    successful_executions: 4
+                    unsuccessful_executions: 1
+                total_count: 2
+  /api/v2.1/org/{org_id}/admin/statistics/login-logs/by-day/:
+    get:
+      tags:
+        - Statistics
+      summary: Login Logs (by Day)
+      operationId: getLoginLogStatisticsByDay
+      description: Returns statistics about login logs grouped by day.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                results:
+                  - date: '2025-11-27'
+                    number_of_attempts: 15
+                    successful_attempts: 14
+                    unsuccessful_attempts: 1
+                  - date: '2025-11-28'
+                    number_of_attempts: 2
+                    successful_attempts: 1
+                    unsuccessful_attempts: 1
+                total_count: 2
+  /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-day/:
+    get:
+      tags:
+        - Statistics
+      summary: Python Runs (by Day)
+      operationId: getPythonRunStatisticsByDay
+      description: Returns statistics about python runs grouped by day.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/dtable_uuid"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                results:
+                  - date: '2025-11-27'
+                    number_of_runs: 8
+                    total_run_time: 5
+                    triggered_by_automation_rule: 0
+                    triggered_manually: 8
+                    successful_runs: 3
+                    unsuccessful_runs: 5
+                  - date: '2025-11-28'
+                    number_of_runs: 4
+                    total_run_time: 22
+                    triggered_by_automation_rule: 0
+                    triggered_manually: 4
+                    successful_runs: 4
+                    unsuccessful_runs: 0
+                total_count: 2
+  /api/v2.1/org/{org_id}/admin/statistics/python-runs/by-base/:
+    get:
+      tags:
+        - Statistics
+      summary: Python Runs (by Base)
+      operationId: getPythonRunStatisticsByBase
+      description: Returns statistics about python runs grouped by base.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/org_id"
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/end"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                results:
+                  - base_uuid: 4202f7ad-3168-4bf4-b1e4-01aee6782f94
+                    number_of_runs: 8
+                    total_run_time: 5
+                    triggered_by_automation_rule: 0
+                    triggered_manually: 8
+                    successful_runs: 3
+                    unsuccessful_runs: 5
+                  - base_uuid: ca490121-cea3-4a04-8e25-ac72b03a61e0
+                    number_of_runs: 4
+                    total_run_time: 22
+                    triggered_by_automation_rule: 0
+                    triggered_manually: 4
+                    successful_runs: 4
+                    unsuccessful_runs: 0
+                total_count: 2
+  /api/v2.1/org/{org_id}/admin/statistics/ai/:
+    get:
+      tags:
+        - Statistics
+      summary: Get AI Statistics by User/Base
+      operationId: getUserOrBaseAIStatistics
+      description: Get AI usage statistics monthly by user/base.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/group_by"
+        - $ref: "#/components/parameters/date"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/org_id"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                group_by_owner:
+                  summary: Query group by owner
+                  value:
+                    results:
+                      - owner: 1@seafile_group
+                        total_cost: 0.15
+                        group_name: group-11
+                      - owner: d15ebe61bd684b868344498c73bdeac4@auth.local
+                        total_cost: 0.2
+                        nickname: test
+                    count: 2
+                group_by_base:
+                  summary: Query group by base
+                  value:
+                    results:
+                      - dtable_uuid: f0e6f53caee749b1a5eb65cb2991d6bb
+                        owner: 1@seafile_group
+                        total_cost: 0.04
+                        group_name: group-11
+                    count: 1
+
   /api/v2.1/org/{org_id}/admin/org-logo/:
     post:
       tags:

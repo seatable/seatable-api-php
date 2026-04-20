@@ -19,12 +19,12 @@ Class | Method | HTTP request | Description
 *CommonDatasetApi* | [**deleteInvalidSyncs**](docs/SysAdmin/Api/CommonDatasetApi.md#deleteinvalidsyncs) | **DELETE** /api/v2.1/admin/common-dataset/invalid-syncs/ | Delete Invalid Syncs
 *CommonDatasetApi* | [**listCommonDataset**](docs/SysAdmin/Api/CommonDatasetApi.md#listcommondataset) | **GET** /api/v2.1/admin/common-datasets/ | List Common Dataset
 *CommonDatasetApi* | [**listCommonDatasetSyncs**](docs/SysAdmin/Api/CommonDatasetApi.md#listcommondatasetsyncs) | **GET** /api/v2.1/admin/common-dataset/periodical-syncs/ | List Common Dataset Syncs
-*CommonDatasetApi* | [**listInvalidSyncs**](docs/SysAdmin/Api/CommonDatasetApi.md#listinvalidsyncs) | **GET** /api/v2.1/admin/common-dataset/invalid-syncs/ | List invalid Syncs
+*CommonDatasetApi* | [**listInvalidSyncs**](docs/SysAdmin/Api/CommonDatasetApi.md#listinvalidsyncs) | **GET** /api/v2.1/admin/common-dataset/invalid-syncs/ | List Invalid Syncs
 *DepartmentsApi* | [**addDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#adddepartment) | **POST** /api/v2.1/admin/address-book/groups/ | Add Department
 *DepartmentsApi* | [**deleteDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#deletedepartment) | **DELETE** /api/v2.1/admin/address-book/groups/{department_id}/ | Delete Department
 *DepartmentsApi* | [**getDepartments**](docs/SysAdmin/Api/DepartmentsApi.md#getdepartments) | **GET** /api/v2.1/admin/address-book/groups/{department_id}/ | Get Department
 *DepartmentsApi* | [**listDepartments**](docs/SysAdmin/Api/DepartmentsApi.md#listdepartments) | **GET** /api/v2.1/admin/address-book/groups/{parent_department_id}/ | List Departments
-*ExportApi* | [**exportBase**](docs/SysAdmin/Api/ExportApi.md#exportbase) | **GET** /api/v2.1/admin/dtables/{base_uuid}/synchronous-export/export-dtable/ | Export base
+*ExportApi* | [**exportBase**](docs/SysAdmin/Api/ExportApi.md#exportbase) | **GET** /api/v2.1/admin/dtables/{base_uuid}/synchronous-export/export-dtable/ | Export Base
 *FormsApi* | [**deleteDataCollectionForms**](docs/SysAdmin/Api/FormsApi.md#deletedatacollectionforms) | **DELETE** /api/v2.1/admin/collection-tables/{collection_table_token}/ | Delete Data Collection Forms
 *FormsApi* | [**deleteForm**](docs/SysAdmin/Api/FormsApi.md#deleteform) | **DELETE** /api/v2.1/admin/forms/{form_token}/ | Delete Form
 *FormsApi* | [**listDataCollectionForms**](docs/SysAdmin/Api/FormsApi.md#listdatacollectionforms) | **GET** /api/v2.1/admin/collection-tables/ | List Data Collection Forms
@@ -62,10 +62,11 @@ Class | Method | HTTP request | Description
 *StatisticsApi* | [**getActiveUsersPerDay**](docs/SysAdmin/Api/StatisticsApi.md#getactiveusersperday) | **GET** /api/v2.1/admin/statistics/active-users/ | Get Active Users (per Day)
 *StatisticsApi* | [**getAutomationRules**](docs/SysAdmin/Api/StatisticsApi.md#getautomationrules) | **GET** /api/v2.1/admin/statistics/auto-rules/ | Get Automation Rules
 *StatisticsApi* | [**getExternalApps**](docs/SysAdmin/Api/StatisticsApi.md#getexternalapps) | **GET** /api/v2.1/admin/statistics/external-apps/ | Get External Apps
+*StatisticsApi* | [**getOwnerOrTeamAIStatistics**](docs/SysAdmin/Api/StatisticsApi.md#getownerorteamaistatistics) | **GET** /api/v2.1/admin/statistics/ai/ | Get AI Statistics by Owner/Team
 *StatisticsApi* | [**getScriptRunningCountByUser**](docs/SysAdmin/Api/StatisticsApi.md#getscriptrunningcountbyuser) | **GET** /api/v2.1/admin/statistics/scripts-running/ | Get Script Running Count by User
 *StatisticsApi* | [**listActiveUsersByDay**](docs/SysAdmin/Api/StatisticsApi.md#listactiveusersbyday) | **GET** /api/v2.1/admin/daily-active-users/ | List Active Users (one Day)
 *StatisticsApi* | [**listScriptTasks**](docs/SysAdmin/Api/StatisticsApi.md#listscripttasks) | **GET** /api/v2.1/admin/scripts-tasks/ | List Scripts Tasks
-*SystemInfoCustomizingApi* | [**getSystemInformation**](docs/SysAdmin/Api/SystemInfoCustomizingApi.md#getsysteminformation) | **GET** /api/v2.1/admin/sysinfo/ | Get system information
+*SystemInfoCustomizingApi* | [**getSystemInformation**](docs/SysAdmin/Api/SystemInfoCustomizingApi.md#getsysteminformation) | **GET** /api/v2.1/admin/sysinfo/ | Get System Information
 *SystemInfoCustomizingApi* | [**updateFavicon**](docs/SysAdmin/Api/SystemInfoCustomizingApi.md#updatefavicon) | **POST** /api/v2.1/admin/favicon/ | Update Favicon
 *SystemInfoCustomizingApi* | [**updateGeneralSettings**](docs/SysAdmin/Api/SystemInfoCustomizingApi.md#updategeneralsettings) | **PUT** /api/v2.1/admin/web-settings/ | Update General Settings
 *SystemInfoCustomizingApi* | [**updateLoginBackgroundImage**](docs/SysAdmin/Api/SystemInfoCustomizingApi.md#updateloginbackgroundimage) | **POST** /api/v2.1/admin/login-background-image/ | Update Login Background Image
@@ -91,7 +92,7 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**disableTwoFactor**](docs/SysAdmin/Api/UsersApi.md#disabletwofactor) | **DELETE** /api2/two-factor-auth/{user_id}/ | Disable 2FA
 *UsersApi* | [**enforceTwoFactor**](docs/SysAdmin/Api/UsersApi.md#enforcetwofactor) | **PUT** /api/v2.1/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA
 *UsersApi* | [**getUser**](docs/SysAdmin/Api/UsersApi.md#getuser) | **GET** /api/v2.1/admin/users/{user_id}/ | Get User
-*UsersApi* | [**importUsers**](docs/SysAdmin/Api/UsersApi.md#importusers) | **POST** /api/v2.1/admin/import-users/ | Import users
+*UsersApi* | [**importUsers**](docs/SysAdmin/Api/UsersApi.md#importusers) | **POST** /api/v2.1/admin/import-users/ | Import Users
 *UsersApi* | [**listAdminUsers**](docs/SysAdmin/Api/UsersApi.md#listadminusers) | **GET** /api/v2.1/admin/admin-users/ | List Admin Users
 *UsersApi* | [**listBasesSharedToUser**](docs/SysAdmin/Api/UsersApi.md#listbasessharedtouser) | **GET** /api/v2.1/admin/users/{user_id}/shared-dtables/ | List Bases Shared to User
 *UsersApi* | [**listUserStorageObjects**](docs/SysAdmin/Api/UsersApi.md#listuserstorageobjects) | **GET** /api/v2.1/admin/users/{user_id}/storage/ | List User&#39;s Storage Objects
@@ -107,5 +108,5 @@ Class | Method | HTTP request | Description
 
 This PHP package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project:
 
-- API version: `6.0`
+- API version: `6.1`
 - Build package: `org.openapitools.codegen.languages.PhpClientCodegen`

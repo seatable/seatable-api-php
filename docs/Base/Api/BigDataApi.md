@@ -169,12 +169,12 @@ BaseTokenAuth
 ## `moveRowsToNormalBackend()`
 
 ```php
-moveRowsToNormalBackend($base_uuid, $move_rows_to_normal_backend_request)
+moveRowsToNormalBackend($base_uuid, $move_rows_to_normal_backend_request): object
 ```
 
 Move Rows to Normal Backend
 
-Moves the seleted rows into the big data backend.
+Moves the selected rows from the big data backend to the normal backend.
 
 ### Example
 
@@ -192,7 +192,8 @@ $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identi
 $move_rows_to_normal_backend_request = new \SeaTable\Client\Base\MoveRowsToNormalBackendRequest(); // \SeaTable\Client\Base\MoveRowsToNormalBackendRequest
 
 try {
-    $apiInstance->moveRowsToNormalBackend($base_uuid, $move_rows_to_normal_backend_request);
+    $result = $apiInstance->moveRowsToNormalBackend($base_uuid, $move_rows_to_normal_backend_request);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BigDataApi->moveRowsToNormalBackend: ', $e->getMessage(), PHP_EOL;
 }
@@ -207,7 +208,7 @@ try {
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 

@@ -88,7 +88,7 @@ AccountTokenAuth
 ## `createGroupViewShare()`
 
 ```php
-createGroupViewShare($workspace_id, $base_name, $table_id, $view_id, $permission, $to_group_id): object
+createGroupViewShare($workspace_id, $base_name, $table_id, $view_id, $permission, $to_group_id): \SeaTable\Client\User\CreateGroupViewShare200Response
 ```
 
 Create Group View Share
@@ -135,7 +135,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateGroupViewShare200Response**](../Model/CreateGroupViewShare200Response.md)
 
 ### Authorization
 
@@ -202,7 +202,7 @@ AccountTokenAuth
 ## `createUserViewShare()`
 
 ```php
-createUserViewShare($workspace_id, $base_name, $permission, $to_user, $table_id, $view_id): object
+createUserViewShare($workspace_id, $base_name, $permission, $to_user, $table_id, $view_id): \SeaTable\Client\User\CreateUserViewShare200Response
 ```
 
 Create User View Share
@@ -249,7 +249,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateUserViewShare200Response**](../Model/CreateUserViewShare200Response.md)
 
 ### Authorization
 
@@ -337,7 +337,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 
 try {
     $result = $apiInstance->deleteGroupShare($workspace_id, $base_name, $group_id);
@@ -353,7 +353,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 
 ### Return type
 
@@ -390,7 +390,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$group_view_share_id = 6; // int
+$group_view_share_id = 6; // int | The ID of the group view share.
 
 try {
     $result = $apiInstance->deleteGroupViewShare($workspace_id, $base_name, $group_view_share_id);
@@ -406,7 +406,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **group_view_share_id** | **int**|  | |
+| **group_view_share_id** | **int**| The ID of the group view share. | |
 
 ### Return type
 
@@ -477,7 +477,7 @@ AccountTokenAuth
 ## `deleteUserShare()`
 
 ```php
-deleteUserShare($workspace_id, $base_name): object
+deleteUserShare($workspace_id, $base_name, $email): object
 ```
 
 Delete User Share
@@ -498,9 +498,10 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
+$email = 'email_example'; // string | The user ID ending with @auth.local
 
 try {
-    $result = $apiInstance->deleteUserShare($workspace_id, $base_name);
+    $result = $apiInstance->deleteUserShare($workspace_id, $base_name, $email);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SharingApi->deleteUserShare: ', $e->getMessage(), PHP_EOL;
@@ -513,6 +514,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
+| **email** | **string**| The user ID ending with @auth.local | |
 
 ### Return type
 
@@ -549,7 +551,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$user_view_share_id = 15; // int
+$user_view_share_id = 15; // int | The ID of the user view share.
 
 try {
     $result = $apiInstance->deleteUserViewShare($workspace_id, $base_name, $user_view_share_id);
@@ -565,7 +567,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **user_view_share_id** | **int**|  | |
+| **user_view_share_id** | **int**| The ID of the user view share. | |
 
 ### Return type
 
@@ -600,7 +602,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_view_share_id = 15; // int
+$user_view_share_id = 15; // int | The ID of the user view share.
 
 try {
     $result = $apiInstance->leaveSharedView($user_view_share_id);
@@ -614,7 +616,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **user_view_share_id** | **int**|  | |
+| **user_view_share_id** | **int**| The ID of the user view share. | |
 
 ### Return type
 
@@ -972,7 +974,7 @@ listUserShares($workspace_id, $base_name): object
 
 List User Shares
 
-List all the users sharing a base (except the current user). This request only lists off all the individual users sharing the base, which does not includ groups and group members sharing this base.  To see which groups are sharing this base, use the request [List Groups Base is Shared To](/reference/listgroupshares).
+List all the users sharing a base (except the current user). This request only lists off all the individual users sharing the base, which does not include groups and group members sharing this base.  To see which groups are sharing this base, use the request [List Groups Base is Shared To](/reference/listgroupshares).
 
 ### Example
 
@@ -1090,7 +1092,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$group_id = 1; // int
+$group_id = 1; // int | The ID of the group.
 $permission = 'permission_example'; // string | `r` for read only or `rw` for read and write
 
 try {
@@ -1107,7 +1109,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **group_id** | **int**|  | |
+| **group_id** | **int**| The ID of the group. | |
 | **permission** | **string**| &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write | [optional] |
 
 ### Return type
@@ -1124,7 +1126,7 @@ AccountTokenAuth
 ## `updateGroupViewShare()`
 
 ```php
-updateGroupViewShare($workspace_id, $base_name, $group_view_share_id, $permission): object
+updateGroupViewShare($workspace_id, $base_name, $group_view_share_id, $permission): \SeaTable\Client\User\CreateGroupViewShare200Response
 ```
 
 Update Group View Share
@@ -1145,7 +1147,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$group_view_share_id = 6; // int
+$group_view_share_id = 6; // int | The ID of the group view share.
 $permission = 'permission_example'; // string | `r` for read only or `rw` for read and write
 
 try {
@@ -1162,12 +1164,12 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **group_view_share_id** | **int**|  | |
+| **group_view_share_id** | **int**| The ID of the group view share. | |
 | **permission** | **string**| &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateGroupViewShare200Response**](../Model/CreateGroupViewShare200Response.md)
 
 ### Authorization
 
@@ -1234,7 +1236,7 @@ AccountTokenAuth
 ## `updateUserViewShare()`
 
 ```php
-updateUserViewShare($workspace_id, $base_name, $user_view_share_id, $permission): object
+updateUserViewShare($workspace_id, $base_name, $user_view_share_id, $permission): \SeaTable\Client\User\CreateUserViewShare200Response
 ```
 
 Update User View Share
@@ -1255,7 +1257,7 @@ $apiInstance = new SeaTable\Client\User\SharingApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$user_view_share_id = 15; // int
+$user_view_share_id = 15; // int | The ID of the user view share.
 $permission = 'permission_example'; // string | `r` for read only or `rw` for read and write
 
 try {
@@ -1272,12 +1274,12 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **user_view_share_id** | **int**|  | |
+| **user_view_share_id** | **int**| The ID of the user view share. | |
 | **permission** | **string**| &#x60;r&#x60; for read only or &#x60;rw&#x60; for read and write | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateUserViewShare200Response**](../Model/CreateUserViewShare200Response.md)
 
 ### Authorization
 

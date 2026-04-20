@@ -3,7 +3,7 @@ info:
   title: "Account Operations: System admin"
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
@@ -14,11 +14,6 @@ x-readme:
   explorer-enabled: true
   metrics-enabled: false
   proxy-enabled: false
-
-# why uses /api/v2.1/admin/organizations-basic-info/ query_params? Why not using a body?
-# why sometimes base_uuid, sometimes base_id?
-# the auth.local has many different descriptions: owner, user_id, username or email. Keeping to the same description would be great.
-# is there a possibility to get "internal-links"?
 
 tags:
   - name: Users
@@ -111,9 +106,10 @@ components:
     return_ancestors:
       name: return_ancestors
       in: query
+      description: Whether to include ancestor groups in the response.
       schema:
         type: boolean
-      example: "true"
+      example: true
     starting_time:
       name: start
       in: query
@@ -153,7 +149,7 @@ components:
         users who are not in any teams (`true`) or by teams (`false`).  The
         usage of `true` here is seldom meaningful for cloud.seatable.io as
         all the users in the SeaTable Cloud are team users.
-      example: "false"
+      example: false
     month:
       name: month
       in: query
@@ -174,7 +170,7 @@ components:
       description: >-
         The ID of the user you are querying. Optional. If you don't define a
         user, all the users are queried.
-      example: 123abc456def789ghi123jkl456mno789@auth.local
+      example: 12abc456def789abc123def456abc789@auth.local
     role:
       name: role
       in: query
@@ -193,17 +189,20 @@ components:
     parent_dir:
       name: parent_dir
       in: query
+      description: The parent directory path.
       schema:
         type: string
       example: /asset/
     query:
       name: query
       in: query
+      description: Search query string.
       schema:
         type: string
     org_id_query:
       name: org_id
       in: query
+      description: Filter by team ID.
       schema:
         type: integer
         minimum: 1
@@ -234,8 +233,25 @@ components:
       in: query
       schema:
         type: boolean
-      example: "false"
+      example: false
       description: Set this to `true` to export the base without assets. Default is `false`.
+    group_by:
+      name: group_by
+      in: query
+      schema:
+        type: string
+        enum: [owner, org_id]
+      required: true
+      description: Query by owner or organization
+      example: "owner"
+    date_YYYY_MM_DD:
+      name: date
+      in: query
+      schema:
+        type: string
+      required: true
+      description: A date string in YYYY-MM-DD format
+      example: "2025-01-01"
 
     #=======================Path parameters=======================#
     base_uuid:
@@ -255,7 +271,7 @@ components:
         type: string
         pattern: "^[a-f0-9]{32}(@auth.local)$"
       required: true
-      example: 23abc456def789ghi123jkl456mno789@auth.local
+      example: 2abc456def789abc123def456abc789a@auth.local
     org_id:
       name: org_id
       in: path
@@ -274,10 +290,11 @@ components:
       schema:
         type: string
       required: true
-      example: base_id
+      example: 123
     automation_rule_id:
       name: automation_rule_id
       in: path
+      description: The ID of the automation rule.
       schema:
         type: integer
         minimum: 1
@@ -286,6 +303,7 @@ components:
     notification_rule_id:
       name: notification_rule_id
       in: path
+      description: The ID of the notification rule.
       schema:
         type: integer
         minimum: 1
@@ -294,6 +312,7 @@ components:
     collection_table_token:
       name: collection_table_token
       in: path
+      description: The token of the collection table.
       schema:
         type: string
         pattern: ^[0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$
@@ -321,6 +340,7 @@ components:
     department_id:
       name: department_id
       in: path
+      description: The ID of the department.
       schema:
         type: integer
         minimum: 1
@@ -329,6 +349,7 @@ components:
     external_link_token:
       name: external_link_token
       in: path
+      description: The token of the external link.
       schema:
         type: string
       required: true
@@ -336,14 +357,15 @@ components:
     view_external_link_token:
       name: view_external_link_token
       in: path
+      description: The token of the view external link.
       schema:
         type: string
-        pattern: ^[a-f0-9]{20}$
       required: true
       example: "1f0447eab4df4343ab6d"
     form_token:
       name: form_token
       in: path
+      description: The token of the form.
       schema:
         type: string
         pattern: ^[0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$
@@ -352,6 +374,7 @@ components:
     plugin_id:
       name: plugin_id
       in: path
+      description: The ID of the plugin.
       schema:
         type: integer
         minimum: 1
@@ -360,6 +383,7 @@ components:
     sys_notification_id:
       name: sys_notification_id
       in: path
+      description: The ID of the system notification.
       schema:
         type: integer
       required: true
@@ -367,6 +391,7 @@ components:
     group_id:
       name: group_id
       in: path
+      description: The ID of the group.
       schema:
         type: integer
         minimum: 1
@@ -375,6 +400,7 @@ components:
     abuse_report_id:
       name: abuse_report_id
       in: path
+      description: The ID of the abuse report.
       schema:
         type: integer
         minimum: 1
@@ -383,6 +409,7 @@ components:
     task_id:
       name: task_id
       in: path
+      description: The ID of the task.
       schema:
         type: string
       required: true
@@ -394,7 +421,7 @@ components:
       example: "Hello user!"
     username:
       type: string
-      example: "123abc456def789ghi123jkl456mno789@auth.local"
+      example: "12abc456def789abc123def456abc789@auth.local"
     system_admin_force_2fa:
       type: boolean
       description: Enforce Two Factor for all accounts
@@ -461,13 +488,16 @@ components:
     row_limit:
       type: integer
       description: User's total row limit in number. For example 10000.
-      example: "50000"
+      example: 50000
     quota_total:
       type: string
       description: Update their total quota in MB.
     asset_quota_mb:
       type: string
       description: The asset quota in MB.
+    monthly_automation_limit_per_user:
+      type: integer
+      description: Monthly limit on the number of automation rules per user.
     file:
       type: string
       format: binary
@@ -490,7 +520,7 @@ components:
       description: >-
         If a workspace should be automatically created for the user.
         Optional. `false` by default.
-      example: "true"
+      example: true
     max_user_number:
       type: string
       description: The maximum user number.
@@ -504,13 +534,13 @@ components:
     parent_group:
       type: string
       description: The ID of the parent department. Optional. -1 by default.
-      example: parent_department_id
+      example: -1
     handled:
       type: boolean
       description: >-
         Required. Use `true` or `false` to mark the status of the
         report.
-      example: "true"
+      example: true
     plugin:
       type: string
       description: Path and file name to the plugin file.
@@ -533,7 +563,7 @@ components:
       description: >-
         If a custom CSS should be used. Optional, `0` by default. If
         set to `1`, paste your CSS into the param `CUSTOM_CSS`.
-      example: "0"
+      example: 0
     CUSTOM_CSS:
       type: string
       description: The content of your custom CSS. Optional. Empty by default.
@@ -545,49 +575,49 @@ components:
         registration. Optional, `1` by default. If `0`, then the
         user need to be activated by the administrator or via the
         activation email.
-      example: "1"
+      example: 1
     REGISTRATION_SEND_MAIL:
       type: integer
       description: >-
         If an activation email should be sent after the user has
         registered. Optional, `0` by default.
-      example: "0"
+      example: 0
     LOGIN_REMEMBER_DAYS:
       type: integer
       description: >-
         How many default days a user could be kept signed in.
         Optional, `7` by default.
-      example: "7"
+      example: 7
     LOGIN_ATTEMPT_LIMIT:
       type: integer
       description: >-
         The maximum number of failed login attempts before showing
         CAPTCHA. Optional, `5` by default.
-      example: "5"
+      example: 5
     FREEZE_USER_ON_LOGIN_FAILED:
       type: integer
       description: >-
         If the user's account should be frozen when they exceed the
         login attempts limit. Optional, `0` by default.
-      example: "0"
+      example: 0
     USER_STRONG_PASSWORD_REQUIRED:
       type: integer
       description: >-
         Force the users to use a strong password when signing up or
         changing password. Optional, `0` by default.
-      example: "0"
+      example: 0
     FORCE_PASSWORD_CHANGE:
       type: integer
       description: >-
         Force newly added users to change their password, or when
         the admin resets their password. Optional, `1` by default.
-      example: "1"
+      example: 1
     USER_PASSWORD_MIN_LENGTH:
       type: integer
       description: >-
         The minimum length of user passwords. Optional, `6` by
         default.
-      example: "6"
+      example: 6
     USER_PASSWORD_STRENGTH_LEVEL:
       type: integer
       description: >-
@@ -595,19 +625,19 @@ components:
         `3` means password must have at least 3 of the following: a
         number, an upper letter, a lower letter and a special
         symbol. Optional, `3` by default.
-      example: "3"
+      example: 3
     ENABLE_TWO_FACTOR_AUTH:
       type: integer
       description: >-
         If two factor authentication should be activated for the
         system. Optional, `0` by default.
-      example: "0"
+      example: 0
     ENABLE_SIGNUP:
       type: integer
       description: >-
         If registration on the web interface is allowed. Optional,
         `0` by default.
-      example: "1"
+      example: 1
     logo:
       type: string
       description: The path and filename of the image file of your logo.
@@ -622,7 +652,7 @@ components:
         Leave this param as its default (`false`) to upload your
         favicon, and use this param as `true` to upload a favicon
         with a notification sign.
-      example: "true"
+      example: true
     login_bg_image:
       type: string
       description: The path and filename of the background image.
@@ -653,6 +683,7 @@ paths:
         - Users
       summary: List Users
       operationId: listUsers
+      description: List all users in the system with pagination support.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -690,6 +721,14 @@ paths:
                     storage_usage: 1721496
                     rows_count: 142
                 total_count: 2000
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                detail: You do not have permission to perform this action.
     post:
       tags:
         - Users
@@ -701,6 +740,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - email
+                - password
               properties:
                 email:
                   $ref: "#/components/schemas/email"
@@ -721,6 +763,27 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  login_id:
+                    type: string
+                  id_in_org:
+                    type: string
+                  is_staff:
+                    type: boolean
+                  is_active:
+                    type: boolean
+                  create_time:
+                    type: string
+                  role:
+                    type: string
+                  add_user_tip:
+                    type: string
               example:
                 email: 12345678219d4067816452757a850b61@auth.local
                 name: Example User
@@ -740,6 +803,7 @@ paths:
         - Users
       summary: Get User
       operationId: getUser
+      description: Get the details of a specific user by their user ID.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -751,8 +815,41 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  unit:
+                    type: string
+                  login_id:
+                    type: string
+                  id_in_org:
+                    type: string
+                  is_staff:
+                    type: boolean
+                  is_active:
+                    type: boolean
+                  phone:
+                    type: string
+                  create_time:
+                    type: string
+                  role:
+                    type: string
+                  avatar_url:
+                    type: string
+                  has_default_device:
+                    type: boolean
+                  is_force_2fa:
+                    type: boolean
               example:
-                org_id: 1,
+                org_id: 1
                 org_name: "Team 1"
                 email: "6196ab3dacef4e539ae8da4844b58a1f@auth.local"
                 name: "John Doe"
@@ -808,6 +905,8 @@ paths:
                   $ref: "#/components/schemas/quota_total"
                 asset_quota_mb:
                   $ref: "#/components/schemas/asset_quota_mb"
+                monthly_automation_limit_per_user:
+                  $ref: "#/components/schemas/monthly_automation_limit_per_user"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -819,6 +918,37 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  unit:
+                    type: string
+                  login_id:
+                    type: string
+                  id_in_org:
+                    type: string
+                  is_staff:
+                    type: boolean
+                  is_active:
+                    type: boolean
+                  phone:
+                    type: string
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  create_time:
+                    type: string
+                  role:
+                    type: string
+                  update_status_tip:
+                    type: string
+                  monthly_automation_limit_per_user:
+                    type: integer
               example:
                 email: 876543216569491ba42905bf1647fd3f@auth.local
                 name: Michael Jackson
@@ -834,6 +964,7 @@ paths:
                 create_time: "2020-11-18T12:30:31+00:00"
                 role: default
                 update_status_tip: ""
+                monthly_automation_limit_per_user: 1000
     delete:
       tags:
         - Users
@@ -1060,6 +1191,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - force_2fa
               properties:
                 force_2fa:
                   $ref: "#/components/schemas/system_admin_force_2fa"
@@ -1159,8 +1292,7 @@ paths:
         - Users
       summary: Search User by Org-ID
       operationId: searchUserByOrgId
-      description: >-
-        Hier muss noch eine Beschreibung ergänzt werden
+      description: Search for a user by their organization ID.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1178,21 +1310,21 @@ paths:
                     [
                       {
                         "email": "148768b50bb44c9d9d04f101a2b34a49@auth.local",
-                        "avatar_url": "http://127.0.0.1:8000/media/avatars/default.png",
+                        "avatar_url": "https://cloud.seatable.io/media/avatars/default.png",
                         "name": "org_guest1",
-                        "contact_email": "org_guest1@qq.com",
+                        "contact_email": "org_guest1@example.com",
                       },
                       {
                         "email": "4919f22fa6e14a538b47428b5589ec60@auth.local",
-                        "avatar_url": "http://127.0.0.1:8000/media/avatars/default.png",
+                        "avatar_url": "https://cloud.seatable.io/media/avatars/default.png",
                         "name": "org_guest2",
-                        "contact_email": "org_guest2@qq.com",
+                        "contact_email": "org_guest2@example.com",
                       },
                       {
                         "email": "53f1af67b0dd492491264dd8143040b3@auth.local",
-                        "avatar_url": "http://127.0.0.1:8000/media/avatars/default.png",
+                        "avatar_url": "https://cloud.seatable.io/media/avatars/default.png",
                         "name": "org_guest",
-                        "contact_email": "org_guest@qq.com",
+                        "contact_email": "org_guest@example.com",
                       },
                     ],
                 }
@@ -1200,7 +1332,7 @@ paths:
     post:
       tags:
         - Users
-      summary: Import users
+      summary: Import Users
       operationId: importUsers
       description: >-
         As system administrator, you can batch import users with an Excel file,
@@ -1224,6 +1356,8 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - file
               properties:
                 file:
                   $ref: "#/components/schemas/file"
@@ -1348,7 +1482,7 @@ paths:
                     obj_name: 650d8a0d-7e27-46a8-8b18-6cc6f3db2057
                     file_size: ""
                     last_update: "2021-03-11T13:36:37+00:00"
-                email: 123abc456def789ghi123jkl456mno789@auth.local
+                email: 12abc456def789abc123def456abc789@auth.local
   /api/v2.1/admin/users/{user_id}/dtables/:
     get:
       tags:
@@ -1416,6 +1550,7 @@ paths:
         - Bases
       summary: List All Bases
       operationId: listAllBases
+      description: List all bases in the system with pagination support.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1673,6 +1808,7 @@ paths:
       tags: [Groups]
       summary: Create Group
       operationId: createGroup
+      description: Create a new group with a specified name and owner.
       security:
         - AccountTokenAuth: []
       requestBody:
@@ -1680,6 +1816,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - group_name
+                - group_owner
               properties:
                 group_name:
                   $ref: "#/components/schemas/system_admin_group_name"
@@ -1693,22 +1832,23 @@ paths:
               schema:
                 type: object
               example:
-                - success: "?"
+                - success: true
   /api/v2.1/admin/groups/{group_id}/:
     put:
       tags: [Groups]
       summary: Transfer Group
       operationId: transferGroup
+      description: Transfer the ownership of a group to a new owner.
       requestBody:
         content:
           application/json:
             schema:
               type: object
+              required:
+                - new_owner
               properties:
                 new_owner:
                   $ref: "#/components/schemas/username"
-                #quota:
-                #  $ref: "#/components/schemas/group_quota"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1720,11 +1860,28 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  parent_group_id:
+                    type: integer
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  created_at:
+                    type: string
+                  avatar_url:
+                    type: string
+                  admins:
+                    type: array
+                    items:
+                      type: string
               example:
                 id: 1
                 parent_group_id: 0
                 name: Group New
-                owner: 123abc456def789ghi123jkl456mno789@auth.local
+                owner: 12abc456def789abc123def456abc789@auth.local
                 created_at: "2020-11-19T08:14:52+00:00"
                 avatar_url: "http://cloud.seatable.io/media/avatars/groups/default.png"
                 admins:
@@ -1733,7 +1890,13 @@ paths:
       tags: [Groups]
       summary: Delete Group
       operationId: deleteGroup
-      description: Delete a group with its ID.
+      description: >-
+        Delete a group with its ID.
+
+
+        > 🚧 Group must be empty
+        >
+        > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `"Cannot delete group with bases"`.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1856,6 +2019,35 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  ctime:
+                    type: string
+                  org_url_prefix:
+                    type: string
+                  role:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
+                  quota:
+                    type: integer
+                  storage_usage:
+                    type: integer
+                  storage_quota:
+                    type: integer
+                  max_user_number:
+                    type: integer
+                  rows_count:
+                    type: integer
+                  row_limit:
+                    type: integer
               example:
                 org_id: 2937
                 org_name: SeaTable Testing
@@ -1929,11 +2121,13 @@ paths:
         - Teams
       summary: Get Organization Names
       operationId: getOrganizationNames
+      description: Retrieve the names of one or more organizations by their IDs.
       security:
         - AccountTokenAuth: []
       parameters:
         - name: org_ids
           in: query
+          description: Comma-separated list of organization IDs to look up.
           schema:
             type: array
             items:
@@ -1941,7 +2135,15 @@ paths:
           example: "2"
       responses:
         "200":
-          description: ok
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                organization_list:
+                  - org_id: 1
+                    org_name: "My Team"
   /api/v2.1/admin/organizations/{org_id}/:
     put:
       tags:
@@ -1969,6 +2171,8 @@ paths:
                   $ref: "#/components/schemas/max_user_number"
                 asset_quota_mb:
                   $ref: "#/components/schemas/asset_quota_mb"
+                monthly_automation_limit_per_user:
+                  $ref: "#/components/schemas/monthly_automation_limit_per_user"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -1980,6 +2184,37 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  ctime:
+                    type: string
+                  org_url_prefix:
+                    type: string
+                  role:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
+                  quota:
+                    type: integer
+                  storage_usage:
+                    type: integer
+                  storage_quota:
+                    type: integer
+                  max_user_number:
+                    type: integer
+                  rows_count:
+                    type: integer
+                  row_limit:
+                    type: integer
+                  monthly_automation_limit_per_user:
+                    type: integer
               example:
                 org_id: 176
                 org_name: Team SeaTable
@@ -1995,6 +2230,7 @@ paths:
                 max_user_number: 3
                 rows_count: 7185
                 row_limit: -1
+                monthly_automation_limit_per_user: 1000
     get:
       tags:
         - Teams
@@ -2014,13 +2250,48 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  org_name:
+                    type: string
+                  ctime:
+                    type: string
+                  org_url_prefix:
+                    type: string
+                  role:
+                    type: string
+                  creator_email:
+                    type: string
+                  creator_name:
+                    type: string
+                  creator_contact_email:
+                    type: string
+                  quota:
+                    type: integer
+                  storage_usage:
+                    type: integer
+                  storage_quota:
+                    type: integer
+                  max_user_number:
+                    type: integer
+                  rows_count:
+                    type: integer
+                  row_limit:
+                    type: integer
+                  users_count:
+                    type: integer
+                  active_users_count:
+                    type: integer
+                  groups_count:
+                    type: integer
               example:
                 org_id: 1
                 org_name: SeaTable
                 ctime: "2020-11-18T12:30:31+00:00"
                 org_url_prefix: org_d0hfk6jeupd72ab2nxnh
                 role: org_enterprise
-                creator_email: 87654321569491ba42905bf1647fd3f@auth.local
+                creator_email: 876543210569491ba42905bf1647fd3f@auth.local
                 creator_name: Michael Jackson
                 creator_contact_email: test@example.com
                 quota: -2
@@ -2152,6 +2423,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  is_org_admin:
+                    type: boolean
+                  quota_total:
+                    type: integer
+                  quota_usage:
+                    type: integer
+                  create_time:
+                    type: string
+                  last_login:
+                    type: string
+                  active:
+                    type: boolean
               example:
                 org_id: 1
                 workspace_id: 357
@@ -2199,6 +2493,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  contact_email:
+                    type: string
+                  is_org_admin:
+                    type: boolean
+                  quota_total:
+                    type: integer
+                  quota_usage:
+                    type: integer
+                  create_time:
+                    type: string
+                  last_login:
+                    type: string
+                  active:
+                    type: boolean
               example:
                 org_id: 1
                 workspace_id: 357
@@ -2290,7 +2607,7 @@ paths:
   /api/v2.1/admin/dtables/{base_uuid}/synchronous-export/export-dtable/:
     get:
       tags: [Export]
-      summary: Export base
+      summary: Export Base
       operationId: exportBase
       description: |
         Use this request to export a base as System Admin.
@@ -2302,6 +2619,9 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            # Actually application/x-zip-compressed, but dtable-web does not accept this in Accept header
+            application/json: {}
 
   # Common Dataset
   /api/v2.1/admin/common-datasets/:
@@ -2376,7 +2696,7 @@ paths:
     get:
       tags:
         - Common Dataset
-      summary: List invalid Syncs
+      summary: List Invalid Syncs
       operationId: listInvalidSyncs
       description: >-
         In some cases, a common dataset synchronization configuration becomes
@@ -2419,7 +2739,7 @@ paths:
         - AccountTokenAuth: []
       responses:
         "200":
-          description: "ok"
+          description: OK
           content:
             application/json:
               schema:
@@ -2448,7 +2768,7 @@ paths:
         - $ref: "#/components/parameters/sync_id"
       responses:
         "200":
-          description: "ok"
+          description: OK
           content:
             application/json:
               schema:
@@ -2480,6 +2800,31 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  created_at:
+                    type: string
+                  parent_group_id:
+                    type: integer
+                  quota:
+                    type: integer
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                  members:
+                    type: array
+                    items:
+                      type: object
+                  ancestor_groups:
+                    type: array
+                    items:
+                      type: object
               example:
                 id: 1
                 name: Sys Dev
@@ -2530,6 +2875,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  created_at:
+                    type: string
+                  parent_group_id:
+                    type: integer
+                  quota:
+                    type: integer
               example:
                 id: 2
                 name: Test Department
@@ -2556,6 +2914,31 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  created_at:
+                    type: string
+                  parent_group_id:
+                    type: integer
+                  quota:
+                    type: integer
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                  members:
+                    type: array
+                    items:
+                      type: object
+                  ancestor_groups:
+                    type: array
+                    items:
+                      type: object
               example:
                 id: 2
                 name: Test department
@@ -2620,7 +3003,7 @@ paths:
                   base_external_links:
                     - id: 72
                       from_dtable: Example
-                      creator: 123abc456def789ghi123jkl456mno789@auth.local
+                      creator: 12abc456def789abc123def456abc789@auth.local
                       creator_name: Jasmin Tee
                       token: fleischkaesebroetchen
                       permission: r
@@ -2630,7 +3013,7 @@ paths:
                         https://cloud.seatable.io/dtable/external-links/custom/fleischkaesebroetchen/
                     - id: 73
                       from_dtable: Example
-                      creator: 123abc456def789ghi123jkl456mno789@auth.local
+                      creator: 12abc456def789abc123def456abc789@auth.local
                       creator_name: Jasmin Tee
                       token: 42a42b34f97745948765
                       permission: r
@@ -2641,7 +3024,7 @@ paths:
                   view_external_links:
                     - id: 12
                       from_dtable: Example
-                      creator: 123abc456def789ghi123jkl456mno789@auth.local
+                      creator: 12abc456def789abc123def456abc789@auth.local
                       creator_name: Jasmin Tee
                       token: 922008ae1f1742f788f8
                       permission: r
@@ -2655,7 +3038,7 @@ paths:
                       expire_date: ""
                     - id: 13
                       from_dtable: Example
-                      creator: 123abc456def789ghi123jkl456mno789@auth.local
+                      creator: 12abc456def789abc123def456abc789@auth.local
                       creator_name: Jasmin Tee
                       token: 35967f61163848b29c44
                       permission: r
@@ -3127,7 +3510,7 @@ paths:
                     dtable_uuid: 88b0e65a-18f1-4b08-9e6f-fe63d6199c87
                     run_condition: per_update
                     trigger:
-                      rule_name: wd的提醒规则
+                      rule_name: My notification rule
                       table_id: clk6
                       view_id: "0000"
                       condition: rows_modified
@@ -3135,7 +3518,7 @@ paths:
                       watch_all_columns: true
                     action:
                       type: notify
-                      default_msg: 呜呜呜
+                      default_msg: A row has been modified.
                       users:
                         - 3d3ef49e927a4ff99e605763355027e2@auth.local
                       users_column_key: ""
@@ -3147,7 +3530,7 @@ paths:
                     dtable_uuid: 88b0e65a-18f1-4b08-9e6f-fe63d6199c87
                     run_condition: per_update
                     trigger:
-                      rule_name: wd的提醒规则2
+                      rule_name: My notification rule 2
                       table_id: clk6
                       view_id: "0000"
                       condition: rows_modified
@@ -3155,7 +3538,7 @@ paths:
                       watch_all_columns: true
                     action:
                       type: notify
-                      default_msg: 呜呜呜
+                      default_msg: A row has been modified.
                       users:
                         - 3d3ef49e927a4ff99e605763355027e2@auth.local
                       users_column_key: ""
@@ -3246,17 +3629,17 @@ paths:
         - Logs
       summary: List Registration Logs
       operationId: listRegistrationLogs
+      description: List all registration and invitation logs in the system.
       security:
         - AccountTokenAuth: []
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             application/json:
               schema:
                 type: object
               example:
-                # FIXME: Should actually be registration_logs...
                 invitation_logs: []
   /api/v2.1/admin/abuse-reports/:
     get:
@@ -3308,6 +3691,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - handled
               properties:
                 handled:
                   $ref: "#/components/schemas/handled"
@@ -3322,6 +3707,25 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_uuid:
+                    type: string
+                  reporter:
+                    type: string
+                  external_link_token:
+                    type: string
+                  create_time:
+                    type: string
+                  abuse_type:
+                    type: string
+                  description:
+                    type: string
+                  handled:
+                    type: boolean
+                  dtable_name:
+                    type: string
               example:
                 id: 1
                 dtable_uuid: 12345678-ebe8-466c-89f6-492a0f956af9
@@ -3346,7 +3750,7 @@ paths:
         - $ref: "#/components/parameters/per_page"
       responses:
         "200":
-          description: Successful response with the queried audit logs.
+          description: OK
           content:
             application/json:
               schema:
@@ -3399,6 +3803,17 @@ paths:
                     type: integer
                     description: The total number of logs available.
                     example: 15
+              example:
+                audit_log_list:
+                  - username: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
+                    name: "John Smith"
+                    operation: "group_delete"
+                    org_id: -1
+                    detail:
+                      id: 250
+                      name: "My Group"
+                    created_at: "2024-03-19T01:25:25+00:00"
+                    org_name: ""
   /api/v2.1/admin/group-member-audit/:
     get:
       tags:
@@ -3422,12 +3837,12 @@ paths:
                 group_member_log_list:
                   - user_email: 493524d94e7e467da506e30c24898555@auth.local
                     user_name: 123
-                    user_contact_email: 123@qq.com
+                    user_contact_email: user@example.com
                     group_id: 3
                     group_name: g2
                     operator_email: 8d597a4a971c43afa8926a2dede58231@auth.local
                     operator_name: admin
-                    operator_contact_email: zwfxiaxue@163.com
+                    operator_contact_email: admin@example.com
                     date: 2025-05-27T06:59:43+00:00
                     operation: group_member_add
                 count: 1
@@ -3457,12 +3872,12 @@ paths:
                       "device": "",
                       "user": "af57b7dda06b4928b255339d92294853@auth.local",
                       "name": "org_admin1",
-                      "contact_email": "org_admin1@qq.com",
+                      "contact_email": "org_admin1@example.com",
                       "ip": "172.18.0.1",
                       "org_id": 1,
                       "dtable_uuid": "8e7ad4a8-73dc-4be4-abae-057fd5203a0e",
                       "file_path": "/custom/aaa (1) (1).md",
-                      "dtable_name": "1\u5bfc\u5165\u534f\u4f5c\u4eba",
+                      "dtable_name": "Example Base",
                       "org_name": "org1",
                       "file_or_dir_name": "aaa (1) (1).md"
                     },
@@ -3472,12 +3887,12 @@ paths:
                       "device": "",
                       "user": "fc7043070b1d40878570f666de8d3481@auth.local",
                       "name": "view",
-                      "contact_email": "yangtong1009@163.com",
+                      "contact_email": "viewer@example.com",
                       "ip": "172.18.0.1",
                       "org_id": -1,
                       "dtable_uuid": "96908687-8713-4b81-9856-77f9d96af4b3",
                       "file_path": "/custom/aaa.md",
-                      "dtable_name": "\u5bfc\u5165\u4f18\u5316",
+                      "dtable_name": "Test Base",
                       "org_name": "",
                       "file_or_dir_name": "aaa.md"
                     }
@@ -3501,6 +3916,7 @@ paths:
         - $ref: "#/components/parameters/per_page"
         - in: query
           name: has_handled
+          description: Filter by handling status. Use `true` for handled, `false` for unhandled, or `null` for all.
           schema:
             type: string
             enum: [true, false, null]
@@ -3514,9 +3930,9 @@ paths:
                   - repo_id: 696b27df-173e-4628-8ac2-10347c58a428
                     file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com.txt
                     has_deleted: true
-                    has_ignored": false,
+                    has_ignored: false
                     virus_id: 1
-                    group_id: 1,
+                    group_id: 1
                     group_name: group-11
                     org_id: 1
                     org_name: org-1
@@ -3526,7 +3942,7 @@ paths:
                     file_path: /asset/af5fa655-ef97-4573-8f2d-c3812e17a548/files/2024-08/eicar.com (1).txt
                     has_deleted: false
                     has_ignored: false
-                    virus_id: 2,
+                    virus_id: 2
                     username: ac8961c4118f4400ad71bada398675b7@auth.local
                     nickname: test@demo.com
                     org_id: 1
@@ -3631,15 +4047,9 @@ paths:
                       version: 0.1.33
                       display_type: overlay
                       display_name:
-                        de: Galerie
                         en: Gallery
-                        fr: Galerie
-                        zh-cn: 图库
                       description:
-                        de: Zeigen Sie Ihre Datensätze in einer Galerie an.
                         en: Display your records in a gallery.
-                        fr: Affichez vos enregistrements dans une galerie.
-                        zh-cn: 用图库的方式展示你的记录。
                       last_modified: "2021-03-12T12:04:33+08:00"
                       has_css: true
                       has_icon: true
@@ -3653,19 +4063,9 @@ paths:
                       version: 0.4.29
                       display_type: overlay
                       display_name:
-                        de: ""
                         en: Timeline
-                        fr: ""
-                        zh-cn: 时间线
                       description:
-                        de: >-
-                          Visualisieren Sie die aufgezeichneten Informationen
-                          auf der Timeline.
                         en: Visualize the recorded information on the timeline.
-                        fr: >-
-                          Visualisez les informations enregistrées sur la
-                          chronologie.
-                        zh-cn: 在时间线上可视化展现记录信息。
                       last_modified: "2021-03-08T10:29:27+08:00"
                       has_css: true
                       has_icon: true
@@ -3678,23 +4078,9 @@ paths:
                       name: map-en
                       version: 0.0.16
                       display_name:
-                        cs: Mapy
-                        de: Karten
                         en: Map
-                        es: Mapas
-                        fr: Les cartes
-                        it: mappa
-                        ru: карта
-                        zh-cn: 地图
                       description:
-                        de: >-
-                          Das Karten-Plugin kann Datensätze auf der Karte
-                          anzeigen
                         en: Map plugin can display records on the map
-                        fr: >-
-                          Le plugin de carte peut afficher des enregistrements
-                          sur la carte
-                        zh-cn: 地图插件能把记录显示到地图上
                       last_modified: "2020-12-08T11:04:56+08:00"
                       has_css: true
                       has_icon: true
@@ -3707,15 +4093,9 @@ paths:
                       name: deduplication
                       version: 0.0.18
                       display_name:
-                        de: Datendeduplizierung
                         en: Deduplication
-                        fr: Déduplication des données
-                        zh-cn: 数据去重
                       description:
-                        de: Entfernen Sie doppelte Datensätze in einer Tabelle
                         en: Remove duplicated records in a table
-                        fr: Supprimer les enregistrements dupliqués dans une table
-                        zh-cn: 删除表格中的重复数据
                       last_modified: "2021-02-04T11:55:26+08:00"
                       has_css: true
                       has_icon: true
@@ -3729,13 +4109,14 @@ paths:
       operationId: addPlugin
       description: >-
         Add a plugin with a .zip file. This file could be retrieved from the
-        internet, for example, from the [SeaTable Plugins
-        Market](https://cloud.seatable.io/dtable/view-external-links/custom/plugins/).
+        internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive/).
       requestBody:
         content:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - plugin
               properties:
                 plugin:
                   $ref: "#/components/schemas/plugin"
@@ -3748,6 +4129,17 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  plugin_name:
+                    type: string
+                  info:
+                    type: object
+                  added_by:
+                    type: string
+                  added_time:
+                    type: string
               example:
                 id: 6
                 plugin_name: deduplication
@@ -3755,15 +4147,9 @@ paths:
                   name: deduplication
                   version: 0.0.18
                   display_name:
-                    de: Datendeduplizierung
                     en: Deduplication
-                    fr: Déduplication des données
-                    zh-cn: 数据去重
                   description:
-                    de: Entfernen Sie doppelte Datensätze in einer Tabelle
                     en: Remove duplicated records in a table
-                    fr: Supprimer les enregistrements dupliqués dans une table
-                    zh-cn: 删除表格中的重复数据
                   last_modified: "2021-02-04T11:55:26+08:00"
                   has_css: true
                   has_icon: true
@@ -3827,6 +4213,17 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  plugin_name:
+                    type: string
+                  info:
+                    type: object
+                  added_by:
+                    type: string
+                  added_time:
+                    type: string
               example:
                 id: 6
                 plugin_name: deduplication
@@ -3834,15 +4231,9 @@ paths:
                   name: deduplication
                   version: 0.0.18
                   display_name:
-                    de: Datendeduplizierung
                     en: Deduplication
-                    fr: Déduplication des données
-                    zh-cn: 数据去重
                   description:
-                    de: Entfernen Sie doppelte Datensätze in einer Tabelle
                     en: Remove duplicated records in a table
-                    fr: Supprimer les enregistrements dupliqués dans une table
-                    zh-cn: 删除表格中的重复数据
                   last_modified: "2021-02-04T11:55:26+08:00"
                   has_css: true
                   has_icon: true
@@ -3920,6 +4311,15 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  active_user_list:
+                    type: array
+                    items:
+                      type: object
+                  page:
+                    type: integer
+                  total_count:
+                    type: integer
               example:
                 active_user_list:
                   - avatar_url: https://cloud.seatable.io/media/avatars/default.png
@@ -3928,7 +4328,7 @@ paths:
                     name: Hannah Lustig
                     reg_date: "2020-06-09T19:58:47.228413"
                   - avatar_url: https://cloud.seatable.io/media/avatars/default.png
-                    email: kdjfhgls5f1e4c8d8e1c42d95867317c@auth.local
+                    email: cd0f00a5f1e4c8d8e1c42d958673170c@auth.local
                     contact_email: pan@example.com
                     name: Peter Pan
                     reg_date: "2019-11-14T02:25:39.929507"
@@ -4096,6 +4496,51 @@ paths:
                     latest_visit_at: "2022-07-02T14:09:37+00:00"
                     org_name: SeaTable GmbH
                 count: 1
+  /api/v2.1/admin/statistics/ai/:
+    get:
+      tags:
+        - Statistics
+      summary: Get AI Statistics by Owner/Team
+      operationId: getOwnerOrTeamAIStatistics
+      description: Get AI usage statistics monthly by owner/team.
+      security:
+        - AccountTokenAuth: []
+      parameters:
+        - $ref: "#/components/parameters/group_by"
+        - $ref: "#/components/parameters/date_YYYY_MM_DD"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                group_by_owner:
+                  summary: Query group by owner
+                  value:
+                    results:
+                      - org_id: 176
+                        org_name: SeaTable
+                        owner: 1@seafile_group
+                        group_name: group-11
+                        total_cost: 0.25
+                        is_department_v2_group: false
+                      - org_id: 176
+                        org_name: SeaTable
+                        owner: d15ebe61bd684b868344498c73bdeac4@auth.local
+                        nickname: test
+                    count: 2
+                group_by_team:
+                  summary: Query group by organization
+                  value:
+                    results:
+                      - org_id: 176
+                        org_name: SeaTable
+                        total_cost: 0.25
+                    count: 1
 
   # Maintenance
   /api/v2.1/admin/dtable/{base_uuid}/repair/:
@@ -4111,7 +4556,7 @@ paths:
         - $ref: "#/components/parameters/base_uuid"
       responses:
         "200":
-          description: Successful response indicating that the dtable was repaired.
+          description: OK
           content:
             application/json:
               schema:
@@ -4120,6 +4565,8 @@ paths:
                   success:
                     type: boolean
                     example: true
+              example:
+                success: true
 
   # System Notifications
   /api/v2.1/admin/sys-user-notifications/:
@@ -4164,6 +4611,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - msg
+                - username
               properties:
                 msg:
                   $ref: "#/components/schemas/msg"
@@ -4215,7 +4665,7 @@ paths:
     get:
       tags:
         - System Info & Customizing
-      summary: Get system information
+      summary: Get System Information
       operationId: getSystemInformation
       description: >-
         Get the general system information with this request as system
@@ -4229,6 +4679,47 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  version:
+                    type: string
+                  users_count:
+                    type: integer
+                  active_users_count:
+                    type: integer
+                  groups_count:
+                    type: integer
+                  org_count:
+                    type: integer
+                  dtables_count:
+                    type: integer
+                  multi_tenancy_enabled:
+                    type: boolean
+                  is_pro:
+                    type: boolean
+                  with_license:
+                    type: boolean
+                  license_expiration:
+                    type: string
+                  license_mode:
+                    type: string
+                  license_maxusers:
+                    type: integer
+                  license_to:
+                    type: string
+                  dtable_server_info:
+                    type: array
+                    items:
+                      type: object
+                  dtable_server_info_in_etcd:
+                    type: array
+                    items:
+                      type: object
+                  archived_base_count:
+                    type: integer
+                  archived_row_count:
+                    type: integer
+                  archived_base_storage:
+                    type: integer
               example:
                 version: 3.3.7
                 users_count: 417
@@ -4316,6 +4807,37 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  ENABLE_SIGNUP:
+                    type: integer
+                  ACTIVATE_AFTER_REGISTRATION:
+                    type: integer
+                  REGISTRATION_SEND_MAIL:
+                    type: integer
+                  LOGIN_REMEMBER_DAYS:
+                    type: integer
+                  USER_STRONG_PASSWORD_REQUIRED:
+                    type: integer
+                  USER_PASSWORD_MIN_LENGTH:
+                    type: integer
+                  USER_PASSWORD_STRENGTH_LEVEL:
+                    type: integer
+                  FORCE_PASSWORD_CHANGE:
+                    type: integer
+                  LOGIN_ATTEMPT_LIMIT:
+                    type: integer
+                  FREEZE_USER_ON_LOGIN_FAILED:
+                    type: integer
+                  ENABLE_TWO_FACTOR_AUTH:
+                    type: integer
+                  ENABLE_BRANDING_CSS:
+                    type: integer
+                  SITE_NAME:
+                    type: string
+                  SITE_TITLE:
+                    type: string
+                  CUSTOM_CSS:
+                    type: string
               example:
                 ENABLE_SIGNUP: 1
                 ACTIVATE_AFTER_REGISTRATION: 1
@@ -4346,6 +4868,8 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - logo
               properties:
                 logo:
                   $ref: "#/components/schemas/logo"
@@ -4380,6 +4904,8 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - favicon
               properties:
                 favicon:
                   $ref: "#/components/schemas/favicon"
@@ -4408,6 +4934,8 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - login_bg_image
               properties:
                 login_bg_image:
                   $ref: "#/components/schemas/login_bg_image"

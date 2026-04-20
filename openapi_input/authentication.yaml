@@ -3,18 +3,12 @@ info:
   title: Authentication
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
       server:
         default: cloud.seatable.io
-
-## Questions for later:
-# - why is the return value always 200 but only once 201?
-# - create temporary token > why is this a GET request?
-# - app_name is sometimes param, sometimes body, is there a reason for that?
-# - return values of auth. varies: "get base-token with api-token delivers 8 values back", "Get base-token with account-token" delivers only 5 values back. Why not the same?
 
 x-readme:
   explorer-enabled: true
@@ -71,7 +65,7 @@ components:
     workspace_id:
       name: workspace_id
       description: |
-        The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/workspace-id-einer-gruppe-ermitteln/). 
+        The id of the workspace. For an explanation how to get the *workspace_id*, check out this [help-article](https://seatable.com/help/find-workspace-id-group/). 
         Alternatively the API endpoint [get metadata](/reference/getmetadata) can be used.
       in: path
       schema:
@@ -99,8 +93,8 @@ components:
       name: external_link_token
       description: |
         The random string from the external link. Eg: 
-        - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786, the link token is *c41cef71f5094827a786*.
-        - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link, the link token is only *my-personal-link*.
+        - If the external link is https://cloud.seatable.io/dtable/external-links/c41cef71f5094827a786/, the link token is *c41cef71f5094827a786*.
+        - If the external link is a custom link like https://cloud.seatable.io/dtable/external-links/custom/my-personal-link/, the link token is only *my-personal-link*.
       in: path
       schema:
         type: string
@@ -110,7 +104,7 @@ components:
   schemas:
     AccountToken:
       type: object
-      description: account-token ...
+      description: The account token used for authenticating API requests.
       properties:
         token:
           type: string
@@ -119,9 +113,10 @@ components:
           maxLength: 40
     ApiTokenList:
       type: object
-      description: ...
+      description: List of API tokens for a base.
       properties:
         api_tokens:
+          type: array
           items:
             $ref: "#/components/schemas/ApiToken"
     ApiToken:
@@ -149,7 +144,7 @@ components:
       example:
         app_name: Example
         api_token: 1234567f17157cd6c41fdb202813f8d9a9fi3yr7
-        generated_by: 1234566569491ba42905bf1647fd3f@auth.local
+        generated_by: 123456600569491ba42905bf1647fd3f@auth.local
         generated_at: "2021-03-02T09:47:41+00:00"
         last_access: "2021-03-02T09:47:41+00:00"
         permission: rw
@@ -174,7 +169,7 @@ components:
           format: uuid
       example:
         access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQzNTI1OTQsImR0YWJsZV91dWlkIjoiNjUwZDhhMGQtN2UyNy00NmE4LThiMTgtNmNjNmYzZGIyMDU3IiwidXNlcm5hbWUiOiIiLCJwZXJtaXNzaW9uIjoicnciLCJhcHBfbmFtZSI6InBvc3RtYW4ifQ.4aTmvBfFElyB3xg5jjF7zWCiyRZI17SZD980GdHT6e3
-        dtable_uuid: 650d8a0d-7e27-46a8-8b18-6cc6f384ufy4
+        dtable_uuid: 650d8a0d-7e27-46a8-8b18-6cc6f3db2057
 
     authentication_permission:
       type: string
@@ -219,7 +214,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountToken"
         "400":
-          description: Forbidden
+          description: Bad Request
           content:
             application/json:
               example:
@@ -249,6 +244,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiTokenList"
+              example:
+                api_tokens:
+                  - app_name: "My App"
+                    api_token: "4ed751818b040c85a49a2aff29f0176d032269fb"
+                    generated_by: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
+                    generated_at: "2021-03-02T09:47:41+00:00"
+                    last_access: "2021-03-02T09:47:41+00:00"
+                    permission: "rw"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example: { "detail": "Invalid token" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example: { "detail": "Authentication credentials were not provided." }
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              example: { "error_msg": "Workspace 99999 not found." }
     post:
       tags:
         - API-Token
@@ -278,11 +296,26 @@ paths:
         - $ref: "#/components/parameters/base_name"
       responses:
         "201":
-          description: Ok
+          description: Created
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiToken"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              example: { "error_msg": "app_name invalid." }
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example: { "detail": "Invalid token" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example: { "detail": "Authentication credentials were not provided." }
 
   /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/temp-api-token/:
     get:
@@ -303,6 +336,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiTokenTemporary"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example: { "detail": "Invalid token" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example: { "detail": "Authentication credentials were not provided." }
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              example: { "error_msg": "Workspace 99999 not found." }
 
   /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/api-tokens/{app_name}/:
     put:
@@ -335,13 +383,28 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ApiToken"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example: { "detail": "Invalid token" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example: { "detail": "Authentication credentials were not provided." }
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              example: { "error_msg": "dtable <base_name> not found." }
     delete:
       tags:
         - API-Token
       summary: Delete API-Token
       operationId: deleteApiToken
       description: >-
-        Delete one specific API token from a base. The token is identified by his *app_name*.
+        Delete one specific API token from a base. The token is identified by its *app_name*.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -357,6 +420,21 @@ paths:
                 type: object
               example:
                 success: true
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              example: { "detail": "Invalid token" }
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              example: { "detail": "Authentication credentials were not provided." }
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              example: { "error_msg": "dtable <base_name> not found." }
 
   /api/v2.1/dtable/app-access-token/:
     get:
@@ -377,11 +455,26 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  app_name:
+                    type: string
+                  access_token:
+                    type: string
+                  dtable_uuid:
+                    type: string
+                  dtable_server:
+                    type: string
+                  workspace_id:
+                    type: integer
+                  use_api_gateway:
+                    type: boolean
+                  dtable_name:
+                    type: string
               example:
                 app_name: postman
                 access_token: >-
                   eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTQzNTI1OTQsImR0YWJsZV91dWlkIjoiNjUwZDhhMGQtN2UyNy00NmE4LThiMTgtNmNjNmYzZGIyMDU3IiwidXNlcm5hbWUiOiIiLCJwZXJtaXNzaW9uIjoicnciLCJhcHBfbmFtZSI6InBvc3RtYW4ifQ.4aTmvBfFElyB3xg5jjF7zWCiyRZI17SZD980GdHT6e3
-                dtable_uuid: 650d8a0d-7e27-46a8-8b18-6cc6f384ufy4
+                dtable_uuid: 650d8a0d-7e27-46a8-8b18-6cc6f3db2057
                 dtable_server: https://cloud.seatable.io/api-gateway/
                 workspace_id: 20
                 use_api_gateway: true
@@ -417,30 +510,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccessToken"
         "401":
-          description: "Forbidden"
+          description: "Unauthorized"
           content:
             application/json:
               example: { "detail": "Invalid token" }
+        "403":
+          description: "Forbidden"
+          content:
+            application/json:
+              example: { "detail": "Authentication credentials were not provided." }
         "404":
           description: Not found
           content:
             application/json:
               example: { "error_msg": "dtable <base_name> not found." }
-
-  /api/v2.1/external-link-tokens/{external_link_token}/access-token/:
-    get:
-      tags:
-        - Base-Token
-      summary: Get Base-Token with External-Link
-      operationId: getBaseTokenWithExternLink
-      description: >-
-        Generate a Base-Token from an external link to this base. Because external links always grant read-only permissions, the Base-Token generated from a external link will only grant read permissions to the base.
-      parameters:
-        - $ref: "#/components/parameters/external_link_token"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccessToken"

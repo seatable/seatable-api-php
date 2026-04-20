@@ -4,16 +4,63 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**deleteTeam()**](InfoSettingsApi.md#deleteTeam) | **DELETE** /api/v2.1/org/admin/ | Delete Team |
 | [**getTeamInfo()**](InfoSettingsApi.md#getTeamInfo) | **GET** /api/v2.1/org/admin/info/ | Get Team Info |
 | [**getTeamSettings()**](InfoSettingsApi.md#getTeamSettings) | **GET** /api/v2.1/org/admin/settings/ | Get Team Settings |
 | [**updateTeam()**](InfoSettingsApi.md#updateTeam) | **PUT** /api/v2.1/org/admin/info/ | Update Team |
 | [**updateTeamSettings()**](InfoSettingsApi.md#updateTeamSettings) | **PUT** /api/v2.1/org/admin/settings/ | Update Team Settings |
 
 
+## `deleteTeam()`
+
+```php
+deleteTeam(): object
+```
+
+Delete Team
+
+Delete a team (organization) with its ID. This will eliminate the team! However, this won't delete the team users - but all its members will become team-less users in the system.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\InfoSettingsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->deleteTeam();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling InfoSettingsApi->deleteTeam: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
 ## `getTeamInfo()`
 
 ```php
-getTeamInfo(): object
+getTeamInfo(): \SeaTable\Client\TeamAdmin\GetTeamInfo200Response
 ```
 
 Get Team Info
@@ -47,7 +94,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetTeamInfo200Response**](../Model/GetTeamInfo200Response.md)
 
 ### Authorization
 
@@ -59,7 +106,7 @@ AccountTokenAuth
 ## `getTeamSettings()`
 
 ```php
-getTeamSettings(): object
+getTeamSettings(): \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
 ```
 
 Get Team Settings
@@ -93,7 +140,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetTeamSettings200Response**](../Model/GetTeamSettings200Response.md)
 
 ### Authorization
 
@@ -154,7 +201,7 @@ AccountTokenAuth
 ## `updateTeamSettings()`
 
 ```php
-updateTeamSettings($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name): object
+updateTeamSettings($enable_force_2fa, $enable_force_sso_login, $enable_new_user_email, $enable_external_user_access_invite_link, $enable_member_modify_name): \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
 ```
 
 Update Team Settings
@@ -199,7 +246,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetTeamSettings200Response**](../Model/GetTeamSettings200Response.md)
 
 ### Authorization
 

@@ -119,6 +119,8 @@ listAllBases($per_page, $page): object
 
 List All Bases
 
+List all bases in the system with pagination support.
+
 ### Example
 
 ```php
@@ -292,7 +294,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 23abc456def789ghi123jkl456mno789@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
+$user_id = 2abc456def789abc123def456abc789a@auth.local; // string | The unique user id in the form ...@auth.local. This is not the email address of the user.
 $page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
 $per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
 
@@ -345,7 +347,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\BasesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$base_id = base_id; // string | The id of the base. This is not the base_uuid.
+$base_id = 123; // string | The id of the base. This is not the base_uuid.
 
 try {
     $result = $apiInstance->restoreTrashedBase($base_id);

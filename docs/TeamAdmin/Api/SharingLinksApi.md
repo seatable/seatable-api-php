@@ -9,6 +9,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**deleteViewExternalLink()**](SharingLinksApi.md#deleteViewExternalLink) | **DELETE** /api/v2.1/org/{org_id}/admin/view-external-links/{view_external_link_token}/ | Delete View External Link |
 | [**listBaseExternalLinks()**](SharingLinksApi.md#listBaseExternalLinks) | **GET** /api/v2.1/org/{org_id}/admin/external-links/ | List Base External Links |
 | [**listInviteLinks()**](SharingLinksApi.md#listInviteLinks) | **GET** /api/v2.1/org/{org_id}/admin/invite-links/ | List Invite Links |
+| [**listShares()**](SharingLinksApi.md#listShares) | **GET** /api/v2.1/org/{org_id}/admin/shares/ | List Shares |
 | [**listViewExternalLinks()**](SharingLinksApi.md#listViewExternalLinks) | **GET** /api/v2.1/org/{org_id}/admin/view-external-links/ | List View External Links |
 | [**updateInviteLink()**](SharingLinksApi.md#updateInviteLink) | **PUT** /api/v2.1/org/{org_id}/admin/invite-links/{invite_link_token}/ | Update Invite Link |
 
@@ -36,7 +37,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$external_link_token = d6d006b319ca4d2aa060; // string
+$external_link_token = d6d006b319ca4d2aa060; // string | The token of the external link.
 
 try {
     $result = $apiInstance->deleteExternalLink($org_id, $external_link_token);
@@ -51,7 +52,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **external_link_token** | **string**|  | |
+| **external_link_token** | **string**| The token of the external link. | |
 
 ### Return type
 
@@ -87,7 +88,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$invite_link_token = 0366b8995d7f47d8eu3t; // string
+$invite_link_token = 0366b8995d7f47d8ae3c; // string | The token of the invite link.
 
 try {
     $result = $apiInstance->deleteInviteLink($org_id, $invite_link_token);
@@ -102,7 +103,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **invite_link_token** | **string**|  | |
+| **invite_link_token** | **string**| The token of the invite link. | |
 
 ### Return type
 
@@ -138,7 +139,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$view_external_link_token = d6d006b319ca4d2aa060; // string
+$view_external_link_token = d6d006b319ca4d2aa060; // string | The token of the view external link.
 
 try {
     $result = $apiInstance->deleteViewExternalLink($org_id, $view_external_link_token);
@@ -153,7 +154,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **view_external_link_token** | **string**|  | |
+| **view_external_link_token** | **string**| The token of the view external link. | |
 
 ### Return type
 
@@ -268,6 +269,55 @@ AccountTokenAuth
 
 
 
+## `listShares()`
+
+```php
+listShares($org_id): \SeaTable\Client\TeamAdmin\ListShares200Response
+```
+
+List Shares
+
+List all shares inside the given team/organization.  This includes the following:   - Bases shared to individual users   - Bases shared to groups   - Views shared to individual users   - Views shared to groups
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+
+try {
+    $result = $apiInstance->listShares($org_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SharingLinksApi->listShares: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+
+### Return type
+
+[**\SeaTable\Client\TeamAdmin\ListShares200Response**](../Model/ListShares200Response.md)
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
 ## `listViewExternalLinks()`
 
 ```php
@@ -320,7 +370,7 @@ AccountTokenAuth
 ## `updateInviteLink()`
 
 ```php
-updateInviteLink($org_id, $invite_link_token, $update_invite_link_request): object
+updateInviteLink($org_id, $invite_link_token, $update_invite_link_request): \SeaTable\Client\TeamAdmin\UpdateInviteLink200Response
 ```
 
 Update Invite Link
@@ -340,7 +390,7 @@ $apiInstance = new SeaTable\Client\TeamAdmin\SharingLinksApi(
     $config
 );
 $org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
-$invite_link_token = 0366b8995d7f47d8eu3t; // string
+$invite_link_token = 0366b8995d7f47d8ae3c; // string | The token of the invite link.
 $update_invite_link_request = new \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest(); // \SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest
 
 try {
@@ -356,12 +406,12 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
-| **invite_link_token** | **string**|  | |
+| **invite_link_token** | **string**| The token of the invite link. | |
 | **update_invite_link_request** | [**\SeaTable\Client\TeamAdmin\UpdateInviteLinkRequest**](../Model/UpdateInviteLinkRequest.md)|  | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\UpdateInviteLink200Response**](../Model/UpdateInviteLink200Response.md)
 
 ### Authorization
 

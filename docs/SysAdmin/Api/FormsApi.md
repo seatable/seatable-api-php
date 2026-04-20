@@ -32,7 +32,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\FormsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$collection_table_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$collection_table_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string | The token of the collection table.
 
 try {
     $result = $apiInstance->deleteDataCollectionForms($collection_table_token);
@@ -46,7 +46,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **collection_table_token** | **string**|  | |
+| **collection_table_token** | **string**| The token of the collection table. | |
 
 ### Return type
 
@@ -81,7 +81,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\FormsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string
+$form_token = 12345678-d378-4c12-8d7a-6da0fb48ee83; // string | The token of the form.
 
 try {
     $result = $apiInstance->deleteForm($form_token);
@@ -95,7 +95,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **form_token** | **string**|  | |
+| **form_token** | **string**| The token of the form. | |
 
 ### Return type
 

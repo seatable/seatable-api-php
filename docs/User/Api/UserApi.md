@@ -66,7 +66,7 @@ AccountTokenAuth
 ## `getAccountInfo()`
 
 ```php
-getAccountInfo(): object
+getAccountInfo(): \SeaTable\Client\User\GetAccountInfo200Response
 ```
 
 Get Account Info
@@ -100,7 +100,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\GetAccountInfo200Response**](../Model/GetAccountInfo200Response.md)
 
 ### Authorization
 
@@ -112,7 +112,7 @@ AccountTokenAuth
 ## `getPublicUserInfo()`
 
 ```php
-getPublicUserInfo($user_id): object
+getPublicUserInfo($user_id): \SeaTable\Client\User\GetPublicUserInfo200Response
 ```
 
 Get Public User Info
@@ -131,7 +131,7 @@ $apiInstance = new SeaTable\Client\User\UserApi(
     new GuzzleHttp\Client(),
     $config
 );
-$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique user ID in the format `xxx@auth.local`.
 
 try {
     $result = $apiInstance->getPublicUserInfo($user_id);
@@ -145,11 +145,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **user_id** | **string**|  | |
+| **user_id** | **string**| The unique user ID in the format &#x60;xxx@auth.local&#x60;. | |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\GetPublicUserInfo200Response**](../Model/GetPublicUserInfo200Response.md)
 
 ### Authorization
 
@@ -229,7 +229,7 @@ $apiInstance = new SeaTable\Client\User\UserApi(
     new GuzzleHttp\Client(),
     $config
 );
-$q = Micha; // string
+$q = Micha; // string | Search query string. Matches against email, name, or contact email.
 
 try {
     $result = $apiInstance->searchUser($q);
@@ -243,7 +243,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **q** | **string**|  | [optional] |
+| **q** | **string**| Search query string. Matches against email, name, or contact email. | [optional] |
 
 ### Return type
 

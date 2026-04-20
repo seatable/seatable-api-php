@@ -3,7 +3,7 @@ info:
   title: File Operations
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
@@ -138,9 +138,21 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  upload_link:
+                    type: string
+                  workspace_id:
+                    type: integer
+                  parent_path:
+                    type: string
+                  img_relative_path:
+                    type: string
+                  file_relative_path:
+                    type: string
               example:
                 upload_link: >-
-                  https://cloud.seafile.com/seafhttp/upload-api/83e701c8-84ba-498c-91b1-ddb3789edb7e
+                  https://cloud.seatable.io/seafhttp/upload-api/83e701c8-84ba-498c-91b1-ddb3789edb7e
+                workspace_id: 42
                 parent_path: /asset/a275d870-fd55-48e4-8c4a-5fd6f2549765
                 img_relative_path: images/2021-08
                 file_relative_path: files/2021-08
@@ -184,7 +196,7 @@ paths:
         ```
         # Example how to add an already uploaded image to a row:
         "row": {
-          "My Image Column": ["/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png`"]
+          "My Image Column": ["/workspace/24/asset/55f2f056-5da1-4095-b5f8-791bb51b991e/images/2023-07/party.png"]
         }
 
         # Example how to add an already uploaded file to a row:
@@ -251,12 +263,22 @@ paths:
               example:
                 download_link: >-
                   https://cloud.seatable.io/seafhttp/files/12345678-1234-4672-834c-4eca40dc104b/test.png
+        "400":
+          description: Bad Request — file not found at the given path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_msg:
+                    type: string
+                    example: "path /files/2020-01/nonexistent.txt not found."
   /api/v2.1/dtable/app-asset/:
     delete:
       tags:
         - Files & Images
       summary: Delete a Base Asset
-      operationId: DeleteBaseAsset
+      operationId: deleteBaseAsset
       description: |
         Delete a base's attachment.
 
@@ -273,6 +295,16 @@ paths:
                 type: object
               example:
                 success: true
+        "404":
+          description: Not Found — file does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_msg:
+                    type: string
+                    example: "File not found."
 
   # Files & Images (Custom Folder)
   /api/v2.1/dtable/custom/app-asset-dir/:
@@ -280,6 +312,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get Files from Folder
       operationId: getCustomFiles
+      description: List files and subdirectories in a custom folder of a base.
       security:
         - ApiTokenAuth: []
       parameters:
@@ -303,6 +336,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get File Metadata
       operationId: getCustomFileMetadata
+      description: Get metadata (name, size, last update) of a file in a custom folder.
       security:
         - ApiTokenAuth: []
       parameters:
@@ -325,7 +359,7 @@ paths:
     delete:
       tags: [Files & Images (Custom Folder)]
       summary: Delete a Base Asset in Custom Folder
-      operationId: DeleteBaseCustomFolderAsset
+      operationId: deleteBaseCustomFolderAsset
       description: |
         Delete a base's attachment in custom folder.
 
@@ -347,6 +381,7 @@ paths:
       tags: [Files & Images (Custom Folder)]
       summary: Get Upload Link
       operationId: getCustomUploadLink
+      description: Get a temporary upload link for uploading files to a custom folder.
       security:
         - ApiTokenAuth: []
       parameters:
@@ -361,13 +396,15 @@ paths:
               example:
                 dirent:
                   upload_link: "https://cloud.seatable.io/seafhttp/upload-api/e943a56a-c5b3-441a-ac1d-9199819dec71"
+                  workspace_id: 42
                   parent_path: "/asset/1338f224-8482-4d71-b8be-63c8f37b896a/custom"
-                  relative_path": "/"
+                  relative_path: "/"
   /api/v2.1/dtable/custom/app-download-link/:
     get:
       tags: [Files & Images (Custom Folder)]
       summary: Get Download Link
       operationId: getCustomDownloadLink
+      description: Get a temporary download link for a file in a custom folder.
       security:
         - ApiTokenAuth: []
       parameters:

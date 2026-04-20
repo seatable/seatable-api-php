@@ -14,12 +14,12 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addPlugin()`
 
 ```php
-addPlugin($plugin): object
+addPlugin($plugin): \SeaTable\Client\SysAdmin\AddPlugin200Response
 ```
 
 Add Plugin
 
-Add a plugin with a .zip file. This file could be retrieved from the internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/dtable/view-external-links/custom/plugins/).
+Add a plugin with a .zip file. This file could be retrieved from the internet, for example, from the [SeaTable Plugins Market](https://cloud.seatable.io/apps/custom/plugin-archive/).
 
 ### Example
 
@@ -47,11 +47,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **plugin** | **\SplFileObject****\SplFileObject**| Path and file name to the plugin file. | [optional] |
+| **plugin** | **\SplFileObject****\SplFileObject**| Path and file name to the plugin file. | |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddPlugin200Response**](../Model/AddPlugin200Response.md)
 
 ### Authorization
 
@@ -82,7 +82,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$plugin_id = 5; // int
+$plugin_id = 5; // int | The ID of the plugin.
 
 try {
     $result = $apiInstance->deletePlugin($plugin_id);
@@ -96,7 +96,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **plugin_id** | **int**|  | |
+| **plugin_id** | **int**| The ID of the plugin. | |
 
 ### Return type
 
@@ -203,7 +203,7 @@ AccountTokenAuth
 ## `updatePlugin()`
 
 ```php
-updatePlugin($plugin_id, $plugin): object
+updatePlugin($plugin_id, $plugin): \SeaTable\Client\SysAdmin\AddPlugin200Response
 ```
 
 Update Plugin
@@ -222,7 +222,7 @@ $apiInstance = new SeaTable\Client\SysAdmin\PluginsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$plugin_id = 5; // int
+$plugin_id = 5; // int | The ID of the plugin.
 $plugin = '/path/to/file.txt'; // \SplFileObject | Path and file name to the plugin file.
 
 try {
@@ -237,12 +237,12 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **plugin_id** | **int**|  | |
+| **plugin_id** | **int**| The ID of the plugin. | |
 | **plugin** | **\SplFileObject****\SplFileObject**| Path and file name to the plugin file. | [optional] |
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\SysAdmin\AddPlugin200Response**](../Model/AddPlugin200Response.md)
 
 ### Authorization
 

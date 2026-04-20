@@ -17,7 +17,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `createBaseExternalLink()`
 
 ```php
-createBaseExternalLink($workspace_id, $base_name, $password, $expire_days, $token): object
+createBaseExternalLink($workspace_id, $base_name, $password, $expire_days, $token): \SeaTable\Client\User\CreateBaseExternalLink200Response
 ```
 
 Create Base External Link
@@ -62,7 +62,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateBaseExternalLink200Response**](../Model/CreateBaseExternalLink200Response.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ AccountTokenAuth
 ## `createInviteLink()`
 
 ```php
-createInviteLink($table_name, $workspace_id, $permission, $password, $expire_days): object
+createInviteLink($table_name, $workspace_id, $permission, $password, $expire_days): \SeaTable\Client\User\CreateInviteLink200Response
 ```
 
 Create Invite Link
@@ -119,7 +119,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateInviteLink200Response**](../Model/CreateInviteLink200Response.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ AccountTokenAuth
 ## `createViewExternalLink()`
 
 ```php
-createViewExternalLink($workspace_id, $base_name, $table_id, $view_id, $token, $password, $expire_days): object
+createViewExternalLink($workspace_id, $base_name, $table_id, $view_id, $token, $password, $expire_days): \SeaTable\Client\User\CreateViewExternalLink200Response
 ```
 
 Create View External Link
@@ -180,7 +180,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\User\CreateViewExternalLink200Response**](../Model/CreateViewExternalLink200Response.md)
 
 ### Authorization
 
@@ -213,7 +213,7 @@ $apiInstance = new SeaTable\Client\User\SharingLinksApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$external_link_token = f84903f9aa454a2481f3; // string
+$external_link_token = f84903f9aa454a2481f3; // string | The token of the external link.
 
 try {
     $result = $apiInstance->deleteExternalLink($workspace_id, $base_name, $external_link_token);
@@ -229,7 +229,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **external_link_token** | **string**|  | |
+| **external_link_token** | **string**| The token of the external link. | |
 
 ### Return type
 
@@ -264,7 +264,7 @@ $apiInstance = new SeaTable\Client\User\SharingLinksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$invite_link_token = 65432148a9074901923d; // string
+$invite_link_token = 65432148a9074901923d; // string | The token of the invite link.
 
 try {
     $result = $apiInstance->deleteInviteLink($invite_link_token);
@@ -278,7 +278,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **invite_link_token** | **string**|  | |
+| **invite_link_token** | **string**| The token of the invite link. | |
 
 ### Return type
 
@@ -315,7 +315,7 @@ $apiInstance = new SeaTable\Client\User\SharingLinksApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$view_external_link_token = f234baec8ce44028978a; // string
+$view_external_link_token = f234baec8ce44028978a; // string | The token of the view external link.
 
 try {
     $result = $apiInstance->deleteViewExternalLink($workspace_id, $base_name, $view_external_link_token);
@@ -331,7 +331,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **view_external_link_token** | **string**|  | |
+| **view_external_link_token** | **string**| The token of the view external link. | |
 
 ### Return type
 
@@ -351,6 +351,8 @@ listBaseExternalLinks($workspace_id, $base_name): object
 ```
 
 List Base External Links
+
+List all external links that have been created for a specific base.
 
 ### Example
 

@@ -89,7 +89,7 @@ $apiInstance = new SeaTable\Client\User\WebhooksApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$webhook_id = 1; // int
+$webhook_id = 1; // int | The ID of the webhook.
 
 try {
     $result = $apiInstance->deleteWebhook($workspace_id, $base_name, $webhook_id);
@@ -105,7 +105,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **webhook_id** | **int**|  | |
+| **webhook_id** | **int**| The ID of the webhook. | |
 
 ### Return type
 
@@ -193,7 +193,7 @@ $apiInstance = new SeaTable\Client\User\WebhooksApi(
 );
 $workspace_id = 127; // int | id of your workspace.
 $base_name = My Projects; // string | name of your base.
-$webhook_id = 1; // int
+$webhook_id = 1; // int | The ID of the webhook.
 $url = 'url_example'; // string | The URL of the webhook. It should start with `http(s)`. Required.
 $secret = 56; // int | When you set a secret, you'll receive the X-SeaTable-Signature header, whose value is the result of SHA1 encryption of the secret key, in the webhook POST request. Optional.
 
@@ -211,7 +211,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **workspace_id** | **int**| id of your workspace. | |
 | **base_name** | **string**| name of your base. | |
-| **webhook_id** | **int**|  | |
+| **webhook_id** | **int**| The ID of the webhook. | |
 | **url** | **string**| The URL of the webhook. It should start with &#x60;http(s)&#x60;. Required. | [optional] |
 | **secret** | **int**| When you set a secret, you&#39;ll receive the X-SeaTable-Signature header, whose value is the result of SHA1 encryption of the secret key, in the webhook POST request. Optional. | [optional] |
 

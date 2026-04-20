@@ -20,7 +20,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addGroup()`
 
 ```php
-addGroup($org_id, $group_name, $group_owner): object
+addGroup($org_id, $group_name, $group_owner): \SeaTable\Client\TeamAdmin\AddGroup200Response
 ```
 
 Add Group
@@ -61,7 +61,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\AddGroup200Response**](../Model/AddGroup200Response.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ deleteGroup($org_id, $group_id): object
 
 Delete Group
 
-Delete a group with its ID.
+Delete a group with its ID.  > 🚧 Group must be empty > > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `\"Cannot delete group with bases\"`.
 
 ### Example
 
@@ -177,7 +177,7 @@ AccountTokenAuth
 ## `getGroup()`
 
 ```php
-getGroup($org_id, $group_id): object
+getGroup($org_id, $group_id): \SeaTable\Client\TeamAdmin\AddGroup200Response
 ```
 
 Get Group
@@ -216,7 +216,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\AddGroup200Response**](../Model/AddGroup200Response.md)
 
 ### Authorization
 
@@ -279,7 +279,7 @@ AccountTokenAuth
 ## `listGroupMembers()`
 
 ```php
-listGroupMembers($org_id, $group_id): object
+listGroupMembers($org_id, $group_id): \SeaTable\Client\TeamAdmin\ListGroupMembers200Response
 ```
 
 List Group Members
@@ -318,7 +318,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\ListGroupMembers200Response**](../Model/ListGroupMembers200Response.md)
 
 ### Authorization
 
@@ -330,7 +330,7 @@ AccountTokenAuth
 ## `listGroups()`
 
 ```php
-listGroups($org_id, $page, $per_page): object
+listGroups($org_id, $page, $per_page): \SeaTable\Client\TeamAdmin\ListGroups200Response
 ```
 
 List Groups (Team)
@@ -371,7 +371,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\ListGroups200Response**](../Model/ListGroups200Response.md)
 
 ### Authorization
 
@@ -489,12 +489,12 @@ AccountTokenAuth
 ## `updateGroup()`
 
 ```php
-updateGroup($org_id, $group_id, $update_group_request): object
+updateGroup($org_id, $group_id, $update_group_request): \SeaTable\Client\TeamAdmin\UpdateGroup200Response
 ```
 
 Update Group
 
-Use this request to rename, and/or change owner of a group. In the request body, both parameters are optional. Only use the ones that you need to update: *   `new_owner` is the new owner of the group, include the user's ID here. If you don't want to change the owner, remove this parameter because if you enter the current owner's ID here, you'll get an error \"User xxx is already group owner\". *   `new_group_name` is the new name of your group. If you don't want to change the name, remove shi parameter because if you enter the current group name here you'll get an error \"There is already a group with that name\".
+Use this request to rename, and/or change owner of a group. In the request body, both parameters are optional. Only use the ones that you need to update: *   `new_owner` is the new owner of the group, include the user's ID here. If you don't want to change the owner, remove this parameter because if you enter the current owner's ID here, you'll get an error \"User xxx is already group owner\". *   `new_group_name` is the new name of your group. If you don't want to change the name, remove this parameter because if you enter the current group name here you'll get an error \"There is already a group with that name\".
 
 ### Example
 
@@ -530,7 +530,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\UpdateGroup200Response**](../Model/UpdateGroup200Response.md)
 
 ### Authorization
 

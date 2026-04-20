@@ -10,7 +10,7 @@ rm -r ./lib/*
 rm -r ./docs/*
 
 LOG_LEVEL="warn"
-TAG="v7.15.0"
+TAG="v7.18.0"
 
 # generate sysadmin
 docker run --rm \

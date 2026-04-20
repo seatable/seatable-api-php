@@ -13,7 +13,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**importBasefromDTableFile()**](ImportExportApi.md#importBasefromDTableFile) | **POST** /api/v2.1/workspace/{workspace_id}/import-dtable/ | Import Base from dtable file |
 | [**importBasefromFile()**](ImportExportApi.md#importBasefromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-base/ | Import Base from xlsx or csv |
 | [**importTableFromFile()**](ImportExportApi.md#importTableFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/import-excel-csv-to-table/ | Import Table from xlsx or csv |
-| [**updateFromFile()**](ImportExportApi.md#updateFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from xlsx or csv |
+| [**updateFromFile()**](ImportExportApi.md#updateFromFile) | **POST** /api/v2.1/workspace/{workspace_id}/synchronous-import/update-table-via-excel-csv/ | Update from XLSX or CSV |
 
 
 ## `appendToTableFromFile()`
@@ -24,7 +24,7 @@ appendToTableFromFile($workspace_id, $file, $dtable_uuid, $table_name): object
 
 Append Excel CSV
 
-Hier muss noch eine Beschreibung ergänzt werden.
+Appends rows from an uploaded Excel or CSV file to an existing table.
 
 ### Example
 
@@ -79,6 +79,8 @@ exportBase($dtable_name, $workspace_id, $password, $ignore_asset)
 
 Export Base
 
+Export a base as a .dtable file. Optionally exclude assets or provide a base password for encrypted bases.
+
 ### Example
 
 ```php
@@ -91,7 +93,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client(),
     $config
 );
-$dtable_name = Example; // string
+$dtable_name = Example; // string | The name of the base to search for.
 $workspace_id = 127; // int | id of your workspace.
 $password = 'password_example'; // string | The password of your Base.
 $ignore_asset = false; // bool | Set this to `true` to export the base without assets. Default is `false`.
@@ -107,7 +109,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **dtable_name** | **string**|  | |
+| **dtable_name** | **string**| The name of the base to search for. | |
 | **workspace_id** | **int**| id of your workspace. | |
 | **password** | **string**| The password of your Base. | [optional] |
 | **ignore_asset** | **bool**| Set this to &#x60;true&#x60; to export the base without assets. Default is &#x60;false&#x60;. | [optional] |
@@ -141,7 +143,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $apiInstance = new SeaTable\Client\User\ImportExportApi(
     new GuzzleHttp\Client()
 );
-$external_link_token = f84903f9aa454a2481f3; // string
+$external_link_token = f84903f9aa454a2481f3; // string | The token of the external link.
 
 try {
     $apiInstance->exportBaseFromExternalLink($external_link_token);
@@ -154,7 +156,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **external_link_token** | **string**|  | |
+| **external_link_token** | **string**| The token of the external link. | |
 
 ### Return type
 
@@ -174,7 +176,7 @@ exportBigDataView($workspace_id, $base_name, $table_id, $view_id)
 
 Export Big Data View to Excel
 
-Hier muss noch eine Beschreibung ergänzt werden
+Exports a big data view as an Excel file. Returns a task ID that can be used to track the export progress.
 
 ### Example
 
@@ -228,6 +230,8 @@ exportTable($table_id, $table_name, $dtable_name, $workspace_id)
 
 Export Table
 
+Export a single table from a base to an Excel file.
+
 ### Example
 
 ```php
@@ -242,7 +246,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
 );
 $table_id = 0000; // string | The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**.
 $table_name = Table1; // string | The name of the table.
-$dtable_name = Example; // string
+$dtable_name = Example; // string | The name of the base to search for.
 $workspace_id = 127; // int | id of your workspace.
 
 try {
@@ -258,7 +262,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **table_id** | **string**| The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. | |
 | **table_name** | **string**| The name of the table. | |
-| **dtable_name** | **string**|  | |
+| **dtable_name** | **string**| The name of the base to search for. | |
 | **workspace_id** | **int**| id of your workspace. | |
 
 ### Return type
@@ -280,6 +284,8 @@ exportView($table_id, $table_name, $dtable_name, $view_id, $view_name, $workspac
 
 Export View
 
+Export a specific view of a table from a base to an Excel file.
+
 ### Example
 
 ```php
@@ -294,7 +300,7 @@ $apiInstance = new SeaTable\Client\User\ImportExportApi(
 );
 $table_id = 0000; // string | The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**.
 $table_name = Table1; // string | The name of the table.
-$dtable_name = Example; // string
+$dtable_name = Example; // string | The name of the base to search for.
 $view_id = Jz4d; // string | id of view, string
 $view_name = Default View; // string | name of view, required, string
 $workspace_id = 127; // int | id of your workspace.
@@ -312,7 +318,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **table_id** | **string**| The id of the table. The id of a table is unique inside a base and is often used to identify a table. **Important: the table_id is not the table_name**. | |
 | **table_name** | **string**| The name of the table. | |
-| **dtable_name** | **string**|  | |
+| **dtable_name** | **string**| The name of the base to search for. | |
 | **view_id** | **string**| id of view, string | |
 | **view_name** | **string**| name of view, required, string | |
 | **workspace_id** | **int**| id of your workspace. | |
@@ -491,7 +497,7 @@ AccountTokenAuth
 updateFromFile($workspace_id, $file, $dtable_uuid, $table_name, $selected_columns): object
 ```
 
-Update from xlsx or csv
+Update from XLSX or CSV
 
 This API call allows you to update a SeaTable database table by uploading an Excel (xlsx) or CSV file. The uploaded file contains rows with data that should be either matched against existing rows in the table for updates or inserted as new rows if no match is found. Matching is performed based on the columns specified in the `selected_columns` parameter. For each row in the uploaded file, the system checks whether there are existing rows where the values in these selected columns match exactly. If a match is found, the existing row is updated with the new data from the file. If no match exists, the row is added as a new entry.  > 📘 Example of the `selected_columns` parameter > > - If one column is specified (e.g., `Name`), the update process finds rows where the value in that column matches the corresponding value in the file. Those rows will be updated; unmatched rows result in new rows being created. > - If multiple columns are specified (e.g., `Name,Age`), all these columns must match exactly for a row to be considered a match and updated. > - Rows not matching on all selected columns are treated as new and will be added to the table.
 

@@ -3,7 +3,7 @@ info:
   title: Account Operations - User
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.0"
+  version: "6.1"
 servers:
   - url: "https://{server}"
     variables:
@@ -132,6 +132,7 @@ components:
       example: 5c264e76-0e5a-448a-9f34-580b551364ca
     dtable_name_query:
       name: dtable_name
+      description: The name of the base to search for.
       in: query
       schema:
         type: string
@@ -139,6 +140,7 @@ components:
       example: Example
     page:
       name: page
+      description: Page number of results to return. Default is 1.
       in: query
       schema:
         type: integer
@@ -146,6 +148,7 @@ components:
       example: 1
     per_page:
       name: per_page
+      description: Number of results per page.
       in: query
       schema:
         type: integer
@@ -153,6 +156,7 @@ components:
       example: 2
     tz:
       name: to_tz
+      description: Timezone offset for date/time conversion.
       in: query
       schema:
         type: string
@@ -166,15 +170,17 @@ components:
       description: >-
         `true` or `false`, optional, `true` by default. When `false`, only
         the ID, name and type of each workspace is listed.
-      example: "false"
+      example: false
     parent_dir:
       name: parent_dir
+      description: The parent directory path.
       in: query
       schema:
         type: string
       example: /
     path:
       name: path
+      description: The file path relative to the asset directory.
       in: query
       schema:
         type: string
@@ -192,6 +198,7 @@ components:
       example: "3"
     account_name:
       name: account_name
+      description: The name of the third-party email account.
       in: query
       schema:
         type: string
@@ -204,7 +211,7 @@ components:
       description: >-
         The ID of the task, returned when you **Send An Email via 3rd Party
         Email Account**.
-      example: "1616585864320"
+      example: 1616585864320
     base_password:
       name: password
       in: query
@@ -219,6 +226,7 @@ components:
       description: Whether return the list of datasets by groups when dtable_uuid is not given, default false, optional
     op_date:
       name: op_date
+      description: Filter by operation date.
       in: query
       schema:
         type: string
@@ -234,6 +242,7 @@ components:
       description: "Search string. Substrings are allowed and capitalization does not matter."
     query_type:
       name: query_type
+      description: Filter the search by type. Use `base` to search only bases or `app` to search only apps.
       in: query
       schema:
         type: string
@@ -243,12 +252,13 @@ components:
       in: query
       schema:
         type: boolean
-      example: "false"
+      example: false
       description: Set this to `true` to export the base without assets. Default is `false`.
 
     #=======================Path parameters=======================#
     user_id:
       name: user_id
+      description: The unique user ID in the format `xxx@auth.local`.
       in: path
       schema:
         type: string
@@ -283,12 +293,14 @@ components:
       example: 5c264e76-0e5a-448a-9f34-580b551364ca
     folder_id:
       name: folder_id
+      description: The ID of the folder.
       in: path
       schema:
         type: string
       required: true
     commit_id:
       name: commit_id
+      description: The commit ID for a base snapshot.
       in: path
       schema:
         type: string
@@ -297,6 +309,7 @@ components:
       example: 7ee107a4eadb9561e8ce7699494939015f0d101b
     external_link_token:
       name: external_link_token
+      description: The token of the external link.
       in: path
       schema:
         type: string
@@ -304,6 +317,7 @@ components:
       example: f84903f9aa454a2481f3
     form_token:
       name: form_token
+      description: The token of the form.
       in: path
       schema:
         type: string
@@ -312,6 +326,7 @@ components:
       example: 12345678-d378-4c12-8d7a-6da0fb48ee83
     collection_token:
       name: collection_token
+      description: The token of the collection table.
       in: path
       schema:
         type: string
@@ -338,6 +353,7 @@ components:
       example: "1"
     3rd_party_account_id:
       name: 3rd_party_account_id
+      description: The ID of the third-party account.
       in: path
       schema:
         type: string
@@ -345,6 +361,7 @@ components:
       example: "5"
     group_id:
       name: group_id
+      description: The ID of the group.
       in: path
       schema:
         type: integer
@@ -353,14 +370,16 @@ components:
       example: 1
     group_member:
       name: group_member
+      description: The unique user ID of the group member.
       in: path
       schema:
         type: string
         pattern: "^[a-f0-9]{32}(@auth.local)$"
       required: true
-      example: 12345678-d378-4c12-8d7a-6da0fb48ee83
+      example: 12345678d3784c128d7a6da0fb48ee83@auth.local
     webhook_id:
       name: webhook_id
+      description: The ID of the webhook.
       in: path
       schema:
         type: integer
@@ -369,6 +388,7 @@ components:
       example: 1
     notification_rule_id:
       name: notification_rule_id
+      description: The ID of the notification rule.
       in: path
       schema:
         type: string
@@ -386,6 +406,7 @@ components:
       example: 7
     app_token:
       name: app_token
+      description: The token of the universal app.
       in: path
       schema:
         type: string
@@ -394,6 +415,7 @@ components:
       example: 8254d58e-6a67-45ab-be37-87939d80e99f
     group_view_share_id:
       name: group_view_share_id
+      description: The ID of the group view share.
       in: path
       schema:
         type: integer
@@ -402,6 +424,7 @@ components:
       example: 6
     user_view_share_id:
       name: user_view_share_id
+      description: The ID of the user view share.
       in: path
       schema:
         type: integer
@@ -410,14 +433,15 @@ components:
       example: 15
     view_external_link_token:
       name: view_external_link_token
+      description: The token of the view external link.
       in: path
       schema:
         type: string
-        pattern: "^[0-9a-f]{20}$"
       required: true
       example: f234baec8ce44028978a
     invite_link_token:
       name: invite_link_token
+      description: The token of the invite link.
       in: path
       schema:
         type: string
@@ -446,6 +470,7 @@ components:
       example: 10
     automation_rule_id:
       name: automation_rule_id
+      description: The ID of the automation rule.
       in: path
       schema:
         type: integer
@@ -517,13 +542,13 @@ components:
     dtable_uuid:
       type: string
       description: The UUID of the base.
-      example: 650d8a0d-7e27-46a8-8b18-6cc6f3dbvh46
+      example: 650d8a0d-7e27-46a8-8b18-6cc6f3db2046
       required:
         - dtable_uuid
     dst_dtable_uuid:
       type: string
       description: The UUID of the destination base.
-      example: 650d8a0d-7e27-46a8-8b18-6cc6f3dbvh46
+      example: 650d8a0d-7e27-46a8-8b18-6cc6f3db2046
     dst_table_id:
       type: string
       example: pzoO
@@ -550,12 +575,12 @@ components:
       type: array
       items:
         type: integer
-        example: "52"
+        example: 52
     user_id_list:
       type: array
       items:
         type: string
-        example: "123abc456def789ghi123jkl456mno789@auth.local"
+        example: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local"
     account_name:
       type: string
       example: "Email Server2"
@@ -605,7 +630,7 @@ components:
           type: array
           items:
             type: string
-            example: c7fh3rda6569491ba42905bf1647fd3f@auth.local
+            example: b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7@auth.local
     is_admin:
       type: string
       enum: ["", "true", "false"]
@@ -2104,7 +2129,7 @@ components:
     item_id:
       type: string
       description: When moving a base, use its `UUID`. Required.
-      example: "650d8a0d-7e27-46a8-8b18-6cc6f3dbvh46"
+      example: "650d8a0d-7e27-46a8-8b18-6cc6f3db2046"
     from:
       type: string
       description: >-
@@ -2118,7 +2143,7 @@ components:
     src_workspace_id:
       type: integer
       description: Source workspace's ID.
-      example: "1"
+      example: 1
     base_name:
       type: string
       description: Name of the base.
@@ -2126,7 +2151,7 @@ components:
     dst_workspace_id:
       type: integer
       description: Destination workspace's ID.
-      example: "80"
+      example: 80
     is_copy_dataset_syncs:
       type: boolean
       description: Select whether common datasets should be synchronous too. False by default.
@@ -2171,7 +2196,7 @@ components:
     user_account_email:
       type: string
       description: The user ID ending with @auth.local
-      example: 123abc456def789ghi123jkl456mno789@auth.local
+      example: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
     table_id:
       type: string
       example: "0000"
@@ -2181,7 +2206,7 @@ components:
     expire_days:
       type: integer
       description: Add expiration period in days. Optional.
-      example: "30"
+      example: 30
     token:
       type: string
       description: >-
@@ -2189,7 +2214,7 @@ components:
         it'll appear as
         "https<span>://cloud.seatable.io/dtable/view-external-links/custom/example/".
         If not given, SeaTable will give a random token to the link.
-      example: fleischkaesebroetchen
+      example: my-custom-link
     dataset_name:
       type: string
       description: The name of the common dataset.
@@ -2289,6 +2314,45 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  org_id:
+                    type: integer
+                  is_org_staff:
+                    type: integer
+                  space_usage:
+                    type: string
+                  total:
+                    type: integer
+                  usage:
+                    type: integer
+                  row_usage_rate:
+                    type: string
+                  row_total:
+                    type: integer
+                  row_usage:
+                    type: integer
+                  avatar_url:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  login_id:
+                    type: string
+                  contact_email:
+                    type: string
+                  institution:
+                    type: string
+                  is_staff:
+                    type: boolean
+                  enable_chargebee:
+                    type: boolean
+                  enable_subscription:
+                    type: boolean
+                  dtable_updates_email_interval:
+                    type: integer
+                  dtable_collaborate_email_interval:
+                    type: integer
               example:
                 org_id: 4
                 is_org_staff: 0
@@ -2299,7 +2363,7 @@ paths:
                 row_total: -1
                 row_usage: 88
                 avatar_url: https://cloud.seatable.io/media/avatars/default.png
-                email: 7fhe63g949b946a3b200555db5de1d23@auth.local
+                email: 7f0e63a949b946a3b200555db5de1d23@auth.local
                 name: Robert Teamplayer
                 login_id: ""
                 contact_email: teamplayer@example.com
@@ -2309,6 +2373,22 @@ paths:
                 enable_subscription: false
                 dtable_updates_email_interval: 0
                 dtable_collaborate_email_interval: 0
+        "401":
+          description: Unauthorized — invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                detail: Invalid token
+        "403":
+          description: Forbidden — no token provided
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                detail: Authentication credentials were not provided.
   /api/v2.1/user/contact-email/:
     put:
       tags:
@@ -2389,6 +2469,15 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  avatar_url:
+                    type: string
+                  contact_email:
+                    type: string
               example:
                 email: 123456786569491ba42905bf1647fd3f@auth.local
                 name: Jasmin Tee
@@ -2421,10 +2510,10 @@ paths:
                 type: object
               example:
                 user_list:
-                  - email: 244b43hr6fy54bb4afa2c2cb7369d244@auth.local
+                  - email: 244b430060f54bb4afa2c2cb7369d244@auth.local
                     name: Ginger Ale
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
-                  - email: 8cb2a6da656876hgf42905bf1647fd3f@auth.local
+                  - email: 8cb2a6da65687600f42905bf1647fd3f@auth.local
                     name: Jasmin Tee
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
 
@@ -2444,6 +2533,7 @@ paths:
       parameters:
         - name: q
           in: query
+          description: Search query string. Matches against email, name, or contact email.
           schema:
             type: string
           example: Micha
@@ -2541,7 +2631,7 @@ paths:
   /api/v2.1/dtable/items-search/:
     get:
       tags: [Bases]
-      summary: Search base or apps
+      summary: Search Base or Apps
       operationId: searchBaseOrApps
       description: Search the base or apps of a user. Capitalization is irrelevant for the search and substrings are also allowed.
       security:
@@ -2557,7 +2647,7 @@ paths:
               schema:
                 type: object
               example:
-                result:
+                results:
                   - id: 514
                     workspace_id: 3
                     uuid: f5a8bbe1-2a2e-44a4-b993-4b599fd5e837
@@ -3140,7 +3230,7 @@ paths:
             type: integer
           required: true
           description: The ID of the trashed base.
-          example: "497"
+          example: 497
       responses:
         "200":
           description: OK
@@ -3242,6 +3332,7 @@ paths:
       tags: [Groups & Workspaces]
       summary: Create Group
       operationId: createGroup
+      description: Create a new group. The user who creates the group becomes its owner.
       security:
         - AccountTokenAuth: []
       requestBody:
@@ -3267,6 +3358,7 @@ paths:
       tags: [Groups & Workspaces]
       summary: Get Group
       operationId: getGroup
+      description: Get the details of a specific group including its name, owner, and admins.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -3302,7 +3394,7 @@ paths:
         "User xxx is already group owner".
 
         *   `name` is the new name of your group. If you don't want to
-        change the name, remove shi parameter because if you enter the current
+        change the name, remove this parameter because if you enter the current
         group name here you'll get an error "There is already a group with that
         name".
       requestBody:
@@ -3326,11 +3418,28 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  parent_group_id:
+                    type: integer
+                  name:
+                    type: string
+                  owner:
+                    type: string
+                  created_at:
+                    type: string
+                  avatar_url:
+                    type: string
+                  admins:
+                    type: array
+                    items:
+                      type: string
               example:
                 id: 1
                 parent_group_id: 0
                 name: Group New
-                owner: 123abc456def789ghi123jkl456mno789@auth.local
+                owner: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                 created_at: "2020-11-19T08:14:52+00:00"
                 avatar_url: "http://cloud.seatable.io/media/avatars/groups/default.png"
                 admins:
@@ -3339,7 +3448,13 @@ paths:
       tags: [Groups & Workspaces]
       summary: Delete Group
       operationId: deleteGroup
-      description: Delete a group with its ID.
+      description: >-
+        Delete a group with its ID.
+
+
+        > 🚧 Group must be empty
+        >
+        > A group can only be deleted if it contains no bases. Delete or move all bases out of the group first, otherwise the API returns `400` with `"Cannot delete group with bases"`.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -3366,6 +3481,7 @@ paths:
       parameters:
         - name: q
           in: query
+          description: Search query string. Matches against group name.
           schema:
             type: string
           example: Micha
@@ -3375,7 +3491,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    owner:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
               example:
                 - id: 92
                   name: Production
@@ -3387,6 +3515,7 @@ paths:
       tags: [Groups & Workspaces]
       summary: Get Group Members
       operationId: getGroupMembers
+      description: List all members of a group along with their roles.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -3397,10 +3526,25 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    contact_email:
+                      type: string
+                    is_admin:
+                      type: integer
+                    role:
+                      type: string
+                    group_id:
+                      type: integer
               example:
                 - name: Production
-                  email: 123abc456def789ghi123jkl456mno789@auth.local
+                  email: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                   contact_email: hans@example.com
                   is_admin: 1
                   role: owner
@@ -3409,6 +3553,7 @@ paths:
       tags: [Groups & Workspaces]
       summary: Add Group Member
       operationId: addGroupMember
+      description: Add a user to a group as a member.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -3422,16 +3567,31 @@ paths:
                 email:
                   $ref: "#/components/schemas/user_id"
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
                 type: object
+                properties:
+                  group_id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  contact_email:
+                    type: string
+                  login_id:
+                    type: string
+                  is_admin:
+                    type: boolean
+                  role:
+                    type: string
               example:
                 group_id: 1
                 name: Production
-                email: 123abc456def789ghi123jkl456mno789@auth.local
+                email: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                 contact_email: "hans@example.com"
                 login_id: ""
                 is_admin: false
@@ -3441,6 +3601,7 @@ paths:
       tags: [Groups & Workspaces]
       summary: Update Group Role
       operationId: updateGroupRole
+      description: Update the role of a group member, for example to promote or demote an admin.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -3456,7 +3617,7 @@ paths:
                   $ref: "#/components/schemas/is_admin"
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -3476,7 +3637,7 @@ paths:
         - $ref: "#/components/parameters/group_member"
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -3496,7 +3657,7 @@ paths:
 
 
         Just give a search keyword in the `q` param. Attention: Although a
-        fussy search is allowed, unlike the web interface, the search via API
+        fuzzy search is allowed, unlike the web interface, the search via API
         is still case sensitive!
 
         A successful search will return each member's details that fit to your
@@ -3506,6 +3667,7 @@ paths:
       parameters:
         - name: q
           in: query
+          description: Search query string. Matches against member name or email.
           schema:
             type: string
           example: Micha
@@ -3784,9 +3946,9 @@ paths:
                           - id: 424
                             workspace_id: 204
                             uuid: 8d29d6fc-1f00-46af-98df-4007b3635e1c
-                            name: 1. Templates-Übersicht
-                            creator: Jasmin Tee
-                            modifier: Jasmin Tee
+                            name: 1. Templates Overview
+                            creator: Jane Doe
+                            modifier: Jane Doe
                             created_at: "2021-01-08T15:09:03+00:00"
                             updated_at: "2021-01-21T16:06:26+00:00"
                             color: null
@@ -3911,6 +4073,15 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  upload_link:
+                    type: string
+                  parent_path:
+                    type: string
+                  img_relative_path:
+                    type: string
+                  file_relative_path:
+                    type: string
               example:
                 upload_link: >-
                   https://cloud.seatable.io/seafhttp/upload-api/5d2b06ba-ec8d-4efb-a62e-3ae6ac84a67c
@@ -4247,7 +4418,7 @@ paths:
     post:
       tags:
         - Import & Export
-      summary: Update from xlsx or csv
+      summary: Update from XLSX or CSV
       description: |
         This API call allows you to update a SeaTable database table by uploading an Excel (xlsx) or CSV file. The uploaded file contains rows with data that should be either matched against existing rows in the table for updates or inserted as new rows if no match is found.
         Matching is performed based on the columns specified in the `selected_columns` parameter. For each row in the uploaded file, the system checks whether there are existing rows where the values in these selected columns match exactly. If a match is found, the existing row is updated with the new data from the file. If no match exists, the row is added as a new entry.
@@ -4296,6 +4467,7 @@ paths:
         - Import & Export
       summary: Export Base
       operationId: exportBase
+      description: Export a base as a .dtable file. Optionally exclude assets or provide a base password for encrypted bases.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -4305,7 +4477,7 @@ paths:
         - $ref: "#/components/parameters/ignore_asset"
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             # TODO: Actually "application/x-zip-compressed", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
@@ -4315,6 +4487,7 @@ paths:
         - Import & Export
       summary: Export Table
       operationId: exportTable
+      description: Export a single table from a base to an Excel file.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -4324,7 +4497,7 @@ paths:
         - $ref: "#/components/parameters/workspace_id"
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             # TODO: Actually "application/ms-excel", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
@@ -4334,6 +4507,7 @@ paths:
         - Import & Export
       summary: Export View
       operationId: exportView
+      description: Export a specific view of a table from a base to an Excel file.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -4345,7 +4519,7 @@ paths:
         - $ref: "#/components/parameters/workspace_id"
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             # TODO: Actually "application/ms-excel", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
@@ -4362,7 +4536,7 @@ paths:
         - $ref: "#/components/parameters/external_link_token"
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             # TODO: Actually "application/x-zip-compressed", but dtable-web does not accept this when specified inside an "Accept" header
             application/json: {}
@@ -4374,7 +4548,7 @@ paths:
       summary: Export Big Data View to Excel
       operationId: exportBigDataView
       description: >-
-        Hier muss noch eine Beschreibung ergänzt werden
+        Exports a big data view as an Excel file. Returns a task ID that can be used to track the export progress.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -4384,7 +4558,7 @@ paths:
         - $ref: "#/components/parameters/view_id"
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             application/json:
               example: { "task_id": "1680694429195" }
@@ -4395,7 +4569,7 @@ paths:
         - Import & Export
       summary: Append Excel CSV
       operationId: appendToTableFromFile
-      description: Hier muss noch eine Beschreibung ergänzt werden.
+      description: Appends rows from an uploaded Excel or CSV file to an existing table.
       requestBody:
         content:
           multipart/form-data:
@@ -4465,7 +4639,7 @@ paths:
       description: >-
         List all the users sharing a base (except the current user). This
         request only lists off all the individual users sharing the base, which
-        does not includ groups and group members sharing this base.
+        does not include groups and group members sharing this base.
 
 
         To see which groups are sharing this base, use the request [List Groups Base is Shared To](/reference/listgroupshares).
@@ -4483,7 +4657,7 @@ paths:
                 type: object
               example:
                 user_list:
-                  - email: oe3jr7v949b946a3b200555db5de1d23@auth.local
+                  - email: 0e30070949b946a3b200555db5de1d23@auth.local
                     name: Robert Teamplayer
                     contact_email: teamplayer@example.com
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
@@ -4556,6 +4730,16 @@ paths:
       summary: Delete User Share
       operationId: deleteUserShare
       description: Stop sharing a base to a user.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  $ref: "#/components/schemas/user_account_email"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -4624,7 +4808,7 @@ paths:
                   "165":
                     - id: 355
                       workspace_id: 377
-                      uuid: 03d8b71c-84c7-4a16-b314-94c886dc170p
+                      uuid: 03d8b71c-84c7-4a16-b314-94c886dc170a
                       name: Surveys
                       creator: Robert Teamplayer
                       modifier: Robert Teamplayer
@@ -4873,15 +5057,34 @@ paths:
         - $ref: "#/components/parameters/base_name"
       responses:
         "200":
-          description: "ok"
+          description: OK
           content:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_name:
+                    type: string
+                  from_user:
+                    type: string
+                  from_user_name:
+                    type: string
+                  to_group_id:
+                    type: string
+                  to_group_name:
+                    type: string
+                  permission:
+                    type: string
+                  table_id:
+                    type: string
+                  view_id:
+                    type: string
               example:
                 id: 0
                 dtable_name: Example
-                from_user: 123abc456def789ghi123jkl456mno789@auth.local
+                from_user: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                 from_user_name: John Doe
                 to_group_id: "1"
                 to_group_name: Group One
@@ -4938,10 +5141,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_name:
+                    type: string
+                  from_user:
+                    type: string
+                  from_user_name:
+                    type: string
+                  to_group_id:
+                    type: string
+                  to_group_name:
+                    type: string
+                  permission:
+                    type: string
+                  table_id:
+                    type: string
+                  view_id:
+                    type: string
               example:
                 id: 0
                 dtable_name: Example
-                from_user: 123abc456def789ghi123jkl456mno789@auth.local
+                from_user: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@auth.local
                 from_user_name: John Doe
                 to_group_id: "1"
                 to_group_name: Group One
@@ -5083,6 +5305,27 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_name:
+                    type: string
+                  from_user:
+                    type: string
+                  from_user_name:
+                    type: string
+                  to_user:
+                    type: string
+                  to_user_name:
+                    type: string
+                  permission:
+                    type: string
+                  table_id:
+                    type: string
+                  view_id:
+                    type: string
+                  shared_name:
+                    type: string
               example:
                 id: 15
                 dtable_name: Example
@@ -5146,6 +5389,27 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_name:
+                    type: string
+                  from_user:
+                    type: string
+                  from_user_name:
+                    type: string
+                  to_user:
+                    type: string
+                  to_user_name:
+                    type: string
+                  permission:
+                    type: string
+                  table_id:
+                    type: string
+                  view_id:
+                    type: string
+                  shared_name:
+                    type: string
               example:
                 id: 15
                 dtable_name: Example
@@ -5226,10 +5490,10 @@ paths:
                 type: object
               example:
                 user_list:
-                  - email: 244b43hr6fy54bb4afa2c2cb7369d244@auth.local
+                  - email: 244b430060f54bb4afa2c2cb7369d244@auth.local
                     name: Ginger Ale
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
-                  - email: 8cb2a6da656876hgf42905bf1647fd3f@auth.local
+                  - email: 8cb2a6da65687600f42905bf1647fd3f@auth.local
                     name: Jasmin Tee
                     avatar_url: https://cloud.seatable.io/media/avatars/default.png
 
@@ -5240,6 +5504,7 @@ paths:
         - Sharing Links
       summary: List Base External Links
       operationId: listBaseExternalLinks
+      description: List all external links that have been created for a specific base.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -5298,6 +5563,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  url:
+                    type: string
+                  token:
+                    type: string
+                  is_custom:
+                    type: boolean
+                  permission:
+                    type: string
+                  is_expired:
+                    type: boolean
+                  expire_date:
+                    type: string
               example:
                 url: >-
                   https://cloud.seatable.io/dtable/external-links/custom/fleischkaesebroetchen/
@@ -5401,6 +5679,33 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  from_dtable:
+                    type: string
+                  creator:
+                    type: string
+                  creator_name:
+                    type: string
+                  token:
+                    type: string
+                  permission:
+                    type: string
+                  create_at:
+                    type: string
+                  view_cnt:
+                    type: integer
+                  table_id:
+                    type: string
+                  view_id:
+                    type: string
+                  url:
+                    type: string
+                  is_custom:
+                    type: boolean
+                  expire_date:
+                    type: string
               example:
                 id: 14
                 from_dtable: Example
@@ -5486,11 +5791,30 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  username:
+                    type: string
+                  permission:
+                    type: string
+                  token:
+                    type: string
+                  link:
+                    type: string
+                  dtable:
+                    type: string
+                  dtable_id:
+                    type: integer
+                  workspace_id:
+                    type: integer
+                  expire_date:
+                    type: string
+                  ctime:
+                    type: string
               example:
                 username: 876543216569491ba42905bf1647fd3f@auth.local
                 permission: rw
                 token: 65432148a9074901923d
-                link: https://cloud.seatable.io/dtable/links/65432148a9074901923d
+                link: https://cloud.seatable.io/dtable/links/65432148a9074901923d/
                 dtable: Example
                 dtable_id: 562
                 workspace_id: 2
@@ -5568,6 +5892,25 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  org_id:
+                    type: integer
+                  group_id:
+                    type: integer
+                  dtable_uuid:
+                    type: string
+                  table_id:
+                    type: string
+                  view_id:
+                    type: string
+                  created_at:
+                    type: string
+                  creator:
+                    type: string
+                  dataset_name:
+                    type: string
               example:
                 id: 9
                 org_id: 1
@@ -5627,7 +5970,7 @@ paths:
               type: object
               properties:
                 dst_dtable_uuid:
-                  $ref: "#/components/schemas/dtable_name"
+                  $ref: "#/components/schemas/dtable_uuid"
       security:
         - AccountTokenAuth: []
       parameters:
@@ -5687,6 +6030,19 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                  columns:
+                    type: array
+                    items:
+                      type: object
+                  related_user_list:
+                    type: array
+                    items:
+                      type: object
               example:
                 rows:
                   - _id: Sn7svBUYTTmup7WuMsJhGw
@@ -5829,7 +6185,7 @@ paths:
         - $ref: "#/components/parameters/dataset_id"
       responses:
         "200":
-          description: Successful response
+          description: OK
           content:
             application/json:
               schema:
@@ -6713,6 +7069,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_uuid:
+                    type: string
+                  run_condition:
+                    type: string
+                  trigger:
+                    type: object
+                  actions:
+                    type: array
+                    items:
+                      type: object
+                  creator:
+                    type: string
+                  ctime:
+                    type: string
+                  last_trigger_time:
+                    type: string
+                  is_valid:
+                    type: boolean
+                  trigger_count:
+                    type: integer
               example:
                 id: 12
                 dtable_uuid: a275d870-fd55-48e4-8c4a-5fd6f2549765
@@ -6728,7 +7107,7 @@ paths:
                 actions:
                   - type: notify
                     users:
-                      - 123456a6569491ba42905bf1647fd3f@auth.local
+                      - 1234560a6569491ba42905bf1647fd3f@auth.local
                     default_msg: Take a look at this!
                     _id: "365729"
                     users_column_key: ""
@@ -6772,6 +7151,29 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  dtable_uuid:
+                    type: string
+                  run_condition:
+                    type: string
+                  trigger:
+                    type: object
+                  actions:
+                    type: array
+                    items:
+                      type: object
+                  creator:
+                    type: string
+                  ctime:
+                    type: string
+                  last_trigger_time:
+                    type: string
+                  is_valid:
+                    type: boolean
+                  trigger_count:
+                    type: integer
               example:
                 id: 20
                 dtable_uuid: a275d870-fd55-48e4-8c4a-5fd6f2549765
@@ -6832,7 +7234,7 @@ paths:
         - $ref: "#/components/parameters/base_uuid"
       responses:
         "200":
-          description: Successful response indicating that the dtable was repaired.
+          description: OK indicating that the dtable was repaired.
           content:
             application/json:
               schema:
@@ -6841,6 +7243,8 @@ paths:
                   success:
                     type: boolean
                     example: true
+              example:
+                success: true
 
   # Notifications
   /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/notification-rules/:
@@ -7005,6 +7409,21 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  run_condition:
+                    type: string
+                  trigger:
+                    type: object
+                  action:
+                    type: object
+                  creator:
+                    type: string
+                  ctime:
+                    type: string
+                  last_trigger_time:
+                    type: string
               example:
                 id: 24
                 run_condition: per_update
@@ -7064,6 +7483,21 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  id:
+                    type: integer
+                  run_condition:
+                    type: string
+                  trigger:
+                    type: object
+                  action:
+                    type: object
+                  creator:
+                    type: string
+                  ctime:
+                    type: string
+                  last_trigger_time:
+                    type: string
               example:
                 id: 19
                 run_condition: per_day
@@ -7344,8 +7778,8 @@ paths:
         - $ref: "#/components/parameters/account_name"
         - $ref: "#/components/parameters/base_uuid"
       responses:
-        "400":
-          description: Bad Request
+        "200":
+          description: OK
           content:
             application/json:
               schema:
@@ -7496,7 +7930,7 @@ paths:
                 webhook:
                   id: 1
                   dtable_uuid: 12345678-7e27-46a8-8b18-6cc6f3db2057
-                  url: https://www.seatable.io
+                  url: https://seatable.com
                   creator: 123456786569491ba42905bf1647fd3f@auth.local
                   created_at: "2021-03-16T14:27:58.873621"
                   settings:
@@ -7621,7 +8055,7 @@ paths:
         - Snapshots
       summary: List Big Data Backups
       operationId: listBigDataBackups
-      description: List all all available big data backups.
+      description: List all available big data backups.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -7667,7 +8101,7 @@ paths:
         - Apps
       summary: List Apps
       operationId: listApps
-      description: Hier muss noch eine Beschreibung ergänzt werden
+      description: Lists all universal apps that you manage or have access to.
       security:
         - AccountTokenAuth: []
       responses:
@@ -7686,7 +8120,7 @@ paths:
                         "app_id": 20,
                         "app_name": "test",
                         "app_token": "5863cf72-a3fa-488a-84cd-d02d2c578660",
-                        "app_config": '{"app_type": "universal-app", "app_name": "test", "settings": {"pages": [{"id": "XtTu", "name": "test", "type": "custom_page", "icon": "app-gallery", "content_url": "https://stage.seatable.io/workspace/3/asset/2d0d0c32-5e79-4437-a414-766ade7618a5/external-apps/XtTu/XtTu.json", "trigger_workflow_option": {"can_trigger_workflow": false}}], "navigation": [{"id": "XtTu", "type": "page"}]}, "use_custom_icon": false, "icon_class_name": "customer-contract-management", "app_icon": "", "app_theme_mode": "dark", "icon_color_index": 0, "app_theme_color": "#FF8000"}',
+                        "app_config": '{"app_type": "universal-app", "app_name": "test", "settings": {"pages": [{"id": "XtTu", "name": "test", "type": "custom_page", "icon": "app-gallery", "content_url": "https://cloud.seatable.io/workspace/3/asset/2d0d0c32-5e79-4437-a414-766ade7618a5/external-apps/XtTu/XtTu.json", "trigger_workflow_option": {"can_trigger_workflow": false}}], "navigation": [{"id": "XtTu", "type": "page"}]}, "use_custom_icon": false, "icon_class_name": "customer-contract-management", "app_icon": "", "app_theme_mode": "dark", "icon_color_index": 0, "app_theme_color": "#FF8000"}',
                         "role_name": "admin",
                         "permission": "rw",
                         "dtable_uuid": "2d0d0c325e794437a414766ade7618a5",
@@ -7701,7 +8135,7 @@ paths:
                         "app_id": 23,
                         "app_name": "app",
                         "app_token": "00252a1e-6b47-4df6-bfe7-c69eb8a9f905",
-                        "app_config": '{"app_type": "universal-app", "app_name": "app", "settings": {"pages": [{"id": "IpvJ", "name": "test", "type": "custom_page", "icon": "app-form", "content_url": "https://stage.seatable.io/workspace/3/asset/a81922f3-ead6-4904-942e-4617402b8006/external-apps/IpvJ/IpvJ.json", "trigger_workflow_option": {"can_trigger_workflow": false}}], "navigation": [{"id": "IpvJ", "type": "page"}]}, "use_custom_icon": false, "icon_class_name": "customer-contract-management", "app_icon": "", "app_theme_mode": "dark", "icon_color_index": 0, "app_theme_color": "#FF8000"}',
+                        "app_config": '{"app_type": "universal-app", "app_name": "app", "settings": {"pages": [{"id": "IpvJ", "name": "test", "type": "custom_page", "icon": "app-form", "content_url": "https://cloud.seatable.io/workspace/3/asset/a81922f3-ead6-4904-942e-4617402b8006/external-apps/IpvJ/IpvJ.json", "trigger_workflow_option": {"can_trigger_workflow": false}}], "navigation": [{"id": "IpvJ", "type": "page"}]}, "use_custom_icon": false, "icon_class_name": "customer-contract-management", "app_icon": "", "app_theme_mode": "dark", "icon_color_index": 0, "app_theme_color": "#FF8000"}',
                         "role_name": "admin",
                         "permission": "rw",
                         "dtable_uuid": "f80260f70ad246aca54ffa1a17bc9db6",
@@ -7736,7 +8170,7 @@ paths:
         - Apps
       summary: Import Users to App
       operationId: importUsersToApp
-      description: Hier muss noch eine Beschreibung ergänzt werden
+      description: Imports multiple users to a universal app in a single batch operation.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -7765,11 +8199,11 @@ paths:
                       "created_at": "2022-08-05T16:58:33+08:00",
                       "is_active": true,
                       "name": "org_guest",
-                      "app_name": "\u901a\u7528\u5e94\u7528-a",
+                      "app_name": "My App",
                       "role_id": 21,
                       "role_name": "default",
                       "role_permission": "rw",
-                      "avatar_url": "http://127.0.0.1:8000/media/avatars/default.png",
+                      "avatar_url": "https://cloud.seatable.io/media/avatars/default.png",
                     },
                   ]
 
@@ -7779,7 +8213,7 @@ paths:
         - Apps
       summary: List Universal App Users
       operationId: listUniversalAppUsers
-      description: Hier muss noch eine Beschreibung ergänzt werden
+      description: Lists all users of a specific universal app.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -7815,7 +8249,7 @@ paths:
         - Apps
       summary: List App Invite Links
       operationId: listAppInviteLinks
-      description: Hier muss noch eine Beschreibung ergänzt werden
+      description: Lists all invite links for a specific universal app.
       security:
         - AccountTokenAuth: []
       parameters:
@@ -7832,7 +8266,7 @@ paths:
                       {
                         "username": "145504ae043c438cbb55f2afb084d586@auth.local",
                         "token": "a3ec5042d7ae47f18c2e",
-                        "link": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e",
+                        "link": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e/",
                         "app_name": "Dgdfh",
                         "app_id": 72,
                         "expire_date": "",
@@ -7880,7 +8314,7 @@ paths:
                           "settings": { "pages": ["..."] },
                         },
                       "created_at": "2023-04-02T21:23:21+00:00",
-                      "external_app_url": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e",
+                      "external_app_url": "https://cloud.seatable.io/dtable/universal-app/links/a3ec5042d7ae47f18c2e/",
                       "visit_times": 3,
                       "creator": "Hulk",
                       "can_anonymous_access": false,
@@ -7953,8 +8387,8 @@ paths:
                     row_id: TMtyvDMNROq-dOJJqaqq9w
                     op_type: modify_row
                     author_email: "2d67c225c64f4305ada3e5820ce6d660@auth.local"
-                    author_name: "Hans Müller"
-                    author_contact_email: "hans@seatable.io"
+                    author_name: "John Smith"
+                    author_contact_email: "john@example.com"
                     op_time: "2023-06-29T15:21:19+02:00"
                     table_id: 0000
                     table_name: SeaTable API Docs
@@ -7979,7 +8413,7 @@ paths:
         - $ref: "#/components/parameters/per_page"
       responses:
         "200":
-          description: Successful response with the queried big data operation logs.
+          description: OK with the queried big data operation logs.
           content:
             application/json:
               schema:
@@ -8053,3 +8487,5 @@ paths:
                                 _id: "SQNJkddjSDGBdWBtdLZC6g"
                                 _last_modifier: "509fe338ed4f44099158d7143e4e4de3@auth.local"
                                 _mtime: "2024-08-19T11:53:13.103871879+08:00"
+              example:
+                operations: []

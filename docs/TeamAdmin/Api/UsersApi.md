@@ -17,7 +17,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 ## `addUser()`
 
 ```php
-addUser($org_id, $email, $name, $password, $with_workspace): object
+addUser($org_id, $email, $name, $password, $with_workspace): \SeaTable\Client\TeamAdmin\AddUser200Response
 ```
 
 Add User
@@ -62,7 +62,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\AddUser200Response**](../Model/AddUser200Response.md)
 
 ### Authorization
 
@@ -181,7 +181,7 @@ enforceTwofactor($org_id, $user_id, $enforce_twofactor_request): object
 
 Enforce 2FA
 
-As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `true` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `false` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necesssarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
+As the team administrator, you can force each team member to use 2-factor authentication (2FA).  When the value of `force_2fa` is `true` in this request, the member will be requested to activate 2FA by scanning a QR code next time they log in. To cancel enforcing them to use 2FA, change the value to `false` and send this request again.  This request is to be distinguished from the next request, because cancelling the enforcement doesn't necessarily [Disable 2FA for A User in Team](/reference/disabletwofactor-1), which serves a different purpose.
 
 ### Example
 
@@ -229,7 +229,7 @@ AccountTokenAuth
 ## `getUser()`
 
 ```php
-getUser($org_id, $user_id): object
+getUser($org_id, $user_id): \SeaTable\Client\TeamAdmin\GetUser200Response
 ```
 
 Get User
@@ -268,7 +268,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\GetUser200Response**](../Model/GetUser200Response.md)
 
 ### Authorization
 
@@ -384,7 +384,7 @@ AccountTokenAuth
 ## `updateUser()`
 
 ```php
-updateUser($org_id, $user_id, $name, $contact_email, $is_staff, $is_active, $quota_total, $id_in_org): object
+updateUser($org_id, $user_id, $name, $contact_email, $is_staff, $is_active, $quota_total, $id_in_org): \SeaTable\Client\TeamAdmin\UpdateUser200Response
 ```
 
 Update User
@@ -435,7 +435,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\TeamAdmin\UpdateUser200Response**](../Model/UpdateUser200Response.md)
 
 ### Authorization
 
