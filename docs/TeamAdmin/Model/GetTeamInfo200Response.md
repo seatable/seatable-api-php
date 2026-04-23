@@ -24,4 +24,6 @@ Name | Type | Description | Notes
 **automation_limit** | **int** |  | [optional]
 **scripts_running_total** | **int** |  | [optional]
 **scripts_running_count** | **int** |  | [optional]
+**ai_cost** | **float** |  | [optional]
+**ai_credit** | **float** |  | [optional]
 

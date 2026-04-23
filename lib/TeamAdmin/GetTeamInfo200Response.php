@@ -75,7 +75,9 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'automation_count' => 'int',
         'automation_limit' => 'int',
         'scripts_running_total' => 'int',
-        'scripts_running_count' => 'int'
+        'scripts_running_count' => 'int',
+        'ai_cost' => 'float',
+        'ai_credit' => 'float'
     ];
 
     /**
@@ -105,7 +107,9 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'automation_count' => null,
         'automation_limit' => null,
         'scripts_running_total' => null,
-        'scripts_running_count' => null
+        'scripts_running_count' => null,
+        'ai_cost' => null,
+        'ai_credit' => null
     ];
 
     /**
@@ -133,7 +137,9 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'automation_count' => false,
         'automation_limit' => false,
         'scripts_running_total' => false,
-        'scripts_running_count' => false
+        'scripts_running_count' => false,
+        'ai_cost' => false,
+        'ai_credit' => false
     ];
 
     /**
@@ -241,7 +247,9 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'automation_count' => 'automation_count',
         'automation_limit' => 'automation_limit',
         'scripts_running_total' => 'scripts_running_total',
-        'scripts_running_count' => 'scripts_running_count'
+        'scripts_running_count' => 'scripts_running_count',
+        'ai_cost' => 'ai_cost',
+        'ai_credit' => 'ai_credit'
     ];
 
     /**
@@ -269,7 +277,9 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'automation_count' => 'setAutomationCount',
         'automation_limit' => 'setAutomationLimit',
         'scripts_running_total' => 'setScriptsRunningTotal',
-        'scripts_running_count' => 'setScriptsRunningCount'
+        'scripts_running_count' => 'setScriptsRunningCount',
+        'ai_cost' => 'setAiCost',
+        'ai_credit' => 'setAiCredit'
     ];
 
     /**
@@ -297,7 +307,9 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'automation_count' => 'getAutomationCount',
         'automation_limit' => 'getAutomationLimit',
         'scripts_running_total' => 'getScriptsRunningTotal',
-        'scripts_running_count' => 'getScriptsRunningCount'
+        'scripts_running_count' => 'getScriptsRunningCount',
+        'ai_cost' => 'getAiCost',
+        'ai_credit' => 'getAiCredit'
     ];
 
     /**
@@ -377,6 +389,8 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('automation_limit', $data ?? [], null);
         $this->setIfExists('scripts_running_total', $data ?? [], null);
         $this->setIfExists('scripts_running_count', $data ?? [], null);
+        $this->setIfExists('ai_cost', $data ?? [], null);
+        $this->setIfExists('ai_credit', $data ?? [], null);
     }
 
     /**
@@ -957,6 +971,60 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable scripts_running_count cannot be null');
         }
         $this->container['scripts_running_count'] = $scripts_running_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets ai_cost
+     *
+     * @return float|null
+     */
+    public function getAiCost()
+    {
+        return $this->container['ai_cost'];
+    }
+
+    /**
+     * Sets ai_cost
+     *
+     * @param float|null $ai_cost ai_cost
+     *
+     * @return self
+     */
+    public function setAiCost($ai_cost)
+    {
+        if (is_null($ai_cost)) {
+            throw new \InvalidArgumentException('non-nullable ai_cost cannot be null');
+        }
+        $this->container['ai_cost'] = $ai_cost;
+
+        return $this;
+    }
+
+    /**
+     * Gets ai_credit
+     *
+     * @return float|null
+     */
+    public function getAiCredit()
+    {
+        return $this->container['ai_credit'];
+    }
+
+    /**
+     * Sets ai_credit
+     *
+     * @param float|null $ai_credit ai_credit
+     *
+     * @return self
+     */
+    public function setAiCredit($ai_credit)
+    {
+        if (is_null($ai_credit)) {
+            throw new \InvalidArgumentException('non-nullable ai_credit cannot be null');
+        }
+        $this->container['ai_credit'] = $ai_credit;
 
         return $this;
     }
