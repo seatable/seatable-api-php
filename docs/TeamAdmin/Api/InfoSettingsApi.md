@@ -111,7 +111,7 @@ getTeamSettings(): \SeaTable\Client\TeamAdmin\GetTeamSettings200Response
 
 Get Team Settings
 
-List the current organization settings.  **Return Values**  `enable_force_2fa`: if the 2-factor-authentication is forced (`true` or `false`).  `enable_new_user_email`: if newly added users will get a system email (`true` or `false`).  `enable_external_user_access_invite_link`: if external users can access bases via invite links (`true` or `false`).  `enable_member_modify_name`: if members are allowed to change their names (`true` or `false`).
+List the current organization settings.  **Return Values**  `enable_force_2fa`: if the 2-factor-authentication is forced (`true` or `false`).  `enable_force_sso_login`: if login via single-sign on (SSO) is enforced (`true` or `false`).  `enable_new_user_email`: if newly added users will get a system email (`true` or `false`).  `enable_external_user_access_invite_link`: if external users can access bases via invite links (`true` or `false`).  `enable_member_modify_name`: if members are allowed to change their names (`true` or `false`).
 
 ### Example
 

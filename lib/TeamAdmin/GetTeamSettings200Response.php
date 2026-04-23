@@ -57,8 +57,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static $openAPITypes = [
         'enable_force_2fa' => 'bool',
+        'enable_force_sso_login' => 'bool',
         'enable_new_user_email' => 'bool',
-        'enable_external_user_access_invite_link' => 'bool'
+        'enable_external_user_access_invite_link' => 'bool',
+        'enable_member_modify_name' => 'bool'
     ];
 
     /**
@@ -70,8 +72,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static $openAPIFormats = [
         'enable_force_2fa' => null,
+        'enable_force_sso_login' => null,
         'enable_new_user_email' => null,
-        'enable_external_user_access_invite_link' => null
+        'enable_external_user_access_invite_link' => null,
+        'enable_member_modify_name' => null
     ];
 
     /**
@@ -81,8 +85,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static array $openAPINullables = [
         'enable_force_2fa' => false,
+        'enable_force_sso_login' => false,
         'enable_new_user_email' => false,
-        'enable_external_user_access_invite_link' => false
+        'enable_external_user_access_invite_link' => false,
+        'enable_member_modify_name' => false
     ];
 
     /**
@@ -172,8 +178,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     protected static $attributeMap = [
         'enable_force_2fa' => 'enable_force_2fa',
+        'enable_force_sso_login' => 'enable_force_sso_login',
         'enable_new_user_email' => 'enable_new_user_email',
-        'enable_external_user_access_invite_link' => 'enable_external_user_access_invite_link'
+        'enable_external_user_access_invite_link' => 'enable_external_user_access_invite_link',
+        'enable_member_modify_name' => 'enable_member_modify_name'
     ];
 
     /**
@@ -183,8 +191,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     protected static $setters = [
         'enable_force_2fa' => 'setEnableForce2fa',
+        'enable_force_sso_login' => 'setEnableForceSsoLogin',
         'enable_new_user_email' => 'setEnableNewUserEmail',
-        'enable_external_user_access_invite_link' => 'setEnableExternalUserAccessInviteLink'
+        'enable_external_user_access_invite_link' => 'setEnableExternalUserAccessInviteLink',
+        'enable_member_modify_name' => 'setEnableMemberModifyName'
     ];
 
     /**
@@ -194,8 +204,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     protected static $getters = [
         'enable_force_2fa' => 'getEnableForce2fa',
+        'enable_force_sso_login' => 'getEnableForceSsoLogin',
         'enable_new_user_email' => 'getEnableNewUserEmail',
-        'enable_external_user_access_invite_link' => 'getEnableExternalUserAccessInviteLink'
+        'enable_external_user_access_invite_link' => 'getEnableExternalUserAccessInviteLink',
+        'enable_member_modify_name' => 'getEnableMemberModifyName'
     ];
 
     /**
@@ -256,8 +268,10 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
     public function __construct(?array $data = null)
     {
         $this->setIfExists('enable_force_2fa', $data ?? [], null);
+        $this->setIfExists('enable_force_sso_login', $data ?? [], null);
         $this->setIfExists('enable_new_user_email', $data ?? [], null);
         $this->setIfExists('enable_external_user_access_invite_link', $data ?? [], null);
+        $this->setIfExists('enable_member_modify_name', $data ?? [], null);
     }
 
     /**
@@ -330,6 +344,33 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
     }
 
     /**
+     * Gets enable_force_sso_login
+     *
+     * @return bool|null
+     */
+    public function getEnableForceSsoLogin()
+    {
+        return $this->container['enable_force_sso_login'];
+    }
+
+    /**
+     * Sets enable_force_sso_login
+     *
+     * @param bool|null $enable_force_sso_login enable_force_sso_login
+     *
+     * @return self
+     */
+    public function setEnableForceSsoLogin($enable_force_sso_login)
+    {
+        if (is_null($enable_force_sso_login)) {
+            throw new \InvalidArgumentException('non-nullable enable_force_sso_login cannot be null');
+        }
+        $this->container['enable_force_sso_login'] = $enable_force_sso_login;
+
+        return $this;
+    }
+
+    /**
      * Gets enable_new_user_email
      *
      * @return bool|null
@@ -379,6 +420,33 @@ class GetTeamSettings200Response implements ModelInterface, ArrayAccess, \JsonSe
             throw new \InvalidArgumentException('non-nullable enable_external_user_access_invite_link cannot be null');
         }
         $this->container['enable_external_user_access_invite_link'] = $enable_external_user_access_invite_link;
+
+        return $this;
+    }
+
+    /**
+     * Gets enable_member_modify_name
+     *
+     * @return bool|null
+     */
+    public function getEnableMemberModifyName()
+    {
+        return $this->container['enable_member_modify_name'];
+    }
+
+    /**
+     * Sets enable_member_modify_name
+     *
+     * @param bool|null $enable_member_modify_name enable_member_modify_name
+     *
+     * @return self
+     */
+    public function setEnableMemberModifyName($enable_member_modify_name)
+    {
+        if (is_null($enable_member_modify_name)) {
+            throw new \InvalidArgumentException('non-nullable enable_member_modify_name cannot be null');
+        }
+        $this->container['enable_member_modify_name'] = $enable_member_modify_name;
 
         return $this;
     }
