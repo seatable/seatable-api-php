@@ -3,7 +3,7 @@ info:
   title: Base Operations
   description: >-
     The official SeaTable API Reference (OpenAPI 3.0).
-  version: "6.1"
+  version: "6.2"
 servers:
   - url: "https://{server}"
     variables:
@@ -4288,7 +4288,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  type: object
               example:
                 - id: 1
                   author: 28d006e7d1754bb4afa2c2cb7369d244@auth.local
@@ -4314,6 +4316,33 @@ paths:
                   created_at: "2021-01-15T13:53:13.000Z"
                   updated_at: "2021-01-15T13:53:13.000Z"
                   resolved: 1
+    post:
+      tags:
+        - Row Comments
+      summary: Create Row Comment
+      operationId: createRowComment
+      description: >-
+        Create a comment for a certain row.
+      security:
+        - BaseTokenAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/create_row_comment"
+      parameters:
+        - $ref: "#/components/parameters/base_uuid"
+        - $ref: "#/components/parameters/table_id"
+        - $ref: "#/components/parameters/row_id"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success:true
   /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/:
     delete:
       tags:
@@ -4321,13 +4350,7 @@ paths:
       summary: Delete Comment
       operationId: deleteComment
       deprecated: true
-      description: >-
-        Delete a certain comment by its ID.
-
-
-        > 🚧 Creating comments via the API Gateway is not yet supported.
-        This will be fixed in SeaTable 6.2. Until then, comments can only be
-        created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
+      description: Delete a certain comment by its ID.
       security:
         - BaseTokenAuth: []
       parameters:
@@ -4348,13 +4371,7 @@ paths:
       summary: Get Comment
       operationId: getComment
       deprecated: true
-      description: >-
-        Get the details of a certain comment with its ID.
-
-
-        > 🚧 Creating comments via the API Gateway is not yet supported.
-        This will be fixed in SeaTable 6.2. Until then, comments can only be
-        created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
+      description: Get the details of a certain comment with its ID.
       security:
         - BaseTokenAuth: []
       parameters:
