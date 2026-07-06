@@ -676,7 +676,7 @@ class ImportExportApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/x-zip-compressed', ],
             $contentType,
             $multipart
         );
@@ -898,7 +898,7 @@ class ImportExportApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/x-zip-compressed', ],
             $contentType,
             $multipart
         );
