@@ -490,7 +490,6 @@ class RowCommentsApi
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return object
-     * @deprecated
      */
     public function deleteComment($base_uuid, $comment_id, string $contentType = self::contentTypes['deleteComment'][0])
     {
@@ -510,7 +509,6 @@ class RowCommentsApi
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
-     * @deprecated
      */
     public function deleteCommentWithHttpInfo($base_uuid, $comment_id, string $contentType = self::contentTypes['deleteComment'][0])
     {
@@ -596,7 +594,6 @@ class RowCommentsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
-     * @deprecated
      */
     public function deleteCommentAsync($base_uuid, $comment_id, string $contentType = self::contentTypes['deleteComment'][0])
     {
@@ -619,7 +616,6 @@ class RowCommentsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
-     * @deprecated
      */
     public function deleteCommentAsyncWithHttpInfo($base_uuid, $comment_id, string $contentType = self::contentTypes['deleteComment'][0])
     {
@@ -671,7 +667,6 @@ class RowCommentsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
-     * @deprecated
      */
     public function deleteCommentRequest($base_uuid, $comment_id, string $contentType = self::contentTypes['deleteComment'][0])
     {
@@ -793,7 +788,6 @@ class RowCommentsApi
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \SeaTable\Client\Base\GetComment200Response
-     * @deprecated
      */
     public function getComment($base_uuid, $comment_id, string $contentType = self::contentTypes['getComment'][0])
     {
@@ -813,7 +807,6 @@ class RowCommentsApi
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \SeaTable\Client\Base\GetComment200Response, HTTP status code, HTTP response headers (array of strings)
-     * @deprecated
      */
     public function getCommentWithHttpInfo($base_uuid, $comment_id, string $contentType = self::contentTypes['getComment'][0])
     {
@@ -899,7 +892,6 @@ class RowCommentsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
-     * @deprecated
      */
     public function getCommentAsync($base_uuid, $comment_id, string $contentType = self::contentTypes['getComment'][0])
     {
@@ -922,7 +914,6 @@ class RowCommentsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
-     * @deprecated
      */
     public function getCommentAsyncWithHttpInfo($base_uuid, $comment_id, string $contentType = self::contentTypes['getComment'][0])
     {
@@ -974,7 +965,6 @@ class RowCommentsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
-     * @deprecated
      */
     public function getCommentRequest($base_uuid, $comment_id, string $contentType = self::contentTypes['getComment'][0])
     {
