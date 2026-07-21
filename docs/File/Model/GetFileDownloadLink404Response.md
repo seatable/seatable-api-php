@@ -1,4 +1,4 @@
-# # GetFileDownloadLink400Response
+# # GetFileDownloadLink404Response
 
 ## Properties
 

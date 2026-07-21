@@ -4,12 +4,68 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createRowComment()**](RowCommentsApi.md#createRowComment) | **POST** /api-gateway/api/v2/dtables/{base_uuid}/comments/ | Create Row Comment |
 | [**deleteComment()**](RowCommentsApi.md#deleteComment) | **DELETE** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Delete Comment |
 | [**getComment()**](RowCommentsApi.md#getComment) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/{comment_id}/ | Get Comment |
 | [**getNumberOfComments()**](RowCommentsApi.md#getNumberOfComments) | **GET** /api/v2.1/dtables/{base_uuid}/rows-comments-num/ | Get Number of Comments |
 | [**getRowCommentsCount()**](RowCommentsApi.md#getRowCommentsCount) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-count/ | Get Row Comments Count |
 | [**listCommentsWithinDays()**](RowCommentsApi.md#listCommentsWithinDays) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments-within-days/ | List Comments within Days |
 | [**listRowComments()**](RowCommentsApi.md#listRowComments) | **GET** /api-gateway/api/v2/dtables/{base_uuid}/comments/ | List Row Comments |
+
+
+## `createRowComment()`
+
+```php
+createRowComment($base_uuid, $table_id, $row_id, $create_row_comment): object
+```
+
+Create Row Comment
+
+Create a comment for a certain row.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: BaseTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\Base\RowCommentsApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+$table_id = 0000; // string | The id of the table. The id of a table is unique inside a base and is often used to identify a table.
+$row_id = YMIviMeERQCUiQhPPqo6Gw; // string | Unique id of a row.
+$create_row_comment = new \SeaTable\Client\Base\CreateRowComment(); // \SeaTable\Client\Base\CreateRowComment
+
+try {
+    $result = $apiInstance->createRowComment($base_uuid, $table_id, $row_id, $create_row_comment);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling RowCommentsApi->createRowComment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+| **table_id** | **string**| The id of the table. The id of a table is unique inside a base and is often used to identify a table. | |
+| **row_id** | **string**| Unique id of a row. | |
+| **create_row_comment** | [**\SeaTable\Client\Base\CreateRowComment**](../Model/CreateRowComment.md)|  | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+BaseTokenAuth
+
+
 
 
 ## `deleteComment()`
@@ -20,7 +76,7 @@ deleteComment($base_uuid, $comment_id): object
 
 Delete Comment
 
-Delete a certain comment by its ID.  > 🚧 Creating comments via the API Gateway is not yet supported. This will be fixed in SeaTable 6.2. Until then, comments can only be created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
+Delete a certain comment by its ID.
 
 ### Example
 
@@ -71,7 +127,7 @@ getComment($base_uuid, $comment_id): \SeaTable\Client\Base\GetComment200Response
 
 Get Comment
 
-Get the details of a certain comment with its ID.  > 🚧 Creating comments via the API Gateway is not yet supported. This will be fixed in SeaTable 6.2. Until then, comments can only be created via `POST /api/v2.1/dtables/{dtable_uuid}/comments/` (dtable-web).
+Get the details of a certain comment with its ID.
 
 ### Example
 
@@ -268,7 +324,7 @@ BaseTokenAuth
 ## `listRowComments()`
 
 ```php
-listRowComments($base_uuid, $row_id): object
+listRowComments($base_uuid, $row_id): object[]
 ```
 
 List Row Comments
@@ -307,7 +363,7 @@ try {
 
 ### Return type
 
-**object**
+**object[]**
 
 ### Authorization
 
