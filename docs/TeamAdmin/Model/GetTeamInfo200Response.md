@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **api_calls_limit** | **int** |  | [optional]
 **automation_count** | **int** |  | [optional]
 **automation_limit** | **int** |  | [optional]
-**scripts_running_total** | **int** |  | [optional]
+**scripts_running_limit** | **int** |  | [optional]
 **scripts_running_count** | **int** |  | [optional]
 **ai_cost** | **float** |  | [optional]
 **ai_credit** | **float** |  | [optional]
