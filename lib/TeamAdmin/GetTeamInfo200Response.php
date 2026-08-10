@@ -74,7 +74,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'api_calls_limit' => 'int',
         'automation_count' => 'int',
         'automation_limit' => 'int',
-        'scripts_running_total' => 'int',
+        'scripts_running_limit' => 'int',
         'scripts_running_count' => 'int',
         'ai_cost' => 'float',
         'ai_credit' => 'float'
@@ -106,7 +106,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'api_calls_limit' => null,
         'automation_count' => null,
         'automation_limit' => null,
-        'scripts_running_total' => null,
+        'scripts_running_limit' => null,
         'scripts_running_count' => null,
         'ai_cost' => null,
         'ai_credit' => null
@@ -136,7 +136,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'api_calls_limit' => false,
         'automation_count' => false,
         'automation_limit' => false,
-        'scripts_running_total' => false,
+        'scripts_running_limit' => false,
         'scripts_running_count' => false,
         'ai_cost' => false,
         'ai_credit' => false
@@ -246,7 +246,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'api_calls_limit' => 'api_calls_limit',
         'automation_count' => 'automation_count',
         'automation_limit' => 'automation_limit',
-        'scripts_running_total' => 'scripts_running_total',
+        'scripts_running_limit' => 'scripts_running_limit',
         'scripts_running_count' => 'scripts_running_count',
         'ai_cost' => 'ai_cost',
         'ai_credit' => 'ai_credit'
@@ -276,7 +276,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'api_calls_limit' => 'setApiCallsLimit',
         'automation_count' => 'setAutomationCount',
         'automation_limit' => 'setAutomationLimit',
-        'scripts_running_total' => 'setScriptsRunningTotal',
+        'scripts_running_limit' => 'setScriptsRunningLimit',
         'scripts_running_count' => 'setScriptsRunningCount',
         'ai_cost' => 'setAiCost',
         'ai_credit' => 'setAiCredit'
@@ -306,7 +306,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         'api_calls_limit' => 'getApiCallsLimit',
         'automation_count' => 'getAutomationCount',
         'automation_limit' => 'getAutomationLimit',
-        'scripts_running_total' => 'getScriptsRunningTotal',
+        'scripts_running_limit' => 'getScriptsRunningLimit',
         'scripts_running_count' => 'getScriptsRunningCount',
         'ai_cost' => 'getAiCost',
         'ai_credit' => 'getAiCredit'
@@ -387,7 +387,7 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('api_calls_limit', $data ?? [], null);
         $this->setIfExists('automation_count', $data ?? [], null);
         $this->setIfExists('automation_limit', $data ?? [], null);
-        $this->setIfExists('scripts_running_total', $data ?? [], null);
+        $this->setIfExists('scripts_running_limit', $data ?? [], null);
         $this->setIfExists('scripts_running_count', $data ?? [], null);
         $this->setIfExists('ai_cost', $data ?? [], null);
         $this->setIfExists('ai_credit', $data ?? [], null);
@@ -922,28 +922,28 @@ class GetTeamInfo200Response implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
-     * Gets scripts_running_total
+     * Gets scripts_running_limit
      *
      * @return int|null
      */
-    public function getScriptsRunningTotal()
+    public function getScriptsRunningLimit()
     {
-        return $this->container['scripts_running_total'];
+        return $this->container['scripts_running_limit'];
     }
 
     /**
-     * Sets scripts_running_total
+     * Sets scripts_running_limit
      *
-     * @param int|null $scripts_running_total scripts_running_total
+     * @param int|null $scripts_running_limit scripts_running_limit
      *
      * @return self
      */
-    public function setScriptsRunningTotal($scripts_running_total)
+    public function setScriptsRunningLimit($scripts_running_limit)
     {
-        if (is_null($scripts_running_total)) {
-            throw new \InvalidArgumentException('non-nullable scripts_running_total cannot be null');
+        if (is_null($scripts_running_limit)) {
+            throw new \InvalidArgumentException('non-nullable scripts_running_limit cannot be null');
         }
-        $this->container['scripts_running_total'] = $scripts_running_total;
+        $this->container['scripts_running_limit'] = $scripts_running_limit;
 
         return $this;
     }
