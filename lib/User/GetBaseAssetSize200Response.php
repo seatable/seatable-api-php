@@ -1,6 +1,6 @@
 <?php
 /**
- * AutonumberColumn
+ * GetBaseAssetSize200Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Base Operations
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,22 +25,21 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\Base;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * AutonumberColumn Class Doc Comment
+ * GetBaseAssetSize200Response Class Doc Comment
  *
  * @category Class
- * @description Add an auto number column.
  * @package  SeaTable\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetBaseAssetSize200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +48,7 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'autonumber_column';
+    protected static $openAPIModelName = 'getBaseAssetSize_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +56,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'column_name' => 'string',
-        'column_type' => 'string',
-        'anchor_column' => 'string',
-        'column_data' => '\SeaTable\Client\Base\AutonumberColumnFormat'
+        'asset_size' => 'int',
+        'max_size_of_export' => 'int',
+        'unit' => 'string',
+        'can_export_asset' => 'bool'
     ];
 
     /**
@@ -71,10 +70,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'column_name' => null,
-        'column_type' => null,
-        'anchor_column' => null,
-        'column_data' => null
+        'asset_size' => null,
+        'max_size_of_export' => null,
+        'unit' => null,
+        'can_export_asset' => null
     ];
 
     /**
@@ -83,10 +82,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'column_name' => false,
-        'column_type' => false,
-        'anchor_column' => false,
-        'column_data' => false
+        'asset_size' => false,
+        'max_size_of_export' => false,
+        'unit' => false,
+        'can_export_asset' => false
     ];
 
     /**
@@ -175,10 +174,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'column_name' => 'column_name',
-        'column_type' => 'column_type',
-        'anchor_column' => 'anchor_column',
-        'column_data' => 'column_data'
+        'asset_size' => 'asset_size',
+        'max_size_of_export' => 'max_size_of_export',
+        'unit' => 'unit',
+        'can_export_asset' => 'can_export_asset'
     ];
 
     /**
@@ -187,10 +186,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'column_name' => 'setColumnName',
-        'column_type' => 'setColumnType',
-        'anchor_column' => 'setAnchorColumn',
-        'column_data' => 'setColumnData'
+        'asset_size' => 'setAssetSize',
+        'max_size_of_export' => 'setMaxSizeOfExport',
+        'unit' => 'setUnit',
+        'can_export_asset' => 'setCanExportAsset'
     ];
 
     /**
@@ -199,10 +198,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'column_name' => 'getColumnName',
-        'column_type' => 'getColumnType',
-        'anchor_column' => 'getAnchorColumn',
-        'column_data' => 'getColumnData'
+        'asset_size' => 'getAssetSize',
+        'max_size_of_export' => 'getMaxSizeOfExport',
+        'unit' => 'getUnit',
+        'can_export_asset' => 'getCanExportAsset'
     ];
 
     /**
@@ -246,19 +245,6 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const COLUMN_TYPE_AUTO_NUMBER = 'auto-number';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getColumnTypeAllowableValues()
-    {
-        return [
-            self::COLUMN_TYPE_AUTO_NUMBER,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -275,10 +261,10 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('column_name', $data ?? [], null);
-        $this->setIfExists('column_type', $data ?? [], null);
-        $this->setIfExists('anchor_column', $data ?? [], null);
-        $this->setIfExists('column_data', $data ?? [], null);
+        $this->setIfExists('asset_size', $data ?? [], null);
+        $this->setIfExists('max_size_of_export', $data ?? [], null);
+        $this->setIfExists('unit', $data ?? [], null);
+        $this->setIfExists('can_export_asset', $data ?? [], null);
     }
 
     /**
@@ -308,25 +294,6 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['column_name'] === null) {
-            $invalidProperties[] = "'column_name' can't be null";
-        }
-        if (!preg_match("/^[^.}{`]*$/", $this->container['column_name'])) {
-            $invalidProperties[] = "invalid value for 'column_name', must be conform to the pattern /^[^.}{`]*$/.";
-        }
-
-        if ($this->container['column_type'] === null) {
-            $invalidProperties[] = "'column_type' can't be null";
-        }
-        $allowedValues = $this->getColumnTypeAllowableValues();
-        if (!is_null($this->container['column_type']) && !in_array($this->container['column_type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'column_type', must be one of '%s'",
-                $this->container['column_type'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -343,124 +310,109 @@ class AutonumberColumn implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets column_name
+     * Gets asset_size
      *
-     * @return string
+     * @return int|null
      */
-    public function getColumnName()
+    public function getAssetSize()
     {
-        return $this->container['column_name'];
+        return $this->container['asset_size'];
     }
 
     /**
-     * Sets column_name
+     * Sets asset_size
      *
-     * @param string $column_name The name of the column.
+     * @param int|null $asset_size Total size of all assets of the base.
      *
      * @return self
      */
-    public function setColumnName($column_name)
+    public function setAssetSize($asset_size)
     {
-        if (is_null($column_name)) {
-            throw new \InvalidArgumentException('non-nullable column_name cannot be null');
+        if (is_null($asset_size)) {
+            throw new \InvalidArgumentException('non-nullable asset_size cannot be null');
         }
-
-        if ((!preg_match("/^[^.}{`]*$/", ObjectSerializer::toString($column_name)))) {
-            throw new \InvalidArgumentException("invalid value for \$column_name when calling AutonumberColumn., must conform to the pattern /^[^.}{`]*$/.");
-        }
-
-        $this->container['column_name'] = $column_name;
+        $this->container['asset_size'] = $asset_size;
 
         return $this;
     }
 
     /**
-     * Gets column_type
+     * Gets max_size_of_export
      *
-     * @return string
+     * @return int|null
      */
-    public function getColumnType()
+    public function getMaxSizeOfExport()
     {
-        return $this->container['column_type'];
+        return $this->container['max_size_of_export'];
     }
 
     /**
-     * Sets column_type
+     * Sets max_size_of_export
      *
-     * @param string $column_type column_type
+     * @param int|null $max_size_of_export Maximum asset size that can be included in an export.
      *
      * @return self
      */
-    public function setColumnType($column_type)
+    public function setMaxSizeOfExport($max_size_of_export)
     {
-        if (is_null($column_type)) {
-            throw new \InvalidArgumentException('non-nullable column_type cannot be null');
+        if (is_null($max_size_of_export)) {
+            throw new \InvalidArgumentException('non-nullable max_size_of_export cannot be null');
         }
-        $allowedValues = $this->getColumnTypeAllowableValues();
-        if (!in_array($column_type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'column_type', must be one of '%s'",
-                    $column_type,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['column_type'] = $column_type;
+        $this->container['max_size_of_export'] = $max_size_of_export;
 
         return $this;
     }
 
     /**
-     * Gets anchor_column
+     * Gets unit
      *
      * @return string|null
      */
-    public function getAnchorColumn()
+    public function getUnit()
     {
-        return $this->container['anchor_column'];
+        return $this->container['unit'];
     }
 
     /**
-     * Sets anchor_column
+     * Sets unit
      *
-     * @param string|null $anchor_column Give the name or the key of a column after you would like to add this new column. If you leave this empty, the new column will be created at the end.
+     * @param string|null $unit Unit of the returned sizes.
      *
      * @return self
      */
-    public function setAnchorColumn($anchor_column)
+    public function setUnit($unit)
     {
-        if (is_null($anchor_column)) {
-            throw new \InvalidArgumentException('non-nullable anchor_column cannot be null');
+        if (is_null($unit)) {
+            throw new \InvalidArgumentException('non-nullable unit cannot be null');
         }
-        $this->container['anchor_column'] = $anchor_column;
+        $this->container['unit'] = $unit;
 
         return $this;
     }
 
     /**
-     * Gets column_data
+     * Gets can_export_asset
      *
-     * @return \SeaTable\Client\Base\AutonumberColumnFormat|null
+     * @return bool|null
      */
-    public function getColumnData()
+    public function getCanExportAsset()
     {
-        return $this->container['column_data'];
+        return $this->container['can_export_asset'];
     }
 
     /**
-     * Sets column_data
+     * Sets can_export_asset
      *
-     * @param \SeaTable\Client\Base\AutonumberColumnFormat|null $column_data column_data
+     * @param bool|null $can_export_asset Whether the assets of this base can be included in an export.
      *
      * @return self
      */
-    public function setColumnData($column_data)
+    public function setCanExportAsset($can_export_asset)
     {
-        if (is_null($column_data)) {
-            throw new \InvalidArgumentException('non-nullable column_data cannot be null');
+        if (is_null($can_export_asset)) {
+            throw new \InvalidArgumentException('non-nullable can_export_asset cannot be null');
         }
-        $this->container['column_data'] = $column_data;
+        $this->container['can_export_asset'] = $can_export_asset;
 
         return $this;
     }
