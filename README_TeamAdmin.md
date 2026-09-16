@@ -19,6 +19,7 @@ Class | Method | HTTP request | Description
 *BasesApi* | [**listApiTokensOfAllBases**](docs/TeamAdmin/Api/BasesApi.md#listapitokensofallbases) | **GET** /api/v2.1/org/{org_id}/admin/api-tokens/ | List API-Tokens of All Bases
 *BasesApi* | [**listBaseSharings**](docs/TeamAdmin/Api/BasesApi.md#listbasesharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/ | List Base Sharings
 *BasesApi* | [**listBases**](docs/TeamAdmin/Api/BasesApi.md#listbases) | **GET** /api/v2.1/org/{org_id}/admin/dtables/ | List Bases (Team)
+*BasesApi* | [**listBasesSharedToUser**](docs/TeamAdmin/Api/BasesApi.md#listbasessharedtouser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/shared-dtables/ | List Bases Shared to User
 *BasesApi* | [**listTrashBases**](docs/TeamAdmin/Api/BasesApi.md#listtrashbases) | **GET** /api/v2.1/org/{org_id}/admin/trash-dtables/ | List Trash Bases
 *BasesApi* | [**listUsersBases**](docs/TeamAdmin/Api/BasesApi.md#listusersbases) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/dtables/ | List User&#39;s Bases
 *BasesApi* | [**restoreBaseFromTrash**](docs/TeamAdmin/Api/BasesApi.md#restorebasefromtrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_uuid}/ | Restore Base from Trash
@@ -66,7 +67,9 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**disableTwoFactor**](docs/TeamAdmin/Api/UsersApi.md#disabletwofactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA
 *UsersApi* | [**enforceTwofactor**](docs/TeamAdmin/Api/UsersApi.md#enforcetwofactor) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA
 *UsersApi* | [**getUser**](docs/TeamAdmin/Api/UsersApi.md#getuser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Get User
+*UsersApi* | [**listManagedApps**](docs/TeamAdmin/Api/UsersApi.md#listmanagedapps) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/managed-external-apps/ | List Managed Apps
 *UsersApi* | [**listTeamUsers**](docs/TeamAdmin/Api/UsersApi.md#listteamusers) | **GET** /api/v2.1/org/{org_id}/admin/users/ | List Users (Team)
+*UsersApi* | [**listUsableApps**](docs/TeamAdmin/Api/UsersApi.md#listusableapps) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/can-use-external-apps/ | List Usable Apps
 *UsersApi* | [**resetUserPassword**](docs/TeamAdmin/Api/UsersApi.md#resetuserpassword) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/set-password/ | Reset User Password
 *UsersApi* | [**updateUser**](docs/TeamAdmin/Api/UsersApi.md#updateuser) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Update User
 
