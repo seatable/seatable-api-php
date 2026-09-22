@@ -12,6 +12,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**listApiTokensOfAllBases()**](BasesApi.md#listApiTokensOfAllBases) | **GET** /api/v2.1/org/{org_id}/admin/api-tokens/ | List API-Tokens of All Bases |
 | [**listBaseSharings()**](BasesApi.md#listBaseSharings) | **GET** /api/v2.1/org/{org_id}/admin/dtables/{base_uuid}/shares/ | List Base Sharings |
 | [**listBases()**](BasesApi.md#listBases) | **GET** /api/v2.1/org/{org_id}/admin/dtables/ | List Bases (Team) |
+| [**listBasesSharedToUser()**](BasesApi.md#listBasesSharedToUser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/shared-dtables/ | List Bases Shared to User |
 | [**listTrashBases()**](BasesApi.md#listTrashBases) | **GET** /api/v2.1/org/{org_id}/admin/trash-dtables/ | List Trash Bases |
 | [**listUsersBases()**](BasesApi.md#listUsersBases) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/dtables/ | List User&#39;s Bases |
 | [**restoreBaseFromTrash()**](BasesApi.md#restoreBaseFromTrash) | **PUT** /api/v2.1/org/{org_id}/admin/trash-dtables/{base_uuid}/ | Restore Base from Trash |
@@ -416,6 +417,61 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `listBasesSharedToUser()`
+
+```php
+listBasesSharedToUser($org_id, $user_id, $page, $per_page): object
+```
+
+List Bases Shared to User
+
+List all the bases shared to a certain user by the user's ID.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\BasesApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+
+try {
+    $result = $apiInstance->listBasesSharedToUser($org_id, $user_id, $page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BasesApi->listBasesSharedToUser: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 

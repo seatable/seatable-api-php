@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group_name** | **string** | The name of the new department. | [optional]
-**parent_group** | **string** | The ID of the parent department. Optional. -1 by default. | [optional]
+**name** | **string** | The name of the department. Has to be unique within the parent department. |
+**parent_id** | **int** | The ID of the parent department. Use &#x60;-1&#x60; to create the top-level department. |
+**org_id** | **int** | The ID of the team. Optional. &#x60;-1&#x60; (system-level department) by default. | [optional]
 
