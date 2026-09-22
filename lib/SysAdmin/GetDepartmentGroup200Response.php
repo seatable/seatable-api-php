@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * GetDepartmentGroup200Response
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * GetDepartmentGroup200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetDepartmentGroup200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'getDepartmentGroup_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'group_id' => 'int',
+        'group_name' => 'string'
     ];
 
     /**
@@ -67,7 +68,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'group_id' => null,
+        'group_name' => null
     ];
 
     /**
@@ -76,7 +78,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'group_id' => false,
+        'group_name' => false
     ];
 
     /**
@@ -165,7 +168,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'group_id' => 'group_id',
+        'group_name' => 'group_name'
     ];
 
     /**
@@ -174,7 +178,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'group_id' => 'setGroupId',
+        'group_name' => 'setGroupName'
     ];
 
     /**
@@ -183,7 +188,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'group_id' => 'getGroupId',
+        'group_name' => 'getGroupName'
     ];
 
     /**
@@ -243,7 +249,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('group_id', $data ?? [], null);
+        $this->setIfExists('group_name', $data ?? [], null);
     }
 
     /**
@@ -289,28 +296,55 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets group_id
      *
-     * @return object[]|null
+     * @return int|null
      */
-    public function getDepartmentList()
+    public function getGroupId()
     {
-        return $this->container['department_list'];
+        return $this->container['group_id'];
     }
 
     /**
-     * Sets department_list
+     * Sets group_id
      *
-     * @param object[]|null $department_list department_list
+     * @param int|null $group_id group_id
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setGroupId($group_id)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($group_id)) {
+            throw new \InvalidArgumentException('non-nullable group_id cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['group_id'] = $group_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets group_name
+     *
+     * @return string|null
+     */
+    public function getGroupName()
+    {
+        return $this->container['group_name'];
+    }
+
+    /**
+     * Sets group_name
+     *
+     * @param string|null $group_name group_name
+     *
+     * @return self
+     */
+    public function setGroupName($group_name)
+    {
+        if (is_null($group_name)) {
+            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
+        }
+        $this->container['group_name'] = $group_name;
 
         return $this;
     }

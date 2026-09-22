@@ -1,8 +1,8 @@
-# # ListDepartments200Response
+# # ListDepartmentMembers200Response
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**department_list** | **object[]** |  | [optional]
+**member_list** | **object[]** |  | [optional]
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * AddDepartmentMembersRequest
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Account Operations: System admin
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * AddDepartmentMembersRequest Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddDepartmentMembersRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'addDepartmentMembers_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'emails' => 'string'
     ];
 
     /**
@@ -67,7 +67,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'emails' => null
     ];
 
     /**
@@ -76,7 +76,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'emails' => false
     ];
 
     /**
@@ -165,7 +165,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'emails' => 'emails'
     ];
 
     /**
@@ -174,7 +174,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'emails' => 'setEmails'
     ];
 
     /**
@@ -183,7 +183,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'emails' => 'getEmails'
     ];
 
     /**
@@ -243,7 +243,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('emails', $data ?? [], null);
     }
 
     /**
@@ -273,6 +273,9 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
     {
         $invalidProperties = [];
 
+        if ($this->container['emails'] === null) {
+            $invalidProperties[] = "'emails' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -289,28 +292,28 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets emails
      *
-     * @return object[]|null
+     * @return string
      */
-    public function getDepartmentList()
+    public function getEmails()
     {
-        return $this->container['department_list'];
+        return $this->container['emails'];
     }
 
     /**
-     * Sets department_list
+     * Sets emails
      *
-     * @param object[]|null $department_list department_list
+     * @param string $emails The unique user IDs (`xxx@auth.local`) of the users to add, separated by commas.
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setEmails($emails)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($emails)) {
+            throw new \InvalidArgumentException('non-nullable emails cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['emails'] = $emails;
 
         return $this;
     }

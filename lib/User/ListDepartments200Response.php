@@ -11,7 +11,7 @@
  */
 
 /**
- * Account Operations: System admin
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
@@ -56,7 +56,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'departments' => 'object[]'
     ];
 
     /**
@@ -67,7 +67,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'departments' => null
     ];
 
     /**
@@ -76,7 +76,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'departments' => false
     ];
 
     /**
@@ -165,7 +165,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'departments' => 'departments'
     ];
 
     /**
@@ -174,7 +174,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'departments' => 'setDepartments'
     ];
 
     /**
@@ -183,7 +183,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'departments' => 'getDepartments'
     ];
 
     /**
@@ -243,7 +243,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('departments', $data ?? [], null);
     }
 
     /**
@@ -289,28 +289,28 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets departments
      *
      * @return object[]|null
      */
-    public function getDepartmentList()
+    public function getDepartments()
     {
-        return $this->container['department_list'];
+        return $this->container['departments'];
     }
 
     /**
-     * Sets department_list
+     * Sets departments
      *
-     * @param object[]|null $department_list department_list
+     * @param object[]|null $departments departments
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setDepartments($departments)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($departments)) {
+            throw new \InvalidArgumentException('non-nullable departments cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['departments'] = $departments;
 
         return $this;
     }

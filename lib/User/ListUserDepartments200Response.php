@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * ListUserDepartments200Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Account Operations: System admin
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * ListUserDepartments200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListUserDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'listUserDepartments_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

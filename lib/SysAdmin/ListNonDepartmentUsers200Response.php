@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * ListNonDepartmentUsers200Response
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * ListNonDepartmentUsers200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListNonDepartmentUsers200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'listNonDepartmentUsers_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'user_list' => 'object[]'
     ];
 
     /**
@@ -67,7 +67,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'user_list' => null
     ];
 
     /**
@@ -76,7 +76,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'user_list' => false
     ];
 
     /**
@@ -165,7 +165,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'user_list' => 'user_list'
     ];
 
     /**
@@ -174,7 +174,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'user_list' => 'setUserList'
     ];
 
     /**
@@ -183,7 +183,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'user_list' => 'getUserList'
     ];
 
     /**
@@ -243,7 +243,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('user_list', $data ?? [], null);
     }
 
     /**
@@ -289,28 +289,28 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets user_list
      *
      * @return object[]|null
      */
-    public function getDepartmentList()
+    public function getUserList()
     {
-        return $this->container['department_list'];
+        return $this->container['user_list'];
     }
 
     /**
-     * Sets department_list
+     * Sets user_list
      *
-     * @param object[]|null $department_list department_list
+     * @param object[]|null $user_list user_list
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setUserList($user_list)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($user_list)) {
+            throw new \InvalidArgumentException('non-nullable user_list cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['user_list'] = $user_list;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * GetDepartmentGroupMembersCount200Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Account Operations: System admin
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * GetDepartmentGroupMembersCount200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetDepartmentGroupMembersCount200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'getDepartmentGroupMembersCount_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'count' => 'int'
     ];
 
     /**
@@ -67,7 +67,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'count' => null
     ];
 
     /**
@@ -76,7 +76,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'count' => false
     ];
 
     /**
@@ -165,7 +165,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'count' => 'count'
     ];
 
     /**
@@ -174,7 +174,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'count' => 'setCount'
     ];
 
     /**
@@ -183,7 +183,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'count' => 'getCount'
     ];
 
     /**
@@ -243,7 +243,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('count', $data ?? [], null);
     }
 
     /**
@@ -289,28 +289,28 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets count
      *
-     * @return object[]|null
+     * @return int|null
      */
-    public function getDepartmentList()
+    public function getCount()
     {
-        return $this->container['department_list'];
+        return $this->container['count'];
     }
 
     /**
-     * Sets department_list
+     * Sets count
      *
-     * @param object[]|null $department_list department_list
+     * @param int|null $count count
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setCount($count)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($count)) {
+            throw new \InvalidArgumentException('non-nullable count cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['count'] = $count;
 
         return $this;
     }

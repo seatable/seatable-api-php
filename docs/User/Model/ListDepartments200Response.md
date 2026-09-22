@@ -4,5 +4,5 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**department_list** | **object[]** |  | [optional]
+**departments** | **object[]** |  | [optional]
 

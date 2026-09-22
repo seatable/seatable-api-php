@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * UpdateDepartmentMember200Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Account Operations: System admin
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * UpdateDepartmentMember200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateDepartmentMember200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'updateDepartmentMember_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'group_id' => 'int',
+        'name' => 'string',
+        'email' => 'string',
+        'contact_email' => 'string',
+        'login_id' => 'string',
+        'avatar_url' => 'string',
+        'is_admin' => 'bool',
+        'role' => 'string',
+        'department_id' => 'int'
     ];
 
     /**
@@ -67,7 +75,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'group_id' => null,
+        'name' => null,
+        'email' => null,
+        'contact_email' => null,
+        'login_id' => null,
+        'avatar_url' => null,
+        'is_admin' => null,
+        'role' => null,
+        'department_id' => null
     ];
 
     /**
@@ -76,7 +92,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'group_id' => false,
+        'name' => false,
+        'email' => false,
+        'contact_email' => false,
+        'login_id' => false,
+        'avatar_url' => false,
+        'is_admin' => false,
+        'role' => false,
+        'department_id' => false
     ];
 
     /**
@@ -165,7 +189,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'group_id' => 'group_id',
+        'name' => 'name',
+        'email' => 'email',
+        'contact_email' => 'contact_email',
+        'login_id' => 'login_id',
+        'avatar_url' => 'avatar_url',
+        'is_admin' => 'is_admin',
+        'role' => 'role',
+        'department_id' => 'department_id'
     ];
 
     /**
@@ -174,7 +206,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'group_id' => 'setGroupId',
+        'name' => 'setName',
+        'email' => 'setEmail',
+        'contact_email' => 'setContactEmail',
+        'login_id' => 'setLoginId',
+        'avatar_url' => 'setAvatarUrl',
+        'is_admin' => 'setIsAdmin',
+        'role' => 'setRole',
+        'department_id' => 'setDepartmentId'
     ];
 
     /**
@@ -183,7 +223,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'group_id' => 'getGroupId',
+        'name' => 'getName',
+        'email' => 'getEmail',
+        'contact_email' => 'getContactEmail',
+        'login_id' => 'getLoginId',
+        'avatar_url' => 'getAvatarUrl',
+        'is_admin' => 'getIsAdmin',
+        'role' => 'getRole',
+        'department_id' => 'getDepartmentId'
     ];
 
     /**
@@ -243,7 +291,15 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('group_id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('contact_email', $data ?? [], null);
+        $this->setIfExists('login_id', $data ?? [], null);
+        $this->setIfExists('avatar_url', $data ?? [], null);
+        $this->setIfExists('is_admin', $data ?? [], null);
+        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('department_id', $data ?? [], null);
     }
 
     /**
@@ -289,28 +345,244 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets group_id
      *
-     * @return object[]|null
+     * @return int|null
      */
-    public function getDepartmentList()
+    public function getGroupId()
     {
-        return $this->container['department_list'];
+        return $this->container['group_id'];
     }
 
     /**
-     * Sets department_list
+     * Sets group_id
      *
-     * @param object[]|null $department_list department_list
+     * @param int|null $group_id group_id
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setGroupId($group_id)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($group_id)) {
+            throw new \InvalidArgumentException('non-nullable group_id cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['group_id'] = $group_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string|null $email email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
+        }
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets contact_email
+     *
+     * @return string|null
+     */
+    public function getContactEmail()
+    {
+        return $this->container['contact_email'];
+    }
+
+    /**
+     * Sets contact_email
+     *
+     * @param string|null $contact_email contact_email
+     *
+     * @return self
+     */
+    public function setContactEmail($contact_email)
+    {
+        if (is_null($contact_email)) {
+            throw new \InvalidArgumentException('non-nullable contact_email cannot be null');
+        }
+        $this->container['contact_email'] = $contact_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets login_id
+     *
+     * @return string|null
+     */
+    public function getLoginId()
+    {
+        return $this->container['login_id'];
+    }
+
+    /**
+     * Sets login_id
+     *
+     * @param string|null $login_id login_id
+     *
+     * @return self
+     */
+    public function setLoginId($login_id)
+    {
+        if (is_null($login_id)) {
+            throw new \InvalidArgumentException('non-nullable login_id cannot be null');
+        }
+        $this->container['login_id'] = $login_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets avatar_url
+     *
+     * @return string|null
+     */
+    public function getAvatarUrl()
+    {
+        return $this->container['avatar_url'];
+    }
+
+    /**
+     * Sets avatar_url
+     *
+     * @param string|null $avatar_url avatar_url
+     *
+     * @return self
+     */
+    public function setAvatarUrl($avatar_url)
+    {
+        if (is_null($avatar_url)) {
+            throw new \InvalidArgumentException('non-nullable avatar_url cannot be null');
+        }
+        $this->container['avatar_url'] = $avatar_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_admin
+     *
+     * @return bool|null
+     */
+    public function getIsAdmin()
+    {
+        return $this->container['is_admin'];
+    }
+
+    /**
+     * Sets is_admin
+     *
+     * @param bool|null $is_admin is_admin
+     *
+     * @return self
+     */
+    public function setIsAdmin($is_admin)
+    {
+        if (is_null($is_admin)) {
+            throw new \InvalidArgumentException('non-nullable is_admin cannot be null');
+        }
+        $this->container['is_admin'] = $is_admin;
+
+        return $this;
+    }
+
+    /**
+     * Gets role
+     *
+     * @return string|null
+     */
+    public function getRole()
+    {
+        return $this->container['role'];
+    }
+
+    /**
+     * Sets role
+     *
+     * @param string|null $role role
+     *
+     * @return self
+     */
+    public function setRole($role)
+    {
+        if (is_null($role)) {
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        }
+        $this->container['role'] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets department_id
+     *
+     * @return int|null
+     */
+    public function getDepartmentId()
+    {
+        return $this->container['department_id'];
+    }
+
+    /**
+     * Sets department_id
+     *
+     * @param int|null $department_id department_id
+     *
+     * @return self
+     */
+    public function setDepartmentId($department_id)
+    {
+        if (is_null($department_id)) {
+            throw new \InvalidArgumentException('non-nullable department_id cannot be null');
+        }
+        $this->container['department_id'] = $department_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * ListDepartmentMembers200Response
  *
  * PHP version 8.1
  *
@@ -11,7 +11,7 @@
  */
 
 /**
- * Account Operations: System admin
+ * Account Operations - User
  *
  * The official SeaTable API Reference (OpenAPI 3.0).
  *
@@ -25,13 +25,13 @@
  * Do not edit the class manually.
  */
 
-namespace SeaTable\Client\SysAdmin;
+namespace SeaTable\Client\User;
 
 use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * ListDepartmentMembers200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class ListDepartmentMembers200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'listDepartmentMembers_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'member_list' => 'object[]'
     ];
 
     /**
@@ -67,7 +67,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'member_list' => null
     ];
 
     /**
@@ -76,7 +76,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'member_list' => false
     ];
 
     /**
@@ -165,7 +165,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'member_list' => 'member_list'
     ];
 
     /**
@@ -174,7 +174,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'member_list' => 'setMemberList'
     ];
 
     /**
@@ -183,7 +183,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'member_list' => 'getMemberList'
     ];
 
     /**
@@ -243,7 +243,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('member_list', $data ?? [], null);
     }
 
     /**
@@ -289,28 +289,28 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets member_list
      *
      * @return object[]|null
      */
-    public function getDepartmentList()
+    public function getMemberList()
     {
-        return $this->container['department_list'];
+        return $this->container['member_list'];
     }
 
     /**
-     * Sets department_list
+     * Sets member_list
      *
-     * @param object[]|null $department_list department_list
+     * @param object[]|null $member_list member_list
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setMemberList($member_list)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($member_list)) {
+            throw new \InvalidArgumentException('non-nullable member_list cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['member_list'] = $member_list;
 
         return $this;
     }

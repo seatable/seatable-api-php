@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * AddDepartment200ResponseDepartment
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * AddDepartment200ResponseDepartment Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddDepartment200ResponseDepartment implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'addDepartment_200_response_department';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'id' => 'int',
+        'name' => 'string',
+        'parent_id' => 'int',
+        'org_id' => 'int',
+        'id_in_org' => 'int'
     ];
 
     /**
@@ -67,7 +71,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'id' => null,
+        'name' => null,
+        'parent_id' => null,
+        'org_id' => null,
+        'id_in_org' => null
     ];
 
     /**
@@ -76,7 +84,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'id' => false,
+        'name' => false,
+        'parent_id' => false,
+        'org_id' => false,
+        'id_in_org' => false
     ];
 
     /**
@@ -165,7 +177,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'id' => 'id',
+        'name' => 'name',
+        'parent_id' => 'parent_id',
+        'org_id' => 'org_id',
+        'id_in_org' => 'id_in_org'
     ];
 
     /**
@@ -174,7 +190,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'id' => 'setId',
+        'name' => 'setName',
+        'parent_id' => 'setParentId',
+        'org_id' => 'setOrgId',
+        'id_in_org' => 'setIdInOrg'
     ];
 
     /**
@@ -183,7 +203,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'id' => 'getId',
+        'name' => 'getName',
+        'parent_id' => 'getParentId',
+        'org_id' => 'getOrgId',
+        'id_in_org' => 'getIdInOrg'
     ];
 
     /**
@@ -243,7 +267,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('parent_id', $data ?? [], null);
+        $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('id_in_org', $data ?? [], null);
     }
 
     /**
@@ -289,28 +317,136 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets id
      *
-     * @return object[]|null
+     * @return int|null
      */
-    public function getDepartmentList()
+    public function getId()
     {
-        return $this->container['department_list'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets department_list
+     * Sets id
      *
-     * @param object[]|null $department_list department_list
+     * @param int|null $id id
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setId($id)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets parent_id
+     *
+     * @return int|null
+     */
+    public function getParentId()
+    {
+        return $this->container['parent_id'];
+    }
+
+    /**
+     * Sets parent_id
+     *
+     * @param int|null $parent_id parent_id
+     *
+     * @return self
+     */
+    public function setParentId($parent_id)
+    {
+        if (is_null($parent_id)) {
+            throw new \InvalidArgumentException('non-nullable parent_id cannot be null');
+        }
+        $this->container['parent_id'] = $parent_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets org_id
+     *
+     * @return int|null
+     */
+    public function getOrgId()
+    {
+        return $this->container['org_id'];
+    }
+
+    /**
+     * Sets org_id
+     *
+     * @param int|null $org_id org_id
+     *
+     * @return self
+     */
+    public function setOrgId($org_id)
+    {
+        if (is_null($org_id)) {
+            throw new \InvalidArgumentException('non-nullable org_id cannot be null');
+        }
+        $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets id_in_org
+     *
+     * @return int|null
+     */
+    public function getIdInOrg()
+    {
+        return $this->container['id_in_org'];
+    }
+
+    /**
+     * Sets id_in_org
+     *
+     * @param int|null $id_in_org id_in_org
+     *
+     * @return self
+     */
+    public function setIdInOrg($id_in_org)
+    {
+        if (is_null($id_in_org)) {
+            throw new \InvalidArgumentException('non-nullable id_in_org cannot be null');
+        }
+        $this->container['id_in_org'] = $id_in_org;
 
         return $this;
     }

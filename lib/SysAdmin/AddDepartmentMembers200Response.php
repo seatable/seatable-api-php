@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * AddDepartmentMembers200Response
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * AddDepartmentMembers200Response Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class AddDepartmentMembers200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'addDepartmentMembers_200_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'success' => 'object[]',
+        'failed' => 'object[]'
     ];
 
     /**
@@ -67,7 +68,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'success' => null,
+        'failed' => null
     ];
 
     /**
@@ -76,7 +78,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'success' => false,
+        'failed' => false
     ];
 
     /**
@@ -165,7 +168,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'success' => 'success',
+        'failed' => 'failed'
     ];
 
     /**
@@ -174,7 +178,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'success' => 'setSuccess',
+        'failed' => 'setFailed'
     ];
 
     /**
@@ -183,7 +188,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'success' => 'getSuccess',
+        'failed' => 'getFailed'
     ];
 
     /**
@@ -243,7 +249,8 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('success', $data ?? [], null);
+        $this->setIfExists('failed', $data ?? [], null);
     }
 
     /**
@@ -289,28 +296,55 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets success
      *
      * @return object[]|null
      */
-    public function getDepartmentList()
+    public function getSuccess()
     {
-        return $this->container['department_list'];
+        return $this->container['success'];
     }
 
     /**
-     * Sets department_list
+     * Sets success
      *
-     * @param object[]|null $department_list department_list
+     * @param object[]|null $success success
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setSuccess($success)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($success)) {
+            throw new \InvalidArgumentException('non-nullable success cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['success'] = $success;
+
+        return $this;
+    }
+
+    /**
+     * Gets failed
+     *
+     * @return object[]|null
+     */
+    public function getFailed()
+    {
+        return $this->container['failed'];
+    }
+
+    /**
+     * Sets failed
+     *
+     * @param object[]|null $failed failed
+     *
+     * @return self
+     */
+    public function setFailed($failed)
+    {
+        if (is_null($failed)) {
+            throw new \InvalidArgumentException('non-nullable failed cannot be null');
+        }
+        $this->container['failed'] = $failed;
 
         return $this;
     }

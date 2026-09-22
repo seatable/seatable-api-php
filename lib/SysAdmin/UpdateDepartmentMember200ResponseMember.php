@@ -1,6 +1,6 @@
 <?php
 /**
- * ListDepartments200Response
+ * UpdateDepartmentMember200ResponseMember
  *
  * PHP version 8.1
  *
@@ -31,7 +31,7 @@ use \ArrayAccess;
 use \SeaTable\Client\ObjectSerializer;
 
 /**
- * ListDepartments200Response Class Doc Comment
+ * UpdateDepartmentMember200ResponseMember Class Doc Comment
  *
  * @category Class
  * @package  SeaTable\Client
@@ -39,7 +39,7 @@ use \SeaTable\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateDepartmentMember200ResponseMember implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       *
       * @var string
       */
-    protected static $openAPIModelName = 'listDepartments_200_response';
+    protected static $openAPIModelName = 'updateDepartmentMember_200_response_member';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,7 +56,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'department_list' => 'object[]'
+        'email' => 'string',
+        'name' => 'string',
+        'avatar_url' => 'string',
+        'contact_email' => 'string',
+        'is_staff' => 'bool'
     ];
 
     /**
@@ -67,7 +71,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'department_list' => null
+        'email' => null,
+        'name' => null,
+        'avatar_url' => null,
+        'contact_email' => null,
+        'is_staff' => null
     ];
 
     /**
@@ -76,7 +84,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'department_list' => false
+        'email' => false,
+        'name' => false,
+        'avatar_url' => false,
+        'contact_email' => false,
+        'is_staff' => false
     ];
 
     /**
@@ -165,7 +177,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $attributeMap = [
-        'department_list' => 'department_list'
+        'email' => 'email',
+        'name' => 'name',
+        'avatar_url' => 'avatar_url',
+        'contact_email' => 'contact_email',
+        'is_staff' => 'is_staff'
     ];
 
     /**
@@ -174,7 +190,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $setters = [
-        'department_list' => 'setDepartmentList'
+        'email' => 'setEmail',
+        'name' => 'setName',
+        'avatar_url' => 'setAvatarUrl',
+        'contact_email' => 'setContactEmail',
+        'is_staff' => 'setIsStaff'
     ];
 
     /**
@@ -183,7 +203,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      * @var string[]
      */
     protected static $getters = [
-        'department_list' => 'getDepartmentList'
+        'email' => 'getEmail',
+        'name' => 'getName',
+        'avatar_url' => 'getAvatarUrl',
+        'contact_email' => 'getContactEmail',
+        'is_staff' => 'getIsStaff'
     ];
 
     /**
@@ -243,7 +267,11 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('department_list', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('avatar_url', $data ?? [], null);
+        $this->setIfExists('contact_email', $data ?? [], null);
+        $this->setIfExists('is_staff', $data ?? [], null);
     }
 
     /**
@@ -289,28 +317,136 @@ class ListDepartments200Response implements ModelInterface, ArrayAccess, \JsonSe
 
 
     /**
-     * Gets department_list
+     * Gets email
      *
-     * @return object[]|null
+     * @return string|null
      */
-    public function getDepartmentList()
+    public function getEmail()
     {
-        return $this->container['department_list'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets department_list
+     * Sets email
      *
-     * @param object[]|null $department_list department_list
+     * @param string|null $email email
      *
      * @return self
      */
-    public function setDepartmentList($department_list)
+    public function setEmail($email)
     {
-        if (is_null($department_list)) {
-            throw new \InvalidArgumentException('non-nullable department_list cannot be null');
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['department_list'] = $department_list;
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets avatar_url
+     *
+     * @return string|null
+     */
+    public function getAvatarUrl()
+    {
+        return $this->container['avatar_url'];
+    }
+
+    /**
+     * Sets avatar_url
+     *
+     * @param string|null $avatar_url avatar_url
+     *
+     * @return self
+     */
+    public function setAvatarUrl($avatar_url)
+    {
+        if (is_null($avatar_url)) {
+            throw new \InvalidArgumentException('non-nullable avatar_url cannot be null');
+        }
+        $this->container['avatar_url'] = $avatar_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets contact_email
+     *
+     * @return string|null
+     */
+    public function getContactEmail()
+    {
+        return $this->container['contact_email'];
+    }
+
+    /**
+     * Sets contact_email
+     *
+     * @param string|null $contact_email contact_email
+     *
+     * @return self
+     */
+    public function setContactEmail($contact_email)
+    {
+        if (is_null($contact_email)) {
+            throw new \InvalidArgumentException('non-nullable contact_email cannot be null');
+        }
+        $this->container['contact_email'] = $contact_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_staff
+     *
+     * @return bool|null
+     */
+    public function getIsStaff()
+    {
+        return $this->container['is_staff'];
+    }
+
+    /**
+     * Sets is_staff
+     *
+     * @param bool|null $is_staff is_staff
+     *
+     * @return self
+     */
+    public function setIsStaff($is_staff)
+    {
+        if (is_null($is_staff)) {
+            throw new \InvalidArgumentException('non-nullable is_staff cannot be null');
+        }
+        $this->container['is_staff'] = $is_staff;
 
         return $this;
     }

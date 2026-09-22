@@ -1,4 +1,4 @@
-# # ListDepartments200Response
+# # ListUserDepartments200Response
 
 ## Properties
 

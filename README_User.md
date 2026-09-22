@@ -53,8 +53,15 @@ Class | Method | HTTP request | Description
 *CommonDatasetApi* | [**renameCommonDataset**](docs/User/Api/CommonDatasetApi.md#renamecommondataset) | **PUT** /api/v2.1/dtable/common-datasets/{dataset_id}/ | Rename Common Dataset
 *CommonDatasetApi* | [**syncCommonDataset**](docs/User/Api/CommonDatasetApi.md#synccommondataset) | **POST** /api/v2.1/dtable/common-datasets/{dataset_id}/sync/ | Sync Common Dataset
 *CommonDatasetApi* | [**updateCommonDatasetSync**](docs/User/Api/CommonDatasetApi.md#updatecommondatasetsync) | **PUT** /api/v2.1/dtable/common-datasets/{dataset_id}/sync/ | Update Common Dataset Sync
-*DepartmentsApi* | [**listDeparmentMembers**](docs/User/Api/DepartmentsApi.md#listdeparmentmembers) | **GET** /api/v2.1/address-book/departments/{department_id}/members/ | List Deparment Members
-*DepartmentsApi* | [**listDepartments**](docs/User/Api/DepartmentsApi.md#listdepartments) | **GET** /api/v2.1/address-book/departments/ | List Departments
+*DepartmentsApi* | [**addDepartmentMembers**](docs/User/Api/DepartmentsApi.md#adddepartmentmembers) | **POST** /api/v2.1/address-book-v2/departments/{department_id}/members/ | Add Department Members
+*DepartmentsApi* | [**getDepartmentGroupMembersCount**](docs/User/Api/DepartmentsApi.md#getdepartmentgroupmemberscount) | **GET** /api/v2.1/address-book-v2/departments/groups/{group_id}/members-count/ | Get Department Group Members Count
+*DepartmentsApi* | [**listDepartmentMemberBases**](docs/User/Api/DepartmentsApi.md#listdepartmentmemberbases) | **GET** /api/v2.1/address-book-v2/departments/{department_id}/members/{user_id}/dtables/ | List Department Member&#39;s Bases
+*DepartmentsApi* | [**listDepartmentMembers**](docs/User/Api/DepartmentsApi.md#listdepartmentmembers) | **GET** /api/v2.1/address-book-v2/departments/{department_id}/members/ | List Department Members
+*DepartmentsApi* | [**listDepartments**](docs/User/Api/DepartmentsApi.md#listdepartments) | **GET** /api/v2.1/address-book-v2/departments/ | List Departments
+*DepartmentsApi* | [**listSubDepartments**](docs/User/Api/DepartmentsApi.md#listsubdepartments) | **GET** /api/v2.1/address-book-v2/departments/{department_id}/sub-departments/ | List Sub-Departments
+*DepartmentsApi* | [**listUserDepartments**](docs/User/Api/DepartmentsApi.md#listuserdepartments) | **GET** /api/v2.1/address-book-v2/user-departments/ | List User&#39;s Departments
+*DepartmentsApi* | [**removeDepartmentMember**](docs/User/Api/DepartmentsApi.md#removedepartmentmember) | **DELETE** /api/v2.1/address-book-v2/departments/{department_id}/members/{user_id}/ | Remove Department Member
+*DepartmentsApi* | [**updateDepartmentMember**](docs/User/Api/DepartmentsApi.md#updatedepartmentmember) | **PUT** /api/v2.1/address-book-v2/departments/{department_id}/members/{user_id}/ | Update Department Member
 *EmailAccountsApi* | [**addEmailAccount**](docs/User/Api/EmailAccountsApi.md#addemailaccount) | **POST** /api/v2.1/third-party-accounts/{base_uuid}/ | Add Email Account
 *EmailAccountsApi* | [**deleteEmailAccount**](docs/User/Api/EmailAccountsApi.md#deleteemailaccount) | **DELETE** /api/v2.1/third-party-accounts/{base_uuid}/{3rd_party_account_id}/ | Delete Email Account
 *EmailAccountsApi* | [**getEmailAccount**](docs/User/Api/EmailAccountsApi.md#getemailaccount) | **GET** /api/v2.1/third-party-accounts/{base_uuid}/detail/ | Get Email Account

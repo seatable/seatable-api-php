@@ -56,8 +56,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'group_name' => 'string',
-        'parent_group' => 'string'
+        'name' => 'string',
+        'parent_id' => 'int',
+        'org_id' => 'int'
     ];
 
     /**
@@ -68,8 +69,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'group_name' => null,
-        'parent_group' => null
+        'name' => null,
+        'parent_id' => null,
+        'org_id' => null
     ];
 
     /**
@@ -78,8 +80,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'group_name' => false,
-        'parent_group' => false
+        'name' => false,
+        'parent_id' => false,
+        'org_id' => false
     ];
 
     /**
@@ -168,8 +171,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'group_name' => 'group_name',
-        'parent_group' => 'parent_group'
+        'name' => 'name',
+        'parent_id' => 'parent_id',
+        'org_id' => 'org_id'
     ];
 
     /**
@@ -178,8 +182,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'group_name' => 'setGroupName',
-        'parent_group' => 'setParentGroup'
+        'name' => 'setName',
+        'parent_id' => 'setParentId',
+        'org_id' => 'setOrgId'
     ];
 
     /**
@@ -188,8 +193,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'group_name' => 'getGroupName',
-        'parent_group' => 'getParentGroup'
+        'name' => 'getName',
+        'parent_id' => 'getParentId',
+        'org_id' => 'getOrgId'
     ];
 
     /**
@@ -249,8 +255,9 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('group_name', $data ?? [], null);
-        $this->setIfExists('parent_group', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('parent_id', $data ?? [], null);
+        $this->setIfExists('org_id', $data ?? [], null);
     }
 
     /**
@@ -280,6 +287,12 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['parent_id'] === null) {
+            $invalidProperties[] = "'parent_id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -296,55 +309,82 @@ class AddDepartmentRequest implements ModelInterface, ArrayAccess, \JsonSerializ
 
 
     /**
-     * Gets group_name
+     * Gets name
      *
-     * @return string|null
+     * @return string
      */
-    public function getGroupName()
+    public function getName()
     {
-        return $this->container['group_name'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets group_name
+     * Sets name
      *
-     * @param string|null $group_name The name of the new department.
+     * @param string $name The name of the department. Has to be unique within the parent department.
      *
      * @return self
      */
-    public function setGroupName($group_name)
+    public function setName($name)
     {
-        if (is_null($group_name)) {
-            throw new \InvalidArgumentException('non-nullable group_name cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['group_name'] = $group_name;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets parent_group
+     * Gets parent_id
      *
-     * @return string|null
+     * @return int
      */
-    public function getParentGroup()
+    public function getParentId()
     {
-        return $this->container['parent_group'];
+        return $this->container['parent_id'];
     }
 
     /**
-     * Sets parent_group
+     * Sets parent_id
      *
-     * @param string|null $parent_group The ID of the parent department. Optional. -1 by default.
+     * @param int $parent_id The ID of the parent department. Use `-1` to create the top-level department.
      *
      * @return self
      */
-    public function setParentGroup($parent_group)
+    public function setParentId($parent_id)
     {
-        if (is_null($parent_group)) {
-            throw new \InvalidArgumentException('non-nullable parent_group cannot be null');
+        if (is_null($parent_id)) {
+            throw new \InvalidArgumentException('non-nullable parent_id cannot be null');
         }
-        $this->container['parent_group'] = $parent_group;
+        $this->container['parent_id'] = $parent_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets org_id
+     *
+     * @return int|null
+     */
+    public function getOrgId()
+    {
+        return $this->container['org_id'];
+    }
+
+    /**
+     * Sets org_id
+     *
+     * @param int|null $org_id The ID of the team. Optional. `-1` (system-level department) by default.
+     *
+     * @return self
+     */
+    public function setOrgId($org_id)
+    {
+        if (is_null($org_id)) {
+            throw new \InvalidArgumentException('non-nullable org_id cannot be null');
+        }
+        $this->container['org_id'] = $org_id;
 
         return $this;
     }

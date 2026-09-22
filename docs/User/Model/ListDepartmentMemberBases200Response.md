@@ -1,8 +1,8 @@
-# # ListDepartments200Response
+# # ListDepartmentMemberBases200Response
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**department_list** | **object[]** |  | [optional]
+**dtable_list** | **object[]** |  | [optional]
 

@@ -20,10 +20,19 @@ Class | Method | HTTP request | Description
 *CommonDatasetApi* | [**listCommonDataset**](docs/SysAdmin/Api/CommonDatasetApi.md#listcommondataset) | **GET** /api/v2.1/admin/common-datasets/ | List Common Dataset
 *CommonDatasetApi* | [**listCommonDatasetSyncs**](docs/SysAdmin/Api/CommonDatasetApi.md#listcommondatasetsyncs) | **GET** /api/v2.1/admin/common-dataset/periodical-syncs/ | List Common Dataset Syncs
 *CommonDatasetApi* | [**listInvalidSyncs**](docs/SysAdmin/Api/CommonDatasetApi.md#listinvalidsyncs) | **GET** /api/v2.1/admin/common-dataset/invalid-syncs/ | List Invalid Syncs
-*DepartmentsApi* | [**addDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#adddepartment) | **POST** /api/v2.1/admin/address-book/groups/ | Add Department
-*DepartmentsApi* | [**deleteDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#deletedepartment) | **DELETE** /api/v2.1/admin/address-book/groups/{department_id}/ | Delete Department
-*DepartmentsApi* | [**getDepartments**](docs/SysAdmin/Api/DepartmentsApi.md#getdepartments) | **GET** /api/v2.1/admin/address-book/groups/{department_id}/ | Get Department
-*DepartmentsApi* | [**listDepartments**](docs/SysAdmin/Api/DepartmentsApi.md#listdepartments) | **GET** /api/v2.1/admin/address-book/groups/{parent_department_id}/ | List Departments
+*DepartmentsApi* | [**addDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#adddepartment) | **POST** /api/v2.1/admin/address-book-v2/departments/ | Add Department
+*DepartmentsApi* | [**addDepartmentMembers**](docs/SysAdmin/Api/DepartmentsApi.md#adddepartmentmembers) | **POST** /api/v2.1/admin/address-book-v2/departments/{department_id}/members/ | Add Department Members
+*DepartmentsApi* | [**addUserToDepartments**](docs/SysAdmin/Api/DepartmentsApi.md#addusertodepartments) | **POST** /api/v2.1/admin/address-book-v2/departments/add-to-departments/ | Add User to Departments
+*DepartmentsApi* | [**createDepartmentGroup**](docs/SysAdmin/Api/DepartmentsApi.md#createdepartmentgroup) | **POST** /api/v2.1/admin/address-book-v2/departments/{department_id}/group/ | Create Department Group
+*DepartmentsApi* | [**deleteDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#deletedepartment) | **DELETE** /api/v2.1/admin/address-book-v2/departments/{department_id}/ | Delete Department
+*DepartmentsApi* | [**deleteDepartmentGroup**](docs/SysAdmin/Api/DepartmentsApi.md#deletedepartmentgroup) | **DELETE** /api/v2.1/admin/address-book-v2/departments/{department_id}/group/ | Delete Department Group
+*DepartmentsApi* | [**getDepartmentGroup**](docs/SysAdmin/Api/DepartmentsApi.md#getdepartmentgroup) | **GET** /api/v2.1/admin/address-book-v2/departments/{department_id}/group/ | Get Department Group
+*DepartmentsApi* | [**listDepartmentMembers**](docs/SysAdmin/Api/DepartmentsApi.md#listdepartmentmembers) | **GET** /api/v2.1/admin/address-book-v2/departments/{department_id}/members/ | List Department Members
+*DepartmentsApi* | [**listDepartments**](docs/SysAdmin/Api/DepartmentsApi.md#listdepartments) | **GET** /api/v2.1/admin/address-book-v2/departments/ | List Departments
+*DepartmentsApi* | [**listNonDepartmentUsers**](docs/SysAdmin/Api/DepartmentsApi.md#listnondepartmentusers) | **GET** /api/v2.1/admin/address-book-v2/non-department-users/ | List Users without Department
+*DepartmentsApi* | [**removeDepartmentMember**](docs/SysAdmin/Api/DepartmentsApi.md#removedepartmentmember) | **DELETE** /api/v2.1/admin/address-book-v2/departments/{department_id}/members/{user_id}/ | Remove Department Member
+*DepartmentsApi* | [**updateDepartment**](docs/SysAdmin/Api/DepartmentsApi.md#updatedepartment) | **PUT** /api/v2.1/admin/address-book-v2/departments/{department_id}/ | Update Department
+*DepartmentsApi* | [**updateDepartmentMember**](docs/SysAdmin/Api/DepartmentsApi.md#updatedepartmentmember) | **PUT** /api/v2.1/admin/address-book-v2/departments/{department_id}/members/{user_id}/ | Update Department Member
 *ExportApi* | [**exportBase**](docs/SysAdmin/Api/ExportApi.md#exportbase) | **GET** /api/v2.1/admin/dtables/{base_uuid}/synchronous-export/export-dtable/ | Export Base
 *FormsApi* | [**deleteDataCollectionForms**](docs/SysAdmin/Api/FormsApi.md#deletedatacollectionforms) | **DELETE** /api/v2.1/admin/collection-tables/{collection_table_token}/ | Delete Data Collection Forms
 *FormsApi* | [**deleteForm**](docs/SysAdmin/Api/FormsApi.md#deleteform) | **DELETE** /api/v2.1/admin/forms/{form_token}/ | Delete Form

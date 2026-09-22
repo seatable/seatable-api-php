@@ -56,12 +56,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
-        'name' => 'string',
-        'owner' => 'string',
-        'created_at' => 'string',
-        'parent_group_id' => 'int',
-        'quota' => 'int'
+        'department' => '\SeaTable\Client\SysAdmin\AddDepartment200ResponseDepartment'
     ];
 
     /**
@@ -72,12 +67,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'owner' => null,
-        'created_at' => null,
-        'parent_group_id' => null,
-        'quota' => null
+        'department' => null
     ];
 
     /**
@@ -86,12 +76,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'name' => false,
-        'owner' => false,
-        'created_at' => false,
-        'parent_group_id' => false,
-        'quota' => false
+        'department' => false
     ];
 
     /**
@@ -180,12 +165,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'owner' => 'owner',
-        'created_at' => 'created_at',
-        'parent_group_id' => 'parent_group_id',
-        'quota' => 'quota'
+        'department' => 'department'
     ];
 
     /**
@@ -194,12 +174,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'owner' => 'setOwner',
-        'created_at' => 'setCreatedAt',
-        'parent_group_id' => 'setParentGroupId',
-        'quota' => 'setQuota'
+        'department' => 'setDepartment'
     ];
 
     /**
@@ -208,12 +183,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'owner' => 'getOwner',
-        'created_at' => 'getCreatedAt',
-        'parent_group_id' => 'getParentGroupId',
-        'quota' => 'getQuota'
+        'department' => 'getDepartment'
     ];
 
     /**
@@ -273,12 +243,7 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('owner', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('parent_group_id', $data ?? [], null);
-        $this->setIfExists('quota', $data ?? [], null);
+        $this->setIfExists('department', $data ?? [], null);
     }
 
     /**
@@ -324,163 +289,28 @@ class AddDepartment200Response implements ModelInterface, ArrayAccess, \JsonSeri
 
 
     /**
-     * Gets id
+     * Gets department
      *
-     * @return int|null
+     * @return \SeaTable\Client\SysAdmin\AddDepartment200ResponseDepartment|null
      */
-    public function getId()
+    public function getDepartment()
     {
-        return $this->container['id'];
+        return $this->container['department'];
     }
 
     /**
-     * Sets id
+     * Sets department
      *
-     * @param int|null $id id
+     * @param \SeaTable\Client\SysAdmin\AddDepartment200ResponseDepartment|null $department department
      *
      * @return self
      */
-    public function setId($id)
+    public function setDepartment($department)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($department)) {
+            throw new \InvalidArgumentException('non-nullable department cannot be null');
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets owner
-     *
-     * @return string|null
-     */
-    public function getOwner()
-    {
-        return $this->container['owner'];
-    }
-
-    /**
-     * Sets owner
-     *
-     * @param string|null $owner owner
-     *
-     * @return self
-     */
-    public function setOwner($owner)
-    {
-        if (is_null($owner)) {
-            throw new \InvalidArgumentException('non-nullable owner cannot be null');
-        }
-        $this->container['owner'] = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return string|null
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param string|null $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets parent_group_id
-     *
-     * @return int|null
-     */
-    public function getParentGroupId()
-    {
-        return $this->container['parent_group_id'];
-    }
-
-    /**
-     * Sets parent_group_id
-     *
-     * @param int|null $parent_group_id parent_group_id
-     *
-     * @return self
-     */
-    public function setParentGroupId($parent_group_id)
-    {
-        if (is_null($parent_group_id)) {
-            throw new \InvalidArgumentException('non-nullable parent_group_id cannot be null');
-        }
-        $this->container['parent_group_id'] = $parent_group_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets quota
-     *
-     * @return int|null
-     */
-    public function getQuota()
-    {
-        return $this->container['quota'];
-    }
-
-    /**
-     * Sets quota
-     *
-     * @param int|null $quota quota
-     *
-     * @return self
-     */
-    public function setQuota($quota)
-    {
-        if (is_null($quota)) {
-            throw new \InvalidArgumentException('non-nullable quota cannot be null');
-        }
-        $this->container['quota'] = $quota;
+        $this->container['department'] = $department;
 
         return $this;
     }
