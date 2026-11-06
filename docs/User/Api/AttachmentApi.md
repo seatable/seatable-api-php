@@ -7,6 +7,7 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**checkIfAssetExists()**](AttachmentApi.md#checkIfAssetExists) | **GET** /api/v2.1/workspace/{workspace_id}/dtable/{base_name}/asset-exists/ | Check If Asset Exists |
 | [**deleteBaseAsset()**](AttachmentApi.md#deleteBaseAsset) | **DELETE** /api/v2.1/dtable-asset/{base_uuid}/ | Delete Base Asset |
 | [**deleteBaseAssets()**](AttachmentApi.md#deleteBaseAssets) | **DELETE** /api/v2.1/dtable-asset/{base_uuid}/batch-delete-assets/ | Delete Base Assets |
+| [**getBaseAssetSize()**](AttachmentApi.md#getBaseAssetSize) | **GET** /api/v2.1/dtable-asset/{base_uuid}/asset-size/ | Get Base Asset Size |
 | [**getBaseAttachmentUploadLink()**](AttachmentApi.md#getBaseAttachmentUploadLink) | **GET** /api/v2.1/workspace/{workspace_id}/dtable-asset-upload-link/ | Get Base Attachment Upload Link |
 | [**listBaseAssets()**](AttachmentApi.md#listBaseAssets) | **GET** /api/v2.1/dtable-asset/{base_uuid}/ | List Base Asset Directories And Files |
 | [**listRecentlyUploadedFiles()**](AttachmentApi.md#listRecentlyUploadedFiles) | **GET** /api/v2.1/dtable-recent-asset/{base_uuid}/ | List Recently Uploaded Files |
@@ -158,6 +159,55 @@ try {
 ### Return type
 
 **object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `getBaseAssetSize()`
+
+```php
+getBaseAssetSize($base_uuid): \SeaTable\Client\User\GetBaseAssetSize200Response
+```
+
+Get Base Asset Size
+
+Get the total size of all assets (attachments, images and files) stored in a base and check whether the base can be exported together with its assets. All sizes are given in megabytes, rounded down. `max_size_of_export` is the server-wide limit configured by the system administrator (default: 100). If `can_export_asset` is `false`, the assets of this base exceed that limit and the base can only be exported without its assets.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\User\AttachmentApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identifier of a base. Sometimes also called dtable_uuid.
+
+try {
+    $result = $apiInstance->getBaseAssetSize($base_uuid);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AttachmentApi->getBaseAssetSize: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **base_uuid** | **string**| The unique identifier of a base. Sometimes also called dtable_uuid. | |
+
+### Return type
+
+[**\SeaTable\Client\User\GetBaseAssetSize200Response**](../Model/GetBaseAssetSize200Response.md)
 
 ### Authorization
 

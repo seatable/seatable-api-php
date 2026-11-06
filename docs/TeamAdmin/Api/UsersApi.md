@@ -9,7 +9,9 @@ All URIs are relative to https://cloud.seatable.io, except if the operation defi
 | [**disableTwoFactor()**](UsersApi.md#disableTwoFactor) | **DELETE** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Disable 2FA |
 | [**enforceTwofactor()**](UsersApi.md#enforceTwofactor) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/two-factor-auth/ | Enforce 2FA |
 | [**getUser()**](UsersApi.md#getUser) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Get User |
+| [**listManagedApps()**](UsersApi.md#listManagedApps) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/managed-external-apps/ | List Managed Apps |
 | [**listTeamUsers()**](UsersApi.md#listTeamUsers) | **GET** /api/v2.1/org/{org_id}/admin/users/ | List Users (Team) |
+| [**listUsableApps()**](UsersApi.md#listUsableApps) | **GET** /api/v2.1/org/{org_id}/admin/users/{user_id}/can-use-external-apps/ | List Usable Apps |
 | [**resetUserPassword()**](UsersApi.md#resetUserPassword) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/set-password/ | Reset User Password |
 | [**updateUser()**](UsersApi.md#updateUser) | **PUT** /api/v2.1/org/{org_id}/admin/users/{user_id}/ | Update User |
 
@@ -277,6 +279,61 @@ AccountTokenAuth
 
 
 
+## `listManagedApps()`
+
+```php
+listManagedApps($org_id, $user_id, $page, $per_page): object
+```
+
+List Managed Apps
+
+List all the universal apps a certain user manages, i.e. the apps in which the user has the `admin` role. Inactive apps and apps of deleted bases are not included.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+
+try {
+    $result = $apiInstance->listManagedApps($org_id, $user_id, $page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UsersApi->listManagedApps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
 ## `listTeamUsers()`
 
 ```php
@@ -316,6 +373,61 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
+| **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
+
+### Return type
+
+**object**
+
+### Authorization
+
+AccountTokenAuth
+
+
+
+
+## `listUsableApps()`
+
+```php
+listUsableApps($org_id, $user_id, $page, $per_page): object
+```
+
+List Usable Apps
+
+List all the universal apps a certain user can use, i.e. the apps in which the user has a role other than `admin`. Inactive apps and apps of deleted bases are not included.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer authorization: AccountTokenAuth (use the right token for your request)
+$config = SeaTable\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_TOKEN');
+$apiInstance = new SeaTable\Client\TeamAdmin\UsersApi(
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 1; // int | The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin.
+$user_id = 123456789f1e4c8d8e1c31415867317c@auth.local; // string | The unique `user_id` in the form ...@auth.local. This is not the email address of the user.
+$page = 1; // int | The page number you want to start showing the entries. If no value is provided, 1 will be used.
+$per_page = 25; // int | The number of results that should be returned. If no value is provided, 25 results will be returned.
+
+try {
+    $result = $apiInstance->listUsableApps($org_id, $user_id, $page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UsersApi->listUsableApps: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| The ID of your team/organization. Numeric. Get it from [Get Team](/reference/getteaminfo). Contact your team admin, if you are not the admin. | |
+| **user_id** | **string**| The unique &#x60;user_id&#x60; in the form ...@auth.local. This is not the email address of the user. | |
 | **page** | **int**| The page number you want to start showing the entries. If no value is provided, 1 will be used. | [optional] |
 | **per_page** | **int**| The number of results that should be returned. If no value is provided, 25 results will be returned. | [optional] |
 
