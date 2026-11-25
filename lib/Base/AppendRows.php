@@ -294,6 +294,10 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['rows'] === null) {
             $invalidProperties[] = "'rows' can't be null";
         }
+        if ((count($this->container['rows']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'rows', number of items must be less than or equal to 1000.";
+        }
+
         return $invalidProperties;
     }
 
@@ -349,7 +353,7 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets rows
      *
-     * @param object[] $rows Defines the rows which should be added.
+     * @param object[] $rows Defines the rows which should be added. Maximum 1,000 rows per call.
      *
      * @return self
      */
@@ -357,6 +361,10 @@ class AppendRows implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (is_null($rows)) {
             throw new \InvalidArgumentException('non-nullable rows cannot be null');
+        }
+
+        if ((count($rows) > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $rows when calling AppendRows., number of items must be less than or equal to 1000.');
         }
         $this->container['rows'] = $rows;
 

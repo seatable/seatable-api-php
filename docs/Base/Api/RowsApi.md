@@ -22,7 +22,7 @@ appendRows($base_uuid, $append_rows): \SeaTable\Client\Base\AppendRows200Respons
 
 Append Row(s)
 
-Append multiple rows to a table. Define the column:values pairs of each column in the [rows object](/reference/models).  > 🚧 Column names only > > This endpoint always expects **column names** (e.g. `Name`) in the row object, not internal column keys (e.g. `0000`). The `convert_keys` parameter is not supported. Unknown keys are silently ignored without error.
+Append multiple rows to a table. Define the column:values pairs of each column in the [rows object](/reference/models).  > ❗ Limits > > - **Maximum:** 1,000 rows per call. Larger requests are rejected with `413` and no rows are added. Split larger amounts into multiple calls. > > See [Limits](/reference/limits) for details.  > 🚧 Column names only > > This endpoint always expects **column names** (e.g. `Name`) in the row object, not internal column keys (e.g. `0000`). The `convert_keys` parameter is not supported. Unknown keys are silently ignored without error.
 
 ### Example
 
@@ -68,12 +68,12 @@ BaseTokenAuth
 ## `deleteRow()`
 
 ```php
-deleteRow($base_uuid, $delete_rows): object
+deleteRow($base_uuid, $delete_rows): \SeaTable\Client\Base\DeleteRow200Response
 ```
 
 Delete Row(s)
 
-Deletes one or multiple rows from the table, identified by its row id no matter if the row is stored in big data or normal backend.
+Deletes one or multiple rows from the table, identified by its row id no matter if the row is stored in big data or normal backend.  > ❗ Limits > > - **Maximum:** 10,000 row IDs per call. Larger requests are rejected with `413` and no rows are deleted. Split larger amounts into multiple calls. > > See [Limits](/reference/limits) for details.
 
 ### Example
 
@@ -107,7 +107,7 @@ try {
 
 ### Return type
 
-**object**
+[**\SeaTable\Client\Base\DeleteRow200Response**](../Model/DeleteRow200Response.md)
 
 ### Authorization
 
@@ -179,7 +179,7 @@ listRows($base_uuid, $table_name, $view_name, $start, $limit, $convert_keys): ob
 
 List Rows
 
-Returns a list of rows contained in a table (or in a view if provided).  The usage of a view in SeaTable could be much more convenient than the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).  > 👍 Big Data support added  >  > Since Version 4.4 this endpoint also supports the big data backend.  Every row consists of the columns, you defined in your base but also *hidden* informations like `_id`, `_mtime`, `_ctime`, `_creator` and so on. Get more details about these information in the [Models](/reference/models) area.  > 📘 Hidden Columns  > > If no view is selected, all columns (even hidden one) are returned. If a view is selected, only the visible columns of that view are returned with the request.  > 📘 Link Columns > > From version 5.3 onward, the link column of a row returns a maximum of 50 records.
+Returns a list of rows contained in a table (or in a view if provided).  The usage of a view in SeaTable could be much more convenient than the usage of the complex SQL-syntax of the [SQL query endpoint](/reference/querysql).  > 👍 Big Data support added  >  > Since Version 4.4 this endpoint also supports the big data backend.  Every row consists of the columns, you defined in your base but also *hidden* informations like `_id`, `_mtime`, `_ctime`, `_creator` and so on. Get more details about these information in the [Models](/reference/models) area.  > 📘 Hidden Columns  > > If no view is selected, all columns (even hidden one) are returned. If a view is selected, only the visible columns of that view are returned with the request.  > ❗ Limits > > - **Default and maximum:** 1,000 rows per call. Larger `limit` values are silently capped; no error is returned. > - To retrieve more rows, paginate with `start` and `limit` until fewer than `limit` rows are returned. > - **Link columns** return a maximum of 50 linked records per row (since version 5.3). > > See [Limits](/reference/limits) for details.
 
 ### Example
 
@@ -197,7 +197,7 @@ $base_uuid = 5c264e76-0e5a-448a-9f34-580b551364ca; // string | The unique identi
 $table_name = Table1; // string | The name of the table to perform the operation on. Alternatively, you can use the `table_id` instead of `table_name`. If using `table_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `table_name: Table1` you can use `table_id: 0000`.
 $view_name = Default View; // string | The name of the view to perform the operation on. Alternatively, you can use the `view_id` instead of `view_name`. If using `view_id`, ensure that the key in the request body is replaced accordingly. **Example:** Instead of `view_name: Default View` you can use `view_id: 0000`.
 $start = 0; // int | Starting position (number) of the returned rows. 0 by default.
-$limit = 100; // int | Number of rows that should be returned. 1000 by default.
+$limit = 100; // int | Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000.
 $convert_keys = true; // bool | Determines if the columns are returned as their keys (false by default) or their names (true).
 
 try {
@@ -216,7 +216,7 @@ try {
 | **table_name** | **string**| The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. | |
 | **view_name** | **string**| The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. | [optional] |
 | **start** | **int**| Starting position (number) of the returned rows. 0 by default. | [optional] |
-| **limit** | **int**| Number of rows that should be returned. 1000 by default. | [optional] |
+| **limit** | **int**| Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000. | [optional] |
 | **convert_keys** | **bool**| Determines if the columns are returned as their keys (false by default) or their names (true). | [optional] |
 
 ### Return type
@@ -238,7 +238,7 @@ lockRows($base_uuid, $table_with_row_ids): object
 
 Lock Rows
 
-Locks one or more rows. It is ok to include rows that were already locked. Rows in big data backend can not be locked.  > 📘 Advanced feature >  > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.com/prices/).
+Locks one or more rows. It is ok to include rows that were already locked. Rows in big data backend can not be locked.  > 📘 No row limit > > There is no limit on the number of row IDs per call. See [Limits](/reference/limits) for details.  > 📘 Advanced feature >  > Lock rows is an advanced feature in SeaTable and only available for [enterprise subscriptions](https://seatable.com/prices/).
 
 ### Example
 
@@ -340,7 +340,7 @@ unlockRows($base_uuid, $table_with_row_ids): object
 
 Unlock Rows
 
-Use this API request to unlock one or more locked rows. As this request makes sure that all the mentioned rows are unlocked, it's OK to include rows that were not locked.
+Use this API request to unlock one or more locked rows. As this request makes sure that all the mentioned rows are unlocked, it's OK to include rows that were not locked.  > 📘 No row limit > > There is no limit on the number of row IDs per call. See [Limits](/reference/limits) for details.
 
 ### Example
 
@@ -391,7 +391,7 @@ updateRow($base_uuid, $update_rows): object
 
 Update Row(s)
 
-Change the values in one or multiple existing row(s) by defining the new values for necessary columns in the row object. Both SeaTable backends are supported.  > 📘 Structure of the row object >  > The row object contains key:value pairs with the column name as key and the desired values. Check the page [Models](/reference/models) to get a better understanding of the row object.  > 🚧 Column names only > > This endpoint always expects **column names** (e.g. `Name`) in the row object, not internal column keys (e.g. `0000`). The `convert_keys` parameter is not supported. Unknown keys are silently ignored without error.
+Change the values in one or multiple existing row(s) by defining the new values for necessary columns in the row object. Both SeaTable backends are supported.  > ❗ Limits > > - **Maximum:** 1,000 rows per call. Larger requests are rejected with `413` and no rows are updated. Split larger amounts into multiple calls. > > See [Limits](/reference/limits) for details.  > 📘 Structure of the row object >  > The row object contains key:value pairs with the column name as key and the desired values. Check the page [Models](/reference/models) to get a better understanding of the row object.  > 🚧 Column names only > > This endpoint always expects **column names** (e.g. `Name`) in the row object, not internal column keys (e.g. `0000`). The `convert_keys` parameter is not supported. Unknown keys are silently ignored without error.
 
 ### Example
 

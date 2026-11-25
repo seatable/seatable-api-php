@@ -287,6 +287,10 @@ class DeleteRows implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['row_ids'] === null) {
             $invalidProperties[] = "'row_ids' can't be null";
         }
+        if ((count($this->container['row_ids']) > 10000)) {
+            $invalidProperties[] = "invalid value for 'row_ids', number of items must be less than or equal to 10000.";
+        }
+
         return $invalidProperties;
     }
 
@@ -342,7 +346,7 @@ class DeleteRows implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets row_ids
      *
-     * @param string[] $row_ids Defines the rows which should be deleted.
+     * @param string[] $row_ids Defines the rows which should be deleted. Maximum 10,000 row IDs per call.
      *
      * @return self
      */
@@ -350,6 +354,10 @@ class DeleteRows implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (is_null($row_ids)) {
             throw new \InvalidArgumentException('non-nullable row_ids cannot be null');
+        }
+
+        if ((count($row_ids) > 10000)) {
+            throw new \InvalidArgumentException('invalid value for $row_ids when calling DeleteRows., number of items must be less than or equal to 10000.');
         }
         $this->container['row_ids'] = $row_ids;
 

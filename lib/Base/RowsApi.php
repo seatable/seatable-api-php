@@ -156,7 +156,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \SeaTable\Client\Base\AppendRows200Response
+     * @return \SeaTable\Client\Base\AppendRows200Response|\SeaTable\Client\Base\UpdateRow413Response
      */
     public function appendRows($base_uuid, $append_rows = null, string $contentType = self::contentTypes['appendRows'][0])
     {
@@ -175,7 +175,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \SeaTable\Client\Base\AppendRows200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\AppendRows200Response|\SeaTable\Client\Base\UpdateRow413Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function appendRowsWithHttpInfo($base_uuid, $append_rows = null, string $contentType = self::contentTypes['appendRows'][0])
     {
@@ -211,6 +211,12 @@ class RowsApi
                         $request,
                         $response,
                     );
+                case 413:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\Base\UpdateRow413Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -239,6 +245,14 @@ class RowsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SeaTable\Client\Base\AppendRows200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 413:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SeaTable\Client\Base\UpdateRow413Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -444,7 +458,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \SeaTable\Client\Base\DeleteRow200Response|\SeaTable\Client\Base\UpdateRow413Response
      */
     public function deleteRow($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRow'][0])
     {
@@ -463,7 +477,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SeaTable\Client\Base\DeleteRow200Response|\SeaTable\Client\Base\UpdateRow413Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteRowWithHttpInfo($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRow'][0])
     {
@@ -495,7 +509,13 @@ class RowsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        'object',
+                        '\SeaTable\Client\Base\DeleteRow200Response',
+                        $request,
+                        $response,
+                    );
+                case 413:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\Base\UpdateRow413Response',
                         $request,
                         $response,
                     );
@@ -517,7 +537,7 @@ class RowsApi
             }
 
             return $this->handleResponseWithDataType(
-                'object',
+                '\SeaTable\Client\Base\DeleteRow200Response',
                 $request,
                 $response,
             );
@@ -526,7 +546,15 @@ class RowsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\SeaTable\Client\Base\DeleteRow200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 413:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SeaTable\Client\Base\UpdateRow413Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -574,7 +602,7 @@ class RowsApi
      */
     public function deleteRowAsyncWithHttpInfo($base_uuid, $delete_rows = null, string $contentType = self::contentTypes['deleteRow'][0])
     {
-        $returnType = 'object';
+        $returnType = '\SeaTable\Client\Base\DeleteRow200Response';
         $request = $this->deleteRowRequest($base_uuid, $delete_rows, $contentType);
 
         return $this->client
@@ -1092,7 +1120,7 @@ class RowsApi
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
@@ -1115,7 +1143,7 @@ class RowsApi
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
@@ -1205,7 +1233,7 @@ class RowsApi
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
@@ -1231,7 +1259,7 @@ class RowsApi
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
@@ -1286,7 +1314,7 @@ class RowsApi
      * @param  string $table_name The name of the table to perform the operation on. Alternatively, you can use the &#x60;table_id&#x60; instead of &#x60;table_name&#x60;. If using &#x60;table_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;table_name: Table1&#x60; you can use &#x60;table_id: 0000&#x60;. (required)
      * @param  string|null $view_name The name of the view to perform the operation on. Alternatively, you can use the &#x60;view_id&#x60; instead of &#x60;view_name&#x60;. If using &#x60;view_id&#x60;, ensure that the key in the request body is replaced accordingly. **Example:** Instead of &#x60;view_name: Default View&#x60; you can use &#x60;view_id: 0000&#x60;. (optional)
      * @param  int|null $start Starting position (number) of the returned rows. 0 by default. (optional)
-     * @param  int|null $limit Number of rows that should be returned. 1000 by default. (optional)
+     * @param  int|null $limit Number of rows that should be returned. 1,000 by default. Maximum 1,000; larger values are silently capped to 1,000. (optional)
      * @param  bool|null $convert_keys Determines if the columns are returned as their keys (false by default) or their names (true). (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listRows'] to see the possible values for this operation
      *
@@ -2334,7 +2362,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object|\SeaTable\Client\Base\UpdateRow413Response
      */
     public function updateRow($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
@@ -2353,7 +2381,7 @@ class RowsApi
      *
      * @throws \SeaTable\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\SeaTable\Client\Base\UpdateRow413Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateRowWithHttpInfo($base_uuid, $update_rows = null, string $contentType = self::contentTypes['updateRow'][0])
     {
@@ -2389,6 +2417,12 @@ class RowsApi
                         $request,
                         $response,
                     );
+                case 413:
+                    return $this->handleResponseWithDataType(
+                        '\SeaTable\Client\Base\UpdateRow413Response',
+                        $request,
+                        $response,
+                    );
             }
 
             
@@ -2417,6 +2451,14 @@ class RowsApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 413:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SeaTable\Client\Base\UpdateRow413Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

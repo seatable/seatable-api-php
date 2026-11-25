@@ -287,6 +287,10 @@ class UpdateRows implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['updates'] === null) {
             $invalidProperties[] = "'updates' can't be null";
         }
+        if ((count($this->container['updates']) > 1000)) {
+            $invalidProperties[] = "invalid value for 'updates', number of items must be less than or equal to 1000.";
+        }
+
         return $invalidProperties;
     }
 
@@ -342,7 +346,7 @@ class UpdateRows implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets updates
      *
-     * @param \SeaTable\Client\Base\UpdateRowsUpdatesInner[] $updates Defines the rows which should be updated.
+     * @param \SeaTable\Client\Base\UpdateRowsUpdatesInner[] $updates Defines the rows which should be updated. Maximum 1,000 rows per call.
      *
      * @return self
      */
@@ -350,6 +354,10 @@ class UpdateRows implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         if (is_null($updates)) {
             throw new \InvalidArgumentException('non-nullable updates cannot be null');
+        }
+
+        if ((count($updates) > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $updates when calling UpdateRows., number of items must be less than or equal to 1000.');
         }
         $this->container['updates'] = $updates;
 
