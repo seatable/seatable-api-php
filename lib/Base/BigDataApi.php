@@ -28,11 +28,11 @@ namespace SeaTable\Client\Base;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use SeaTable\Client\ApiException;
@@ -177,13 +177,14 @@ class BigDataApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $eResponse = $this->getExceptionResponse($e);
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $eResponse ? $eResponse->getHeaders() : null,
+                    $eResponse ? (string) $eResponse->getBody() : null
                 );
-            } catch (ConnectException $e) {
+            } catch (NetworkExceptionInterface $e) {
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -300,7 +301,15 @@ class BigDataApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $this->getExceptionResponse($exception);
+                    if ($response === null) {
+                        throw new ApiException(
+                            "[{$exception->getCode()}] {$exception->getMessage()}",
+                            (int) $exception->getCode(),
+                            null,
+                            null
+                        );
+                    }
                     $statusCode = $response->getStatusCode();
                     throw new ApiException(
                         sprintf(
@@ -353,7 +362,7 @@ class BigDataApi
         // path params
         if ($base_uuid !== null) {
             $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
+                '{base_uuid}',
                 ObjectSerializer::toPathValue($base_uuid),
                 $resourcePath
             );
@@ -370,7 +379,11 @@ class BigDataApi
         if (isset($insert_rows_into_big_data)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($insert_rows_into_big_data));
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($insert_rows_into_big_data), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 $httpBody = $insert_rows_into_big_data;
             }
@@ -391,7 +404,11 @@ class BigDataApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -467,13 +484,14 @@ class BigDataApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $eResponse = $this->getExceptionResponse($e);
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $eResponse ? $eResponse->getHeaders() : null,
+                    $eResponse ? (string) $eResponse->getBody() : null
                 );
-            } catch (ConnectException $e) {
+            } catch (NetworkExceptionInterface $e) {
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -592,7 +610,15 @@ class BigDataApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $this->getExceptionResponse($exception);
+                    if ($response === null) {
+                        throw new ApiException(
+                            "[{$exception->getCode()}] {$exception->getMessage()}",
+                            (int) $exception->getCode(),
+                            null,
+                            null
+                        );
+                    }
                     $statusCode = $response->getStatusCode();
                     throw new ApiException(
                         sprintf(
@@ -671,7 +697,7 @@ class BigDataApi
         // path params
         if ($base_uuid !== null) {
             $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
+                '{base_uuid}',
                 ObjectSerializer::toPathValue($base_uuid),
                 $resourcePath
             );
@@ -702,7 +728,11 @@ class BigDataApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -776,13 +806,14 @@ class BigDataApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $eResponse = $this->getExceptionResponse($e);
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $eResponse ? $eResponse->getHeaders() : null,
+                    $eResponse ? (string) $eResponse->getBody() : null
                 );
-            } catch (ConnectException $e) {
+            } catch (NetworkExceptionInterface $e) {
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -899,7 +930,15 @@ class BigDataApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $this->getExceptionResponse($exception);
+                    if ($response === null) {
+                        throw new ApiException(
+                            "[{$exception->getCode()}] {$exception->getMessage()}",
+                            (int) $exception->getCode(),
+                            null,
+                            null
+                        );
+                    }
                     $statusCode = $response->getStatusCode();
                     throw new ApiException(
                         sprintf(
@@ -952,7 +991,7 @@ class BigDataApi
         // path params
         if ($base_uuid !== null) {
             $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
+                '{base_uuid}',
                 ObjectSerializer::toPathValue($base_uuid),
                 $resourcePath
             );
@@ -969,7 +1008,11 @@ class BigDataApi
         if (isset($archive_view)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($archive_view));
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($archive_view), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 $httpBody = $archive_view;
             }
@@ -990,7 +1033,11 @@ class BigDataApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1064,13 +1111,14 @@ class BigDataApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $eResponse = $this->getExceptionResponse($e);
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $eResponse ? $eResponse->getHeaders() : null,
+                    $eResponse ? (string) $eResponse->getBody() : null
                 );
-            } catch (ConnectException $e) {
+            } catch (NetworkExceptionInterface $e) {
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1187,7 +1235,15 @@ class BigDataApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $this->getExceptionResponse($exception);
+                    if ($response === null) {
+                        throw new ApiException(
+                            "[{$exception->getCode()}] {$exception->getMessage()}",
+                            (int) $exception->getCode(),
+                            null,
+                            null
+                        );
+                    }
                     $statusCode = $response->getStatusCode();
                     throw new ApiException(
                         sprintf(
@@ -1240,7 +1296,7 @@ class BigDataApi
         // path params
         if ($base_uuid !== null) {
             $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
+                '{base_uuid}',
                 ObjectSerializer::toPathValue($base_uuid),
                 $resourcePath
             );
@@ -1257,7 +1313,11 @@ class BigDataApi
         if (isset($move_rows_to_normal_backend_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($move_rows_to_normal_backend_request));
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($move_rows_to_normal_backend_request), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 $httpBody = $move_rows_to_normal_backend_request;
             }
@@ -1278,7 +1338,11 @@ class BigDataApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1352,13 +1416,14 @@ class BigDataApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $eResponse = $this->getExceptionResponse($e);
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $eResponse ? $eResponse->getHeaders() : null,
+                    $eResponse ? (string) $eResponse->getBody() : null
                 );
-            } catch (ConnectException $e) {
+            } catch (NetworkExceptionInterface $e) {
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
@@ -1475,7 +1540,15 @@ class BigDataApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $this->getExceptionResponse($exception);
+                    if ($response === null) {
+                        throw new ApiException(
+                            "[{$exception->getCode()}] {$exception->getMessage()}",
+                            (int) $exception->getCode(),
+                            null,
+                            null
+                        );
+                    }
                     $statusCode = $response->getStatusCode();
                     throw new ApiException(
                         sprintf(
@@ -1537,7 +1610,7 @@ class BigDataApi
         // path params
         if ($base_uuid !== null) {
             $resourcePath = str_replace(
-                '{' . 'base_uuid' . '}',
+                '{base_uuid}',
                 ObjectSerializer::toPathValue($base_uuid),
                 $resourcePath
             );
@@ -1545,7 +1618,7 @@ class BigDataApi
         // path params
         if ($op_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'op_id' . '}',
+                '{op_id}',
                 ObjectSerializer::toPathValue($op_id),
                 $resourcePath
             );
@@ -1576,7 +1649,11 @@ class BigDataApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1634,6 +1711,21 @@ class BigDataApi
         }
 
         return $options;
+    }
+
+    /**
+     * Returns the response attached to a Guzzle exception, if there is one.
+     *
+     * Guzzle 7 exposes getResponse() on RequestException, while Guzzle 8 only
+     * exposes it on ResponseException and its subclasses.
+     *
+     * @param \Throwable $exception
+     *
+     * @return ResponseInterface|null
+     */
+    private function getExceptionResponse(\Throwable $exception): ?ResponseInterface
+    {
+        return method_exists($exception, 'getResponse') ? $exception->getResponse() : null;
     }
 
     private function handleResponseWithDataType(
